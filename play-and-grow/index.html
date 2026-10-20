@@ -1,0 +1,1164 @@
+<title>Play &amp; Grow</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;700;800&family=Hind+Siliguri:wght@400;500;600&display=swap">
+<style>
+/* Layout: one bright "sticker board" app. Header, then one screen at a time (home, activity, report, teacher). Single light look on purpose. */
+:root {
+  color-scheme: light;
+  --ground: #EEF7F3;
+  --paper: #FFFFFF;
+  --ink: #17304A;
+  --ink-soft: #4C6378;
+  --line: #17304A;
+  --sun: #F6B12E;
+  --teal: #12927F;
+  --coral: #EE6A52;
+  --lilac: #8A6FDF;
+  --sky: #3B8EE0;
+  --leaf: #6DB33F;
+  --tint-sun: #FFF1D2;
+  --tint-teal: #D8F1EC;
+  --tint-coral: #FDE2DC;
+  --tint-lilac: #ECE6FB;
+  --tint-sky: #DDEBFB;
+  --tint-leaf: #E5F3DA;
+  --good: #1E9E5A;
+  --bad: #D2443A;
+  --display: "Baloo Da 2", "Hind Siliguri", system-ui, sans-serif;
+  --body: "Hind Siliguri", "Baloo Da 2", system-ui, sans-serif;
+  --r: 18px;
+  --shadow: 4px 4px 0 var(--line);
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { min-height: 100%; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px 40px;
+  background-image: radial-gradient(circle at 1px 1px, rgba(23,48,74,.08) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--sky); outline-offset: 2px; }
+.muted { color: var(--ink-soft); }
+.small { font-size: 14px; }
+
+/* Header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; text-align: left; text-decoration: none; color: var(--ink); background: none; border: 0; padding: 0; }
+.brand svg { width: 44px; height: 44px; flex: none; }
+.brand-name { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -.01em; }
+.brand-name small { display: block; font-family: var(--body); font-weight: 500; font-size: 12px; color: var(--ink-soft); letter-spacing: .04em; text-transform: uppercase; margin-top: -2px; }
+.top-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 2px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--paper); }
+.seg button { border: 0; background: transparent; padding: 4px 12px; font-weight: 600; font-size: 14px; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 2px solid var(--line); border-radius: 999px; padding: 3px 12px; background: var(--tint-sun); font-weight: 600; font-size: 14px; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 2px solid var(--line); border-radius: 14px; background: var(--sun); padding: 10px 18px; font-family: var(--display); font-weight: 700; font-size: 18px; box-shadow: var(--shadow); transition: transform .08s, box-shadow .08s; text-decoration: none; color: var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--line); }
+.btn.alt { background: var(--paper); }
+.btn.teal { background: var(--teal); color: #fff; }
+.btn.small { font-size: 15px; padding: 6px 12px; border-radius: 10px; }
+.btn[disabled] { opacity: .45; pointer-events: none; }
+.linkish { background: none; border: 0; padding: 0; text-decoration: underline; color: var(--ink-soft); font-size: 14px; }
+
+.panel { background: var(--paper); border: 2px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 20px; min-width: 0; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: stretch; }
+.hero-copy { display: flex; flex-direction: column; gap: 14px; justify-content: center; padding: 8px 4px; }
+.hero h1 { font-size: clamp(34px, 6vw, 56px); font-weight: 800; }
+.hero h1 em { font-style: normal; background: var(--sun); padding: 0 .18em; border-radius: 10px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.hero-copy p { font-size: 18px; max-width: 34ch; }
+.who h2 { font-size: 26px; }
+.who form { display: flex; flex-direction: column; gap: 14px; margin-top: 12px; }
+label.lbl { font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; }
+.field { width: 100%; border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--paper); font-size: 17px; }
+.ages { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.ages button { border: 2px solid var(--line); background: var(--paper); border-radius: 10px; padding: 6px 0; font-weight: 700; font-family: var(--display); font-size: 18px; }
+.ages button[aria-pressed="true"] { background: var(--teal); color: #fff; }
+.greet { display: flex; flex-direction: column; gap: 12px; }
+.greet h2 { font-size: 30px; }
+.starbar { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.star { width: 22px; height: 22px; }
+.star path { fill: #E3E8EC; stroke: var(--line); stroke-width: 1.5; }
+.star.on path { fill: var(--sun); }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+/* Activity grid */
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.sec-head h2 { font-size: 28px; }
+.acts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.act { position: relative; text-align: left; border: 2px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); padding: 16px; display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: start; background: var(--paper); transition: transform .12s; min-width: 0; }
+.act:hover { transform: translateY(-2px) rotate(-.4deg); }
+.act .ico { width: 64px; height: 64px; border-radius: 14px; border: 2px solid var(--line); display: grid; place-items: center; }
+.act .ico svg { width: 40px; height: 40px; }
+.act h3 { font-size: 22px; }
+.act p { font-size: 14px; color: var(--ink-soft); margin-top: 2px; }
+.act .meta { display: flex; gap: 8px; align-items: center; margin-top: 8px; font-size: 13px; font-weight: 600; }
+.act .done-badge { position: absolute; top: -10px; right: 12px; background: var(--good); color: #fff; border: 2px solid var(--line); border-radius: 999px; font-size: 12px; font-weight: 700; padding: 0 10px; }
+.c-teal { background: var(--tint-teal); } .c-sun { background: var(--tint-sun); } .c-coral { background: var(--tint-coral); }
+.c-lilac { background: var(--tint-lilac); } .c-sky { background: var(--tint-sky); } .c-leaf { background: var(--tint-leaf); }
+
+.parents { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.parents div { display: flex; flex-direction: column; gap: 4px; }
+.parents strong { font-family: var(--display); font-size: 19px; }
+.parents span { font-size: 14px; color: var(--ink-soft); }
+
+/* Activity screen */
+.stage-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.stage-head h2 { font-size: 30px; }
+.stage { min-height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; padding: 28px 16px; }
+.big-q { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 9vw, 72px); line-height: 1; font-variant-numeric: tabular-nums; }
+.hud { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.hud .chip { background: var(--paper); font-variant-numeric: tabular-nums; }
+.answer-box { min-width: 160px; border: 3px solid var(--line); border-radius: 14px; padding: 6px 16px; font-family: var(--display); font-size: 40px; font-weight: 700; min-height: 66px; background: var(--paper); font-variant-numeric: tabular-nums; }
+.answer-box.ok { background: #D7F2E2; } .answer-box.no { background: #FBDAD6; }
+.keypad { display: grid; grid-template-columns: repeat(3, 72px); gap: 8px; }
+.keypad button { height: 58px; border: 2px solid var(--line); border-radius: 12px; background: var(--paper); font-family: var(--display); font-weight: 700; font-size: 26px; box-shadow: 2px 2px 0 var(--line); }
+.keypad button.go { background: var(--teal); color: #fff; }
+.keypad button:active { transform: translate(2px, 2px); box-shadow: none; }
+
+.bubble-wrap { width: 260px; height: 260px; display: grid; place-items: center; max-width: 100%; }
+.bubble { width: 110px; height: 110px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff 0 12%, #9FDCD2 30%, var(--teal) 100%); border: 3px solid var(--line); transition-property: transform; transition-timing-function: ease-in-out; }
+.cue { font-family: var(--display); font-size: 34px; font-weight: 700; min-height: 44px; }
+
+.options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%; max-width: 520px; }
+.options button { border: 2px solid var(--line); border-radius: 14px; background: var(--paper); padding: 14px 10px; font-size: 20px; font-weight: 600; box-shadow: 2px 2px 0 var(--line); }
+.options button.ok { background: #CFF0DC; } .options button.no { background: #FBD6D1; }
+.pic { font-size: 84px; line-height: 1; }
+.prompt { font-family: var(--display); font-size: clamp(22px, 4vw, 30px); font-weight: 700; max-width: 26ch; }
+
+.grid-maze { display: grid; gap: 4px; }
+.cell { width: 48px; height: 48px; border-radius: 10px; border: 2px solid var(--line); background: var(--paper); display: grid; place-items: center; }
+.cell.wall { background: var(--ink); }
+.cell.goal { background: var(--tint-sun); }
+.cell svg { width: 34px; height: 34px; }
+.cmds { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; min-height: 44px; max-width: 520px; padding: 6px; border: 2px dashed var(--ink-soft); border-radius: 12px; width: 100%; }
+.cmd { width: 34px; height: 34px; border-radius: 8px; background: var(--lilac); color: #fff; display: grid; place-items: center; font-weight: 800; border: 2px solid var(--line); }
+.cmd.now { background: var(--sun); color: var(--ink); }
+.arrows { display: grid; grid-template-columns: repeat(3, 60px); gap: 6px; }
+.arrows button { height: 52px; border: 2px solid var(--line); border-radius: 12px; background: var(--tint-lilac); font-size: 24px; font-weight: 800; box-shadow: 2px 2px 0 var(--line); }
+
+.cards { display: grid; gap: 8px; }
+.card { width: 70px; height: 80px; border-radius: 12px; border: 2px solid var(--line); background: var(--sky); font-size: 38px; display: grid; place-items: center; box-shadow: 2px 2px 0 var(--line); }
+.card.up { background: var(--paper); }
+.card.got { background: #D7F2E2; }
+.card span { visibility: hidden; }
+.card.up span, .card.got span { visibility: visible; }
+
+.ring { width: 170px; height: 170px; }
+.topic { font-family: var(--display); font-size: clamp(24px, 4.5vw, 34px); font-weight: 700; max-width: 22ch; }
+
+.result { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.result .star { width: 52px; height: 52px; }
+.result h3 { font-size: 34px; }
+
+/* Report */
+.report { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+.report-card { display: flex; flex-direction: column; gap: 16px; }
+.rc-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; border-bottom: 2px dashed var(--ink-soft); padding-bottom: 12px; }
+.rc-head h2 { font-size: 32px; }
+.skill { display: grid; grid-template-columns: 140px 1fr 44px; gap: 10px; align-items: center; font-weight: 600; }
+.skill .bar { height: 16px; border: 2px solid var(--line); border-radius: 999px; background: var(--ground); overflow: hidden; }
+.skill .bar i { display: block; height: 100%; }
+.skill .val { text-align: right; font-variant-numeric: tabular-nums; }
+.skill.none { opacity: .5; }
+.note { border: 2px solid var(--line); border-radius: 14px; padding: 12px 14px; background: var(--tint-sun); }
+.note strong { font-family: var(--display); font-size: 19px; display: block; }
+.side { display: flex; flex-direction: column; gap: 16px; }
+.side h3 { font-size: 24px; }
+.form { display: flex; flex-direction: column; gap: 12px; }
+.check { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; }
+.check input { margin-top: 4px; width: 18px; height: 18px; flex: none; }
+.msg { border-radius: 12px; padding: 10px 12px; border: 2px solid var(--line); background: var(--tint-teal); }
+.msg.err { background: var(--tint-coral); }
+
+/* Teacher */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.kpi { border: 2px solid var(--line); border-radius: 14px; padding: 12px; background: var(--paper); }
+.kpi b { font-family: var(--display); font-size: 34px; display: block; line-height: 1; font-variant-numeric: tabular-nums; }
+.kpi span { font-size: 13px; color: var(--ink-soft); font-weight: 600; }
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #C9D6DF; white-space: nowrap; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
+td.num { font-variant-numeric: tabular-nums; }
+.empty { padding: 18px; border: 2px dashed var(--ink-soft); border-radius: 14px; color: var(--ink-soft); text-align: center; }
+
+footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--ink-soft); }
+
+@keyframes pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
+.pop { animation: pop .35s ease-out; }
+@media (prefers-reduced-motion: reduce) { .pop { animation: none; } .act:hover { transform: none; } }
+
+@media (max-width: 860px) {
+  .hero, .report { grid-template-columns: 1fr; }
+  .acts { grid-template-columns: repeat(2, 1fr); }
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .acts, .parents { grid-template-columns: 1fr; }
+  .skill { grid-template-columns: 110px 1fr 40px; font-size: 14px; }
+  .cell { width: 40px; height: 40px; }
+  .card { width: 60px; height: 70px; font-size: 32px; }
+  .panel { padding: 16px; }
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <button class="brand" id="homeBtn" aria-label="Home">
+      <svg viewBox="0 0 44 44" aria-hidden="true">
+        <circle cx="22" cy="22" r="20" fill="#F6B12E" stroke="#17304A" stroke-width="2.5"/>
+        <path d="M22 33V20" stroke="#17304A" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M22 23c0-5 4-8 9-8 0 5-4 8-9 8z" fill="#12927F" stroke="#17304A" stroke-width="2"/>
+        <path d="M22 26c0-4-3-7-8-7 0 4 3 7 8 7z" fill="#6DB33F" stroke="#17304A" stroke-width="2"/>
+      </svg>
+      <span class="brand-name"><span data-t="brand"></span><small data-t="brandSub"></small></span>
+    </button>
+    <div class="top-actions">
+      <span class="chip" id="playerChip" hidden></span>
+      <div class="seg" role="group" aria-label="Language">
+        <button id="langEn" aria-pressed="true">English</button>
+        <button id="langBn" aria-pressed="false">বাংলা</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <main id="viewHome" class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1 data-t="heroTitle"></h1>
+        <p data-t="heroText"></p>
+        <div class="row small muted" data-t="heroAges"></div>
+      </div>
+      <div class="panel who" id="whoPanel">
+        <h2 data-t="whoTitle"></h2>
+        <form id="whoForm" novalidate>
+          <div>
+            <label class="lbl" for="kidName" data-t="kidName"></label>
+            <input class="field" id="kidName" autocomplete="off" maxlength="24" placeholder="Ayaan">
+          </div>
+          <div>
+            <span class="lbl" data-t="kidAge"></span>
+            <div class="ages" id="ages"></div>
+          </div>
+          <p class="msg err" id="whoErr" hidden></p>
+          <button class="btn" type="submit" data-t="letsPlay"></button>
+        </form>
+      </div>
+      <div class="panel greet" id="greetPanel" hidden>
+        <h2 id="greetTitle"></h2>
+        <p class="muted" id="greetText"></p>
+        <div class="starbar" id="greetStars"></div>
+        <div class="row">
+          <button class="btn teal" id="toReport" data-t="seeReport"></button>
+          <button class="btn alt small" id="newPlayer" data-t="newPlayer"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" style="gap:12px">
+      <div class="sec-head">
+        <h2 data-t="gamesTitle"></h2>
+        <p class="muted small" data-t="gamesHint"></p>
+      </div>
+      <div class="acts" id="acts"></div>
+    </section>
+
+    <section class="panel">
+      <div class="parents">
+        <div><strong data-t="p1t"></strong><span data-t="p1"></span></div>
+        <div><strong data-t="p2t"></strong><span data-t="p2"></span></div>
+        <div><strong data-t="p3t"></strong><span data-t="p3"></span></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ACTIVITY -->
+  <main id="viewAct" hidden>
+    <div class="panel" style="padding:0">
+      <div class="stage-head" style="padding:16px 20px;border-bottom:2px solid var(--line)">
+        <h2 id="actTitle"></h2>
+        <button class="btn alt small" id="actBack" data-t="back"></button>
+      </div>
+      <div class="stage" id="stage"></div>
+    </div>
+  </main>
+
+  <!-- REPORT -->
+  <main id="viewReport" hidden>
+    <div class="report">
+      <section class="panel report-card">
+        <div class="rc-head">
+          <div>
+            <p class="small muted" data-t="rcLabel"></p>
+            <h2 id="rcName"></h2>
+          </div>
+          <p class="small muted" id="rcMeta"></p>
+        </div>
+        <div id="rcSkills" style="display:flex;flex-direction:column;gap:10px"></div>
+        <div class="note" id="rcStrength"></div>
+        <div class="note" id="rcGrow" style="background:var(--tint-teal)"></div>
+        <div class="row">
+          <a class="btn teal small" id="waShare" target="_blank" rel="noopener" data-t="shareWa"></a>
+          <button class="btn alt small" id="copyReport" data-t="copy"></button>
+          <button class="btn alt small" id="rcMore" data-t="playMore"></button>
+        </div>
+        <textarea id="copyFallback" class="field small" rows="5" hidden readonly></textarea>
+      </section>
+      <aside class="panel side">
+        <h3 data-t="demoTitle"></h3>
+        <p class="muted small" data-t="demoText"></p>
+        <form class="form" id="demoForm" novalidate>
+          <div><label class="lbl" for="pName" data-t="pName"></label><input class="field" id="pName" maxlength="40" autocomplete="name"></div>
+          <div><label class="lbl" for="pPhone" data-t="pPhone"></label><input class="field" id="pPhone" inputmode="tel" maxlength="20" placeholder="01XXXXXXXXX" autocomplete="tel"></div>
+          <div><label class="lbl" for="pTime" data-t="pTime"></label>
+            <select class="field" id="pTime">
+              <option value="afternoon" data-t="tAfternoon"></option>
+              <option value="evening" data-t="tEvening"></option>
+              <option value="weekend" data-t="tWeekend"></option>
+            </select>
+          </div>
+          <label class="check"><input type="checkbox" id="pConsent"><span data-t="consent"></span></label>
+          <p class="msg err" id="demoErr" hidden></p>
+          <button class="btn" type="submit" data-t="bookDemo"></button>
+        </form>
+        <div id="demoDone" hidden class="form"></div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- TEACHER -->
+  <main id="viewTeacher" hidden>
+    <section class="panel wrap" style="gap:16px">
+      <div class="sec-head">
+        <h2 data-t="tTitle"></h2>
+        <button class="btn alt small" id="tBack" data-t="back"></button>
+      </div>
+      <p class="muted small" id="tSource"></p>
+      <div class="kpis" id="tKpis"></div>
+      <h3 data-t="tLeads" style="font-size:22px"></h3>
+      <div class="tbl-wrap" id="tLeads"></div>
+      <h3 data-t="tSessions" style="font-size:22px"></h3>
+      <div class="tbl-wrap" id="tSessions"></div>
+      <div class="row" id="tClearRow">
+        <button class="btn alt small" id="tClear" data-t="clearLocal"></button>
+        <span id="tClearConfirm" hidden class="row small">
+          <span data-t="sure"></span>
+          <button class="btn small" id="tClearYes" style="background:var(--coral);color:#fff" data-t="yesClear"></button>
+          <button class="linkish" id="tClearNo" data-t="cancel"></button>
+        </span>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span data-t="footer"></span>
+    <button class="linkish" id="teacherBtn" data-t="teacherView"></button>
+  </footer>
+</div>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------- Academy settings (fill in when the name and number are final) ---------- */
+const ACADEMY = {
+  name: "Play & Grow",
+  area: "Rupnagar R/A, Mirpur",
+  whatsapp: "" // international format without +, e.g. "88017XXXXXXXX"
+};
+
+/* ---------- Text ---------- */
+const T = {
+  en: {
+    brand: ACADEMY.name, brandSub: "Kids Academy · " + ACADEMY.area,
+    heroTitle: "Learn by <em>playing</em>, grow every week",
+    heroText: "Six short games for ages 6–16. Each takes about two minutes. When you finish, your parents get a report card.",
+    heroAges: "Ages 6–16 · Math · English · Coding · Focus · Confidence",
+    whoTitle: "Who's playing today?", kidName: "First name", kidAge: "Age", letsPlay: "Let's play",
+    errName: "Type a first name to start.", errAge: "Tap your age.",
+    greetTitle: "Hi {name}!", greetText: "Pick any game. You've finished {done} of 6.",
+    seeReport: "See report card", newPlayer: "New player",
+    gamesTitle: "Pick a game", gamesHint: "Every game gets harder or easier to match your age.",
+    p1t: "Short and screen-smart", p1: "Each game lasts 1–3 minutes, and the breathing game helps kids settle down.",
+    p2t: "Results for parents", p2: "A clear report card shows strengths and what to practise next.",
+    p3t: "Free demo class", p3: "Like what you see? Book a free class from the report card.",
+    back: "Back to games", done: "Done", played: "Played", stars: "stars",
+    start: "Start", next: "Next", again: "Play again", toReportShort: "Report card",
+    // activities
+    calm: "Calm Bubble", calmD: "Breathe with the bubble for one minute.",
+    math: "Math Sprint", mathD: "Answer as many as you can in 60 seconds.",
+    english: "Word Explorer", englishD: "Match words, pictures and meanings in English.",
+    logic: "Robo Path", logicD: "Give the robot arrow commands to reach the star.",
+    memory: "Memory Match", memoryD: "Flip cards and find all the pairs.",
+    confidence: "Brave Voice", confidenceD: "Talk about a fun topic until the timer ends.",
+    // skills
+    sk_calm: "Calm & focus", sk_math: "Mental math", sk_english: "English", sk_logic: "Coding & logic", sk_memory: "Memory", sk_confidence: "Confidence",
+    // calm
+    calmIntro: "Sit comfortably. Breathe in as the bubble grows, and out as it shrinks.",
+    breatheIn: "Breathe in", hold: "Hold", breatheOut: "Breathe out", breathOf: "Breath {n} of {t}",
+    feelQ: "How do you feel now?", feel3: "Calm", feel2: "A bit better", feel1: "The same",
+    // math
+    mathIntro: "60 seconds. Type the answer and press ✓. Ready?", time: "Time", score: "Correct",
+    // english
+    engIntro: "8 questions. Tap the right answer. Press the speaker to hear it.", hear: "Hear it",
+    qPic: "What is this?", qBn: "What is this in English?",
+    // logic
+    logicIntro: "Tap arrows to plan the robot's path, then press Run. Walls are dark squares.",
+    run: "Run", clear: "Clear", undo: "Undo", level: "Level {n} of 3", bump: "Bump! Change the plan and try again.",
+    reached: "You reached the star!", skip: "Finish",
+    // memory
+    memIntro: "Find all the matching pairs with as few flips as you can.", moves: "Moves", pairs: "Pairs",
+    // confidence
+    confIntro: "Read the topic and talk about it out loud to your grown-up or teacher until the bell.",
+    talkNow: "Talk now!", confQ: "Did you keep talking until the end?", conf3: "Yes, the whole time", conf2: "Most of the time", conf1: "A little",
+    newTopic: "Another topic",
+    // results
+    great: "Fantastic!", good: "Well done!", ok: "Good try!",
+    // report
+    rcLabel: "Play & Grow report card", rcMeta: "Age {age} · {date}",
+    notPlayed: "not played yet",
+    strongTitle: "Strongest skill: {skill}", strongText: "{name} did really well here. Keep encouraging it!",
+    growTitle: "Next to practise: {skill}", growText: "Our {prog} programme builds this step by step in small groups.",
+    growNone: "Play a few more games to see what to practise next.",
+    shareWa: "Share on WhatsApp", copy: "Copy report", copied: "Copied!", playMore: "Play more games",
+    demoTitle: "Book a free demo class", demoText: "For parents. We'll call to confirm a time. We only use your number for this.",
+    pName: "Parent's name", pPhone: "Phone number", pTime: "Best time",
+    tAfternoon: "Afternoon (3–5 pm)", tEvening: "Evening (after Maghrib)", tWeekend: "Friday or Saturday",
+    consent: "I agree that the academy may call me about the demo class.",
+    bookDemo: "Book free class",
+    errPName: "Please add your name.", errPhone: "Please add a phone number (at least 10 digits).", errConsent: "Please tick the box so we can call you.",
+    demoSaved: "Thank you! Your request is saved. We'll call you soon.",
+    demoLocal: "Thank you! Your request is saved on this device.",
+    demoWa: "To make sure we get it, send it to us on WhatsApp:", sendWa: "Send on WhatsApp",
+    demoShow: "Please show this screen to our teacher.",
+    // teacher
+    teacherView: "Teacher view", tTitle: "Teacher dashboard",
+    tSrcDb: "Showing every player and demo request saved to your academy's database.",
+    tSrcLocal: "Showing what was saved on this device only. Open this page while signed in as the owner to see everything.",
+    tLeads: "Demo class requests", tSessions: "Players",
+    kPlayers: "Players", kGames: "Games finished", kLeads: "Demo requests", kTop: "Most common strength",
+    noLeads: "No demo requests yet. They appear here when a parent books from the report card.",
+    noSessions: "No players yet. Each child who enters a name appears here.",
+    clearLocal: "Clear this device's data", sure: "Delete all players and requests saved on this device?", yesClear: "Delete", cancel: "Cancel",
+    footer: "Made for families in " + ACADEMY.area + ". Results stay private to the academy.",
+    colChild: "Child", colAge: "Age", colParent: "Parent", colPhone: "Phone", colTime: "Best time", colWhen: "When", colGames: "Games", colStrong: "Strongest", colGrow: "Practise"
+  },
+  bn: {
+    brand: ACADEMY.name, brandSub: "কিডস একাডেমি · রূপনগর আ/এ, মিরপুর",
+    heroTitle: "<em>খেলতে খেলতে</em> শিখি, প্রতি সপ্তাহে এগিয়ে যাই",
+    heroText: "৬–১৬ বছর বয়সীদের জন্য ছয়টি ছোট খেলা। প্রতিটি প্রায় দুই মিনিটের। শেষ হলে অভিভাবক পাবেন একটি রিপোর্ট কার্ড।",
+    heroAges: "বয়স ৬–১৬ · গণিত · ইংরেজি · কোডিং · মনোযোগ · আত্মবিশ্বাস",
+    whoTitle: "আজ কে খেলছে?", kidName: "নাম", kidAge: "বয়স", letsPlay: "খেলা শুরু",
+    errName: "শুরু করতে নাম লেখো।", errAge: "তোমার বয়স বেছে নাও।",
+    greetTitle: "হ্যালো {name}!", greetText: "যেকোনো খেলা বেছে নাও। ৬টির মধ্যে {done}টি শেষ।",
+    seeReport: "রিপোর্ট কার্ড দেখো", newPlayer: "নতুন খেলোয়াড়",
+    gamesTitle: "একটি খেলা বেছে নাও", gamesHint: "তোমার বয়স অনুযায়ী খেলা সহজ বা কঠিন হয়।",
+    p1t: "ছোট ও স্ক্রিন-সচেতন", p1: "প্রতিটি খেলা ১–৩ মিনিটের, আর শ্বাসের খেলাটি শিশুকে শান্ত হতে সাহায্য করে।",
+    p2t: "অভিভাবকের জন্য ফলাফল", p2: "রিপোর্ট কার্ডে দেখা যায় শিশুর শক্তি এবং এরপর কী অনুশীলন করতে হবে।",
+    p3t: "ফ্রি ডেমো ক্লাস", p3: "ভালো লাগলে রিপোর্ট কার্ড থেকেই ফ্রি ক্লাস বুক করুন।",
+    back: "খেলায় ফিরে যাও", done: "শেষ", played: "খেলা হয়েছে", stars: "তারা",
+    start: "শুরু", next: "পরের", again: "আবার খেলো", toReportShort: "রিপোর্ট কার্ড",
+    calm: "শান্ত বুদবুদ", calmD: "এক মিনিট বুদবুদের সাথে শ্বাস নাও।",
+    math: "গণিত দৌড়", mathD: "৬০ সেকেন্ডে যত বেশি পারো উত্তর দাও।",
+    english: "শব্দ অভিযান", englishD: "ইংরেজি শব্দ, ছবি আর অর্থ মেলাও।",
+    logic: "রোবো পথ", logicD: "তীর দিয়ে নির্দেশ দিয়ে রোবটকে তারার কাছে নাও।",
+    memory: "মেমোরি ম্যাচ", memoryD: "কার্ড উল্টে সব জোড়া খুঁজে বের করো।",
+    confidence: "সাহসী কণ্ঠ", confidenceD: "টাইমার শেষ না হওয়া পর্যন্ত একটি মজার বিষয়ে কথা বলো।",
+    sk_calm: "শান্ত ও মনোযোগ", sk_math: "মানসিক গণিত", sk_english: "ইংরেজি", sk_logic: "কোডিং ও যুক্তি", sk_memory: "স্মৃতিশক্তি", sk_confidence: "আত্মবিশ্বাস",
+    calmIntro: "আরাম করে বসো। বুদবুদ বড় হলে শ্বাস নাও, ছোট হলে শ্বাস ছাড়ো।",
+    breatheIn: "শ্বাস নাও", hold: "ধরে রাখো", breatheOut: "শ্বাস ছাড়ো", breathOf: "{t}টির মধ্যে {n} নম্বর শ্বাস",
+    feelQ: "এখন কেমন লাগছে?", feel3: "শান্ত", feel2: "একটু ভালো", feel1: "আগের মতোই",
+    mathIntro: "৬০ সেকেন্ড। উত্তর লিখে ✓ চাপো। প্রস্তুত?", time: "সময়", score: "সঠিক",
+    engIntro: "৮টি প্রশ্ন। সঠিক উত্তরে চাপ দাও। শুনতে স্পিকারে চাপো।", hear: "শোনো",
+    qPic: "এটা কী?", qBn: "ইংরেজিতে এটা কী?",
+    logicIntro: "তীর চেপে রোবটের পথ ঠিক করো, তারপর চালাও চাপো। গাঢ় ঘরগুলো দেয়াল।",
+    run: "চালাও", clear: "মুছে ফেলো", undo: "ফেরত", level: "লেভেল {n} / ৩", bump: "ধাক্কা! পরিকল্পনা বদলে আবার চেষ্টা করো।",
+    reached: "তুমি তারায় পৌঁছে গেছো!", skip: "শেষ করো",
+    memIntro: "যত কম উল্টে পারো, সব মিলে যাওয়া জোড়া খুঁজে বের করো।", moves: "চাল", pairs: "জোড়া",
+    confIntro: "বিষয়টি পড়ো, তারপর বেল বাজা পর্যন্ত বড়দের বা শিক্ষকের সামনে জোরে কথা বলো।",
+    talkNow: "এখন বলো!", confQ: "শেষ পর্যন্ত কি কথা বলতে পেরেছো?", conf3: "হ্যাঁ, পুরো সময়", conf2: "বেশিরভাগ সময়", conf1: "অল্প একটু",
+    newTopic: "অন্য বিষয়",
+    great: "অসাধারণ!", good: "খুব ভালো!", ok: "ভালো চেষ্টা!",
+    rcLabel: "প্লে অ্যান্ড গ্রো রিপোর্ট কার্ড", rcMeta: "বয়স {age} · {date}",
+    notPlayed: "এখনো খেলা হয়নি",
+    strongTitle: "সবচেয়ে ভালো: {skill}", strongText: "{name} এখানে দারুণ করেছে। উৎসাহ দিতে থাকুন!",
+    growTitle: "এরপর অনুশীলন: {skill}", growText: "আমাদের {prog} প্রোগ্রাম ছোট ব্যাচে ধাপে ধাপে এটি গড়ে তোলে।",
+    growNone: "আরও কয়েকটি খেলা খেললে বোঝা যাবে এরপর কী অনুশীলন করতে হবে।",
+    shareWa: "হোয়াটসঅ্যাপে পাঠান", copy: "রিপোর্ট কপি করুন", copied: "কপি হয়েছে!", playMore: "আরও খেলো",
+    demoTitle: "ফ্রি ডেমো ক্লাস বুক করুন", demoText: "অভিভাবকদের জন্য। সময় নিশ্চিত করতে আমরা ফোন করব। নম্বরটি শুধু এই কাজে ব্যবহার হবে।",
+    pName: "অভিভাবকের নাম", pPhone: "ফোন নম্বর", pTime: "সুবিধাজনক সময়",
+    tAfternoon: "বিকেল (৩–৫টা)", tEvening: "সন্ধ্যা (মাগরিবের পরে)", tWeekend: "শুক্র বা শনিবার",
+    consent: "ডেমো ক্লাসের বিষয়ে একাডেমি আমাকে ফোন করতে পারে, আমি রাজি।",
+    bookDemo: "ফ্রি ক্লাস বুক করুন",
+    errPName: "অনুগ্রহ করে আপনার নাম লিখুন।", errPhone: "অনুগ্রহ করে ফোন নম্বর দিন (কমপক্ষে ১০ সংখ্যা)।", errConsent: "আমরা যেন ফোন করতে পারি, বক্সে টিক দিন।",
+    demoSaved: "ধন্যবাদ! আপনার অনুরোধ সংরক্ষণ হয়েছে। শিগগিরই ফোন করব।",
+    demoLocal: "ধন্যবাদ! আপনার অনুরোধ এই ডিভাইসে সংরক্ষণ হয়েছে।",
+    demoWa: "আমরা যেন নিশ্চিতভাবে পাই, হোয়াটসঅ্যাপে পাঠিয়ে দিন:", sendWa: "হোয়াটসঅ্যাপে পাঠান",
+    demoShow: "অনুগ্রহ করে এই স্ক্রিনটি আমাদের শিক্ষককে দেখান।",
+    teacherView: "শিক্ষকের ভিউ", tTitle: "শিক্ষকের ড্যাশবোর্ড",
+    tSrcDb: "একাডেমির ডাটাবেসে সংরক্ষিত সব খেলোয়াড় ও ডেমো অনুরোধ দেখাচ্ছে।",
+    tSrcLocal: "শুধু এই ডিভাইসে সংরক্ষিত তথ্য দেখাচ্ছে। সব দেখতে মালিক হিসেবে সাইন ইন করে পেজটি খুলুন।",
+    tLeads: "ডেমো ক্লাসের অনুরোধ", tSessions: "খেলোয়াড়",
+    kPlayers: "খেলোয়াড়", kGames: "শেষ করা খেলা", kLeads: "ডেমো অনুরোধ", kTop: "সবচেয়ে বেশি দেখা শক্তি",
+    noLeads: "এখনো কোনো ডেমো অনুরোধ নেই। অভিভাবক রিপোর্ট কার্ড থেকে বুক করলে এখানে দেখা যাবে।",
+    noSessions: "এখনো কোনো খেলোয়াড় নেই। প্রতিটি শিশু নাম লিখলে এখানে দেখা যাবে।",
+    clearLocal: "এই ডিভাইসের তথ্য মুছুন", sure: "এই ডিভাইসে সংরক্ষিত সব খেলোয়াড় ও অনুরোধ মুছে ফেলবেন?", yesClear: "মুছুন", cancel: "বাতিল",
+    footer: "রূপনগর আ/এ, মিরপুরের পরিবারের জন্য তৈরি। ফলাফল শুধু একাডেমির কাছে থাকে।",
+    colChild: "শিশু", colAge: "বয়স", colParent: "অভিভাবক", colPhone: "ফোন", colTime: "সময়", colWhen: "কখন", colGames: "খেলা", colStrong: "শক্তি", colGrow: "অনুশীলন"
+  }
+};
+const PROG = {
+  en: { calm: "Focus & Mindfulness", math: "Mental Math", english: "Spoken English", logic: "Computer & AI", memory: "Focus & Mindfulness", confidence: "Confidence & Presentation" },
+  bn: { calm: "মনোযোগ ও মাইন্ডফুলনেস", math: "মেন্টাল ম্যাথ", english: "স্পোকেন ইংলিশ", logic: "কম্পিউটার ও এআই", memory: "মনোযোগ ও মাইন্ডফুলনেস", confidence: "আত্মবিশ্বাস ও প্রেজেন্টেশন" }
+};
+
+/* ---------- State ---------- */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("pg_" + k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem("pg_" + k, JSON.stringify(v)); } catch {} }
+};
+let lang = store.get("lang", "en");
+let player = store.get("player", null); // {id, name, age, band, startedAt, updatedAt, results:{}}
+let pickedAge = null;
+let cleanup = null;
+let db = null, user = null, isOwner = false;
+
+const $ = s => document.querySelector(s);
+const t = (k, vars) => { let s = (T[lang][k] ?? T.en[k] ?? k); if (vars) for (const v in vars) s = s.replaceAll("{" + v + "}", vars[v]); return s; };
+const num = n => lang === "bn" ? String(n).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]) : String(n);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const bandOf = age => age <= 8 ? 0 : age <= 12 ? 1 : 2;
+const starSvg = on => `<svg class="star${on ? " on" : ""}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5L2.5 9.3l6.6-.8z"/></svg>`;
+const stars = n => [1, 2, 3].map(i => starSvg(i <= n)).join("");
+
+/* ---------- Activities registry ---------- */
+const ICON = {
+  calm: '<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="#9FDCD2" stroke="#17304A" stroke-width="2.5"/><circle cx="15" cy="15" r="3" fill="#fff"/><circle cx="33" cy="8" r="3" fill="#fff" stroke="#17304A" stroke-width="2"/></svg>',
+  math: '<svg viewBox="0 0 40 40"><path d="M10 12h10M15 7v10M24 12h8M10 28h10M24 25h8M24 31h8" stroke="#17304A" stroke-width="3" stroke-linecap="round"/><path d="M11 33l8-8M19 33l-8-8" stroke="#EE6A52" stroke-width="3" stroke-linecap="round"/></svg>',
+  english: '<svg viewBox="0 0 40 40"><path d="M5 31L12 9h3l7 22M8 24h11" stroke="#17304A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="29" cy="25" r="5.5" fill="none" stroke="#3B8EE0" stroke-width="3"/><path d="M34.5 19v12" stroke="#3B8EE0" stroke-width="3" stroke-linecap="round"/></svg>',
+  logic: '<svg viewBox="0 0 40 40"><rect x="9" y="12" width="22" height="18" rx="5" fill="#fff" stroke="#17304A" stroke-width="2.5"/><circle cx="16" cy="21" r="2.5" fill="#17304A"/><circle cx="24" cy="21" r="2.5" fill="#17304A"/><path d="M20 12V7" stroke="#17304A" stroke-width="2.5"/><circle cx="20" cy="6" r="2.5" fill="#8A6FDF" stroke="#17304A" stroke-width="2"/><path d="M15 26h10" stroke="#17304A" stroke-width="2" stroke-linecap="round"/></svg>',
+  memory: '<svg viewBox="0 0 40 40"><rect x="6" y="9" width="15" height="21" rx="3" fill="#3B8EE0" stroke="#17304A" stroke-width="2.5" transform="rotate(-8 13 19)"/><rect x="19" y="10" width="15" height="21" rx="3" fill="#fff" stroke="#17304A" stroke-width="2.5" transform="rotate(8 26 20)"/><circle cx="26.5" cy="20.5" r="3.5" fill="#F6B12E"/></svg>',
+  confidence: '<svg viewBox="0 0 40 40"><path d="M7 17v7h5l10 6V11l-10 6z" fill="#EE6A52" stroke="#17304A" stroke-width="2.5" stroke-linejoin="round"/><path d="M27 15c2 1.5 2 8.5 0 10M31 11c4 3 4 15 0 18" stroke="#17304A" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>'
+};
+const ACTS = [
+  { id: "calm", tint: "c-teal", mins: "1", run: runCalm },
+  { id: "math", tint: "c-sun", mins: "1", run: runMath },
+  { id: "english", tint: "c-sky", mins: "2", run: runEnglish },
+  { id: "logic", tint: "c-lilac", mins: "3", run: runLogic },
+  { id: "memory", tint: "c-leaf", mins: "2", run: runMemory },
+  { id: "confidence", tint: "c-coral", mins: "1", run: runConfidence }
+];
+const SKILL_COLOR = { calm: "var(--teal)", math: "var(--sun)", english: "var(--sky)", logic: "var(--lilac)", memory: "var(--leaf)", confidence: "var(--coral)" };
+
+/* ---------- Rendering: static text ---------- */
+function applyText() {
+  document.documentElement.lang = lang === "bn" ? "bn" : "en";
+  document.querySelectorAll("[data-t]").forEach(el => {
+    const k = el.dataset.t;
+    if (k === "heroTitle") el.innerHTML = t(k); else el.textContent = t(k);
+  });
+  $("#langEn").setAttribute("aria-pressed", lang === "en");
+  $("#langBn").setAttribute("aria-pressed", lang === "bn");
+}
+
+function renderAges() {
+  const box = $("#ages"); box.innerHTML = "";
+  for (let a = 6; a <= 16; a++) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = num(a); b.setAttribute("aria-pressed", pickedAge === a);
+    b.onclick = () => { pickedAge = a; renderAges(); };
+    box.appendChild(b);
+  }
+}
+
+function renderHome() {
+  applyText();
+  renderAges();
+  const has = !!player;
+  $("#whoPanel").hidden = has; $("#greetPanel").hidden = !has;
+  $("#playerChip").hidden = !has;
+  if (has) {
+    const done = Object.keys(player.results).length;
+    $("#playerChip").textContent = player.name + " · " + num(player.age);
+    $("#greetTitle").textContent = t("greetTitle", { name: player.name });
+    $("#greetText").textContent = t("greetText", { done: num(done) });
+    const total = Object.values(player.results).reduce((s, r) => s + r.stars, 0);
+    $("#greetStars").innerHTML = Array.from({ length: 18 }, (_, i) => starSvg(i < total)).join("");
+    $("#toReport").disabled = done === 0;
+  }
+  const box = $("#acts"); box.innerHTML = "";
+  ACTS.forEach(a => {
+    const r = player?.results[a.id];
+    const b = document.createElement("button");
+    b.className = "act"; b.type = "button";
+    b.innerHTML = `<span class="ico ${a.tint}">${ICON[a.id]}</span>
+      <span style="min-width:0"><h3>${esc(t(a.id))}</h3><p>${esc(t(a.id + "D"))}</p>
+      <span class="meta"><span class="muted">${esc(t("sk_" + a.id))}</span>${r ? `<span class="starbar">${stars(r.stars)}</span>` : ""}</span></span>
+      ${r ? `<span class="done-badge">${esc(t("played"))}</span>` : ""}`;
+    b.onclick = () => openAct(a);
+    box.appendChild(b);
+  });
+}
+
+/* ---------- Views ---------- */
+function show(id) {
+  if (cleanup) { cleanup(); cleanup = null; }
+  try { speechSynthesis.cancel(); } catch {}
+  ["viewHome", "viewAct", "viewReport", "viewTeacher"].forEach(v => $("#" + v).hidden = v !== id);
+  window.scrollTo(0, 0);
+}
+function goHome() { show("viewHome"); renderHome(); }
+
+function openAct(a) {
+  if (!player) { $("#kidName").focus(); $("#whoErr").hidden = false; $("#whoErr").textContent = t("errName"); window.scrollTo(0, 0); return; }
+  show("viewAct");
+  applyText();
+  $("#actTitle").textContent = t(a.id);
+  const stage = $("#stage");
+  stage.innerHTML = "";
+  a.run(stage, player.band, res => finishAct(a, res));
+}
+
+function finishAct(a, res) {
+  if (cleanup) { cleanup(); cleanup = null; }
+  player.results[a.id] = { pct: Math.round(res.pct), stars: res.stars, detail: res.detail || {}, at: Date.now() };
+  player.updatedAt = Date.now();
+  savePlayer();
+  const stage = $("#stage");
+  const word = res.stars >= 3 ? t("great") : res.stars === 2 ? t("good") : t("ok");
+  stage.innerHTML = `<div class="result pop"><div class="starbar">${stars(res.stars)}</div><h3>${esc(word)}</h3>
+    <p class="muted">${esc(res.summary || "")}</p>
+    <div class="row" style="justify-content:center">
+      <button class="btn" id="rBack">${esc(t("back"))}</button>
+      <button class="btn alt" id="rAgain">${esc(t("again"))}</button>
+      <button class="btn teal" id="rReport">${esc(t("toReportShort"))}</button>
+    </div></div>`;
+  $("#rBack").onclick = goHome;
+  $("#rAgain").onclick = () => openAct(a);
+  $("#rReport").onclick = openReport;
+}
+
+/* ---------- Saving ---------- */
+function savePlayer() {
+  store.set("player", player);
+  const all = store.get("sessions", {});
+  all[player.id] = player;
+  store.set("sessions", all);
+  if (db) db.doc("sessions/" + player.id).set(JSON.parse(JSON.stringify(player))).catch(() => {});
+}
+
+/* ---------- Activity: Calm Bubble ---------- */
+function runCalm(stage, band, done) {
+  const total = band === 0 ? 4 : 5;
+  stage.innerHTML = `<p class="prompt" style="font-size:22px">${esc(t("calmIntro"))}</p>
+    <div class="bubble-wrap"><div class="bubble" id="bubble"></div></div>
+    <p class="cue" id="cue"></p><p class="muted" id="cnt"></p>
+    <button class="btn" id="go">${esc(t("start"))}</button>`;
+  const bubble = $("#bubble"), cue = $("#cue"), cnt = $("#cnt");
+  let timers = [];
+  cleanup = () => timers.forEach(clearTimeout);
+  const step = (txt, scale, secs) => new Promise(res => {
+    cue.textContent = txt; bubble.style.transitionDuration = secs + "s"; bubble.style.transform = `scale(${scale})`;
+    timers.push(setTimeout(res, secs * 1000));
+  });
+  $("#go").onclick = async () => {
+    $("#go").hidden = true;
+    for (let i = 1; i <= total; i++) {
+      cnt.textContent = t("breathOf", { n: num(i), t: num(total) });
+      await step(t("breatheIn"), 2.1, 4);
+      await step(t("hold"), 2.1, 2);
+      await step(t("breatheOut"), 1, 4);
+    }
+    cue.textContent = ""; cnt.textContent = "";
+    const q = document.createElement("div");
+    q.className = "result pop";
+    q.innerHTML = `<p class="prompt">${esc(t("feelQ"))}</p><div class="row" style="justify-content:center">
+      <button class="btn teal" data-f="3">${esc(t("feel3"))}</button><button class="btn alt" data-f="2">${esc(t("feel2"))}</button><button class="btn alt" data-f="1">${esc(t("feel1"))}</button></div>`;
+    stage.appendChild(q);
+    q.querySelectorAll("[data-f]").forEach(b => b.onclick = () =>
+      done({ pct: 100, stars: 3, detail: { breaths: total, feeling: +b.dataset.f }, summary: t("breathOf", { n: num(total), t: num(total) }) }));
+  };
+}
+
+/* ---------- Activity: Math Sprint ---------- */
+function mathQ(band) {
+  if (band === 0) {
+    let a = rnd(1, 10), b = rnd(1, 10);
+    if (Math.random() < .5) return { q: `${a} + ${b}`, a: a + b };
+    if (a < b) [a, b] = [b, a];
+    return { q: `${a} − ${b}`, a: a - b };
+  }
+  if (band === 1) {
+    const k = rnd(0, 3);
+    if (k === 0) { const a = rnd(2, 10), b = rnd(2, 10); return { q: `${a} × ${b}`, a: a * b }; }
+    if (k === 1) { const b = rnd(2, 10), r = rnd(2, 10); return { q: `${b * r} ÷ ${b}`, a: r }; }
+    if (k === 2) { const a = rnd(10, 60), b = rnd(10, 39); return { q: `${a} + ${b}`, a: a + b }; }
+    const a = rnd(20, 99), b = rnd(5, a); return { q: `${a} − ${b}`, a: a - b };
+  }
+  const k = rnd(0, 3);
+  if (k === 0) { const a = rnd(12, 49), b = rnd(3, 9); return { q: `${a} × ${b}`, a: a * b }; }
+  if (k === 1) {
+    const p = [10, 20, 25, 50][rnd(0, 3)], step = { 10: 10, 20: 5, 25: 4, 50: 2 }[p], n = rnd(2, 30) * step;
+    return { q: `${p}% of ${n}`, a: n * p / 100 };
+  }
+  if (k === 2) { const a = rnd(11, 20); return { q: `${a}²`, a: a * a }; }
+  const a = rnd(-20, 20), b = rnd(-20, -1);
+  return { q: `${a} + (${b})`, a: a + b };
+}
+function runMath(stage, band, done) {
+  const goal = [20, 16, 13][band];
+  stage.innerHTML = `<p class="prompt">${esc(t("mathIntro"))}</p><button class="btn" id="go">${esc(t("start"))}</button>`;
+  $("#go").onclick = () => {
+    let left = 60, right = 0, tried = 0, cur = mathQ(band), typed = "";
+    stage.innerHTML = `<div class="hud"><span class="chip">${esc(t("time"))}: <b id="tl">60</b></span><span class="chip">${esc(t("score"))}: <b id="sc">0</b></span></div>
+      <div class="big-q" id="q"></div><div class="answer-box" id="ans" aria-live="polite"></div>
+      <div class="keypad" id="kp"></div>`;
+    // Older kids get a minus key for negative answers; the tick then fills its own row.
+    const keys = band === 2 ? ["1", "2", "3", "4", "5", "6", "7", "8", "9", "−", "0", "⌫", "✓"] : ["1", "2", "3", "4", "5", "6", "7", "8", "9", "⌫", "0", "✓"];
+    const kp = $("#kp");
+    keys.forEach(k => { const b = document.createElement("button"); b.type = "button"; b.textContent = k; if (k === "✓") b.className = "go"; b.onclick = () => press(k); kp.appendChild(b); });
+    if (band === 2) kp.lastChild.style.gridColumn = "span 3";
+    const draw = () => { $("#q").textContent = cur.q; $("#ans").textContent = typed; };
+    const press = k => {
+      if (k === "✓") return submit();
+      if (k === "⌫") typed = typed.slice(0, -1);
+      else if (k === "−") typed = typed.startsWith("-") ? typed.slice(1) : "-" + typed;
+      else if (typed.replace("-", "").length < 5) typed += k;
+      draw();
+    };
+    const submit = () => {
+      if (!typed || typed === "-") return;
+      tried++;
+      const ok = Number(typed) === cur.a;
+      if (ok) right++;
+      const box = $("#ans"); box.className = "answer-box " + (ok ? "ok" : "no");
+      $("#sc").textContent = num(right);
+      setTimeout(() => { box.className = "answer-box"; }, 250);
+      cur = mathQ(band); typed = ""; draw();
+    };
+    const onKey = e => {
+      if (/^\d$/.test(e.key)) press(e.key);
+      else if (e.key === "Backspace") press("⌫");
+      else if (e.key === "-" && band === 2) press("−");
+      else if (e.key === "Enter") press("✓");
+    };
+    document.addEventListener("keydown", onKey);
+    const iv = setInterval(() => {
+      left--; $("#tl").textContent = num(left);
+      if (left <= 0) {
+        cleanup(); cleanup = null;
+        const st = right >= goal ? 3 : right >= goal * .6 ? 2 : right >= 1 ? 1 : 0;
+        done({ pct: Math.min(100, right / goal * 100), stars: st, detail: { correct: right, tried }, summary: `${num(right)} / ${num(tried)} ${t("score").toLowerCase()}` });
+      }
+    }, 1000);
+    cleanup = () => { clearInterval(iv); document.removeEventListener("keydown", onKey); };
+    draw();
+  };
+}
+
+/* ---------- Activity: Word Explorer ---------- */
+const ENG = [
+  [ // ages 6–8: picture to word
+    ["🍎", "apple", ["ball", "egg"]], ["🐱", "cat", ["cow", "duck"]], ["🚌", "bus", ["boat", "bike"]], ["☀️", "sun", ["moon", "star"]],
+    ["🐟", "fish", ["frog", "bird"]], ["🏠", "house", ["horse", "hat"]], ["📚", "books", ["bags", "boxes"]], ["🦁", "lion", ["tiger", "goat"]],
+    ["🥭", "mango", ["banana", "orange"]], ["🌧️", "rain", ["wind", "snow"]], ["🐘", "elephant", ["monkey", "camel"]], ["🚲", "bicycle", ["car", "train"]]
+  ],
+  [ // ages 9–12: Bangla word to English
+    ["আকাশ", "sky", ["sea", "soil", "smoke"]], ["ফুল", "flower", ["fruit", "leaf", "flour"]], ["শিক্ষক", "teacher", ["student", "doctor", "farmer"]],
+    ["জানালা", "window", ["door", "wall", "roof"]], ["রান্নাঘর", "kitchen", ["bedroom", "garden", "bathroom"]], ["প্রজাপতি", "butterfly", ["dragonfly", "bee", "ant"]],
+    ["মেঘ", "cloud", ["storm", "thunder", "fog"]], ["সাহসী", "brave", ["shy", "lazy", "angry"]], ["চাবি", "key", ["lock", "chain", "bell"]],
+    ["নদী", "river", ["lake", "pond", "hill"]], ["বন্ধু", "friend", ["enemy", "guest", "cousin"]], ["সকাল", "morning", ["evening", "night", "noon"]]
+  ],
+  [ // ages 13–16: usage and vocabulary
+    ["The opposite of “ancient” is …", "modern", ["antique", "huge", "silent"]],
+    ["He ___ to school every day.", "goes", ["go", "going", "gone"]],
+    ["A word that means “very happy”:", "delighted", ["anxious", "exhausted", "curious"]],
+    ["If you postpone a meeting, you ___ it.", "delay", ["cancel", "begin", "forget"]],
+    ["Which spelling is correct?", "necessary", ["neccessary", "necesary", "nessesary"]],
+    ["Rupa is taller ___ Mitu.", "than", ["then", "that", "from"]],
+    ["A synonym of “brave”:", "courageous", ["careful", "clever", "calm"]],
+    ["She has lived here ___ 2019.", "since", ["for", "from", "at"]],
+    ["A person who writes books is an …", "author", ["audience", "editor", "actor"]],
+    ["The plural of “child” is …", "children", ["childs", "childes", "childrens"]]
+  ]
+];
+const canSpeak = (() => { try { return "speechSynthesis" in window && typeof SpeechSynthesisUtterance === "function"; } catch { return false; } })();
+function say(text) { if (!canSpeak) return; try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = .85; speechSynthesis.speak(u); } catch {} }
+function runEnglish(stage, band, done) {
+  const qs = shuffle(ENG[band]).slice(0, 8);
+  let i = 0, right = 0;
+  stage.innerHTML = `<p class="prompt">${esc(t("engIntro"))}</p><button class="btn" id="go">${esc(t("start"))}</button>`;
+  const ask = () => {
+    if (i >= qs.length) {
+      const pct = right / qs.length * 100;
+      return done({ pct, stars: right >= 7 ? 3 : right >= 5 ? 2 : right >= 1 ? 1 : 0, detail: { correct: right, of: qs.length }, summary: `${num(right)} / ${num(qs.length)}` });
+    }
+    const [p, ans, wrong] = qs[i];
+    const head = band === 0 ? `<p class="muted">${esc(t("qPic"))}</p><div class="pic" aria-hidden="true">${p}</div>`
+      : band === 1 ? `<p class="muted">${esc(t("qBn"))}</p><div class="prompt" style="font-size:44px">${esc(p)}</div>`
+      : `<div class="prompt">${esc(p)}</div>`;
+    stage.innerHTML = `<div class="hud"><span class="chip">${num(i + 1)} / ${num(qs.length)}</span><span class="chip">${esc(t("score"))}: ${num(right)}</span></div>
+      ${head}<div class="options" id="opts"></div>
+      ${canSpeak ? `<button class="btn alt small" id="hear">🔊 ${esc(t("hear"))}</button>` : ""}`;
+    if (canSpeak) $("#hear").onclick = () => say(band === 2 ? p.replace("___", ans).replace("…", ans) : ans);
+    const box = $("#opts"); let locked = false;
+    shuffle([ans, ...wrong]).forEach(w => {
+      const b = document.createElement("button"); b.type = "button"; b.textContent = w;
+      b.onclick = () => {
+        if (locked) return; locked = true;
+        const ok = w === ans; if (ok) right++;
+        b.classList.add(ok ? "ok" : "no");
+        [...box.children].forEach(c => { if (c.textContent === ans) c.classList.add("ok"); });
+        say(ans);
+        const tm = setTimeout(() => { i++; ask(); }, ok ? 900 : 1600);
+        cleanup = () => clearTimeout(tm);
+      };
+      box.appendChild(b);
+    });
+  };
+  $("#go").onclick = ask;
+}
+
+/* ---------- Activity: Robo Path ---------- */
+const MAZES = [
+  [["S..G"], ["S.#.", "..#G", "...."], ["S...", "##..", "...#", "G#.."]],
+  [["S.#..", ".##.#", "...#G", "#.#..", "....."], ["S#...", ".#.#.", ".#.#.", "...#G", "##..."], ["S....", "####.", "...#.", ".#...", "G#.##"]],
+  [["S..#..", ".#.#.#", ".#....", ".####.", "....#.", "##..#G"], ["S.#...", "..#.#.", "#...#.", "#.##..", "..#..#", ".#..G."], ["S....#", "####.#", "...#..", ".#.##.", ".#....", "G####."]]
+];
+const ROBOT = '<svg viewBox="0 0 34 34"><rect x="6" y="9" width="22" height="18" rx="5" fill="#8A6FDF" stroke="#17304A" stroke-width="2.2"/><circle cx="13" cy="18" r="2.6" fill="#fff"/><circle cx="21" cy="18" r="2.6" fill="#fff"/><path d="M17 9V5" stroke="#17304A" stroke-width="2.2"/><circle cx="17" cy="4" r="2.2" fill="#F6B12E" stroke="#17304A" stroke-width="1.6"/></svg>';
+const GOAL = '<svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5L2.5 9.3l6.6-.8z" fill="#F6B12E" stroke="#17304A" stroke-width="1.5"/></svg>';
+const DIRS = { "↑": [-1, 0], "↓": [1, 0], "←": [0, -1], "→": [0, 1] };
+function runLogic(stage, band, done) {
+  const levels = MAZES[band];
+  let lv = 0, solved = 0, bumps = 0, plan = [], running = false, timer = null;
+  cleanup = () => clearTimeout(timer);
+  stage.innerHTML = `<p class="prompt" style="font-size:22px">${esc(t("logicIntro"))}</p><button class="btn" id="go">${esc(t("start"))}</button>`;
+  const finish = () => done({ pct: solved / levels.length * 100, stars: solved, detail: { solved, bumps }, summary: `${num(solved)} / ${num(levels.length)}` });
+  const drawLevel = () => {
+    const g = levels[lv];
+    let start;
+    g.forEach((r, y) => [...r].forEach((c, x) => { if (c === "S") start = [y, x]; }));
+    let pos = start.slice();
+    stage.innerHTML = `<div class="hud"><span class="chip">${esc(t("level", { n: num(lv + 1) }))}</span></div>
+      <div class="grid-maze" id="mz" style="grid-template-columns:repeat(${g[0].length}, auto)"></div>
+      <p class="muted" id="lmsg" aria-live="polite"></p>
+      <div class="cmds" id="cmds"></div>
+      <div class="arrows"><span></span><button data-d="↑" aria-label="up">↑</button><span></span><button data-d="←" aria-label="left">←</button><button data-d="↓" aria-label="down">↓</button><button data-d="→" aria-label="right">→</button></div>
+      <div class="row" style="justify-content:center"><button class="btn teal" id="run">${esc(t("run"))}</button><button class="btn alt small" id="undo">${esc(t("undo"))}</button><button class="btn alt small" id="clr">${esc(t("clear"))}</button><button class="linkish" id="skip">${esc(t("skip"))}</button></div>`;
+    const mz = $("#mz");
+    const paint = () => {
+      mz.innerHTML = "";
+      g.forEach((r, y) => [...r].forEach((c, x) => {
+        const d = document.createElement("div");
+        d.className = "cell" + (c === "#" ? " wall" : c === "G" ? " goal" : "");
+        if (pos[0] === y && pos[1] === x) d.innerHTML = ROBOT; else if (c === "G") d.innerHTML = GOAL;
+        mz.appendChild(d);
+      }));
+    };
+    const drawCmds = (cur = -1) => { $("#cmds").innerHTML = plan.map((c, i) => `<span class="cmd${i === cur ? " now" : ""}">${c}</span>`).join(""); };
+    paint(); drawCmds();
+    stage.querySelectorAll("[data-d]").forEach(b => b.onclick = () => { if (!running && plan.length < 24) { plan.push(b.dataset.d); drawCmds(); } });
+    $("#undo").onclick = () => { if (!running) { plan.pop(); drawCmds(); } };
+    $("#clr").onclick = () => { if (!running) { plan = []; drawCmds(); } };
+    $("#skip").onclick = () => { if (!running) finish(); };
+    $("#run").onclick = () => {
+      if (running || !plan.length) return;
+      running = true; $("#lmsg").textContent = ""; pos = start.slice(); paint();
+      let i = 0;
+      const tick = () => {
+        if (i >= plan.length) { running = false; if (g[pos[0]][pos[1]] !== "G") { $("#lmsg").textContent = t("bump"); bumps++; } return; }
+        drawCmds(i);
+        const [dy, dx] = DIRS[plan[i]], ny = pos[0] + dy, nx = pos[1] + dx;
+        if (ny < 0 || nx < 0 || ny >= g.length || nx >= g[0].length || g[ny][nx] === "#") {
+          running = false; bumps++; $("#lmsg").textContent = t("bump");
+          timer = setTimeout(() => { pos = start.slice(); paint(); drawCmds(); }, 700);
+          return;
+        }
+        pos = [ny, nx]; paint();
+        if (g[ny][nx] === "G") {
+          solved++; running = false; $("#lmsg").textContent = t("reached");
+          timer = setTimeout(() => { lv++; plan = []; if (lv >= levels.length) finish(); else drawLevel(); }, 1100);
+          return;
+        }
+        i++; timer = setTimeout(tick, 380);
+      };
+      tick();
+    };
+  };
+  $("#go").onclick = drawLevel;
+}
+
+/* ---------- Activity: Memory Match ---------- */
+function runMemory(stage, band, done) {
+  const pool = ["🐯", "🌸", "⚽", "🚀", "🍉", "🦋", "🎈", "🐢", "🌙", "🍌"];
+  const pairs = band === 0 ? 6 : 8;
+  const deck = shuffle(shuffle(pool).slice(0, pairs).flatMap(e => [e, e]));
+  let open = [], got = 0, moves = 0, lock = false, tm = null;
+  cleanup = () => clearTimeout(tm);
+  stage.innerHTML = `<p class="prompt" style="font-size:22px">${esc(t("memIntro"))}</p>
+    <div class="hud"><span class="chip">${esc(t("moves"))}: <b id="mv">0</b></span><span class="chip">${esc(t("pairs"))}: <b id="pr">0</b> / ${num(pairs)}</span></div>
+    <div class="cards" id="cards" style="grid-template-columns:repeat(4, auto)"></div>`;
+  const box = $("#cards");
+  deck.forEach((e, i) => {
+    const c = document.createElement("button");
+    c.type = "button"; c.className = "card"; c.innerHTML = `<span>${e}</span>`; c.setAttribute("aria-label", "card " + (i + 1));
+    c.onclick = () => {
+      if (lock || c.classList.contains("up") || c.classList.contains("got")) return;
+      c.classList.add("up"); open.push(c);
+      if (open.length < 2) return;
+      moves++; $("#mv").textContent = num(moves);
+      const [a, b] = open;
+      if (a.textContent === b.textContent) {
+        a.classList.replace("up", "got"); b.classList.replace("up", "got"); open = []; got++;
+        $("#pr").textContent = num(got);
+        if (got === pairs) {
+          const st = moves <= pairs * 1.6 ? 3 : moves <= pairs * 2.3 ? 2 : 1;
+          tm = setTimeout(() => done({ pct: Math.min(100, pairs * 1.4 / moves * 100), stars: st, detail: { moves, pairs }, summary: `${num(moves)} ${t("moves").toLowerCase()}` }), 600);
+        }
+      } else {
+        lock = true;
+        tm = setTimeout(() => { a.classList.remove("up"); b.classList.remove("up"); open = []; lock = false; }, 800);
+      }
+    };
+    box.appendChild(c);
+  });
+}
+
+/* ---------- Activity: Brave Voice ---------- */
+const TOPICS = {
+  en: [
+    ["My favourite animal and why", "What I like to eat for breakfast", "My best friend", "If I could fly, I would go to…", "My favourite game to play outside"],
+    ["My dream job and why", "A place in Bangladesh I want to visit", "If I had a robot helper", "The best day of my life", "One rule I would add at school"],
+    ["Should students have phones at school?", "A problem in Dhaka I would solve", "What makes a good leader?", "The most useful invention ever", "My plan for the next five years"]
+  ],
+  bn: [
+    ["আমার প্রিয় প্রাণী এবং কেন", "সকালের নাস্তায় আমি কী খেতে ভালোবাসি", "আমার সবচেয়ে ভালো বন্ধু", "আমি উড়তে পারলে যেতাম…", "বাইরে আমার প্রিয় খেলা"],
+    ["আমার স্বপ্নের পেশা এবং কেন", "বাংলাদেশের যে জায়গায় যেতে চাই", "আমার যদি একটা রোবট সহকারী থাকত", "আমার জীবনের সেরা দিন", "স্কুলে আমি যে একটি নিয়ম যোগ করতাম"],
+    ["স্কুলে কি ছাত্রছাত্রীদের ফোন থাকা উচিত?", "ঢাকার যে সমস্যাটি আমি সমাধান করতাম", "একজন ভালো নেতার গুণ কী?", "সবচেয়ে কাজের আবিষ্কার", "আগামী পাঁচ বছরের জন্য আমার পরিকল্পনা"]
+  ]
+};
+function runConfidence(stage, band, done) {
+  const secs = [20, 30, 45][band];
+  let k = rnd(0, 4), iv = null;
+  cleanup = () => clearInterval(iv);
+  const intro = () => {
+    stage.innerHTML = `<p class="muted">${esc(t("confIntro"))}</p><p class="topic">${esc(TOPICS[lang][band][k])}</p>
+      <p class="chip" style="background:var(--paper)">${num(secs)} s</p>
+      <div class="row" style="justify-content:center"><button class="btn" id="go">${esc(t("start"))}</button><button class="btn alt small" id="nt">${esc(t("newTopic"))}</button></div>`;
+    $("#nt").onclick = () => { k = (k + 1) % 5; intro(); };
+    $("#go").onclick = talk;
+  };
+  const talk = () => {
+    let left = secs;
+    const C = 2 * Math.PI * 70;
+    stage.innerHTML = `<p class="topic">${esc(TOPICS[lang][band][k])}</p>
+      <svg class="ring" viewBox="0 0 170 170"><circle cx="85" cy="85" r="70" fill="none" stroke="#DCE6EC" stroke-width="14"/>
+      <circle id="arc" cx="85" cy="85" r="70" fill="none" stroke="#EE6A52" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="0" transform="rotate(-90 85 85)"/>
+      <text id="sec" x="85" y="98" text-anchor="middle" font-family="Baloo Da 2, sans-serif" font-weight="800" font-size="44" fill="#17304A">${num(left)}</text></svg>
+      <p class="cue">${esc(t("talkNow"))}</p>`;
+    iv = setInterval(() => {
+      left--; $("#sec").textContent = num(left);
+      $("#arc").setAttribute("stroke-dashoffset", C * (1 - left / secs));
+      if (left <= 0) {
+        clearInterval(iv); bell();
+        stage.innerHTML = `<div class="result pop"><p class="prompt">${esc(t("confQ"))}</p><div class="row" style="justify-content:center">
+          <button class="btn teal" data-s="3">${esc(t("conf3"))}</button><button class="btn alt" data-s="2">${esc(t("conf2"))}</button><button class="btn alt" data-s="1">${esc(t("conf1"))}</button></div></div>`;
+        stage.querySelectorAll("[data-s]").forEach(b => b.onclick = () => done({ pct: +b.dataset.s / 3 * 100, stars: +b.dataset.s, detail: { seconds: secs, topic: TOPICS.en[band][k] }, summary: `${num(secs)} s` }));
+      }
+    }, 1000);
+  };
+  intro();
+}
+function bell() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [880, 1320].forEach((f, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.frequency.value = f; o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(.2, ctx.currentTime + i * .18); g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + i * .18 + .6);
+      o.start(ctx.currentTime + i * .18); o.stop(ctx.currentTime + i * .18 + .65);
+    });
+  } catch {}
+}
+
+/* ---------- Report card ---------- */
+function analyse(p) {
+  const played = ACTS.filter(a => p.results[a.id]).map(a => ({ id: a.id, pct: p.results[a.id].pct }));
+  const byHigh = played.slice().sort((a, b) => b.pct - a.pct);
+  const strong = byHigh[0] || null;
+  const grow = played.length >= 2 ? byHigh[byHigh.length - 1] : null;
+  return { played, strong, grow: grow && grow.id !== strong?.id ? grow : null };
+}
+function reportText() {
+  const a = analyse(player);
+  const lines = [`${t("rcLabel")}: ${player.name} (${t("kidAge")} ${player.age})`];
+  ACTS.forEach(x => { const r = player.results[x.id]; if (r) lines.push(`• ${t("sk_" + x.id)}: ${r.pct}% ${"★".repeat(r.stars)}`); });
+  if (a.strong) lines.push(t("strongTitle", { skill: t("sk_" + a.strong.id) }));
+  if (a.grow) lines.push(t("growTitle", { skill: t("sk_" + a.grow.id) }) + " → " + PROG[lang][a.grow.id]);
+  lines.push(ACADEMY.name + " · " + ACADEMY.area);
+  return lines.join("\n");
+}
+function openReport() {
+  if (!player) return goHome();
+  show("viewReport"); applyText();
+  const a = analyse(player);
+  $("#rcName").textContent = player.name;
+  $("#rcMeta").textContent = t("rcMeta", { age: num(player.age), date: new Date().toLocaleDateString(lang === "bn" ? "bn-BD" : "en-GB", { day: "numeric", month: "long", year: "numeric" }) });
+  $("#rcSkills").innerHTML = ACTS.map(x => {
+    const r = player.results[x.id];
+    return `<div class="skill${r ? "" : " none"}"><span>${esc(t("sk_" + x.id))}</span>
+      <span class="bar"><i style="width:${r ? r.pct : 0}%;background:${SKILL_COLOR[x.id]}"></i></span>
+      <span class="val small">${r ? num(r.pct) + "%" : "–"}</span></div>`;
+  }).join("") + (a.played.length < 6 ? `<p class="small muted">${esc(ACTS.filter(x => !player.results[x.id]).map(x => t("sk_" + x.id)).join(", "))}: ${esc(t("notPlayed"))}</p>` : "");
+  $("#rcStrength").innerHTML = a.strong ? `<strong>${esc(t("strongTitle", { skill: t("sk_" + a.strong.id) }))}</strong>${esc(t("strongText", { name: player.name }))}` : "";
+  $("#rcStrength").hidden = !a.strong;
+  $("#rcGrow").innerHTML = a.grow ? `<strong>${esc(t("growTitle", { skill: t("sk_" + a.grow.id) }))}</strong>${esc(t("growText", { prog: PROG[lang][a.grow.id] }))}` : esc(t("growNone"));
+  $("#waShare").href = "https://wa.me/?text=" + encodeURIComponent(reportText());
+  $("#copyFallback").hidden = true;
+  const lead = store.get("leads", []).find(l => l.sessionId === player.id);
+  $("#demoForm").hidden = !!lead; $("#demoDone").hidden = !lead;
+  if (lead) showDemoDone(lead, lead.savedToDb);
+  $("#demoErr").hidden = true;
+}
+$("#copyReport").onclick = async () => {
+  const txt = reportText();
+  try { await navigator.clipboard.writeText(txt); $("#copyReport").textContent = t("copied"); setTimeout(() => $("#copyReport").textContent = t("copy"), 1500); }
+  catch { const f = $("#copyFallback"); f.hidden = false; f.value = txt; f.focus(); f.select(); }
+};
+$("#rcMore").onclick = goHome;
+
+$("#demoForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = $("#pName").value.trim(), phone = $("#pPhone").value.trim(), time = $("#pTime").value, ok = $("#pConsent").checked;
+  const err = m => { $("#demoErr").hidden = false; $("#demoErr").textContent = m; };
+  if (!name) return err(t("errPName"));
+  if (phone.replace(/\D/g, "").length < 10) return err(t("errPhone"));
+  if (!ok) return err(t("errConsent"));
+  const a = analyse(player);
+  const lead = { id: uid(), sessionId: player.id, childName: player.name, childAge: player.age, parentName: name, phone, time,
+    strongest: a.strong?.id || "", practise: a.grow?.id || "", lang, consent: true, createdAt: Date.now(), savedToDb: false };
+  if (db) { try { const { savedToDb, ...body } = lead; await db.doc("leads/" + lead.id).set(body); lead.savedToDb = true; } catch {} }
+  const leads = store.get("leads", []); leads.push(lead); store.set("leads", leads);
+  $("#demoForm").hidden = true; $("#demoDone").hidden = false;
+  showDemoDone(lead, lead.savedToDb);
+});
+function showDemoDone(lead, inDb) {
+  const box = $("#demoDone");
+  const waText = `Free demo class request\nChild: ${lead.childName} (${lead.childAge})\nParent: ${lead.parentName}\nPhone: ${lead.phone}\nBest time: ${T.en["t" + lead.time[0].toUpperCase() + lead.time.slice(1)]}`;
+  let html = `<p class="msg">${esc(inDb ? t("demoSaved") : t("demoLocal"))}</p>`;
+  if (!inDb) {
+    html += ACADEMY.whatsapp
+      ? `<p class="small">${esc(t("demoWa"))}</p><a class="btn teal small" target="_blank" rel="noopener" href="https://wa.me/${ACADEMY.whatsapp}?text=${encodeURIComponent(waText)}">${esc(t("sendWa"))}</a>`
+      : `<p class="small muted">${esc(t("demoShow"))}</p>`;
+  }
+  box.innerHTML = html;
+}
+
+/* ---------- Who's playing ---------- */
+$("#whoForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("#kidName").value.trim();
+  const err = m => { $("#whoErr").hidden = false; $("#whoErr").textContent = m; };
+  if (!name) return err(t("errName"));
+  if (!pickedAge) return err(t("errAge"));
+  $("#whoErr").hidden = true;
+  player = { id: uid(), name, age: pickedAge, band: bandOf(pickedAge), lang, startedAt: Date.now(), updatedAt: Date.now(), results: {} };
+  savePlayer();
+  $("#kidName").value = ""; pickedAge = null;
+  renderHome();
+});
+$("#newPlayer").onclick = () => { player = null; store.set("player", null); $("#pName").value = ""; $("#pPhone").value = ""; $("#pConsent").checked = false; renderHome(); $("#kidName").focus(); };
+$("#toReport").onclick = openReport;
+$("#homeBtn").onclick = goHome;
+$("#actBack").onclick = goHome;
+$("#tBack").onclick = goHome;
+$("#langEn").onclick = () => setLang("en");
+$("#langBn").onclick = () => setLang("bn");
+function setLang(l) {
+  lang = l; store.set("lang", l);
+  if (!$("#viewReport").hidden) openReport();
+  else if (!$("#viewTeacher").hidden) openTeacher();
+  else if (!$("#viewAct").hidden) applyText();
+  else renderHome();
+}
+
+/* ---------- Teacher dashboard ---------- */
+let unsubs = [];
+async function openTeacher() {
+  show("viewTeacher"); applyText();
+  unsubs.forEach(u => u()); unsubs = [];
+  const local = { sessions: Object.values(store.get("sessions", {})), leads: store.get("leads", []) };
+  if (db && isOwner) {
+    $("#tSource").textContent = t("tSrcDb");
+    $("#tClearRow").hidden = true;
+    const data = { sessions: [], leads: [] };
+    unsubs.push(db.collection("sessions").onSnapshot(s => { data.sessions = s.docs.map(d => d.data()); drawTeacher(data); }, () => drawTeacher(local)));
+    unsubs.push(db.collection("leads").onSnapshot(s => { data.leads = s.docs.map(d => d.data()); drawTeacher(data); }, () => {}));
+    cleanup = () => { unsubs.forEach(u => u()); unsubs = []; };
+    drawTeacher(data);
+  } else {
+    $("#tSource").textContent = t("tSrcLocal");
+    $("#tClearRow").hidden = false;
+    drawTeacher(local);
+  }
+}
+function drawTeacher({ sessions, leads }) {
+  sessions = sessions.slice().sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  leads = leads.slice().sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  const games = sessions.reduce((s, p) => s + Object.keys(p.results || {}).length, 0);
+  const tally = {};
+  sessions.forEach(p => { const a = analyse({ results: p.results || {} }); if (a.strong) tally[a.strong.id] = (tally[a.strong.id] || 0) + 1; });
+  const top = Object.entries(tally).sort((a, b) => b[1] - a[1])[0];
+  $("#tKpis").innerHTML = [
+    [num(sessions.length), t("kPlayers")], [num(games), t("kGames")], [num(leads.length), t("kLeads")],
+    [top ? esc(t("sk_" + top[0])) : "–", t("kTop")]
+  ].map(([v, l], i) => `<div class="kpi"><b style="${i === 3 ? "font-size:22px;line-height:1.2" : ""}">${v}</b><span>${esc(l)}</span></div>`).join("");
+  const when = ms => ms ? new Date(ms).toLocaleString(lang === "bn" ? "bn-BD" : "en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
+  $("#tLeads").innerHTML = leads.length ? `<table><thead><tr><th>${t("colWhen")}</th><th>${t("colParent")}</th><th>${t("colPhone")}</th><th>${t("colTime")}</th><th>${t("colChild")}</th><th>${t("colAge")}</th><th>${t("colStrong")}</th><th>${t("colGrow")}</th></tr></thead><tbody>${
+    leads.map(l => `<tr><td>${esc(when(l.createdAt))}</td><td>${esc(l.parentName)}</td><td class="num">${esc(l.phone)}</td><td>${esc(t("t" + (l.time || "x")[0].toUpperCase() + (l.time || "").slice(1)))}</td><td>${esc(l.childName)}</td><td class="num">${num(l.childAge)}</td><td>${l.strongest ? esc(t("sk_" + l.strongest)) : "–"}</td><td>${l.practise ? esc(t("sk_" + l.practise)) : "–"}</td></tr>`).join("")
+  }</tbody></table>` : `<div class="empty">${esc(t("noLeads"))}</div>`;
+  $("#tSessions").innerHTML = sessions.length ? `<table><thead><tr><th>${t("colWhen")}</th><th>${t("colChild")}</th><th>${t("colAge")}</th><th>${t("colGames")}</th>${ACTS.map(a => `<th>${esc(t("sk_" + a.id))}</th>`).join("")}</tr></thead><tbody>${
+    sessions.map(p => `<tr><td>${esc(when(p.updatedAt))}</td><td>${esc(p.name)}</td><td class="num">${num(p.age)}</td><td class="num">${num(Object.keys(p.results || {}).length)}</td>${ACTS.map(a => { const r = (p.results || {})[a.id]; return `<td class="num">${r ? num(r.pct) + "%" : "–"}</td>`; }).join("")}</tr>`).join("")
+  }</tbody></table>` : `<div class="empty">${esc(t("noSessions"))}</div>`;
+}
+$("#teacherBtn").onclick = openTeacher;
+$("#tClear").onclick = () => { $("#tClearConfirm").hidden = false; };
+$("#tClearNo").onclick = () => { $("#tClearConfirm").hidden = true; };
+$("#tClearYes").onclick = () => { store.set("sessions", {}); store.set("leads", []); store.set("player", null); player = null; $("#tClearConfirm").hidden = true; openTeacher(); };
+
+/* ---------- Start ---------- */
+renderHome();
+(async () => {
+  try {
+    if (!window.claude?.use) return;
+    const [d, u] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+    user = u; isOwner = (u ? await u.canEdit() : false) || false;
+    db = d;
+    if (db && player) savePlayer();
+    if (!$("#viewTeacher").hidden) openTeacher();
+  } catch {}
+})();
+})();
+</script>
