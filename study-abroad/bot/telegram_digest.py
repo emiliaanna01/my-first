@@ -1,6 +1,7 @@
 """Send study-abroad deadline reminders to Telegram.
 
-Reads data/opportunities.json and data/roadmap.json and posts:
+Reads data/opportunities.json, data/roadmap.json and data/daily_plan.json and posts:
+  - today's study / application session (every day)
   - an alert for anything due in exactly 30, 14, 7, 3 or 1 days (or today)
   - a full digest on Mondays, or whenever --digest is passed
 
@@ -55,10 +56,26 @@ def line(days, label, detail, link):
     return text + (f'\n  <a href="{link}">link</a>' if link else "")
 
 
+def todays_session(today):
+    plan = {p["date"]: p for p in load("daily_plan.json")}
+    p = plan.get(today.isoformat())
+    if not p:
+        return ""
+    week = [plan.get((today - dt.timedelta(days=k)).isoformat()) for k in range(1, 8)]
+    done = sum(1 for w in week if w and w.get("done"))
+    text = f"📚 <b>Today · {p['minutes']} min · {p['focus']}</b>\n{p['task']}"
+    if p.get("resource"):
+        text += f"\n<i>Use: {p['resource']}</i>"
+    return text + f"\nLast 7 days: {done}/7 sessions done."
+
+
 def build_message(today, digest):
     items = sorted(open_items(today))
     alerts = [i for i in items if i[0] in ALERT_DAYS or i[0] < 0]
     parts = []
+    session = todays_session(today)
+    if session:
+        parts.append(session)
     if alerts:
         parts.append("⏰ <b>Deadline alerts</b>\n" + "\n".join(line(*i) for i in alerts))
     if digest:

@@ -1,0 +1,938 @@
+[
+ {
+  "id": "2026-10-20",
+  "date": "2026-10-20",
+  "focus": "Admin",
+  "minutes": 30,
+  "task": "Book IELTS Academic for early December (British Council or IDP Dhaka). Pay the fee and log it in Funds.",
+  "resource": "ielts.org / britishcouncil.org.bd",
+  "done": false
+ },
+ {
+  "id": "2026-10-21",
+  "date": "2026-10-21",
+  "focus": "IELTS Writing",
+  "minutes": 45,
+  "task": "Learn the Task 2 structure (intro, 2 body paragraphs, conclusion), then write one essay. Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-22",
+  "date": "2026-10-22",
+  "focus": "IELTS Speaking",
+  "minutes": 30,
+  "task": "Speaking Part 2: 3 cue cards, 2 min each, record on your phone. Then 10 new topic words.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-23",
+  "date": "2026-10-23",
+  "focus": "IELTS Writing",
+  "minutes": 30,
+  "task": "Writing Task 1: describe one chart in 20 min (150+ words). Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-24",
+  "date": "2026-10-24",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Cambridge IELTS 19 Test 1, Reading passage 3 + full Listening. Log scores in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-25",
+  "date": "2026-10-25",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Fill in the [brackets] in your CV doc: AKIJ department, dates, 2 bullets with numbers.",
+  "resource": "CV doc",
+  "done": false
+ },
+ {
+  "id": "2026-10-26",
+  "date": "2026-10-26",
+  "focus": "IELTS Listening",
+  "minutes": 30,
+  "task": "Cambridge IELTS 19 Test 1, Listening (all 4 parts, timed). Check answers; list every word you missed.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-27",
+  "date": "2026-10-27",
+  "focus": "IELTS Reading",
+  "minutes": 45,
+  "task": "Cambridge IELTS 19 Test 2, Reading passages 1–2 (40 min timed). Mark True/False/Not Given errors.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-28",
+  "date": "2026-10-28",
+  "focus": "IELTS Writing",
+  "minutes": 45,
+  "task": "Learn the Task 2 structure (intro, 2 body paragraphs, conclusion), then write one essay. Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-29",
+  "date": "2026-10-29",
+  "focus": "IELTS Speaking",
+  "minutes": 30,
+  "task": "Speaking Part 2: 3 cue cards, 2 min each, record on your phone. Then 10 new topic words.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-30",
+  "date": "2026-10-30",
+  "focus": "IELTS Writing",
+  "minutes": 30,
+  "task": "Writing Task 1: describe one chart in 20 min (150+ words). Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-10-31",
+  "date": "2026-10-31",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Cambridge IELTS 19 Test 2, Reading passage 3 + full Listening. Log scores in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-01",
+  "date": "2026-11-01",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Read the GrEnFIn and EPOG programme pages. Note required documents in the Documents tab.",
+  "resource": "Opportunities tab",
+  "done": false
+ },
+ {
+  "id": "2026-11-02",
+  "date": "2026-11-02",
+  "focus": "IELTS Listening",
+  "minutes": 30,
+  "task": "Cambridge IELTS 19 Test 2, Listening (all 4 parts, timed). Check answers; list every word you missed.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-03",
+  "date": "2026-11-03",
+  "focus": "IELTS Reading",
+  "minutes": 45,
+  "task": "Cambridge IELTS 19 Test 3, Reading passages 1–2 (40 min timed). Mark True/False/Not Given errors.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-04",
+  "date": "2026-11-04",
+  "focus": "IELTS Writing",
+  "minutes": 45,
+  "task": "Writing Task 2: one essay in 40 min (250+ words). Paste it into the IELTS tab for a band score.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-05",
+  "date": "2026-11-05",
+  "focus": "IELTS Speaking",
+  "minutes": 30,
+  "task": "Speaking Part 2: 3 cue cards, 2 min each, record on your phone. Then 10 new topic words.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-06",
+  "date": "2026-11-06",
+  "focus": "IELTS Writing",
+  "minutes": 30,
+  "task": "Writing Task 1: describe one chart in 20 min (150+ words). Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-07",
+  "date": "2026-11-07",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Cambridge IELTS 19 Test 3, Reading passage 3 + full Listening. Log scores in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-08",
+  "date": "2026-11-08",
+  "focus": "Papers",
+  "minutes": 45,
+  "task": "Check both passports. Request NSU transcript, enrolment certificate and English-medium letter.",
+  "resource": "Documents tab",
+  "done": false
+ },
+ {
+  "id": "2026-11-09",
+  "date": "2026-11-09",
+  "focus": "IELTS Listening",
+  "minutes": 30,
+  "task": "Cambridge IELTS 19 Test 3, Listening (all 4 parts, timed). Check answers; list every word you missed.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-10",
+  "date": "2026-11-10",
+  "focus": "IELTS Reading",
+  "minutes": 45,
+  "task": "Cambridge IELTS 18 Test 4, Reading passages 1–2 (40 min timed). Mark True/False/Not Given errors.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-11",
+  "date": "2026-11-11",
+  "focus": "IELTS Writing",
+  "minutes": 45,
+  "task": "Writing Task 2: one essay in 40 min (250+ words). Paste it into the IELTS tab for a band score.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-12",
+  "date": "2026-11-12",
+  "focus": "IELTS Speaking",
+  "minutes": 30,
+  "task": "Speaking Part 2: 3 cue cards, 2 min each, record on your phone. Then 10 new topic words.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-13",
+  "date": "2026-11-13",
+  "focus": "IELTS Writing",
+  "minutes": 30,
+  "task": "Writing Task 1: describe one chart in 20 min (150+ words). Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-14",
+  "date": "2026-11-14",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Cambridge IELTS 18 Test 4, Reading passage 3 + full Listening. Log scores in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-15",
+  "date": "2026-11-15",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Statement of purpose draft 1 with Claude: why Finance/Analytics, why Europe, career goal.",
+  "resource": "Ask Claude in chat",
+  "done": false
+ },
+ {
+  "id": "2026-11-16",
+  "date": "2026-11-16",
+  "focus": "IELTS Listening",
+  "minutes": 30,
+  "task": "Cambridge IELTS 18 Test 4, Listening (all 4 parts, timed). Check answers; list every word you missed.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-17",
+  "date": "2026-11-17",
+  "focus": "IELTS Reading",
+  "minutes": 45,
+  "task": "Cambridge IELTS 18 Test 1, Reading passages 1–2 (40 min timed). Mark True/False/Not Given errors.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-18",
+  "date": "2026-11-18",
+  "focus": "IELTS Writing",
+  "minutes": 45,
+  "task": "Writing Task 2: one essay in 40 min (250+ words). Paste it into the IELTS tab for a band score.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-19",
+  "date": "2026-11-19",
+  "focus": "IELTS Speaking",
+  "minutes": 30,
+  "task": "Speaking Part 2: 3 cue cards, 2 min each, record on your phone. Then 10 new topic words.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-20",
+  "date": "2026-11-20",
+  "focus": "IELTS Writing",
+  "minutes": 30,
+  "task": "Writing Task 1: describe one chart in 20 min (150+ words). Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-21",
+  "date": "2026-11-21",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Cambridge IELTS 18 Test 1, Reading passage 3 + full Listening. Log scores in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-22",
+  "date": "2026-11-22",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Email 2 NSU professors asking for recommendation letters. Attach CV and programme list.",
+  "resource": "Documents tab",
+  "done": false
+ },
+ {
+  "id": "2026-11-23",
+  "date": "2026-11-23",
+  "focus": "IELTS Listening",
+  "minutes": 30,
+  "task": "Cambridge IELTS 18 Test 1, Listening (all 4 parts, timed). Check answers; list every word you missed.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-24",
+  "date": "2026-11-24",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Full timed mock: Cambridge IELTS 18 Test 2 Reading (60 min). Log your band.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-25",
+  "date": "2026-11-25",
+  "focus": "IELTS Writing",
+  "minutes": 45,
+  "task": "Writing Task 2: one essay in 40 min (250+ words). Paste it into the IELTS tab for a band score.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-26",
+  "date": "2026-11-26",
+  "focus": "IELTS Speaking",
+  "minutes": 30,
+  "task": "Speaking Part 2: 3 cue cards, 2 min each, record on your phone. Then 10 new topic words.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-27",
+  "date": "2026-11-27",
+  "focus": "IELTS Writing",
+  "minutes": 30,
+  "task": "Writing Task 1: describe one chart in 20 min (150+ words). Score it in the IELTS tab.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-28",
+  "date": "2026-11-28",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Full timed mock: Cambridge IELTS 18 Test 2 Reading (60 min). Log your band.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-11-29",
+  "date": "2026-11-29",
+  "focus": "Funds",
+  "minutes": 30,
+  "task": "Update the Funds tab: savings, family commitment, fees paid so far.",
+  "resource": "Funds tab",
+  "done": false
+ },
+ {
+  "id": "2026-11-30",
+  "date": "2026-11-30",
+  "focus": "IELTS Listening",
+  "minutes": 30,
+  "task": "Cambridge IELTS 18 Test 2, Listening (all 4 parts, timed). Check answers; list every word you missed.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-12-01",
+  "date": "2026-12-01",
+  "focus": "IELTS Mock",
+  "minutes": 60,
+  "task": "Full timed mock: Cambridge IELTS 18 Test 3 Reading (60 min). Log your band.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-12-02",
+  "date": "2026-12-02",
+  "focus": "IELTS Writing",
+  "minutes": 45,
+  "task": "Writing Task 2: one essay in 40 min (250+ words). Paste it into the IELTS tab for a band score.",
+  "resource": "Cambridge IELTS books · British Council 'IELTS Ready' (free)",
+  "done": false
+ },
+ {
+  "id": "2026-12-03",
+  "date": "2026-12-03",
+  "focus": "IELTS Review",
+  "minutes": 30,
+  "task": "Light review only: read your error list and 2 model essays. No new material.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-04",
+  "date": "2026-12-04",
+  "focus": "IELTS Review",
+  "minutes": 30,
+  "task": "Light review only: read your error list and 2 model essays. No new material.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-05",
+  "date": "2026-12-05",
+  "focus": "IELTS Test",
+  "minutes": 180,
+  "task": "IELTS TEST DAY. Sleep well, bring your passport, arrive 45 min early.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-06",
+  "date": "2026-12-06",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Erasmus Mundus shortlist: pick your best 3 programmes and confirm deadlines on official pages.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-07",
+  "date": "2026-12-07",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GrEnFIn (energy markets + finance angle).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-08",
+  "date": "2026-12-08",
+  "focus": "Papers",
+  "minutes": 30,
+  "task": "Scan everything as PDF (under 2 MB each), name files clearly, upload to your Drive folder.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-09",
+  "date": "2026-12-09",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Fill in the GrEnFIn portal (Univ. of Bologna Studenti Online). Save draft.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-10",
+  "date": "2026-12-10",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Chase recommendation letters. Confirm referees got the portal emails.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-11",
+  "date": "2026-12-11",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for EPOG (economic policy, finance, innovation).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-12",
+  "date": "2026-12-12",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Stipendium Hungaricum: choose 2 programmes, start the DreamApply form.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-13",
+  "date": "2026-12-13",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Check the Bangladesh Ministry of Education nomination steps for Stipendium Hungaricum.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-14",
+  "date": "2026-12-14",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GLOCAL (global business).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-15",
+  "date": "2026-12-15",
+  "focus": "German",
+  "minutes": 30,
+  "task": "German A1: one lesson (Nicos Weg A1, DW Learn German, free).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-16",
+  "date": "2026-12-16",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Erasmus Mundus shortlist: pick your best 3 programmes and confirm deadlines on official pages.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-17",
+  "date": "2026-12-17",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GrEnFIn (energy markets + finance angle).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-18",
+  "date": "2026-12-18",
+  "focus": "Papers",
+  "minutes": 30,
+  "task": "Scan everything as PDF (under 2 MB each), name files clearly, upload to your Drive folder.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-19",
+  "date": "2026-12-19",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Fill in the GrEnFIn portal (Univ. of Bologna Studenti Online). Save draft.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-20",
+  "date": "2026-12-20",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Chase recommendation letters. Confirm referees got the portal emails.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-21",
+  "date": "2026-12-21",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for EPOG (economic policy, finance, innovation).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-22",
+  "date": "2026-12-22",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Stipendium Hungaricum: choose 2 programmes, start the DreamApply form.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-23",
+  "date": "2026-12-23",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Check the Bangladesh Ministry of Education nomination steps for Stipendium Hungaricum.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-24",
+  "date": "2026-12-24",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GLOCAL (global business).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-25",
+  "date": "2026-12-25",
+  "focus": "German",
+  "minutes": 30,
+  "task": "German A1: one lesson (Nicos Weg A1, DW Learn German, free).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-26",
+  "date": "2026-12-26",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Erasmus Mundus shortlist: pick your best 3 programmes and confirm deadlines on official pages.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-27",
+  "date": "2026-12-27",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GrEnFIn (energy markets + finance angle).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-28",
+  "date": "2026-12-28",
+  "focus": "Papers",
+  "minutes": 30,
+  "task": "Scan everything as PDF (under 2 MB each), name files clearly, upload to your Drive folder.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-29",
+  "date": "2026-12-29",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Fill in the GrEnFIn portal (Univ. of Bologna Studenti Online). Save draft.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-30",
+  "date": "2026-12-30",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Chase recommendation letters. Confirm referees got the portal emails.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2026-12-31",
+  "date": "2026-12-31",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for EPOG (economic policy, finance, innovation).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-01",
+  "date": "2027-01-01",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Stipendium Hungaricum: choose 2 programmes, start the DreamApply form.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-02",
+  "date": "2027-01-02",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Check the Bangladesh Ministry of Education nomination steps for Stipendium Hungaricum.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-03",
+  "date": "2027-01-03",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GLOCAL (global business).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-04",
+  "date": "2027-01-04",
+  "focus": "German",
+  "minutes": 30,
+  "task": "German A1: one lesson (Nicos Weg A1, DW Learn German, free).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-05",
+  "date": "2027-01-05",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "SUBMIT GrEnFIn (deadline 7 Jan). Screenshot the confirmation.",
+  "resource": "Opportunities tab",
+  "done": false
+ },
+ {
+  "id": "2027-01-06",
+  "date": "2027-01-06",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Erasmus Mundus shortlist: pick your best 3 programmes and confirm deadlines on official pages.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-07",
+  "date": "2027-01-07",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GrEnFIn (energy markets + finance angle).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-08",
+  "date": "2027-01-08",
+  "focus": "Papers",
+  "minutes": 30,
+  "task": "Scan everything as PDF (under 2 MB each), name files clearly, upload to your Drive folder.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-09",
+  "date": "2027-01-09",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Fill in the GrEnFIn portal (Univ. of Bologna Studenti Online). Save draft.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-10",
+  "date": "2027-01-10",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Chase recommendation letters. Confirm referees got the portal emails.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-11",
+  "date": "2027-01-11",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for EPOG (economic policy, finance, innovation).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-12",
+  "date": "2027-01-12",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "SUBMIT GLOCAL (deadline 14 Jan).",
+  "resource": "Opportunities tab",
+  "done": false
+ },
+ {
+  "id": "2027-01-13",
+  "date": "2027-01-13",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "SUBMIT Stipendium Hungaricum (deadline 15 Jan).",
+  "resource": "Opportunities tab",
+  "done": false
+ },
+ {
+  "id": "2027-01-14",
+  "date": "2027-01-14",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Stipendium Hungaricum: choose 2 programmes, start the DreamApply form.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-15",
+  "date": "2027-01-15",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Check the Bangladesh Ministry of Education nomination steps for Stipendium Hungaricum.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-16",
+  "date": "2027-01-16",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GLOCAL (global business).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-17",
+  "date": "2027-01-17",
+  "focus": "German",
+  "minutes": 30,
+  "task": "German A1: one lesson (Nicos Weg A1, DW Learn German, free).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-18",
+  "date": "2027-01-18",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Erasmus Mundus shortlist: pick your best 3 programmes and confirm deadlines on official pages.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-19",
+  "date": "2027-01-19",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GrEnFIn (energy markets + finance angle).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-20",
+  "date": "2027-01-20",
+  "focus": "Papers",
+  "minutes": 30,
+  "task": "Scan everything as PDF (under 2 MB each), name files clearly, upload to your Drive folder.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-21",
+  "date": "2027-01-21",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Fill in the GrEnFIn portal (Univ. of Bologna Studenti Online). Save draft.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-22",
+  "date": "2027-01-22",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Chase recommendation letters. Confirm referees got the portal emails.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-23",
+  "date": "2027-01-23",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for EPOG (economic policy, finance, innovation).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-24",
+  "date": "2027-01-24",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "SUBMIT EPOG (deadline 27 Jan).",
+  "resource": "Opportunities tab",
+  "done": false
+ },
+ {
+  "id": "2027-01-25",
+  "date": "2027-01-25",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Stipendium Hungaricum: choose 2 programmes, start the DreamApply form.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-26",
+  "date": "2027-01-26",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Check the Bangladesh Ministry of Education nomination steps for Stipendium Hungaricum.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-27",
+  "date": "2027-01-27",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GLOCAL (global business).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-28",
+  "date": "2027-01-28",
+  "focus": "German",
+  "minutes": 30,
+  "task": "German A1: one lesson (Nicos Weg A1, DW Learn German, free).",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-29",
+  "date": "2027-01-29",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Erasmus Mundus shortlist: pick your best 3 programmes and confirm deadlines on official pages.",
+  "resource": "",
+  "done": false
+ },
+ {
+  "id": "2027-01-30",
+  "date": "2027-01-30",
+  "focus": "Applications",
+  "minutes": 45,
+  "task": "Start the German MSc shortlist on the DAAD database (Finance, Business Analytics, FinTech).",
+  "resource": "Opportunities tab",
+  "done": false
+ },
+ {
+  "id": "2027-01-31",
+  "date": "2027-01-31",
+  "focus": "Applications",
+  "minutes": 60,
+  "task": "Tailor the SOP for GrEnFIn (energy markets + finance angle).",
+  "resource": "",
+  "done": false
+ }
+]

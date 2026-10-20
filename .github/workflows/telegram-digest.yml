@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the daily research run commits tracker data to this branch
+          ref: claude/friendly-cerf-x5ro5z
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
