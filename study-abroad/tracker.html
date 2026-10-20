@@ -1,0 +1,437 @@
+<title>Path Abroad</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; a countdown strip of the next deadlines, then tabbed working views (opportunities, roadmap, budget). */
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --ink: #16212b;
+  --muted: #5b6875;
+  --line: #dce2e8;
+  --accent: #1d5a86;
+  --accent-soft: #e2edf6;
+  --good: #23784a;
+  --good-soft: #e1f2e8;
+  --warn: #9a5b00;
+  --warn-soft: #fbefd9;
+  --bad: #b3322b;
+  --bad-soft: #f9e2e0;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151b; --surface: #17202a; --ink: #e6ecf1; --muted: #98a6b3; --line: #2a3643;
+    --accent: #7db6e3; --accent-soft: #1c3347; --good: #6fcf97; --good-soft: #17352a;
+    --warn: #f0b45a; --warn-soft: #3a2c14; --bad: #f08a83; --bad-soft: #3c1d1b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f151b; --surface: #17202a; --ink: #e6ecf1; --muted: #98a6b3; --line: #2a3643;
+  --accent: #7db6e3; --accent-soft: #1c3347; --good: #6fcf97; --good-soft: #17352a;
+  --warn: #f0b45a; --warn-soft: #3a2c14; --bad: #f08a83; --bad-soft: #3c1d1b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5;
+}
+.wrap {
+  max-width: 920px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 6vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+h2 { font-size: 20px; font-weight: 600; }
+h3 { font-size: 16px; font-weight: 600; line-height: 1.3; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+
+header { display: flex; flex-direction: column; gap: 12px; }
+.profile { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); white-space: nowrap;
+}
+.chip b { font-weight: 600; }
+
+.strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.tick {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 4px; min-width: 0;
+}
+.tick .days { font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1; }
+.tick .days small { font-size: 14px; font-weight: 600; color: var(--muted); margin-left: 4px; }
+.tick .what { font-size: 14px; font-weight: 500; }
+.tick.urgent .days { color: var(--bad); }
+.tick.soon .days { color: var(--warn); }
+
+nav.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; }
+nav.tabs button {
+  font: 600 14px var(--font-body); color: var(--muted); background: none; border: 0;
+  padding: 10px 14px; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap;
+}
+nav.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button {
+  font: 500 13px var(--font-body); padding: 5px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+.filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+.opp {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px;
+  display: grid; grid-template-columns: 92px 1fr; gap: 16px; min-width: 0;
+}
+.opp .date { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.opp .date .d { font-family: var(--font-mono); font-size: 13px; }
+.opp .body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.opp .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.opp p { margin: 0; font-size: 14px; }
+.opp .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.opp a { color: var(--accent); font-weight: 500; font-size: 14px; }
+.pill { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+.p-urgent { background: var(--bad-soft); color: var(--bad); }
+.p-soon { background: var(--warn-soft); color: var(--warn); }
+.p-ok { background: var(--accent-soft); color: var(--accent); }
+.p-none { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+.p-high { background: var(--good-soft); color: var(--good); }
+.p-medium { background: var(--accent-soft); color: var(--accent); }
+.p-low { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+.p-verified { background: var(--good-soft); color: var(--good); }
+.p-unverified { background: var(--warn-soft); color: var(--warn); }
+select {
+  font: 500 13px var(--font-body); padding: 5px 8px; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+}
+
+.phase { display: flex; flex-direction: column; gap: 8px; }
+.phase h2 { font-size: 17px; }
+.step {
+  display: grid; grid-template-columns: 24px 1fr auto; gap: 12px; align-items: start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+}
+.step input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent); }
+.step .t { font-weight: 600; font-size: 14px; }
+.step .x { font-size: 13px; color: var(--muted); }
+.step.done .t { text-decoration: line-through; color: var(--muted); }
+.step .due { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.progress { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.progress > i { display: block; height: 100%; background: var(--accent); }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 520px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+td.num { font-family: var(--font-mono); text-align: right; font-variant-numeric: tabular-nums; }
+tr.total td { font-weight: 600; border-bottom: 0; }
+.cards2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.note {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 6px; font-size: 14px;
+}
+.note p { margin: 0; }
+.rate { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 14px; }
+.rate input { width: 90px; font: 500 14px var(--font-mono); padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); }
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 24px; color: var(--muted); }
+.status-msg { font-size: 13px; color: var(--muted); min-height: 1.2em; }
+
+@media (max-width: 560px) {
+  .opp { grid-template-columns: 1fr; gap: 10px; }
+  .opp .date { flex-direction: row; gap: 8px; align-items: center; }
+  .step { grid-template-columns: 24px 1fr; }
+  .step .due { grid-column: 2; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .progress > i { transition: width .3s ease; }
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Masters abroad · Winter 2027 target</span>
+    <h1>Path Abroad</h1>
+    <div class="profile">
+      <span class="chip">BBA Finance, <b>NSU</b></span>
+      <span class="chip">CGPA <b class="mono">3.25</b> → German grade <b class="mono">≈ 1.75</b></span>
+      <span class="chip">Budget <b>15–25 lakh BDT</b></span>
+      <span class="chip">IELTS <b>not taken</b></span>
+      <span class="chip">Spouse joins later</span>
+    </div>
+  </header>
+
+  <section aria-label="Next deadlines" class="strip" id="strip">
+    <div class="tick"><span class="eyebrow">Loading</span><span class="what muted">Fetching your deadlines…</span></div>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" id="tab-opps" aria-selected="true" data-view="opps">Opportunities</button>
+    <button role="tab" id="tab-road" aria-selected="false" data-view="road">Roadmap</button>
+    <button role="tab" id="tab-budget" aria-selected="false" data-view="budget">Budget</button>
+  </nav>
+
+  <section id="view-opps" class="list" style="gap:14px">
+    <div class="filters" id="filters">
+      <button aria-pressed="true" data-f="all">All</button>
+      <button aria-pressed="false" data-f="scholarship">Scholarships</button>
+      <button aria-pressed="false" data-f="program">Programmes</button>
+      <button aria-pressed="false" data-f="search">Shortlists</button>
+      <button aria-pressed="false" data-f="visa">Visa</button>
+      <button aria-pressed="false" data-f="later">Later</button>
+    </div>
+    <div class="status-msg" id="opp-msg" aria-live="polite"></div>
+    <div class="list" id="opp-list">
+      <div class="empty">Your opportunities will appear here. Claude adds new ones from each research round.</div>
+    </div>
+  </section>
+
+  <section id="view-road" class="list" hidden>
+    <div class="note">
+      <div class="row" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <b id="road-count">0 of 0 steps done</b>
+        <span class="muted" style="font-size:13px">Tick a step when it's finished. The Telegram bot stops reminding you about it after the next sync.</span>
+      </div>
+      <div class="progress"><i id="road-bar" style="width:0%"></i></div>
+    </div>
+    <div class="list" id="road-list" style="gap:20px">
+      <div class="empty">Your step-by-step roadmap will appear here.</div>
+    </div>
+  </section>
+
+  <section id="view-budget" class="list" hidden>
+    <div class="rate">
+      <label for="rate">Exchange rate used:</label>
+      <span class="mono">1 € =</span><input id="rate" type="number" min="50" max="300" step="1" value="140"><span class="mono">BDT</span>
+      <label for="rate-cad" style="margin-left:8px">1 CAD =</label><input id="rate-cad" type="number" min="30" max="200" step="1" value="88"><span class="mono">BDT</span>
+    </div>
+    <p class="muted" style="margin:0;font-size:13px">These rates are placeholders. Set them to today's bank rate.</p>
+    <h2>Germany, first year (public university)</h2>
+    <div class="table-wrap"><table id="t-de"></table></div>
+    <h2>Canada, first year (MSc)</h2>
+    <div class="table-wrap"><table id="t-ca"></table></div>
+    <div class="cards2">
+      <div class="note"><b>Germany fits your budget</b><p>The blocked account is the big number, and it is your own living money, released monthly once you arrive. A scholarship replaces most of it.</p></div>
+      <div class="note"><b>Canada needs full funding</b><p>Visa proof of funds is CAD 23,448 for applications from 1 Sep 2026, plus first-year tuition. Look only at funded, thesis-based MSc offers.</p></div>
+      <div class="note"><b>German grade: how 1.75 is calculated</b><p class="mono" style="font-size:13px">1 + 3 × (4.0 − 3.25) ÷ (4.0 − 1.0) = 1.75</p><p>Modified Bavarian formula, with D = 1.0 as NSU's pass mark. Lower is better, and many programmes ask for 2.5 or better.</p></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const DE = [
+  ["Blocked account (living costs, 12 months)", 11904, "€992/month, 2026 figure"],
+  ["Semester contributions (2 semesters)", 600, "€150–350 each"],
+  ["Blocked account provider fees", 250, "setup + monthly fee"],
+  ["Visa fee", 75, "national visa"],
+  ["uni-assist (about 4 applications)", 165, "€75 first, €30 each after"],
+  ["Flight Dhaka → Germany", 700, "one way, estimate"],
+  ["First month: deposit and setup", 900, "room deposit, SIM, basics"],
+];
+const CA = [
+  ["Proof of funds: living costs", 23448, "single applicant, from 1 Sep 2026"],
+  ["Tuition, first year (typical MSc)", 25000, "ranges CAD 20,000–40,000"],
+  ["Study permit + biometrics", 235, "fees"],
+  ["Flight Dhaka → Canada", 1600, "one way, estimate"],
+];
+
+function readNum(id, fallback) {
+  try { const v = localStorage.getItem(id); return v ? Number(v) : fallback; } catch { return fallback; }
+}
+function saveNum(id, v) { try { localStorage.setItem(id, String(v)); } catch {} }
+const fmt = (n) => Math.round(n).toLocaleString("en-US");
+const lakh = (bdt) => (bdt / 100000).toFixed(1) + " lakh";
+
+function renderBudget() {
+  const eur = Number(document.getElementById("rate").value) || 140;
+  const cad = Number(document.getElementById("rate-cad").value) || 88;
+  const build = (rows, cur, rate) => {
+    const total = rows.reduce((s, r) => s + r[1], 0);
+    return `<tr><th>Item</th><th style="text-align:right">${cur}</th><th style="text-align:right">BDT</th><th>Note</th></tr>` +
+      rows.map(r => `<tr><td>${r[0]}</td><td class="num">${fmt(r[1])}</td><td class="num">${lakh(r[1] * rate)}</td><td class="muted">${r[2]}</td></tr>`).join("") +
+      `<tr class="total"><td>Total</td><td class="num">${fmt(total)}</td><td class="num">${lakh(total * rate)}</td><td></td></tr>`;
+  };
+  document.getElementById("t-de").innerHTML = build(DE, "EUR", eur);
+  document.getElementById("t-ca").innerHTML = build(CA, "CAD", cad);
+}
+for (const id of ["rate", "rate-cad"]) {
+  const el = document.getElementById(id);
+  el.value = readNum(id, Number(el.value));
+  el.addEventListener("input", () => { saveNum(id, el.value); renderBudget(); });
+}
+renderBudget();
+
+/* Tabs */
+const views = { opps: "view-opps", road: "view-road", budget: "view-budget" };
+function showView(key) {
+  for (const [k, id] of Object.entries(views)) document.getElementById(id).hidden = k !== key;
+  document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === key)));
+}
+document.querySelectorAll("nav.tabs button").forEach(b => b.addEventListener("click", () => showView(b.dataset.view)));
+const startHash = location.hash.slice(1);
+if (views[startHash]) showView(startHash);
+
+/* Data */
+const STATUSES = [
+  ["to-check", "To check"], ["preparing", "Preparing"], ["applied", "Applied"],
+  ["accepted", "Accepted"], ["rejected", "Rejected"], ["later", "Later"], ["dropped", "Dropped"],
+];
+const FIT_ORDER = { high: 0, medium: 1, low: 2 };
+let opps = [], steps = [], filter = "all", db = null, readOnly = false;
+
+const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+function daysLeft(iso) {
+  if (!iso) return null;
+  const [y, m, d] = iso.split("-").map(Number);
+  return Math.round((new Date(y, m - 1, d) - today()) / 86400000);
+}
+function duePill(days) {
+  if (days === null) return `<span class="pill p-none">No fixed date</span>`;
+  if (days < 0) return `<span class="pill p-urgent">${-days}d overdue</span>`;
+  if (days <= 14) return `<span class="pill p-urgent">${days === 0 ? "Today" : days + "d left"}</span>`;
+  if (days <= 45) return `<span class="pill p-soon">${days}d left</span>`;
+  return `<span class="pill p-ok">${days}d left</span>`;
+}
+const fmtDate = (iso) => iso ? new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—";
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const safeUrl = (u) => /^https:\/\//.test(u || "") ? u : null;
+const DONE = new Set(["applied", "accepted", "rejected", "dropped"]);
+
+function renderStrip() {
+  const items = [
+    ...opps.filter(o => o.deadline && !DONE.has(o.status)).map(o => ({ d: o.deadline, what: o.name })),
+    ...steps.filter(s => s.due && !s.done).map(s => ({ d: s.due, what: s.title })),
+  ].map(i => ({ ...i, days: daysLeft(i.d) })).filter(i => i.days >= 0).sort((a, b) => a.days - b.days).slice(0, 3);
+  const el = document.getElementById("strip");
+  if (!items.length) {
+    el.innerHTML = `<div class="tick"><span class="eyebrow">Next deadlines</span><span class="what muted">Nothing upcoming yet.</span></div>`;
+    return;
+  }
+  el.innerHTML = items.map(i => `
+    <div class="tick ${i.days <= 14 ? "urgent" : i.days <= 45 ? "soon" : ""}">
+      <span class="eyebrow mono">${fmtDate(i.d)}</span>
+      <span class="days">${i.days}<small>days</small></span>
+      <span class="what">${esc(i.what)}</span>
+    </div>`).join("");
+}
+
+function renderOpps() {
+  const list = document.getElementById("opp-list");
+  let rows = opps.slice();
+  if (filter === "later") rows = rows.filter(o => o.status === "later");
+  else if (filter !== "all") rows = rows.filter(o => o.kind === filter);
+  rows.sort((a, b) => {
+    const da = daysLeft(a.deadline), dbb = daysLeft(b.deadline);
+    if (da === null && dbb !== null) return 1;
+    if (dbb === null && da !== null) return -1;
+    if (da !== dbb) return (da ?? 0) - (dbb ?? 0);
+    return (FIT_ORDER[a.fit] ?? 3) - (FIT_ORDER[b.fit] ?? 3);
+  });
+  if (!rows.length) {
+    list.innerHTML = `<div class="empty">${opps.length ? "Nothing in this filter." : "Your opportunities will appear here. Claude adds new ones from each research round."}</div>`;
+    return;
+  }
+  list.innerHTML = rows.map(o => {
+    const days = daysLeft(o.deadline);
+    const url = safeUrl(o.link);
+    const opts = STATUSES.map(([v, l]) => `<option value="${v}" ${o.status === v ? "selected" : ""}>${l}</option>`).join("");
+    return `
+    <article class="opp">
+      <div class="date">
+        <span class="d">${fmtDate(o.deadline)}</span>
+        ${duePill(DONE.has(o.status) ? null : days)}
+      </div>
+      <div class="body">
+        <h3>${esc(o.name)}</h3>
+        <div class="meta">
+          <span class="pill p-${esc(o.fit)}">${esc(o.fit)} fit</span>
+          <span class="pill ${o.verified ? "p-verified" : "p-unverified"}">${o.verified ? "Verified source" : "Verify on official page"}</span>
+          <span class="muted" style="font-size:13px">${esc(o.country)} · ${esc(o.field)}</span>
+        </div>
+        <p><b>${esc(o.funding)}</b></p>
+        ${o.deadlineNote ? `<p class="muted">${esc(o.deadlineNote)}</p>` : ""}
+        <p>${esc(o.eligibility)}</p>
+        ${o.notes ? `<p class="muted">${esc(o.notes)}</p>` : ""}
+        <div class="row">
+          ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">Open source ↗</a>` : "<span></span>"}
+          <label class="muted" style="font-size:13px;display:flex;gap:6px;align-items:center">Status
+            <select id="st-${esc(o.id)}" data-id="${esc(o.id)}" ${readOnly || !db ? "disabled" : ""}>${opts}</select>
+          </label>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+  list.querySelectorAll("select[data-id]").forEach(sel => sel.addEventListener("change", async () => {
+    const msg = document.getElementById("opp-msg");
+    try {
+      await db.collection("opportunities").doc(sel.dataset.id).update({ status: sel.value });
+      msg.textContent = "Status saved.";
+    } catch (e) {
+      msg.textContent = e && e.code === "invalid_argument" ? "You can view this tracker but not change it." : "Couldn't save. Check your connection and try again.";
+      if (e && e.code === "invalid_argument") { readOnly = true; renderOpps(); }
+    }
+  }));
+}
+
+function renderRoad() {
+  const list = document.getElementById("road-list");
+  const done = steps.filter(s => s.done).length;
+  document.getElementById("road-count").textContent = `${done} of ${steps.length} steps done`;
+  document.getElementById("road-bar").style.width = steps.length ? (done / steps.length * 100) + "%" : "0%";
+  if (!steps.length) { list.innerHTML = `<div class="empty">Your step-by-step roadmap will appear here.</div>`; return; }
+  const phases = new Map();
+  steps.slice().sort((a, b) => a.order - b.order).forEach(s => {
+    if (!phases.has(s.phase)) phases.set(s.phase, []);
+    phases.get(s.phase).push(s);
+  });
+  list.innerHTML = [...phases].map(([phase, items]) => `
+    <div class="phase">
+      <h2>${esc(phase)}</h2>
+      ${items.map(s => {
+        const d = daysLeft(s.due);
+        const late = !s.done && d !== null && d < 0;
+        return `
+        <label class="step ${s.done ? "done" : ""}" for="cb-${esc(s.id)}">
+          <input type="checkbox" id="cb-${esc(s.id)}" data-id="${esc(s.id)}" ${s.done ? "checked" : ""} ${readOnly || !db ? "disabled" : ""}>
+          <span><span class="t">${esc(s.title)}</span><br><span class="x">${esc(s.detail)}</span></span>
+          <span class="due" ${late ? 'style="color:var(--bad)"' : ""}>${s.due ? (late ? "late · " : "by ") + fmtDate(s.due) : "when ready"}</span>
+        </label>`;
+      }).join("")}
+    </div>`).join("");
+  list.querySelectorAll("input[data-id]").forEach(cb => cb.addEventListener("change", async () => {
+    try { await db.collection("roadmap").doc(cb.dataset.id).update({ done: cb.checked }); }
+    catch (e) { cb.checked = !cb.checked; if (e && e.code === "invalid_argument") { readOnly = true; renderRoad(); } }
+  }));
+}
+
+document.getElementById("filters").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-f]");
+  if (!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll("#filters button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  renderOpps();
+});
+
+(async () => {
+  db = window.claude?.use ? await window.claude.use("db") : null;
+  if (!db) {
+    document.getElementById("strip").innerHTML = `<div class="tick"><span class="eyebrow">Sign in needed</span><span class="what muted">Open this page signed in to claude.ai to see your tracker.</span></div>`;
+    renderOpps(); renderRoad();
+    return;
+  }
+  db.collection("opportunities").onSnapshot(s => { opps = s.docs.map(d => ({ id: d.id, ...d.data() })); renderOpps(); renderStrip(); },
+    () => { document.getElementById("opp-msg").textContent = "Live updates stopped. Reload the page."; });
+  db.collection("roadmap").onSnapshot(s => { steps = s.docs.map(d => ({ id: d.id, ...d.data() })); renderRoad(); renderStrip(); });
+})();
+</script>

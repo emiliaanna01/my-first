@@ -1,0 +1,31 @@
+name: Study-abroad Telegram reminders
+
+on:
+  schedule:
+    # 03:00 UTC = 09:00 in Dhaka, every day
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+    inputs:
+      digest:
+        description: "Send the full 60-day digest now"
+        type: boolean
+        default: true
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Send reminders
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "Telegram secrets not set yet; skipping."
+            exit 0
+          fi
+          python study-abroad/bot/telegram_digest.py ${{ github.event.inputs.digest == 'true' && '--digest' || '' }}
