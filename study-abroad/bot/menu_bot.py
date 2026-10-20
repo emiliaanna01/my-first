@@ -109,7 +109,8 @@ def cmd_apply(_):
         if days < 0:
             continue
         check = "" if o.get("verified") else " ⚠️ verify date"
-        rows.append(f"• <b>{o['name']}</b>\n  {days}d left ({o['deadline']}) · {o['status']}{check}")
+        link = f'\n  <a href="{o["link"]}">Official page</a>' if o.get("link") else ""
+        rows.append(f"• <b>{o['name']}</b>\n  {days}d left ({o['deadline']}) · {o['status']}{check}{link}")
     return "📝 <b>Applications to work on</b>\n" + ("\n".join(rows) or "No open applications with dates.")
 
 
