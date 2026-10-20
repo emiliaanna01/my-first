@@ -1,0 +1,807 @@
+<title>Path Abroad</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column. Header + profile chips, a countdown strip, then tabbed working views; Today opens first. */
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --ink: #16212b;
+  --muted: #5b6875;
+  --line: #dce2e8;
+  --accent: #1d5a86;
+  --accent-soft: #e2edf6;
+  --good: #23784a;
+  --good-soft: #e1f2e8;
+  --warn: #9a5b00;
+  --warn-soft: #fbefd9;
+  --bad: #b3322b;
+  --bad-soft: #f9e2e0;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151b; --surface: #17202a; --ink: #e6ecf1; --muted: #98a6b3; --line: #2a3643;
+    --accent: #7db6e3; --accent-soft: #1c3347; --good: #6fcf97; --good-soft: #17352a;
+    --warn: #f0b45a; --warn-soft: #3a2c14; --bad: #f08a83; --bad-soft: #3c1d1b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f151b; --surface: #17202a; --ink: #e6ecf1; --muted: #98a6b3; --line: #2a3643;
+  --accent: #7db6e3; --accent-soft: #1c3347; --good: #6fcf97; --good-soft: #17352a;
+  --warn: #f0b45a; --warn-soft: #3a2c14; --bad: #f08a83; --bad-soft: #3c1d1b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap {
+  max-width: 920px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 64px;
+  display: flex; flex-direction: column; gap: 22px;
+}
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 6vw, 44px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+h2 { font-size: 19px; font-weight: 600; }
+h3 { font-size: 16px; font-weight: 600; line-height: 1.3; }
+p { margin: 0; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-weight: 600; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.between { justify-content: space-between; }
+
+header { display: flex; flex-direction: column; gap: 12px; }
+.profile { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); white-space: nowrap; }
+.chip b { font-weight: 600; }
+
+.strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.tick { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.tick .days { font-family: var(--font-display); font-size: 30px; font-weight: 800; line-height: 1; }
+.tick .days small { font-size: 14px; font-weight: 600; color: var(--muted); margin-left: 4px; }
+.tick .what { font-size: 14px; font-weight: 500; }
+.tick.urgent .days { color: var(--bad); }
+.tick.soon .days { color: var(--warn); }
+
+nav.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: thin; }
+nav.tabs button { font: 600 14px var(--font-body); color: var(--muted); background: none; border: 0; padding: 10px 12px; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
+nav.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card.hero { border-color: var(--accent); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.btn { font: 600 14px var(--font-body); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: var(--surface); cursor: pointer; }
+.btn.ghost { background: var(--surface); color: var(--accent); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.tiny { padding: 3px 8px; font-size: 12px; }
+input[type="text"], input[type="number"], input[type="date"], select, textarea {
+  font: 500 14px var(--font-body); padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); min-width: 0;
+}
+textarea { width: 100%; font-weight: 400; line-height: 1.5; resize: vertical; }
+label.f { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button { font: 500 13px var(--font-body); padding: 5px 12px; border-radius: 999px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+.list { display: flex; flex-direction: column; gap: 10px; }
+.opp { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; grid-template-columns: 92px 1fr; gap: 16px; min-width: 0; }
+.opp .date { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.opp .date .d { font-family: var(--font-mono); font-size: 13px; }
+.opp .body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.opp p { font-size: 14px; }
+a { color: var(--accent); font-weight: 500; }
+.pill { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+.p-urgent { background: var(--bad-soft); color: var(--bad); }
+.p-soon { background: var(--warn-soft); color: var(--warn); }
+.p-ok { background: var(--accent-soft); color: var(--accent); }
+.p-none { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+.p-high, .p-good { background: var(--good-soft); color: var(--good); }
+.p-medium { background: var(--accent-soft); color: var(--accent); }
+.p-low { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+
+.task-line { display: grid; grid-template-columns: 96px 1fr auto; gap: 12px; align-items: start; padding: 10px 0; border-top: 1px solid var(--line); }
+.task-line:first-child { border-top: 0; }
+.task-line.done .t { text-decoration: line-through; color: var(--muted); }
+.big-task { font-size: 18px; font-weight: 500; line-height: 1.45; }
+.streak { font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 1; }
+
+.phase { display: flex; flex-direction: column; gap: 8px; }
+.step { display: grid; grid-template-columns: 24px 1fr auto; gap: 12px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+.step input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent); }
+.step .t { font-weight: 600; font-size: 14px; }
+.step .x { font-size: 13px; color: var(--muted); }
+.step.done .t { text-decoration: line-through; color: var(--muted); }
+.step .due { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.progress { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.progress > i { display: block; height: 100%; background: var(--accent); }
+.meter { display: grid; grid-template-columns: 130px 1fr 64px; gap: 12px; align-items: center; }
+.meter .v { font-family: var(--font-mono); text-align: right; font-size: 13px; }
+.score { font-family: var(--font-display); font-size: 64px; font-weight: 800; line-height: 1; }
+.score small { font-size: 20px; color: var(--muted); }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 520px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+td.num, th.num { font-family: var(--font-mono); text-align: right; font-variant-numeric: tabular-nums; }
+tr.total td { font-weight: 600; border-bottom: 0; }
+tr:last-child td { border-bottom: 0; }
+td input[type="text"] { width: 100%; }
+
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 20px; color: var(--muted); }
+#toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-size: 14px; z-index: 20; }
+.feedback { white-space: pre-wrap; font-size: 14px; }
+.chart svg { width: 100%; height: auto; display: block; }
+
+@media (max-width: 560px) {
+  .opp { grid-template-columns: 1fr; gap: 10px; }
+  .opp .date { flex-direction: row; gap: 8px; align-items: center; }
+  .step { grid-template-columns: 24px 1fr; }
+  .step .due { grid-column: 2; }
+  .task-line { grid-template-columns: 1fr auto; }
+  .task-line .when { grid-column: 1 / -1; }
+  .meter { grid-template-columns: 1fr 56px; }
+  .meter .progress { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (prefers-reduced-motion: no-preference) { .progress > i { transition: width .3s ease; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Masters abroad · Winter 2027 target</span>
+    <h1>Path Abroad</h1>
+    <div class="profile" id="chips">
+      <span class="chip">BBA Finance, <b>NSU</b> (final year)</span>
+      <span class="chip">CGPA <b class="mono">3.21</b> → German grade <b class="mono">≈ 1.79</b></span>
+      <span class="chip">Intern, <b>AKIJ Resource</b></span>
+      <span class="chip">IELTS target <b class="mono">7.0</b></span>
+    </div>
+  </header>
+
+  <section aria-label="Next deadlines" class="strip" id="strip">
+    <div class="tick"><span class="eyebrow">Loading</span><span class="what muted">Fetching your deadlines…</span></div>
+  </section>
+
+  <nav class="tabs" role="tablist" id="tabs">
+    <button role="tab" aria-selected="true" data-view="today">Today</button>
+    <button role="tab" aria-selected="false" data-view="ready">Readiness</button>
+    <button role="tab" aria-selected="false" data-view="opps">Opportunities</button>
+    <button role="tab" aria-selected="false" data-view="ielts">IELTS</button>
+    <button role="tab" aria-selected="false" data-view="papers">Papers</button>
+    <button role="tab" aria-selected="false" data-view="funds">Funds</button>
+    <button role="tab" aria-selected="false" data-view="road">Roadmap</button>
+  </nav>
+
+  <!-- TODAY -->
+  <section id="view-today" class="stack">
+    <div class="card hero" id="today-card">
+      <span class="eyebrow" id="today-date">Today</span>
+      <p class="big-task muted">Your session for today appears here.</p>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <span class="eyebrow">Streak</span>
+        <span class="streak" id="streak">0</span>
+        <span class="muted small" id="streak-note">days in a row</span>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Catch up</span>
+        <div id="missed" class="small muted">Nothing missed.</div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Next 6 days</h2>
+      <div id="week"></div>
+    </div>
+    <div class="card">
+      <div class="row between"><h2>Research updates</h2><span class="muted small">Claude adds one each morning</span></div>
+      <div id="updates" class="stack"><p class="muted small">The first daily research update will appear here.</p></div>
+    </div>
+  </section>
+
+  <!-- READINESS -->
+  <section id="view-ready" class="stack" hidden>
+    <div class="card">
+      <div class="row between" style="align-items:flex-end">
+        <div class="stack" style="gap:4px">
+          <span class="eyebrow">Move-out readiness</span>
+          <span class="score" id="score">0<small>/100</small></span>
+        </div>
+        <p id="score-label" class="muted" style="max-width:380px"></p>
+      </div>
+      <div class="stack" id="meters" style="gap:14px"></div>
+    </div>
+    <div class="card">
+      <h2>Update your status</h2>
+      <div class="grid2">
+        <label class="f" for="pf-ieltsDate">IELTS test date<input id="pf-ieltsDate" type="date"></label>
+        <label class="f" for="pf-ieltsScore">IELTS result (overall)<input id="pf-ieltsScore" type="number" min="0" max="9" step="0.5" placeholder="e.g. 7.0"></label>
+        <label class="f" for="pf-german">German level
+          <select id="pf-german"><option value="none">None yet</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2+</option></select>
+        </label>
+        <label class="f" for="pf-graduation">Expected graduation<input id="pf-graduation" type="text" placeholder="e.g. April 2027"></label>
+      </div>
+      <div class="row"><button class="btn" id="pf-save">Save status</button><span class="muted small">Scores update instantly.</span></div>
+    </div>
+  </section>
+
+  <!-- OPPORTUNITIES -->
+  <section id="view-opps" class="stack" hidden>
+    <div class="filters" id="filters">
+      <button aria-pressed="true" data-f="all">All</button>
+      <button aria-pressed="false" data-f="scholarship">Scholarships</button>
+      <button aria-pressed="false" data-f="program">Programmes</button>
+      <button aria-pressed="false" data-f="search">Shortlists</button>
+      <button aria-pressed="false" data-f="visa">Visa</button>
+      <button aria-pressed="false" data-f="later">Later</button>
+    </div>
+    <div class="list" id="opp-list"><div class="empty">Your opportunities will appear here. Claude adds new ones from each research round.</div></div>
+  </section>
+
+  <!-- IELTS -->
+  <section id="view-ielts" class="stack" hidden>
+    <div class="grid2">
+      <div class="card">
+        <span class="eyebrow">Test day</span>
+        <span class="streak" id="ielts-count">–</span>
+        <span class="muted small" id="ielts-date">Set your test date in Readiness.</span>
+      </div>
+      <div class="card">
+        <span class="eyebrow">Latest mock</span>
+        <span class="streak" id="ielts-latest">–</span>
+        <span class="muted small">Target: 7.0 overall, no band below 6.5</span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Log a practice test</h2>
+      <div class="row">
+        <label class="f" for="m-date">Date<input id="m-date" type="date"></label>
+        <label class="f" for="m-l">Listening<input id="m-l" type="number" min="0" max="9" step="0.5" style="width:84px"></label>
+        <label class="f" for="m-r">Reading<input id="m-r" type="number" min="0" max="9" step="0.5" style="width:84px"></label>
+        <label class="f" for="m-w">Writing<input id="m-w" type="number" min="0" max="9" step="0.5" style="width:84px"></label>
+        <label class="f" for="m-s">Speaking<input id="m-s" type="number" min="0" max="9" step="0.5" style="width:84px"></label>
+        <button class="btn" id="m-add" style="align-self:flex-end">Add</button>
+      </div>
+      <p class="muted small">Leave a skill blank if you didn't test it. Use the Cambridge answer key's band table for Listening and Reading.</p>
+      <div class="chart" id="mock-chart"></div>
+      <div class="table-wrap"><table id="mock-table"></table></div>
+    </div>
+    <div class="card" id="essay-card">
+      <div class="row between"><h2>Score my writing</h2><span class="pill p-ok">Claude examiner</span></div>
+      <div class="row">
+        <label class="f" for="e-task">Task
+          <select id="e-task"><option value="Task 2">Task 2 (essay, 250+ words)</option><option value="Task 1">Task 1 (chart/graph, 150+ words)</option></select>
+        </label>
+      </div>
+      <label class="f" for="e-q">Question<textarea id="e-q" rows="2" placeholder="Paste the exact question"></textarea></label>
+      <label class="f" for="e-text">Your answer<textarea id="e-text" rows="10" placeholder="Paste your essay"></textarea></label>
+      <div class="row between"><span class="muted small mono" id="e-words">0 words</span><button class="btn" id="e-go">Score it</button></div>
+      <div id="e-out" class="stack" hidden></div>
+      <div id="essay-history" class="stack"></div>
+    </div>
+  </section>
+
+  <!-- PAPERS -->
+  <section id="view-papers" class="stack" hidden>
+    <div class="card">
+      <div class="row between"><h2 id="papers-count">Documents</h2><span class="muted small">Note where each file lives, e.g. "Drive / Academic".</span></div>
+      <div class="progress"><i id="papers-bar" style="width:0%"></i></div>
+    </div>
+    <div id="papers" class="stack"><div class="empty">Your document checklist will appear here.</div></div>
+  </section>
+
+  <!-- FUNDS -->
+  <section id="view-funds" class="stack" hidden>
+    <div class="card">
+      <div class="row between">
+        <div class="stack" style="gap:2px"><span class="eyebrow">Available for year one</span><span class="score" id="funds-have" style="font-size:44px">0</span></div>
+        <div class="stack" style="gap:2px;text-align:right"><span class="eyebrow">Target (Germany)</span><span class="mono" id="funds-target">–</span></div>
+      </div>
+      <div class="progress"><i id="funds-bar" style="width:0%"></i></div>
+      <p class="muted small" id="funds-note"></p>
+    </div>
+    <div class="card">
+      <h2>Add an entry</h2>
+      <div class="row">
+        <label class="f" for="fd-date">Date<input id="fd-date" type="date"></label>
+        <label class="f" for="fd-type">Type
+          <select id="fd-type"><option value="saved">Saved (your money)</option><option value="pledge">Family pledge</option><option value="spent">Spent (fees etc.)</option></select>
+        </label>
+        <label class="f" for="fd-amt">Amount (BDT)<input id="fd-amt" type="number" min="0" step="100" style="width:130px"></label>
+        <label class="f" for="fd-note" style="flex:1;min-width:160px">Note<input id="fd-note" type="text" placeholder="e.g. IELTS fee"></label>
+        <button class="btn" id="fd-add" style="align-self:flex-end">Add</button>
+      </div>
+      <div class="table-wrap"><table id="funds-table"></table></div>
+    </div>
+    <div class="row">
+      <label class="f" for="rate" style="flex-direction:row;align-items:center;gap:8px">1 € =<input id="rate" type="number" min="50" max="300" step="1" style="width:84px">BDT</label>
+      <label class="f" for="rate-cad" style="flex-direction:row;align-items:center;gap:8px">1 CAD =<input id="rate-cad" type="number" min="30" max="200" step="1" style="width:84px">BDT</label>
+      <span class="muted small">Set these to today's bank rate.</span>
+    </div>
+    <h2>Germany, first year (public university)</h2>
+    <div class="table-wrap"><table id="t-de"></table></div>
+    <h2>Canada, first year (MSc)</h2>
+    <div class="table-wrap"><table id="t-ca"></table></div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="view-road" class="stack" hidden>
+    <div class="card">
+      <div class="row between"><b id="road-count">0 of 0 steps done</b><span class="muted small">Tick a step when it's finished.</span></div>
+      <div class="progress"><i id="road-bar" style="width:0%"></i></div>
+    </div>
+    <div class="list" id="road-list" style="gap:20px"><div class="empty">Your step-by-step roadmap will appear here.</div></div>
+  </section>
+</div>
+<div id="toast" hidden></div>
+
+<script>
+/* ---------- helpers ---------- */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const safeUrl = (u) => /^https:\/\//.test(u || "") ? u : null;
+const linkify = (s) => esc(s).replace(/https:\/\/[^\s<]+[^\s<.,;:)]/g, (u) => `<a href="${u}" target="_blank" rel="noopener">${u.replace(/^https:\/\/(www\.)?/, "").split("/")[0]} ↗</a>`);
+const fmt = (n) => Math.round(n).toLocaleString("en-US");
+const lakh = (bdt) => (bdt / 100000).toFixed(1) + " lakh";
+const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const todayISO = () => iso(new Date());
+const parse = (s) => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+const daysLeft = (s) => s ? Math.round((parse(s) - parse(todayISO())) / 86400000) : null;
+const fmtDate = (s) => s ? parse(s).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—";
+const fmtDay = (s) => parse(s).toLocaleDateString("en-GB", { weekday: "short", day: "2-digit", month: "short" });
+let toastTimer;
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => t.hidden = true, 2600); }
+function ieltsOverall(bands) {
+  const b = bands.filter(x => typeof x === "number" && !isNaN(x));
+  if (b.length < 4) return null;
+  const avg = b.reduce((s, x) => s + x, 0) / 4, fl = Math.floor(avg), fr = avg - fl;
+  return fr < 0.25 ? fl : fr < 0.75 ? fl + 0.5 : fl + 1;
+}
+
+/* ---------- state ---------- */
+let db = null, sample = null, readOnly = false;
+const S = { opps: [], steps: [], plan: [], docs: [], mocks: [], essays: [], funds: [], updates: [], profile: {} };
+const DONE = new Set(["applied", "accepted", "rejected", "dropped"]);
+const SUBMITTED = new Set(["applied", "accepted", "rejected"]);
+
+async function write(col, id, data, okMsg) {
+  if (!db || readOnly) { toast("Sign in to claude.ai to save changes."); return false; }
+  try {
+    const ref = db.collection(col).doc(id);
+    const snap = await ref.get();
+    if (snap.exists) await ref.update(data); else await ref.set(data);
+    if (okMsg) toast(okMsg);
+    return true;
+  } catch (e) {
+    if (e && e.code === "invalid_argument") { readOnly = true; toast("You can view this tracker but not change it."); }
+    else toast("Couldn't save. Check your connection and try again.");
+    return false;
+  }
+}
+async function addDoc(col, data, okMsg) {
+  if (!db || readOnly) { toast("Sign in to claude.ai to save changes."); return false; }
+  try { await db.collection(col).add(data); if (okMsg) toast(okMsg); return true; }
+  catch (e) { toast(e && e.code === "quota_exceeded" ? "Storage is full. Delete old entries first." : "Couldn't save. Try again."); return false; }
+}
+
+/* ---------- tabs ---------- */
+const VIEWS = ["today", "ready", "opps", "ielts", "papers", "funds", "road"];
+function showView(key) {
+  VIEWS.forEach(k => $("view-" + k).hidden = k !== key);
+  document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === key)));
+}
+document.querySelectorAll("#tabs button").forEach(b => b.addEventListener("click", () => showView(b.dataset.view)));
+if (VIEWS.includes(location.hash.slice(1))) showView(location.hash.slice(1));
+
+/* ---------- budget ---------- */
+const DE = [
+  ["Blocked account (living costs, 12 months)", 11904, "€992/month, 2026 figure"],
+  ["Semester contributions (2 semesters)", 600, "€150–350 each"],
+  ["Blocked account provider fees", 250, "setup + monthly fee"],
+  ["Visa fee", 75, "national visa"],
+  ["uni-assist (about 4 applications)", 165, "€75 first, €30 each after"],
+  ["Flight Dhaka → Germany", 700, "one way, estimate"],
+  ["First month: deposit and setup", 900, "room deposit, SIM, basics"],
+];
+const CA = [
+  ["Proof of funds: living costs", 23448, "single applicant, from 1 Sep 2026"],
+  ["Tuition, first year (typical MSc)", 25000, "ranges CAD 20,000–40,000"],
+  ["Study permit + biometrics", 235, "fees"],
+  ["Flight Dhaka → Canada", 1600, "one way, estimate"],
+];
+const DE_TOTAL = DE.reduce((s, r) => s + r[1], 0);
+const rateEur = () => Number(S.profile.eurToBdt) || 140;
+const rateCad = () => Number(S.profile.cadToBdt) || 88;
+const fundsTarget = () => DE_TOTAL * rateEur();
+function renderBudget() {
+  const build = (rows, cur, rate) => {
+    const total = rows.reduce((s, r) => s + r[1], 0);
+    return `<tr><th>Item</th><th class="num">${cur}</th><th class="num">BDT</th><th>Note</th></tr>` +
+      rows.map(r => `<tr><td>${r[0]}</td><td class="num">${fmt(r[1])}</td><td class="num">${lakh(r[1] * rate)}</td><td class="muted">${r[2]}</td></tr>`).join("") +
+      `<tr class="total"><td>Total</td><td class="num">${fmt(total)}</td><td class="num">${lakh(total * rate)}</td><td></td></tr>`;
+  };
+  $("t-de").innerHTML = build(DE, "EUR", rateEur());
+  $("t-ca").innerHTML = build(CA, "CAD", rateCad());
+  if (document.activeElement !== $("rate")) $("rate").value = rateEur();
+  if (document.activeElement !== $("rate-cad")) $("rate-cad").value = rateCad();
+}
+let rateTimer;
+for (const [id, key] of [["rate", "eurToBdt"], ["rate-cad", "cadToBdt"]]) {
+  $(id).addEventListener("input", () => {
+    const v = Number($(id).value); if (!v) return;
+    S.profile[key] = v; renderBudget(); renderFunds(); renderReady();
+    clearTimeout(rateTimer); rateTimer = setTimeout(() => write("profile", "main", { [key]: v }), 800);
+  });
+}
+
+/* ---------- strip ---------- */
+function renderStrip() {
+  const items = [
+    ...S.opps.filter(o => o.deadline && !DONE.has(o.status)).map(o => ({ d: o.deadline, what: o.name })),
+    ...S.steps.filter(s => s.due && !s.done).map(s => ({ d: s.due, what: s.title })),
+    ...(S.profile.ieltsDate && !S.profile.ieltsScore ? [{ d: S.profile.ieltsDate, what: "IELTS test" }] : []),
+  ].map(i => ({ ...i, days: daysLeft(i.d) })).filter(i => i.days >= 0).sort((a, b) => a.days - b.days).slice(0, 3);
+  $("strip").innerHTML = items.length ? items.map(i => `
+    <div class="tick ${i.days <= 14 ? "urgent" : i.days <= 45 ? "soon" : ""}">
+      <span class="eyebrow mono">${fmtDate(i.d)}</span>
+      <span class="days">${i.days}<small>days</small></span>
+      <span class="what">${esc(i.what)}</span>
+    </div>`).join("") : `<div class="tick"><span class="eyebrow">Next deadlines</span><span class="what muted">Nothing upcoming yet.</span></div>`;
+}
+
+/* ---------- today ---------- */
+function focusPill(f) {
+  const cls = /Test|Mock/.test(f) ? "p-urgent" : /IELTS/.test(f) ? "p-ok" : /Applications/.test(f) ? "p-good" : "p-soon";
+  return `<span class="pill ${cls}">${esc(f)}</span>`;
+}
+function renderToday() {
+  const t = todayISO();
+  const byDate = new Map(S.plan.map(p => [p.date, p]));
+  const cur = byDate.get(t);
+  $("today-card").innerHTML = cur ? `
+    <div class="row between"><span class="eyebrow">${fmtDay(t)} · ${cur.minutes} min</span>${focusPill(cur.focus)}</div>
+    <p class="big-task">${esc(cur.task)}</p>
+    ${cur.resource ? `<p class="muted small">Use: ${esc(cur.resource)}</p>` : ""}
+    <div class="row"><button class="btn ${cur.done ? "ghost" : ""}" id="today-done">${cur.done ? "Done ✓ (undo)" : "Mark as done"}</button></div>`
+    : `<span class="eyebrow">${fmtDay(t)}</span><p class="big-task muted">${S.plan.length ? "No session planned for today. Claude adds new days in the morning research run." : "Your daily plan will appear here."}</p>`;
+  if (cur) $("today-done").addEventListener("click", () => write("plan", cur.id, { done: !cur.done }, cur.done ? "Marked not done." : "Nice. Session logged."));
+
+  // streak: consecutive done days ending today (or yesterday if today isn't done yet)
+  let streak = 0; const d = parse(t);
+  if (!(cur && cur.done)) d.setDate(d.getDate() - 1);
+  while (true) { const p = byDate.get(iso(d)); if (!p || !p.done) break; streak++; d.setDate(d.getDate() - 1); }
+  $("streak").textContent = streak;
+  $("streak-note").textContent = streak === 1 ? "day in a row" : "days in a row";
+
+  const missed = S.plan.filter(p => p.date < t && !p.done && p.date >= iso(new Date(Date.now() - 14 * 86400000))).slice(-3);
+  $("missed").innerHTML = missed.length ? missed.map(p => `
+    <div class="row between" style="padding:4px 0"><span><span class="mono">${fmtDay(p.date)}</span> · ${esc(p.focus)}</span>
+    <button class="btn ghost tiny" data-plan="${esc(p.id)}">Done</button></div>`).join("") : "Nothing missed in the last 2 weeks.";
+  $("missed").querySelectorAll("[data-plan]").forEach(b => b.addEventListener("click", () => write("plan", b.dataset.plan, { done: true }, "Caught up.")));
+
+  const next = S.plan.filter(p => p.date > t).slice(0, 6);
+  $("week").innerHTML = next.length ? next.map(p => `
+    <div class="task-line"><span class="mono small when">${fmtDay(p.date)}</span>
+    <span class="t small">${esc(p.task)}</span><span class="row" style="gap:6px">${focusPill(p.focus)}<span class="mono small muted">${p.minutes}m</span></span></div>`).join("")
+    : `<p class="muted small">No upcoming sessions yet.</p>`;
+
+  const ups = S.updates.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 3);
+  $("updates").innerHTML = ups.length ? ups.map(u => `
+    <div class="stack" style="gap:4px;padding-bottom:10px;border-bottom:1px solid var(--line)">
+      <span class="eyebrow mono">${fmtDate(u.date)}</span>
+      <p class="small">${linkify(u.summary)}</p>
+      ${Array.isArray(u.items) && u.items.length ? `<ul class="small" style="margin:0;padding-left:18px">${u.items.map(i => `<li>${linkify(i)}</li>`).join("")}</ul>` : ""}
+    </div>`).join("") : `<p class="muted small">The first daily research update will appear here.</p>`;
+}
+
+/* ---------- readiness ---------- */
+function components() {
+  const p = S.profile;
+  const latestMock = S.mocks.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "")).find(m => m.overall != null);
+  let eng = 0, engTxt = "No IELTS or mock yet", engNext = "Do one full timed mock this week and log it.";
+  if (p.ieltsScore) { eng = Math.min(p.ieltsScore / 7, 1); engTxt = `IELTS ${p.ieltsScore}`; engNext = p.ieltsScore >= 7 ? "Done. Upload the Test Report Form to Papers." : "Consider a retake for 7.0."; }
+  else if (latestMock) { eng = Math.min(latestMock.overall / 7, 1) * 0.8; engTxt = `Mock ${latestMock.overall}`; engNext = latestMock.overall >= 7 ? "Keep it steady until test day." : "Target your weakest skill in the IELTS tab."; }
+  if (!p.ieltsScore && p.ieltsDate) engTxt += ` · test ${fmtDate(p.ieltsDate)}`;
+
+  const W = { missing: 0, requested: 0.4, have: 0.7, ready: 1 };
+  const docs = S.docs.length ? S.docs.reduce((s, d) => s + (W[d.status] ?? 0), 0) / S.docs.length : 0;
+  const nextDoc = S.docs.find(d => d.status === "missing");
+
+  const net = fundsNet(), target = fundsTarget();
+  const funds = target ? Math.max(0, Math.min(net / target, 1)) : 0;
+
+  const subs = S.opps.filter(o => SUBMITTED.has(o.status)).length, appsT = Number(p.appsTarget) || 6;
+  const apps = Math.min(subs / appsT, 1);
+  const nextOpp = S.opps.filter(o => o.deadline && !DONE.has(o.status) && daysLeft(o.deadline) >= 0).sort((a, b) => a.deadline.localeCompare(b.deadline))[0];
+
+  const road = S.steps.length ? S.steps.filter(s => s.done).length / S.steps.length : 0;
+  return [
+    { k: "English", w: 25, v: eng, txt: engTxt, next: engNext },
+    { k: "Documents", w: 20, v: docs, txt: `${S.docs.filter(d => d.status === "ready").length}/${S.docs.length} ready`, next: nextDoc ? `Get: ${nextDoc.name}` : "All collected." },
+    { k: "Funds", w: 20, v: funds, txt: `${lakh(net)} of ${lakh(target)}`, next: funds >= 1 ? "Target reached." : "Log savings and family pledges in Funds." },
+    { k: "Applications", w: 20, v: apps, txt: `${subs}/${appsT} submitted`, next: nextOpp ? `Next: ${nextOpp.name} (${fmtDate(nextOpp.deadline)})` : "Add targets in Opportunities." },
+    { k: "Roadmap", w: 15, v: road, txt: `${S.steps.filter(s => s.done).length}/${S.steps.length} steps`, next: "Tick steps in the Roadmap tab." },
+  ];
+}
+function renderReady() {
+  const cs = components();
+  const score = Math.round(cs.reduce((s, c) => s + c.v * c.w, 0));
+  $("score").innerHTML = `${score}<small>/100</small>`;
+  $("score-label").textContent = score < 30 ? "Early stage. The biggest jump comes from IELTS and collecting your papers."
+    : score < 60 ? "Building up. Keep the daily sessions going and submit the January applications."
+    : score < 85 ? "Strong position. Focus on submissions and funds proof." : "Ready to move. Push the visa steps.";
+  const weakest = cs.slice().sort((a, b) => a.v - b.v)[0];
+  $("meters").innerHTML = cs.map(c => `
+    <div class="stack" style="gap:4px">
+      <div class="meter"><b class="small">${c.k}${c === weakest ? ' <span class="pill p-soon">focus</span>' : ""}</b>
+        <div class="progress"><i style="width:${Math.round(c.v * 100)}%"></i></div>
+        <span class="v">${Math.round(c.v * c.w)}/${c.w}</span></div>
+      <span class="muted small">${esc(c.txt)} · ${esc(c.next)}</span>
+    </div>`).join("");
+  const p = S.profile;
+  const setIf = (id, v) => { if (document.activeElement !== $(id)) $(id).value = v ?? ""; };
+  setIf("pf-ieltsDate", p.ieltsDate); setIf("pf-ieltsScore", p.ieltsScore); setIf("pf-german", p.germanLevel || "none"); setIf("pf-graduation", p.graduation);
+}
+$("pf-save").addEventListener("click", () => {
+  const sc = $("pf-ieltsScore").value;
+  write("profile", "main", {
+    ieltsDate: $("pf-ieltsDate").value || null,
+    ieltsScore: sc === "" ? null : Number(sc),
+    germanLevel: $("pf-german").value,
+    graduation: $("pf-graduation").value.trim(),
+  }, "Status saved.");
+});
+
+/* ---------- opportunities ---------- */
+const STATUSES = [["to-check", "To check"], ["preparing", "Preparing"], ["applied", "Applied"], ["accepted", "Accepted"], ["rejected", "Rejected"], ["later", "Later"], ["dropped", "Dropped"]];
+const FIT_ORDER = { high: 0, medium: 1, low: 2 };
+let filter = "all";
+function duePill(days) {
+  if (days === null) return `<span class="pill p-none">No fixed date</span>`;
+  if (days < 0) return `<span class="pill p-urgent">${-days}d overdue</span>`;
+  if (days <= 14) return `<span class="pill p-urgent">${days === 0 ? "Today" : days + "d left"}</span>`;
+  if (days <= 45) return `<span class="pill p-soon">${days}d left</span>`;
+  return `<span class="pill p-ok">${days}d left</span>`;
+}
+function renderOpps() {
+  let rows = S.opps.slice();
+  if (filter === "later") rows = rows.filter(o => o.status === "later");
+  else if (filter !== "all") rows = rows.filter(o => o.kind === filter);
+  rows.sort((a, b) => {
+    const da = daysLeft(a.deadline), dbb = daysLeft(b.deadline);
+    if (da === null && dbb !== null) return 1;
+    if (dbb === null && da !== null) return -1;
+    if (da !== dbb) return (da ?? 0) - (dbb ?? 0);
+    return (FIT_ORDER[a.fit] ?? 3) - (FIT_ORDER[b.fit] ?? 3);
+  });
+  const list = $("opp-list");
+  if (!rows.length) { list.innerHTML = `<div class="empty">${S.opps.length ? "Nothing in this filter." : "Your opportunities will appear here."}</div>`; return; }
+  list.innerHTML = rows.map(o => {
+    const url = safeUrl(o.link);
+    const opts = STATUSES.map(([v, l]) => `<option value="${v}" ${o.status === v ? "selected" : ""}>${l}</option>`).join("");
+    return `
+    <article class="opp">
+      <div class="date"><span class="d">${fmtDate(o.deadline)}</span>${duePill(DONE.has(o.status) ? null : daysLeft(o.deadline))}</div>
+      <div class="body">
+        <h3>${esc(o.name)}</h3>
+        <div class="row" style="gap:6px">
+          <span class="pill p-${esc(o.fit)}">${esc(o.fit)} fit</span>
+          <span class="pill ${o.verified ? "p-good" : "p-soon"}">${o.verified ? "Verified source" : "Verify on official page"}</span>
+          <span class="muted small">${esc(o.country)} · ${esc(o.field)}</span>
+        </div>
+        <p><b>${esc(o.funding)}</b></p>
+        ${o.deadlineNote ? `<p class="muted">${esc(o.deadlineNote)}</p>` : ""}
+        <p>${esc(o.eligibility)}</p>
+        ${o.notes ? `<p class="muted">${esc(o.notes)}</p>` : ""}
+        <div class="row between">
+          ${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">Open source ↗</a>` : "<span></span>"}
+          <label class="muted small row" style="gap:6px" for="st-${esc(o.id)}">Status
+            <select id="st-${esc(o.id)}" data-id="${esc(o.id)}" ${db ? "" : "disabled"}>${opts}</select></label>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+  list.querySelectorAll("select[data-id]").forEach(sel => sel.addEventListener("change", () => write("opportunities", sel.dataset.id, { status: sel.value }, "Status saved.")));
+}
+$("filters").addEventListener("click", (e) => {
+  const b = e.target.closest("button[data-f]"); if (!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll("#filters button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  renderOpps();
+});
+
+/* ---------- IELTS ---------- */
+$("m-date").value = todayISO();
+$("m-add").addEventListener("click", async () => {
+  const v = (id) => $(id).value === "" ? null : Number($(id).value);
+  const L = v("m-l"), R = v("m-r"), W = v("m-w"), Sp = v("m-s");
+  if ([L, R, W, Sp].every(x => x === null)) { toast("Enter at least one band."); return; }
+  if ([L, R, W, Sp].some(x => x !== null && (x < 0 || x > 9))) { toast("Bands go from 0 to 9."); return; }
+  const ok = await addDoc("mocks", { date: $("m-date").value || todayISO(), L, R, W, S: Sp, overall: ieltsOverall([L, R, W, Sp]) }, "Practice test logged.");
+  if (ok) ["m-l", "m-r", "m-w", "m-s"].forEach(id => $(id).value = "");
+});
+function renderIelts() {
+  const p = S.profile;
+  if (p.ieltsDate) {
+    const d = daysLeft(p.ieltsDate);
+    $("ielts-count").textContent = p.ieltsScore ? p.ieltsScore : d >= 0 ? d + "d" : "Done";
+    $("ielts-date").textContent = p.ieltsScore ? `Result logged. Test date ${fmtDate(p.ieltsDate)}` : `Test on ${fmtDate(p.ieltsDate)}`;
+  }
+  const ms = S.mocks.slice().sort((a, b) => (a.date || "").localeCompare(b.date || ""));
+  const withOverall = ms.filter(m => m.overall != null);
+  $("ielts-latest").textContent = withOverall.length ? withOverall[withOverall.length - 1].overall : "–";
+  const cell = (x) => x == null ? `<td class="num muted">–</td>` : `<td class="num" ${x < 6.5 ? 'style="color:var(--bad)"' : ""}>${x}</td>`;
+  $("mock-table").innerHTML = ms.length ? `<tr><th>Date</th><th class="num">L</th><th class="num">R</th><th class="num">W</th><th class="num">S</th><th class="num">Overall</th><th></th></tr>` +
+    ms.slice().reverse().map(m => `<tr><td class="mono small">${fmtDate(m.date)}</td>${cell(m.L)}${cell(m.R)}${cell(m.W)}${cell(m.S)}<td class="num"><b>${m.overall ?? "–"}</b></td>
+      <td><button class="btn ghost tiny" data-del-mock="${esc(m.id)}">Delete</button></td></tr>`).join("")
+    : `<tr><td class="muted">No practice tests logged yet. Your first Saturday mock goes here.</td></tr>`;
+  $("mock-table").querySelectorAll("[data-del-mock]").forEach(b => b.addEventListener("click", async () => {
+    if (b.dataset.confirm !== "1") { b.dataset.confirm = "1"; b.textContent = "Confirm"; return; }
+    try { await db.collection("mocks").doc(b.dataset.delMock).delete(); toast("Deleted."); } catch { toast("Couldn't delete."); }
+  }));
+  renderMockChart(ms);
+  const hist = S.essays.slice().sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 6);
+  $("essay-history").innerHTML = hist.length ? `<h3>Past scores</h3>` + hist.map(e => `
+    <div class="row between small" style="border-top:1px solid var(--line);padding-top:8px">
+      <span><span class="mono">${fmtDate(e.date)}</span> · ${esc(e.task)} · ${esc(e.summary || "")}</span><b class="mono">${esc(e.overall)}</b></div>`).join("") : "";
+}
+function renderMockChart(ms) {
+  // Overall band per test, per skill as faint lines; target 7.0 marked.
+  const el = $("mock-chart");
+  const pts = ms.filter(m => m.overall != null);
+  if (pts.length < 2) { el.innerHTML = `<p class="muted small">Log 2+ full tests to see your trend.</p>`; return; }
+  const Wd = 640, H = 200, pl = 34, pr = 12, pt = 12, pb = 26, lo = 4, hi = 9;
+  const x = (i) => pl + i * (Wd - pl - pr) / (pts.length - 1);
+  const y = (v) => pt + (hi - v) * (H - pt - pb) / (hi - lo);
+  const grid = [4, 5, 6, 7, 8, 9].map(v => `<line x1="${pl}" x2="${Wd - pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${pl - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="var(--font-mono)">${v}</text>`).join("");
+  const target = `<line x1="${pl}" x2="${Wd - pr}" y1="${y(7)}" y2="${y(7)}" stroke="var(--good)" stroke-width="1.5" stroke-dasharray="5 4"/><text x="${Wd - pr}" y="${y(7) - 6}" text-anchor="end" font-size="11" fill="var(--good)" font-family="var(--font-body)">target 7.0</text>`;
+  const path = pts.map((m, i) => `${i ? "L" : "M"}${x(i)},${y(m.overall)}`).join(" ");
+  const area = `${path} L${x(pts.length - 1)},${y(lo)} L${x(0)},${y(lo)} Z`;
+  const dots = pts.map((m, i) => `<circle cx="${x(i)}" cy="${y(m.overall)}" r="${i === pts.length - 1 ? 5 : 3}" fill="var(--accent)"/>`).join("");
+  const labels = pts.map((m, i) => (i === 0 || i === pts.length - 1) ? `<text x="${x(i)}" y="${H - 6}" text-anchor="${i ? "end" : "start"}" font-size="11" fill="var(--muted)" font-family="var(--font-mono)">${fmtDay(m.date)}</text>` : "").join("");
+  el.innerHTML = `<svg viewBox="0 0 ${Wd} ${H}" role="img" aria-label="Overall IELTS practice band over time">${grid}<path d="${area}" fill="var(--accent-soft)" opacity=".7"/>${target}<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.5"/>${dots}${labels}</svg>`;
+}
+const countWords = (s) => (s.trim().match(/\S+/g) || []).length;
+$("e-text").addEventListener("input", () => { $("e-words").textContent = countWords($("e-text").value) + " words"; });
+$("e-go").addEventListener("click", async () => {
+  if (!sample) { toast("Writing scoring needs the Claude app or claude.ai."); return; }
+  const task = $("e-task").value, q = $("e-q").value.trim(), essay = $("e-text").value.trim();
+  if (countWords(essay) < 40) { toast("Paste your full answer first."); return; }
+  const out = $("e-out"); out.hidden = false; out.innerHTML = `<p class="muted">Thinking… scoring against the IELTS band descriptors.</p>`;
+  $("e-go").disabled = true;
+  const prompt = `You are a strict, experienced IELTS Academic Writing examiner. Score this ${task} answer using the official public band descriptors.
+Criteria: ${task === "Task 1" ? "Task Achievement (TA)" : "Task Response (TR)"}, Coherence and Cohesion (CC), Lexical Resource (LR), Grammatical Range and Accuracy (GRA). Give each criterion a whole band from 0 to 9. Overall = the mean of the four, rounded to the nearest 0.5 (.25 rounds up to .5, .75 rounds up to the next whole band).
+Penalise under-length (${task === "Task 1" ? "150" : "250"} words minimum). Word count: ${countWords(essay)}.
+The candidate is a Bangladeshi BBA graduate aiming for 7.0. Be honest; do not inflate.
+
+Question:
+${q || "(not provided — judge task response from the answer itself and say the question is missing)"}
+
+Answer:
+${essay}
+
+Reply with JSON only, in this shape:
+{"overall": 6.5, "criteria": {"TR": {"band": 6, "why": "one sentence"}, "CC": {"band": 7, "why": "..."}, "LR": {"band": 6, "why": "..."}, "GRA": {"band": 7, "why": "..."}}, "fixes": ["three specific changes that would raise the band, each quoting a phrase from the answer"], "better_paragraph": "the weakest paragraph rewritten at band 7.5+", "summary": "under 12 words"}`;
+  try {
+    const r = await sample.json(prompt, { modelTier: "default" });
+    const c = r.criteria || {};
+    out.innerHTML = `
+      <div class="row between"><h3>Estimated band</h3><span class="score" style="font-size:40px">${esc(r.overall)}</span></div>
+      <div class="table-wrap"><table style="min-width:0"><tr><th>Criterion</th><th class="num">Band</th><th>Why</th></tr>
+        ${Object.entries(c).map(([k, v]) => `<tr><td><b>${esc(k)}</b></td><td class="num">${esc(v.band)}</td><td class="small">${esc(v.why)}</td></tr>`).join("")}</table></div>
+      <h3>Three fixes</h3><ol class="small" style="margin:0;padding-left:20px">${(r.fixes || []).map(f => `<li>${esc(f)}</li>`).join("")}</ol>
+      <h3>Weakest paragraph, rewritten</h3><p class="feedback">${esc(r.better_paragraph)}</p>`;
+    addDoc("essays", { date: todayISO(), task, overall: r.overall ?? null, summary: String(r.summary || "").slice(0, 120), words: countWords(essay) });
+  } catch (e) {
+    out.innerHTML = `<p class="muted">${e && e.code === "not_granted" ? "Scoring needs your permission to use Claude. Allow it and try again." : e && e.code === "rate_limited" ? "Too many requests. Wait a minute and try again." : "Couldn't score this one. Try again in a moment."}</p>`;
+  } finally { $("e-go").disabled = false; }
+});
+
+/* ---------- papers ---------- */
+const DOC_STATUS = [["missing", "Missing"], ["requested", "Requested"], ["have", "Have original"], ["ready", "Scanned + filed"]];
+function renderPapers() {
+  const ready = S.docs.filter(d => d.status === "ready").length;
+  $("papers-count").textContent = `${ready} of ${S.docs.length} documents ready`;
+  $("papers-bar").style.width = S.docs.length ? (ready / S.docs.length * 100) + "%" : "0%";
+  if (!S.docs.length) return;
+  const cats = new Map();
+  S.docs.forEach(d => { if (!cats.has(d.category)) cats.set(d.category, []); cats.get(d.category).push(d); });
+  $("papers").innerHTML = [...cats].map(([cat, items]) => `
+    <div class="stack" style="gap:6px"><h2>${esc(cat)}</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Document</th><th style="width:170px">Status</th><th style="width:220px">Where it is</th></tr>
+      ${items.map(d => `<tr>
+        <td class="small">${esc(d.name)}</td>
+        <td><select data-doc="${esc(d.id)}" id="ds-${esc(d.id)}" aria-label="Status of ${esc(d.name)}">${DOC_STATUS.map(([v, l]) => `<option value="${v}" ${d.status === v ? "selected" : ""}>${l}</option>`).join("")}</select></td>
+        <td><input type="text" data-loc="${esc(d.id)}" id="dl-${esc(d.id)}" value="${esc(d.location)}" placeholder="Drive / folder" aria-label="Location of ${esc(d.name)}"></td>
+      </tr>`).join("")}
+    </table></div></div>`).join("");
+  $("papers").querySelectorAll("select[data-doc]").forEach(s => s.addEventListener("change", () => write("documents", s.dataset.doc, { status: s.value }, "Saved.")));
+  $("papers").querySelectorAll("input[data-loc]").forEach(i => i.addEventListener("change", () => write("documents", i.dataset.loc, { location: i.value.trim() }, "Saved.")));
+}
+
+/* ---------- funds ---------- */
+function fundsNet() {
+  return S.funds.reduce((s, f) => s + (f.type === "spent" ? -1 : 1) * (Number(f.amount) || 0), 0);
+}
+$("fd-date").value = todayISO();
+$("fd-add").addEventListener("click", async () => {
+  const amt = Number($("fd-amt").value);
+  if (!amt || amt <= 0) { toast("Enter an amount in BDT."); return; }
+  const ok = await addDoc("funds", { date: $("fd-date").value || todayISO(), type: $("fd-type").value, amount: amt, note: $("fd-note").value.trim() }, "Entry added.");
+  if (ok) { $("fd-amt").value = ""; $("fd-note").value = ""; }
+});
+function renderFunds() {
+  const net = fundsNet(), target = fundsTarget();
+  const saved = S.funds.filter(f => f.type === "saved").reduce((s, f) => s + Number(f.amount || 0), 0);
+  const pledged = S.funds.filter(f => f.type === "pledge").reduce((s, f) => s + Number(f.amount || 0), 0);
+  const spent = S.funds.filter(f => f.type === "spent").reduce((s, f) => s + Number(f.amount || 0), 0);
+  $("funds-have").textContent = lakh(net) + " BDT";
+  $("funds-target").textContent = `${lakh(target)} BDT (€${fmt(DE_TOTAL)})`;
+  $("funds-bar").style.width = Math.max(0, Math.min(net / target, 1)) * 100 + "%";
+  $("funds-note").textContent = `Saved ${lakh(saved)} · family pledges ${lakh(pledged)} · spent on applications ${lakh(spent)}. ` +
+    (net >= target ? "You have the full first-year amount." : `Gap: ${lakh(target - net)} BDT. A full scholarship removes the blocked-account part (about ${lakh(11904 * rateEur())}).`);
+  const rows = S.funds.slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const label = { saved: "Saved", pledge: "Family pledge", spent: "Spent" };
+  $("funds-table").innerHTML = rows.length ? `<tr><th>Date</th><th>Type</th><th class="num">BDT</th><th>Note</th><th></th></tr>` + rows.map(f => `
+    <tr><td class="mono small">${fmtDate(f.date)}</td><td>${label[f.type] || esc(f.type)}</td>
+    <td class="num" ${f.type === "spent" ? 'style="color:var(--bad)"' : ""}>${f.type === "spent" ? "−" : ""}${fmt(f.amount)}</td>
+    <td class="small">${esc(f.note)}</td><td><button class="btn ghost tiny" data-del-fund="${esc(f.id)}">Delete</button></td></tr>`).join("")
+    : `<tr><td class="muted">No entries yet. Add your current savings first.</td></tr>`;
+  $("funds-table").querySelectorAll("[data-del-fund]").forEach(b => b.addEventListener("click", async () => {
+    if (b.dataset.confirm !== "1") { b.dataset.confirm = "1"; b.textContent = "Confirm"; return; }
+    try { await db.collection("funds").doc(b.dataset.delFund).delete(); toast("Deleted."); } catch { toast("Couldn't delete."); }
+  }));
+}
+
+/* ---------- roadmap ---------- */
+function renderRoad() {
+  const list = $("road-list"), done = S.steps.filter(s => s.done).length;
+  $("road-count").textContent = `${done} of ${S.steps.length} steps done`;
+  $("road-bar").style.width = S.steps.length ? (done / S.steps.length * 100) + "%" : "0%";
+  if (!S.steps.length) return;
+  const phases = new Map();
+  S.steps.slice().sort((a, b) => a.order - b.order).forEach(s => { if (!phases.has(s.phase)) phases.set(s.phase, []); phases.get(s.phase).push(s); });
+  list.innerHTML = [...phases].map(([phase, items]) => `
+    <div class="phase"><h2>${esc(phase)}</h2>
+      ${items.map(s => { const d = daysLeft(s.due), late = !s.done && d !== null && d < 0; return `
+        <label class="step ${s.done ? "done" : ""}" for="cb-${esc(s.id)}">
+          <input type="checkbox" id="cb-${esc(s.id)}" data-id="${esc(s.id)}" ${s.done ? "checked" : ""} ${db ? "" : "disabled"}>
+          <span><span class="t">${esc(s.title)}</span><br><span class="x">${esc(s.detail)}</span></span>
+          <span class="due" ${late ? 'style="color:var(--bad)"' : ""}>${s.due ? (late ? "late · " : "by ") + fmtDate(s.due) : "when ready"}</span>
+        </label>`; }).join("")}
+    </div>`).join("");
+  list.querySelectorAll("input[data-id]").forEach(cb => cb.addEventListener("change", () => write("roadmap", cb.dataset.id, { done: cb.checked })));
+}
+
+/* ---------- boot ---------- */
+function renderAll() { renderStrip(); renderToday(); renderReady(); renderOpps(); renderIelts(); renderPapers(); renderFunds(); renderRoad(); renderBudget(); }
+renderAll();
+(async () => {
+  const use = window.claude?.use;
+  db = use ? await window.claude.use("db") : null;
+  sample = use ? await window.claude.use("sample") : null;
+  if (!sample) { $("e-go").disabled = true; $("e-out").hidden = false; $("e-out").innerHTML = `<p class="muted small">Writing scoring works when you open this page in claude.ai or the Claude app.</p>`; }
+  if (!db) {
+    $("strip").innerHTML = `<div class="tick"><span class="eyebrow">Sign in needed</span><span class="what muted">Open this page signed in to claude.ai to see your tracker.</span></div>`;
+    return;
+  }
+  const sub = (col, key) => db.collection(col).onSnapshot(
+    s => { S[key] = s.docs.map(d => ({ id: d.id, ...d.data() })); renderAll(); },
+    () => toast("Live updates stopped. Reload the page."));
+  sub("opportunities", "opps"); sub("roadmap", "steps"); sub("plan", "plan"); sub("documents", "docs");
+  sub("mocks", "mocks"); sub("essays", "essays"); sub("funds", "funds"); sub("updates", "updates");
+  db.doc("profile/main").onSnapshot(s => { S.profile = s.exists ? { ...s.data() } : {}; renderAll(); });
+})();
+</script>

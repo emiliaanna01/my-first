@@ -1,6 +1,12 @@
 __pycache__/
-edit/*/
-!edit/.keep
-*.mp4
-*.mov
-*.MOV
+out/
+*.wav
+edit/*/*.mp4
+edit/*/verify/
+edit/*/*.lock
+edit/*/clips/
+edit/*/layers/
+edit/*/sets/
+
+# Path Abroad bot keys
+study-abroad/bot/.env

@@ -1,0 +1,358 @@
+{
+ "language_code": "en",
+ "text": "Good morning everyone today I'm going to talk about AI video editing so you can edit the video in every aspect You can see my face I want to change the background, I want to change the lighting, I want to change I want to keep my body movement language smooth and consistent so you do the job",
+ "words": [
+  {
+   "text": "Good",
+   "start": 0.4,
+   "end": 0.56,
+   "type": "word"
+  },
+  {
+   "text": "morning",
+   "start": 0.64,
+   "end": 0.88,
+   "type": "word"
+  },
+  {
+   "text": "everyone",
+   "start": 1.12,
+   "end": 1.52,
+   "type": "word"
+  },
+  {
+   "text": "today",
+   "start": 2.32,
+   "end": 2.44,
+   "type": "word"
+  },
+  {
+   "text": "I'm",
+   "start": 2.64,
+   "end": 2.88,
+   "type": "word"
+  },
+  {
+   "text": "going",
+   "start": 2.88,
+   "end": 2.96,
+   "type": "word"
+  },
+  {
+   "text": "to",
+   "start": 2.96,
+   "end": 3.08,
+   "type": "word"
+  },
+  {
+   "text": "talk",
+   "start": 3.28,
+   "end": 3.4,
+   "type": "word"
+  },
+  {
+   "text": "about",
+   "start": 3.6,
+   "end": 3.72,
+   "type": "word"
+  },
+  {
+   "text": "AI",
+   "start": 4.48,
+   "end": 4.8,
+   "type": "word"
+  },
+  {
+   "text": "video",
+   "start": 5.04,
+   "end": 5.28,
+   "type": "word"
+  },
+  {
+   "text": "editing",
+   "start": 5.36,
+   "end": 6.0,
+   "type": "word"
+  },
+  {
+   "text": "so",
+   "start": 6.56,
+   "end": 6.68,
+   "type": "word"
+  },
+  {
+   "text": "you",
+   "start": 7.68,
+   "end": 7.8,
+   "type": "word"
+  },
+  {
+   "text": "can",
+   "start": 7.92,
+   "end": 8.04,
+   "type": "word"
+  },
+  {
+   "text": "edit",
+   "start": 8.08,
+   "end": 8.4,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 8.48,
+   "end": 8.6,
+   "type": "word"
+  },
+  {
+   "text": "video",
+   "start": 8.64,
+   "end": 9.04,
+   "type": "word"
+  },
+  {
+   "text": "in",
+   "start": 9.2,
+   "end": 9.32,
+   "type": "word"
+  },
+  {
+   "text": "every",
+   "start": 9.44,
+   "end": 9.56,
+   "type": "word"
+  },
+  {
+   "text": "aspect",
+   "start": 9.76,
+   "end": 10.32,
+   "type": "word"
+  },
+  {
+   "text": "You",
+   "start": 13.04,
+   "end": 13.16,
+   "type": "word"
+  },
+  {
+   "text": "can",
+   "start": 13.28,
+   "end": 13.4,
+   "type": "word"
+  },
+  {
+   "text": "see",
+   "start": 13.44,
+   "end": 13.56,
+   "type": "word"
+  },
+  {
+   "text": "my",
+   "start": 13.68,
+   "end": 13.8,
+   "type": "word"
+  },
+  {
+   "text": "face",
+   "start": 13.92,
+   "end": 14.32,
+   "type": "word"
+  },
+  {
+   "text": "I",
+   "start": 15.2,
+   "end": 15.32,
+   "type": "word"
+  },
+  {
+   "text": "want",
+   "start": 15.36,
+   "end": 15.48,
+   "type": "word"
+  },
+  {
+   "text": "to",
+   "start": 15.52,
+   "end": 15.64,
+   "type": "word"
+  },
+  {
+   "text": "change",
+   "start": 15.68,
+   "end": 15.84,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 15.92,
+   "end": 16.04,
+   "type": "word"
+  },
+  {
+   "text": "background,",
+   "start": 16.08,
+   "end": 16.64,
+   "type": "word"
+  },
+  {
+   "text": "I",
+   "start": 16.64,
+   "end": 16.76,
+   "type": "word"
+  },
+  {
+   "text": "want",
+   "start": 16.8,
+   "end": 16.92,
+   "type": "word"
+  },
+  {
+   "text": "to",
+   "start": 16.96,
+   "end": 17.04,
+   "type": "word"
+  },
+  {
+   "text": "change",
+   "start": 17.04,
+   "end": 17.2,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 17.28,
+   "end": 17.36,
+   "type": "word"
+  },
+  {
+   "text": "lighting,",
+   "start": 17.36,
+   "end": 17.84,
+   "type": "word"
+  },
+  {
+   "text": "I",
+   "start": 17.84,
+   "end": 17.92,
+   "type": "word"
+  },
+  {
+   "text": "want",
+   "start": 17.92,
+   "end": 18.04,
+   "type": "word"
+  },
+  {
+   "text": "to",
+   "start": 18.08,
+   "end": 18.16,
+   "type": "word"
+  },
+  {
+   "text": "change",
+   "start": 18.16,
+   "end": 18.4,
+   "type": "word"
+  },
+  {
+   "text": "I",
+   "start": 18.88,
+   "end": 19.0,
+   "type": "word"
+  },
+  {
+   "text": "want",
+   "start": 19.04,
+   "end": 19.16,
+   "type": "word"
+  },
+  {
+   "text": "to",
+   "start": 19.2,
+   "end": 19.32,
+   "type": "word"
+  },
+  {
+   "text": "keep",
+   "start": 19.44,
+   "end": 19.56,
+   "type": "word"
+  },
+  {
+   "text": "my",
+   "start": 19.76,
+   "end": 19.88,
+   "type": "word"
+  },
+  {
+   "text": "body",
+   "start": 23.92,
+   "end": 24.24,
+   "type": "word"
+  },
+  {
+   "text": "movement",
+   "start": 24.48,
+   "end": 24.88,
+   "type": "word"
+  },
+  {
+   "text": "language",
+   "start": 25.04,
+   "end": 25.44,
+   "type": "word"
+  },
+  {
+   "text": "smooth",
+   "start": 26.0,
+   "end": 26.4,
+   "type": "word"
+  },
+  {
+   "text": "and",
+   "start": 26.48,
+   "end": 26.6,
+   "type": "word"
+  },
+  {
+   "text": "consistent",
+   "start": 27.04,
+   "end": 27.6,
+   "type": "word"
+  },
+  {
+   "text": "so",
+   "start": 28.08,
+   "end": 28.2,
+   "type": "word"
+  },
+  {
+   "text": "you",
+   "start": 28.4,
+   "end": 28.52,
+   "type": "word"
+  },
+  {
+   "text": "do",
+   "start": 28.72,
+   "end": 28.84,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 28.96,
+   "end": 29.08,
+   "type": "word"
+  },
+  {
+   "text": "job",
+   "start": 29.12,
+   "end": 29.28,
+   "type": "word"
+  }
+ ],
+ "source": "WhatsApp Video 2026-10-20 at 4.25.42 PM.mp4",
+ "model": "parakeet-tdt-0.6b-v2 int8 (sherpa-onnx)",
+ "timeline": "video",
+ "audio_offset": 0.0
+}

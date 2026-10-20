@@ -1,0 +1,202 @@
+[
+ {
+  "id": "passport-self",
+  "category": "Identity",
+  "name": "Your passport (valid 2+ years)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "passport-wife",
+  "category": "Identity",
+  "name": "Wife's passport (valid 2+ years)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "nid",
+  "category": "Identity",
+  "name": "National ID card",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "marriage-cert",
+  "category": "Identity",
+  "name": "Marriage certificate, English translation (needed for the family visa later)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "photos",
+  "category": "Identity",
+  "name": "Biometric photos, 35×45 mm, white background",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "bba-transcript",
+  "category": "Academic",
+  "name": "NSU BBA transcript, official, sealed",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "bba-certificate",
+  "category": "Academic",
+  "name": "NSU degree certificate or provisional certificate (after graduation)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "enrolment-letter",
+  "category": "Academic",
+  "name": "NSU letter: final-year student, expected graduation date",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "moi-letter",
+  "category": "Academic",
+  "name": "NSU English-medium (MOI) letter",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "hsc",
+  "category": "Academic",
+  "name": "HSC certificate and marksheet",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "ssc",
+  "category": "Academic",
+  "name": "SSC certificate and marksheet",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "course-descriptions",
+  "category": "Academic",
+  "name": "NSU course descriptions / syllabus (for German credit checks)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "attestation",
+  "category": "Academic",
+  "name": "Attestation: Education Board + Ministry of Foreign Affairs",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "ielts-trf",
+  "category": "Language",
+  "name": "IELTS Academic Test Report Form",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "cv",
+  "category": "Applications",
+  "name": "CV in Europass format (PDF)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "sop",
+  "category": "Applications",
+  "name": "Statement of purpose: master version + one per programme",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "lor-1",
+  "category": "Applications",
+  "name": "Recommendation letter 1 (NSU professor)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "lor-2",
+  "category": "Applications",
+  "name": "Recommendation letter 2 (NSU professor or AKIJ supervisor)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "internship-cert",
+  "category": "Applications",
+  "name": "AKIJ Resource internship certificate",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "certs",
+  "category": "Applications",
+  "name": "Course certificates (Coursera, Udemy, NSU CPC)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "bank-statement",
+  "category": "Financial",
+  "name": "Bank statements (6 months) and sponsor letter, if family helps",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "blocked-account",
+  "category": "Visa",
+  "name": "Blocked account confirmation (€11,904)",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "health-insurance",
+  "category": "Visa",
+  "name": "Travel + student health insurance",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "admission-letter",
+  "category": "Visa",
+  "name": "University admission letter",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ },
+ {
+  "id": "visa-forms",
+  "category": "Visa",
+  "name": "VIDEX visa form + VFS checklist documents",
+  "status": "missing",
+  "location": "",
+  "note": ""
+ }
+]
