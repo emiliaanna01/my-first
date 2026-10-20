@@ -158,10 +158,12 @@ HANDLERS["/start"] = cmd_help
 def handle(update):
     msg = update.get("message") or {}
     if str(msg.get("chat", {}).get("id")) != CHAT_ID:
+        print("ignored a message from a chat that isn't TELEGRAM_CHAT_ID")
         return
     word = (msg.get("text") or "").strip().split()[0:1]
     cmd = word[0].split("@")[0].lower() if word else ""
     fn = HANDLERS.get(cmd, cmd_help)
+    print(f"answering {cmd or '(text)'}")
     try:
         reply(fn(msg))
     except FileNotFoundError:
@@ -193,12 +195,16 @@ def main():
 
     api("setMyCommands", commands=[{"command": c, "description": d} for c, d in COMMANDS])
     if args.once:
+        hook = api("getWebhookInfo").get("url")
+        if hook:
+            print("A webhook is set on this bot, so getUpdates can't read messages. Remove it with deleteWebhook.")
         offset = None
         while True:  # drain everything waiting, then stop
             before = offset
             offset = poll(0, offset)
             if offset == before:
                 break
+        print("done: no more waiting messages" if offset else "no waiting messages")
         return
 
     print("Path Abroad menu bot is running. Press Ctrl+C to stop.")

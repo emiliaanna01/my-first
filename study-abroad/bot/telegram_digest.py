@@ -93,6 +93,11 @@ def send(text):
         "text": text[:4000],
         "parse_mode": "HTML",
         "disable_web_page_preview": "true",
+        # same buttons as menu_bot.py, so the menu shows under the chat box
+        "reply_markup": json.dumps({
+            "keyboard": [["/today", "/week", "/deadlines"], ["/apply", "/ielts", "/papers"], ["/done", "/tracker", "/help"]],
+            "resize_keyboard": True, "is_persistent": True,
+        }),
     }).encode()
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     with urllib.request.urlopen(url, data=payload, timeout=30) as resp:
