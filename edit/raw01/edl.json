@@ -1,0 +1,91 @@
+{
+ "version": 1,
+ "sources": {
+  "main": "/home/user/my-first/sources/raw01.mp4"
+ },
+ "speed": 1.1,
+ "speeds": {
+  "main": 1.1
+ },
+ "grade": "none",
+ "ranges": [
+  {
+   "source": "main",
+   "start": 0.433,
+   "end": 1.3,
+   "speed": 1.1,
+   "beat": "greeting"
+  },
+  {
+   "source": "main",
+   "start": 2.333,
+   "end": 4.233,
+   "speed": 1.1,
+   "beat": "topic"
+  },
+  {
+   "source": "main",
+   "start": 4.533,
+   "end": 5.867,
+   "speed": 1.1,
+   "beat": "topic"
+  },
+  {
+   "source": "main",
+   "start": 6.2,
+   "end": 6.767,
+   "speed": 1.1,
+   "beat": "promise"
+  },
+  {
+   "source": "main",
+   "start": 7.733,
+   "end": 10.233,
+   "speed": 1.1,
+   "beat": "promise"
+  },
+  {
+   "source": "main",
+   "start": 10.667,
+   "end": 11.233,
+   "speed": 1.1,
+   "beat": "promise"
+  },
+  {
+   "source": "main",
+   "start": 12.967,
+   "end": 14.5,
+   "speed": 1.1,
+   "beat": "wishes"
+  },
+  {
+   "source": "main",
+   "start": 15.2,
+   "end": 17.767,
+   "speed": 1.1,
+   "beat": "wishes"
+  },
+  {
+   "source": "main",
+   "start": 18.8,
+   "end": 19.8,
+   "speed": 1.1,
+   "beat": "wishes, second take"
+  },
+  {
+   "source": "main",
+   "start": 24.133,
+   "end": 27.7,
+   "speed": 1.1,
+   "beat": "wishes"
+  },
+  {
+   "source": "main",
+   "start": 28.0,
+   "end": 29.333,
+   "speed": 1.1,
+   "beat": "ending"
+  }
+ ],
+ "total_duration_s": 16.067
+}

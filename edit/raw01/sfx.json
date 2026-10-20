@@ -1,0 +1,85 @@
+{
+ "below_voice_db": 14,
+ "sounds": [
+  {
+   "file": "edit/raw01/sound/whoosh.wav",
+   "at": 0.84,
+   "what": "whip into lamp"
+  },
+  {
+   "file": "edit/raw01/sound/swoosh_soft.wav",
+   "at": 2.33,
+   "what": "zoom punch"
+  },
+  {
+   "file": "edit/raw01/sound/pop.wav",
+   "at": 2.53,
+   "what": "title AI Video Editing"
+  },
+  {
+   "file": "edit/raw01/sound/whoosh.wav",
+   "at": 3.84,
+   "what": "whip into desk"
+  },
+  {
+   "file": "edit/raw01/sound/pop.wav",
+   "at": 4.5,
+   "what": "timeline card"
+  },
+  {
+   "file": "edit/raw01/sound/swoosh_soft.wav",
+   "at": 6.48,
+   "what": "zoom punch"
+  },
+  {
+   "file": "edit/raw01/sound/tap.wav",
+   "at": 7.8,
+   "what": "face brackets"
+  },
+  {
+   "file": "edit/raw01/sound/whoosh.wav",
+   "at": 8.19,
+   "what": "whip into crt"
+  },
+  {
+   "file": "edit/raw01/sound/whoosh.wav",
+   "at": 8.84,
+   "what": "before/after wipe"
+  },
+  {
+   "file": "edit/raw01/sound/pop.wav",
+   "at": 9.2,
+   "what": "title New Background"
+  },
+  {
+   "file": "edit/raw01/sound/shimmer.wav",
+   "at": 10.36,
+   "what": "light switch"
+  },
+  {
+   "file": "edit/raw01/sound/whoosh.wav",
+   "at": 11.29,
+   "what": "whip into window"
+  },
+  {
+   "file": "edit/raw01/sound/swoosh_soft.wav",
+   "at": 13.13,
+   "what": "zoom punch"
+  },
+  {
+   "file": "edit/raw01/sound/pop.wav",
+   "at": 13.33,
+   "what": "title Smooth & Consistent"
+  },
+  {
+   "file": "edit/raw01/sound/shimmer.wav",
+   "at": 14.95,
+   "what": "flash"
+  },
+  {
+   "file": "edit/raw01/sound/pop.wav",
+   "at": 15.45,
+   "what": "bookmark"
+  }
+ ]
+}
