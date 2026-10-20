@@ -5,3 +5,5 @@ edit/*/*.mp4
 edit/*/verify/
 edit/*/*.lock
 edit/*/clips/
+edit/*/layers/
+edit/*/sets/

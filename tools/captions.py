@@ -6,7 +6,7 @@ Burn in with:
   ffmpeg -i IN.mp4 -vf "ass=OUT.ass" -c:a copy OUT.mp4
 English speech recognition: NVIDIA Parakeet TDT 0.6B (sherpa-onnx, CPU), word timestamps.
 """
-import argparse, os, sys
+import argparse, json, os, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from asr import transcribe
@@ -39,13 +39,16 @@ def main():
     ap.add_argument("--title", action="append", default=[], help='"text@start-end" seconds')
     ap.add_argument("--caption-y", type=int, default=1350)
     ap.add_argument("--title-y", type=int, default=520)
+    ap.add_argument("--layout", help="layout.json from director.py: per-shot caption and title heights")
     ap.add_argument("--caption-y-at", action="append", default=[],
                     help='"start-end:y" caption height for a span (e.g. when the chin drops lower)')
     a = ap.parse_args()
 
     ev = []
     spans = [(*map(float, r.split(":")[0].split("-")), int(r.split(":")[1])) for r in a.caption_y_at]
-    cap_y = lambda t: next((y for s0, s1, y in spans if s0 <= t < s1), a.caption_y)
+    layout = json.load(open(a.layout)) if a.layout else []
+    in_shot = lambda t, key, dflt: next((sh[key] for sh in layout if sh["t0"] <= t < sh["t1"]), dflt)
+    cap_y = lambda t: next((y for s0, s1, y in spans if s0 <= t < s1), in_shot(t, "caption_y", a.caption_y))
     words = [w for w in transcribe(a.video) if w[0].lower().strip(",.!?") not in FILLERS]
     for ph in phrases(words):
         for i, w in enumerate(ph):  # whole phrase visible, active word highlighted with a pop
@@ -60,9 +63,10 @@ def main():
         text, rng = t.rsplit("@", 1)
         s, e = map(float, rng.split("-"))
         fs = min(130, int(1900 / max(1, len(text))))  # fit ~950 px of width
+        ty = in_shot(s, "title_y", a.title_y)
         anim = r"\fscx70\fscy70\t(0,180,\fscx106\fscy106)\t(180,300,\fscx100\fscy100)\fad(80,150)"
-        ev.append(f"Dialogue: 2,{ts(s)},{ts(e)},TitleGlow,,0,0,0,,{{\\pos({W // 2},{a.title_y})\\fs{fs}{anim}}}{text}")
-        ev.append(f"Dialogue: 3,{ts(s)},{ts(e)},Title,,0,0,0,,{{\\pos({W // 2},{a.title_y})\\fs{fs}{anim}}}{text}")
+        ev.append(f"Dialogue: 2,{ts(s)},{ts(e)},TitleGlow,,0,0,0,,{{\\pos({W // 2},{ty})\\fs{fs}{anim}}}{text}")
+        ev.append(f"Dialogue: 3,{ts(s)},{ts(e)},Title,,0,0,0,,{{\\pos({W // 2},{ty})\\fs{fs}{anim}}}{text}")
 
     with open(a.out, "w") as f:
         f.write(f"""[Script Info]
