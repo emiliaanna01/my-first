@@ -4,3 +4,4 @@ out/
 edit/*/*.mp4
 edit/*/verify/
 edit/*/*.lock
+edit/*/clips/
