@@ -1,0 +1,35 @@
+name: Path Abroad menu replies
+
+on:
+  schedule:
+    # every 30 min from 06:00 to 23:30 Dhaka time (00:00–17:30 UTC)
+    - cron: "*/30 0-17 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: telegram-menu
+  cancel-in-progress: false
+
+jobs:
+  answer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # the daily research run commits tracker data to this branch
+          ref: claude/friendly-cerf-x5ro5z
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Answer waiting commands
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TRACKER_URL: ${{ secrets.TRACKER_URL }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "Telegram secrets not set yet; skipping."
+            exit 0
+          fi
+          python study-abroad/bot/menu_bot.py --once
