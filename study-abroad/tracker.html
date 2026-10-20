@@ -351,6 +351,7 @@ td input[type="text"] { width: 100%; }
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const safeUrl = (u) => /^https:\/\//.test(u || "") ? u : null;
+const linkify = (s) => esc(s).replace(/https:\/\/[^\s<]+[^\s<.,;:)]/g, (u) => `<a href="${u}" target="_blank" rel="noopener">${u.replace(/^https:\/\/(www\.)?/, "").split("/")[0]} ↗</a>`);
 const fmt = (n) => Math.round(n).toLocaleString("en-US");
 const lakh = (bdt) => (bdt / 100000).toFixed(1) + " lakh";
 const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
@@ -499,8 +500,8 @@ function renderToday() {
   $("updates").innerHTML = ups.length ? ups.map(u => `
     <div class="stack" style="gap:4px;padding-bottom:10px;border-bottom:1px solid var(--line)">
       <span class="eyebrow mono">${fmtDate(u.date)}</span>
-      <p class="small">${esc(u.summary)}</p>
-      ${Array.isArray(u.items) && u.items.length ? `<ul class="small" style="margin:0;padding-left:18px">${u.items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}
+      <p class="small">${linkify(u.summary)}</p>
+      ${Array.isArray(u.items) && u.items.length ? `<ul class="small" style="margin:0;padding-left:18px">${u.items.map(i => `<li>${linkify(i)}</li>`).join("")}</ul>` : ""}
     </div>`).join("") : `<p class="muted small">The first daily research update will appear here.</p>`;
 }
 
