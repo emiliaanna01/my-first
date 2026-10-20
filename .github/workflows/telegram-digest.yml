@@ -1,9 +1,9 @@
-name: Study-abroad Telegram reminders
+name: Path Abroad morning update
 
 on:
   schedule:
-    # 03:00 UTC = 09:00 in Dhaka, every day
-    - cron: "0 3 * * *"
+    # 05:30 UTC = 11:30 in Dhaka, every day
+    - cron: "30 5 * * *"
   workflow_dispatch:
     inputs:
       digest:

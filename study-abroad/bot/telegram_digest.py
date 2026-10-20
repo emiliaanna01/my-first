@@ -72,7 +72,7 @@ def todays_session(today):
 def build_message(today, digest):
     items = sorted(open_items(today))
     alerts = [i for i in items if i[0] in ALERT_DAYS or i[0] < 0]
-    parts = []
+    parts = [f"🧭 <b>Path Abroad</b> · {today:%a %d %b}"]
     session = todays_session(today)
     if session:
         parts.append(session)
