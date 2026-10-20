@@ -6,39 +6,14 @@ Burn in with:
   ffmpeg -i IN.mp4 -vf "ass=OUT.ass" -c:a copy OUT.mp4
 English speech recognition: NVIDIA Parakeet TDT 0.6B (sherpa-onnx, CPU), word timestamps.
 """
-import argparse, os, subprocess, tempfile
-import numpy as np, sherpa_onnx
+import argparse, os, sys
 
-M = os.path.expanduser("~/.cache/video-models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8/")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from asr import transcribe
+
 W, H = 1080, 1920
 TITLE_COLOR = "&H349BF9&"  # #F99B34 (ASS is BGR)
 TITLE_GLOW = "&H1A6BFF&"
-
-
-def transcribe(video):
-    with tempfile.NamedTemporaryFile(suffix=".f32") as f:
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", video, "-ac", "1", "-ar", "16000", "-f", "f32le", f.name],
-                       check=True)
-        audio = np.fromfile(f.name, np.float32)
-    rec = sherpa_onnx.OfflineRecognizer.from_transducer(
-        encoder=M + "encoder.int8.onnx", decoder=M + "decoder.int8.onnx", joiner=M + "joiner.int8.onnx",
-        tokens=M + "tokens.txt", model_type="nemo_transducer", num_threads=os.cpu_count())
-    words, chunk = [], 16000 * 30  # 30 s chunks keep memory flat on long videos
-    for off in range(0, len(audio), chunk):
-        s = rec.create_stream()
-        s.accept_waveform(16000, audio[off:off + chunk])
-        rec.decode_stream(s)
-        for tok, t in zip(s.result.tokens, s.result.timestamps):
-            t += off / 16000
-            if tok.startswith(" ") or not words:
-                words.append([tok.strip(), t, t])
-            else:
-                words[-1][0] += tok
-                words[-1][2] = t
-    for i, w in enumerate(words):  # a word lasts until the next one starts (max 0.8 s)
-        nxt = words[i + 1][1] if i + 1 < len(words) else w[2] + 0.5
-        w[2] = min(nxt, w[1] + 0.8)
-    return words
 
 
 def ts(t):

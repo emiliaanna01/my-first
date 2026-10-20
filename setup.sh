@@ -33,4 +33,25 @@ for f in poppins/Poppins-ExtraBold.ttf poppins/Poppins-Bold.ttf dmserifdisplay/D
   [ -s ~/.fonts/"${f#*/}" ] || curl -sSfL -o ~/.fonts/"${f#*/}" "https://raw.githubusercontent.com/google/fonts/main/ofl/$f"
 done
 fc-cache -f >/dev/null 2>&1 || true
+
+# IT Reelsmaker plugin extras: YuNet face model, rembg person model (where doctor.py looks), Remotion project
+get face_detection_yunet_2023mar.onnx https://media.githubusercontent.com/media/opencv/opencv_zoo/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx
+if [ ! -s ~/.u2net/u2net_human_seg.onnx ]; then
+  "$VENV/bin/rembg" d u2net_human_seg >/dev/null 2>&1 || true
+  mkdir -p ~/.u2net && ln -sf ~/.rembg/models/u2net_human_seg/u2net_human_seg.onnx ~/.u2net/u2net_human_seg.onnx
+fi
+# Remotion can't download its browser here (remotion.media) and forces Chrome off the proxy;
+# wrap the preinstalled headless shell so it renders and still reaches Google Fonts via the proxy.
+mkdir -p ~/.local/bin
+cat > ~/.local/bin/remotion-chrome <<'WRAP'
+#!/bin/bash
+args=()
+for a in "$@"; do
+  case "$a" in --no-proxy-server|--proxy-server=*|--proxy-bypass-list=*) ;; *) args+=("$a") ;; esac
+done
+[ -n "${HTTPS_PROXY:-}" ] && args+=("--proxy-server=$HTTPS_PROXY")
+exec /opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell "${args[@]}"
+WRAP
+chmod +x ~/.local/bin/remotion-chrome
+(cd "$(dirname "$0")/reels" && [ -d node_modules ] || npm install --no-fund --no-audit --silent)
 echo "Video toolchain ready: source $VENV/bin/activate"

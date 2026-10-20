@@ -20,3 +20,13 @@ source ~/.venvs/video/bin/activate
 Also installed for upcoming effects: MediaPipe (hand tracking for the energy-orb
 VFX, face detection for auto punch-in zooms, hair/body segmentation), rembg
 (BiRefNet stills), Whisper-small ONNX (non-English speech).
+
+## IT Reelsmaker plugin
+`it-reelsmaker.json` points the plugin at this project; `reels/` is its Remotion project (ReelKit).
+Its default transcriber (faster-whisper) needs Hugging Face, which this environment blocks, so transcripts come
+from Parakeet instead:
+```bash
+python <plugin>/scripts/transcribe.py audio edit/<id> <source>       # prints the 16 kHz WAV path
+python tools/asr.py edit/<id>/audio16k-<stem>.wav edit/<id>/transcripts/<stem>.json --source <source>
+python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
+```

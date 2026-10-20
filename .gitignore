@@ -1,0 +1,6 @@
+__pycache__/
+edit/*/
+!edit/.keep
+*.mp4
+*.mov
+*.MOV

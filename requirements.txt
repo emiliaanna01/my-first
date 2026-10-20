@@ -6,7 +6,7 @@ mediapipe
 sherpa-onnx
 soundfile
 auto-editor
-rembg[cpu]
+rembg[cpu,cli]
 moviepy
 av
 pysubs2
