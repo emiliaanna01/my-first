@@ -1,0 +1,107 @@
+"""Transcribe a video and write word-by-word captions + glowing titles as an ASS subtitle file.
+
+Usage:
+  python tools/captions.py IN.mp4 OUT.ass [--title "There are 5 levels@0-2.2"] [--title "Level one@9-11"]
+Burn in with:
+  ffmpeg -i IN.mp4 -vf "ass=OUT.ass" -c:a copy OUT.mp4
+English speech recognition: NVIDIA Parakeet TDT 0.6B (sherpa-onnx, CPU), word timestamps.
+"""
+import argparse, os, subprocess, tempfile
+import numpy as np, sherpa_onnx
+
+M = os.path.expanduser("~/.cache/video-models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8/")
+W, H = 1080, 1920
+TITLE_COLOR = "&H349BF9&"  # #F99B34 (ASS is BGR)
+TITLE_GLOW = "&H1A6BFF&"
+
+
+def transcribe(video):
+    with tempfile.NamedTemporaryFile(suffix=".f32") as f:
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", video, "-ac", "1", "-ar", "16000", "-f", "f32le", f.name],
+                       check=True)
+        audio = np.fromfile(f.name, np.float32)
+    rec = sherpa_onnx.OfflineRecognizer.from_transducer(
+        encoder=M + "encoder.int8.onnx", decoder=M + "decoder.int8.onnx", joiner=M + "joiner.int8.onnx",
+        tokens=M + "tokens.txt", model_type="nemo_transducer", num_threads=os.cpu_count())
+    words, chunk = [], 16000 * 30  # 30 s chunks keep memory flat on long videos
+    for off in range(0, len(audio), chunk):
+        s = rec.create_stream()
+        s.accept_waveform(16000, audio[off:off + chunk])
+        rec.decode_stream(s)
+        for tok, t in zip(s.result.tokens, s.result.timestamps):
+            t += off / 16000
+            if tok.startswith(" ") or not words:
+                words.append([tok.strip(), t, t])
+            else:
+                words[-1][0] += tok
+                words[-1][2] = t
+    for i, w in enumerate(words):  # a word lasts until the next one starts (max 0.8 s)
+        nxt = words[i + 1][1] if i + 1 < len(words) else w[2] + 0.5
+        w[2] = min(nxt, w[1] + 0.8)
+    return words
+
+
+def ts(t):
+    cs = int(round(t * 100))
+    return f"{cs // 360000}:{cs // 6000 % 60:02d}:{cs // 100 % 60:02d}.{cs % 100:02d}"
+
+
+def phrases(words, max_words=3):
+    out, cur = [], []
+    for w in words:
+        cur.append(w)
+        if len(cur) == max_words or w[0][-1:] in ".,!?" or (cur and w is words[-1]):
+            out.append(cur); cur = []
+    if cur:
+        out.append(cur)
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("video"); ap.add_argument("out")
+    ap.add_argument("--title", action="append", default=[], help='"text@start-end" seconds')
+    ap.add_argument("--caption-y", type=int, default=1350)
+    a = ap.parse_args()
+
+    ev = []
+    for ph in phrases(transcribe(a.video)):
+        for i, w in enumerate(ph):  # whole phrase visible, active word highlighted with a pop
+            end = ph[i + 1][1] if i + 1 < len(ph) else w[2]
+            parts = []
+            for j, x in enumerate(ph):
+                txt = x[0].upper()
+                parts.append(r"{\c&H34E1FF&\t(0,80,\fscx112\fscy112)\t(80,160,\fscx100\fscy100)}" + txt + r"{\c&HFFFFFF&}"
+                             if j == i else txt)
+            ev.append(f"Dialogue: 1,{ts(w[1])},{ts(end)},Cap,,0,0,0,,{{\\pos({W // 2},{a.caption_y})}}" + " ".join(parts))
+    for t in a.title:
+        text, rng = t.rsplit("@", 1)
+        s, e = map(float, rng.split("-"))
+        anim = r"\fscx70\fscy70\t(0,180,\fscx106\fscy106)\t(180,300,\fscx100\fscy100)\fad(80,150)"
+        ev.append(f"Dialogue: 2,{ts(s)},{ts(e)},TitleGlow,,0,0,0,,{{\\pos({W // 2},520){anim}}}{text}")
+        ev.append(f"Dialogue: 3,{ts(s)},{ts(e)},Title,,0,0,0,,{{\\pos({W // 2},520){anim}}}{text}")
+
+    with open(a.out, "w") as f:
+        f.write(f"""[Script Info]
+ScriptType: v4.00+
+PlayResX: {W}
+PlayResY: {H}
+WrapStyle: 2
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Poppins ExtraBold,92,&HFFFFFF&,&HFFFFFF&,&H000000&,&H80000000&,0,0,0,0,100,100,0,0,1,6,3,5,60,60,0,1
+Style: Title,DM Serif Display,130,{TITLE_COLOR},{TITLE_COLOR},&H0A2A5A&,&H00000000&,0,0,0,0,100,100,1,0,1,2,0,5,60,60,0,1
+Style: TitleGlow,DM Serif Display,130,{TITLE_GLOW},{TITLE_GLOW},{TITLE_GLOW},&H00000000&,0,0,0,0,100,100,1,0,1,14,0,5,60,60,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+""")
+        for e in ev:
+            if ",TitleGlow," in e:
+                e = e.replace("{\\pos", "{\\blur18\\alpha&H60&\\pos", 1)
+            f.write(e + "\n")
+
+
+if __name__ == "__main__":
+    main()

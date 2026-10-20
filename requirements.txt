@@ -1,0 +1,12 @@
+onnxruntime
+opencv-python-headless
+numpy
+pillow
+mediapipe
+sherpa-onnx
+soundfile
+auto-editor
+rembg[cpu]
+moviepy
+av
+pysubs2
