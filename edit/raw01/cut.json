@@ -1,0 +1,17 @@
+{
+ "speed": 1.1,
+ "sources": {"main": {"file": "sources/raw01.mp4"}},
+ "ranges": [
+  {"start": 0.433, "end": 1.300, "beat": "greeting"},
+  {"start": 2.333, "end": 4.233, "beat": "topic"},
+  {"start": 4.533, "end": 5.867, "beat": "topic"},
+  {"start": 6.200, "end": 6.767, "beat": "promise"},
+  {"start": 7.733, "end": 10.233, "beat": "promise"},
+  {"start": 10.667, "end": 11.233, "beat": "promise"},
+  {"start": 12.967, "end": 14.500, "beat": "wishes"},
+  {"start": 15.200, "end": 17.780, "beat": "wishes"},
+  {"start": 18.800, "end": 19.800, "beat": "wishes, second take"},
+  {"start": 24.133, "end": 27.700, "beat": "wishes"},
+  {"start": 28.000, "end": 29.333, "beat": "ending"}
+ ]
+}

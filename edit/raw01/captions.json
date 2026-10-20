@@ -1,0 +1,481 @@
+{
+ "duration": 16.067,
+ "segments": [
+  {
+   "i": 0,
+   "source": "main",
+   "src_start": 0.433,
+   "src_end": 1.3,
+   "out_start": 0.0,
+   "out_dur": 0.8,
+   "speed": 1.1,
+   "beat": "greeting"
+  },
+  {
+   "i": 1,
+   "source": "main",
+   "src_start": 2.333,
+   "src_end": 4.233,
+   "out_start": 0.8,
+   "out_dur": 1.733,
+   "speed": 1.1,
+   "beat": "topic"
+  },
+  {
+   "i": 2,
+   "source": "main",
+   "src_start": 4.533,
+   "src_end": 5.867,
+   "out_start": 2.533,
+   "out_dur": 1.2,
+   "speed": 1.1,
+   "beat": "topic"
+  },
+  {
+   "i": 3,
+   "source": "main",
+   "src_start": 6.2,
+   "src_end": 6.767,
+   "out_start": 3.733,
+   "out_dur": 0.5,
+   "speed": 1.1,
+   "beat": "promise"
+  },
+  {
+   "i": 4,
+   "source": "main",
+   "src_start": 7.733,
+   "src_end": 10.233,
+   "out_start": 4.233,
+   "out_dur": 2.267,
+   "speed": 1.1,
+   "beat": "promise"
+  },
+  {
+   "i": 5,
+   "source": "main",
+   "src_start": 10.667,
+   "src_end": 11.233,
+   "out_start": 6.5,
+   "out_dur": 0.5,
+   "speed": 1.1,
+   "beat": "promise"
+  },
+  {
+   "i": 6,
+   "source": "main",
+   "src_start": 12.967,
+   "src_end": 14.5,
+   "out_start": 7.0,
+   "out_dur": 1.4,
+   "speed": 1.1,
+   "beat": "wishes"
+  },
+  {
+   "i": 7,
+   "source": "main",
+   "src_start": 15.2,
+   "src_end": 17.767,
+   "out_start": 8.4,
+   "out_dur": 2.333,
+   "speed": 1.1,
+   "beat": "wishes"
+  },
+  {
+   "i": 8,
+   "source": "main",
+   "src_start": 18.8,
+   "src_end": 19.8,
+   "out_start": 10.733,
+   "out_dur": 0.9,
+   "speed": 1.1,
+   "beat": "wishes, second take"
+  },
+  {
+   "i": 9,
+   "source": "main",
+   "src_start": 24.133,
+   "src_end": 27.7,
+   "out_start": 11.633,
+   "out_dur": 3.233,
+   "speed": 1.1,
+   "beat": "wishes"
+  },
+  {
+   "i": 10,
+   "source": "main",
+   "src_start": 28.0,
+   "src_end": 29.333,
+   "out_start": 14.867,
+   "out_dur": 1.2,
+   "speed": 1.1,
+   "beat": "ending"
+  }
+ ],
+ "words": [
+  {
+   "text": "Good",
+   "src": 0.4,
+   "start": 0.0,
+   "end": 0.115,
+   "seg": 0
+  },
+  {
+   "text": "morning",
+   "src": 0.64,
+   "start": 0.188,
+   "end": 0.406,
+   "seg": 0
+  },
+  {
+   "text": "everyone",
+   "src": 1.12,
+   "start": 0.624,
+   "end": 0.788,
+   "seg": 0
+  },
+  {
+   "text": "today",
+   "src": 2.32,
+   "start": 0.8,
+   "end": 0.897,
+   "seg": 1
+  },
+  {
+   "text": "I'm",
+   "src": 2.64,
+   "start": 1.079,
+   "end": 1.297,
+   "seg": 1
+  },
+  {
+   "text": "going",
+   "src": 2.88,
+   "start": 1.297,
+   "end": 1.406,
+   "seg": 1
+  },
+  {
+   "text": "to",
+   "src": 3.04,
+   "start": 1.442,
+   "end": 1.552,
+   "seg": 1
+  },
+  {
+   "text": "talk",
+   "src": 3.2,
+   "start": 1.588,
+   "end": 1.697,
+   "seg": 1
+  },
+  {
+   "text": "about",
+   "src": 3.76,
+   "start": 2.097,
+   "end": 2.206,
+   "seg": 1
+  },
+  {
+   "text": "AI",
+   "src": 4.4,
+   "start": 2.533,
+   "end": 2.848,
+   "seg": 2
+  },
+  {
+   "text": "video",
+   "src": 5.04,
+   "start": 2.994,
+   "end": 3.212,
+   "seg": 2
+  },
+  {
+   "text": "editing",
+   "src": 5.36,
+   "start": 3.285,
+   "end": 3.745,
+   "seg": 2
+  },
+  {
+   "text": "so",
+   "src": 6.56,
+   "start": 4.061,
+   "end": 4.17,
+   "seg": 3
+  },
+  {
+   "text": "you",
+   "src": 7.68,
+   "start": 4.233,
+   "end": 4.294,
+   "seg": 4
+  },
+  {
+   "text": "can",
+   "src": 7.92,
+   "start": 4.403,
+   "end": 4.512,
+   "seg": 4
+  },
+  {
+   "text": "edit",
+   "src": 8.08,
+   "start": 4.548,
+   "end": 4.839,
+   "seg": 4
+  },
+  {
+   "text": "the",
+   "src": 8.48,
+   "start": 4.912,
+   "end": 5.021,
+   "seg": 4
+  },
+  {
+   "text": "video",
+   "src": 8.64,
+   "start": 5.058,
+   "end": 5.421,
+   "seg": 4
+  },
+  {
+   "text": "in",
+   "src": 9.2,
+   "start": 5.567,
+   "end": 5.676,
+   "seg": 4
+  },
+  {
+   "text": "every",
+   "src": 9.44,
+   "start": 5.785,
+   "end": 5.894,
+   "seg": 4
+  },
+  {
+   "text": "aspect",
+   "src": 9.76,
+   "start": 6.076,
+   "end": 6.506,
+   "seg": 4
+  },
+  {
+   "text": "You",
+   "src": 13.04,
+   "start": 7.067,
+   "end": 7.176,
+   "seg": 6
+  },
+  {
+   "text": "can",
+   "src": 13.2,
+   "start": 7.212,
+   "end": 7.321,
+   "seg": 6
+  },
+  {
+   "text": "see",
+   "src": 13.44,
+   "start": 7.43,
+   "end": 7.539,
+   "seg": 6
+  },
+  {
+   "text": "my",
+   "src": 13.6,
+   "start": 7.576,
+   "end": 7.685,
+   "seg": 6
+  },
+  {
+   "text": "face",
+   "src": 13.92,
+   "start": 7.867,
+   "end": 8.23,
+   "seg": 6
+  },
+  {
+   "text": "I",
+   "src": 15.2,
+   "start": 8.4,
+   "end": 8.509,
+   "seg": 7
+  },
+  {
+   "text": "want",
+   "src": 15.36,
+   "start": 8.545,
+   "end": 8.655,
+   "seg": 7
+  },
+  {
+   "text": "to",
+   "src": 15.52,
+   "start": 8.691,
+   "end": 8.8,
+   "seg": 7
+  },
+  {
+   "text": "change",
+   "src": 15.68,
+   "start": 8.836,
+   "end": 8.982,
+   "seg": 7
+  },
+  {
+   "text": "the",
+   "src": 15.92,
+   "start": 9.055,
+   "end": 9.164,
+   "seg": 7
+  },
+  {
+   "text": "background,",
+   "src": 16.08,
+   "start": 9.2,
+   "end": 9.709,
+   "seg": 7
+  },
+  {
+   "text": "I",
+   "src": 16.64,
+   "start": 9.709,
+   "end": 9.818,
+   "seg": 7
+  },
+  {
+   "text": "want",
+   "src": 16.8,
+   "start": 9.855,
+   "end": 9.927,
+   "seg": 7
+  },
+  {
+   "text": "to",
+   "src": 16.88,
+   "start": 9.927,
+   "end": 10.036,
+   "seg": 7
+  },
+  {
+   "text": "change",
+   "src": 17.04,
+   "start": 10.073,
+   "end": 10.218,
+   "seg": 7
+  },
+  {
+   "text": "the",
+   "src": 17.28,
+   "start": 10.291,
+   "end": 10.364,
+   "seg": 7
+  },
+  {
+   "text": "lighting,",
+   "src": 17.36,
+   "start": 10.364,
+   "end": 10.733,
+   "seg": 7
+  },
+  {
+   "text": "I",
+   "src": 18.8,
+   "start": 10.733,
+   "end": 10.842,
+   "seg": 8
+  },
+  {
+   "text": "want",
+   "src": 19.04,
+   "start": 10.952,
+   "end": 11.061,
+   "seg": 8
+  },
+  {
+   "text": "to",
+   "src": 19.2,
+   "start": 11.097,
+   "end": 11.206,
+   "seg": 8
+  },
+  {
+   "text": "keep",
+   "src": 19.44,
+   "start": 11.315,
+   "end": 11.424,
+   "seg": 8
+  },
+  {
+   "text": "movement",
+   "src": 24.48,
+   "start": 11.948,
+   "end": 12.312,
+   "seg": 9
+  },
+  {
+   "text": "language",
+   "src": 25.04,
+   "start": 12.458,
+   "end": 12.821,
+   "seg": 9
+  },
+  {
+   "text": "smooth",
+   "src": 26.0,
+   "start": 13.33,
+   "end": 13.694,
+   "seg": 9
+  },
+  {
+   "text": "and",
+   "src": 26.48,
+   "start": 13.767,
+   "end": 13.876,
+   "seg": 9
+  },
+  {
+   "text": "consistent",
+   "src": 27.04,
+   "start": 14.276,
+   "end": 14.785,
+   "seg": 9
+  },
+  {
+   "text": "so",
+   "src": 28.08,
+   "start": 14.939,
+   "end": 15.048,
+   "seg": 10
+  },
+  {
+   "text": "you",
+   "src": 28.4,
+   "start": 15.23,
+   "end": 15.339,
+   "seg": 10
+  },
+  {
+   "text": "do",
+   "src": 28.72,
+   "start": 15.521,
+   "end": 15.63,
+   "seg": 10
+  },
+  {
+   "text": "the",
+   "src": 28.96,
+   "start": 15.739,
+   "end": 15.848,
+   "seg": 10
+  },
+  {
+   "text": "job",
+   "src": 29.12,
+   "start": 15.885,
+   "end": 16.03,
+   "seg": 10
+  }
+ ]
+}
