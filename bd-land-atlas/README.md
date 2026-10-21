@@ -13,7 +13,8 @@ Rebuild:
 ```sh
 npm pack bangladesh-geojson@1.0.0 && tar xzf bangladesh-geojson-1.0.0.tgz
 python3 build_geo.py package/src/data/bangladesh.geojson upazilas.json
-python3 -c "s=open('atlas.src.html').read(); g=open('upazilas.json').read().replace('</','<\\\\/'); open('bangladesh-land-atlas.html','w').write(s.replace('__GEO__',g))"
+python3 build_gz.py data/gazipur-findings.json gz_mouzas.json
+python3 -c "s=open('atlas.src.html').read(); g=open('upazilas.json').read().replace('</','<\\\\/'); m=open('gz_mouzas.json').read().replace('</','<\\\\/'); open('bangladesh-land-atlas.html','w').write(s.replace('__GEO__',g).replace('__GZM__',m))"
 ```
 
 Boundaries © geoBoundaries (gbOpen BGD ADM3, 2020), CC BY 4.0, from BBS / OCHA ROAP. No public plot-level (dag) or owner dataset exists; use the official portals listed in the page.
