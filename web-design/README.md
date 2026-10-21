@@ -53,23 +53,28 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "industrial monitoring da
 | `playwright` | Real browser: click, type, screenshot, console, network | Chromium refuses to start as root without `--no-sandbox`; works locally. In the cloud, use `webapp-testing` or `bin/shoot.cjs` |
 | `chrome-devtools` | Lighthouse, performance traces, console, network (usage stats off) | Same root/sandbox limit as Playwright; works locally |
 | `shadcn` | Search and install shadcn components from registries | Works |
+| `parallel-search` | Web search and page reading, no key | Needs `search.parallel.ai` allowed in the environment's network settings |
+| `magic-21st` | 21st.dev Magic: search 10,000+ React/Tailwind components, generate new ones | Needs a key from 21st.dev/mcp stored as the environment variable `TWENTY_FIRST_API_KEY`, and `21st.dev` allowed in network settings |
 
 Claude asks once to approve project MCP servers the first time it opens this repo.
 
-Not added by default because they need your own account or key (add them yourself):
-```bash
-npx @21st-dev/cli@latest init --client claude          # 21st.dev Magic: 10,000+ React/Tailwind components (key from 21st.dev/mcp)
-claude mcp add --transport http vercel https://mcp.vercel.com
-claude mcp add --transport http Parallel-Search-MCP https://search.parallel.ai/mcp
-```
+### Setting these up when you only use claude.ai/code (no terminal)
+Everything is configured by files in this repo, so there's nothing to type. What's left is in
+the cloud environment's settings (environment menu in the session's title bar → **Edit**), and
+it applies from the next new session:
+- **Network access → Allowed domains:** add `context7.com`, `mcp.context7.com`, `search.parallel.ai`,
+  `21st.dev` (keep *Allow package managers* ticked). Steps: https://code.claude.com/docs/en/cloud-environments#network-access
+- **Environment variables:** `TWENTY_FIRST_API_KEY=<your 21st.dev key>` (and optionally
+  `CONTEXT7_API_KEY=<key from context7.com>` for higher limits). Never paste keys into the chat.
+- **Vercel** needs a login, so connect it at https://claude.ai/customize/connectors instead of here.
 
-## Plugins to add inside Claude Code (run in an interactive session, not a script)
-```
-/plugin marketplace add anthropics/skills
-/plugin install example-skills@anthropic-agent-skills
-/plugin install superpowers@claude-plugins-official     # brainstorm → plan → TDD → review workflow
-/plugin marketplace add greensock/gsap-skills            # already vendored here; this keeps it updated
-```
+On your own PC, the terminal equivalents are `claude mcp add ...` / `npx @21st-dev/cli@latest init --client claude`.
+
+## Plugins (`.claude/settings.json`)
+**Superpowers** (brainstorm → plan → TDD → review workflow) is enabled for this repo in
+`.claude/settings.json`, so every Claude Code session on it loads the plugin automatically. Anthropic's
+example skills and the GSAP skills are already copied into `.claude/skills/`, so they need no plugin.
+In an interactive terminal session the same thing is `/plugin install superpowers@claude-plugins-official`.
 
 ## Workflow for a new site
 
