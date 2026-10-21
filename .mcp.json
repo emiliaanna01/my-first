@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "playwright": {
+      "command": "bash",
+      "args": [
+        "web-design/bin/playwright-mcp.sh"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "bash",
+      "args": [
+        "web-design/bin/chrome-devtools-mcp.sh"
+      ]
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "shadcn@latest",
+        "mcp"
+      ]
+    },
+    "parallel-search": {
+      "type": "http",
+      "url": "https://search.parallel.ai/mcp"
+    },
+    "magic-21st": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@21st-dev/magic@latest"
+      ]
+    }
+  }
+}

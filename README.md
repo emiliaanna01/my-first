@@ -30,3 +30,8 @@ python <plugin>/scripts/transcribe.py audio edit/<id> <source>       # prints th
 python tools/asr.py edit/<id>/audio16k-<stem>.wav edit/<id>/transcripts/<stem>.json --source <source>
 python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
 ```
+
+## Web design toolkit
+`web-design/` holds the website-building setup: 25 design, UI/UX, animation (GSAP) and quality skills
+in `.claude/skills/`, MCP servers in `.mcp.json`, inspiration and component guides, a screenshot
+tool and a starter page. Start with `web-design/README.md`.

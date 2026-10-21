@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Setpoint: loop health monitoring</title>
+  <meta name="description" content="Starter page: design tokens, light and dark themes, and GSAP scroll motion that respects reduced motion.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="#" aria-label="Setpoint home">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 16 C6 16 7 6 12 6 S18 12 22 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        Setpoint
+      </a>
+      <nav aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#loops">Loops</a>
+        <a class="btn btn-small" href="#start">Request a demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="eyebrow reveal">PID loop health for plants and OEMs</p>
+        <h1 class="reveal">Find the loops that fight your operators.</h1>
+        <p class="lede reveal">Setpoint reads your historian, scores every control loop for oscillation, stiction and saturation, and tells you which ten to retune first.</p>
+        <div class="actions reveal">
+          <a class="btn" href="#start">Request a demo</a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+      </div>
+
+      <figure class="trend reveal" aria-labelledby="trend-cap">
+        <div class="trend-head">
+          <span class="mono">FIC-2041 · Reactor feed</span>
+          <span class="badge badge-warn"><span aria-hidden="true">▲</span> Oscillating</span>
+        </div>
+        <svg viewBox="0 0 400 180" role="img" aria-label="Process value oscillating around a setpoint of 50 percent, settling after retune">
+          <line class="grid" x1="0" y1="45" x2="400" y2="45"/>
+          <line class="grid" x1="0" y1="135" x2="400" y2="135"/>
+          <line class="sp" x1="0" y1="90" x2="400" y2="90"/>
+          <path class="pv" d="M0 90 C20 40 40 40 60 90 S100 140 120 90 S160 45 180 90 S220 130 240 90 S270 62 290 90 S320 108 340 90 S370 84 400 90"/>
+          <line class="marker" x1="240" y1="20" x2="240" y2="170"/>
+          <text class="mono label" x="246" y="30">retune</text>
+          <text class="mono label" x="396" y="78" text-anchor="end">SP 50%</text>
+        </svg>
+        <figcaption id="trend-cap" class="muted">Process value against setpoint, before and after a retune.</figcaption>
+      </figure>
+    </section>
+
+    <section class="stats wrap" aria-label="Results">
+      <div class="stat reveal"><span class="num" data-count="38">38</span><span class="unit">%</span><p>fewer operator interventions</p></div>
+      <div class="stat reveal"><span class="num" data-count="1200">1200</span><span class="unit">+</span><p>loops scored per site, every night</p></div>
+      <div class="stat reveal"><span class="num" data-count="0">0</span><span class="unit"> agents</span><p>to install on your control network</p></div>
+    </section>
+
+    <section id="how" class="how wrap">
+      <h2 class="reveal">How it works</h2>
+      <ol class="steps">
+        <li class="reveal"><span class="step-n mono">01</span><div><h3>Connect read-only</h3><p>Point Setpoint at your historian (OPC UA, PI, or CSV export). Nothing writes back to the DCS.</p></div></li>
+        <li class="reveal"><span class="step-n mono">02</span><div><h3>Score every loop</h3><p>Each loop gets a health score from variability, time in manual, valve travel and oscillation index.</p></div></li>
+        <li class="reveal"><span class="step-n mono">03</span><div><h3>Retune the worst first</h3><p>Ranked list with the likely cause and suggested Kp, Ti, Td, so your controls engineer starts with evidence.</p></div></li>
+      </ol>
+    </section>
+
+    <section id="loops" class="loops wrap">
+      <h2 class="reveal">Tonight's worst loops</h2>
+      <div class="table-wrap reveal">
+        <table>
+          <thead><tr><th scope="col">Tag</th><th scope="col">Service</th><th scope="col">Score</th><th scope="col">Likely cause</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">FIC-2041</td><td>Reactor feed</td><td><span class="badge badge-bad"><span aria-hidden="true">■</span> 31</span></td><td>Valve stiction</td></tr>
+            <tr><td class="mono">TIC-1107</td><td>Jacket temperature</td><td><span class="badge badge-warn"><span aria-hidden="true">▲</span> 54</span></td><td>Integral too aggressive</td></tr>
+            <tr><td class="mono">LIC-3302</td><td>Surge drum level</td><td><span class="badge badge-warn"><span aria-hidden="true">▲</span> 61</span></td><td>Output saturating</td></tr>
+            <tr><td class="mono">PIC-0815</td><td>Header pressure</td><td><span class="badge badge-ok"><span aria-hidden="true">●</span> 88</span></td><td>Healthy</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="start" class="cta wrap reveal">
+      <h2>Bring one historian export. Leave with a retune list.</h2>
+      <p class="muted">A 30-minute session on your own data. No install on the control network.</p>
+      <a class="btn" href="mailto:demo@example.com">Request a demo</a>
+    </section>
+  </main>
+
+  <footer class="wrap site-footer muted">
+    <p>Setpoint is a fictional product used to demo the web-design starter.</p>
+  </footer>
+
+  <script src="vendor/gsap.min.js" defer></script>
+  <script src="vendor/ScrollTrigger.min.js" defer></script>
+  <script src="motion.js" defer></script>
+</body>
+</html>
