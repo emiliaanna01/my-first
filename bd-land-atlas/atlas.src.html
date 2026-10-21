@@ -126,6 +126,10 @@ td .url { font-family: var(--f-mono); font-size: 12.5px; overflow-wrap: anywhere
 .progress { font-family: var(--f-mono); font-size: 13px; color: var(--muted) }
 .glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 8px 24px; font-size: 14.5px }
 .glossary div b { font-family: var(--f-display); font-stretch: 85% }
+.gzgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 16px }
+.gzrisk { border-left: 3px solid var(--stamp); padding-left: 12px; display: grid; gap: 4px }
+.gzrisk p { font-size: 15px }
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right }
 footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-width: 90ch }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important } }
 </style>
@@ -160,6 +164,33 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-widt
       <div class="scale" id="scale"></div>
     </div>
     <aside class="inspector" id="insp" aria-live="polite"></aside>
+  </div>
+</section>
+
+<section id="gazipur">
+  <div class="sec-head">
+    <span class="eyebrow">Focus area</span>
+    <h2>Gazipur district (গাজীপুর)</h2>
+    <p class="lede">Gazipur has five upazilas and about 725 mouzas, and much of it sits inside Gazipur City Corporation. Fast industrial growth, old Bhawal estate records and the forest land around it make Gazipur one of the riskiest districts in the country to buy land in. Click a row to show that upazila on the map.</p>
+  </div>
+  <div class="tablewrap"><table style="min-width:640px">
+    <thead><tr><th>Upazila</th><th class="num">Area km²</th><th class="num">Unions</th><th class="num">Mouzas</th><th class="num">Villages</th><th>Portal path</th></tr></thead>
+    <tbody id="gzrows"></tbody>
+    <tfoot><tr><td colspan="6" class="small">Counts from Banglapedia (2011 census). Wikipedia gives Sreepur 81 mouzas. Gazipur Sadar's unions are Baria, Basan, Gachha, Kashimpur, Kayaltia, Konabari, Mirzapur and Pubail. Tongi and Joydebpur are now city corporation wards inside Gazipur Sadar.</td></tr></tfoot>
+  </table></div>
+  <div class="gzgrid">
+    <div class="card gzrisk"><h3>Forest land recorded to the Forest Department</h3>
+      <p>Large parts of the old Bhawal (Vawal) Court of Wards Estate were declared forest by gazette notifications in 1934, 1955 and 1984. Many RS khatians now name the Forest Department even where the CS khatian names a private owner. A seller can show genuine old papers for land the government still claims, and the High Court has seen many such suits. The Forest Department has listed more than 1,000 acres it says were grabbed with fake papers.</p>
+      <p class="small">Check: compare the CS, SA and RS khatians for the dag. If any record names বন বিভাগ (Forest Department) or the dag is near sal forest, ask the Divisional Forest Office in Gazipur in writing before you pay. Sources: <a href="https://supremecourt.gov.bd/resources/documents/2460370_First_Appeal_No.488_of_2019.pdf" target="_blank" rel="noopener">First Appeal 488/2019</a>, <a href="https://supremecourt.gov.bd/resources/documents/1209146_Civil_Revision_No_2760_of_2017.pdf" target="_blank" rel="noopener">Civil Revision 2760/2017</a>, <a href="https://online-d11.thedailystar.net/news-detail-187114" target="_blank" rel="noopener">Daily Star</a>.</p></div>
+    <div class="card gzrisk"><h3>Land grabbing and false cases</h3>
+      <p>In August 2026, residents of Kaliganj protested that a politically connected group was taking land, demanding money and filing false cases. The same month a claimant in Outpara, inside the city corporation, alleged that false criminal cases were being used to take ancestral land. Both are allegations reported in the press. They show why a pending case search matters here.</p>
+      <p class="small">Check: civil and criminal cause lists for the seller's name; ask neighbours who is in physical possession. Sources: <a href="https://observerbd.com/news/590645" target="_blank" rel="noopener">Observer, 30 Aug 2026</a>, <a href="https://observerbd.com/news/586126" target="_blank" rel="noopener">Observer, 3 Aug 2026</a>.</p></div>
+    <div class="card gzrisk"><h3>City corporation costs and building rules</h3>
+      <p>Registration in Gazipur City Corporation falls in the highest cost tier, roughly 10–14% of deed value in total. Guides disagree on the exact gain tax rate (8% or Tk 80,000 per katha, against a reduced 6% or Tk 50,000), so get the figure from the sub-registry. Whether RAJUK's Detailed Area Plan covers Gazipur is unclear. One report says the revised plan excludes Gazipur, while an earlier proposal capped buildings there at six storeys.</p>
+      <p class="small">Check: the deed value and fees at the sub-registry; the land-use zone with RAJUK or Gazipur City Corporation before you buy to build. Sources: <a href="https://www.advmdshahalam.me/blog/land-registration-cost-fees-calculator-bangladesh-2026" target="_blank" rel="noopener">fee guide 2026</a>, <a href="https://unb.com.bd/category/Special/dap-amendment-nears-approval-amid-stakeholder-consensus-developers-pressure/165965" target="_blank" rel="noopener">UNB on DAP</a>.</p></div>
+    <div class="card gzrisk" style="border-left-color:var(--accent)"><h3>Offices to visit</h3>
+      <p>Each upazila has an AC Land office (mutation, khas and acquisition questions) and a sub-registry office (deed search). The DC office's L.A. branch holds acquisition cases, and the district record room issues certified khatians.</p>
+      <p class="small">District portal: <a class="url" href="https://www.gazipur.gov.bd/" target="_blank" rel="noopener">gazipur.gov.bd</a> · Sadar upazila: <a class="url" href="http://sadar.gazipur.gov.bd/" target="_blank" rel="noopener">sadar.gazipur.gov.bd</a> · Sreepur land office: <a class="url" href="http://acl.sreepur.gazipur.gov.bd/en/site/view/InfoOfficer?layer_id=6&amp;page=1" target="_blank" rel="noopener">acl.sreepur.gazipur.gov.bd</a> · Land hotline <span class="url">16122</span></p></div>
   </div>
 </section>
 
@@ -265,7 +296,7 @@ function resize() {
   const r = box.getBoundingClientRect();
   const first = !W; W = r.width; H = r.height;
   cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
-  if (first) fit(); else draw();
+  if (first) gzHome(); else draw();
 }
 function fitBounds(x0, y0, x1, y1, pad = 30) {
   s = Math.min((W - pad * 2) / (x1 - x0), (H - pad * 2) / (y1 - y0));
@@ -403,6 +434,20 @@ function select(f, zoom = true) {
 }
 renderInspector();
 
+/* ---------- Gazipur ---------- */
+const GZ = [['Gazipur Sadar', 457.67, 8, 181, 264], ['Kaliakair', 314.13, 9, 170, 272], ['Kaliganj', 214.63, 7, 134, 175], ['Kapasia', 356.98, 11, 165, 231], ['Sreepur', 462.94, 8, 75, 172]];
+const gzF = n => F.find(f => f.n === n && f.d === 'Gazipur');
+document.getElementById('gzrows').innerHTML = GZ.map(([n, a, u, m, v]) => { const f = gzF(n); return `<tr style="cursor:pointer" data-n="${esc(n)}" tabindex="0"><td><strong>${esc(n)}</strong> ${f && f.bn ? '· ' + esc(f.bn) : ''}</td><td class="num">${a.toFixed(2)}</td><td class="num">${u}</td><td class="num">${m}</td><td class="num">${v}</td><td>ঢাকা › গাজীপুর › ${esc(f && f.bn || n)}</td></tr>`; }).join('')
+  + `<tr><td><strong>District total</strong></td><td class="num">${GZ.reduce((s, r) => s + r[1], 0).toFixed(2)}</td><td class="num">${GZ.reduce((s, r) => s + r[2], 0)}</td><td class="num">${GZ.reduce((s, r) => s + r[3], 0)}</td><td class="num">${GZ.reduce((s, r) => s + r[4], 0)}</td><td></td></tr>`;
+function gzHome() {
+  const fs = F.filter(f => f.d === 'Gazipur'); if (!fs.length) return fit();
+  const bs = fs.map(bbox); sel = gzF('Gazipur Sadar') || null; renderInspector();
+  fitBounds(Math.min(...bs.map(b => b[0])), Math.min(...bs.map(b => b[1])), Math.max(...bs.map(b => b[2])), Math.max(...bs.map(b => b[3])), 40);
+}
+const gzGo = tr => { const f = tr && gzF(tr.dataset.n); if (f) { select(f); document.getElementById('atlas').scrollIntoView({ behavior: 'smooth' }); } };
+document.getElementById('gzrows').addEventListener('click', e => gzGo(e.target.closest('tr[data-n]')));
+document.getElementById('gzrows').addEventListener('keydown', e => { if (e.key === 'Enter') gzGo(e.target.closest('tr[data-n]')); });
+
 /* ---------- search ---------- */
 const q = document.getElementById('q'), sugg = document.getElementById('sugg');
 q.addEventListener('input', () => {
@@ -418,11 +463,11 @@ q.addEventListener('keydown', e => { if (e.key === 'Enter') { const b = sugg.que
 /* ---------- plot checker ---------- */
 const SQFT = { decimal: 435.6, katha: 720, bigha: 14400, acre: 43560, sqft: 1 };
 const M2_PER_SQFT = 0.09290304;
-const SAMPLE = `# Example plot near Rupganj, Narayanganj (made-up coordinates, not a real record)
-23.842076, 90.501198
-23.842189, 90.501431
-23.841994, 90.501532
-23.841881, 90.501299`;
+const SAMPLE = `# Example plot in Gazipur Sadar (made-up coordinates, not a real record)
+24.012076, 90.401198
+24.012189, 90.401431
+24.011994, 90.401532
+24.011881, 90.401299`;
 const ta = document.getElementById('coords'), out = document.getElementById('result');
 function parse(txt) {
   txt = txt.trim();

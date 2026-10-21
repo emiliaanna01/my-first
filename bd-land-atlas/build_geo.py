@@ -74,5 +74,8 @@ for f in feats:
         nd = byname.get(fix[k]) or byname.get(fix[k].replace('Jhalokati','Jhalakathi'))
         if not nd: print('missing', fix[k]); continue
         f['d'], f['dbn'] = nd['name'], nd['bn_name']; f['v'], f['vbn'] = divs[nd['division_id']]; fixed += 1
+bnfix = {('Gazipur Sadar','Gazipur'):'গাজীপুর সদর',('Kaliakair','Gazipur'):'কালিয়াকৈর'}
+for f in feats:
+    if not f['bn'] and (f['n'], f['d']) in bnfix: f['bn'] = bnfix[(f['n'], f['d'])]
 json.dump(feats, open(out, 'w'), ensure_ascii=False, separators=(',', ':'))
 print('fixed', fixed)
