@@ -36,7 +36,11 @@
       "args": [
         "-y",
         "@21st-dev/magic@latest"
-      ]
+      ],
+      "env": {
+        "NODE_USE_ENV_PROXY": "1",
+        "NODE_NO_WARNINGS": "1"
+      }
     }
   }
 }

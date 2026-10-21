@@ -49,7 +49,7 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "industrial monitoring da
 
 | Server | What it gives Claude | Status in Claude cloud sessions |
 |---|---|---|
-| `context7` | Current, version-specific docs (Next.js, Tailwind, GSAP...) | `context7.com` is blocked by this environment's network policy; works locally or once the host is allowed |
+| `context7` | Current, version-specific docs (Next.js, Tailwind, GSAP...) | Reachable once `context7.com` is allowed, but the shared anonymous quota runs out fast: set `CONTEXT7_API_KEY` (free key from context7.com/dashboard) |
 | `playwright` | Real browser: click, type, screenshot, console, network | Chromium refuses to start as root without `--no-sandbox`; works locally. In the cloud, use `webapp-testing` or `bin/shoot.cjs` |
 | `chrome-devtools` | Lighthouse, performance traces, console, network (usage stats off) | Same root/sandbox limit as Playwright; works locally |
 | `shadcn` | Search and install shadcn components from registries | Works |
@@ -65,7 +65,8 @@ it applies from the next new session:
 - **Network access → Allowed domains:** add `context7.com`, `mcp.context7.com`, `search.parallel.ai`,
   `21st.dev` (keep *Allow package managers* ticked). Steps: https://code.claude.com/docs/en/cloud-environments#network-access
 - **Environment variables:** `TWENTY_FIRST_API_KEY=<your 21st.dev key>` (and optionally
-  `CONTEXT7_API_KEY=<key from context7.com>` for higher limits). Never paste keys into the chat.
+  `CONTEXT7_API_KEY=<free key from context7.com/dashboard>`, which Context7 needs in practice). Never paste keys into the chat.
+  (`magic-21st` runs with `NODE_USE_ENV_PROXY=1` so Node's fetch goes through the cloud proxy.)
 - **Vercel** needs a login, so connect it at https://claude.ai/customize/connectors instead of here.
 
 On your own PC, the terminal equivalents are `claude mcp add ...` / `npx @21st-dev/cli@latest init --client claude`.
