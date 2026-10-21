@@ -1,0 +1,4 @@
+# keys and the remembered session stay on this PC
+.env
+.state.json
+__pycache__/
