@@ -37,6 +37,7 @@
   color-scheme: dark }
 
 * { box-sizing: border-box }
+[hidden] { display: none !important }
 body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px }
 .wrap { max-width: 1200px; margin: 0 auto; display: grid; gap: 40px }
@@ -130,6 +131,11 @@ td .url { font-family: var(--f-mono); font-size: 12.5px; overflow-wrap: anywhere
 .gzrisk { border-left: 3px solid var(--stamp); padding-left: 12px; display: grid; gap: 4px }
 .gzrisk p { font-size: 15px }
 .num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right }
+.mapctl button.wide { width: auto; padding: 0 10px; font-size: 13px; font-family: var(--f-body); font-weight: 500 }
+.chips { display: flex; flex-wrap: wrap; gap: 6px }
+.chips .chip { font-size: 13px; padding: 4px 10px }
+#gzrows tr[aria-current="true"] td { background: var(--accent-soft) }
+.locgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px }
 footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-width: 90ch }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important } }
 </style>
@@ -159,6 +165,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-widt
         <button id="zin" aria-label="Zoom in">+</button>
         <button id="zout" aria-label="Zoom out">−</button>
         <button id="zfit" aria-label="Show whole country" title="Whole country">⤢</button>
+        <button id="zreset" class="wide" aria-label="Reset map, selection and plot" title="Clear selection, plot and search">Reset</button>
       </div>
       <div class="legend" id="legend"></div>
       <div class="scale" id="scale"></div>
@@ -167,10 +174,14 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-widt
   </div>
 </section>
 
-<section id="gazipur">
+<section id="local">
   <div class="sec-head">
-    <span class="eyebrow">Focus area</span>
-    <h2>Gazipur district (গাজীপুর)</h2>
+    <span class="eyebrow">Local details</span>
+    <h2 id="loctitle">Pick a location</h2>
+  </div>
+  <div id="localsum"></div>
+  <div id="gzbox" style="display:grid;gap:16px" hidden>
+  <div class="sec-head"><h3>Gazipur district (গাজীপুর), checked on the portals</h3>
     <p class="lede">Gazipur has five upazilas and about 800 mouzas on the land record system, and much of it sits inside Gazipur City Corporation. Fast industrial growth, old Bhawal estate records and the forest land around it make Gazipur one of the riskiest districts in the country to buy land in. Click a row to show that upazila on the map.</p>
   </div>
   <div class="tablewrap"><table style="min-width:640px">
@@ -229,6 +240,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-widt
   <div class="sec-head" style="margin-top:8px"><h3>Gazipur land and registry offices</h3>
     <p class="small">Office contacts as listed on the government portals on 22 Oct 2026. The portals give no street addresses. Officers transfer often (Kapasia's AC Land had a release order on 15 Oct 2026), so call the office number rather than a named officer.</p></div>
   <div class="tablewrap"><table style="min-width:640px"><thead><tr><th>Office</th><th>Upazila</th><th>Phone</th><th>Email / site</th></tr></thead><tbody id="offrows"></tbody></table></div>
+  </div>
 </section>
 
 <section id="checker">
@@ -334,7 +346,7 @@ function resize() {
   const r = box.getBoundingClientRect();
   const first = !W; W = r.width; H = r.height;
   cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
-  if (first) gzHome(); else draw();
+  if (first) fit(); else draw();
 }
 function fitBounds(x0, y0, x1, y1, pad = 30) {
   s = Math.min((W - pad * 2) / (x1 - x0), (H - pad * 2) / (y1 - y0));
@@ -464,10 +476,11 @@ function renderInspector() {
       <a class="btn" href="https://dlrms.land.gov.bd/" target="_blank" rel="noopener">Khatian (DLRMS)</a>
       <a class="btn" href="https://map.land.gov.bd/" target="_blank" rel="noopener">Plot map</a>
       <a class="btn" href="https://map.settlement.gov.bd/" target="_blank" rel="noopener">Buy mouza map</a>
-    </div>`;
+    </div>
+    <a href="#local" class="small">Local details for ${esc(f.d)} below</a>`;
 }
 function select(f, zoom = true) {
-  sel = f; renderInspector();
+  sel = f; renderInspector(); renderLocal();
   if (zoom && f) { const [a, b, c, d] = bbox(f); fitBounds(a, b, c, d, 60); } else draw();
 }
 renderInspector();
@@ -498,7 +511,7 @@ function mfind() {
     : '<tr><td colspan="5" class="small">No mouza matches. Try part of the name, a different spelling (e.g. ী/ি, ড়/র), or the JL number.</td></tr>';
 }
 mq.addEventListener('input', mfind); ma.addEventListener('change', mfind);
-mq.value = 'জয়দেবপুর'; mfind();
+mfind();
 
 /* offices */
 const OFF = [
@@ -517,11 +530,6 @@ const OFF = [
   ['Sub-registry office, Sreepur', 'Sreepur', '০১৭১৬৩৫৯১২০', 'sreepursro@gmail.com', 'https://sr.sreepur.gazipur.gov.bd/pages/officers'],
   ['Land hotline (Smart Bhumi Sheba)', 'All', '১৬১২২', 'land.gov.bd', 'https://land.gov.bd/']];
 document.getElementById('offrows').innerHTML = OFF.map(([o, u, ph, em, src]) => `<tr><td><a href="${esc(src)}" target="_blank" rel="noopener">${esc(o)}</a></td><td>${esc(u)}</td><td><span class="url">${esc(ph.replace(/[০-৯]/g, d => '০১২৩৪৫৬৭৮৯'.indexOf(d)))}</span></td><td><span class="url">${esc(em)}</span></td></tr>`).join('');
-function gzHome() {
-  const fs = F.filter(f => f.d === 'Gazipur'); if (!fs.length) return fit();
-  const bs = fs.map(bbox); sel = gzF('Gazipur Sadar') || null; renderInspector();
-  fitBounds(Math.min(...bs.map(b => b[0])), Math.min(...bs.map(b => b[1])), Math.max(...bs.map(b => b[2])), Math.max(...bs.map(b => b[3])), 40);
-}
 const gzGo = tr => { const f = tr && gzF(tr.dataset.n); if (f) { select(f); document.getElementById('atlas').scrollIntoView({ behavior: 'smooth' }); } };
 document.getElementById('gzrows').addEventListener('click', e => gzGo(e.target.closest('tr[data-n]')));
 document.getElementById('gzrows').addEventListener('keydown', e => { if (e.key === 'Enter') gzGo(e.target.closest('tr[data-n]')); });
@@ -595,7 +603,7 @@ function measure() {
     ${up ? '<button class="btn" id="showup">Show on map</button>' : ''}</div>
     <p class="small">Next, compare this outline with the dag on the official mouza map. A plot that crosses two dags, or whose shape differs from the map, needs a survey before you sign.</p>`;
   const b = document.getElementById('showup');
-  if (b) b.onclick = () => { sel = up; renderInspector(); const xs = p.map(q => px(q[1])), ys = p.map(q => py(q[0])); const pad = 0.004; fitBounds(Math.min(...xs) - pad, Math.min(...ys) - pad, Math.max(...xs) + pad, Math.max(...ys) + pad, 40); document.getElementById('atlas').scrollIntoView({ behavior: 'smooth' }); };
+  if (b) b.onclick = () => { sel = up; renderInspector(); renderLocal(); const xs = p.map(q => px(q[1])), ys = p.map(q => py(q[0])); const pad = 0.004; fitBounds(Math.min(...xs) - pad, Math.min(...ys) - pad, Math.max(...xs) + pad, Math.max(...ys) + pad, 40); document.getElementById('atlas').scrollIntoView({ behavior: 'smooth' }); };
   draw();
 }
 function inPoly(x, y, r) {
@@ -701,5 +709,60 @@ const G = [['Mouza (মৌজা)', 'The smallest survey unit, usually one villa
   ['Khas (খাস)', 'Government-owned land. It cannot be bought from a private seller.'],
   ['Tallashi (তল্লাশি)', 'A search of the sub-registry volumes for earlier deeds on the same dag. This is how you find a double sale.']];
 document.getElementById('gloss').innerHTML = G.map(([a, b]) => `<div><b>${esc(a)}</b><br>${esc(b)}</div>`).join('');
+/* ---------- local details follow the selected location ---------- */
+function renderLocal() {
+  const loc = document.getElementById('localsum'), gzbox = document.getElementById('gzbox'), lt = document.getElementById('loctitle');
+  const f = sel;
+  document.querySelectorAll('#gzrows tr[data-n]').forEach(tr => tr.removeAttribute('aria-current'));
+  if (!f) {
+    lt.textContent = 'Pick a location';
+    loc.innerHTML = `<div class="card"><p>Click an upazila on the map or search for one. This section then shows the details for that place: the upazilas around it, the portal path and, where it has been checked, mouza lists, fees, offices and local risks.</p>
+      <p class="small">So far only Gazipur has been checked on the official portals (22 Oct 2026).</p>
+      <div class="btnrow"><button class="btn" data-go="Gazipur Sadar">Show Gazipur Sadar</button></div></div>`;
+    gzbox.hidden = true; return;
+  }
+  const isGz = f.d === 'Gazipur';
+  const sibs = F.filter(x => x.d === f.d).sort((a, b) => a.n.localeCompare(b.n));
+  const path = `${esc(DIVBN[f.v] || f.vbn || f.v)} › ${esc(f.dbn || f.d)} › ${esc(f.bn || f.n)}`;
+  lt.textContent = `${f.n}, ${f.d}`;
+  loc.innerHTML = `<div class="locgrid">
+    <div class="card"><span class="eyebrow">${esc(f.v)} division · ${esc(f.d)} district · ${sibs.length} units on this map</span>
+      <div class="path">${path} › <em>your mouza</em></div>
+      <div class="chips" role="group" aria-label="Upazilas in ${esc(f.d)}">${sibs.map(x => `<button class="chip" data-i="${F.indexOf(x)}" aria-pressed="${x === f}">${esc(x.n)}</button>`).join('')}</div>
+      ${f.inf ? '<p class="small">The district for this unit was inferred from the map. Confirm it in the portal list.</p>' : ''}</div>
+    ${isGz ? `<div class="card"><span class="eyebrow">Checked on the portals · 22 Oct 2026</span>
+      <p>Gazipur's mouza list, khatian steps, fees, offices and local risks are below. The mouza finder is set to ${esc(f.n)}.</p>
+      <p class="small">On DLRMS, Tongi properties sit under টংঙ্গি রাজস্ব সার্কেল, not গাজীপুর সদর.</p></div>`
+    : `<div class="card"><span class="eyebrow">Not yet checked on the portals</span>
+      <p>Mouza lists, office contacts and local risks have only been collected for Gazipur. For ${esc(f.n)}, follow these steps on the official sites:</p>
+      <ol class="steps"><li>On <a class="url" href="https://dlrms.land.gov.bd/" target="_blank" rel="noopener">dlrms.land.gov.bd</a>, সার্ভে খতিয়ান tab, choose ${path}, then the survey and the mouza.</li>
+        <li>Buy the mouza map sheet on <a class="url" href="https://map.settlement.gov.bd/" target="_blank" rel="noopener">map.settlement.gov.bd</a>. Districts created after 1984 may be listed under their old parent district.</li>
+        <li>Try <a class="url" href="https://map.land.gov.bd/" target="_blank" rel="noopener">map.land.gov.bd</a> for plot outlines; it covers only some districts so far.</li></ol>
+      <dl class="kv"><dt>Certified khatian</dt><dd>Tk 120</dd><dt>Mouza map sheet</dt><dd>Tk 590 + delivery</dd><dt>e-Mutation</dt><dd>Tk 1,170</dd></dl>
+      <p class="small">These fees are national. To add ${esc(f.d)} to this page, run the Claude in Chrome brief again with ${esc(f.d)} in place of Gazipur.</p></div>`}
+  </div>`;
+  gzbox.hidden = !isGz;
+  if (isGz) {
+    const gi = GZ.findIndex(r => r[0] === f.n);
+    document.querySelectorAll(`#gzrows tr[data-n="${f.n.replace(/"/g, '')}"]`).forEach((tr, i) => { if (i === 0) tr.setAttribute('aria-current', 'true'); });
+    if (gi >= 0) { ma.value = String(gi); mfind(); }
+  }
+}
+document.getElementById('localsum').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.i) select(F[+b.dataset.i]);
+  else if (b.dataset.go) { const f = F.find(x => x.n === b.dataset.go && x.d === 'Gazipur'); if (f) select(f); }
+});
+
+function resetAll() {
+  sel = null; hover = null; plot = null;
+  q.value = ''; sugg.hidden = true;
+  ta.value = '';
+  out.innerHTML = '<span class="eyebrow">No plot measured</span><p class="small">Paste the corner points and press Measure plot, or load the example plot.</p>';
+  mq.value = ''; ma.value = '-1'; mfind();
+  renderInspector(); renderLocal(); fit();
+}
+document.getElementById('zreset').onclick = resetAll;
+renderLocal();
 })();
 </script>
