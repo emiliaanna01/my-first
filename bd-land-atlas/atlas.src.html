@@ -1,0 +1,579 @@
+<title>Bangladesh Land Check Atlas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Hind+Siliguri:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a survey-office ledger. Map + inspector on top, plot checker, then the source register and the buyer's checklist. */
+:root {
+  --bg: #f4f6f1;
+  --panel: #ffffff;
+  --ink: #1b241f;
+  --muted: #5d6a62;
+  --line: #d6ddd5;
+  --accent: #0e6b58;
+  --accent-soft: #e0efe9;
+  --stamp: #b2402c;
+  --warn-bg: #fbf1dc;
+  --warn-ink: #7a5310;
+  --ok: #2c7a3f;
+  --land: #e9eee5;
+  --water: #dfe9ee;
+  --d1: #6f9b74; --d2: #c49a52; --d3: #7f8fc0; --d4: #b8746a; --d5: #5f9fa6; --d6: #a383b0; --d7: #8fa65a; --d8: #c47f9b;
+  --f-display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111613; --panel: #18201c; --ink: #e4ebe5; --muted: #9aa89f; --line: #2c3731;
+  --accent: #4fc0a2; --accent-soft: #1b3129; --stamp: #e47d66; --warn-bg: #2f2614; --warn-ink: #e9c178; --ok: #6fc184;
+  --land: #1d2621; --water: #142026;
+  --d1: #5f8a64; --d2: #a8844a; --d3: #6a79a8; --d4: #9c6158; --d5: #4f8a90; --d6: #8a6d96; --d7: #77904a; --d8: #a86983;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111613; --panel: #18201c; --ink: #e4ebe5; --muted: #9aa89f; --line: #2c3731;
+  --accent: #4fc0a2; --accent-soft: #1b3129; --stamp: #e47d66; --warn-bg: #2f2614; --warn-ink: #e9c178; --ok: #6fc184;
+  --land: #1d2621; --water: #142026;
+  --d1: #5f8a64; --d2: #a8844a; --d3: #6a79a8; --d4: #9c6158; --d5: #4f8a90; --d6: #8a6d96; --d7: #77904a; --d8: #a86983;
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 64px }
+.wrap { max-width: 1200px; margin: 0 auto; display: grid; gap: 40px }
+h1, h2, h3 { font-family: var(--f-display); font-stretch: 85%; text-wrap: balance; margin: 0; line-height: 1.15 }
+h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -0.01em }
+h2 { font-size: 26px; font-weight: 700 }
+h3 { font-size: 18px; font-weight: 700 }
+p { margin: 0 }
+a { color: var(--accent); text-underline-offset: 2px }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+.lede { max-width: 68ch; color: var(--muted); font-size: 17px }
+header { display: grid; gap: 12px }
+.stamp { display: inline-block; border: 2px solid var(--stamp); color: var(--stamp); font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; transform: rotate(-1.5deg); width: max-content }
+.note { background: var(--warn-bg); color: var(--warn-ink); border-radius: 6px; padding: 12px 14px; font-size: 15px; max-width: 80ch }
+.note strong { color: inherit }
+section { display: grid; gap: 16px; min-width: 0 }
+.sec-head { display: grid; gap: 6px }
+
+/* map */
+.mapgrid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start }
+@media (max-width: 860px) { .mapgrid { grid-template-columns: minmax(0, 1fr) } }
+.mapbox { position: relative; background: var(--water); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; height: min(72vh, 640px); min-height: 380px; touch-action: none }
+canvas#map { width: 100%; height: 100%; display: block; cursor: grab }
+canvas#map.drag { cursor: grabbing }
+.mapctl { position: absolute; top: 10px; right: 10px; display: grid; gap: 6px }
+.mapctl button { width: 36px; height: 36px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); font-size: 18px; cursor: pointer; font-family: var(--f-mono) }
+.mapsearch { position: absolute; top: 10px; left: 10px; right: 60px; max-width: 340px }
+.mapsearch input { width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: inherit; font-size: 15px }
+.sugg { margin-top: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; max-height: 240px; overflow: auto }
+.sugg button { display: block; width: 100%; text-align: left; padding: 7px 10px; border: 0; background: none; color: var(--ink); font: inherit; font-size: 14px; cursor: pointer }
+.sugg button:hover, .sugg button:focus { background: var(--accent-soft) }
+.legend { position: absolute; left: 10px; bottom: 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; max-width: calc(100% - 20px) }
+.legend span { display: inline-flex; align-items: center; gap: 5px }
+.legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block }
+.scale { position: absolute; right: 10px; bottom: 10px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px }
+
+.inspector { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 12px; min-width: 0 }
+.inspector .bn { font-size: 20px; font-weight: 600 }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 14px }
+.kv dt { color: var(--muted) } .kv dd { margin: 0; font-family: var(--f-mono); font-size: 13px; overflow-wrap: anywhere }
+.path { font-family: var(--f-body); background: var(--accent-soft); border-radius: 6px; padding: 8px 10px; font-size: 15px }
+.btnrow { display: flex; flex-wrap: wrap; gap: 8px }
+.btn { display: inline-block; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--accent); color: var(--accent); background: transparent; text-decoration: none; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit }
+.btn.solid { background: var(--accent); color: var(--panel) }
+.small { font-size: 13px; color: var(--muted) }
+ol.steps { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px }
+
+/* plot checker */
+.checker { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px }
+@media (max-width: 760px) { .checker { grid-template-columns: minmax(0, 1fr) } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 10px; min-width: 0; align-content: start }
+textarea { width: 100%; min-height: 170px; font-family: var(--f-mono); font-size: 13px; padding: 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); resize: vertical }
+label { font-size: 14px; font-weight: 500 }
+.units { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px }
+.unit { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px }
+.unit b { display: block; font-family: var(--f-mono); font-size: 18px; font-variant-numeric: tabular-nums }
+.unit span { font-size: 12px; color: var(--muted) }
+.err { color: var(--stamp); font-size: 14px }
+.cmp { font-size: 15px; padding: 8px 10px; border-radius: 6px }
+.cmp.good { background: var(--accent-soft) } .cmp.bad { background: var(--warn-bg); color: var(--warn-ink) }
+input[type=number], select { padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 14px }
+
+/* sources */
+.filters { display: flex; flex-wrap: wrap; gap: 8px }
+.chip { padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; font-size: 14px; font-family: inherit }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel) }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top }
+th { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--bg) }
+tr:last-child td { border-bottom: 0 }
+td .url { font-family: var(--f-mono); font-size: 12.5px; overflow-wrap: anywhere }
+.tag { display: inline-block; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; padding: 2px 6px; border-radius: 3px; white-space: nowrap }
+.tag.gov { background: var(--accent-soft); color: var(--accent) }
+.tag.third { background: var(--warn-bg); color: var(--warn-ink) }
+.tag.avoid { border: 1px solid var(--stamp); color: var(--stamp) }
+.tag.law { background: var(--line); color: var(--ink) }
+
+/* checklist */
+.risks { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px }
+.risk h3 { display: flex; gap: 8px; align-items: baseline }
+.risk ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px }
+.risk li { display: grid; grid-template-columns: 22px 1fr; gap: 6px; font-size: 15px }
+.risk input { margin-top: 5px; accent-color: var(--accent) }
+.where { font-size: 12.5px; color: var(--muted); display: block }
+.progress { font-family: var(--f-mono); font-size: 13px; color: var(--muted) }
+.glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 8px 24px; font-size: 14.5px }
+.glossary div b { font-family: var(--f-display); font-stretch: 85% }
+footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; max-width: 90ch }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important } }
+</style>
+
+<div class="wrap">
+<header>
+  <span class="stamp">Research file · Oct 2026</span>
+  <h1>Bangladesh Land Check Atlas</h1>
+  <p class="lede">Before you buy land, check four things yourself: who the record says owns it, where its boundaries are, whether a case or claim is pending on it, and whether it has already been sold. This page lists the official portals and other sources for each check. It also has a map of all 544 upazilas and a tool that measures a surveyed plot so you can compare it with the deed.</p>
+  <div class="note"><strong>About plot-level owner maps.</strong> No public, downloadable dataset shows every plot (dag) in Bangladesh with its owner. Owner names are in khatians that you look up one mouza at a time. Plot outlines are on scanned mouza maps (CS/SA/RS/BS) or the new digital BDS survey. The official ways to see a single plot are the <em>Smart Bhumi Naksha</em> app, <span class="url">map.land.gov.bd</span>, DLRMS and the DLRS map store, all listed below. This atlas takes you to the right upazila and shows the exact menu path to enter there.</div>
+</header>
+
+<section id="atlas">
+  <div class="sec-head">
+    <span class="eyebrow">1 · Locate</span>
+    <h2>Upazila map</h2>
+    <p class="small">Drag to pan and scroll or use +/− to zoom. Click an upazila to see the selection path for the land portals and a link to satellite imagery of that spot.</p>
+  </div>
+  <div class="mapgrid">
+    <div class="mapbox" id="mapbox">
+      <canvas id="map" aria-label="Map of Bangladesh upazilas"></canvas>
+      <div class="mapsearch">
+        <input id="q" type="search" placeholder="Find upazila or district (e.g. Rupganj, সাভার)" autocomplete="off" aria-label="Find upazila or district">
+        <div class="sugg" id="sugg" hidden></div>
+      </div>
+      <div class="mapctl">
+        <button id="zin" aria-label="Zoom in">+</button>
+        <button id="zout" aria-label="Zoom out">−</button>
+        <button id="zfit" aria-label="Show whole country" title="Whole country">⤢</button>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="scale" id="scale"></div>
+    </div>
+    <aside class="inspector" id="insp" aria-live="polite"></aside>
+  </div>
+</section>
+
+<section id="checker">
+  <div class="sec-head">
+    <span class="eyebrow">2 · Measure</span>
+    <h2>Plot area checker</h2>
+    <p class="lede">Ask your surveyor (amin) for the GPS corners of the plot, or walk the boundary with a phone GPS app and export it. Paste the corners here. The tool measures the area in local units, compares it with the deed, finds the upazila and draws the plot on the map.</p>
+  </div>
+  <div class="checker">
+    <div class="card">
+      <label for="coords">Corner points, one per line as <code>latitude, longitude</code>. KML <code>&lt;coordinates&gt;</code> or a GeoJSON polygon also work.</label>
+      <textarea id="coords" spellcheck="false"></textarea>
+      <div class="btnrow">
+        <button class="btn solid" id="measure">Measure plot</button>
+        <button class="btn" id="sample">Load example plot</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <label for="deed">Area in deed</label>
+        <input id="deed" type="number" min="0" step="any" style="width:110px" value="10">
+        <select id="deedu" aria-label="Deed unit">
+          <option value="decimal">decimal (শতাংশ)</option>
+          <option value="katha" selected>katha (কাঠা)</option>
+          <option value="bigha">bigha (বিঘা)</option>
+          <option value="acre">acre</option>
+          <option value="sqft">sq ft</option>
+        </select>
+      </div>
+      <p class="small">Unit sizes used: 1 decimal = 435.6 sq ft; 1 katha = 720 sq ft (the standard used in Dhaka and most registries); 1 bigha = 20 katha = 33 decimal; 1 acre = 100 decimal. Some districts use a different local katha or bigha, so confirm with the sub-registry.</p>
+    </div>
+    <div class="card" id="result"></div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="sec-head">
+    <span class="eyebrow">3 · Verify</span>
+    <h2>Where to check, and who runs it</h2>
+    <p class="lede">Government portals first. Anything marked third-party or avoid has not been confirmed by the government. Do not pay fees or enter your NID on those sites.</p>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th style="width:24%">Service</th><th style="width:12%">Operator</th><th>What you can check</th><th style="width:22%">Address</th></tr></thead>
+    <tbody id="srcrows"></tbody>
+  </table></div>
+</section>
+
+<section id="checklist">
+  <div class="sec-head">
+    <span class="eyebrow">4 · Decide</span>
+    <h2>Buyer's checklist by risk</h2>
+    <p class="lede">Each risk you described, with the record that exposes it and where to get that record. Ticks are saved only in this browser.</p>
+    <span class="progress" id="prog"></span>
+  </div>
+  <div class="risks" id="risks"></div>
+</section>
+
+<section id="terms">
+  <div class="sec-head"><span class="eyebrow">Reference</span><h2>Terms on the documents</h2></div>
+  <div class="glossary" id="gloss"></div>
+</section>
+
+<footer>
+  <p><strong>Method and limits.</strong> Sources were gathered by web search in October 2026. The government sites could not be opened directly from the research environment, so URLs and steps come from official listings, news reports and law-firm guides. Fees and menu labels change; confirm them on the portal or by calling 16122. eporcha.gov.bd is reported to redirect to dlrms.land.gov.bd. This page is not legal advice. Have a lawyer read the title chain before you pay an advance (bayna).</p>
+  <p><strong>Map data.</strong> Upazila and thana boundaries © geoBoundaries (gbOpen, BGD ADM3, 2020), CC BY 4.0, from Bangladesh Bureau of Statistics / OCHA ROAP, via the open <span class="url">bangladesh-geojson</span> package. Coordinates are rounded to about 100 m. Where the source lacked a district name, the district was inferred from neighbouring units and checked by hand; these are marked "inferred". Upazila boundaries change; the portal's own list is authoritative.</p>
+</footer>
+</div>
+
+<script id="geo" type="application/json">__GEO__</script>
+<script>
+(() => {
+'use strict';
+const F = JSON.parse(document.getElementById('geo').textContent);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const DIVS = ['Dhaka','Chattogram','Rajshahi','Khulna','Barishal','Sylhet','Rangpur','Mymensingh'];
+const DIVBN = {Dhaka:'ঢাকা',Chattogram:'চট্টগ্রাম',Rajshahi:'রাজশাহী',Khulna:'খুলনা',Barishal:'বরিশাল',Sylhet:'সিলেট',Rangpur:'রংপুর',Mymensingh:'ময়মনসিংহ'};
+const divVar = v => '--d' + (DIVS.indexOf(v) + 1 || 1);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- projection: local equirectangular around Bangladesh ---------- */
+const LAT0 = 23.7, K = Math.cos(LAT0 * Math.PI / 180);
+const px = lon => (lon - 90.35) * K, py = lat => -(lat - LAT0);
+const unpx = x => x / K + 90.35, unpy = y => LAT0 - y;
+let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+for (const f of F) {
+  const p = new Path2D();
+  for (const poly of f.g) for (const ring of poly) {
+    ring.forEach(([lon, lat], i) => {
+      const x = px(lon), y = py(lat);
+      if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y;
+      i ? p.lineTo(x, y) : p.moveTo(x, y);
+    });
+    p.closePath();
+  }
+  f.path = p;
+}
+
+const box = document.getElementById('mapbox'), cv = document.getElementById('map'), ctx = cv.getContext('2d');
+let W = 0, H = 0, DPR = 1, s = 1, tx = 0, ty = 0, sel = null, hover = null, plot = null;
+
+function resize() {
+  DPR = window.devicePixelRatio || 1;
+  const r = box.getBoundingClientRect();
+  const first = !W; W = r.width; H = r.height;
+  cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+  if (first) fit(); else draw();
+}
+function fitBounds(x0, y0, x1, y1, pad = 30) {
+  s = Math.min((W - pad * 2) / (x1 - x0), (H - pad * 2) / (y1 - y0));
+  tx = (W - (x1 - x0) * s) / 2 - x0 * s; ty = (H - (y1 - y0) * s) / 2 - y0 * s;
+  draw();
+}
+function fit() { fitBounds(minX, minY, maxX, maxY); }
+function bbox(f) {
+  let a = 1e9, b = 1e9, c = -1e9, d = -1e9;
+  for (const poly of f.g) for (const [lon, lat] of poly[0]) { const x = px(lon), y = py(lat); a = Math.min(a, x); c = Math.max(c, x); b = Math.min(b, y); d = Math.max(d, y); }
+  return [a, b, c, d];
+}
+
+function draw() {
+  const C = { line: css('--line'), ink: css('--ink'), accent: css('--accent'), stamp: css('--stamp'), bg: css('--panel'), muted: css('--muted') };
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  ctx.setTransform(s * DPR, 0, 0, s * DPR, tx * DPR, ty * DPR);
+  const lw = 1 / s;
+  for (const f of F) {
+    ctx.fillStyle = css(divVar(f.v));
+    ctx.globalAlpha = f === sel ? 1 : (sel && f.d === sel.d ? .85 : .55);
+    ctx.fill(f.path);
+  }
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = C.bg; ctx.lineWidth = lw * .8;
+  for (const f of F) ctx.stroke(f.path);
+  if (hover && hover !== sel) { ctx.strokeStyle = C.ink; ctx.lineWidth = lw * 1.5; ctx.stroke(hover.path); }
+  if (sel) { ctx.strokeStyle = C.ink; ctx.lineWidth = lw * 2.5; ctx.stroke(sel.path); }
+  if (plot) {
+    ctx.beginPath();
+    plot.pts.forEach(([la, lo], i) => i ? ctx.lineTo(px(lo), py(la)) : ctx.moveTo(px(lo), py(la)));
+    ctx.closePath();
+    ctx.fillStyle = C.stamp; ctx.globalAlpha = .35; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.strokeStyle = C.stamp; ctx.lineWidth = lw * 2; ctx.stroke();
+    const [cy, cx] = plot.c;
+    ctx.beginPath(); ctx.arc(px(cx), py(cy), 6 / s, 0, Math.PI * 2); ctx.fillStyle = C.stamp; ctx.fill();
+  }
+  // labels
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  if (s > 260) {
+    ctx.font = '500 11px "Hind Siliguri", system-ui, sans-serif';
+    for (const f of F) {
+      const x = px(f.c[0]) * s + tx, y = py(f.c[1]) * s + ty;
+      if (x < -50 || x > W + 50 || y < -20 || y > H + 20) continue;
+      ctx.lineWidth = 3; ctx.strokeStyle = C.bg; ctx.strokeText(f.n, x, y);
+      ctx.fillStyle = C.ink; ctx.fillText(f.n, x, y);
+    }
+  }
+  // scale bar
+  const kmPerUnit = 111.32, pxPerKm = s / kmPerUnit;
+  const nice = [1, 2, 5, 10, 20, 50, 100, 200].find(k => k * pxPerKm > 60) || 200;
+  document.getElementById('scale').textContent = `${nice} km ≈ ${Math.round(nice * pxPerKm)} px`;
+}
+
+function hit(cx, cy) {
+  ctx.setTransform(s * DPR, 0, 0, s * DPR, tx * DPR, ty * DPR);
+  for (const f of F) if (ctx.isPointInPath(f.path, cx * DPR, cy * DPR)) return f;
+  return null;
+}
+
+/* ---------- interaction ---------- */
+let drag = null, moved = false;
+const pts = new Map();
+cv.addEventListener('pointerdown', e => {
+  cv.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.offsetX, e.offsetY]);
+  drag = { x: e.offsetX, y: e.offsetY, tx, ty, s, d: pts.size === 2 ? dist() : 0 }; moved = false; cv.classList.add('drag');
+});
+function dist() { const [a, b] = [...pts.values()]; return Math.hypot(a[0] - b[0], a[1] - b[1]); }
+cv.addEventListener('pointermove', e => {
+  if (!drag) { const h = hit(e.offsetX, e.offsetY); if (h !== hover) { hover = h; draw(); } return; }
+  pts.set(e.pointerId, [e.offsetX, e.offsetY]);
+  if (pts.size === 2 && drag.d) {
+    const [a, b] = [...pts.values()]; const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+    zoomAt(mx, my, drag.s * dist() / drag.d / s); moved = true; return;
+  }
+  const dx = e.offsetX - drag.x, dy = e.offsetY - drag.y;
+  if (Math.abs(dx) + Math.abs(dy) > 3) moved = true;
+  tx = drag.tx + dx; ty = drag.ty + dy; draw();
+});
+const end = e => {
+  pts.delete(e.pointerId); cv.classList.remove('drag');
+  if (drag && !moved && e.type === 'pointerup') { const h = hit(e.offsetX, e.offsetY); if (h) select(h, false); }
+  if (pts.size === 0) drag = null; else { const [p] = [...pts.values()]; drag = { x: p[0], y: p[1], tx, ty, s, d: 0 }; }
+};
+cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+cv.addEventListener('pointerleave', () => { if (hover) { hover = null; draw(); } });
+function zoomAt(x, y, k) {
+  const ns = Math.max(80, Math.min(40000, s * k)); k = ns / s;
+  tx = x - (x - tx) * k; ty = y - (y - ty) * k; s = ns; draw();
+}
+cv.addEventListener('wheel', e => { e.preventDefault(); zoomAt(e.offsetX, e.offsetY, Math.exp(-e.deltaY * 0.0015)); }, { passive: false });
+document.getElementById('zin').onclick = () => zoomAt(W / 2, H / 2, 1.6);
+document.getElementById('zout').onclick = () => zoomAt(W / 2, H / 2, 1 / 1.6);
+document.getElementById('zfit').onclick = fit;
+new ResizeObserver(resize).observe(box);
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+document.getElementById('legend').innerHTML = DIVS.map(d => `<span><i style="background:var(${divVar(d)})"></i>${d}</span>`).join('');
+
+/* ---------- inspector ---------- */
+const insp = document.getElementById('insp');
+const sat = (lat, lon, z = 15) => `https://www.google.com/maps/@${lat},${lon},${z * 100}m/data=!3m1!1e3`;
+const osm = (lat, lon, z = 14) => `https://www.openstreetmap.org/#map=${z}/${lat}/${lon}`;
+function renderInspector() {
+  if (!sel) {
+    insp.innerHTML = `<span class="eyebrow">No upazila selected</span>
+      <h3>Click the map or search</h3>
+      <p class="small">You will get the exact selections to make on each land portal (বিভাগ › জেলা › উপজেলা › মৌজা) and a satellite link for that location.</p>
+      <ol class="steps"><li>Pick the upazila where the land is.</li><li>Open the khatian search and enter the mouza and the khatian or dag number from the seller's papers.</li><li>Compare the owner names with the seller's NID and the deed chain.</li><li>Open the mouza map, find the dag and compare its shape with what you see on site and on satellite.</li></ol>`;
+    return;
+  }
+  const f = sel, [lon, lat] = f.c;
+  const sameD = F.filter(x => x.d === f.d).length;
+  insp.innerHTML = `<span class="eyebrow">${esc(f.v)} division · ${esc(f.d)} district</span>
+    <div><h3>${esc(f.n)}</h3>${f.bn ? `<div class="bn">${esc(f.bn)}</div>` : ''}</div>
+    <div class="path">${esc(DIVBN[f.v] || f.vbn || f.v)} › ${esc(f.dbn || f.d)} › ${esc(f.bn || f.n)} › <em>your mouza</em></div>
+    <p class="small">Choose these in order on DLRMS, the Smart Bhumi Naksha app or the DLRS map store, then pick the mouza named on the deed.${f.inf ? ' The district for this unit was inferred from the map, so confirm it in the portal list.' : ''}</p>
+    <dl class="kv"><dt>Centre</dt><dd>${lat.toFixed(4)}, ${lon.toFixed(4)}</dd><dt>District units</dt><dd>${sameD} on this map</dd></dl>
+    <div class="btnrow">
+      <a class="btn solid" href="${sat(lat, lon, 12)}" target="_blank" rel="noopener">Satellite view</a>
+      <a class="btn" href="${osm(lat, lon, 12)}" target="_blank" rel="noopener">OpenStreetMap</a>
+    </div>
+    <div class="btnrow">
+      <a class="btn" href="https://dlrms.land.gov.bd/" target="_blank" rel="noopener">Khatian (DLRMS)</a>
+      <a class="btn" href="https://map.land.gov.bd/" target="_blank" rel="noopener">Plot map</a>
+      <a class="btn" href="https://map.settlement.gov.bd/" target="_blank" rel="noopener">Buy mouza map</a>
+    </div>`;
+}
+function select(f, zoom = true) {
+  sel = f; renderInspector();
+  if (zoom && f) { const [a, b, c, d] = bbox(f); fitBounds(a, b, c, d, 60); } else draw();
+}
+renderInspector();
+
+/* ---------- search ---------- */
+const q = document.getElementById('q'), sugg = document.getElementById('sugg');
+q.addEventListener('input', () => {
+  const t = q.value.trim().toLowerCase();
+  if (t.length < 2) { sugg.hidden = true; return; }
+  const m = F.filter(f => f.n.toLowerCase().includes(t) || (f.bn && f.bn.includes(q.value.trim())) || f.d.toLowerCase().includes(t) || (f.dbn && f.dbn.includes(q.value.trim()))).slice(0, 12);
+  sugg.innerHTML = m.length ? m.map((f, i) => `<button data-i="${F.indexOf(f)}">${esc(f.n)}${f.bn ? ' · ' + esc(f.bn) : ''} <span class="small">— ${esc(f.d)}</span></button>`).join('') : '<p class="small" style="padding:8px 10px">No upazila matches that name. Try the English or Bangla spelling.</p>';
+  sugg.hidden = false;
+});
+sugg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; select(F[+b.dataset.i]); sugg.hidden = true; q.value = F[+b.dataset.i].n; });
+q.addEventListener('keydown', e => { if (e.key === 'Enter') { const b = sugg.querySelector('button'); if (b) b.click(); } if (e.key === 'Escape') sugg.hidden = true; });
+
+/* ---------- plot checker ---------- */
+const SQFT = { decimal: 435.6, katha: 720, bigha: 14400, acre: 43560, sqft: 1 };
+const M2_PER_SQFT = 0.09290304;
+const SAMPLE = `# Example plot near Rupganj, Narayanganj (made-up coordinates, not a real record)
+23.842076, 90.501198
+23.842189, 90.501431
+23.841994, 90.501532
+23.841881, 90.501299`;
+const ta = document.getElementById('coords'), out = document.getElementById('result');
+function parse(txt) {
+  txt = txt.trim();
+  if (txt.startsWith('{')) {
+    const g = JSON.parse(txt), geom = g.type === 'FeatureCollection' ? g.features[0].geometry : g.type === 'Feature' ? g.geometry : g;
+    const ring = geom.type === 'Polygon' ? geom.coordinates[0] : geom.type === 'MultiPolygon' ? geom.coordinates[0][0] : null;
+    if (!ring) throw new Error('The GeoJSON has no polygon. Paste a Polygon or a Feature that contains one.');
+    return ring.map(([lo, la]) => [la, lo]);
+  }
+  const k = txt.match(/<coordinates>([\s\S]*?)<\/coordinates>/i);
+  if (k) return k[1].trim().split(/\s+/).map(t => { const [lo, la] = t.split(',').map(Number); return [la, lo]; });
+  return txt.split(/\n/).map(l => l.replace(/#.*/, '').trim()).filter(Boolean).map((l, i) => {
+    const n = l.split(/[\s,;]+/).map(Number);
+    if (n.length < 2 || n.some(isNaN)) throw new Error(`Line ${i + 1} is not two numbers: "${l}"`);
+    return [n[0], n[1]];
+  });
+}
+function measure() {
+  let p;
+  try { p = parse(ta.value); } catch (e) { out.innerHTML = `<p class="err">${esc(e.message)}</p>`; return; }
+  if (p.length > 1 && p[0][0] === p[p.length - 1][0] && p[0][1] === p[p.length - 1][1]) p.pop();
+  if (p.length < 3) { out.innerHTML = '<p class="err">A plot needs at least three corners. Add one corner per line.</p>'; return; }
+  const bad = p.find(([la, lo]) => la < 20 || la > 27 || lo < 88 || lo > 93);
+  if (bad) { out.innerHTML = `<p class="err">${bad[0]}, ${bad[1]} is outside Bangladesh. Check that each line is latitude first, then longitude.</p>`; return; }
+  const la0 = p.reduce((a, q) => a + q[0], 0) / p.length, lo0 = p.reduce((a, q) => a + q[1], 0) / p.length;
+  const R = 6371008.8, kx = Math.cos(la0 * Math.PI / 180) * R * Math.PI / 180, ky = R * Math.PI / 180;
+  const xy = p.map(([la, lo]) => [(lo - lo0) * kx, (la - la0) * ky]);
+  let A = 0, per = 0;
+  xy.forEach(([x1, y1], i) => { const [x2, y2] = xy[(i + 1) % xy.length]; A += x1 * y2 - x2 * y1; per += Math.hypot(x2 - x1, y2 - y1); });
+  const m2 = Math.abs(A) / 2, sqft = m2 / M2_PER_SQFT;
+  const up = F.find(f => f.g.some(poly => inPoly(lo0, la0, poly[0]) && !poly.slice(1).some(h => inPoly(lo0, la0, h))));
+  plot = { pts: p, c: [la0, lo0] };
+  const deed = parseFloat(document.getElementById('deed').value), du = document.getElementById('deedu').value;
+  let cmp = '';
+  if (deed > 0) {
+    const dsq = deed * SQFT[du], diff = (sqft - dsq) / dsq * 100;
+    const good = Math.abs(diff) <= 5;
+    cmp = `<div class="cmp ${good ? 'good' : 'bad'}">Measured ${diff >= 0 ? 'larger' : 'smaller'} than the deed by <b>${Math.abs(diff).toFixed(1)}%</b> (${fmt(Math.abs(sqft - dsq) / SQFT.decimal, 2)} decimal). ${good ? 'Within 5%, which is normal for GPS corners.' : 'More than 5% off. Ask for a survey with the government mouza map before you pay.'}</div>`;
+  }
+  out.innerHTML = `<span class="eyebrow">Measured from ${p.length} corners</span>
+    <div class="units">${['decimal', 'katha', 'bigha', 'acre'].map(u => `<div class="unit"><b>${fmt(sqft / SQFT[u], u === 'acre' ? 3 : 2)}</b><span>${u}</span></div>`).join('')}
+    <div class="unit"><b>${fmt(sqft, 0)}</b><span>sq ft</span></div><div class="unit"><b>${fmt(m2, 0)}</b><span>m²</span></div></div>
+    <dl class="kv"><dt>Perimeter</dt><dd>${fmt(per, 1)} m</dd><dt>Centre</dt><dd>${la0.toFixed(5)}, ${lo0.toFixed(5)}</dd>
+    <dt>Upazila</dt><dd>${up ? `${esc(up.n)}, ${esc(up.d)}` : 'Not found. The point may be in a river or on a boundary.'}</dd></dl>
+    ${cmp}
+    <div class="btnrow"><a class="btn solid" href="${sat(la0, lo0, 19)}" target="_blank" rel="noopener">See plot on satellite</a>
+    ${up ? '<button class="btn" id="showup">Show on map</button>' : ''}</div>
+    <p class="small">Next, compare this outline with the dag on the official mouza map. A plot that crosses two dags, or whose shape differs from the map, needs a survey before you sign.</p>`;
+  const b = document.getElementById('showup');
+  if (b) b.onclick = () => { sel = up; renderInspector(); const xs = p.map(q => px(q[1])), ys = p.map(q => py(q[0])); const pad = 0.004; fitBounds(Math.min(...xs) - pad, Math.min(...ys) - pad, Math.max(...xs) + pad, Math.max(...ys) + pad, 40); document.getElementById('atlas').scrollIntoView({ behavior: 'smooth' }); };
+  draw();
+}
+function inPoly(x, y, r) {
+  let c = false;
+  for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+    const [xi, yi] = r[i], [xj, yj] = r[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c;
+  }
+  return c;
+}
+const fmt = (n, d) => n.toLocaleString('en-IN', { minimumFractionDigits: d, maximumFractionDigits: d });
+document.getElementById('measure').onclick = measure;
+document.getElementById('sample').onclick = () => { ta.value = SAMPLE; document.getElementById('deed').value = 10; document.getElementById('deedu').value = 'katha'; measure(); };
+ta.value = SAMPLE; measure();
+
+/* ---------- sources ---------- */
+const SRC = [
+  ['gov','Bhumi Sheba gateway (ভূমি সেবা)','Ministry of Land','Single entry point: khatian search, e-mutation application and tracking, land development tax, certified copy orders, citizen corner downloads.','https://land.gov.bd/'],
+  ['gov','DLRMS: khatian / porcha (e-Porcha)','Ministry of Land / DLRS','Search a record of rights by survey (CS, SA, RS, BS), mouza, khatian number, dag number or owner name. Order a certified copy online. eporcha.gov.bd is reported to redirect here.','https://dlrms.land.gov.bd/'],
+  ['gov','Bhumi Naksha plot map (ভূমি নকশা)','Ministry of Land','Web map viewer for mouza and plot (dag) outlines where the digital map is loaded.','https://map.land.gov.bd/'],
+  ['gov','Smart Bhumi Naksha app','Ministry of Land','Phone app: search a mouza or dag on the map and see the linked khatian. The closest official tool to a zoomable plot map.','https://play.google.com/store/apps/details?id=smart.bhumi.naksha'],
+  ['gov','DLRS online map store','Dept. of Land Records & Surveys','Search, buy and track certified mouza maps for CS, SA, RS, BRS and the new BDS digital survey. Request scans.','https://map.settlement.gov.bd/'],
+  ['gov','Land development tax (LD Tax)','Ministry of Land','Check whether tax is paid and in whose name. A current receipt in the seller\'s name is strong evidence of possession and mutation. Also on the Google Play app.','https://ldtax.gov.bd/'],
+  ['gov','e-Mutation (নামজারি)','AC Land office via land.gov.bd','Check whether the seller\'s name was mutated (namjari) and see the DCR. A pending or rejected mutation is a warning sign.','https://land.gov.bd/'],
+  ['gov','Land hotline 16122','Ministry of Land','Ask about application status, fees and which office holds a record. Call 16122 from any phone.',''],
+  ['gov','National GIS portal (BGISP)','Government of Bangladesh','Lists a DLRS mouza map layer you can view. Coverage varies.','http://www.gis.gov.bd/'],
+  ['gov','Online cause list and Amar Adalat app','Law & Justice Division / Supreme Court','Search court cause lists by party name or case number to find a pending suit or injunction on the land or the seller. Rollout is by district, so some courts are not yet online.','https://causelist.judiciary.org.bd/'],
+  ['gov','RAJUK Detailed Area Plan 2022–2035','RAJUK','Dhaka area only: permitted land use, flood flow zones and road widening that can make a plot unbuildable.','https://rajuk.gov.bd/'],
+  ['gov','Deed digitisation and e-registration','Ministry of Land / Dept. of Registration','Registered deeds since 1908 are being uploaded in phases for online certified copies. The Registration (Amendment) Ordinance 2026 adds electronic registration after pilots in Dhaka, Gazipur and Jashore. Until your sub-registry is online, ask there for a search of earlier deeds on the dag (তল্লাশি).','https://thefinancialexpress.com.bd/national/govt-moves-to-digitise-all-land-deeds'],
+  ['law','Land Crime Prevention and Remedy Act 2023','Parliament','Makes forged documents, sale without handing over possession, and fraud in measurement or transfer criminal offences. Trial before a magistrate within 180 working days; 2–7 years for forgery.','https://unb.com.bd/category/Bangladesh/land-crime-prevention-and-remedy-bill-2023-passed-in-js-to-ensure-stringent-measures/121930'],
+  ['law','BDS digital survey: what owners must do','BD Advocacy (law firm guide)','Explains each stage of the drone and satellite Bangladesh Digital Survey and when to object to a wrong record.','https://bdadvocacy.com/guides/bds-digital-land-survey/'],
+  ['law','How to read a khatian, porcha and mouza map','BD Advocacy (law firm guide)','Field-by-field guide to the record and the map.','https://bdadvocacy.com/guides/how-to-read-khatian-porcha-mouza-map/'],
+  ['law','land.gov.bd and e-Porcha guides 2026','Adv. Md. Shah Alam (lawyer blog)','Step-by-step screenshots for khatian search, mutation tracking and land tax.','https://www.advmdshahalam.me/blog/land-gov-bd-bhumi-seba-complete-guide-2026'],
+  ['law','Land title search: legal overview','Justice Corner BD','What a full title search covers and the documents to ask the seller for.','https://justicecornerbd.com/blogs/bangladesh-land-title-search-a-comprehensive-legal'],
+  ['law','Checking plot and developer title online','GLG Assets','Buyer guide for checking a developer\'s land before buying a flat or plot.','https://glgassets.com/land-records-bangladesh-how-to-check-online/'],
+  ['third','mouza.bd','Private (not government)','Free downloads of scanned mouza maps by survey. Useful for a first look; buy the certified copy from DLRS for anything legal.','https://mouza.bd/en'],
+  ['third','Mouza Map BD','Private (not government)','Another scanned mouza map library.','https://www.mouzamapbd.com/'],
+  ['third','eMouza','Private (not government)','Mouza map PDF downloads.','https://web.emouza.com/mouza-map-download/'],
+  ['third','Open boundary data (geoBoundaries / bangladesh-geojson)','Open data, CC BY 4.0','Upazila and union boundaries for your own GIS work. No mouza or plot layer exists in open data.','https://www.geoboundaries.org/'],
+  ['third','LandSure AI and LandVerify (prototypes)','Hackathon projects on GitHub','Research demos of deed checks and plot verification. They use synthetic data and do not check real records.','https://github.com/Shihab-10/LandSure-AI'],
+  ['avoid','Look-alike e-Porcha sites','Unknown operators','eporchagov.com, eporcha.info, ekhatian.com, e-porcha.com copy the government name. Do not pay or enter your NID there.',''],
+  ['avoid','Banglarbhumi (banglarbhumi.gov.in)','West Bengal, India','A different country\'s land portal. Bangladeshi records are not there, though it shows up often in searches.','']
+];
+const TAGS = { gov: ['Government', 'gov'], law: ['Law & guides', 'law'], third: ['Third-party', 'third'], avoid: ['Avoid', 'avoid'] };
+let filt = 'all';
+const fl = document.getElementById('filters');
+fl.innerHTML = [['all', 'All ' + SRC.length], ...Object.entries(TAGS).map(([k, v]) => [k, `${v[0]} ${SRC.filter(r => r[0] === k).length}`])].map(([k, l]) => `<button class="chip" data-k="${k}" aria-pressed="${k === filt}">${l}</button>`).join('');
+fl.onclick = e => { const b = e.target.closest('button'); if (!b) return; filt = b.dataset.k; fl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); rows(); };
+function rows() {
+  document.getElementById('srcrows').innerHTML = SRC.filter(r => filt === 'all' || r[0] === filt).map(([t, n, op, w, u]) => `<tr>
+    <td><span class="tag ${TAGS[t][1]}">${TAGS[t][0]}</span><br><strong>${esc(n)}</strong></td><td>${esc(op)}</td><td>${esc(w)}</td>
+    <td>${u ? `<a class="url" href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</a>` : (n.includes('16122') ? '<span class="url">16122</span>' : '<span class="small">no link given</span>')}</td></tr>`).join('');
+}
+rows();
+
+/* ---------- checklist ---------- */
+const RISKS = [
+  ['Seller is not the real owner', [
+    ['Latest khatian (BS/RS) shows the seller or the person they inherited from', 'DLRMS khatian search by owner name or khatian number'],
+    ['Mutation (namjari) is in the seller\'s name and the DCR is genuine', 'e-Mutation tracking on land.gov.bd; AC Land office'],
+    ['Land tax receipt for this year is in the seller\'s name', 'ldtax.gov.bd, by holding number'],
+    ['Seller\'s NID matches the khatian and deed names; if inherited, a succession certificate and family tree (forayez)', 'Union Parishad or city ward; civil court for succession'],
+    ['Chain of title is unbroken from CS to SA to RS to BS khatian, with each earlier deed (bia dolil)', 'Certified khatians from DLRMS; deed copies from the sub-registry']]],
+  ['Same land already sold to someone else', [
+    ['Search at the sub-registry office for any deed on this dag in the last 25+ years (তল্লাশি)', 'Sub-registry office for the mouza; online copies where digitised'],
+    ['No other mutation application pending on the same dag', 'AC Land office; ask by dag number'],
+    ['Seller hands over original deeds, not photocopies, and keeps none back', 'At signing'],
+    ['Pay the advance (bayna) only by bank transfer against a registered bayna deed', 'Sub-registry']]],
+  ['Boundary unclear or encroached', [
+    ['Certified mouza map for the dag, latest survey (BS or BDS)', 'DLRS map store; Smart Bhumi Naksha app'],
+    ['Independent amin surveys the plot against the map and marks pillars', 'Licensed surveyor'],
+    ['Measured area matches the deed within 5%', 'Plot area checker on this page'],
+    ['Outline matches the satellite image and the neighbours agree on the line', 'Satellite link from the map; site visit']]],
+  ['Land is in a case or claim', [
+    ['No pending civil suit, injunction or partition suit on the dag or the seller', 'Online cause list; district civil court record room; lawyer'],
+    ['Not khas, vested (arpito), abandoned or under acquisition (L.A.) case', 'DC office L.A. branch; AC Land office'],
+    ['No objection or appeal pending in the BDS or BS survey record', 'Upazila settlement office'],
+    ['No bank mortgage on the land', 'Ask for the bank NOC; sub-registry search shows registered mortgages']]],
+  ['Plot cannot be used as planned', [
+    ['Land class on the khatian (nal, bhiti, doba) fits your use', 'Khatian'],
+    ['In Dhaka, the RAJUK DAP land-use zone allows building', 'RAJUK DAP map'],
+    ['Road access is legal (a public road or a registered right of way), not just a neighbour\'s path', 'Mouza map and site visit']]]
+];
+const KEY = 'bd-land-checks';
+let done = {}; try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+const total = RISKS.reduce((a, r) => a + r[1].length, 0);
+document.getElementById('risks').innerHTML = RISKS.map(([h, items], ri) => `<div class="card risk"><h3>${esc(h)}</h3><ul>${items.map(([t, w], i) => {
+  const id = `ck${ri}_${i}`; return `<li><input type="checkbox" id="${id}" ${done[id] ? 'checked' : ''}><label for="${id}" style="font-weight:400">${esc(t)}<span class="where">${esc(w)}</span></label></li>`; }).join('')}</ul></div>`).join('');
+const prog = () => { const n = Object.values(done).filter(Boolean).length; document.getElementById('prog').textContent = `${n} of ${total} checks done`; };
+document.getElementById('risks').addEventListener('change', e => { done[e.target.id] = e.target.checked; try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (x) {} prog(); });
+prog();
+
+/* ---------- glossary ---------- */
+const G = [['Mouza (মৌজা)', 'The smallest survey unit, usually one village. Every map and khatian is per mouza.'],
+  ['Dag / plot (দাগ)', 'One numbered parcel on the mouza map. Dag numbers change between surveys.'],
+  ['Khatian / porcha (খতিয়ান)', 'Record of rights: owners, their shares, and the dags in the holding.'],
+  ['CS · SA · RS · BS · BDS', 'Successive surveys: Cadastral (1888–1940), State Acquisition (1956–62), Revisional, Bangladesh Survey, and the new drone-based Bangladesh Digital Survey.'],
+  ['Namjari (নামজারি)', 'Mutation: updating the khatian to the new owner after a sale or inheritance. Issued with a DCR (Duplicate Carbon Receipt).'],
+  ['Bia dolil (বায়া দলিল)', 'The earlier deeds that show how the seller got the land.'],
+  ['Khas (খাস)', 'Government-owned land. It cannot be bought from a private seller.'],
+  ['Tallashi (তল্লাশি)', 'A search of the sub-registry volumes for earlier deeds on the same dag. This is how you find a double sale.']];
+document.getElementById('gloss').innerHTML = G.map(([a, b]) => `<div><b>${esc(a)}</b><br>${esc(b)}</div>`).join('');
+})();
+</script>
