@@ -4,6 +4,8 @@ Research on verifying land in Bangladesh: who runs each land service, a map of a
 
 - `bangladesh-land-atlas.html` — the finished page. Open it in a browser; it needs no internet except for web fonts.
 - `atlas.src.html` — the page source, with `__GEO__` where the boundary data goes.
+- `build_gz.py` — turns `data/gazipur-findings.json` (collected with Claude in Chrome on 22 Oct 2026) into the compact Gazipur mouza index the page embeds.
+- `data/gazipur-findings.json` — raw portal findings: menu paths, fees, mouza lists, office contacts.
 - `build_geo.py` — turns the geoBoundaries upazila GeoJSON (from the `bangladesh-geojson` npm package) into the compact data the page embeds, fills in missing district names and applies hand corrections.
 
 Rebuild:

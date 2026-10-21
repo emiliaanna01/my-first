@@ -1,0 +1,4631 @@
+{
+ "checked_on": "2026-10-22",
+ "portals": [
+  {
+   "url": "https://land.gov.bd",
+   "loads": true,
+   "redirects_to": "https://land.gov.bd/",
+   "title": "ভূমি তথ্য বাতায়ন (Land Information Portal)",
+   "services": [
+    "মিউটেশন (Mutation) → http://mutation.land.gov.bd/",
+    "ভূমি উন্নয়ন কর (Land Development Tax) → http://portal.ldtax.gov.bd/",
+    "ভূমি রেকর্ড ও ম্যাপ (Land Records & Maps) → https://dlrms.land.gov.bd/",
+    "ভূমি অধিগ্রহণ ও হুকুমদখল (Land Acquisition & Requisition) → https://larms.land.gov.bd/",
+    "ইজারা ও বন্দোবস্ত (Lease & Settlement) → https://land.gov.bd/lease-and-settlement",
+    "ভূমি প্রশাসন ব্যবস্থাপনা (Land Administration Management) → http://lams.land.gov.bd/",
+    "ভূমি রাজস্ব মামলা (Land Revenue Cases) → http://case.gov.bd/",
+    "ভূমি তথ্য ব্যাংক (Land Data Bank) → link is '#'",
+    "কারিগরি ও অভিযোগ প্রতিকার ব্যবস্থাপনা (Technical & Grievance Redress)",
+    "ভূমি দৃষ্টি (Bhumi Drishti) → http://attendance.land.gov.bd/",
+    "ভূমি নকশা (Land Map) → https://map.land.gov.bd/",
+    "রাজউক পূর্বাচল নতুন শহর প্রকল্পের সকল মৌজার সমন্বিত তথ্য (RAJUK Purbachal New Town – integrated info of all mouzas)",
+    "Hotline: ১৬১২২ (16122)"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://dlrms.land.gov.bd",
+   "loads": true,
+   "redirects_to": "https://dlrms.land.gov.bd/",
+   "title": "DLRMS | Home",
+   "services": [
+    "সার্ভে খতিয়ান (Survey khatian search/certified copy)",
+    "নামজারি খতিয়ান (Mutation khatian)",
+    "মৌজা ম্যাপ (Mouza map order)",
+    "আবেদনের অবস্থা (Application status)",
+    "নির্দেশিকা (Guidelines)",
+    "পরিপত্র (Circulars)",
+    "খতিয়ান ও ম্যাপ অনুসন্ধান (Khatian & map search)",
+    "Banner: QR-coded online/instant khatian copy ১২০ টাকা; certified copy re-fixed to ১২০ টাকা",
+    "Stats (last update 22-10-2026 00:30): survey khatians ৬,০৭,৬৮,৩১৯; mutation khatians ২,০৭,১১,৯২০; total maps ২,৩০,৪৭৭"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://eporcha.gov.bd",
+   "loads": false,
+   "redirects_to": "",
+   "title": "not_found",
+   "services": [],
+   "blocked": "dns: DNS_PROBE_FINISHED_NXDOMAIN (also www.eporcha.gov.bd). Does NOT redirect to dlrms; the domain does not resolve. land.gov.bd now links ভূমি রেকর্ড ও ম্যাপ to dlrms.land.gov.bd."
+  },
+  {
+   "url": "https://map.land.gov.bd",
+   "loads": true,
+   "redirects_to": "https://map.land.gov.bd/",
+   "title": "ভূমি নকশা (Bhumi Naksha / Land Map)",
+   "services": [
+    "Search Menu: বিভাগ › জেলা › থানা/উপজেলা › মৌজা › সিট নং › প্লট (division › district › upazila › mouza › sheet › plot)",
+    "ভূমি ব্যবহারের সারাংশ (Land-use summary)",
+    "ভূমি জোনিং সারাংশ (Land-zoning summary)",
+    "Top menu: জমির মানচিত্র, প্রকল্পের উদ্দেশ্য, আমাদের সম্পর্কে, প্রকল্প সারসংক্ষেপ, প্রশ্নোত্তর, লগইন",
+    "OpenStreetMap base layer; global search button"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://map.settlement.gov.bd",
+   "loads": true,
+   "redirects_to": "https://map.settlement.gov.bd/",
+   "title": "DLRS Map Portal — Search & Buy Mouza Maps | Bangladesh (after a search: 'DLRS - Integrated Online Map Purchase System | Bangladesh')",
+   "services": [
+    "Smart Map Search: Division › District › Upazila/Thana › Mouza › Survey Type › Sheet",
+    "Buy Now / Add to Cart / Preview",
+    "Track Order",
+    "Request Scan / Can't Find the Map?",
+    "Report an Issue",
+    "Stats: 239.9K+ maps digitized, 63 districts covered",
+    "Payment: bKash, Nagad, credit card, bank transfer",
+    "Contact: Tejgaon, Dhaka-1208; +880-2-9116971; cho1@dlrs.gov.bd"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://ldtax.gov.bd",
+   "loads": true,
+   "redirects_to": "https://ldtax.gov.bd/",
+   "title": "ভূমি উন্নয়ন কর (Land Development Tax)",
+   "services": [
+    "ভূমি উন্নয়ন কর প্রদান (Pay LD tax)",
+    "নিবন্ধন করুন (Register) – needs mobile no., NID no., NID date of birth, দাখিলা/খারিজ খতিয়ান info",
+    "নির্দেশিকা (Guide)",
+    "টিউটোরিয়াল",
+    "ভূমিসেবা ফর্ম (Land service forms)",
+    "গার্ড ফাইল",
+    "সাধারণ জিজ্ঞাসা (FAQ)",
+    "Footer marked 'পরীক্ষামূলক সংস্করণ' (beta version)",
+    "Note: land.gov.bd links LD tax to http://portal.ldtax.gov.bd/ (not opened)"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://mutation.land.gov.bd",
+   "loads": true,
+   "redirects_to": "https://mutation.land.gov.bd/",
+   "title": "মিউটেশন সিস্টেম - ভূমি মন্ত্রণালয় (Mutation System – Ministry of Land)",
+   "services": [
+    "নতুন আবেদন (New application) – login required",
+    "আবেদন অবস্থা দেখুন (Application status)",
+    "মিউটেশন সংক্রান্ত প্রজ্ঞাপন (Circulars) /notification",
+    "মিউটেশন সংক্রান্ত জিজ্ঞাসা (FAQ) /query",
+    "পরিসংখ্যান (Statistics)",
+    "Dhaka division last 30 days (21-09 to 21-10-2026): new ১,৩৬,৮০৭; disposed ১,৩৯,১৬৪; avg ১৯ days; approval ৬৬%; pending ১,২৩,৯৯৩; >28 days ১৮%",
+    "Service time (FAQ): normal ২৮ working days; expatriates metro ১২, other ০৯; certified freedom fighters ১০; important/export/FDI industry ০৭"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://causelist.judiciary.org.bd",
+   "loads": false,
+   "redirects_to": "",
+   "title": "not_found",
+   "services": [],
+   "blocked": "dns: DNS_PROBE_FINISHED_NXDOMAIN (judiciary.org.bd also NXDOMAIN). Working e-causelist is https://causelist.judiciary.gov.bd/ (linked as 'ই-কার্যতালিকা' from https://judiciary.gov.bd/bn)."
+  },
+  {
+   "url": "https://causelist.judiciary.gov.bd",
+   "loads": true,
+   "redirects_to": "https://causelist.judiciary.gov.bd/",
+   "title": "মামলার কার্যতালিকা | Causelist",
+   "services": [
+    "আদালত অনুসন্ধান করুন (Court search: বিভাগ › জেলা › আদালতের ধরন › আদালত › date)",
+    "মামলা অনুসন্ধান করুন (Case search) /caseinfo – by court + মামলা নম্বর only",
+    "'আমার আদালত' app; call 333"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://rajuk.gov.bd",
+   "loads": true,
+   "redirects_to": "https://rajuk.gov.bd/",
+   "title": "হোম | রাজধানী উন্নয়ন কর্তৃপক্ষ (রাজউক)",
+   "services": [
+    "ভূমি ব্যবহার ও নকশা অনুমোদন (Land-use & plan approval) → https://ecps.gov.bd/",
+    "প্লট/ফ্ল্যাট সংক্রান্ত সেবা সমূহ",
+    "প্লট বেজড ল্যান্ড রেকর্ড সিস্টেম",
+    "বেসরকারি আবাসিক প্রকল্প উদ্যোক্তা / রিয়েল এস্টেট ডেভেলপার নিবন্ধন",
+    "Heading 'বিশদ অঞ্চল পরিকল্পনা ২০২২-২০৩৫' on homepage (no working link found)",
+    "Menu link 'ড্যাপ(২০১৬-২০৩৫)' → empty page",
+    "Menu link 'ড্যাপ ম্যাপ' → PDF of DMDP Integrated Detailed Area Plan 2010-2015",
+    "Projects: উত্তরা এপার্টমেন্ট, পূর্বাচল নতুন শহর, ঝিলমিল, আরবান রেসিলিয়েন্স"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://gazipur.gov.bd",
+   "loads": true,
+   "redirects_to": "https://gazipur.gov.bd/",
+   "title": "হোম | গাজীপুর জেলা",
+   "services": [
+    "ভূমি-সেবা: উত্তরাধিকার ক্যালকুলেটর (inheritance calculator), ই-মিউটেশন, ভূমি অধিগ্রহণ ক্ষতিপূরণ আবেদনের প্রয়োজনীয় কাগজপত্র (LA compensation documents), জমি ক্রয়ের পূর্বানুমোদন (prior approval for land purchase)",
+    "Officer lists by designation, e.g. সহকারী কমিশনার (ভূমি) → /views/employee-list?designationId=8",
+    "Notice 08-10-2026: ধীরাশ্রম আইসিডি নির্মাণের লক্ষ্যে জমি অধিগ্রহণসহ পুবাইল-ধীরাশ্রম রেল লিংক নির্মাণ প্রকল্পের গণবিজ্ঞপ্তি (public notice: land acquisition for Dhirasram ICD + Pubail–Dhirasram rail link)",
+    "Notice 15-10-2026: release order of AC (Land) Kapasia",
+    "Hotline ১৬১২২ (Smart Bhumi Sheba)"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://sadar.gazipur.gov.bd",
+   "loads": true,
+   "redirects_to": "https://sadar.gazipur.gov.bd/",
+   "title": "হোম | গাজীপুর সদর উপজেলা",
+   "services": [
+    "ভূমি বিষয়ক menu: উপজেলা ভূমি অফিস, গাজীপুর সদর → http://acl.sadar.gazipur.gov.bd/",
+    "উপজেলা ভূমি অফিস (সার্কেল টঙ্গি) → http://acltongi.sadar.gazipur.gov.bd/",
+    "সাব-রেজিষ্ট্রী অফিস, টঙ্গী → http://tongisr.sadar.gazipur.gov.bd/",
+    "গাজীপুর সদর সাব-রেজিষ্ট্রি অফিস → http://sr.sadar.gazipur.gov.bd/"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://gis.gov.bd",
+   "loads": false,
+   "redirects_to": "",
+   "title": "not_found",
+   "services": [],
+   "blocked": "timeout: ERR_CONNECTION_TIMED_OUT"
+  },
+  {
+   "url": "https://dlrs.gov.bd",
+   "loads": true,
+   "redirects_to": "https://dlrs.gov.bd/",
+   "title": "হোম | ভূমি রেকর্ড ও জরিপ অধিদপ্তর (extra – checked for BDS notices)",
+   "services": [
+    "Gazipur listed under 'জোনাল সেটেলমেন্ট অফিস, ঢাকা' (Zonal Settlement Office, Dhaka) menu – link is '#'",
+    "ডিজিটাল জরিপ page → empty",
+    "ডিজিটাল জরিপের সাধারণ নির্দেশিকা-২০১৩",
+    "সকল জোনের সহকারী সেটেলমেন্ট অফিসারদের মোবাইল নম্বর (PDF)"
+   ],
+   "blocked": ""
+  },
+  {
+   "url": "https://gda.gov.bd",
+   "loads": true,
+   "redirects_to": "https://gda.gov.bd/",
+   "title": "হোম | গাজীপুর উন্নয়ন কর্তৃপক্ষ (Gazipur Development Authority – extra)",
+   "services": [
+    "ভূমি ব্যবহার ছাড়পত্র আবেদন ফরম (land-use clearance application form) → https://gda.gov.bd/pages/forms/6922d9e6933eb65569e00eb7",
+    "'পরিকল্পনা ও উন্নয়নে গাউক' page → empty"
+   ],
+   "blocked": ""
+  }
+ ],
+ "khatian_search": {
+  "portal_url": "https://dlrms.land.gov.bd/",
+  "steps": [
+   "Open https://dlrms.land.gov.bd/ – the search is on the home page, tab 'সার্ভে খতিয়ান' (Survey khatian), section 'সার্ভে খতিয়ানের তথ্য'. No login needed to browse.",
+   "Column 'বিভাগ' (Division): click 'ঢাকা'",
+   "Column 'জেলা' (District): click 'গাজীপুর'",
+   "Column 'উপজেলা/থানা' (Upazila/Thana): options are টংঙ্গি রাজস্ব সার্কেল (Tongi Revenue Circle), গাজীপুর সদর, কালিয়াকৈর, কালীগঞ্জ, কাপাসিয়া, শ্রীপুর → click 'গাজীপুর সদর'",
+   "Column 'খতিয়ানের ধরন' (Khatian type = survey): সি এস / আর এস / এস এ / বি ডি এস",
+   "Column 'মৌজা' (Mouza): list shown as 'JL - name'; has an 'অনুসন্ধান' (search) filter box",
+   "Column 'খতিয়ানের তালিকা' (Khatian list): list of khatians appears (each row shows khatian no. + owner summary); box 'খতিয়ান নং' + button 'খুজুন' (Search) to search by khatian number",
+   "Button 'অধিকতর অনুসন্ধান' (Advanced search) opens fields 'মালিকের নামঃ' (owner name) and 'দাগ নংঃ' (dag no.) + 'খুজুন'",
+   "Instruction text: 'আবেদনের জন্য খতিয়ানের উপর ডাবল ক্লিক করুন' – double-click a khatian to apply (add to cart → checkout → online fee → DC office prepares → delivered by post)"
+  ],
+  "surveys_listed_gazipur_sadar": [
+   "সি এস (CS)",
+   "আর এস (RS)",
+   "এস এ (SA)",
+   "বি ডি এস (BDS)"
+  ],
+  "search_by": {
+   "owner_name": true,
+   "khatian_no": true,
+   "dag_no": true
+  },
+  "notes": "No City Survey, BS or BRS option for Gazipur Sadar in the khatian search. Survey options per upazila: Tongi Revenue Circle = আর এস, এস এ, সি এস, বি ডি এস; Gazipur Sadar = সি এস, আর এস, এস এ, বি ডি এস (BDS has 0 mouzas); Kaliakair = আর এস only; Kaliganj = সি এস, আর এস, এস এ; Kapasia = আর এস, এস এ; Sreepur = আর এস only. Owner-name and dag search are inside 'অধিকতর অনুসন্ধান' and only appear after a mouza is selected. The DLRMS mouza-map tab (মৌজা ম্যাপের তথ্য) uses a separate generic survey dropdown: সি এস, আর এস, এস এ, বি এস, দিয়ারা, পেটি, বি আর এস, বি ডি এস. The app calls gateway.dlrms.land.gov.bd/core-api/api/public/... (needs an access token; direct calls return 'The access token is missing'). Gazipur BBS district code 33, Gazipur Sadar upazila code 30 (seen in API URL)."
+ },
+ "mouzas": {
+  "Gazipur Sadar": [
+   {
+    "name_bn": "পিরুজালী",
+    "name_en": "not_found",
+    "jl_no": "1"
+   },
+   {
+    "name_bn": "ক্ষুদে বর্ম্মি",
+    "name_en": "not_found",
+    "jl_no": "1"
+   },
+   {
+    "name_bn": "সুকুন্দি",
+    "name_en": "not_found",
+    "jl_no": "2"
+   },
+   {
+    "name_bn": "বোকরান মনিপুর",
+    "name_en": "not_found",
+    "jl_no": "2"
+   },
+   {
+    "name_bn": "দক্ষিন দিগদিয়া",
+    "name_en": "not_found",
+    "jl_no": "3"
+   },
+   {
+    "name_bn": "মাহনা ভবানীপুর",
+    "name_en": "not_found",
+    "jl_no": "3"
+   },
+   {
+    "name_bn": "খুন্দিয়া",
+    "name_en": "not_found",
+    "jl_no": "4"
+   },
+   {
+    "name_bn": "বারইপারা",
+    "name_en": "not_found",
+    "jl_no": "4"
+   },
+   {
+    "name_bn": "বনকর আমুনা",
+    "name_en": "not_found",
+    "jl_no": "5"
+   },
+   {
+    "name_bn": "বিশৈয়া কুড়িবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "5"
+   },
+   {
+    "name_bn": "ডগরী",
+    "name_en": "not_found",
+    "jl_no": "6"
+   },
+   {
+    "name_bn": "বিবাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "6"
+   },
+   {
+    "name_bn": "পাইনশাইল",
+    "name_en": "not_found",
+    "jl_no": "7"
+   },
+   {
+    "name_bn": "আমুনা",
+    "name_en": "not_found",
+    "jl_no": "7"
+   },
+   {
+    "name_bn": "কেশরীতা",
+    "name_en": "not_found",
+    "jl_no": "8"
+   },
+   {
+    "name_bn": "মির্জাপুর",
+    "name_en": "not_found",
+    "jl_no": "8"
+   },
+   {
+    "name_bn": "পাকুরিয়া",
+    "name_en": "not_found",
+    "jl_no": "9"
+   },
+   {
+    "name_bn": "আঙ্গুটিয়া",
+    "name_en": "not_found",
+    "jl_no": "9"
+   },
+   {
+    "name_bn": "আরগরিয়া",
+    "name_en": "not_found",
+    "jl_no": "10"
+   },
+   {
+    "name_bn": "কায়েলতিয়া",
+    "name_en": "not_found",
+    "jl_no": "10"
+   },
+   {
+    "name_bn": "উত্তর দৌলিয়া",
+    "name_en": "not_found",
+    "jl_no": "11"
+   },
+   {
+    "name_bn": "খালিসাবার্তা",
+    "name_en": "not_found",
+    "jl_no": "11"
+   },
+   {
+    "name_bn": "কালনি",
+    "name_en": "not_found",
+    "jl_no": "12"
+   },
+   {
+    "name_bn": "নাওরাবার্থা",
+    "name_en": "not_found",
+    "jl_no": "12"
+   },
+   {
+    "name_bn": "জামুনা",
+    "name_en": "not_found",
+    "jl_no": "13"
+   },
+   {
+    "name_bn": "বিপ্রবর্থা",
+    "name_en": "not_found",
+    "jl_no": "13"
+   },
+   {
+    "name_bn": "দড়ি বলধা",
+    "name_en": "not_found",
+    "jl_no": "14"
+   },
+   {
+    "name_bn": "জোলারপারা",
+    "name_en": "not_found",
+    "jl_no": "14"
+   },
+   {
+    "name_bn": "উত্তর সালনা",
+    "name_en": "not_found",
+    "jl_no": "15"
+   },
+   {
+    "name_bn": "বলধা",
+    "name_en": "not_found",
+    "jl_no": "15"
+   },
+   {
+    "name_bn": "পাড়াগাঁও",
+    "name_en": "not_found",
+    "jl_no": "16"
+   },
+   {
+    "name_bn": "বাউপাড়া",
+    "name_en": "not_found",
+    "jl_no": "16"
+   },
+   {
+    "name_bn": "আতুরী",
+    "name_en": "not_found",
+    "jl_no": "17"
+   },
+   {
+    "name_bn": "বাহাদুরপুর",
+    "name_en": "not_found",
+    "jl_no": "17"
+   },
+   {
+    "name_bn": "নাসারান",
+    "name_en": "not_found",
+    "jl_no": "18"
+   },
+   {
+    "name_bn": "আড়াইশপ্রসাদ",
+    "name_en": "not_found",
+    "jl_no": "18.."
+   },
+   {
+    "name_bn": "সারাইয়া",
+    "name_en": "not_found",
+    "jl_no": "19"
+   },
+   {
+    "name_bn": "হাুতিয়াব",
+    "name_en": "not_found",
+    "jl_no": "19"
+   },
+   {
+    "name_bn": "বামনী ছামনী",
+    "name_en": "not_found",
+    "jl_no": "20"
+   },
+   {
+    "name_bn": "গাজীপুর",
+    "name_en": "not_found",
+    "jl_no": "20"
+   },
+   {
+    "name_bn": "বন্দান",
+    "name_en": "not_found",
+    "jl_no": "21"
+   },
+   {
+    "name_bn": "পাজুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "21"
+   },
+   {
+    "name_bn": "কুমুন",
+    "name_en": "not_found",
+    "jl_no": "22"
+   },
+   {
+    "name_bn": "ভানুয়া",
+    "name_en": "not_found",
+    "jl_no": "22"
+   },
+   {
+    "name_bn": "ফাকাইল",
+    "name_en": "not_found",
+    "jl_no": "23"
+   },
+   {
+    "name_bn": "রোসাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "23"
+   },
+   {
+    "name_bn": "চাপুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "24"
+   },
+   {
+    "name_bn": "চিলনি",
+    "name_en": "not_found",
+    "jl_no": "24"
+   },
+   {
+    "name_bn": "ভূরুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "25"
+   },
+   {
+    "name_bn": "কামারিয়া",
+    "name_en": "not_found",
+    "jl_no": "25"
+   },
+   {
+    "name_bn": "বাড়িয়া",
+    "name_en": "not_found",
+    "jl_no": "26"
+   },
+   {
+    "name_bn": "চতর",
+    "name_en": "not_found",
+    "jl_no": "26"
+   },
+   {
+    "name_bn": "নাগা",
+    "name_en": "not_found",
+    "jl_no": "27"
+   },
+   {
+    "name_bn": "রেওলা",
+    "name_en": "not_found",
+    "jl_no": "27"
+   },
+   {
+    "name_bn": "খাইতা",
+    "name_en": "not_found",
+    "jl_no": "28"
+   },
+   {
+    "name_bn": "বাগলবাড়ি",
+    "name_en": "not_found",
+    "jl_no": "28"
+   },
+   {
+    "name_bn": "কয়ের",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "দেশীপাড়া",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "দক্ষিন সালনা",
+    "name_en": "not_found",
+    "jl_no": "30"
+   },
+   {
+    "name_bn": "বিলবেলাই",
+    "name_en": "not_found",
+    "jl_no": "30"
+   },
+   {
+    "name_bn": "টেক্কাথোরা",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "টেকীবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "মজলিসপুর",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "কামার বাসুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "ইটাহাটা",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "পালেরপাড়া",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "টেকনাগপাড়া",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "তেলিপাড়া",
+    "name_en": "not_found",
+    "jl_no": "38"
+   },
+   {
+    "name_bn": "আউটপাড়া",
+    "name_en": "not_found",
+    "jl_no": "39"
+   },
+   {
+    "name_bn": "নলজানি",
+    "name_en": "not_found",
+    "jl_no": "40"
+   },
+   {
+    "name_bn": "বাড়ীয়ালী",
+    "name_en": "not_found",
+    "jl_no": "41"
+   },
+   {
+    "name_bn": "মারিয়ালি",
+    "name_en": "not_found",
+    "jl_no": "42"
+   },
+   {
+    "name_bn": "টেক ভাড়ারিয়া",
+    "name_en": "not_found",
+    "jl_no": "43"
+   },
+   {
+    "name_bn": "চান্দনা",
+    "name_en": "not_found",
+    "jl_no": "44"
+   },
+   {
+    "name_bn": "ভোগরা",
+    "name_en": "not_found",
+    "jl_no": "45"
+   },
+   {
+    "name_bn": "নাওজুরী",
+    "name_en": "not_found",
+    "jl_no": "46"
+   },
+   {
+    "name_bn": "কড্ডা নান্দুন",
+    "name_en": "not_found",
+    "jl_no": "47"
+   },
+   {
+    "name_bn": "ইছলামপুর",
+    "name_en": "not_found",
+    "jl_no": "48"
+   },
+   {
+    "name_bn": "বলইকান্তা",
+    "name_en": "not_found",
+    "jl_no": "48"
+   },
+   {
+    "name_bn": "বাসন",
+    "name_en": "not_found",
+    "jl_no": "49"
+   },
+   {
+    "name_bn": "চান্দপাড়া",
+    "name_en": "not_found",
+    "jl_no": "50"
+   },
+   {
+    "name_bn": "মিরপুর",
+    "name_en": "not_found",
+    "jl_no": "51"
+   },
+   {
+    "name_bn": "আধেপাশা",
+    "name_en": "not_found",
+    "jl_no": "51"
+   },
+   {
+    "name_bn": "বাগিয়া",
+    "name_en": "not_found",
+    "jl_no": "52"
+   },
+   {
+    "name_bn": "মৌগর খাল",
+    "name_en": "not_found",
+    "jl_no": "52"
+   },
+   {
+    "name_bn": "যোগীতলা",
+    "name_en": "not_found",
+    "jl_no": "53"
+   },
+   {
+    "name_bn": "পূর্ব্ব খোলাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "53"
+   },
+   {
+    "name_bn": "প্রতাপপুর",
+    "name_en": "not_found",
+    "jl_no": "54"
+   },
+   {
+    "name_bn": "সর পাড়া",
+    "name_en": "not_found",
+    "jl_no": "54"
+   },
+   {
+    "name_bn": "জয়ের টেক",
+    "name_en": "not_found",
+    "jl_no": "55"
+   },
+   {
+    "name_bn": "সামন্তপুর",
+    "name_en": "not_found",
+    "jl_no": "56"
+   },
+   {
+    "name_bn": "বাইমাইল",
+    "name_en": "not_found",
+    "jl_no": "56"
+   },
+   {
+    "name_bn": "ছোট দেওড়া",
+    "name_en": "not_found",
+    "jl_no": "57"
+   },
+   {
+    "name_bn": "জয়দেবপুর",
+    "name_en": "not_found",
+    "jl_no": "58"
+   },
+   {
+    "name_bn": "হাড়ীনাল",
+    "name_en": "not_found",
+    "jl_no": "59"
+   },
+   {
+    "name_bn": "নওগাও",
+    "name_en": "not_found",
+    "jl_no": "60"
+   },
+   {
+    "name_bn": "লাগালিয়া",
+    "name_en": "not_found",
+    "jl_no": "61"
+   },
+   {
+    "name_bn": "বাঙ্গালগাছ",
+    "name_en": "not_found",
+    "jl_no": "62"
+   },
+   {
+    "name_bn": "ভোরা",
+    "name_en": "not_found",
+    "jl_no": "63"
+   },
+   {
+    "name_bn": "আদাবৈ",
+    "name_en": "not_found",
+    "jl_no": "64"
+   },
+   {
+    "name_bn": "নীলেরপাড়া",
+    "name_en": "not_found",
+    "jl_no": "65"
+   },
+   {
+    "name_bn": "বালুচাকুলী",
+    "name_en": "not_found",
+    "jl_no": "66"
+   },
+   {
+    "name_bn": "তরৎপাড়া",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "কানাইয়া",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "ডেমরপাড়া",
+    "name_en": "not_found",
+    "jl_no": "68"
+   },
+   {
+    "name_bn": "ইছালী",
+    "name_en": "not_found",
+    "jl_no": "69"
+   },
+   {
+    "name_bn": "টেকিপাড়া",
+    "name_en": "not_found",
+    "jl_no": "70"
+   },
+   {
+    "name_bn": "পাকৈরদেশী",
+    "name_en": "not_found",
+    "jl_no": "71"
+   },
+   {
+    "name_bn": "তেলিনগর",
+    "name_en": "not_found",
+    "jl_no": "72"
+   },
+   {
+    "name_bn": "রাহাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "73"
+   },
+   {
+    "name_bn": "ভারারুল",
+    "name_en": "not_found",
+    "jl_no": "74"
+   },
+   {
+    "name_bn": "ধীরাশ্রম",
+    "name_en": "not_found",
+    "jl_no": "75"
+   },
+   {
+    "name_bn": "দক্ষিণ খান",
+    "name_en": "not_found",
+    "jl_no": "76"
+   },
+   {
+    "name_bn": "হায়দরাবাদ",
+    "name_en": "not_found",
+    "jl_no": "77"
+   },
+   {
+    "name_bn": "সুবুন্দী",
+    "name_en": "not_found",
+    "jl_no": "78"
+   },
+   {
+    "name_bn": "জিরোইতলী",
+    "name_en": "not_found",
+    "jl_no": "79"
+   },
+   {
+    "name_bn": "মেঘডুবি",
+    "name_en": "not_found",
+    "jl_no": "80"
+   },
+   {
+    "name_bn": "খোরাহদ",
+    "name_en": "not_found",
+    "jl_no": "81"
+   },
+   {
+    "name_bn": "লক্ষনদিয়া",
+    "name_en": "not_found",
+    "jl_no": "82"
+   },
+   {
+    "name_bn": "পাবান",
+    "name_en": "not_found",
+    "jl_no": "83"
+   },
+   {
+    "name_bn": "বিলাসরা",
+    "name_en": "not_found",
+    "jl_no": "84"
+   },
+   {
+    "name_bn": "নাগপাড়া",
+    "name_en": "not_found",
+    "jl_no": "85"
+   },
+   {
+    "name_bn": "সোরুল",
+    "name_en": "not_found",
+    "jl_no": "86"
+   },
+   {
+    "name_bn": "করান্দয়া",
+    "name_en": "not_found",
+    "jl_no": "87"
+   },
+   {
+    "name_bn": "মাইজগাও",
+    "name_en": "not_found",
+    "jl_no": "88"
+   },
+   {
+    "name_bn": "ধরপারা",
+    "name_en": "not_found",
+    "jl_no": "89"
+   },
+   {
+    "name_bn": "কোট ভাদন",
+    "name_en": "not_found",
+    "jl_no": "90"
+   },
+   {
+    "name_bn": "নৈবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "91"
+   },
+   {
+    "name_bn": "চামুন্ডা",
+    "name_en": "not_found",
+    "jl_no": "92"
+   },
+   {
+    "name_bn": "কুদাব",
+    "name_en": "not_found",
+    "jl_no": "93"
+   },
+   {
+    "name_bn": "মাজুখাঁন",
+    "name_en": "not_found",
+    "jl_no": "94"
+   },
+   {
+    "name_bn": "মার্কুয়া",
+    "name_en": "not_found",
+    "jl_no": "95"
+   },
+   {
+    "name_bn": "পদেরবাইদ",
+    "name_en": "not_found",
+    "jl_no": "96"
+   },
+   {
+    "name_bn": "করমতলা",
+    "name_en": "not_found",
+    "jl_no": "97"
+   },
+   {
+    "name_bn": "সাতপোয়া",
+    "name_en": "not_found",
+    "jl_no": "98"
+   },
+   {
+    "name_bn": "কামারগাঁও",
+    "name_en": "not_found",
+    "jl_no": "99"
+   },
+   {
+    "name_bn": "বসুগাঁও",
+    "name_en": "not_found",
+    "jl_no": "100"
+   },
+   {
+    "name_bn": "খিলগাঁও",
+    "name_en": "not_found",
+    "jl_no": "101"
+   },
+   {
+    "name_bn": "পূবাইল",
+    "name_en": "not_found",
+    "jl_no": "102"
+   },
+   {
+    "name_bn": "উজিরপুর",
+    "name_en": "not_found",
+    "jl_no": "103"
+   },
+   {
+    "name_bn": "ছিকলিয়া",
+    "name_en": "not_found",
+    "jl_no": "104"
+   },
+   {
+    "name_bn": "উদুর",
+    "name_en": "not_found",
+    "jl_no": "105"
+   },
+   {
+    "name_bn": "সমরহিংহ",
+    "name_en": "not_found",
+    "jl_no": "106"
+   },
+   {
+    "name_bn": "নারায়নকুল",
+    "name_en": "not_found",
+    "jl_no": "107"
+   },
+   {
+    "name_bn": "তালটিয়া",
+    "name_en": "not_found",
+    "jl_no": "108"
+   },
+   {
+    "name_bn": "নন্দিবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "109"
+   },
+   {
+    "name_bn": "হারবাইদ",
+    "name_en": "not_found",
+    "jl_no": "110"
+   },
+   {
+    "name_bn": "চঙ্গেরবাইদ",
+    "name_en": "not_found",
+    "jl_no": "111"
+   },
+   {
+    "name_bn": "বিন্দান",
+    "name_en": "not_found",
+    "jl_no": "112"
+   },
+   {
+    "name_bn": "ছোট জয়নগর",
+    "name_en": "not_found",
+    "jl_no": "113"
+   },
+   {
+    "name_bn": "বোরান",
+    "name_en": "not_found",
+    "jl_no": "114"
+   },
+   {
+    "name_bn": "ধোপাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "115"
+   }
+  ],
+  "Kaliakair": [
+   {
+    "name_bn": "মোথাজুরী",
+    "name_en": "not_found",
+    "jl_no": "1"
+   },
+   {
+    "name_bn": "মনতলা",
+    "name_en": "not_found",
+    "jl_no": "2"
+   },
+   {
+    "name_bn": "গোয়াল চালা",
+    "name_en": "not_found",
+    "jl_no": "3"
+   },
+   {
+    "name_bn": "চাপুরিয়া",
+    "name_en": "not_found",
+    "jl_no": "4"
+   },
+   {
+    "name_bn": "উত্তর শিমুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "5"
+   },
+   {
+    "name_bn": "বাসাকৈর",
+    "name_en": "not_found",
+    "jl_no": "6"
+   },
+   {
+    "name_bn": "নাবির বহর",
+    "name_en": "not_found",
+    "jl_no": "7"
+   },
+   {
+    "name_bn": "জাথিলা",
+    "name_en": "not_found",
+    "jl_no": "8"
+   },
+   {
+    "name_bn": "খালিশাজানী",
+    "name_en": "not_found",
+    "jl_no": "9"
+   },
+   {
+    "name_bn": "সোনাতলা",
+    "name_en": "not_found",
+    "jl_no": "10"
+   },
+   {
+    "name_bn": "নন্দীচালা",
+    "name_en": "not_found",
+    "jl_no": "11"
+   },
+   {
+    "name_bn": "মধ্যচক",
+    "name_en": "not_found",
+    "jl_no": "12"
+   },
+   {
+    "name_bn": "বোয়ালী",
+    "name_en": "not_found",
+    "jl_no": "13"
+   },
+   {
+    "name_bn": "ভেড়াচালা",
+    "name_en": "not_found",
+    "jl_no": "14"
+   },
+   {
+    "name_bn": "নলুয়া",
+    "name_en": "not_found",
+    "jl_no": "15"
+   },
+   {
+    "name_bn": "বান্ধাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "16"
+   },
+   {
+    "name_bn": "গোসাইবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "17"
+   },
+   {
+    "name_bn": "পিপড়া ছিট",
+    "name_en": "not_found",
+    "jl_no": "18"
+   },
+   {
+    "name_bn": "গলৈয়া",
+    "name_en": "not_found",
+    "jl_no": "19"
+   },
+   {
+    "name_bn": "ডাকুরাইল",
+    "name_en": "not_found",
+    "jl_no": "20"
+   },
+   {
+    "name_bn": "বরই বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "21"
+   },
+   {
+    "name_bn": "নিশ্চিন্তপুর",
+    "name_en": "not_found",
+    "jl_no": "22"
+   },
+   {
+    "name_bn": "হাবুয়ার চালা",
+    "name_en": "not_found",
+    "jl_no": "23"
+   },
+   {
+    "name_bn": "পাইকপাড়া",
+    "name_en": "not_found",
+    "jl_no": "24"
+   },
+   {
+    "name_bn": "কোট বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "25"
+   },
+   {
+    "name_bn": "পাঠাতা",
+    "name_en": "not_found",
+    "jl_no": "26"
+   },
+   {
+    "name_bn": "উত্তর বাগবেড়",
+    "name_en": "not_found",
+    "jl_no": "27"
+   },
+   {
+    "name_bn": "ধুলীগড়া",
+    "name_en": "not_found",
+    "jl_no": "28"
+   },
+   {
+    "name_bn": "ভাল্লক বেড়",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "রশিদপুর",
+    "name_en": "not_found",
+    "jl_no": "30"
+   },
+   {
+    "name_bn": "উত্তর সাদুল্লাপুর",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "বড় গোবিন্দপুর",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "বড় কাঞ্চনপুর",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "মেদি আসুলাই",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "আগারিয়া বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "35"
+   },
+   {
+    "name_bn": "বড় মেদি",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "কালিয়াদহ",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "তালতলী",
+    "name_en": "not_found",
+    "jl_no": "38"
+   },
+   {
+    "name_bn": "ভাঙ্গাজঙ্গল",
+    "name_en": "not_found",
+    "jl_no": "39"
+   },
+   {
+    "name_bn": "বাগাম্বর",
+    "name_en": "not_found",
+    "jl_no": "40"
+   },
+   {
+    "name_bn": "উত্তর রাঙ্গা মাটিয়া",
+    "name_en": "not_found",
+    "jl_no": "41"
+   },
+   {
+    "name_bn": "কাচারস",
+    "name_en": "not_found",
+    "jl_no": "42"
+   },
+   {
+    "name_bn": "বাঁশতলী",
+    "name_en": "not_found",
+    "jl_no": "43"
+   },
+   {
+    "name_bn": "দিঘীবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "44"
+   },
+   {
+    "name_bn": "সাহেবাবাদ",
+    "name_en": "not_found",
+    "jl_no": "45"
+   },
+   {
+    "name_bn": "উত্তর রাজাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "46"
+   },
+   {
+    "name_bn": "গাবতলী",
+    "name_en": "not_found",
+    "jl_no": "47"
+   },
+   {
+    "name_bn": "নামা আসুলাই",
+    "name_en": "not_found",
+    "jl_no": "48"
+   },
+   {
+    "name_bn": "সৈদপুর",
+    "name_en": "not_found",
+    "jl_no": "49"
+   },
+   {
+    "name_bn": "তেতুলিয়াচালা",
+    "name_en": "not_found",
+    "jl_no": "50"
+   },
+   {
+    "name_bn": "জানুর চালা",
+    "name_en": "not_found",
+    "jl_no": "51"
+   },
+   {
+    "name_bn": "পীরের টেকী",
+    "name_en": "not_found",
+    "jl_no": "52"
+   },
+   {
+    "name_bn": "ভানুর টেকী",
+    "name_en": "not_found",
+    "jl_no": "53"
+   },
+   {
+    "name_bn": "কালিয়াকৈর",
+    "name_en": "not_found",
+    "jl_no": "54"
+   },
+   {
+    "name_bn": "কুতুবদিয়া",
+    "name_en": "not_found",
+    "jl_no": "55"
+   },
+   {
+    "name_bn": "চাপাইর",
+    "name_en": "not_found",
+    "jl_no": "56"
+   },
+   {
+    "name_bn": "সুত্রাপুর",
+    "name_en": "not_found",
+    "jl_no": "57"
+   },
+   {
+    "name_bn": "টান সুত্রাপুর",
+    "name_en": "not_found",
+    "jl_no": "58"
+   },
+   {
+    "name_bn": "তালুক শিমুলতলী",
+    "name_en": "not_found",
+    "jl_no": "59"
+   },
+   {
+    "name_bn": "উত্তর দরিয়াপুর",
+    "name_en": "not_found",
+    "jl_no": "60"
+   },
+   {
+    "name_bn": "উত্তর গজারিয়া",
+    "name_en": "not_found",
+    "jl_no": "61"
+   },
+   {
+    "name_bn": "ছোট কাঞ্চনপুর",
+    "name_en": "not_found",
+    "jl_no": "62"
+   },
+   {
+    "name_bn": "দক্ষিণ গজারিয়া",
+    "name_en": "not_found",
+    "jl_no": "63"
+   },
+   {
+    "name_bn": "উত্তর হিজলতলী",
+    "name_en": "not_found",
+    "jl_no": "64"
+   },
+   {
+    "name_bn": "দক্ষিন হিজলতলী",
+    "name_en": "not_found",
+    "jl_no": "65"
+   },
+   {
+    "name_bn": "নয়ানগর",
+    "name_en": "not_found",
+    "jl_no": "66"
+   },
+   {
+    "name_bn": "কাঠালিয়া",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "টালাবহ",
+    "name_en": "not_found",
+    "jl_no": "68"
+   },
+   {
+    "name_bn": "ভাউমান",
+    "name_en": "not_found",
+    "jl_no": "69"
+   },
+   {
+    "name_bn": "বড়বাড়ীয়া",
+    "name_en": "not_found",
+    "jl_no": "70"
+   },
+   {
+    "name_bn": "ফয়জুল্লাপুর",
+    "name_en": "not_found",
+    "jl_no": "71"
+   },
+   {
+    "name_bn": "টেকীবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "72"
+   },
+   {
+    "name_bn": "পশ্চিম চাঁন্দপুর",
+    "name_en": "not_found",
+    "jl_no": "73"
+   },
+   {
+    "name_bn": "পশ্চিম বাগবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "74"
+   },
+   {
+    "name_bn": "সাজনধরা",
+    "name_en": "not_found",
+    "jl_no": "75"
+   },
+   {
+    "name_bn": "দক্ষিন সাদুল্যাপুর",
+    "name_en": "not_found",
+    "jl_no": "76"
+   },
+   {
+    "name_bn": "জামালপুর",
+    "name_en": "not_found",
+    "jl_no": "77"
+   },
+   {
+    "name_bn": "ডুবাইল",
+    "name_en": "not_found",
+    "jl_no": "78"
+   },
+   {
+    "name_bn": "নিশিন্দী হাটী",
+    "name_en": "not_found",
+    "jl_no": "79"
+   },
+   {
+    "name_bn": "আদাব",
+    "name_en": "not_found",
+    "jl_no": "80"
+   },
+   {
+    "name_bn": "পোড়া টেঙ্গর",
+    "name_en": "not_found",
+    "jl_no": "81"
+   },
+   {
+    "name_bn": "বান্দাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "82"
+   },
+   {
+    "name_bn": "ঢাল জোড়া",
+    "name_en": "not_found",
+    "jl_no": "83"
+   },
+   {
+    "name_bn": "পাকুরাইল",
+    "name_en": "not_found",
+    "jl_no": "84"
+   },
+   {
+    "name_bn": "কূড়ালকাপা",
+    "name_en": "not_found",
+    "jl_no": "85"
+   },
+   {
+    "name_bn": "বাঙ্গুরী",
+    "name_en": "not_found",
+    "jl_no": "86"
+   },
+   {
+    "name_bn": "বৈকুণ্ঠপুর",
+    "name_en": "not_found",
+    "jl_no": "87"
+   },
+   {
+    "name_bn": "চকচকা",
+    "name_en": "not_found",
+    "jl_no": "88"
+   },
+   {
+    "name_bn": "চিনাইল",
+    "name_en": "not_found",
+    "jl_no": "89"
+   },
+   {
+    "name_bn": "দেওয়াইর",
+    "name_en": "not_found",
+    "jl_no": "90"
+   },
+   {
+    "name_bn": "বাহাদুর পুর",
+    "name_en": "not_found",
+    "jl_no": "91"
+   },
+   {
+    "name_bn": "গণ্ডস্থা",
+    "name_en": "not_found",
+    "jl_no": "92"
+   },
+   {
+    "name_bn": "বামন খোলা",
+    "name_en": "not_found",
+    "jl_no": "93"
+   },
+   {
+    "name_bn": "আশাপুর",
+    "name_en": "not_found",
+    "jl_no": "94"
+   },
+   {
+    "name_bn": "বেনুপুর",
+    "name_en": "not_found",
+    "jl_no": "95"
+   },
+   {
+    "name_bn": "উল্টাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "96"
+   },
+   {
+    "name_bn": "মুদিপাড়া",
+    "name_en": "not_found",
+    "jl_no": "97"
+   },
+   {
+    "name_bn": "বাসুরা",
+    "name_en": "not_found",
+    "jl_no": "98"
+   },
+   {
+    "name_bn": "মেদুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "99"
+   },
+   {
+    "name_bn": "কান্দাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "100"
+   },
+   {
+    "name_bn": "বাগুন বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "101"
+   },
+   {
+    "name_bn": "মহরাবহ",
+    "name_en": "not_found",
+    "jl_no": "102"
+   },
+   {
+    "name_bn": "সাভাজপুর",
+    "name_en": "not_found",
+    "jl_no": "103"
+   },
+   {
+    "name_bn": "বামনাবহ",
+    "name_en": "not_found",
+    "jl_no": "104"
+   },
+   {
+    "name_bn": "দক্ষিণ পাকুল্লা",
+    "name_en": "not_found",
+    "jl_no": "105"
+   },
+   {
+    "name_bn": "দরবারিয়া",
+    "name_en": "not_found",
+    "jl_no": "106"
+   },
+   {
+    "name_bn": "চাতৈলভিটি",
+    "name_en": "not_found",
+    "jl_no": "107"
+   },
+   {
+    "name_bn": "হিজল হাটিয়া",
+    "name_en": "not_found",
+    "jl_no": "108"
+   },
+   {
+    "name_bn": "পশ্চিম খোলাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "109"
+   },
+   {
+    "name_bn": "জালসুকা",
+    "name_en": "not_found",
+    "jl_no": "110"
+   },
+   {
+    "name_bn": "কালিদাসপট্টি",
+    "name_en": "not_found",
+    "jl_no": "111"
+   },
+   {
+    "name_bn": "উত্তর পাকুল্লা",
+    "name_en": "not_found",
+    "jl_no": "112"
+   },
+   {
+    "name_bn": "চান্দাব",
+    "name_en": "not_found",
+    "jl_no": "113"
+   },
+   {
+    "name_bn": "জাঙ্গালিয়া বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "114"
+   },
+   {
+    "name_bn": "বেলাবহ",
+    "name_en": "not_found",
+    "jl_no": "115"
+   },
+   {
+    "name_bn": "দক্ষিণ রাজাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "116"
+   },
+   {
+    "name_bn": "গোসাত্রা",
+    "name_en": "not_found",
+    "jl_no": "118"
+   },
+   {
+    "name_bn": "উত্তর কাঞ্চনপুর",
+    "name_en": "not_found",
+    "jl_no": "119"
+   },
+   {
+    "name_bn": "মাথালিয়া",
+    "name_en": "not_found",
+    "jl_no": "119"
+   },
+   {
+    "name_bn": "বৈরাব",
+    "name_en": "not_found",
+    "jl_no": "120"
+   },
+   {
+    "name_bn": "সারাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "121"
+   },
+   {
+    "name_bn": "সোনাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "122"
+   },
+   {
+    "name_bn": "গোঠরী",
+    "name_en": "not_found",
+    "jl_no": "123"
+   },
+   {
+    "name_bn": "হরিনা হাটী",
+    "name_en": "not_found",
+    "jl_no": "124"
+   },
+   {
+    "name_bn": "নাওলা",
+    "name_en": "not_found",
+    "jl_no": "125"
+   },
+   {
+    "name_bn": "আটাব",
+    "name_en": "not_found",
+    "jl_no": "126"
+   },
+   {
+    "name_bn": "কামারিয়া",
+    "name_en": "not_found",
+    "jl_no": "127"
+   },
+   {
+    "name_bn": "চণ্ডীতলা",
+    "name_en": "not_found",
+    "jl_no": "128"
+   },
+   {
+    "name_bn": "সেওড়াতলী",
+    "name_en": "not_found",
+    "jl_no": "129"
+   },
+   {
+    "name_bn": "রাধানগর",
+    "name_en": "not_found",
+    "jl_no": "130"
+   },
+   {
+    "name_bn": "সিন্দুরী",
+    "name_en": "not_found",
+    "jl_no": "131"
+   },
+   {
+    "name_bn": "বলিয়াদি",
+    "name_en": "not_found",
+    "jl_no": "132"
+   },
+   {
+    "name_bn": "বাজে বালিয়াদি",
+    "name_en": "not_found",
+    "jl_no": "133"
+   },
+   {
+    "name_bn": "বামন দহ",
+    "name_en": "not_found",
+    "jl_no": "134"
+   },
+   {
+    "name_bn": "বাজে হিজলতলী",
+    "name_en": "not_found",
+    "jl_no": "135"
+   },
+   {
+    "name_bn": "ভিঙ্গরাজ",
+    "name_en": "not_found",
+    "jl_no": "136"
+   },
+   {
+    "name_bn": "বরদল",
+    "name_en": "not_found",
+    "jl_no": "137"
+   },
+   {
+    "name_bn": "ভোঙ্গাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "138"
+   },
+   {
+    "name_bn": "শ্রীফলতলী",
+    "name_en": "not_found",
+    "jl_no": "139"
+   },
+   {
+    "name_bn": "বড়ইতলী",
+    "name_en": "not_found",
+    "jl_no": "140"
+   },
+   {
+    "name_bn": "শিমৈলতলী",
+    "name_en": "not_found",
+    "jl_no": "141"
+   },
+   {
+    "name_bn": "টাংলা বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "142"
+   },
+   {
+    "name_bn": "লতিফপুর",
+    "name_en": "not_found",
+    "jl_no": "143"
+   },
+   {
+    "name_bn": "গোয়ালবাথান",
+    "name_en": "not_found",
+    "jl_no": "144"
+   },
+   {
+    "name_bn": "উত্তর বক্তারপুর",
+    "name_en": "not_found",
+    "jl_no": "145"
+   },
+   {
+    "name_bn": "হরতকি তলা",
+    "name_en": "not_found",
+    "jl_no": "146"
+   },
+   {
+    "name_bn": "পাচলক্ষী",
+    "name_en": "not_found",
+    "jl_no": "147"
+   },
+   {
+    "name_bn": "কালামপুর",
+    "name_en": "not_found",
+    "jl_no": "148"
+   },
+   {
+    "name_bn": "ডাইনকিনি",
+    "name_en": "not_found",
+    "jl_no": "149"
+   },
+   {
+    "name_bn": "ভাতারিয়া",
+    "name_en": "not_found",
+    "jl_no": "150"
+   },
+   {
+    "name_bn": "বিষাইদ",
+    "name_en": "not_found",
+    "jl_no": "151"
+   },
+   {
+    "name_bn": "রসুল পুর",
+    "name_en": "not_found",
+    "jl_no": "152"
+   },
+   {
+    "name_bn": "বড়ৈসুটী",
+    "name_en": "not_found",
+    "jl_no": "153"
+   },
+   {
+    "name_bn": "মাটিকাটা",
+    "name_en": "not_found",
+    "jl_no": "153"
+   },
+   {
+    "name_bn": "চান্দরা",
+    "name_en": "not_found",
+    "jl_no": "154"
+   },
+   {
+    "name_bn": "উলুসারা",
+    "name_en": "not_found",
+    "jl_no": "155"
+   },
+   {
+    "name_bn": "হাবিবপুর",
+    "name_en": "not_found",
+    "jl_no": "156"
+   },
+   {
+    "name_bn": "আজুলিপাড়া",
+    "name_en": "not_found",
+    "jl_no": "157"
+   },
+   {
+    "name_bn": "হরি রাউৎ পুলকার",
+    "name_en": "not_found",
+    "jl_no": "158"
+   },
+   {
+    "name_bn": "আড়াবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "159"
+   },
+   {
+    "name_bn": "সফিপুর",
+    "name_en": "not_found",
+    "jl_no": "161"
+   },
+   {
+    "name_bn": "কৌচাকুড়ি",
+    "name_en": "not_found",
+    "jl_no": "162"
+   },
+   {
+    "name_bn": "কারল সুরি চালা",
+    "name_en": "not_found",
+    "jl_no": "164"
+   },
+   {
+    "name_bn": "ভূলূয়া",
+    "name_en": "not_found",
+    "jl_no": "165"
+   },
+   {
+    "name_bn": "সিনাব",
+    "name_en": "not_found",
+    "jl_no": "166"
+   },
+   {
+    "name_bn": "সাটুরিয়া সোলাহাটি",
+    "name_en": "not_found",
+    "jl_no": "167"
+   },
+   {
+    "name_bn": "গলাচিপা",
+    "name_en": "not_found",
+    "jl_no": "168"
+   },
+   {
+    "name_bn": "কুয়ার চালা",
+    "name_en": "not_found",
+    "jl_no": "169"
+   },
+   {
+    "name_bn": "মধ্যপাড়া",
+    "name_en": "not_found",
+    "jl_no": "170"
+   },
+   {
+    "name_bn": "উত্তর লস্কর চালা",
+    "name_en": "not_found",
+    "jl_no": "171"
+   },
+   {
+    "name_bn": "মাঝু খান",
+    "name_en": "not_found",
+    "jl_no": "172"
+   },
+   {
+    "name_bn": "ভান্নারা",
+    "name_en": "not_found",
+    "jl_no": "173"
+   },
+   {
+    "name_bn": "ঠাকুরপাড়া",
+    "name_en": "not_found",
+    "jl_no": "174"
+   },
+   {
+    "name_bn": "পূর্ব চাদপুর",
+    "name_en": "not_found",
+    "jl_no": "175"
+   },
+   {
+    "name_bn": "সাকাশর",
+    "name_en": "not_found",
+    "jl_no": "176"
+   },
+   {
+    "name_bn": "বরাব",
+    "name_en": "not_found",
+    "jl_no": "177"
+   },
+   {
+    "name_bn": "বেগমপুর",
+    "name_en": "not_found",
+    "jl_no": "178"
+   }
+  ],
+  "Kaliganj": [
+   {
+    "name_bn": "শিমুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "1"
+   },
+   {
+    "name_bn": "বিরহী",
+    "name_en": "not_found",
+    "jl_no": "2"
+   },
+   {
+    "name_bn": "পিপুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "3"
+   },
+   {
+    "name_bn": "ধনুন",
+    "name_en": "not_found",
+    "jl_no": "4"
+   },
+   {
+    "name_bn": "রায়ান",
+    "name_en": "not_found",
+    "jl_no": "5"
+   },
+   {
+    "name_bn": "গাড়ারিয়া",
+    "name_en": "not_found",
+    "jl_no": "6"
+   },
+   {
+    "name_bn": "বাঘদি",
+    "name_en": "not_found",
+    "jl_no": "7"
+   },
+   {
+    "name_bn": "নাগরী",
+    "name_en": "not_found",
+    "jl_no": "8"
+   },
+   {
+    "name_bn": "করান",
+    "name_en": "not_found",
+    "jl_no": "9"
+   },
+   {
+    "name_bn": "সুজাপুর",
+    "name_en": "not_found",
+    "jl_no": "10"
+   },
+   {
+    "name_bn": "লোদারিয়া",
+    "name_en": "not_found",
+    "jl_no": "11"
+   },
+   {
+    "name_bn": "বিরুয়া",
+    "name_en": "not_found",
+    "jl_no": "12"
+   },
+   {
+    "name_bn": "বান্দাখোলা",
+    "name_en": "not_found",
+    "jl_no": "13"
+   },
+   {
+    "name_bn": "দোয়ানীর টেক",
+    "name_en": "not_found",
+    "jl_no": "14"
+   },
+   {
+    "name_bn": "তিরিয়া",
+    "name_en": "not_found",
+    "jl_no": "15"
+   },
+   {
+    "name_bn": "টেক ছাতিয়ান",
+    "name_en": "not_found",
+    "jl_no": "16"
+   },
+   {
+    "name_bn": "আরা",
+    "name_en": "not_found",
+    "jl_no": "17"
+   },
+   {
+    "name_bn": "চান্দখোলা",
+    "name_en": "not_found",
+    "jl_no": "18"
+   },
+   {
+    "name_bn": "বাঘেরদিয়া",
+    "name_en": "not_found",
+    "jl_no": "19"
+   },
+   {
+    "name_bn": "টেক মানিকপুর",
+    "name_en": "not_found",
+    "jl_no": "20"
+   },
+   {
+    "name_bn": "পাকুরিয়া",
+    "name_en": "not_found",
+    "jl_no": "21"
+   },
+   {
+    "name_bn": "ফিরিন্দা",
+    "name_en": "not_found",
+    "jl_no": "22"
+   },
+   {
+    "name_bn": "চরের খোলা",
+    "name_en": "not_found",
+    "jl_no": "23"
+   },
+   {
+    "name_bn": "পিপড়া সৈর",
+    "name_en": "not_found",
+    "jl_no": "24"
+   },
+   {
+    "name_bn": "চুয়ারিয়া খলা",
+    "name_en": "not_found",
+    "jl_no": "25"
+   },
+   {
+    "name_bn": "দক্ষিণ রাজনগর",
+    "name_en": "not_found",
+    "jl_no": "26"
+   },
+   {
+    "name_bn": "বোয়ালী",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "দক্ষিণ ভাদার্ত্তি",
+    "name_en": "not_found",
+    "jl_no": "30"
+   },
+   {
+    "name_bn": "সাতানিপাড়া",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "উলুয়া",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "ভদ্রতলী",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "ছোট দেউলিয়া",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "সোম",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "টিউলী",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "উত্তর রাজনগর",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "খৈকরা",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "ব্রাহ্মনগাঁও",
+    "name_en": "not_found",
+    "jl_no": "35"
+   },
+   {
+    "name_bn": "ইছাপুর",
+    "name_en": "not_found",
+    "jl_no": "35"
+   },
+   {
+    "name_bn": "বর্ত্তুল",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "বেরুয়া",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "নাওয়াল",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "বরিহাটি",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "গোয়াইল বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "38"
+   },
+   {
+    "name_bn": "রয়েন",
+    "name_en": "not_found",
+    "jl_no": "39"
+   },
+   {
+    "name_bn": "বৌনা",
+    "name_en": "not_found",
+    "jl_no": "40"
+   },
+   {
+    "name_bn": "ছাতিয়ানী",
+    "name_en": "not_found",
+    "jl_no": "41"
+   },
+   {
+    "name_bn": "মরাশ",
+    "name_en": "not_found",
+    "jl_no": "42"
+   },
+   {
+    "name_bn": "পুনসহি",
+    "name_en": "not_found",
+    "jl_no": "44"
+   },
+   {
+    "name_bn": "মালিবন্দ",
+    "name_en": "not_found",
+    "jl_no": "44"
+   },
+   {
+    "name_bn": "বাশিয়ারাটি",
+    "name_en": "not_found",
+    "jl_no": "45"
+   },
+   {
+    "name_bn": "বাড়িয়াদি",
+    "name_en": "not_found",
+    "jl_no": "46"
+   },
+   {
+    "name_bn": "নরুন",
+    "name_en": "not_found",
+    "jl_no": "47"
+   },
+   {
+    "name_bn": "ভাইয়াসুতী",
+    "name_en": "not_found",
+    "jl_no": "47"
+   },
+   {
+    "name_bn": "দেওতলা",
+    "name_en": "not_found",
+    "jl_no": "49"
+   },
+   {
+    "name_bn": "বরায়া",
+    "name_en": "not_found",
+    "jl_no": "50"
+   },
+   {
+    "name_bn": "সরুসুয়াদুলা",
+    "name_en": "not_found",
+    "jl_no": "51"
+   },
+   {
+    "name_bn": "আজমতপুর",
+    "name_en": "not_found",
+    "jl_no": "52"
+   },
+   {
+    "name_bn": "কুলথুন",
+    "name_en": "not_found",
+    "jl_no": "53"
+   },
+   {
+    "name_bn": "কাউলিতা",
+    "name_en": "not_found",
+    "jl_no": "54"
+   },
+   {
+    "name_bn": "মুসুণ্ডী",
+    "name_en": "not_found",
+    "jl_no": "55"
+   },
+   {
+    "name_bn": "সালদিয়া",
+    "name_en": "not_found",
+    "jl_no": "56"
+   },
+   {
+    "name_bn": "দুবুরিয়া",
+    "name_en": "not_found",
+    "jl_no": "57"
+   },
+   {
+    "name_bn": "বাঙ্গালগাঁও",
+    "name_en": "not_found",
+    "jl_no": "58"
+   },
+   {
+    "name_bn": "বড়হরা",
+    "name_en": "not_found",
+    "jl_no": "59"
+   },
+   {
+    "name_bn": "জাঙ্গালিয়া",
+    "name_en": "not_found",
+    "jl_no": "60"
+   },
+   {
+    "name_bn": "আটলাব",
+    "name_en": "not_found",
+    "jl_no": "61"
+   },
+   {
+    "name_bn": "কলুন",
+    "name_en": "not_found",
+    "jl_no": "62"
+   },
+   {
+    "name_bn": "ফুলদী",
+    "name_en": "not_found",
+    "jl_no": "63"
+   },
+   {
+    "name_bn": "মোহানী",
+    "name_en": "not_found",
+    "jl_no": "64"
+   },
+   {
+    "name_bn": "বক্তারপুর",
+    "name_en": "not_found",
+    "jl_no": "65"
+   },
+   {
+    "name_bn": "পাড়াটেক",
+    "name_en": "not_found",
+    "jl_no": "65"
+   },
+   {
+    "name_bn": "পৈলানপুর",
+    "name_en": "not_found",
+    "jl_no": "66"
+   },
+   {
+    "name_bn": "রাথূরা",
+    "name_en": "not_found",
+    "jl_no": "66"
+   },
+   {
+    "name_bn": "বাঙ্গাল হাওলা",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "পানজোড়া",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "তুমুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "68"
+   },
+   {
+    "name_bn": "পারোয়ান",
+    "name_en": "not_found",
+    "jl_no": "68"
+   },
+   {
+    "name_bn": "উত্তর ভাদারতি",
+    "name_en": "not_found",
+    "jl_no": "69"
+   },
+   {
+    "name_bn": "বর্ত্তুলটেক",
+    "name_en": "not_found",
+    "jl_no": "69"
+   },
+   {
+    "name_bn": "দড়িসোম",
+    "name_en": "not_found",
+    "jl_no": "70"
+   },
+   {
+    "name_bn": "উলুখলা",
+    "name_en": "not_found",
+    "jl_no": "70"
+   },
+   {
+    "name_bn": "মুনসুরপুর",
+    "name_en": "not_found",
+    "jl_no": "71"
+   },
+   {
+    "name_bn": "সেনপাড়া",
+    "name_en": "not_found",
+    "jl_no": "71"
+   },
+   {
+    "name_bn": "বাইমা কান্দা",
+    "name_en": "not_found",
+    "jl_no": "72"
+   },
+   {
+    "name_bn": "খঞ্জনা",
+    "name_en": "not_found",
+    "jl_no": "72"
+   },
+   {
+    "name_bn": "নাগরবেলা",
+    "name_en": "not_found",
+    "jl_no": "73"
+   },
+   {
+    "name_bn": "ভাতগাতি",
+    "name_en": "not_found",
+    "jl_no": "73"
+   },
+   {
+    "name_bn": "বড়নগর",
+    "name_en": "not_found",
+    "jl_no": "74"
+   },
+   {
+    "name_bn": "রায়েরদিয়া",
+    "name_en": "not_found",
+    "jl_no": "74"
+   },
+   {
+    "name_bn": "চান্দাইয়া",
+    "name_en": "not_found",
+    "jl_no": "75"
+   },
+   {
+    "name_bn": "তালিয়া",
+    "name_en": "not_found",
+    "jl_no": "75"
+   },
+   {
+    "name_bn": "মঠবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "76"
+   },
+   {
+    "name_bn": "নয়াবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "76"
+   },
+   {
+    "name_bn": "কুচিলাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "77"
+   },
+   {
+    "name_bn": "বেতুয়া",
+    "name_en": "not_found",
+    "jl_no": "77"
+   },
+   {
+    "name_bn": "কেটুন",
+    "name_en": "not_found",
+    "jl_no": "78"
+   },
+   {
+    "name_bn": "ধোলাসাধু খাঁ",
+    "name_en": "not_found",
+    "jl_no": "78"
+   },
+   {
+    "name_bn": "গলান",
+    "name_en": "not_found",
+    "jl_no": "79"
+   },
+   {
+    "name_bn": "বড়কাউ",
+    "name_en": "not_found",
+    "jl_no": "79"
+   },
+   {
+    "name_bn": "জুগলী",
+    "name_en": "not_found",
+    "jl_no": "79"
+   },
+   {
+    "name_bn": "উত্তরগাঁও",
+    "name_en": "not_found",
+    "jl_no": "80"
+   },
+   {
+    "name_bn": "পাড়াবর্ত্তা",
+    "name_en": "not_found",
+    "jl_no": "80"
+   },
+   {
+    "name_bn": "বালিগাঁও",
+    "name_en": "not_found",
+    "jl_no": "81"
+   },
+   {
+    "name_bn": "মুলগাঁও",
+    "name_en": "not_found",
+    "jl_no": "82"
+   },
+   {
+    "name_bn": "চরমীরপুর",
+    "name_en": "not_found",
+    "jl_no": "83"
+   },
+   {
+    "name_bn": "দেওপাড়া",
+    "name_en": "not_found",
+    "jl_no": "84"
+   },
+   {
+    "name_bn": "খলাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "85"
+   },
+   {
+    "name_bn": "ঈশ্বরপুর",
+    "name_en": "not_found",
+    "jl_no": "86"
+   },
+   {
+    "name_bn": "ভূঞ্জাব",
+    "name_en": "not_found",
+    "jl_no": "87"
+   },
+   {
+    "name_bn": "ভাটিরা",
+    "name_en": "not_found",
+    "jl_no": "88"
+   },
+   {
+    "name_bn": "দক্ষিণভাগ",
+    "name_en": "not_found",
+    "jl_no": "89"
+   },
+   {
+    "name_bn": "বাহাদুর সাদী",
+    "name_en": "not_found",
+    "jl_no": "90"
+   },
+   {
+    "name_bn": "ছৈলাদি",
+    "name_en": "not_found",
+    "jl_no": "91"
+   },
+   {
+    "name_bn": "চুপাইর",
+    "name_en": "not_found",
+    "jl_no": "92"
+   },
+   {
+    "name_bn": "মাজু খাঁ",
+    "name_en": "not_found",
+    "jl_no": "93"
+   },
+   {
+    "name_bn": "কৌচান",
+    "name_en": "not_found",
+    "jl_no": "94"
+   },
+   {
+    "name_bn": "কাকোয়াসি",
+    "name_en": "not_found",
+    "jl_no": "95"
+   },
+   {
+    "name_bn": "শিবপুর",
+    "name_en": "not_found",
+    "jl_no": "96"
+   },
+   {
+    "name_bn": "পোটান",
+    "name_en": "not_found",
+    "jl_no": "97"
+   },
+   {
+    "name_bn": "মৈশাইর",
+    "name_en": "not_found",
+    "jl_no": "98"
+   },
+   {
+    "name_bn": "নোয়াপাড়া",
+    "name_en": "not_found",
+    "jl_no": "99"
+   },
+   {
+    "name_bn": "হরিদেবপুর",
+    "name_en": "not_found",
+    "jl_no": "100"
+   },
+   {
+    "name_bn": "ভিটী বাগুন",
+    "name_en": "not_found",
+    "jl_no": "101"
+   },
+   {
+    "name_bn": "দড়ি বাগুন",
+    "name_en": "not_found",
+    "jl_no": "102"
+   },
+   {
+    "name_bn": "শিংলাব",
+    "name_en": "not_found",
+    "jl_no": "103"
+   },
+   {
+    "name_bn": "বাগদি",
+    "name_en": "not_found",
+    "jl_no": "104"
+   },
+   {
+    "name_bn": "রাতকানা",
+    "name_en": "not_found",
+    "jl_no": "105"
+   },
+   {
+    "name_bn": "বড়বোলা",
+    "name_en": "not_found",
+    "jl_no": "106"
+   },
+   {
+    "name_bn": "কলাপটুয়া",
+    "name_en": "not_found",
+    "jl_no": "107"
+   },
+   {
+    "name_bn": "জামালপুর",
+    "name_en": "not_found",
+    "jl_no": "108"
+   },
+   {
+    "name_bn": "বাসাইর",
+    "name_en": "not_found",
+    "jl_no": "109"
+   },
+   {
+    "name_bn": "জামালপুরচক",
+    "name_en": "not_found",
+    "jl_no": "110"
+   },
+   {
+    "name_bn": "নারগানা",
+    "name_en": "not_found",
+    "jl_no": "114"
+   },
+   {
+    "name_bn": "সেওরাইট",
+    "name_en": "not_found",
+    "jl_no": "115"
+   },
+   {
+    "name_bn": "বরাইদ",
+    "name_en": "not_found",
+    "jl_no": "116"
+   },
+   {
+    "name_bn": "বরগাঁও",
+    "name_en": "not_found",
+    "jl_no": "117"
+   },
+   {
+    "name_bn": "রামচন্দ্রপুর",
+    "name_en": "not_found",
+    "jl_no": "118"
+   },
+   {
+    "name_bn": "রাথুরা",
+    "name_en": "not_found",
+    "jl_no": "119"
+   },
+   {
+    "name_bn": "শঙ্করপুর",
+    "name_en": "not_found",
+    "jl_no": "120"
+   },
+   {
+    "name_bn": "ডেমরা",
+    "name_en": "not_found",
+    "jl_no": "121"
+   },
+   {
+    "name_bn": "ধনপুর",
+    "name_en": "not_found",
+    "jl_no": "122"
+   },
+   {
+    "name_bn": "কালিহাসি",
+    "name_en": "not_found",
+    "jl_no": "123"
+   },
+   {
+    "name_bn": "মোক্তারপুর",
+    "name_en": "not_found",
+    "jl_no": "124"
+   },
+   {
+    "name_bn": "একুতা",
+    "name_en": "not_found",
+    "jl_no": "127"
+   },
+   {
+    "name_bn": "দীঘুয়া",
+    "name_en": "not_found",
+    "jl_no": "128"
+   }
+  ],
+  "Kapasia": [
+   {
+    "name_bn": "হাড়িয়াদি",
+    "name_en": "not_found",
+    "jl_no": "1"
+   },
+   {
+    "name_bn": "বড় কাইকা",
+    "name_en": "not_found",
+    "jl_no": "2"
+   },
+   {
+    "name_bn": "পোনাসারি",
+    "name_en": "not_found",
+    "jl_no": "3"
+   },
+   {
+    "name_bn": "সিংহশ্রী",
+    "name_en": "not_found",
+    "jl_no": "4"
+   },
+   {
+    "name_bn": "টোক নগর",
+    "name_en": "not_found",
+    "jl_no": "8"
+   },
+   {
+    "name_bn": "বরাব",
+    "name_en": "not_found",
+    "jl_no": "21"
+   },
+   {
+    "name_bn": "কির্ত্তনিয়া",
+    "name_en": "not_found",
+    "jl_no": "22"
+   },
+   {
+    "name_bn": "ছেলদিয়া",
+    "name_en": "not_found",
+    "jl_no": "23"
+   },
+   {
+    "name_bn": "ভিকারটেক",
+    "name_en": "not_found",
+    "jl_no": "24"
+   },
+   {
+    "name_bn": "বর্জ্জাপুর",
+    "name_en": "not_found",
+    "jl_no": "25"
+   },
+   {
+    "name_bn": "জালারচর",
+    "name_en": "not_found",
+    "jl_no": "26"
+   },
+   {
+    "name_bn": "কুশদী",
+    "name_en": "not_found",
+    "jl_no": "27"
+   },
+   {
+    "name_bn": "চর দুর্ল্লভ খাঁ",
+    "name_en": "not_found",
+    "jl_no": "28"
+   },
+   {
+    "name_bn": "চর বাগুয়া",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "চর নিলখি",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "ঐচার চর",
+    "name_en": "not_found",
+    "jl_no": "30"
+   },
+   {
+    "name_bn": "বাগুয়া",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "বারিষাব",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "আড়াবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "নরোত্তমপুর",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "চেঙ্গনা",
+    "name_en": "not_found",
+    "jl_no": "35"
+   },
+   {
+    "name_bn": "শ্যামপুর",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "গাওরার",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "নয়া নগর",
+    "name_en": "not_found",
+    "jl_no": "38"
+   },
+   {
+    "name_bn": "ডাওরা",
+    "name_en": "not_found",
+    "jl_no": "39"
+   },
+   {
+    "name_bn": "লোহাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "41"
+   },
+   {
+    "name_bn": "দীঘীর কান্দা",
+    "name_en": "not_found",
+    "jl_no": "51"
+   },
+   {
+    "name_bn": "পেচর দিয়া",
+    "name_en": "not_found",
+    "jl_no": "52"
+   },
+   {
+    "name_bn": "পাকিয়াব",
+    "name_en": "not_found",
+    "jl_no": "53"
+   },
+   {
+    "name_bn": "মেরুয়া",
+    "name_en": "not_found",
+    "jl_no": "54"
+   },
+   {
+    "name_bn": "পেওরাইট",
+    "name_en": "not_found",
+    "jl_no": "55"
+   },
+   {
+    "name_bn": "তারগাঁও",
+    "name_en": "not_found",
+    "jl_no": "66"
+   },
+   {
+    "name_bn": "মাটীকাটা",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "কড়িহাটা",
+    "name_en": "not_found",
+    "jl_no": "68"
+   },
+   {
+    "name_bn": "বেহাইদুয়ার",
+    "name_en": "not_found",
+    "jl_no": "69"
+   },
+   {
+    "name_bn": "পিরিজপুর",
+    "name_en": "not_found",
+    "jl_no": "70"
+   },
+   {
+    "name_bn": "আঞ্জাব",
+    "name_en": "not_found",
+    "jl_no": "71"
+   },
+   {
+    "name_bn": "বড় রামপুর",
+    "name_en": "not_found",
+    "jl_no": "72"
+   },
+   {
+    "name_bn": "মাদুলি",
+    "name_en": "not_found",
+    "jl_no": "73"
+   },
+   {
+    "name_bn": "সালদহি",
+    "name_en": "not_found",
+    "jl_no": "74"
+   },
+   {
+    "name_bn": "চাণ্ডাল হাটা",
+    "name_en": "not_found",
+    "jl_no": "75"
+   },
+   {
+    "name_bn": "কামারগাঁও",
+    "name_en": "not_found",
+    "jl_no": "76"
+   },
+   {
+    "name_bn": "জাব",
+    "name_en": "not_found",
+    "jl_no": "77"
+   },
+   {
+    "name_bn": "তালতলা",
+    "name_en": "not_found",
+    "jl_no": "78"
+   },
+   {
+    "name_bn": "ঘাগটিয়া",
+    "name_en": "not_found",
+    "jl_no": "79"
+   },
+   {
+    "name_bn": "সাহাবিদ্যার কোট",
+    "name_en": "not_found",
+    "jl_no": "80"
+   },
+   {
+    "name_bn": "ক্ষিরাটী",
+    "name_en": "not_found",
+    "jl_no": "80"
+   },
+   {
+    "name_bn": "চর ক্ষীরাটী",
+    "name_en": "not_found",
+    "jl_no": "81"
+   },
+   {
+    "name_bn": "বাঘিয়া",
+    "name_en": "not_found",
+    "jl_no": "81"
+   },
+   {
+    "name_bn": "দেওনা",
+    "name_en": "not_found",
+    "jl_no": "82"
+   },
+   {
+    "name_bn": "ঘোরসাব",
+    "name_en": "not_found",
+    "jl_no": "83"
+   },
+   {
+    "name_bn": "উত্তর দিঘাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "83"
+   },
+   {
+    "name_bn": "বিষ্ণুপুর",
+    "name_en": "not_found",
+    "jl_no": "84"
+   },
+   {
+    "name_bn": "বরহর",
+    "name_en": "not_found",
+    "jl_no": "84"
+   },
+   {
+    "name_bn": "সম্মানিয়া",
+    "name_en": "not_found",
+    "jl_no": "85"
+   },
+   {
+    "name_bn": "ভুলেশ্বর",
+    "name_en": "not_found",
+    "jl_no": "85"
+   },
+   {
+    "name_bn": "চর আলীনগর",
+    "name_en": "not_found",
+    "jl_no": "86"
+   },
+   {
+    "name_bn": "হাইল জোড়",
+    "name_en": "not_found",
+    "jl_no": "86"
+   },
+   {
+    "name_bn": "চর সম্মানিয়া",
+    "name_en": "not_found",
+    "jl_no": "87"
+   },
+   {
+    "name_bn": "বলাকোনা",
+    "name_en": "not_found",
+    "jl_no": "87"
+   },
+   {
+    "name_bn": "মির্জ্জানগর",
+    "name_en": "not_found",
+    "jl_no": "88"
+   },
+   {
+    "name_bn": "আমরাইদ",
+    "name_en": "not_found",
+    "jl_no": "88"
+   },
+   {
+    "name_bn": "দক্ষিণ গাঁও",
+    "name_en": "not_found",
+    "jl_no": "89"
+   },
+   {
+    "name_bn": "বাশুদেবপুর",
+    "name_en": "not_found",
+    "jl_no": "90"
+   },
+   {
+    "name_bn": "বেলাসি",
+    "name_en": "not_found",
+    "jl_no": "90"
+   },
+   {
+    "name_bn": "কালিয়াব",
+    "name_en": "not_found",
+    "jl_no": "90"
+   },
+   {
+    "name_bn": "রায়েদ",
+    "name_en": "not_found",
+    "jl_no": "91"
+   },
+   {
+    "name_bn": "আড়াল",
+    "name_en": "not_found",
+    "jl_no": "91"
+   },
+   {
+    "name_bn": "বাগের হাট",
+    "name_en": "not_found",
+    "jl_no": "92"
+   },
+   {
+    "name_bn": "আঠার কাহনিয়া",
+    "name_en": "not_found",
+    "jl_no": "92"
+   },
+   {
+    "name_bn": "সোনাপুর",
+    "name_en": "not_found",
+    "jl_no": "93"
+   },
+   {
+    "name_bn": "হিজলিয়া",
+    "name_en": "not_found",
+    "jl_no": "94"
+   },
+   {
+    "name_bn": "একুরিয়া",
+    "name_en": "not_found",
+    "jl_no": "95"
+   },
+   {
+    "name_bn": "সোনারখিল",
+    "name_en": "not_found",
+    "jl_no": "96"
+   },
+   {
+    "name_bn": "উলুসরা",
+    "name_en": "not_found",
+    "jl_no": "97"
+   },
+   {
+    "name_bn": "চাফাদ",
+    "name_en": "not_found",
+    "jl_no": "97"
+   },
+   {
+    "name_bn": "কেন্দূয়াব",
+    "name_en": "not_found",
+    "jl_no": "98"
+   },
+   {
+    "name_bn": "রাওনাট",
+    "name_en": "not_found",
+    "jl_no": "98"
+   },
+   {
+    "name_bn": "উজলী",
+    "name_en": "not_found",
+    "jl_no": "99"
+   },
+   {
+    "name_bn": "দড়িমেরুন",
+    "name_en": "not_found",
+    "jl_no": "99"
+   },
+   {
+    "name_bn": "পানবরাইল",
+    "name_en": "not_found",
+    "jl_no": "100"
+   },
+   {
+    "name_bn": "সালুয়া টেকী",
+    "name_en": "not_found",
+    "jl_no": "101"
+   },
+   {
+    "name_bn": "কুরুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "101"
+   },
+   {
+    "name_bn": "ইছলামপুর",
+    "name_en": "not_found",
+    "jl_no": "102"
+   },
+   {
+    "name_bn": "তেতুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "102"
+   },
+   {
+    "name_bn": "নাকাচিনি",
+    "name_en": "not_found",
+    "jl_no": "103"
+   },
+   {
+    "name_bn": "নয়ান বাজার",
+    "name_en": "not_found",
+    "jl_no": "103"
+   },
+   {
+    "name_bn": "সহরটোক",
+    "name_en": "not_found",
+    "jl_no": "104"
+   },
+   {
+    "name_bn": "চারবাড়িয়া",
+    "name_en": "not_found",
+    "jl_no": "104"
+   },
+   {
+    "name_bn": "রায়নন্দা",
+    "name_en": "not_found",
+    "jl_no": "105"
+   },
+   {
+    "name_bn": "সুলতানপুর",
+    "name_en": "not_found",
+    "jl_no": "105"
+   },
+   {
+    "name_bn": "নয়া সাঙ্গন",
+    "name_en": "not_found",
+    "jl_no": "106"
+   },
+   {
+    "name_bn": "বড়জোনা",
+    "name_en": "not_found",
+    "jl_no": "106"
+   },
+   {
+    "name_bn": "কান্দানিয়া",
+    "name_en": "not_found",
+    "jl_no": "107"
+   },
+   {
+    "name_bn": "ঘোষের কান্দি",
+    "name_en": "not_found",
+    "jl_no": "107"
+   },
+   {
+    "name_bn": "খোদাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "108"
+   },
+   {
+    "name_bn": "আড়ালিয়া",
+    "name_en": "not_found",
+    "jl_no": "108"
+   },
+   {
+    "name_bn": "পাচুয়া",
+    "name_en": "not_found",
+    "jl_no": "109"
+   },
+   {
+    "name_bn": "জুনিয়া",
+    "name_en": "not_found",
+    "jl_no": "109"
+   },
+   {
+    "name_bn": "সাফাইশ্রী",
+    "name_en": "not_found",
+    "jl_no": "110"
+   },
+   {
+    "name_bn": "কাশেরা",
+    "name_en": "not_found",
+    "jl_no": "110"
+   },
+   {
+    "name_bn": "ডুমদিয়া",
+    "name_en": "not_found",
+    "jl_no": "111"
+   },
+   {
+    "name_bn": "বানার হাওলা",
+    "name_en": "not_found",
+    "jl_no": "111"
+   },
+   {
+    "name_bn": "দিঘাব",
+    "name_en": "not_found",
+    "jl_no": "112"
+   },
+   {
+    "name_bn": "রাউৎ কোনা",
+    "name_en": "not_found",
+    "jl_no": "112"
+   },
+   {
+    "name_bn": "জামিরার চর",
+    "name_en": "not_found",
+    "jl_no": "113"
+   },
+   {
+    "name_bn": "কাপাসিয়া",
+    "name_en": "not_found",
+    "jl_no": "114"
+   },
+   {
+    "name_bn": "দুষ্যু নারায়নপুর",
+    "name_en": "not_found",
+    "jl_no": "115"
+   },
+   {
+    "name_bn": "সুর্য্য নারায়ণপুর",
+    "name_en": "not_found",
+    "jl_no": "116"
+   },
+   {
+    "name_bn": "পাবুর",
+    "name_en": "not_found",
+    "jl_no": "117"
+   },
+   {
+    "name_bn": "ধরপাড়া",
+    "name_en": "not_found",
+    "jl_no": "118"
+   },
+   {
+    "name_bn": "নলগাঁও",
+    "name_en": "not_found",
+    "jl_no": "119"
+   },
+   {
+    "name_bn": "মৈষাধামনা",
+    "name_en": "not_found",
+    "jl_no": "120"
+   },
+   {
+    "name_bn": "সেখের নরুন",
+    "name_en": "not_found",
+    "jl_no": "121"
+   },
+   {
+    "name_bn": "কাজাহাজী",
+    "name_en": "not_found",
+    "jl_no": "122"
+   },
+   {
+    "name_bn": "বাদিয়াবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "123"
+   },
+   {
+    "name_bn": "ডেফুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "124"
+   },
+   {
+    "name_bn": "পাপলা",
+    "name_en": "not_found",
+    "jl_no": "125"
+   },
+   {
+    "name_bn": "চামুরখী",
+    "name_en": "not_found",
+    "jl_no": "126"
+   },
+   {
+    "name_bn": "গোবিন্দপুর",
+    "name_en": "not_found",
+    "jl_no": "127"
+   },
+   {
+    "name_bn": "তিল সুনিয়া",
+    "name_en": "not_found",
+    "jl_no": "128"
+   },
+   {
+    "name_bn": "বোয়ালী",
+    "name_en": "not_found",
+    "jl_no": "129"
+   },
+   {
+    "name_bn": "বাশুদেবপুর",
+    "name_en": "not_found",
+    "jl_no": "130"
+   },
+   {
+    "name_bn": "চান্দুল",
+    "name_en": "not_found",
+    "jl_no": "132"
+   },
+   {
+    "name_bn": "কোট বাজালিয়া",
+    "name_en": "not_found",
+    "jl_no": "133"
+   },
+   {
+    "name_bn": "ভাকোয়াদি",
+    "name_en": "not_found",
+    "jl_no": "134"
+   },
+   {
+    "name_bn": "দড়িভাকোয়াদি",
+    "name_en": "not_found",
+    "jl_no": "135"
+   },
+   {
+    "name_bn": "জায়গীর",
+    "name_en": "not_found",
+    "jl_no": "136"
+   },
+   {
+    "name_bn": "বাঙ্গুরা",
+    "name_en": "not_found",
+    "jl_no": "137"
+   },
+   {
+    "name_bn": "সরসপুর",
+    "name_en": "not_found",
+    "jl_no": "138"
+   },
+   {
+    "name_bn": "চাঁদপুর",
+    "name_en": "not_found",
+    "jl_no": "138"
+   },
+   {
+    "name_bn": "মৈশান",
+    "name_en": "not_found",
+    "jl_no": "139"
+   },
+   {
+    "name_bn": "জালিসা",
+    "name_en": "not_found",
+    "jl_no": "139"
+   },
+   {
+    "name_bn": "সৈয়দপুর",
+    "name_en": "not_found",
+    "jl_no": "140"
+   },
+   {
+    "name_bn": "ছোট সোনারূয়া",
+    "name_en": "not_found",
+    "jl_no": "140"
+   },
+   {
+    "name_bn": "ঘাটকুড়ি",
+    "name_en": "not_found",
+    "jl_no": "141"
+   },
+   {
+    "name_bn": "উরুন",
+    "name_en": "not_found",
+    "jl_no": "141"
+   },
+   {
+    "name_bn": "কামরা",
+    "name_en": "not_found",
+    "jl_no": "142"
+   },
+   {
+    "name_bn": "বামন খোলা",
+    "name_en": "not_found",
+    "jl_no": "142"
+   },
+   {
+    "name_bn": "সোনারুয়া",
+    "name_en": "not_found",
+    "jl_no": "143"
+   },
+   {
+    "name_bn": "মসক",
+    "name_en": "not_found",
+    "jl_no": "143"
+   },
+   {
+    "name_bn": "চিনাডুলি",
+    "name_en": "not_found",
+    "jl_no": "144"
+   },
+   {
+    "name_bn": "জুরাইলবিল",
+    "name_en": "not_found",
+    "jl_no": "144"
+   },
+   {
+    "name_bn": "দলিসোতা",
+    "name_en": "not_found",
+    "jl_no": "145"
+   },
+   {
+    "name_bn": "তরুন",
+    "name_en": "not_found",
+    "jl_no": "145"
+   },
+   {
+    "name_bn": "দালি নগর",
+    "name_en": "not_found",
+    "jl_no": "145"
+   },
+   {
+    "name_bn": "ফুলবাড়ীয়া",
+    "name_en": "not_found",
+    "jl_no": "146"
+   },
+   {
+    "name_bn": "পলাশপুর",
+    "name_en": "not_found",
+    "jl_no": "147"
+   },
+   {
+    "name_bn": "বরুন",
+    "name_en": "not_found",
+    "jl_no": "148"
+   },
+   {
+    "name_bn": "চাকৈল",
+    "name_en": "not_found",
+    "jl_no": "149"
+   },
+   {
+    "name_bn": "দুর্গাপুর",
+    "name_en": "not_found",
+    "jl_no": "150"
+   },
+   {
+    "name_bn": "দোলগাও",
+    "name_en": "not_found",
+    "jl_no": "151"
+   },
+   {
+    "name_bn": "চাটার বাগ",
+    "name_en": "not_found",
+    "jl_no": "152"
+   },
+   {
+    "name_bn": "বড়চালা",
+    "name_en": "not_found",
+    "jl_no": "153"
+   },
+   {
+    "name_bn": "নাজাই",
+    "name_en": "not_found",
+    "jl_no": "154"
+   },
+   {
+    "name_bn": "বারৈগাঁও",
+    "name_en": "not_found",
+    "jl_no": "155"
+   },
+   {
+    "name_bn": "গোসাই গাঁও",
+    "name_en": "not_found",
+    "jl_no": "156"
+   },
+   {
+    "name_bn": "বেগুনহাটী",
+    "name_en": "not_found",
+    "jl_no": "157"
+   },
+   {
+    "name_bn": "খিলগাও",
+    "name_en": "not_found",
+    "jl_no": "158"
+   },
+   {
+    "name_bn": "নাশরা",
+    "name_en": "not_found",
+    "jl_no": "159"
+   },
+   {
+    "name_bn": "দড়িনাস্‌রা",
+    "name_en": "not_found",
+    "jl_no": "160"
+   },
+   {
+    "name_bn": "ফেটালিয়া",
+    "name_en": "not_found",
+    "jl_no": "161"
+   },
+   {
+    "name_bn": "লক্ষীপুর",
+    "name_en": "not_found",
+    "jl_no": "162"
+   },
+   {
+    "name_bn": "ঘি ঘাট",
+    "name_en": "not_found",
+    "jl_no": "163"
+   },
+   {
+    "name_bn": "ধাধার চর",
+    "name_en": "not_found",
+    "jl_no": "164"
+   },
+   {
+    "name_bn": "একডালা",
+    "name_en": "not_found",
+    "jl_no": "165"
+   }
+  ],
+  "Sreepur": [
+   {
+    "name_bn": "বাঁশবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "1"
+   },
+   {
+    "name_bn": "শৈলাট",
+    "name_en": "not_found",
+    "jl_no": "2"
+   },
+   {
+    "name_bn": "গাজীপুর",
+    "name_en": "not_found",
+    "jl_no": "3"
+   },
+   {
+    "name_bn": "ধনুয়া",
+    "name_en": "not_found",
+    "jl_no": "4"
+   },
+   {
+    "name_bn": "মাওনা",
+    "name_en": "not_found",
+    "jl_no": "5"
+   },
+   {
+    "name_bn": "বড় রাথুরা",
+    "name_en": "not_found",
+    "jl_no": "6"
+   },
+   {
+    "name_bn": "কেওয়া",
+    "name_en": "not_found",
+    "jl_no": "7"
+   },
+   {
+    "name_bn": "মুলাইদ",
+    "name_en": "not_found",
+    "jl_no": "8"
+   },
+   {
+    "name_bn": "টেপীর বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "9"
+   },
+   {
+    "name_bn": "তেলীহাটী",
+    "name_en": "not_found",
+    "jl_no": "10"
+   },
+   {
+    "name_bn": "পেলাইদ",
+    "name_en": "not_found",
+    "jl_no": "11"
+   },
+   {
+    "name_bn": "ধামলাই",
+    "name_en": "not_found",
+    "jl_no": "12"
+   },
+   {
+    "name_bn": "জঙ্গীরপুর",
+    "name_en": "not_found",
+    "jl_no": "13"
+   },
+   {
+    "name_bn": "সোনাব",
+    "name_en": "not_found",
+    "jl_no": "14"
+   },
+   {
+    "name_bn": "সাত খামাইর",
+    "name_en": "not_found",
+    "jl_no": "15"
+   },
+   {
+    "name_bn": "কাওরাইদ",
+    "name_en": "not_found",
+    "jl_no": "16"
+   },
+   {
+    "name_bn": "বেলদিয়া",
+    "name_en": "not_found",
+    "jl_no": "17"
+   },
+   {
+    "name_bn": "বয়রা",
+    "name_en": "not_found",
+    "jl_no": "18"
+   },
+   {
+    "name_bn": "বাপতা",
+    "name_en": "not_found",
+    "jl_no": "19"
+   },
+   {
+    "name_bn": "কাটালী",
+    "name_en": "not_found",
+    "jl_no": "20"
+   },
+   {
+    "name_bn": "নাইন্দা সাঙ্গন",
+    "name_en": "not_found",
+    "jl_no": "21"
+   },
+   {
+    "name_bn": "বড়নল",
+    "name_en": "not_found",
+    "jl_no": "22"
+   },
+   {
+    "name_bn": "কুশাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "23"
+   },
+   {
+    "name_bn": "পাঠানটেক",
+    "name_en": "not_found",
+    "jl_no": "24"
+   },
+   {
+    "name_bn": "সোহাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "25"
+   },
+   {
+    "name_bn": "ঘিলাসাইর",
+    "name_en": "not_found",
+    "jl_no": "26"
+   },
+   {
+    "name_bn": "চর বহর",
+    "name_en": "not_found",
+    "jl_no": "27"
+   },
+   {
+    "name_bn": "বরমী",
+    "name_en": "not_found",
+    "jl_no": "28"
+   },
+   {
+    "name_bn": "কাউন্দিয়া",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "বরামা",
+    "name_en": "not_found",
+    "jl_no": "30"
+   },
+   {
+    "name_bn": "পেলাদি",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "নিজ খোজেখালী",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "কর্ণপুর",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "পাঁচলটিয়া",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "কাদিম গাজিয়ারন",
+    "name_en": "not_found",
+    "jl_no": "35"
+   },
+   {
+    "name_bn": "দড়ি খোজে খানি",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "কাহেত পাড়া",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "গাড়ারন",
+    "name_en": "not_found",
+    "jl_no": "38"
+   },
+   {
+    "name_bn": "পারাগুনিয়া",
+    "name_en": "not_found",
+    "jl_no": "39"
+   },
+   {
+    "name_bn": "বেকাশহরা",
+    "name_en": "not_found",
+    "jl_no": "40"
+   },
+   {
+    "name_bn": "টেংরা",
+    "name_en": "not_found",
+    "jl_no": "41"
+   },
+   {
+    "name_bn": "উজিলাব",
+    "name_en": "not_found",
+    "jl_no": "42"
+   },
+   {
+    "name_bn": "শ্রীপুর",
+    "name_en": "not_found",
+    "jl_no": "43"
+   },
+   {
+    "name_bn": "লোহাগাছ",
+    "name_en": "not_found",
+    "jl_no": "44"
+   },
+   {
+    "name_bn": "পটকা",
+    "name_en": "not_found",
+    "jl_no": "45"
+   },
+   {
+    "name_bn": "বাউনী",
+    "name_en": "not_found",
+    "jl_no": "46"
+   },
+   {
+    "name_bn": "ডোয়াই বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "47"
+   },
+   {
+    "name_bn": "বিন্দু বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "48"
+   },
+   {
+    "name_bn": "কাপিলা তলী",
+    "name_en": "not_found",
+    "jl_no": "49"
+   },
+   {
+    "name_bn": "হালকুয়াদি",
+    "name_en": "not_found",
+    "jl_no": "50"
+   },
+   {
+    "name_bn": "মিটালু",
+    "name_en": "not_found",
+    "jl_no": "51"
+   },
+   {
+    "name_bn": "চাওবন",
+    "name_en": "not_found",
+    "jl_no": "52"
+   },
+   {
+    "name_bn": "গোসিঙ্গা",
+    "name_en": "not_found",
+    "jl_no": "53"
+   },
+   {
+    "name_bn": "লতিফপুর",
+    "name_en": "not_found",
+    "jl_no": "54"
+   },
+   {
+    "name_bn": "নারায়নপুর",
+    "name_en": "not_found",
+    "jl_no": "55"
+   },
+   {
+    "name_bn": "বেড়া বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "56"
+   },
+   {
+    "name_bn": "বামন গাঁও",
+    "name_en": "not_found",
+    "jl_no": "57"
+   },
+   {
+    "name_bn": "জয়নারায়নপুর",
+    "name_en": "not_found",
+    "jl_no": "58"
+   },
+   {
+    "name_bn": "রাজাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "59"
+   },
+   {
+    "name_bn": "রাজারামপুর",
+    "name_en": "not_found",
+    "jl_no": "60"
+   },
+   {
+    "name_bn": "নালিয়াটেকি",
+    "name_en": "not_found",
+    "jl_no": "61"
+   },
+   {
+    "name_bn": "গজারিয়া",
+    "name_en": "not_found",
+    "jl_no": "62"
+   },
+   {
+    "name_bn": "ধলাদিয়া",
+    "name_en": "not_found",
+    "jl_no": "63"
+   },
+   {
+    "name_bn": "সাটীয়াবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "64"
+   },
+   {
+    "name_bn": "নোয়াগাঁও",
+    "name_en": "not_found",
+    "jl_no": "65"
+   },
+   {
+    "name_bn": "গিধরিয়া",
+    "name_en": "not_found",
+    "jl_no": "66"
+   },
+   {
+    "name_bn": "টেক লক্ষীপুর",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "দমদমা",
+    "name_en": "not_found",
+    "jl_no": "68"
+   },
+   {
+    "name_bn": "ডুমনি",
+    "name_en": "not_found",
+    "jl_no": "69"
+   },
+   {
+    "name_bn": "ফাগুয়াইন",
+    "name_en": "not_found",
+    "jl_no": "70"
+   },
+   {
+    "name_bn": "নিশ্চিন্তপুর",
+    "name_en": "not_found",
+    "jl_no": "71"
+   },
+   {
+    "name_bn": "আটলোরা",
+    "name_en": "not_found",
+    "jl_no": "72"
+   },
+   {
+    "name_bn": "বন খৈরা",
+    "name_en": "not_found",
+    "jl_no": "73"
+   },
+   {
+    "name_bn": "বাঁশকোপা",
+    "name_en": "not_found",
+    "jl_no": "74"
+   },
+   {
+    "name_bn": "লোহা গাছিয়া",
+    "name_en": "not_found",
+    "jl_no": "75"
+   },
+   {
+    "name_bn": "নিমুরিয়া",
+    "name_en": "not_found",
+    "jl_no": "76"
+   },
+   {
+    "name_bn": "প্রহলাদপুর",
+    "name_en": "not_found",
+    "jl_no": "77"
+   },
+   {
+    "name_bn": "কিসমত নানাইয়া",
+    "name_en": "not_found",
+    "jl_no": "78"
+   },
+   {
+    "name_bn": "মার্ত্তা",
+    "name_en": "not_found",
+    "jl_no": "79"
+   }
+  ],
+  "Tongi Revenue Circle (টংঙ্গি রাজস্ব সার্কেল) – listed by DLRMS as a separate 'upazila' entry; administratively part of Gazipur Sadar upazila": [
+   {
+    "name_bn": "মহিষেরটেক",
+    "name_en": "not_found",
+    "jl_no": "1"
+   },
+   {
+    "name_bn": "দৌলতপুর",
+    "name_en": "not_found",
+    "jl_no": "2"
+   },
+   {
+    "name_bn": "কামারজুরি",
+    "name_en": "not_found",
+    "jl_no": "3"
+   },
+   {
+    "name_bn": "ওঝারপাড়া",
+    "name_en": "not_found",
+    "jl_no": "4"
+   },
+   {
+    "name_bn": "ভাড়ারিপাড়া",
+    "name_en": "not_found",
+    "jl_no": "5"
+   },
+   {
+    "name_bn": "সোণ্ডা",
+    "name_en": "not_found",
+    "jl_no": "6"
+   },
+   {
+    "name_bn": "ছয়দানা",
+    "name_en": "not_found",
+    "jl_no": "7"
+   },
+   {
+    "name_bn": "বালিয়ারা",
+    "name_en": "not_found",
+    "jl_no": "8"
+   },
+   {
+    "name_bn": "সেক্রাউরি",
+    "name_en": "not_found",
+    "jl_no": "9"
+   },
+   {
+    "name_bn": "জাঝড়",
+    "name_en": "not_found",
+    "jl_no": "10"
+   },
+   {
+    "name_bn": "বসুরা",
+    "name_en": "not_found",
+    "jl_no": "11"
+   },
+   {
+    "name_bn": "মৈরান",
+    "name_en": "not_found",
+    "jl_no": "12"
+   },
+   {
+    "name_bn": "ঈশ্বড্ডা",
+    "name_en": "not_found",
+    "jl_no": "13"
+   },
+   {
+    "name_bn": "খালিকৈর",
+    "name_en": "not_found",
+    "jl_no": "14"
+   },
+   {
+    "name_bn": "বাদেকলমেশ্বর",
+    "name_en": "not_found",
+    "jl_no": "15"
+   },
+   {
+    "name_bn": "কলমেশ্বর",
+    "name_en": "not_found",
+    "jl_no": "16"
+   },
+   {
+    "name_bn": "কাথোরা",
+    "name_en": "not_found",
+    "jl_no": "17"
+   },
+   {
+    "name_bn": "গাছা",
+    "name_en": "not_found",
+    "jl_no": "18"
+   },
+   {
+    "name_bn": "ইছরকান্দি",
+    "name_en": "not_found",
+    "jl_no": "19"
+   },
+   {
+    "name_bn": "মুদিপাড়া",
+    "name_en": "not_found",
+    "jl_no": "20"
+   },
+   {
+    "name_bn": "পলাশোনা",
+    "name_en": "not_found",
+    "jl_no": "21"
+   },
+   {
+    "name_bn": "বাদেপলাশোনা",
+    "name_en": "not_found",
+    "jl_no": "22"
+   },
+   {
+    "name_bn": "গুটিয়া",
+    "name_en": "not_found",
+    "jl_no": "23"
+   },
+   {
+    "name_bn": "গুসুলিয়া",
+    "name_en": "not_found",
+    "jl_no": "24"
+   },
+   {
+    "name_bn": "আন্দারুল",
+    "name_en": "not_found",
+    "jl_no": "25"
+   },
+   {
+    "name_bn": "রাজকুর",
+    "name_en": "not_found",
+    "jl_no": "26"
+   },
+   {
+    "name_bn": "ভাকরাল",
+    "name_en": "not_found",
+    "jl_no": "27"
+   },
+   {
+    "name_bn": "চকভাদাম",
+    "name_en": "not_found",
+    "jl_no": "28"
+   },
+   {
+    "name_bn": "ভাদাম",
+    "name_en": "not_found",
+    "jl_no": "29"
+   },
+   {
+    "name_bn": "জামালদিয়া",
+    "name_en": "not_found",
+    "jl_no": "30"
+   },
+   {
+    "name_bn": "ডোমনা",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "কাকিলসাতাইশ",
+    "name_en": "not_found",
+    "jl_no": "31"
+   },
+   {
+    "name_bn": "দাড়াইল",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "দক্ষিণ বাড়ৈবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "32"
+   },
+   {
+    "name_bn": "ভিকনপুর",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "সাতাইশ",
+    "name_en": "not_found",
+    "jl_no": "33"
+   },
+   {
+    "name_bn": "সারাব",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "চান্দরা",
+    "name_en": "not_found",
+    "jl_no": "34"
+   },
+   {
+    "name_bn": "বড় ভবানীপুর",
+    "name_en": "not_found",
+    "jl_no": "35"
+   },
+   {
+    "name_bn": "কুনিয়া",
+    "name_en": "not_found",
+    "jl_no": "35"
+   },
+   {
+    "name_bn": "গাজীপুরা",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "দক্ষিণ পানি সাইল",
+    "name_en": "not_found",
+    "jl_no": "36"
+   },
+   {
+    "name_bn": "পশ্চিম পানি সাইল",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "খরতৈল",
+    "name_en": "not_found",
+    "jl_no": "37"
+   },
+   {
+    "name_bn": "বড় দেওড়া",
+    "name_en": "not_found",
+    "jl_no": "38"
+   },
+   {
+    "name_bn": "শিবরামপুর",
+    "name_en": "not_found",
+    "jl_no": "39"
+   },
+   {
+    "name_bn": "পরানমণ্ডলেরটেক",
+    "name_en": "not_found",
+    "jl_no": "39"
+   },
+   {
+    "name_bn": "উত্তর পানি সাইল",
+    "name_en": "not_found",
+    "jl_no": "40"
+   },
+   {
+    "name_bn": "কাঠালদিয়া",
+    "name_en": "not_found",
+    "jl_no": "40"
+   },
+   {
+    "name_bn": "আউচপাড়া",
+    "name_en": "not_found",
+    "jl_no": "41"
+   },
+   {
+    "name_bn": "গজারচাপ",
+    "name_en": "not_found",
+    "jl_no": "41"
+   },
+   {
+    "name_bn": "দত্তপাড়া",
+    "name_en": "not_found",
+    "jl_no": "42"
+   },
+   {
+    "name_bn": "কোনাপাড়া",
+    "name_en": "not_found",
+    "jl_no": "42"
+   },
+   {
+    "name_bn": "শিলমুন",
+    "name_en": "not_found",
+    "jl_no": "43"
+   },
+   {
+    "name_bn": "কুমার খাদা",
+    "name_en": "not_found",
+    "jl_no": "43"
+   },
+   {
+    "name_bn": "মাধবপুর",
+    "name_en": "not_found",
+    "jl_no": "44"
+   },
+   {
+    "name_bn": "মরকুন",
+    "name_en": "not_found",
+    "jl_no": "44"
+   },
+   {
+    "name_bn": "হিমারদিঘী",
+    "name_en": "not_found",
+    "jl_no": "45"
+   },
+   {
+    "name_bn": "শৈলারগাতি",
+    "name_en": "not_found",
+    "jl_no": "46"
+   },
+   {
+    "name_bn": "তরফ মাধবপুর",
+    "name_en": "not_found",
+    "jl_no": "47"
+   },
+   {
+    "name_bn": "মাছিমপুর",
+    "name_en": "not_found",
+    "jl_no": "47"
+   },
+   {
+    "name_bn": "দক্ষিণ বাগবেড়",
+    "name_en": "not_found",
+    "jl_no": "48"
+   },
+   {
+    "name_bn": "টঙ্গি",
+    "name_en": "not_found",
+    "jl_no": "48"
+   },
+   {
+    "name_bn": "লস্কর চালা",
+    "name_en": "not_found",
+    "jl_no": "49"
+   },
+   {
+    "name_bn": "আরিজপুর",
+    "name_en": "not_found",
+    "jl_no": "49"
+   },
+   {
+    "name_bn": "লোহাকৈর",
+    "name_en": "not_found",
+    "jl_no": "50"
+   },
+   {
+    "name_bn": "গোপালপুর",
+    "name_en": "not_found",
+    "jl_no": "50"
+   },
+   {
+    "name_bn": "পাগাড়",
+    "name_en": "not_found",
+    "jl_no": "51"
+   },
+   {
+    "name_bn": "কাশিমপুর",
+    "name_en": "not_found",
+    "jl_no": "57"
+   },
+   {
+    "name_bn": "সুরাবাড়ী",
+    "name_en": "not_found",
+    "jl_no": "58"
+   },
+   {
+    "name_bn": "বারেণ্ডা",
+    "name_en": "not_found",
+    "jl_no": "59"
+   },
+   {
+    "name_bn": "গোবিন্দ বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "60"
+   },
+   {
+    "name_bn": "ছোট গোবিন্দপুর",
+    "name_en": "not_found",
+    "jl_no": "61"
+   },
+   {
+    "name_bn": "পশ্চিম শৈলডুবি",
+    "name_en": "not_found",
+    "jl_no": "63"
+   },
+   {
+    "name_bn": "পূর্ব্ববাগ বাড়ী",
+    "name_en": "not_found",
+    "jl_no": "64"
+   },
+   {
+    "name_bn": "সরুপাইতলী",
+    "name_en": "not_found",
+    "jl_no": "67"
+   },
+   {
+    "name_bn": "বাসন (কাসিমপুর)",
+    "name_en": "not_found",
+    "jl_no": "68"
+   },
+   {
+    "name_bn": "পূর্ব্ব শৈলডুবী",
+    "name_en": "not_found",
+    "jl_no": "69"
+   }
+  ]
+ },
+ "mouza_survey_used": "RS (আর এস) for all upazilas – it is the only survey offered in every upazila and gives the full list. Source: DLRMS survey-khatian search (https://dlrms.land.gov.bd/). Counts (RS): Gazipur Sadar 152, Kaliakair 177, Kaliganj 145, Kapasia 166, Sreepur 79, Tongi Revenue Circle 78. CS/SA/BDS give much shorter lists – see extra.mouzas_other_surveys. name_en is 'not_found' because DLRMS shows Bangla names only. jl_no is the number shown before the name, converted to ASCII digits.",
+ "plot_map_viewer": {
+  "url": "https://map.land.gov.bd/",
+  "shows_dag_outlines": "not_available_for_gazipur – in the Search Menu, Dhaka division (value 30) lists only 3 districts: Gopalganj (গোপালগঞ্জ, 3035), Kishoreganj (কিশোরগঞ্জ, 3048), Shariatpur (শরীয়তপুর, 3086). Gazipur is not selectable, so no Gazipur Sadar mouza or dag outline could be opened.",
+  "example_with": [
+   "not_found"
+  ],
+  "example_without": [
+   "not_found"
+  ],
+  "survey": "not_found"
+ },
+ "dlrs_map_store": {
+  "surveys_for_gazipur_sadar": [
+   "আর.এস (RS) – e.g. mouza জয়দেবপুর JL ৫৮: 3 sheets (Sheet ১, ২, ৩)",
+   "এস.এ (SA) – e.g. mouza আউছপাড়া JL ১০৯: only SA offered",
+   "Survey dropdown shows only the surveys available for the chosen mouza; site advertises CS, SA, RS, BRS, BDS generally"
+  ],
+  "price_per_sheet_bdt": "590 (৳ 590 shown on each RS sheet for জয়দেবপুর JL ৫৮; FAQ: price and any delivery charge shown at checkout)",
+  "delivery": [
+   "Home delivery (FAQ: 'You can choose home delivery')",
+   "Collect printed map yourself from the DLRS office (pickup details shown at checkout)",
+   "'How it works': download digital copy instantly or receive printed copy via courier"
+  ],
+  "online_preview": "yes – each sheet has a 'Preview' button that opens a low-resolution image of the sheet without login",
+  "source_url": "https://map.settlement.gov.bd/"
+ },
+ "fees": [
+  {
+   "service": "Certified (সার্টিফাইড/সত্যায়িত) khatian copy – applied online via DLRMS",
+   "amount_bdt": "120",
+   "source_url": "https://dlrms.land.gov.bd/"
+  },
+  {
+   "service": "QR-coded online/instant (অনলাইন/তাৎক্ষনিক) khatian copy",
+   "amount_bdt": "120",
+   "source_url": "https://dlrms.land.gov.bd/"
+  },
+  {
+   "service": "Older circular (13-04-2023) set certified copy and online copy at 100 each – superseded by the 120 shown on DLRMS today",
+   "amount_bdt": "100 (historical)",
+   "source_url": "https://mutation.land.gov.bd/notification_and_rules/notification/Re_fixation_of_fees.pdf"
+  },
+  {
+   "service": "Mouza map sheet – DLRS map store (map.settlement.gov.bd), RS sheet, excl. delivery",
+   "amount_bdt": "590",
+   "source_url": "https://map.settlement.gov.bd/"
+  },
+  {
+   "service": "Mouza map sheet – DLRMS মৌজা ম্যাপ tab (price not shown on results; only 'ঝুড়িতে রাখুন' add-to-cart)",
+   "amount_bdt": "not_found",
+   "source_url": "https://dlrms.land.gov.bd/"
+  },
+  {
+   "service": "e-Mutation (ই-নামজারি) – at application: court fee ২০ + notice-issue fee ৫০",
+   "amount_bdt": "70",
+   "source_url": "https://mutation.land.gov.bd/notification_and_rules/notification/Regarding_payment_of_fees_for_e_namazari.pdf"
+  },
+  {
+   "service": "e-Mutation – after approval: record correction fee ১,০০০ + mutation khatian copy ১০০ (gives QR-coded online DCR)",
+   "amount_bdt": "1100",
+   "source_url": "https://mutation.land.gov.bd/notification_and_rules/notification/Regarding_payment_of_fees_for_e_namazari.pdf"
+  },
+  {
+   "service": "e-Mutation total (circular dated 02-11-2021, still listed on mutation.land.gov.bd/notification)",
+   "amount_bdt": "1170",
+   "source_url": "https://mutation.land.gov.bd/notification_and_rules/notification/Regarding_payment_of_fees_for_e_namazari.pdf"
+  },
+  {
+   "service": "LD tax payment service/convenience charge",
+   "amount_bdt": "not_found",
+   "source_url": "https://ldtax.gov.bd/faq"
+  }
+ ],
+ "court_causelist": {
+  "gazipur_courts_listed": [
+   "District Judge: '- জেলা ও দায়রা জজ আদালত, গাজীপুর' (District & Sessions Judge) + অতিরিক্ত জেলা ও দায়রা জজ ১ম, ২য়, ৩য়, ৪র্থ, ১২তম (গাজীপুর ১) আদালত",
+   "Joint District Judge: '- যুগ্ম জেলা ও দায়রা জজ ১ম আদালত', '২য় আদালত', 'অতিরিক্ত আদালত', গাজীপুর; also যুগ্ম দায়রা আদালত–১ … –১২",
+   "Senior Assistant Judge: not listed under that name; listed as সিনিয়র সিভিল জজ আদালত (সদর; শ্রীপুর; কালীগঞ্জ; কালিয়াকৈর; কাপাসিয়া; -১; -২) and সিভিল জজ আদালত (সদর; শ্রীপুর; কালীগঞ্জ; কাপাসিয়া; কালিয়াকৈর; -১; -২; অতিরিক্ত আদালত টংগী)",
+   "Chief Judicial Magistrate: '- চীফ জুডিসিয়াল ম্যাজিস্ট্রেট আদালত, গাজীপুর' + অতিরিক্ত CJM, Senior Judicial Magistrate ১ম–৪র্থ, Judicial Magistrate ১ম–৫ম, আমলী আদালত (কালিয়াকৈর, কাপাসিয়া, শ্রীপুর, কালীগঞ্জ, জয়দেবপুর), দ্রুত বিচার আদালত",
+   "Land-related: '- ল্যান্ড সার্ভে ট্রাইব্যুনাল, গাজীপুর' (Land Survey Tribunal, under জেলা জজ আদালত type) and '- ল্যান্ড সার্ভে আপিল ট্রাইব্যুনাল, গাজীপুর' (under ট্রাইব্যুনালসমূহ)"
+  ],
+  "search_by_party_name": "false – case search (/caseinfo) has only বিভাগ, জেলা, আদালতের ধরন, আদালত and a text box 'মামলা নম্বর দিন' (case number). Results table columns: ক্রমিক নম্বর, মামলার নম্বর, পক্ষগণ (parties), বিস্তারিত.",
+  "source_url": "https://causelist.judiciary.gov.bd/ (court list) and https://causelist.judiciary.gov.bd/caseinfo (case search)"
+ },
+ "offices": [
+  {
+   "office": "উপজেলা ভূমি অফিস, সদর, গাজীপুর (AC Land, Gazipur Sadar) – AC(L) মো: জিয়াউল হাসান সৌরভ",
+   "upazila": "Gazipur Sadar",
+   "address": "not_found (office name only)",
+   "phone": "mobile ০১৭৮৩-৮৬৫৮৯১; office phone —; email aclandgazipursadar17@gmail.com; portal http://acl.sadar.gazipur.gov.bd/",
+   "source_url": "https://gazipur.gov.bd/views/employee-list?designationId=8"
+  },
+  {
+   "office": "সহকারী কমিশনার (ভূমি) এর কার্যালয়, টঙ্গী রাজস্ব সার্কেল, গাজীপুর (AC Land, Tongi Revenue Circle) – AC(L) মোঃ হাসিবুর রহমান",
+   "upazila": "Gazipur Sadar (Tongi circle)",
+   "address": "not_found (office name only)",
+   "phone": "mobile ০১৩১৭৪১৭৪৭৪; office ০২-৪৯২৭৩২০৮; email aclandtongi@yahoo.com; portal http://acltongi.sadar.gazipur.gov.bd/",
+   "source_url": "https://gazipur.gov.bd/views/employee-list?designationId=8"
+  },
+  {
+   "office": "উপজেলা ভূমি অফিস, কালিয়াকৈর, গাজীপুর – AC(L) শামসুন নাহার শিলা",
+   "upazila": "Kaliakair",
+   "address": "not_found (office name only)",
+   "phone": "mobile ০১৩১২৮৬৫৮৮৫; office ০২৯৯৬৬১৩৫৫৫; email aclandkaliakair@gmail.com",
+   "source_url": "https://gazipur.gov.bd/views/employee-list?designationId=8"
+  },
+  {
+   "office": "উপজেলা ভূমি অফিস, কালীগঞ্জ, গাজীপুর – AC(L) আল-আমিন হালদার",
+   "upazila": "Kaliganj",
+   "address": "not_found (office name only)",
+   "phone": "mobile ০১৭৮২০১৭১৫০; office +৮৮০২৯৯৬৬১৫৫৬৩; email kaligonjaclandoffice@gmail.com",
+   "source_url": "https://gazipur.gov.bd/views/employee-list?designationId=8"
+  },
+  {
+   "office": "উপজেলা ভূমি অফিস, কাপাসিয়া, গাজীপুর – AC(L) মোঃ নাহিদুল হক (a release order for him was posted 15-10-2026, so this may change)",
+   "upazila": "Kapasia",
+   "address": "not_found (office name only)",
+   "phone": "mobile +৮৮০ ১৭৮৫-২১৩৪৮৪; office ০৬৮২৪-৫১২৭২; email aclandkapasia@gmail.com",
+   "source_url": "https://gazipur.gov.bd/views/employee-list?designationId=8"
+  },
+  {
+   "office": "উপজেলা ভূমি অফিস, শ্রীপুর, গাজীপুর – AC(L) মো: নাহিদ নিয়াজ শিশির",
+   "upazila": "Sreepur",
+   "address": "not_found (office name only)",
+   "phone": "mobile ০১৭৮৩৮৬৫৮৯৩; office ০২৯৯৬৬১৪৩৫১; email aclandsreepur@gmail.com",
+   "source_url": "https://gazipur.gov.bd/views/employee-list?designationId=8"
+  },
+  {
+   "office": "জেলা রেজিস্ট্রারের কার্যালয়, গাজীপুর (District Registrar) – মোঃ মিজানুর রহমান; building: রেজিস্ট্রেশন কমপ্লেক্স, গাজীপুর (photo on contact page)",
+   "upazila": "District",
+   "address": "not_found (contact page shows only a building photo)",
+   "phone": "office/mobile ০১৩৪৩৯৫৬৬৬০; email drgazipur2@gmail.com",
+   "source_url": "https://dr.gazipur.gov.bd/pages/officers"
+  },
+  {
+   "office": "সাব-রেজিষ্ট্রি অফিস, গাজীপুর সদর – আব্দুল বাতেন",
+   "upazila": "Gazipur Sadar",
+   "address": "not_found",
+   "phone": "office ৪৯২৬১০৪০; mobile shown only as '০১৭'; email shown '123@gmail.com' (placeholder data on portal)",
+   "source_url": "https://sr.sadar.gazipur.gov.bd/pages/officers"
+  },
+  {
+   "office": "সাব-রেজিস্ট্রার অফিস টঙ্গী, গাজীপুর – মোঃ কামরুল হাসান সরকার",
+   "upazila": "Gazipur Sadar (Tongi)",
+   "address": "not_found",
+   "phone": "office ০২-৯৮১৬৫৩৬; mobile ০১৫৩৪৭০০০০৮০ (12 digits as printed); email srotongi1980@gmail.com",
+   "source_url": "https://tongisr.sadar.gazipur.gov.bd/pages/officers"
+  },
+  {
+   "office": "উপজেলা সাব রেজিস্ট্রার অফিস, কালিয়াকৈর – নুরুল আমিন তালুকদার",
+   "upazila": "Kaliakair",
+   "address": "not_found",
+   "phone": "office/mobile ০১৭২৪১২২২৭৭; email asrafulislamai786@gmail.com",
+   "source_url": "https://sr.kaliakair.gazipur.gov.bd/pages/officers"
+  },
+  {
+   "office": "সাব রেজিস্ট্রারের কার্যালয়, কালীগঞ্জ – জাহিদুর রহমান",
+   "upazila": "Kaliganj",
+   "address": "not_found",
+   "phone": "office/mobile ০২৯৯৬৬১৫৭৮৪; email srokailganjgazipur@gmail.com",
+   "source_url": "https://sr.kaliganj.gazipur.gov.bd/pages/officers"
+  },
+  {
+   "office": "উপজেলা সাব রেজিষ্টারের কার্যালয়, কাপাসিয়া – মোঃ নাজির আহম্মদ রিপন",
+   "upazila": "Kapasia",
+   "address": "not_found",
+   "phone": "mobile ০১৭৭৬২২১৪৩২ (office field shows 'kapasia'); email nazirmn007@gmail.com",
+   "source_url": "https://sr.kapasia.gazipur.gov.bd/pages/officers"
+  },
+  {
+   "office": "উপজেলা সাব রেজিস্ট্রার অফিস, শ্রীপুর – মোঃ ওসমান গনি মন্ডল",
+   "upazila": "Sreepur",
+   "address": "not_found",
+   "phone": "mobile ০১৭১৬৩৫৯১২০ (office field shows '০'); email sreepursro@gmail.com",
+   "source_url": "https://sr.sreepur.gazipur.gov.bd/pages/officers"
+  }
+ ],
+ "bds_gazipur": {
+  "status": "No BDS (Bangladesh Digital Survey) notice for Gazipur found on gazipur.gov.bd home notices or dlrs.gov.bd/pages/notices (first page). DLRMS khatian search does list survey type 'বি ডি এস' for Gazipur Sadar (0 mouzas returned) and Tongi Revenue Circle (1 mouza). dlrs.gov.bd 'ডিজিটাল জরিপ' page is empty.",
+  "mouzas": [
+   "৭৯ - কোনাপাড়া (Tongi Revenue Circle, BDS khatians on DLRMS)"
+  ],
+  "source_url": "https://dlrms.land.gov.bd/ ; https://dlrs.gov.bd/pages/notices ; https://gazipur.gov.bd/"
+ },
+ "rajuk_dap_gazipur": {
+  "covered": "not_found – could not confirm from an official page. RAJUK's 'ড্যাপ(২০১৬-২০৩৫)' page is empty; 'ড্যাপ ম্যাপ' link opens the DMDP Integrated DAP 2010-2015 map (one page, place names not legible at screen size); homepage has heading 'বিশদ অঞ্চল পরিকল্পনা ২০২২-২০৩৫' but no working link; dap.rajuk.gov.bd does not resolve (NXDOMAIN).",
+  "how_to_check_zone": "Not found as a working plot lookup for Gazipur. Options seen: (1) map.land.gov.bd has 'ভূমি জোনিং সারাংশ' / 'ভূমি ব্যবহারের সারাংশ' buttons, but Gazipur is not in its district list; (2) RAJUK 'ভূমি ব্যবহার ও নকশা অনুমোদন' links to https://ecps.gov.bd/ (not opened); (3) Gazipur Development Authority (গাজীপুর উন্নয়ন কর্তৃপক্ষ, gda.gov.bd) publishes a 'ভূমি ব্যবহার ছাড়পত্র আবেদন ফরম' (land-use clearance form), which suggests GDA handles land-use clearance in its area.",
+  "source_url": "https://rajuk.gov.bd/ ; https://rajuk.gov.bd/pages/static-pages/6922de6c933eb65569e1a88a ; https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/office-rajuk/2024/12/47a73a569ded4cefba73012f9391b0bb.pdf ; https://gda.gov.bd/pages/forms/6922d9e6933eb65569e00eb7"
+ },
+ "test_lookup": {
+  "mouza": "",
+  "khatian_or_dag": "",
+  "result_summary": "not run – no mouza/khatian was given in the brief (Task 9 blanks were empty)",
+  "source_url": ""
+ },
+ "extra": {
+  "mouzas_other_surveys": {
+   "Gazipur Sadar CS (সি এস)": [
+    {
+     "name_bn": "উত্তর সালনা",
+     "name_en": "not_found",
+     "jl_no": "15"
+    },
+    {
+     "name_bn": "ভূরুলিয়া",
+     "name_en": "not_found",
+     "jl_no": "25"
+    },
+    {
+     "name_bn": "জয়দেবপুর",
+     "name_en": "not_found",
+     "jl_no": "45"
+    },
+    {
+     "name_bn": "বাঙ্গালগাছ",
+     "name_en": "not_found",
+     "jl_no": "49"
+    },
+    {
+     "name_bn": "ভোরা",
+     "name_en": "not_found",
+     "jl_no": "50"
+    },
+    {
+     "name_bn": "ধীরাশ্রম",
+     "name_en": "not_found",
+     "jl_no": "66"
+    },
+    {
+     "name_bn": "আউছপাড়া",
+     "name_en": "not_found",
+     "jl_no": "109"
+    },
+    {
+     "name_bn": "বিন্দান",
+     "name_en": "not_found",
+     "jl_no": "174"
+    },
+    {
+     "name_bn": "কুমুন",
+     "name_en": "not_found",
+     "jl_no": "316"
+    }
+   ],
+   "Gazipur Sadar SA (এস এ)": [
+    {
+     "name_bn": "পাইনশাইল",
+     "name_en": "not_found",
+     "jl_no": "7"
+    },
+    {
+     "name_bn": "উত্তর সালনা",
+     "name_en": "not_found",
+     "jl_no": "15"
+    },
+    {
+     "name_bn": "ভূরুলিয়া",
+     "name_en": "not_found",
+     "jl_no": "25"
+    },
+    {
+     "name_bn": "বাঙ্গালগাছ",
+     "name_en": "not_found",
+     "jl_no": "49"
+    },
+    {
+     "name_bn": "ভোরা",
+     "name_en": "not_found",
+     "jl_no": "50"
+    },
+    {
+     "name_bn": "আউছপাড়া",
+     "name_en": "not_found",
+     "jl_no": "109"
+    },
+    {
+     "name_bn": "বিন্দান",
+     "name_en": "not_found",
+     "jl_no": "172"
+    },
+    {
+     "name_bn": "কুমুন",
+     "name_en": "not_found",
+     "jl_no": "316"
+    }
+   ],
+   "Gazipur Sadar BDS (বি ডি এস)": [],
+   "Tongi Revenue Circle CS": [
+    {
+     "name_bn": "দত্তপাড়া",
+     "name_en": "not_found",
+     "jl_no": "138"
+    },
+    {
+     "name_bn": "ছোট গোবিন্দপুর",
+     "name_en": "not_found",
+     "jl_no": "547"
+    }
+   ],
+   "Tongi Revenue Circle SA": [
+    {
+     "name_bn": "গাজিপুরা",
+     "name_en": "not_found",
+     "jl_no": "107"
+    },
+    {
+     "name_bn": "547",
+     "name_en": "not_found",
+     "jl_no": "547"
+    }
+   ],
+   "Tongi Revenue Circle BDS": [
+    {
+     "name_bn": "কোনাপাড়া",
+     "name_en": "not_found",
+     "jl_no": "79"
+    }
+   ],
+   "Kaliganj CS": [
+    {
+     "name_bn": "আরা",
+     "name_en": "not_found",
+     "jl_no": "17"
+    },
+    {
+     "name_bn": "বরিহাটী",
+     "name_en": "not_found",
+     "jl_no": "37"
+    },
+    {
+     "name_bn": "উত্তর ভাদারতি",
+     "name_en": "not_found",
+     "jl_no": "338"
+    }
+   ],
+   "Kaliganj SA": [
+    {
+     "name_bn": "তিরিয়া",
+     "name_en": "not_found",
+     "jl_no": "15"
+    },
+    {
+     "name_bn": "আরা",
+     "name_en": "not_found",
+     "jl_no": "17"
+    },
+    {
+     "name_bn": "বেরুয়া",
+     "name_en": "not_found",
+     "jl_no": "36"
+    },
+    {
+     "name_bn": "উত্তর ভাদারতী",
+     "name_en": "not_found",
+     "jl_no": "338"
+    }
+   ],
+   "Kapasia SA": [
+    {
+     "name_bn": "বাগুয়া",
+     "name_en": "not_found",
+     "jl_no": "31"
+    },
+    {
+     "name_bn": "কামারগাঁও",
+     "name_en": "not_found",
+     "jl_no": "76"
+    }
+   ]
+  },
+  "dlrs_store_admin_structure": "map.settlement.gov.bd has NO 'Gazipur' district. Gazipur's upazilas sit under Division ঢাকা › District ঢাকা (old pre-1984 Dhaka district) as: জয়দেবপুর (= Gazipur Sadar; 126 mouzas, shown as 'name (JL: n)', plus an entry 'জয়দেবপুর এবং টংগী'), টঙ্গী, কাপাসিয়া, কালিগঞ্জ, কালিয়াকৈর, শ্রীপুর. Its Dhaka-division district list: কিশোরগঞ্জ, গোপালগঞ্জ, জামালপুর, টাঙ্গাইল, ঢাকা, নওয়াবগঞ্জ, নরসিংদী, নারায়ণগঞ্জ, নেত্রকোনা, ফরিদপুর, ময়মনসিংহ, মাদারীপুর, মানিকগঞ্জ, মুন্সিগঞ্জ, রাজবাড়ী, শরীয়তপুর, শেরপুর.",
+  "dlrs_store_joydebpur_jl_sample": "First mouzas in DLRS store under জয়দেবপুর: আউছপাড়া (JL ১০৯), আউটপাড়া (৩৯), আঙ্গটিয়া (৯), আড়াইশপ্রসাদ (১৮), আদাবৈ (৬৪), আধেপাশা (৫১), ইছালি (৬৯), ইটাকাটা (৩৫), ইটাহাটা (৩৫), ইসলামপুর (৪৮), উজিরপুর (১০৩), উত্তরসালনা (১৫), উদুর (১০৫), কড্ডানান্দুল (৪৭), করনদিয়া (৮৭), করমতলা (৯৭), কলমেশ্বর (৮৪), কানাইয়া (৬৭), কামারগাও (৯৯), কামারবাসুলিয়া (৩৪), কায়ৈলতিয়া (১০), কুদাব (৯৩), কোটভাদুন (৯০), খালসাবার্থা (১১), খিলগাঁও (১০১), খুরাইদ (৮১), গাজিপুর (২০), গাজিপুরা (১০৭), চঙ্গেরবাইদ (১১১), চতর (২৬), চান্দনা (৪৪), চাপুলিয়া (২৪), চামুড্ডা (৯২), ছয়দানা (৮৬), ছিকলিয়া (১০৪), ছোটজয়নগর (১১৩), ছোট দেওরা (৫৭), জয়দেবপুর (৫৮), জয়দেবপুর এবং টংগী (no JL), জিরাইতলি (৭৯), জোলারপাড়া (১৪), টেকনাগপাড়া (৩৭), টেকভারারিয়া (৪৩), টেকিপাড়া (৭০), টেকিবাড়ী (৩২), টেক্কাথোরা (৩১), টেলিনগর (৭২), ডগরী (৬), ডেমরপাড়া (৬৮), তরৎপাড়া (৫৫), তালটিয়া (১০৮), তেলিপাড়া (৩৮) … (list truncated in capture; 126 total). Spellings differ from DLRMS (e.g. কড্ডানান্দুল vs কড্ডা নান্দুন).",
+  "map_land_marquee": "map.land.gov.bd shows a scrolling '**বিশেষ দ্রষ্টব্য:' (special note) listing ~100 upazila names (e.g. নবীনগর, চৌদ্দগ্রাম, ঝালকাঠি সদর … টঙ্গি, মুকসুদপুর … পটুয়াখালী সদর) with no explanation captured. 'টঙ্গি' appears in it; no other Gazipur upazila does; Gazipur is still not selectable in the dropdown.",
+  "causelist_gazipur_district_values": "causelist district dropdown has both 'গাজীপুর' (value 20) and 'গাজীপুর মহানগর' (Gazipur Metropolitan, value 20-1); only 'গাজীপুর' courts were listed here. Court types: জেলা জজ আদালত (48 options incl. header), চীফ জুডিসিয়াল ম্যাজিট্রেট আদালত (18), ট্রাইব্যুনালসমূহ (7): নারী ও শিশু নির্যাতন দমন ট্রাইব্যুনাল, শ্রম আদালত, শিশু সহিংসতা দমন ট্রাইব্যুনাল, পারিবারিক আপিল আদালত, ল্যান্ড সার্ভে আপিল ট্রাইব্যুনাল, বাণিজ্যিক আদালত.",
+  "mutation_circulars": "https://mutation.land.gov.bd/notification lists 22 circulars, incl. 'স্মার্ট ভূমি রেকর্ড ও ম্যাপ সিস্টেমে নতুন সেবা সংযোজনসহ খতিয়ান ও ম্যাপ সেবাসমূহের ফি পুনঃনির্ধারণ' (2023-04-13), 'ই-নামজারি সিস্টেমে ডিসিআর ফি অনলাইনে জমা প্রদান সংক্রান্ত' (2022-09-06), 'ই-নামজারি আবেদন ও নোটিশ জারি ফি অনলাইনে জমা প্রদান প্রসঙ্গে' (2022-03-14), 'ই-নামজারি, জমাভাগ ও জমাএকত্রীকরণ বাবদ ফি অনলাইনে প্রদান সংক্রান্ত' (2021-11-02). Some download links point to mutation-v2.land.gov.bd, which failed to load; the same path on mutation.land.gov.bd worked."
+ },
+ "problems": [
+  "eporcha.gov.bd and www.eporcha.gov.bd: DNS NXDOMAIN – site gone, no redirect.",
+  "causelist.judiciary.org.bd and judiciary.org.bd: DNS NXDOMAIN – the live e-causelist is causelist.judiciary.gov.bd.",
+  "gis.gov.bd: ERR_CONNECTION_TIMED_OUT.",
+  "dap.rajuk.gov.bd: NXDOMAIN (guessed URL).",
+  "map.land.gov.bd (Bhumi Naksha) has no Gazipur district – Task 4 examples could not be produced.",
+  "map.settlement.gov.bd has no Gazipur district; Gazipur upazilas are under old 'ঢাকা' district, Gazipur Sadar named 'জয়দেবপুর'.",
+  "DLRMS shows mouza names in Bangla only – every name_en is 'not_found' (not transliterated, to avoid guessing).",
+  "DLRMS Gazipur Sadar RS list repeats many JL numbers (two mouzas per JL, e.g. ১ - পিরুজালী and ১ - ক্ষুদে বর্ম্মি) – looks like two JL series merged (ক্ষুদে বর্ম্মি is usually a Sreepur mouza). One entry has JL '১৮..' (আড়াইশপ্রসাদ). Kaliganj and Kapasia RS lists also repeat JL numbers. Recorded exactly as shown.",
+  "Tongi SA list has an entry '৫৪৭ - 547' (no name). Kapasia/Kaliakair RS lists skip some JL numbers.",
+  "No official LD-tax payment charge and no DLRMS mouza-map price found without login/cart.",
+  "RAJUK DAP 2022–2035 coverage of Gazipur not confirmed from any official page.",
+  "No address field on the AC Land / sub-registry officer pages; several sub-registry entries have placeholder phone/email values.",
+  "Chrome extension calls failed intermittently on heavy pages (retried); results above are what loaded."
+ ]
+}
