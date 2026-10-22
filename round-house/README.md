@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Round House website (revision D)
 
-## Getting Started
+Next.js 16 (App Router) marketing site for Round House. Every page is pre-rendered as static HTML;
+the only server code is the contact form endpoint.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| What | Where |
+| --- | --- |
+| All copy, prices and case studies | `lib/content.ts` |
+| Pages | `app/page.tsx`, `app/services`, `app/work`, `app/work/[slug]`, `app/about`, `app/contact` |
+| Design tokens and styles | `app/globals.css` (colors, type, light and dark themes at the top) |
+| Turntable drawing | `components/Turntable.tsx` |
+| Home hero, bay console and tour | `components/Hero.tsx` |
+| Site-wide motion (smooth scroll, route curtain, scroll reveals) | `components/SiteMotion.tsx` |
+| Fonts (Big Shoulders and Hanken Grotesk, self-hosted by `next/font` at build time) | `app/layout.tsx` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Motion uses GSAP 3 (ScrollTrigger, Flip) and Lenis. Everything respects `prefers-reduced-motion`,
+and the content is fully readable with JavaScript off.
 
-## Learn More
+## Contact form
 
-To learn more about Next.js, take a look at the following resources:
+`/api/contact` validates the enquiry, then delivers it one of two ways, set in Vercel
+(Project → Settings → Environment Variables):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**A form service.** Set `FORM_ENDPOINT` (or `NEXT_PUBLIC_FORM_ENDPOINT`) to a Formspree, Basin or similar
+URL that accepts JSON.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Email through [Resend](https://resend.com).** Set all three:
 
-## Deploy on Vercel
+| Variable | Example |
+| --- | --- |
+| `RESEND_API_KEY` | `re_...` |
+| `CONTACT_TO` | `hello@roundhouse.studio` |
+| `CONTACT_FROM` | `Round House site <site@roundhouse.studio>` (a sender on a domain verified in Resend) |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Until they are set, the form still validates and then gives the visitor a ready-to-send copy of their
+message with a mail-app link, so no enquiry is silently lost.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Site address
+
+Set `NEXT_PUBLIC_SITE_URL` to the final domain (for canonical URLs, the sitemap and link previews).
+It defaults to `https://round-house.vercel.app`.
+
+## Old URLs
+
+`next.config.ts` redirects the `.html` URLs of the static prototype (`/services.html`,
+`/case-hvac-speed-to-lead.html`, and so on) to the new routes.
