@@ -1,0 +1,26 @@
+name: Build Pass & Play Chess APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'chess-2p/**'
+      - '.github/workflows/chess-apk.yml'
+
+jobs:
+  apk:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Android build tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq aapt apksigner zipalign dalvik-exchange android-sdk-platform-23
+      - name: Test the chess engine
+        run: node chess-2p/test/engine.test.js
+      - name: Build APK
+        run: chess-2p/build-apk.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PassAndPlayChess-apk
+          path: chess-2p/dist/PassAndPlayChess.apk

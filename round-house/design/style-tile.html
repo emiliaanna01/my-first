@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Round House style tile</title>
+<style>
+  @font-face { font-family: "Archivo"; src: url(archivo.woff2) format("woff2-variations"); font-weight: 100 900; font-stretch: 62% 125%; }
+  :root {
+    --plant: #E8EBE9; --panel: #F6F7F6; --ink: #151A1E; --steel: #4F5A63;
+    --rule: #BCC3C2; --signal: #FFC21A; --run: #186B3C;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--plant); color: var(--ink); font: 400 18px/1.55 "Archivo", system-ui, sans-serif; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  .display { font-stretch: 118%; font-weight: 760; letter-spacing: -0.025em; line-height: .98; }
+  h1 { font-size: clamp(44px, 6.4vw, 88px); }
+  h2 { font-size: clamp(32px, 3.8vw, 52px); font-stretch: 112%; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+  h3 { font-size: 24px; font-weight: 650; line-height: 1.2; }
+  .lead { max-width: 34ch; font-size: 20px; color: var(--steel); margin-top: 24px; }
+  .small { font-size: 14px; font-weight: 500; color: var(--steel); }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-stretch: 118%; font-weight: 760; font-size: 20px; letter-spacing: -0.01em; }
+  nav { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
+  .btn { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 2px; font: 600 16px/1 "Archivo"; text-decoration: none; border: 1px solid var(--ink); color: var(--ink); }
+  .btn.primary { background: var(--signal); border-color: var(--signal); }
+  .btn.small { min-height: 40px; font-size: 15px; padding: 0 16px; }
+
+  .hero { position: relative; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; padding: 72px 0 96px; }
+  .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: repeating-linear-gradient(90deg, transparent 0 calc((100% + 24px) / 12 - 1px), color-mix(in srgb, var(--rule) 55%, transparent) calc((100% + 24px) / 12 - 1px) calc((100% + 24px) / 12)); }
+  .hero-copy { grid-column: 1 / 8; position: relative; }
+  .hero-art { grid-column: 8 / 13; margin-left: -64px; position: relative; align-self: end; }
+  .ctas { display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap; }
+  .status { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; font-size: 14px; font-weight: 500; color: var(--run); }
+  .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--run); }
+
+  section.sheet { border-top: 1px solid var(--rule); padding: 72px 0; display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+  .sheet > .label { grid-column: 1 / 4; }
+  .sheet > .body { grid-column: 4 / 13; }
+  .swatches { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; border: 1px solid var(--rule); }
+  .sw { padding: 96px 12px 12px; font-size: 13px; font-weight: 500; border-right: 1px solid var(--rule); }
+  .sw:last-child { border-right: 0; }
+  .sw b { display: block; font-size: 15px; font-weight: 650; }
+  .spec { width: 100%; border-collapse: collapse; font-size: 16px; }
+  .spec th, .spec td { text-align: left; padding: 14px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .spec th { font-weight: 650; width: 30%; }
+  .spec td.num { font-stretch: 118%; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .track { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding-top: 40px; }
+  .track::before { content: ""; position: absolute; top: 11px; left: 11px; right: 0; height: 2px; background: var(--ink); }
+  .station { position: relative; }
+  .station::before { content: ""; position: absolute; top: -40px; left: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--plant); border: 2px solid var(--ink); }
+  .station.on::before { background: var(--signal); }
+  .station p { color: var(--steel); margin-top: 8px; max-width: 32ch; }
+  .station .price { margin-top: 16px; font-stretch: 118%; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .fig .n { font-size: clamp(40px, 4.6vw, 64px); font-stretch: 118%; font-weight: 760; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .fig .n mark { background: var(--signal); color: var(--ink); padding: 0 .08em; }
+  .fig p { margin-top: 10px; color: var(--steel); font-size: 16px; max-width: 28ch; }
+  .tag { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; border: 1px solid var(--rule); padding: 2px 8px; border-radius: 2px; color: var(--steel); }
+  .types p + p { margin-top: 18px; }
+
+  footer { background: var(--ink); color: var(--plant); margin-top: 72px; }
+  .titleblock { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; border: 1px solid #4F5A63; margin: 48px 0; }
+  .titleblock > div { padding: 16px; border-right: 1px solid #4F5A63; font-size: 15px; }
+  .titleblock > div:last-child { border-right: 0; }
+  .titleblock .k { display: block; font-size: 12px; font-weight: 500; color: #9AA5AC; margin-bottom: 4px; }
+  .titleblock .big { font-stretch: 118%; font-weight: 760; font-size: 28px; letter-spacing: -0.01em; }
+
+  @media (max-width: 860px) {
+    nav { display: none; }
+    .hero-copy, .hero-art, .sheet > .label, .sheet > .body { grid-column: 1 / -1; }
+    .swatches { grid-template-columns: repeat(2, 1fr); }
+    .track, .figures, .titleblock { grid-template-columns: 1fr; }
+    .track::before { display: none; }
+    .track { padding-top: 0; gap: 40px; } .station { padding-left: 40px; } .station::before { top: 2px; }
+    .titleblock > div { border-right: 0; border-bottom: 1px solid #4F5A63; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" id="mark"></svg>Round House</div>
+    <nav><span>Services</span><span>Work</span><span>About</span><span>Contact</span></nav>
+    <a class="btn small primary" href="#">Book a call</a>
+  </header>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <h1 class="display">We automate the work that slows you down.</h1>
+      <p class="lead">From the factory floor to the front office, Round House finds where your team loses hours, builds the systems that win them back, and keeps those systems running.</p>
+      <div class="ctas"><a class="btn primary" href="#">Book a 30-minute call</a><a class="btn" href="#">See pricing</a></div>
+      <div class="status">Taking calls now, 9am–6pm ET</div>
+    </div>
+    <div class="hero-art"><svg id="rh" viewBox="0 0 720 440" role="img" aria-label="Roundhouse schematic: work enters on one track and is routed to eight bays"></svg></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="sheet">
+    <div class="label"><h3>Palette</h3><p class="small">Grey stays grey. Yellow means you can act, or a result lives here.</p></div>
+    <div class="body swatches">
+      <div class="sw" style="background:#E8EBE9"><b>Plant</b>#E8EBE9</div>
+      <div class="sw" style="background:#F6F7F6"><b>Panel</b>#F6F7F6</div>
+      <div class="sw" style="background:#BCC3C2"><b>Rule</b>#BCC3C2</div>
+      <div class="sw" style="background:#4F5A63;color:#fff"><b>Steel</b>#4F5A63</div>
+      <div class="sw" style="background:#151A1E;color:#E8EBE9"><b>Ink</b>#151A1E</div>
+      <div class="sw" style="background:#FFC21A"><b>Signal</b>#FFC21A</div>
+      <div class="sw" style="background:#186B3C;color:#fff"><b>Run</b>#186B3C</div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="label"><h3>Type</h3><p class="small">Archivo, one family. Width does the work a second typeface usually would.</p></div>
+    <div class="body types">
+      <p class="display" style="font-size:64px">Leads answered in 90 seconds</p>
+      <p style="font-size:32px;font-stretch:112%;font-weight:700;letter-spacing:-.02em;line-height:1.1">Diagnose, build, run.</p>
+      <p style="max-width:62ch">Body copy at 18px, regular width, 1.55 line-height. We write it the way an ops manager talks: what changes, how long it takes, what it costs, and how you'll know it worked.</p>
+      <p class="small">Caption, 14px medium. Sample engagement, results shown are illustrative.</p>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="label"><h3>Track line</h3><p class="small">Used only for real sequences.</p></div>
+    <div class="body track">
+      <div class="station on"><h3>1. Diagnose</h3><p>A paid audit of your tools, data and workflows, with a 90-day roadmap.</p><div class="price">$2,500–$6,000</div></div>
+      <div class="station"><h3>2. Build</h3><p>The automation, AI agent, CRM or website the roadmap calls for.</p><div class="price">$6,000–$40,000</div></div>
+      <div class="station"><h3>3. Run</h3><p>Monitoring, fixes and monthly reporting on hours saved.</p><div class="price">from $1,800/mo</div></div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="label"><h3>Result figures</h3></div>
+    <div class="body figures">
+      <div class="fig"><div class="n"><mark>−70%</mark></div><p>Invoice processing time for a regional 3PL</p><span class="tag">Sample engagement</span></div>
+      <div class="fig"><div class="n">90 s</div><p>Lead reply time, down from 3 h 40 min, for an HVAC company</p><span class="tag">Sample engagement</span></div>
+      <div class="fig"><div class="n">$38k</div><p>Yearly software spend cut after a tool audit</p><span class="tag">Sample engagement</span></div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="label"><h3>Spec sheet</h3><p class="small">Rows, not cards.</p></div>
+    <div class="body"><table class="spec">
+      <tr><th>Starter</th><td>Monitoring, fixes within 1 business day, monthly report</td><td class="num">$1,800/mo</td></tr>
+      <tr><th>Growth</th><td>Starter, plus 2 new automations a month and prompt tuning</td><td class="num">$4,200/mo</td></tr>
+      <tr><th>Scale</th><td>Growth, plus a fractional automation lead and quarterly roadmap</td><td class="num">$8,500/mo</td></tr>
+    </table></div>
+  </section>
+</div>
+
+<footer><div class="wrap"><div class="titleblock">
+  <div><span class="k">Studio</span><span class="big">Round House</span></div>
+  <div><span class="k">Hours</span>9am–6pm ET, Mon–Fri</div>
+  <div><span class="k">Contact</span>hello@roundhouse.studio</div>
+  <div><span class="k">Rev.</span>C, Oct 2026</div>
+</div></div></footer>
+
+<script>
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (t, a, p) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); p.appendChild(n); return n; };
+  const pt = (cx, cy, r, deg) => [cx + r * Math.cos(deg * Math.PI / 180), cy + r * Math.sin(deg * Math.PI / 180)];
+
+  // Hero schematic
+  const svg = document.getElementById("rh");
+  const cx = 360, cy = 392, r = 52, R1 = 168, R2 = 240;
+  const bays = ["Onboarding", "Documents", "Inbox", "Leads", "CRM", "Reporting", "Content", "Website"];
+  const a0 = 192, a1 = 348, step = (a1 - a0) / (bays.length - 1);
+  const active = 3;
+  // ring building (annular sector)
+  const [o1x, o1y] = pt(cx, cy, R2, a0 - step / 2), [o2x, o2y] = pt(cx, cy, R2, a1 + step / 2);
+  const [i2x, i2y] = pt(cx, cy, R1, a1 + step / 2), [i1x, i1y] = pt(cx, cy, R1, a0 - step / 2);
+  el("path", { d: `M${o1x} ${o1y} A${R2} ${R2} 0 0 1 ${o2x} ${o2y} L${i2x} ${i2y} A${R1} ${R1} 0 0 0 ${i1x} ${i1y} Z`, fill: "#F6F7F6", stroke: "#151A1E", "stroke-width": 1.5 }, svg);
+  bays.forEach((name, i) => {
+    const a = a0 + i * step;
+    // stall dividers
+    const [d1x, d1y] = pt(cx, cy, R1, a - step / 2), [d2x, d2y] = pt(cx, cy, R2, a - step / 2);
+    if (i > 0) el("line", { x1: d1x, y1: d1y, x2: d2x, y2: d2y, stroke: "#151A1E", "stroke-width": 1 }, svg);
+    if (i === active) {
+      const [p1x, p1y] = pt(cx, cy, R2, a - step / 2), [p2x, p2y] = pt(cx, cy, R2, a + step / 2), [p3x, p3y] = pt(cx, cy, R1, a + step / 2), [p4x, p4y] = pt(cx, cy, R1, a - step / 2);
+      el("path", { d: `M${p1x} ${p1y} A${R2} ${R2} 0 0 1 ${p2x} ${p2y} L${p3x} ${p3y} A${R1} ${R1} 0 0 0 ${p4x} ${p4y} Z`, fill: "#FFC21A", stroke: "#151A1E", "stroke-width": 1.5 }, svg);
+    }
+    // track
+    const [t1x, t1y] = pt(cx, cy, r + 2, a), [t2x, t2y] = pt(cx, cy, R2 - 10, a);
+    el("line", { x1: t1x, y1: t1y, x2: t2x, y2: t2y, stroke: i === active ? "#151A1E" : "#9AA5AC", "stroke-width": i === active ? 2.5 : 1.5 }, svg);
+    // label
+    const [lx, ly] = pt(cx, cy, R2 + 18, a);
+    const anchor = Math.abs(Math.cos(a * Math.PI / 180)) < 0.25 ? "middle" : (Math.cos(a * Math.PI / 180) < 0 ? "end" : "start");
+    const t = el("text", { x: lx, y: ly, "text-anchor": anchor, "font-size": 15, "font-weight": i === active ? 700 : 500, fill: i === active ? "#151A1E" : "#4F5A63", "font-family": "Archivo" }, svg);
+    t.textContent = name;
+  });
+  // lead-in track from below
+  el("line", { x1: cx, y1: cy + r, x2: cx, y2: 440, stroke: "#151A1E", "stroke-width": 2.5 }, svg);
+  // turntable + bridge
+  el("circle", { cx, cy, r, fill: "#E8EBE9", stroke: "#151A1E", "stroke-width": 2 }, svg);
+  const aa = a0 + active * step;
+  // bridge: a deck with two rails spanning the pit, not a needle
+  const g = el("g", { transform: `rotate(${aa} ${cx} ${cy})` }, svg);
+  el("rect", { x: cx - r + 3, y: cy - 9, width: 2 * r - 6, height: 18, fill: "#F6F7F6", stroke: "#151A1E", "stroke-width": 1.5 }, g);
+  el("line", { x1: cx - r + 3, y1: cy - 4, x2: cx + r - 3, y2: cy - 4, stroke: "#151A1E", "stroke-width": 1.5 }, g);
+  el("line", { x1: cx - r + 3, y1: cy + 4, x2: cx + r - 3, y2: cy + 4, stroke: "#151A1E", "stroke-width": 1.5 }, g);
+  el("rect", { x: cx + r - 14, y: cy - 6, width: 9, height: 12, fill: "#FFC21A", stroke: "#151A1E", "stroke-width": 1 }, g);
+  // outer wall
+  const [w1x, w1y] = pt(cx, cy, R2 + 6, a0 - step / 2), [w2x, w2y] = pt(cx, cy, R2 + 6, a1 + step / 2);
+  el("path", { d: `M${w1x} ${w1y} A${R2 + 6} ${R2 + 6} 0 0 1 ${w2x} ${w2y}`, fill: "none", stroke: "#151A1E", "stroke-width": 1 }, svg);
+
+  // Logo mark: five-stall roundhouse with turntable
+  const m = document.getElementById("mark");
+  const mcx = 16, mcy = 27, mr = 4.5, M1 = 13, M2 = 22;
+  const ma0 = 200, ma1 = 340;
+  const [q1x, q1y] = pt(mcx, mcy, M2, ma0), [q2x, q2y] = pt(mcx, mcy, M2, ma1), [q3x, q3y] = pt(mcx, mcy, M1, ma1), [q4x, q4y] = pt(mcx, mcy, M1, ma0);
+  el("path", { d: `M${q1x} ${q1y} A${M2} ${M2} 0 0 1 ${q2x} ${q2y} L${q3x} ${q3y} A${M1} ${M1} 0 0 0 ${q4x} ${q4y} Z`, fill: "#151A1E" }, m);
+  for (let i = 1; i < 5; i++) { const a = ma0 + i * (ma1 - ma0) / 5; const [x1, y1] = pt(mcx, mcy, M1 - .5, a), [x2, y2] = pt(mcx, mcy, M2 + .5, a); el("line", { x1, y1, x2, y2, stroke: "#E8EBE9", "stroke-width": 1.4 }, m); }
+  el("circle", { cx: mcx, cy: mcy, r: mr, fill: "#FFC21A", stroke: "#151A1E", "stroke-width": 1.5 }, m);
+</script>
+</body>
+</html>

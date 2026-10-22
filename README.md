@@ -39,3 +39,7 @@ tasks with timers. Run `node deck/server.js`. See `deck/README.md` for API keys 
 `web-design/` holds the website-building setup: 25 design, UI/UX, animation (GSAP) and quality skills
 in `.claude/skills/`, MCP servers in `.mcp.json`, inspiration and component guides, a screenshot
 tool and a starter page. Start with `web-design/README.md`.
+
+## Pass & Play Chess
+`chess-2p/` is an offline two-player chess app for Android (chess.com-style board, clocks with
+increment, all draw rules). Build the APK with `chess-2p/build-apk.sh`; see `chess-2p/README.md`.

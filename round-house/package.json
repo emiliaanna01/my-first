@@ -1,0 +1,25 @@
+{
+  "name": "round-house",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gsap": "3.12.5",
+    "lenis": "1.1.13",
+    "next": "16.4.2",
+    "react": "19.2.9",
+    "react-dom": "19.2.9"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "typescript": "5.8.3"
+  },
+  "engines": { "node": ">=20.9" }
+}

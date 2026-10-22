@@ -1,0 +1,453 @@
+<title>Round House Home, Apple HIG Edition</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..800&display=swap">
+<style>
+/* Layout: Apple-style product page. Centered hero with the roundhouse as the "product shot",
+   then grouped containers: a results group, a segmented control for the three steps,
+   an inset grouped list of practices, a scrolling collection of case studies, a settings-style terms list.
+   Brand lives in the display face, the schematic and Signal yellow on primary actions; system type carries the rest. */
+:root {
+  --page: #fbfcfb;        /* window background */
+  --group: #eef0ef;       /* grouped background */
+  --card: #ffffff;        /* content container */
+  --label: #151a1e;       /* primary label, 17.0:1 on page */
+  --label-2: #4f5a63;     /* secondary label, 6.9:1 on page, 6.2:1 on group */
+  --sep: #d3d8d7;         /* separators (decorative) */
+  --fill: rgba(21, 26, 30, 0.06); /* quaternary fill for segmented control track */
+  --signal: #ffc21a;      /* primary actions and results only; label on it 10.8:1 */
+  --signal-press: #f0b400;
+  --on-signal: #151a1e;
+  --run: #186b3c;         /* status: open now, 6.6:1 on card */
+  --glass: rgba(251, 252, 251, 0.72);
+  --track: #8d989f;
+  --display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --text: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --r-container: 22px;    /* containers: continuous-looking large radius */
+  --r-row: 12px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --page: #0f1214; --group: #0f1214; --card: #1d2226; --label: #eef1ef; --label-2: #a3adb3; --sep: #343c42;
+  --fill: rgba(238, 241, 239, 0.10); --run: #5fc48d; --glass: rgba(15, 18, 20, 0.70); --track: #6c777e; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --page: #0f1214; --group: #0f1214; --card: #1d2226; --label: #eef1ef; --label-2: #a3adb3; --sep: #343c42;
+  --fill: rgba(238, 241, 239, 0.10); --run: #5fc48d; --glass: rgba(15, 18, 20, 0.70); --track: #6c777e; color-scheme: dark }
+/* Increase Contrast: stronger secondary text and separators. */
+@media (prefers-contrast: more) { :root { --label-2: #2b3238; --sep: #8a949b; --track: #4f5a63; }
+  :root[data-theme="dark"] { --label-2: #d0d6d9; --sep: #6c777e; --track: #a3adb3; } }
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --label-2: #d0d6d9; --sep: #6c777e; --track: #a3adb3; } }
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 72px; }
+body { background: var(--page); color: var(--label); font: 400 17px/1.47 var(--text); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--label); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.shell { width: 100%; max-width: 1068px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Type scale: display face for headlines only, system text everywhere else. */
+.large-title { font-family: var(--display); font-stretch: 112%; font-weight: 700; letter-spacing: -0.022em; line-height: 1.04; font-size: clamp(2.4rem, 1.2rem + 4.6vw, 4.75rem); }
+.title-1 { font-family: var(--display); font-stretch: 108%; font-weight: 700; letter-spacing: -0.018em; line-height: 1.08; font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3rem); }
+.title-3 { font-weight: 600; font-size: 1.25rem; line-height: 1.25; letter-spacing: -0.01em; }
+.headline { font-weight: 600; font-size: 1.0625rem; }
+.subhead { font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.5rem); line-height: 1.38; color: var(--label-2); }
+.footnote { font-size: 0.8125rem; line-height: 1.38; color: var(--label-2); }
+.figure { font-family: var(--display); font-stretch: 112%; font-weight: 700; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; font-size: clamp(2.5rem, 1.8rem + 2.4vw, 3.75rem); }
+
+/* Buttons: capsule shape, 44pt minimum, one prominent style per view. */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 22px; border-radius: 999px; font: 600 1.0625rem/1 var(--text); text-decoration: none; border: 0; cursor: pointer; transition: background-color .15s ease, transform .1s ease; }
+.btn:active { transform: scale(0.98); }
+.btn-prominent { background: var(--signal); color: var(--on-signal); }
+.btn-prominent:hover { background: var(--signal-press); }
+.btn-small { min-height: 36px; padding: 0 16px; font-size: 0.9375rem; }
+.link { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-weight: 600; text-decoration: none; }
+.link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.chev { width: 9px; height: 14px; flex: none; }
+
+/* Navigation bar: the only glass in the page, floating above content (Liquid Glass belongs to controls, not content). */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--glass); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid transparent; transition: border-color .2s ease; }
+.bar.scrolled { border-bottom-color: var(--sep); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--page); }
+@media (prefers-reduced-transparency: reduce) { .bar { background: var(--page); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+.bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; font-family: var(--display); font-stretch: 112%; font-weight: 700; font-size: 1.0625rem; }
+.brand svg { width: 26px; height: 26px; }
+.nav { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; font-size: 0.875rem; color: var(--label-2); text-decoration: none; }
+.nav a:hover { color: var(--label); }
+@media (max-width: 720px) { .nav { display: none; } }
+
+/* Hero */
+.hero { text-align: center; padding-block: clamp(48px, 8vw, 96px) 24px; display: grid; justify-items: center; gap: 20px; }
+.hero .large-title { max-width: 14ch; }
+.hero .subhead { max-width: 36ch; }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 28px; margin-top: 8px; }
+.status { display: inline-flex; align-items: center; gap: 8px; font-size: 0.875rem; color: var(--label-2); }
+.status i { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; }
+.status.open { color: var(--run); }
+.status.open i { background: currentColor; }
+
+/* The product shot: the roundhouse */
+.stage { padding-block: 8px 40px; }
+.stage-card { background: var(--card); border-radius: 28px; padding: clamp(16px, 3vw, 32px) clamp(12px, 3vw, 40px) clamp(20px, 3vw, 28px); max-width: 860px; margin: 0 auto; }
+.rh { display: block; width: 100%; height: auto; overflow: visible; }
+.rh .bay { cursor: pointer; outline: none; }
+.rh .stall { fill: var(--group); stroke: var(--label); stroke-width: 1; transition: fill .2s ease; }
+.rh .bay[aria-pressed="true"] .stall { fill: var(--signal); }
+.rh .bay:hover .stall { fill: color-mix(in srgb, var(--signal) 30%, var(--group)); }
+.rh .bay[aria-pressed="true"]:hover .stall { fill: var(--signal); }
+.rh .track { stroke: var(--track); stroke-width: 1.5; }
+.rh .bay[aria-pressed="true"] .track { stroke: var(--label); stroke-width: 2.5; }
+.rh .lbl { fill: var(--label-2); font: 500 21px var(--text); }
+.rh .bay[aria-pressed="true"] .lbl { fill: var(--label); font-weight: 700; }
+.rh .bay:focus-visible .ring { stroke: var(--label); stroke-width: 2.5; stroke-dasharray: 5 4; fill: none; }
+.rh .line { stroke: var(--label); fill: none; }
+.rh .pit { fill: var(--card); stroke: var(--label); stroke-width: 2; }
+@media (max-width: 600px) { .rh .lbl { font-size: 34px; } }
+.caption { display: flex; align-items: center; gap: 16px; margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--sep); }
+.caption p { flex: 1; min-height: 3em; }
+.caption .link { min-height: 0; }
+.stepper { display: flex; gap: 8px; }
+.round { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--fill); color: var(--label); display: grid; place-items: center; cursor: pointer; }
+.round:hover { background: color-mix(in srgb, var(--label) 12%, transparent); }
+.round svg { width: 10px; height: 16px; }
+@media (prefers-reduced-motion: no-preference) {
+  .rh.armed .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .rh.armed .fade { opacity: 0; }
+  .rh.go .draw { stroke-dashoffset: 0; transition: stroke-dashoffset .9s cubic-bezier(.4,0,.2,1); }
+  .rh.go .fade { opacity: 1; transition: opacity .45s ease .55s; }
+  .rh .bridge { transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+}
+
+/* Sections */
+section.block { padding-block: clamp(56px, 8vw, 96px); }
+section.grouped { background: var(--group); }
+.block-head { display: grid; gap: 12px; justify-items: center; text-align: center; margin-bottom: clamp(28px, 4vw, 44px); }
+.block-head .subhead { max-width: 44ch; font-size: 1.1875rem; }
+
+.results { background: var(--card); border-radius: var(--r-container); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.results > div { padding: 28px 24px; display: grid; gap: 10px; align-content: start; }
+.results > div + div { border-left: 1px solid var(--sep); }
+.figure span { box-shadow: inset 0 -0.14em 0 var(--signal); }
+.results p:not(.figure) { color: var(--label-2); font-size: 0.9375rem; }
+.note { display: flex; justify-content: center; margin-top: 14px; }
+@media (max-width: 720px) { .results { grid-template-columns: 1fr; } .results > div + div { border-left: 0; border-top: 1px solid var(--sep); } }
+
+/* Segmented control */
+.segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; background: var(--fill); border-radius: 12px; max-width: 420px; margin: 0 auto 24px; position: relative; }
+.segmented button { position: relative; z-index: 1; min-height: 40px; border: 0; background: transparent; color: var(--label); font: 600 0.9375rem/1 var(--text); border-radius: 9px; cursor: pointer; }
+.segmented button[aria-selected="true"] { background: var(--card); box-shadow: 0 2px 6px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.04); }
+.panel { background: var(--card); border-radius: var(--r-container); padding: clamp(24px, 4vw, 40px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 32px; }
+.panel[hidden] { display: none; }
+.panel .price { font-family: var(--display); font-stretch: 112%; font-weight: 700; font-size: 2rem; letter-spacing: -0.015em; font-variant-numeric: tabular-nums; margin-top: 14px; }
+.panel ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--sep); }
+.panel li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--sep); font-size: 0.9375rem; }
+.panel li b { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) { .panel { grid-template-columns: 1fr; } }
+
+/* Inset grouped list */
+.list { background: var(--card); border-radius: var(--r-row); overflow: hidden; max-width: 720px; margin: 0 auto; }
+.list a { display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 12px 16px 12px 16px; text-decoration: none; position: relative; }
+.list a + a::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--sep); }
+.list a:hover { background: var(--fill); }
+.list .icon { width: 30px; height: 30px; border-radius: 7px; background: var(--group); display: grid; place-items: center; flex: none; }
+.list .icon svg { width: 18px; height: 18px; }
+.list .txt { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.list .txt span { color: var(--label-2); font-size: 0.9375rem; }
+.list .chev { color: var(--label-2); opacity: .6; }
+
+/* Collection */
+.collection { display: grid; grid-auto-flow: column; grid-auto-columns: min(82%, 340px); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px max(16px, env(safe-area-inset-left, 0px)) 20px; scroll-padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
+.collection::-webkit-scrollbar { height: 0; }
+.case { scroll-snap-align: start; background: var(--card); border-radius: var(--r-container); padding: 24px; display: grid; gap: 12px; align-content: start; text-decoration: none; }
+.case:hover .title-3 { text-decoration: underline; text-underline-offset: 4px; }
+.case .figure { font-size: 2.75rem; margin-top: 6px; }
+.case dl { margin: 6px 0 0; display: grid; gap: 4px; font-size: 0.875rem; }
+.case dl div { display: flex; gap: 6px; } .case dt { color: var(--label-2); } .case dd { margin: 0; }
+.tag { justify-self: start; font-size: 0.75rem; font-weight: 600; color: var(--label-2); background: var(--group); border-radius: 999px; padding: 4px 10px; }
+.collection-wrap { max-width: 1100px; margin: 0 auto; position: relative; }
+.collection-ctl { display: flex; justify-content: flex-end; gap: 8px; padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+@media (max-width: 720px) { .collection-ctl { display: none; } }
+
+/* Settings-style terms */
+.terms { background: var(--card); border-radius: var(--r-row); max-width: 720px; margin: 0 auto; }
+.terms div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px; padding: 14px 16px; position: relative; }
+.terms div + div::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--sep); }
+.terms dt { font-weight: 600; } .terms dd { margin: 0; color: var(--label-2); font-size: 0.9375rem; }
+@media (max-width: 560px) { .terms div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* Closing */
+.closing { text-align: center; display: grid; justify-items: center; gap: 18px; }
+footer { border-top: 1px solid var(--sep); padding-block: 24px 40px; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.foot p { font-size: 0.75rem; color: var(--label-2); }
+.compare { margin: 0 auto; max-width: 720px; text-align: center; }
+</style>
+
+<header class="bar" id="bar">
+  <div class="shell bar-inner">
+    <a class="brand" href="https://round-house.vercel.app/" aria-label="Round House, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M1.9 18.87A15 15 0 0 1 30.1 18.87L23.99 21.09A8.5 8.5 0 0 0 8.01 21.09Z" fill="currentColor"/><g stroke="var(--page)" stroke-width="1.2"><line x1="10.65" y1="18.05" x2="5.63" y2="12.48"/><line x1="14.06" y1="16.24" x2="12.25" y2="8.96"/><line x1="17.94" y1="16.24" x2="19.75" y2="8.96"/><line x1="21.35" y1="18.05" x2="26.37" y2="12.48"/></g><circle cx="16" cy="24" r="3.6" fill="var(--signal)" stroke="currentColor" stroke-width="1.5"/></svg>
+      Round House
+    </a>
+    <nav aria-label="Main"><ul class="nav">
+      <li><a href="https://round-house.vercel.app/services">Services</a></li>
+      <li><a href="https://round-house.vercel.app/work">Work</a></li>
+      <li><a href="https://round-house.vercel.app/about">About</a></li>
+      <li><a href="https://round-house.vercel.app/contact">Contact</a></li>
+    </ul></nav>
+    <a class="btn btn-prominent btn-small" href="https://round-house.vercel.app/contact#book">Book a Call</a>
+  </div>
+</header>
+
+<main>
+  <section class="shell hero" aria-labelledby="hero-title">
+    <h1 id="hero-title" class="large-title">We automate the work that slows you down.</h1>
+    <p class="subhead">From the factory floor to the front office. Find where the hours go, build the systems that win them back, keep them running.</p>
+    <div class="hero-actions">
+      <a class="btn btn-prominent" href="https://round-house.vercel.app/contact#book">Book a 30-Minute Call</a>
+      <a class="link" href="#steps">See Prices <svg class="chev" viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7 7l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <p class="status" id="status"><i aria-hidden="true"></i><span>Calls 9am–6pm ET, Monday to Friday</span></p>
+  </section>
+
+  <section class="shell stage" aria-label="The roundhouse: eight processes we automate">
+    <div class="stage-card">
+      <svg class="rh armed" id="rh" viewBox="-110 50 940 410" role="group" aria-label="Roundhouse diagram. Work comes in on one track and the turntable routes it to one of eight bays. Use the arrow keys to move between bays."></svg>
+      <div class="caption">
+        <p id="cap" aria-live="polite"><span class="footnote">Choose a bay to see what we automate there.</span></p>
+        <div class="stepper">
+          <button class="round" type="button" id="prev" aria-label="Previous bay"><svg viewBox="0 0 10 16" aria-hidden="true"><path d="M8 2 2 8l6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="round" type="button" id="next" aria-label="Next bay"><svg viewBox="0 0 10 16" aria-hidden="true"><path d="m2 2 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block grouped" aria-labelledby="results-h">
+    <div class="shell">
+      <div class="block-head">
+        <h2 id="results-h" class="title-1">Measured in hours, not hype.</h2>
+        <p class="subhead">Every engagement starts with a baseline, so the result is a number you can check.</p>
+      </div>
+      <div class="results">
+        <div><p class="figure"><span>+38%</span></p><p>Booked service calls in the first quarter. Regional HVAC company.</p></div>
+        <div><p class="figure"><span>2.1×</span></p><p>Quotes sent per week by the same two estimators. Metal fabrication shop.</p></div>
+        <div><p class="figure"><span>26 h</span></p><p>Accounts-payable time returned each week. Third-party logistics provider.</p></div>
+      </div>
+      <p class="note"><span class="tag">Sample engagements, illustrative figures</span></p>
+    </div>
+  </section>
+
+  <section class="block" id="steps" aria-labelledby="steps-h">
+    <div class="shell">
+      <div class="block-head">
+        <h2 id="steps-h" class="title-1">Start with a paid audit. Then decide.</h2>
+        <p class="subhead">Three steps, with prices on the page. The audit fee comes off the build if you go ahead within 60 days.</p>
+      </div>
+      <div class="segmented" role="tablist" aria-label="Engagement steps">
+        <button role="tab" id="t-d" aria-controls="p-d" aria-selected="true" tabindex="0">Diagnose</button>
+        <button role="tab" id="t-b" aria-controls="p-b" aria-selected="false" tabindex="-1">Build</button>
+        <button role="tab" id="t-r" aria-controls="p-r" aria-selected="false" tabindex="-1">Run</button>
+      </div>
+      <div class="panel" role="tabpanel" id="p-d" aria-labelledby="t-d">
+        <div><h3 class="title-3">A costed plan, ranked by hours saved</h3><p class="footnote" style="margin-top:8px">A paid audit of your tools, data and workflows, with a 90-day roadmap.</p><p class="price">$2,500–$6,000</p><p class="footnote">Credited to your build within 60 days.</p></div>
+        <ul><li>Automation and AI readiness audit<b>$2,500–$6,000</b></li><li>Tech stack and tool-spend audit<b>from $1,500</b></li><li>Customer journey and funnel audit<b>from $1,500</b></li><li>Data readiness assessment<b>from $1,500</b></li></ul>
+      </div>
+      <div class="panel" role="tabpanel" id="p-b" aria-labelledby="t-b" hidden>
+        <div><h3 class="title-3">A working system in your own accounts</h3><p class="footnote" style="margin-top:8px">Fixed scope and price, agreed before work starts. Documented, with your team trained.</p><p class="price">$4,000–$40,000</p><p class="footnote">Most projects take 4 to 10 weeks.</p></div>
+        <ul><li>Lead capture and instant replies<b>$8,000–$20,000</b></li><li>Document automation<b>$8,000–$25,000</b></li><li>CRM setup and migration<b>$6,000–$20,000</b></li><li>Brand identity and website<b>$12,000–$40,000</b></li></ul>
+      </div>
+      <div class="panel" role="tabpanel" id="p-r" aria-labelledby="t-r" hidden>
+        <div><h3 class="title-3">Systems that keep working</h3><p class="footnote" style="margin-top:8px">Monitoring, fixes when tools change, new automations, and a monthly report on hours saved.</p><p class="price">from $1,800/mo</p><p class="footnote">Month to month after the first three months.</p></div>
+        <ul><li>Starter, up to 5 automations<b>$1,800/mo</b></li><li>Growth, 2 new automations a month<b>$4,200/mo</b></li><li>Scale, a named automation lead<b>$8,500/mo</b></li><li>Fractional automation lead<b>from $6,000/mo</b></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="block grouped" aria-labelledby="build-h">
+    <div class="shell">
+      <div class="block-head">
+        <h2 id="build-h" class="title-1">One team for the systems and the shop window.</h2>
+        <p class="subhead">The website that captures the lead and the system that answers it, built to work together.</p>
+      </div>
+      <nav class="list" aria-label="Practices" id="practices"></nav>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="work-h">
+    <div class="shell"><div class="block-head">
+      <h2 id="work-h" class="title-1">Selected work</h2>
+      <p class="subhead">The problem, what we built, what it cost and what changed.</p>
+    </div></div>
+    <div class="collection-wrap">
+      <div class="collection" id="collection" tabindex="0" aria-label="Case studies, scroll sideways"></div>
+      <div class="collection-ctl">
+        <button class="round" type="button" id="c-prev" aria-label="Previous case studies"><svg viewBox="0 0 10 16" aria-hidden="true"><path d="M8 2 2 8l6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="round" type="button" id="c-next" aria-label="Next case studies"><svg viewBox="0 0 10 16" aria-hidden="true"><path d="m2 2 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="block grouped" aria-labelledby="terms-h">
+    <div class="shell">
+      <div class="block-head">
+        <h2 id="terms-h" class="title-1">How we work with US teams</h2>
+        <p class="subhead">What procurement and IT will ask, answered before the first call.</p>
+      </div>
+      <dl class="terms">
+        <div><dt>Hours</dt><dd>9am–6pm Eastern, Monday to Friday. Replies within one business day.</dd></div>
+        <div><dt>Contracts</dt><dd>Mutual NDA before discovery. Master services agreement and a fixed-price statement of work.</dd></div>
+        <div><dt>Pricing</dt><dd>Published ranges for every service. Audit fee credited to your build.</dd></div>
+        <div><dt>Data security</dt><dd>Least-privilege access in your own accounts, MFA required, no training AI models on your data, access removed at handover.</dd></div>
+        <div><dt>Ownership</dt><dd>You own the code, automations, prompts and documentation.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="close-h">
+    <div class="shell closing">
+      <h2 id="close-h" class="title-1">Bring us the work that slows you down.</h2>
+      <a class="btn btn-prominent" href="https://round-house.vercel.app/contact#book">Book a 30-Minute Call</a>
+      <p class="footnote">Or email hello@roundhouse.studio</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="shell foot">
+    <p>© 2026 Round House. Case studies marked as samples are illustrative.</p>
+    <p>Design study: the home page redrawn with Apple's Human Interface Guidelines. The live site is unchanged.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var NS = "http://www.w3.org/2000/svg";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function el(t, a, p) { var n = document.createElementNS(NS, t); for (var k in a) n.setAttribute(k, a[k]); if (p) p.appendChild(n); return n; }
+  function pt(cx, cy, r, d) { var a = d * Math.PI / 180; return [+(cx + r * Math.cos(a)).toFixed(2), +(cy + r * Math.sin(a)).toFixed(2)]; }
+  function sector(cx, cy, r1, r2, a, b) { var p1 = pt(cx, cy, r2, a), p2 = pt(cx, cy, r2, b), p3 = pt(cx, cy, r1, b), p4 = pt(cx, cy, r1, a);
+    return "M" + p1 + "A" + r2 + " " + r2 + " 0 0 1 " + p2 + "L" + p3 + "A" + r1 + " " + r1 + " 0 0 0 " + p4 + "Z"; }
+
+  var bays = [
+    ["Onboarding", "New clients get contracts, forms and a welcome sequence the moment they sign."],
+    ["Documents", "Quotes, proposals and reports assemble themselves from your data."],
+    ["Inbox", "Email gets sorted, drafted and followed up before your team opens it."],
+    ["Leads", "Every enquiry gets a reply in under two minutes, day or night."],
+    ["CRM", "One clean CRM, moved over from the spreadsheets and the old system."],
+    ["Reporting", "One dashboard from your CRM, ads and books, updated every hour."],
+    ["Content", "One video becomes a week of posts and a newsletter, in your voice."],
+    ["Website", "A fast site that turns visitors into booked calls."]
+  ];
+  var CX = 360, CY = 400, PIT = 54, R1 = 170, R2 = 244, A0 = 192, A1 = 348, STEP = (A1 - A0) / (bays.length - 1), START = 3, ENTRY = 90;
+  var svg = document.getElementById("rh"), cap = document.getElementById("cap");
+  el("path", { d: sector(CX, CY, R1, R2, A0 - STEP / 2, A1 + STEP / 2), pathLength: 1, class: "line draw", "stroke-width": 1.5 }, svg);
+  var w1 = pt(CX, CY, R2 + 7, A0 - STEP / 2), w2 = pt(CX, CY, R2 + 7, A1 + STEP / 2);
+  el("path", { d: "M" + w1 + "A" + (R2 + 7) + " " + (R2 + 7) + " 0 0 1 " + w2, pathLength: 1, class: "line draw", "stroke-width": 1 }, svg);
+  el("line", { x1: CX, y1: CY + PIT, x2: CX, y2: 470, pathLength: 1, class: "line draw", "stroke-width": 2.5 }, svg);
+  var groups = [];
+  bays.forEach(function (b, i) {
+    var a = A0 + i * STEP, c = Math.cos(a * Math.PI / 180);
+    var g = el("g", { class: "bay", role: "button", tabindex: i === START ? 0 : -1, "aria-pressed": "false", "aria-label": b[0] + ": " + b[1] }, svg);
+    el("path", { d: sector(CX, CY, R1, R2, a - STEP / 2, a + STEP / 2), class: "stall fade" }, g);
+    el("path", { d: sector(CX, CY, R1, R2, a - STEP / 2, a + STEP / 2), class: "ring" }, g);
+    var t1 = pt(CX, CY, PIT + 3, a), t2 = pt(CX, CY, R2 - 12, a);
+    el("line", { x1: t1[0], y1: t1[1], x2: t2[0], y2: t2[1], pathLength: 1, class: "track draw" }, g);
+    var l = pt(CX, CY, R2 + 24, a);
+    var tx = el("text", { x: l[0], y: l[1], "text-anchor": Math.abs(c) < 0.1 ? "middle" : (c < 0 ? "end" : "start"), "dominant-baseline": "middle", class: "lbl fade" }, g);
+    tx.textContent = b[0];
+    g.addEventListener("click", function () { select(i); });
+    g.addEventListener("keydown", function (e) {
+      var k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(i); }
+      else if (k) { e.preventDefault(); var to = (i + k + bays.length) % bays.length; select(to); groups[to].focus(); }
+      else if (e.key === "Home" || e.key === "End") { e.preventDefault(); var j = e.key === "Home" ? 0 : bays.length - 1; select(j); groups[j].focus(); }
+    });
+    groups.push(g);
+  });
+  el("circle", { cx: CX, cy: CY, r: PIT, pathLength: 1, class: "pit draw" }, svg);
+  var bridge = el("g", { class: "bridge fade", style: "transform-origin:" + CX + "px " + CY + "px; transform: rotate(" + ENTRY + "deg)" }, svg);
+  el("rect", { x: CX - PIT + 4, y: CY - 10, width: PIT * 2 - 8, height: 20, rx: 3, fill: "var(--card)", stroke: "var(--label)", "stroke-width": 1.5 }, bridge);
+  el("line", { x1: CX - PIT + 4, y1: CY - 4.5, x2: CX + PIT - 4, y2: CY - 4.5, stroke: "var(--label)", "stroke-width": 1.5 }, bridge);
+  el("line", { x1: CX - PIT + 4, y1: CY + 4.5, x2: CX + PIT - 4, y2: CY + 4.5, stroke: "var(--label)", "stroke-width": 1.5 }, bridge);
+  el("rect", { x: CX + PIT - 17, y: CY - 7, width: 11, height: 14, rx: 2, fill: "var(--signal)", stroke: "var(--label)", "stroke-width": 1 }, bridge);
+
+  var active = null;
+  function select(i) {
+    active = i;
+    groups.forEach(function (g, j) { g.setAttribute("aria-pressed", String(j === i)); g.setAttribute("tabindex", j === i ? 0 : -1); });
+    bridge.style.transform = "rotate(" + (A0 + i * STEP) + "deg)";
+    cap.innerHTML = "<strong>" + bays[i][0] + ".</strong> " + bays[i][1] + " <a class=\"link\" href=\"https://round-house.vercel.app/services#build\">How we build it <svg class=\"chev\" viewBox=\"0 0 9 14\" aria-hidden=\"true\"><path d=\"M1.5 1.5 7 7l-5.5 5.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>";
+  }
+  document.getElementById("prev").addEventListener("click", function () { select(((active == null ? START : active) - 1 + bays.length) % bays.length); });
+  document.getElementById("next").addEventListener("click", function () { select(((active == null ? START : active) + 1) % bays.length); });
+  // The one orchestrated moment: draw, then swing the turntable from the entry track to Leads. Any click cancels the wait.
+  if (reduce) { svg.classList.remove("armed"); select(START); }
+  else { requestAnimationFrame(function () { requestAnimationFrame(function () { svg.classList.add("go"); setTimeout(function () { if (active == null) select(START); }, 1100); }); }); }
+
+  // Practices as an inset grouped list
+  var practices = [
+    ["Business analysis", "Find where the hours go before anything gets built.", "M4 18V9m5 9V5m5 13v-6m5 6V8"],
+    ["Business automation", "Take the copy-paste, chasing and re-keying off your team.", "M4 12h10m-4-4 4 4-4 4M20 6v12"],
+    ["AI agents and integrated systems", "Assistants that work inside the tools you already use.", "M12 3v3m0 12v3M3 12h3m12 0h3M7 7l2 2m6 6 2 2m0-10-2 2m-6 6-2 2"],
+    ["Brand identity and social", "An identity that looks as reliable as the work you do.", "M12 3l2.6 5.6L20 9.3l-4 4.1.9 5.6L12 16.4 7.1 19l.9-5.6-4-4.1 5.4-.7z"],
+    ["Websites", "Fast sites and landing pages that turn visits into calls.", "M3 5h18v14H3zM3 9h18"],
+    ["UI and UX", "Screens your staff and customers can use without a manual.", "M5 3h14v18H5zM9 17h6"]
+  ];
+  var list = document.getElementById("practices");
+  practices.forEach(function (p) {
+    var a = document.createElement("a"); a.href = "https://round-house.vercel.app/services#practices";
+    a.innerHTML = '<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="' + p[2] + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt"><b class="headline">' + p[0] + '</b><span>' + p[1] + '</span></span><svg class="chev" viewBox="0 0 9 14" aria-hidden="true"><path d="M1.5 1.5 7 7l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    list.appendChild(a);
+  });
+
+  // Case studies as a horizontal collection
+  var cases = [
+    ["hvac-speed-to-lead", "Regional HVAC company, Texas", "Lead replies went from 3 h 40 min to 90 seconds.", "90 s", "$16,000 build, then Growth", "About 6 weeks"],
+    ["fabrication-quote-automation", "Metal fabrication shop, Ohio", "Quotes that took three days now go out in four hours.", "4 h", "$4,500 audit, $22,000 build", "About 4 months"],
+    ["3pl-invoice-processing", "Logistics provider, Georgia", "Invoice processing time cut by 70%.", "−70%", "$24,000 build, then Starter", "About 5 months"],
+    ["clinic-group-tool-audit", "Physical therapy group, North Carolina", "$38,400 a year of unused software cut.", "$38k", "$3,500 audit, $28,000 build", "Audit paid back in 5 weeks"]
+  ];
+  var col = document.getElementById("collection");
+  cases.forEach(function (c) {
+    var a = document.createElement("a"); a.className = "case"; a.href = "https://round-house.vercel.app/work/" + c[0];
+    a.innerHTML = '<span class="tag">Sample engagement</span><p class="footnote">' + c[1] + '</p><h3 class="title-3">' + c[2] + '</h3><p class="figure"><span>' + c[3] + '</span></p><dl><div><dt>Investment</dt><dd>' + c[4] + '</dd></div><div><dt>Payback</dt><dd>' + c[5] + '</dd></div></dl>';
+    col.appendChild(a);
+  });
+  function page(dir) { col.scrollBy({ left: dir * col.clientWidth * 0.8, behavior: reduce ? "auto" : "smooth" }); }
+  document.getElementById("c-prev").addEventListener("click", function () { page(-1); });
+  document.getElementById("c-next").addEventListener("click", function () { page(1); });
+
+  // Segmented control (tabs with arrow-key movement)
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function show(t) {
+    tabs.forEach(function (x) { var on = x === t; x.setAttribute("aria-selected", String(on)); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute("aria-controls")).hidden = !on; });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { show(t); });
+    t.addEventListener("keydown", function (e) {
+      var k = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!k) return; e.preventDefault();
+      var n = tabs[(i + k + tabs.length) % tabs.length]; show(n); n.focus();
+    });
+  });
+
+  // Glass bar gains its separator only once content scrolls under it (scroll edge effect).
+  var bar = document.getElementById("bar");
+  var onScroll = function () { bar.classList.toggle("scrolled", window.scrollY > 4); };
+  window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // Hours status, computed in US Eastern time
+  try {
+    var parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", weekday: "short", hour: "numeric", hourCycle: "h23" }).formatToParts(new Date());
+    var day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(parts.find(function (p) { return p.type === "weekday"; }).value);
+    var hour = +parts.find(function (p) { return p.type === "hour"; }).value;
+    var st = document.getElementById("status");
+    if (day >= 1 && day <= 5 && hour >= 9 && hour < 18) { st.classList.add("open"); st.lastChild.textContent = "Taking calls now, until 6pm ET"; }
+    else { var when = day >= 1 && day <= 5 && hour < 9 ? "at 9am ET" : (day >= 1 && day <= 4 ? "tomorrow at 9am ET" : "Monday at 9am ET"); st.lastChild.textContent = "Back " + when + ". Calls 9am–6pm ET, Monday to Friday"; }
+  } catch (e) {}
+})();
+</script>
