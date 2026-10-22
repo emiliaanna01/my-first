@@ -3,6 +3,8 @@
 One screen of side-by-side columns. It's a plain static website (HTML, CSS and JavaScript), with
 no server and no paid APIs.
 
+**Live site:** https://emiliaanna01.github.io/my-first/ (served from the `gh-pages` branch).
+
 | Column | What it shows | Source | Cost |
 |---|---|---|---|
 | **Google Calendar** | Today's events, with the current one highlighted and Meet links | Google Calendar API, signed in from your browser | Free |
@@ -30,8 +32,8 @@ python3 -m http.server 8080      # then open http://localhost:8080
 
 These are static files, so any free static host works:
 
-- **GitHub Pages:** repo Settings → Pages → deploy from this branch. The site is then at
-  `https://<user>.github.io/<repo>/deck/`.
+- **GitHub Pages (used for the live site):** the `gh-pages` branch holds a copy of this folder at its root.
+  To publish changes, copy `index.html`, `app.js` and `style.css` to that branch and push.
 - **Netlify Drop:** drag the `deck` folder onto https://app.netlify.com/drop.
 - **Cloudflare Pages / Vercel:** connect the repo and set the root directory to `deck`. No build command is needed.
 
