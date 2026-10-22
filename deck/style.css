@@ -62,16 +62,6 @@ body { display: flex; flex-direction: column; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px; margin-top: 8px; }
 .empty { color: var(--muted); text-align: center; padding: 24px 8px; font-size: 14px; }
 
-/* Posts */
-.post-head { display: flex; gap: 8px; align-items: center; font-size: 13px; }
-.post-head img { width: 32px; height: 32px; border-radius: 50%; }
-.post-head b { color: var(--ink); }
-.post-head span { color: var(--muted); }
-.post-text { margin: 8px 0 6px; white-space: pre-wrap; word-wrap: break-word; font-size: 14px; line-height: 1.4; }
-.post-meta { display: flex; gap: 14px; color: var(--muted); font-size: 12px; }
-.post-meta a { color: var(--accent); margin-left: auto; text-decoration: none; }
-.post.new { border-color: var(--accent); }
-
 /* Calendar */
 .ev { display: grid; grid-template-columns: 74px 1fr; gap: 8px; }
 .ev time { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }

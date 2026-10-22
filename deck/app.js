@@ -1,7 +1,7 @@
 // Deck: TweetDeck-style columns. Each column type is a small module with
 // defaults(), settings(col) -> form HTML, and render(col, el) which may return a cleanup fn.
-// Layout and settings live in localStorage; nothing leaves the browser except
-// calls to this page's own server (/api/x) and to Google with your own sign-in.
+// Static site, no server and no paid APIs: layout, settings and tasks live in
+// localStorage; the only outside calls are X's embed widget and Google, with your own sign-in.
 
 const STORE = "deck.columns.v1";
 const $ = (s, r = document) => r.querySelector(s);
@@ -15,82 +15,37 @@ function save(key, val) {
   try { localStorage.setItem(key, JSON.stringify(val)); } catch { /* private mode: run without saving */ }
 }
 
-const ago = (iso) => {
-  const s = (Date.now() - new Date(iso)) / 1000;
-  if (s < 60) return `${Math.floor(s)}s`;
-  if (s < 3600) return `${Math.floor(s / 60)}m`;
-  if (s < 86400) return `${Math.floor(s / 3600)}h`;
-  return new Date(iso).toLocaleDateString();
-};
 const hms = (ms) => {
   const t = Math.floor(ms / 1000);
   return [Math.floor(t / 3600), Math.floor(t / 60) % 60, t % 60].map((n) => String(n).padStart(2, "0")).join(":");
 };
 
-/* ---------------- X / Twitter ---------------- */
+/* ---------------- X / Twitter (free embed, no API) ---------------- */
 
+// X's API is pay-per-read, so this column uses X's own free timeline widget instead.
+// X decides what the widget shows: sometimes a sign-in prompt or older posts.
 const X = {
   icon: "𝕏",
-  defaults: () => ({ title: "X — search", source: "search", query: "PLC OR SCADA OR \"industrial automation\" -is:retweet lang:en", pollSec: 60 }),
+  defaults: () => ({ title: "X", query: "" }),
   title: (c) => c.title,
   settings: (c) => `
-    <label>Source
-      <select name="source">
-        ${[["search", "Search (API)"], ["user", "User's posts (API)"], ["list", "List ID (API)"], ["home", "My home timeline (API, user token)"], ["bookmarks", "My bookmarks (API, user token)"], ["embed", "Embedded profile — free, no API"]]
-          .map(([v, l]) => `<option value="${v}" ${c.source === v ? "selected" : ""}>${l}</option>`).join("")}
-      </select>
-    </label>
-    <label>Query / @username / list ID <input name="query" value="${esc(c.query)}"></label>
-    <label>Check every (seconds) <input name="pollSec" type="number" min="15" value="${c.pollSec}"></label>
-    <p class="hint">The server caches each feed (X_MIN_POLL_SEC) and stops at a daily read cap, because X bills per post read.</p>`,
+    <label>@username <input name="query" value="${esc(c.query)}" placeholder="@username"></label>
+    <p class="hint">Free embed widget, no API key. If it stays blank, sign in to x.com in this browser.</p>`,
   render(c, body, status) {
-    if (c.source === "embed") return X.embed(c, body, status);
-    const seen = new Set();
-    let first = true;
-    const tick = async () => {
-      try {
-        const r = await fetch(`/api/x/${c.source}?q=${encodeURIComponent(c.query)}`);
-        const d = await r.json();
-        if (!r.ok) throw new Error(d.error || r.statusText);
-        status(`${d.capped ? "Daily read cap reached — showing cached. " : ""}Reads today ${d.usage.reads} · updated ${new Date().toLocaleTimeString()}`);
-        if (!d.posts.length) { body.innerHTML = `<div class="empty">No posts yet.</div>`; return; }
-        body.innerHTML = d.posts.map((p) => {
-          const isNew = !first && !seen.has(p.id);
-          seen.add(p.id);
-          const m = p.metrics;
-          return `<article class="card post ${isNew ? "new" : ""}">
-            <div class="post-head">
-              ${p.author.avatar ? `<img src="${esc(p.author.avatar)}" alt="">` : ""}
-              <div><b>${esc(p.author.name)}</b> <span>@${esc(p.author.username)} · ${ago(p.createdAt)}</span></div>
-            </div>
-            <p class="post-text">${esc(p.text)}</p>
-            <div class="post-meta">
-              <span>↩ ${m.reply_count ?? 0}</span><span>⟲ ${m.retweet_count ?? 0}</span><span>♥ ${m.like_count ?? 0}</span>
-              <a href="https://x.com/${esc(p.author.username)}/status/${esc(p.id)}" target="_blank" rel="noopener">Open</a>
-            </div>
-          </article>`;
-        }).join("");
-        first = false;
-      } catch (e) {
-        status(e.message.includes("Failed to fetch") ? "Can't reach the deck server — start it with `node server.js`." : e.message, true);
-      }
-    };
-    tick();
-    const t = setInterval(tick, Math.max(15, c.pollSec) * 1000);
-    return { stop: () => clearInterval(t), refresh: tick };
-  },
-  embed(c, body, status) {
-    const user = c.query.replace(/^@/, "").replace(/[^A-Za-z0-9_]/g, "");
+    const user = (c.query || "").replace(/^@/, "").replace(/[^A-Za-z0-9_]/g, "");
     if (!user) { body.innerHTML = `<div class="empty">Set a @username in ⚙.</div>`; return; }
-    status("Free embedded widget. X may show a sign-in prompt or older posts instead of a live feed.");
-    body.innerHTML = `<a class="twitter-timeline" data-theme="dark" data-dnt="true" data-chrome="noheader nofooter transparent" href="https://twitter.com/${user}">Posts by @${user}</a>`;
-    const load = () => window.twttr?.widgets?.load(body);
-    if (window.twttr) load();
-    else if (!$("#twttr-js")) {
-      const s = Object.assign(document.createElement("script"), { id: "twttr-js", src: "https://platform.twitter.com/widgets.js", async: true });
-      s.onload = load;
-      document.head.append(s);
-    } else $("#twttr-js").addEventListener("load", load);
+    const draw = () => {
+      body.innerHTML = `<a class="twitter-timeline" data-theme="dark" data-dnt="true" data-chrome="noheader nofooter transparent" href="https://twitter.com/${user}">Posts by @${user}</a>
+        <div class="empty"><a href="https://x.com/${user}" target="_blank" rel="noopener">Open @${esc(user)} on x.com</a></div>`;
+      if (window.twttr?.widgets) window.twttr.widgets.load(body);
+      else if (!$("#twttr-js")) {
+        const s = Object.assign(document.createElement("script"), { id: "twttr-js", src: "https://platform.twitter.com/widgets.js", async: true });
+        s.onload = () => window.twttr?.widgets?.load(body);
+        document.head.append(s);
+      } else $("#twttr-js").addEventListener("load", () => window.twttr?.widgets?.load(body));
+    };
+    draw();
+    return { refresh: draw };
   },
 };
 
@@ -280,7 +235,6 @@ const TASKS = {
 
 const TYPES = { x: X, calendar: CAL, tasks: TASKS };
 let columns = load(STORE, null) || [
-  { id: uid(), type: "x", ...X.defaults() },
   { id: uid(), type: "calendar", ...CAL.defaults() },
   { id: uid(), type: "tasks", ...TASKS.defaults() },
 ];

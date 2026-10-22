@@ -32,8 +32,8 @@ python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
 ```
 
 ## Deck
-`deck/` is a TweetDeck-style dashboard with columns for X feeds, today's Google Calendar and running
-tasks with timers. Run `node deck/server.js`. See `deck/README.md` for API keys and costs.
+`deck/` is a free, static TweetDeck-style website with columns for today's Google Calendar, running tasks
+with timers and an optional X profile embed. It uses no paid APIs. See `deck/README.md` for setup and free hosting.
 
 ## Web design toolkit
 `web-design/` holds the website-building setup: 25 design, UI/UX, animation (GSAP) and quality skills
