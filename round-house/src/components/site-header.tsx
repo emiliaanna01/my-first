@@ -52,7 +52,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <Button asChild size="sm" className="hidden sm:inline-flex">
-            <Link href="/contact">Book a call</Link>
+            <Link href="/contact#book">Book a call</Link>
           </Button>
           <button
             type="button"
@@ -83,7 +83,7 @@ export function SiteHeader() {
             ))}
           </ul>
           <Button asChild className="mt-6 w-full">
-            <Link href="/contact" onClick={() => setMenuOpen(false)}>
+            <Link href="/contact#book" onClick={() => setMenuOpen(false)}>
               Book a 30-minute call
             </Link>
           </Button>

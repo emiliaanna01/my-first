@@ -23,7 +23,7 @@ const security = [
   "Least-privilege access through your own accounts, never shared passwords",
   "MFA required on every account we use",
   "Client data is never used to train AI models",
-  "AI providers with zero data retention where they offer it",
+  "AI providers that delete your data after each request, where they offer it",
   "Data stays in your systems. We do not copy it to ours",
   "Access removed and confirmed in writing at handover",
 ];
@@ -56,7 +56,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="col-span-4 hidden md:col-span-4 md:col-start-9 md:block">
-            <LogoMark className="ml-auto w-full max-w-[260px]" />
+            <LogoMark className="ml-auto w-full max-w-[300px]" hub="plain" />
           </div>
         </div>
       </section>
@@ -119,7 +119,7 @@ export default function AboutPage() {
           </dl>
           <div className="mt-12">
             <Button asChild size="lg">
-              <Link href="/contact">Book a 30-minute call</Link>
+              <Link href="/contact#book">Book a 30-minute call</Link>
             </Button>
           </div>
         </div>

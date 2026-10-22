@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { FooterCta } from "@/components/footer-cta";
 import { Wordmark } from "@/components/logo";
 import { nav, site } from "@/content/site";
 
@@ -9,23 +10,7 @@ export function SiteFooter() {
     <footer className="on-ink bg-ink text-plant">
       <div className="shell pt-16 pb-10 md:pt-20">
         <div className="grid-12 gap-y-10">
-          <div className="col-span-4 md:col-span-6">
-            <p className="t-h2 max-w-[14ch]">Bring us the work that slows you down.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex min-h-12 items-center rounded-sm bg-signal px-[22px] font-semibold text-ink transition-colors hover:bg-[#f0b400]"
-              >
-                Book a 30-minute call
-              </Link>
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-flex min-h-12 items-center rounded-sm border border-plant px-[22px] font-semibold transition-colors hover:bg-plant hover:text-ink"
-              >
-                Email us
-              </a>
-            </div>
-          </div>
+          <FooterCta />
           <nav aria-label="Footer" className="col-span-4 md:col-span-3 md:col-start-10">
             <ul className="grid gap-1">
               {[{ href: "/", label: "Home" }, ...nav].map((item) => (
@@ -63,8 +48,8 @@ export function SiteFooter() {
             <dd className="mt-1 text-[15px]">Mutual NDA, MSA and fixed-price SOW</dd>
           </div>
           <div className="p-4">
-            <dt className="text-xs font-medium text-ink-muted">Rev.</dt>
-            <dd className="mt-1 text-[15px] tnum">C, {site.updated}</dd>
+            <dt className="text-xs font-medium text-ink-muted">Updated</dt>
+            <dd className="mt-1 text-[15px] tnum">{site.updated}, revision C</dd>
           </div>
         </dl>
         <p className="mt-6 text-xs text-ink-muted">© 2026 Round House. Case studies marked as samples are illustrative.</p>

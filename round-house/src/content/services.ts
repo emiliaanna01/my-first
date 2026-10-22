@@ -8,8 +8,17 @@ export type Tier = {
   price: string;
   priceNote: string;
   outcome: string;
-  items: { name: string; detail: string; price?: string }[];
+  items: { name: string; detail: string; price?: string; group?: string }[];
 };
+
+/** Anchor id for a service row, so other pages can deep-link to it. */
+export const serviceId = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+export const buildGroups = ["Leads and sales", "Documents and back office", "AI assistants and training", "Brand and web"] as const;
 
 export const tiers: Tier[] = [
   {
@@ -62,19 +71,19 @@ export const tiers: Tier[] = [
     priceNote: "Fixed scope and price, agreed before work starts",
     outcome: "A working system in your own accounts, documented, with your team trained to use it.",
     items: [
-      { name: "Lead capture and speed-to-lead", detail: "Instant replies, qualification questions and booking straight into your calendar.", price: "$8,000–$20,000" },
-      { name: "Internal AI assistant", detail: "Trained on your SOPs, documents and FAQs, for onboarding and support.", price: "$12,000–$35,000" },
-      { name: "Document automation", detail: "Proposals, quotes, contracts, invoices and reports generated from templates and your data.", price: "$8,000–$25,000" },
-      { name: "Email and inbox automation", detail: "Sorting, drafted replies and follow-ups that go out on time.", price: "$6,000–$15,000" },
-      { name: "Client onboarding automation", detail: "Forms, contracts, welcome sequences and tasks created the moment a client signs.", price: "$6,000–$15,000" },
-      { name: "CRM setup and migration", detail: "HubSpot, GoHighLevel or Pipedrive, set up properly and moved over from what you use now.", price: "$6,000–$20,000" },
-      { name: "Reporting dashboards", detail: "Live numbers from your CRM, ads and accounting tools in one place.", price: "$5,000–$15,000" },
-      { name: "AI content system", detail: "One video or article turned into social posts and newsletters, in your brand voice.", price: "$6,000–$18,000" },
-      { name: "Marketing automation", detail: "Email and SMS nurture sequences and review requests that run themselves.", price: "$5,000–$15,000" },
-      { name: "Brand identity and website", detail: "Identity, social branding and a site built to turn visitors into booked calls.", price: "$12,000–$40,000" },
-      { name: "Landing pages and microsites", detail: "For a campaign, an offer or a launch.", price: "$4,000–$9,000" },
-      { name: "Pitch decks and sales collateral", detail: "Designed to match your brand and the way your team sells.", price: "$3,000–$10,000" },
-      { name: "Staff AI training workshops", detail: "Your team learns ChatGPT, Claude and the tools we built, on their own work.", price: "$2,500 per session" },
+      { group: "Leads and sales", name: "Lead capture and instant replies", detail: "Instant replies, qualification questions and booking straight into your calendar.", price: "$8,000–$20,000" },
+      { group: "AI assistants and training", name: "Internal AI assistant", detail: "Trained on your SOPs, documents and FAQs, for onboarding and support.", price: "$12,000–$35,000" },
+      { group: "Documents and back office", name: "Document automation", detail: "Proposals, quotes, contracts, invoices and reports generated from templates and your data.", price: "$8,000–$25,000" },
+      { group: "Documents and back office", name: "Email and inbox automation", detail: "Sorting, drafted replies and follow-ups that go out on time.", price: "$6,000–$15,000" },
+      { group: "Documents and back office", name: "Client onboarding automation", detail: "Forms, contracts, welcome sequences and tasks created the moment a client signs.", price: "$6,000–$15,000" },
+      { group: "Leads and sales", name: "CRM setup and migration", detail: "HubSpot, GoHighLevel or Pipedrive, set up properly and moved over from what you use now.", price: "$6,000–$20,000" },
+      { group: "Documents and back office", name: "Reporting dashboards", detail: "Live numbers from your CRM, ads and accounting tools in one place.", price: "$5,000–$15,000" },
+      { group: "AI assistants and training", name: "AI content system", detail: "One video or article turned into social posts and newsletters, in your brand voice.", price: "$6,000–$18,000" },
+      { group: "Leads and sales", name: "Marketing automation", detail: "Email and SMS nurture sequences and review requests that run themselves.", price: "$5,000–$15,000" },
+      { group: "Brand and web", name: "Brand identity and website", detail: "Identity, social branding and a site built to turn visitors into booked calls.", price: "$12,000–$40,000" },
+      { group: "Brand and web", name: "Landing pages and microsites", detail: "For a campaign, an offer or a launch.", price: "$4,000–$9,000" },
+      { group: "Leads and sales", name: "Pitch decks and sales collateral", detail: "Designed to match your brand and the way your team sells.", price: "$3,000–$10,000" },
+      { group: "AI assistants and training", name: "Staff AI training workshops", detail: "Your team learns ChatGPT, Claude and the tools we built, on their own work.", price: "$2,500 per session" },
     ],
   },
   {
@@ -143,7 +152,7 @@ export const practices = [
   {
     name: "Business automation",
     line: "Take the copy-paste, chasing and re-keying off your team.",
-    examples: ["Speed-to-lead", "Documents and invoices", "Inbox and onboarding"],
+    examples: ["Instant lead replies", "Documents and invoices", "Inbox and onboarding"],
   },
   {
     name: "AI agents and integrated systems",
@@ -169,12 +178,12 @@ export const practices = [
 
 /** The eight bays of the roundhouse schematic. Order is left to right around the ring. */
 export const bays = [
-  { id: "onboarding", name: "Onboarding", outcome: "New clients get contracts, forms and a welcome sequence the moment they sign." },
-  { id: "documents", name: "Documents", outcome: "Quotes, proposals and reports assemble themselves from your data." },
-  { id: "inbox", name: "Inbox", outcome: "Email gets sorted, drafted and followed up before your team opens it." },
-  { id: "leads", name: "Leads", outcome: "Every enquiry gets a reply in under two minutes, day or night." },
-  { id: "crm", name: "CRM", outcome: "One clean CRM, moved over from the spreadsheets and the old system." },
-  { id: "reporting", name: "Reporting", outcome: "One dashboard from your CRM, ads and books, updated every hour." },
-  { id: "content", name: "Content", outcome: "One video becomes a week of posts and a newsletter, in your voice." },
-  { id: "website", name: "Website", outcome: "A fast site that turns visitors into booked calls." },
+  { id: "onboarding", service: "Client onboarding automation", name: "Onboarding", outcome: "New clients get contracts, forms and a welcome sequence the moment they sign." },
+  { id: "documents", service: "Document automation", name: "Documents", outcome: "Quotes, proposals and reports assemble themselves from your data." },
+  { id: "inbox", service: "Email and inbox automation", name: "Inbox", outcome: "Email gets sorted, drafted and followed up before your team opens it." },
+  { id: "leads", service: "Lead capture and instant replies", name: "Leads", outcome: "Every enquiry gets a reply in under two minutes, day or night." },
+  { id: "crm", service: "CRM setup and migration", name: "CRM", outcome: "One clean CRM, moved over from the spreadsheets and the old system." },
+  { id: "reporting", service: "Reporting dashboards", name: "Reporting", outcome: "One dashboard from your CRM, ads and books, updated every hour." },
+  { id: "content", service: "AI content system", name: "Content", outcome: "One video becomes a week of posts and a newsletter, in your voice." },
+  { id: "website", service: "Brand identity and website", name: "Website", outcome: "A fast site that turns visitors into booked calls." },
 ] as const;

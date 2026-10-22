@@ -7,14 +7,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import type { Tier } from "@/content/services";
-import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 /**
  * Diagnose → Build → Run as one railway line with three stations. This is a real sequence,
- * so the numbering is honest. The rail draws itself as the section scrolls into view; with
- * reduced motion it is simply there.
+ * so the numbering is honest. The rail draws once, station to station, when the line comes
+ * into view; it always rests fully drawn, and with reduced motion it is simply there.
  */
 export function TrackLine({ tiers, linkPrefix = "/services" }: { tiers: Tier[]; linkPrefix?: string }) {
   const root = React.useRef<HTMLOListElement>(null);
@@ -23,29 +22,11 @@ export function TrackLine({ tiers, linkPrefix = "/services" }: { tiers: Tier[]; 
     () => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference) and (min-width: 768px)", () => {
-        gsap.fromTo(
-          ".tl-rail",
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            ease: "none",
-            scrollTrigger: { trigger: root.current, start: "top 85%", end: "top 40%", scrub: 0.6 },
-          },
-        );
-        gsap.utils.toArray<HTMLElement>(".tl-stop").forEach((stop, i) => {
-          gsap.fromTo(
-            stop,
-            { backgroundColor: "#e8ebe9" },
-            {
-              backgroundColor: i === 0 ? "#ffc21a" : "#f6f7f6",
-              scrollTrigger: {
-                trigger: root.current,
-                start: `top ${85 - i * 20}%`,
-                toggleActions: "play none none reverse",
-              },
-              duration: 0.2,
-            },
-          );
+        gsap.from(".tl-rail", {
+          scaleX: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: { trigger: root.current, start: "top 85%", once: true },
         });
       });
     },
@@ -54,18 +35,16 @@ export function TrackLine({ tiers, linkPrefix = "/services" }: { tiers: Tier[]; 
 
   return (
     <ol ref={root} className="relative grid gap-10 md:grid-cols-3 md:gap-6 md:pt-12">
+      {/* From the centre of the first station to the centre of the last: two columns plus two gaps. */}
       <span
         aria-hidden="true"
-        className="tl-rail absolute top-[13px] left-[13px] hidden h-0.5 w-[calc(100%-13px)] origin-left bg-ink md:block"
+        className="tl-rail absolute top-[13px] left-[13px] hidden h-0.5 w-[calc((100%-48px)*2/3+48px)] origin-left bg-ink md:block"
       />
       {tiers.map((t, i) => (
         <li key={t.id} className="relative pl-12 md:pl-0">
           <span
             aria-hidden="true"
-            className={cn(
-              "tl-stop absolute top-0.5 left-0 size-7 rounded-full border-2 border-ink md:-top-12",
-              i === 0 ? "bg-signal" : "bg-panel",
-            )}
+            className="absolute top-0.5 left-0 size-7 rounded-full border-2 border-ink bg-panel md:-top-12"
           />
           {i < tiers.length - 1 && (
             <span aria-hidden="true" className="absolute top-8 bottom-[-40px] left-[13px] w-0.5 bg-ink md:hidden" />

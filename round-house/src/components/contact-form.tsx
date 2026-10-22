@@ -18,7 +18,7 @@ const interests = [
   { value: "run", label: "Run: support for systems we or others built" },
   { value: "unsure", label: "Not sure yet" },
 ];
-const budgets = ["Under $5,000", "$5,000–$15,000", "$15,000–$40,000", "$40,000 or more", "Monthly retainer", "Not sure yet"];
+const budgets = ["Under $5,000", "$5,000–$15,000", "$15,000–$40,000", "$40,000 or more"];
 
 const noop = () => () => {};
 
@@ -89,7 +89,7 @@ export function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div role="status" className="border-t-[3px] border-run bg-panel p-6 md:p-8">
+      <div role="status" className="rounded-sm border border-run bg-panel p-6 md:p-8">
         <h2 className="t-h3">Message sent</h2>
         <p className="mt-3 max-w-[48ch]">
           Thanks, {fields.name.split(" ")[0]}. We reply within one business day, 9am–6pm ET. If it is urgent, book a call
@@ -172,7 +172,7 @@ export function ContactForm() {
             Budget in USD <span className="font-normal text-steel">(optional)</span>
           </Label>
           <NativeSelect id="budget" name="budget" className="mt-2" value={fields.budget} onChange={set("budget")}>
-            <option value="">Choose a range</option>
+            <option value="">Not sure yet</option>
             {budgets.map((b) => (
               <option key={b} value={b}>
                 {b}
@@ -202,7 +202,7 @@ export function ContactForm() {
         {fieldError("message")}
       </div>
       <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
-        <Button type="submit" size="lg" disabled={status === "sending"}>
+        <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={status === "sending"}>
           {status === "sending" ? "Sending message" : "Send message"}
         </Button>
         <p id="form-note" className="t-small max-w-[40ch] text-steel">
@@ -211,7 +211,7 @@ export function ContactForm() {
       </div>
       <div aria-live="polite">
         {status === "mailto" && (
-          <p className="border-l-[3px] border-run pl-4">
+          <p className="rounded-sm border border-run bg-panel px-4 py-3">
             Your email app should open with the message ready to send. If it does not, email{" "}
             <a className="underline underline-offset-4" href={`mailto:${site.email}`}>
               {site.email}
@@ -220,7 +220,7 @@ export function ContactForm() {
           </p>
         )}
         {status === "failed" && (
-          <p className="border-l-[3px] border-alarm pl-4 text-alarm">
+          <p className="rounded-sm border border-alarm bg-panel px-4 py-3 text-alarm">
             The message did not send. Check your connection and try again, or email{" "}
             <a className="underline underline-offset-4" href={`mailto:${site.email}`}>
               {site.email}

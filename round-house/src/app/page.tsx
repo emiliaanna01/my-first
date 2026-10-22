@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { CaseRow, Figure, SampleTag, SectionHead, SpecSheet, TextLink, usTerms } from "@/components/blocks";
+import { CaseRow, Figure, SampleNote, SectionHead, SpecSheet, TextLink, usTerms } from "@/components/blocks";
 import { HoursStatus } from "@/components/hours-status";
 import { Roundhouse } from "@/components/roundhouse";
 import { TrackLine } from "@/components/track-line";
@@ -27,7 +27,8 @@ const jsonLd = {
 };
 
 export default function Home() {
-  const headlineFigures = caseStudies.slice(0, 3).map((c) => ({ ...c.figures[0], client: c.client }));
+  // The case rows below lead with each study's first figure, so this block shows the second.
+  const headlineFigures = caseStudies.slice(0, 3).map((c) => ({ ...c.figures[1], client: c.client }));
 
   return (
     <>
@@ -46,7 +47,7 @@ export default function Home() {
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <Link href="/contact">Book a 30-minute call</Link>
+                <Link href="/contact#book">Book a 30-minute call</Link>
               </Button>
               <Button asChild size="lg" variant="outline">
                 <Link href="/services#pricing">See prices</Link>
@@ -66,17 +67,17 @@ export default function Home() {
           <SectionHead
             id="results-title"
             title="Measured in hours, not hype."
-            intro="Every engagement starts with a baseline, so the result is a number you can check. These are sample engagements that show how we report."
+            intro="Every engagement starts with a baseline, so the result is a number you can check, and every case study shows what it cost."
             action={<TextLink href="/work">See the case studies</TextLink>}
           />
           <ul className="mt-14 grid gap-12 md:mt-20 md:grid-cols-3 md:gap-6">
             {headlineFigures.map((f) => (
               <li key={f.client}>
                 <Figure value={f.value} label={`${f.label}. ${f.client}.`} />
-                <SampleTag className="mt-4" />
               </li>
             ))}
           </ul>
+          <SampleNote className="mt-12" />
         </div>
       </section>
 
@@ -128,6 +129,7 @@ export default function Home() {
               <CaseRow key={c.slug} study={c} />
             ))}
           </ul>
+          <SampleNote className="mt-8" />
         </div>
       </section>
 

@@ -23,7 +23,7 @@ export default function WorkPage() {
               Each study starts with the baseline we measured, then what we built and what changed. Filter by the step of
               the engagement.
             </p>
-            <p className="mt-6 max-w-[60ch] border-l-[3px] border-rule pl-4 text-[16px] text-steel">
+            <p className="mt-6 max-w-[60ch] text-[16px] text-steel">
               These four are sample engagements. They show the kind of work we do and how we report results, and the
               figures are illustrative. Published client studies replace them as clients approve.
             </p>

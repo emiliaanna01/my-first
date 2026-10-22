@@ -17,7 +17,7 @@ export const faqs = [
   {
     question: "How do you handle our data?",
     answer:
-      "We work inside your accounts with the least access the job needs, and remove that access at handover. Client data is never used to train AI models, we use AI providers with zero data retention where they offer it, and we require MFA on every account we touch.",
+      "We work inside your accounts with the least access the job needs, and remove that access at handover. Client data is never used to train AI models, we choose AI providers that delete your data after each request where they offer it, and we require MFA on every account we touch.",
   },
   {
     question: "Who owns what you build?",

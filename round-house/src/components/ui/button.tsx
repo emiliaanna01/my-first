@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         // Signal yellow: the one colour that means "act here".
-        default: "bg-signal text-ink border border-signal hover:bg-[#f0b400] hover:border-[#f0b400]",
+        default: "bg-signal text-ink border border-signal hover:bg-signal-press hover:border-signal-press",
         outline: "border border-ink text-ink bg-transparent hover:bg-ink hover:text-plant",
         inverse: "border border-plant text-plant bg-transparent hover:bg-plant hover:text-ink",
         link: "text-ink underline underline-offset-4 decoration-1 hover:decoration-2 px-0",

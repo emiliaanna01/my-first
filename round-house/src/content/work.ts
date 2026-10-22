@@ -11,6 +11,10 @@ export type CaseStudy = {
   summary: string;
   figures: { value: string; label: string }[];
   timeline: string;
+  /** What the engagement cost, in the published price ranges. */
+  investment: string;
+  /** How long until the measured savings covered the cost. */
+  payback: string;
   situation: string[];
   built: { name: string; detail: string }[];
   stack: string[];
@@ -32,6 +36,8 @@ export const caseStudies: CaseStudy[] = [
       { value: "11 h", label: "Dispatcher time returned each week" },
     ],
     timeline: "5 weeks to launch",
+    investment: "$16,000 build, then Growth at $4,200/mo",
+    payback: "About 6 weeks",
     situation: [
       "Web forms and missed calls landed in a shared inbox. Dispatchers answered between jobs, so the average enquiry waited almost four hours for a reply.",
       "Call tracking showed nearly a third of those enquiries booked with a competitor before anyone called back.",
@@ -59,6 +65,8 @@ export const caseStudies: CaseStudy[] = [
       { value: "29%", label: "Quote win rate, up from 22%" },
     ],
     timeline: "2-week audit, 7-week build",
+    investment: "$4,500 audit, $22,000 build",
+    payback: "About 4 months",
     situation: [
       "Two estimators priced every job by hand in spreadsheets, copying material prices and machine rates out of the ERP.",
       "Buyers who needed an answer the same day went elsewhere, and the audit found 30% of estimator time went on re-keying.",
@@ -86,6 +94,8 @@ export const caseStudies: CaseStudy[] = [
       { value: "1.8%", label: "Of carrier spend caught as billing errors" },
     ],
     timeline: "8 weeks to launch",
+    investment: "$24,000 build, then Starter at $1,800/mo",
+    payback: "About 5 months",
     situation: [
       "Around 2,000 carrier invoices a month arrived as PDFs and were keyed into accounting by hand.",
       "Overcharges were only noticed when a customer complained, months later.",
@@ -113,6 +123,8 @@ export const caseStudies: CaseStudy[] = [
       { value: "1", label: "Dashboard replacing four weekly spreadsheets" },
     ],
     timeline: "3-week audit, 10-week build",
+    investment: "$3,500 audit, $28,000 build, then Growth",
+    payback: "Audit paid back in 5 weeks",
     situation: [
       "Each clinic had picked its own tools over the years: three scheduling add-ons, two email platforms and dozens of unused seats.",
       "Leadership spent Monday mornings merging spreadsheets to see how the week had gone.",

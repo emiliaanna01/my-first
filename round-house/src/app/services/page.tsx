@@ -6,7 +6,7 @@ import { TrackLine } from "@/components/track-line";
 import { Button } from "@/components/ui/button";
 import FloodFaq from "@/components/ui/flood-faq";
 import { faqs } from "@/content/faq";
-import { practices, retainers, tiers } from "@/content/services";
+import { buildGroups, practices, retainers, serviceId, tiers, type Tier } from "@/content/services";
 
 export const metadata: Metadata = {
   title: "Services and prices",
@@ -24,6 +24,12 @@ const faqJsonLd = {
     acceptedAnswer: { "@type": "Answer", text: f.answer },
   })),
 };
+
+/** Build is long enough to need subheads; the other steps read as one list. */
+function groupsOf(t: Tier) {
+  if (t.id !== "build") return [{ name: null as string | null, items: t.items }];
+  return buildGroups.map((name) => ({ name: name as string | null, items: t.items.filter((i) => i.group === name) }));
+}
 
 export default function ServicesPage() {
   return (
@@ -80,7 +86,7 @@ export default function ServicesPage() {
                 <p className="mt-4 max-w-[36ch]">{t.summary}</p>
                 <p className="wide tnum mt-6 text-[1.75rem] leading-tight font-bold">{t.price}</p>
                 <p className="t-small mt-1 max-w-[32ch] text-steel">{t.priceNote}</p>
-                <p className="mt-6 max-w-[36ch] border-l-[3px] border-signal pl-4">{t.outcome}</p>
+                <p className="mt-6 max-w-[36ch] border-t border-rule pt-4 font-semibold">{t.outcome}</p>
               </div>
             </div>
             <div className="col-span-4 md:col-span-8">
@@ -96,20 +102,27 @@ export default function ServicesPage() {
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                  {t.items.map((item) => (
-                    <tr key={item.name} className="border-b border-rule align-top">
-                      <th scope="row" className="py-5 pr-6 font-normal">
-                        <span className="block font-semibold">{item.name}</span>
-                        <span className="mt-1 block max-w-[54ch] text-steel">{item.detail}</span>
-                        <span className="wide tnum mt-2 block font-bold sm:hidden">{item.price ?? "Retainer"}</span>
-                      </th>
-                      <td className="wide tnum hidden py-5 text-right font-bold whitespace-nowrap sm:table-cell">
-                        {item.price ?? "Retainer"}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                {groupsOf(t).map((g) => (
+                  <tbody key={g.name ?? "all"}>
+                    {g.name && (
+                      <tr>
+                        <th scope="colgroup" colSpan={2} className="t-h3 pt-10 pb-2 text-left first:pt-6">
+                          {g.name}
+                        </th>
+                      </tr>
+                    )}
+                    {g.items.map((item) => (
+                      <tr key={item.name} id={serviceId(item.name)} className="scroll-mt-28 border-b border-rule align-top target:bg-panel">
+                        <th scope="row" className="py-5 pr-6 font-normal">
+                          <span className="block font-semibold">{item.name}</span>
+                          <span className="mt-1 block max-w-[54ch] text-steel">{item.detail}</span>
+                          <span className="wide tnum mt-2 block font-bold sm:hidden">{item.price}</span>
+                        </th>
+                        <td className="wide tnum hidden py-5 text-right font-bold whitespace-nowrap sm:table-cell">{item.price}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                ))}
               </table>
             </div>
           </div>
@@ -123,8 +136,26 @@ export default function ServicesPage() {
             title="Run retainers"
             intro="Pick the level of support that matches how much you automate. Month to month after the first three months. Prices per month."
           />
-          <div className="mt-12 overflow-x-auto md:mt-16">
-            <table className="w-full min-w-[640px] border-collapse text-left">
+          {/* Phones get the plans stacked; a three-column table would clip two of them. */}
+          <ul className="mt-12 grid gap-10 md:hidden">
+            {retainers.map((r) => (
+              <li key={r.name} className="border-t border-ink pt-5">
+                <h3 className="t-h3">{r.name}</h3>
+                <p className="wide tnum mt-2 text-[2rem] leading-none font-[760]">
+                  {r.price}
+                  <span className="text-base font-semibold text-steel"> /mo</span>
+                </p>
+                <p className="mt-3 text-steel">Best for: {r.for.toLowerCase()}.</p>
+                <ul className="mt-4 grid gap-2">
+                  {r.includes.map((line) => (
+                    <li key={line}>{line}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-16 hidden md:block">
+            <table className="w-full border-collapse text-left">
               <caption className="sr-only">Run retainer plans compared</caption>
               <thead>
                 <tr>

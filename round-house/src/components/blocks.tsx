@@ -3,6 +3,16 @@ import Link from "next/link";
 import type { CaseStudy } from "@/content/work";
 import { cn } from "@/lib/utils";
 
+/** One note per block, instead of a tag on every figure. */
+export function SampleNote({ className }: { className?: string }) {
+  return (
+    <p className={cn("t-small flex items-center gap-2 text-steel", className)}>
+      <SampleTag />
+      Illustrative figures. Published client studies replace these as clients approve.
+    </p>
+  );
+}
+
 export function SampleTag({ className }: { className?: string }) {
   return (
     <span
@@ -66,7 +76,16 @@ export function Figure({ value, label, className }: { value: string; label: stri
   );
 }
 
-export function CaseRow({ study, headingLevel = "h3" }: { study: CaseStudy; headingLevel?: "h2" | "h3" }) {
+export function CaseRow({
+  study,
+  headingLevel = "h3",
+  tagged = false,
+}: {
+  study: CaseStudy;
+  headingLevel?: "h2" | "h3";
+  /** Tag the row itself; lists that carry one sample note for the whole block leave this off. */
+  tagged?: boolean;
+}) {
   const H = headingLevel;
   const lead = study.figures[0];
   return (
@@ -87,11 +106,17 @@ export function CaseRow({ study, headingLevel = "h3" }: { study: CaseStudy; head
             </Link>
           </H>
           <p className="mt-3 max-w-[52ch] text-steel">{study.summary}</p>
-          <SampleTag className="mt-4" />
+          <p className="t-small mt-3 text-steel">
+            <span className="font-semibold text-ink">Investment:</span> {study.investment}.{" "}
+            <span className="font-semibold text-ink">Payback:</span> {study.payback.toLowerCase()}.
+          </p>
+          {tagged && <SampleTag className="mt-4" />}
         </div>
         <div className="col-span-4 md:col-span-3 md:text-right">
-          <p className="wide tnum text-[2.5rem] leading-none font-[760] tracking-[-0.02em]">{lead.value}</p>
-          <p className="t-small mt-2 text-steel md:ml-auto md:max-w-[22ch]">{lead.label}</p>
+          <p className="wide tnum text-[2.5rem] leading-none font-[760] tracking-[-0.02em]">
+            <span className="border-b-[5px] border-signal">{lead.value}</span>
+          </p>
+          <p className="t-small mt-3 text-steel md:ml-auto md:max-w-[22ch]">{lead.label}</p>
         </div>
       </div>
     </li>
@@ -118,7 +143,7 @@ export const usTerms = [
   {
     term: "Data security",
     detail:
-      "We work inside your accounts with the least access the job needs, require MFA, never train models on your data, and remove our access at handover.",
+      "We work inside your accounts with the least access the job needs, require MFA, never train AI models on your data, and remove our access at handover.",
   },
   { term: "Ownership", detail: "You own the code, automations, prompts and documentation. Nothing is locked to a platform we control." },
   { term: "Measurement", detail: "We record a baseline before we build and report hours saved, response times and revenue influenced against it." },

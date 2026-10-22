@@ -5,7 +5,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
-import { bays } from "@/content/services";
+import { bays, serviceId } from "@/content/services";
 
 gsap.registerPlugin(useGSAP);
 
@@ -61,6 +61,7 @@ export function Roundhouse() {
   const root = React.useRef<HTMLDivElement>(null);
   const bridge = React.useRef<SVGGElement>(null);
   const intro = React.useRef<gsap.core.Timeline | null>(null);
+  const bayRefs = React.useRef<(SVGGElement | null)[]>([]);
   const [active, setActive] = React.useState<number | null>(null);
 
   useGSAP(
@@ -106,6 +107,28 @@ export function Roundhouse() {
   }
 
   const step = (dir: 1 | -1) => select(((active ?? START) + dir + bays.length) % bays.length);
+  // One tab stop for the whole diagram; arrow keys move between bays, like a toolbar.
+  const focusIndex = active ?? START;
+  const onBayKey = (e: React.KeyboardEvent, i: number) => {
+    const keys: Record<string, number> = {
+      ArrowRight: i + 1,
+      ArrowDown: i + 1,
+      ArrowLeft: i - 1,
+      ArrowUp: i - 1,
+      Home: 0,
+      End: bays.length - 1,
+    };
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      select(i);
+      return;
+    }
+    if (!(e.key in keys)) return;
+    e.preventDefault();
+    const to = (keys[e.key] + bays.length) % bays.length;
+    select(to);
+    bayRefs.current[to]?.focus();
+  };
   const current = active === null ? null : bays[active];
 
   return (
@@ -127,18 +150,16 @@ export function Roundhouse() {
             <g
               key={g.id}
               className="rh-bay"
+              ref={(el) => {
+                bayRefs.current[i] = el;
+              }}
               role="button"
-              tabIndex={0}
+              tabIndex={focusIndex === i ? 0 : -1}
               aria-pressed={pressed}
               aria-label={`${g.name}: ${g.outcome}`}
+              aria-describedby={i === focusIndex ? "rh-keys" : undefined}
               onClick={() => select(i)}
-              onPointerEnter={(e) => e.pointerType === "mouse" && select(i)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  select(i);
-                }
-              }}
+              onKeyDown={(e) => onBayKey(e, i)}
             >
               <path d={g.stall} className="rh-stall rh-fade" stroke="var(--ink)" strokeWidth={1} />
               <path d={g.stall} className="rh-focus" fill="none" />
@@ -166,7 +187,7 @@ export function Roundhouse() {
 
         {/* Turntable pit and its bridge. The bridge starts lined up with the entry track. */}
         <circle cx={CX} cy={CY} r={PIT} pathLength={1} className="rh-draw" fill="var(--plant)" stroke="var(--ink)" strokeWidth={2} />
-        <g ref={bridge} transform={`rotate(${ENTRY} ${CX} ${CY})`}>
+        <g ref={bridge} className="rh-fade" transform={`rotate(${ENTRY} ${CX} ${CY})`}>
           <rect x={CX - PIT + 4} y={CY - 10} width={PIT * 2 - 8} height={20} fill="var(--panel)" stroke="var(--ink)" strokeWidth={1.5} />
           <line x1={CX - PIT + 4} y1={CY - 4.5} x2={CX + PIT - 4} y2={CY - 4.5} stroke="var(--ink)" strokeWidth={1.5} />
           <line x1={CX - PIT + 4} y1={CY + 4.5} x2={CX + PIT - 4} y2={CY + 4.5} stroke="var(--ink)" strokeWidth={1.5} />
@@ -174,12 +195,18 @@ export function Roundhouse() {
         </g>
       </svg>
 
+      <p id="rh-keys" className="sr-only">
+        Use the arrow keys to move between bays.
+      </p>
       <div className="mt-6 flex items-start gap-4 border-t border-ink pt-4 md:mt-2">
         <p className="min-h-[3.2em] flex-1 text-[17px] leading-snug" aria-live="polite">
           {current ? (
             <>
               <strong className="font-semibold">{current.name}.</strong> {current.outcome}{" "}
-              <Link href="/services#build" className="whitespace-nowrap underline underline-offset-4 hover:decoration-2">
+              <Link
+                href={`/services#${serviceId(current.service)}`}
+                className="whitespace-nowrap underline underline-offset-4 hover:decoration-2"
+              >
                 How we build it
               </Link>
             </>

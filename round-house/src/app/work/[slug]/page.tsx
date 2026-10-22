@@ -51,7 +51,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             <h1 className="t-h1 mt-5 max-w-[20ch]">{study.headline}</h1>
             <p className="t-lead mt-6 max-w-[52ch]">{study.summary}</p>
           </div>
-          <dl className="col-span-4 mt-10 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-ink pt-5 md:col-span-12 md:grid-cols-4">
+          <dl className="col-span-4 mt-10 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-ink pt-5 md:col-span-12 md:grid-cols-3 lg:grid-cols-6">
             <div>
               <dt className="t-small text-steel">Client</dt>
               <dd className="mt-1 font-semibold">{study.client}</dd>
@@ -67,6 +67,14 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             <div>
               <dt className="t-small text-steel">Timeline</dt>
               <dd className="mt-1 font-semibold">{study.timeline}</dd>
+            </div>
+            <div>
+              <dt className="t-small text-steel">Investment</dt>
+              <dd className="mt-1 font-semibold">{study.investment}</dd>
+            </div>
+            <div>
+              <dt className="t-small text-steel">Payback</dt>
+              <dd className="mt-1 font-semibold">{study.payback}</dd>
             </div>
           </dl>
         </div>
@@ -142,7 +150,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         <div className="shell flex flex-col gap-8 py-14 md:flex-row md:items-end md:justify-between md:py-20">
           <div>
             <p className="t-small text-steel">Next case study</p>
-            <Link href={`/work/${next.slug}`} className="t-h3 mt-2 block max-w-[34ch] underline-offset-4 hover:underline">
+            <Link href={`/work/${next.slug}`} className="t-h3 mt-2 block max-w-[34ch] underline decoration-1 underline-offset-4 hover:decoration-2">
               {next.headline}
             </Link>
           </div>

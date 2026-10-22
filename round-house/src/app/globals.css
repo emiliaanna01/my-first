@@ -10,7 +10,9 @@
   --ink: #151a1e;
   --steel: #4f5a63;
   --rule: #bcc3c2;
+  --track: #8d989f; /* inactive tracks in the schematic */
   --signal: #ffc21a;
+  --signal-press: #f0b400;
   --run: #186b3c;
   --alarm: #b42318;
   /* text on ink sections */
@@ -44,6 +46,7 @@
   --color-steel: var(--steel);
   --color-rule: var(--rule);
   --color-signal: var(--signal);
+  --color-signal-press: var(--signal-press);
   --color-run: var(--run);
   --color-alarm: var(--alarm);
   --color-ink-muted: var(--ink-muted);
@@ -111,7 +114,9 @@
   h3 {
     text-wrap: balance;
   }
-  p {
+  p,
+  li,
+  dd {
     text-wrap: pretty;
   }
 }
@@ -239,7 +244,7 @@
   font-weight: 700;
 }
 .rh-bay .rh-track {
-  stroke: #8d989f;
+  stroke: var(--track);
 }
 .rh-bay[aria-pressed="true"] .rh-track {
   stroke: var(--ink);

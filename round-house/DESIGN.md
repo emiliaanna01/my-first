@@ -1,7 +1,8 @@
 # Round House: design direction
 
-Status: **proposal, awaiting approval.** Nothing is built yet. The style tile in
-`design/style-tile.html` shows the tokens below on screen.
+Status: **approved and built** (October 2026). The site in `src/` follows this document; the style
+tile in `design/style-tile.html` was the approved preview. Placeholders still to replace are in
+`PLACEHOLDERS.md`.
 
 ## 1. Brief, restated
 
@@ -110,11 +111,13 @@ monospace "data" labels, no arrows glued to button text.
 One orchestrated moment, two responsive ones:
 
 1. **Hero load (the signature):** the schematic draws itself (tracks stroke in ~900ms), the
-   turntable bridge swings to the "Leads" bay and that bay fills signal yellow. Then it stops.
-2. **On interaction:** hovering or focusing a bay label rotates the bridge to it and shows the
-   one-line outcome for that process. Keyboard-accessible; it's a real list of buttons.
-3. **On scroll, once:** the Diagnose → Build → Run track line draws between stations as the
-   section enters (scrubbed, 0.6s ease-out).
+   turntable bridge swings from the entry track to the "Leads" bay and that bay fills signal
+   yellow. Then it stops.
+2. **On interaction:** clicking a bay, pressing Enter on it, or moving with the arrow keys
+   (one tab stop for the whole diagram) rotates the bridge and shows that process's outcome.
+   Hover only previews the stall; it never changes the caption the visitor is reading.
+3. **On scroll, once:** the Diagnose → Build → Run rail draws from station 1 to station 3 when
+   the section enters (0.9s ease-out, plays once, always rests fully drawn).
 
 No fade-up on every section and no hover lift on cards. `prefers-reduced-motion: reduce` renders
 the final state immediately (bridge pointing at Leads, track lines drawn) via `gsap.matchMedia()`.

@@ -25,7 +25,16 @@ const dividers = [1, 2, 3, 4].map((i) => {
   return [...pt(CX, CY, R1 - 0.5, a), ...pt(CX, CY, R2 + 0.5, a)];
 });
 
-export function LogoMark({ className, tone = "ink" }: { className?: string; tone?: "ink" | "plant" }) {
+export function LogoMark({
+  className,
+  tone = "ink",
+  hub = "signal",
+}: {
+  className?: string;
+  tone?: "ink" | "plant";
+  /** Signal yellow only where the mark sits beside an action (the header link); ink elsewhere. */
+  hub?: "signal" | "plain";
+}) {
   const body = tone === "ink" ? "var(--ink)" : "var(--plant)";
   const gap = tone === "ink" ? "var(--plant)" : "var(--ink)";
   return (
@@ -34,7 +43,7 @@ export function LogoMark({ className, tone = "ink" }: { className?: string; tone
       {dividers.map(([x1, y1, x2, y2], i) => (
         <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={gap} strokeWidth={1.2} />
       ))}
-      <circle cx={CX} cy={CY} r={3.6} fill="var(--signal)" stroke={body} strokeWidth={1.5} />
+      <circle cx={CX} cy={CY} r={3.6} fill={hub === "signal" ? "var(--signal)" : gap} stroke={body} strokeWidth={1.5} />
     </svg>
   );
 }
