@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Deck</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="bar">
+  <h1>Deck</h1>
+  <span class="clock" id="clock"></span>
+  <div class="add">
+    <select id="addType" aria-label="Column type">
+      <option value="x">X / Twitter</option>
+      <option value="calendar">Google Calendar — today</option>
+      <option value="tasks">Running tasks</option>
+    </select>
+    <button id="addBtn">+ Add column</button>
+  </div>
+</header>
+
+<main id="deck" class="deck"></main>
+
+<template id="colTpl">
+  <section class="col">
+    <header class="col-head">
+      <span class="col-icon"></span>
+      <h2 class="col-title"></h2>
+      <div class="col-tools">
+        <button data-act="refresh" title="Refresh">⟳</button>
+        <button data-act="settings" title="Settings">⚙</button>
+        <button data-act="left" title="Move left">←</button>
+        <button data-act="right" title="Move right">→</button>
+        <button data-act="remove" title="Remove column">✕</button>
+      </div>
+    </header>
+    <form class="col-settings" hidden></form>
+    <div class="col-status"></div>
+    <div class="col-body"></div>
+  </section>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>

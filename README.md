@@ -31,6 +31,10 @@ python tools/asr.py edit/<id>/audio16k-<stem>.wav edit/<id>/transcripts/<stem>.j
 python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
 ```
 
+## Deck
+`deck/` is a TweetDeck-style dashboard with columns for X feeds, today's Google Calendar and running
+tasks with timers. Run `node deck/server.js`. See `deck/README.md` for API keys and costs.
+
 ## Web design toolkit
 `web-design/` holds the website-building setup: 25 design, UI/UX, animation (GSAP) and quality skills
 in `.claude/skills/`, MCP servers in `.mcp.json`, inspiration and component guides, a screenshot
