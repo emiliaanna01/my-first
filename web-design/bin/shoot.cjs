@@ -26,7 +26,9 @@ function loadPlaywright() {
   const launch = { headless: true };
   if (fs.existsSync("/opt/pw-browsers/chromium")) launch.executablePath = "/opt/pw-browsers/chromium";
   const proxy = process.env.HTTPS_PROXY || process.env.https_proxy;
-  if (proxy) launch.proxy = { server: proxy };
+  // Local servers and files must not go through the outbound proxy (it only tunnels HTTPS).
+  const local = /^(file:|https?:\/\/(localhost|127\.0\.0\.1|\[::1\])[:/])/.test(url);
+  if (proxy && !local) launch.proxy = { server: proxy };
   const browser = await chromium.launch(launch);
 
   const sizes = { desktop: { width: 1440, height: 900 }, mobile: { width: 390, height: 844 } };
