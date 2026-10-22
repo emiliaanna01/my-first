@@ -31,6 +31,10 @@ python tools/asr.py edit/<id>/audio16k-<stem>.wav edit/<id>/transcripts/<stem>.j
 python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
 ```
 
+## Motion design resources
+`docs/motion-design-claude-resources.md` lists the Claude skills, MCP connectors, GitHub repos, free tools/assets and
+YouTube tutorials for motion design and product launch videos.
+
 ## Web design toolkit
 `web-design/` holds the website-building setup: 25 design, UI/UX, animation (GSAP) and quality skills
 in `.claude/skills/`, MCP servers in `.mcp.json`, inspiration and component guides, a screenshot
