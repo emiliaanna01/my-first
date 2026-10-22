@@ -1,0 +1,79 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .rh-title { position: absolute; left: 140px; margin: 0; font-family: "Inter Tight Variable", sans-serif;
+      font-weight: 550; font-size: 128px; line-height: 1.02; letter-spacing: -0.055em; white-space: nowrap; }
+
+    .s1-pill { position: absolute; font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 30px; color: #e5edcc;
+      padding: 16px 30px; border-radius: 999px; background: #2b3429; border: 1.5px solid #3e4a39; white-space: nowrap; }
+    #s1-sphere { position: absolute; left: 1330px; top: 420px; width: 240px; height: 240px; border-radius: 50%; background: #e0ed9b; }
+
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <i id="s1-anchor" style="position:absolute;width:0;height:0"></i>
+    <div id="s1-ground" class="rh-ground" style="background:#20271f"></div>
+    <span class="s1-pill" id="s1-p0" style="left:1240px;top:170px">CRM</span>
+    <span class="s1-pill" id="s1-p1" style="left:1600px;top:300px">Inbox</span>
+    <span class="s1-pill" id="s1-p2" style="left:1290px;top:430px">Spreadsheet</span>
+    <span class="s1-pill" id="s1-p3" style="left:1620px;top:570px">Calendar</span>
+    <span class="s1-pill" id="s1-p4" style="left:1200px;top:720px">Forms</span>
+    <span class="s1-pill" id="s1-p5" style="left:1500px;top:820px">Chat</span>
+    <span class="s1-pill" id="s1-p6" style="left:210px;top:170px">Docs</span>
+    <span class="s1-pill" id="s1-p7" style="left:560px;top:120px">Invoices</span>
+    <span class="s1-pill" id="s1-p8" style="left:240px;top:770px">Notes</span>
+    <span class="s1-pill" id="s1-p9" style="left:690px;top:820px">Tasks</span>
+    <div id="s1-sphere"></div>
+    <h2 id="s1-a" class="rh-title" style="top:380px;color:#f3f5ea">More software.</h2>
+    <h2 id="s1-b" class="rh-title" style="top:380px;color:#f3f5ea">More back-and-forth.</h2>
+    <h2 id="s1-c" class="rh-title" style="top:330px;color:#f3f5ea">Not another tool.</h2>
+    <h2 id="s1-d" class="rh-title" style="top:466px;color:#a9b78f">A better way to work.</h2>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s1-anchor"));
+
+    var pills = ["s1-p0", "s1-p1", "s1-p2", "s1-p3", "s1-p4", "s1-p5", "s1-p6", "s1-p7", "s1-p8", "s1-p9"];
+    var rot = [-6, 5, 3, -4, -3, 6, -5, 4, 3, -6];
+    var sphereC = { x: 1450, y: 540 };
+    // frame 0 already reads: the line and two tools are on screen
+    pills.forEach(function (id, i) {
+      var el = $(id), t = i === 0 || i === 6 ? 0 : 0.25 + 0.245 * (i < 6 ? i - 1 : i - 2);
+      tl.fromTo(el, { scale: t === 0 ? 1 : 0.4, opacity: t === 0 ? 1 : 0, rotation: rot[i] },
+        { scale: 1, opacity: 1, rotation: rot[i], duration: t === 0 ? 0.01 : 0.38, ease: "back.out(1.7)" }, t);
+      // the old way churns: each tool keeps tipping on the beat until it is pulled in
+      tl.to(el, { rotation: rot[i] * -0.6, duration: 0.49, ease: "power1.inOut", repeat: 3, yoyo: true }, 1.96 + (i % 3) * 0.08);
+      var bx = el.offsetLeft + el.offsetWidth / 2, by = el.offsetTop + el.offsetHeight / 2;
+      tl.to(el, { x: sphereC.x - bx, y: sphereC.y - by, scale: 0.15, opacity: 0, rotation: 0,
+        duration: 0.45, ease: "power3.in" }, 3.66 + i * 0.028);
+    });
+    tl.fromTo($("s1-sphere"), { scale: 0 }, { scale: 1, duration: 0.42, ease: "back.out(1.6)" }, 3.55);
+    tl.to($("s1-sphere"), { scale: 1.08, duration: 0.12, ease: "power2.out" }, 4.05);
+    tl.to($("s1-sphere"), { scale: 1, duration: 0.3, ease: "back.out(2)" }, 4.17);
+    // lines: blur swap on the same spot
+    tl.set($("s1-a"), { opacity: 1, filter: "blur(0px)" }, 0);
+    tl.to($("s1-a"), { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 1.9);
+    tl.fromTo($("s1-b"), { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 1.98);
+    tl.to($("s1-b"), { opacity: 0, filter: "blur(8px)", duration: 0.15, ease: "power2.in" }, 3.56);
+    tl.fromTo($("s1-c"), { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 3.68);
+    tl.fromTo($("s1-d"), { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "power4.out" }, 3.9);
+    tl.to([$("s1-c"), $("s1-d")], { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 5.5);
+    // the sphere becomes the next world: it grows past the frame and turns into the paper of the hero
+    tl.to($("s1-sphere"), { scale: 19, duration: 0.62, ease: "power3.in" }, 5.2);
+    tl.to($("s1-sphere"), { backgroundColor: "#f7f7f2", duration: 0.26, ease: "power2.inOut" }, 5.58);
+
+    restore();
+    window.__timelines["s1"] = tl;
+  });
+})();
+  </script>
+</template>

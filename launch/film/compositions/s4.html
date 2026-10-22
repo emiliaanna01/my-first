@@ -1,0 +1,86 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    #s4-cam .approach-row > div { overflow: hidden; }
+
+  </style>
+  <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <i id="s4-anchor" style="position:absolute;width:0;height:0"></i>
+    <div class="rh-ground" style="background:#f7f7f2"></div>
+    <div id="s4-cam" class="rh-cam"><div class="rh-page"><main><section class="section approach-index" id="path"><div class="approach-intro"><span class="eyebrow">02 / A LITTLE STRUCTURE. A LOT OF POSSIBILITY.</span><h2>Find the right thing.<br><em>Then make it work.</em></h2><p>No six-service shopping list.<br>A clear path, built around your outcome.</p><a class="text-link" href="#/services">Explore our approach <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="approach-rows"><details open class="approach-row reveal" open=""><summary><span>01</span><h3>Diagnose</h3><svg class="icon plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary><div><p>Know where the friction is, what it costs, and what is worth fixing first.</p><ul><li>Workflow &amp; AI readiness review</li><li>Tool-spend and data-quality audit</li><li>Customer journey, brand &amp; web review</li></ul><a class="text-link" href="#/contact?interest=diagnose">Start with clarity <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div></details><details open class="approach-row reveal"><summary><span>02</span><h3>Build</h3><svg class="icon plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary><div><p>Turn a clear priority into a useful automation, AI assistant, or brand and web experience.</p><ul><li>Agreed scope, milestones &amp; baseline</li><li>Connected workflows or digital experience</li><li>Human approvals &amp; acceptance testing</li></ul><a class="text-link" href="#/contact?interest=build">Talk through a project <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div></details><details open class="approach-row reveal"><summary><span>03</span><h3>Run</h3><svg class="icon plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></summary><div><p>Keep your systems useful as your tools, team, and business change.</p><ul><li>Monitoring, support &amp; maintenance</li><li>Monthly workflow or prompt improvements</li><li>Reporting on agreed outcome metrics</li></ul><a class="text-link" href="#/contact?interest=run">Plan ongoing support <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div></details></div></section></main></div></div>
+    <div id="s4-cur" class="rh-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z"/></svg></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s4-anchor"));
+
+    var cam = $("s4-cam"), cur = $("s4-cur"), sec = cam.querySelector("#path");
+    var rows = Array.prototype.slice.call(sec.querySelectorAll(".approach-row"));
+    var body = rows.map(function (r) { return r.querySelector(":scope > div"); });
+    var sum = rows.map(function (r) { return r.querySelector("summary"); });
+    var plus = rows.map(function (r) { return r.querySelector("summary > svg"); });
+    var h3 = rows.map(function (r) { return r.querySelector("h3"); });
+    var hOpen = body.map(function (b) { return b.offsetHeight; });
+    var openColor = getComputedStyle(h3[0]).color, closedColor = "#1d221e";
+    var top = RH.off(sec, cam).y, h = sec.offsetHeight - (hOpen[1] + hOpen[2]);
+    var s = Math.min(1, 1040 / h), base = { s: s, x: (1920 - 1920 * s) / 2, y: (1080 - h * s) / 2 - top * s };
+    // closed rows: no body, ink title, plus upright
+    [1, 2].forEach(function (i) {
+      tl.set(body[i], { height: 0, paddingBottom: 0, opacity: 0 }, 0);
+      tl.set(h3[i], { color: closedColor }, 0);
+      tl.set(plus[i], { rotation: 0 }, 0);
+    });
+    tl.set(plus[0], { rotation: 45 }, 0);
+    // whip in from the right, matching the outgoing whip
+    tl.fromTo(cam, { scale: base.s, x: base.x + 760, y: base.y, filter: "blur(16px)" },
+      { x: base.x, filter: "blur(0px)", duration: 0.34, ease: "power3.out" }, 0);
+    var t2 = sec.querySelector(".approach-intro h2");
+    RH.words(t2).forEach(function (el, i) {
+      tl.fromTo(el, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.55, ease: "expo.out" }, 0.22 + i * 0.07);
+    });
+    function toggle(close, open, t) {
+      tl.to(body[close], { height: 0, paddingBottom: 0, opacity: 0, duration: 0.45, ease: "power3.inOut" }, t);
+      tl.to(h3[close], { color: closedColor, duration: 0.25 }, t);
+      tl.to(plus[close], { rotation: 0, duration: 0.35, ease: "power3.inOut" }, t);
+      tl.to(body[open], { height: hOpen[open], paddingBottom: 30, opacity: 1, duration: 0.5, ease: "power3.inOut" }, t + 0.05);
+      tl.to(h3[open], { color: openColor, duration: 0.25 }, t + 0.05);
+      tl.to(plus[open], { rotation: 45, duration: 0.35, ease: "power3.inOut" }, t + 0.05);
+      body[open].querySelectorAll("li").forEach(function (li, i) {
+        tl.fromTo(li, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, t + 0.3 + i * 0.08);
+      });
+    }
+    // where each summary sits in camera space, before and after the first toggle
+    var yBuild = RH.pt(sum[1], cam).y - hOpen[1] - hOpen[2] + hOpen[1];  // build itself closed, run closed: unchanged
+    var yRunAfter = RH.pt(sum[2], cam).y - hOpen[0];                      // diagnose closed, build open
+    var xs = RH.pt(sum[1], cam, 0.12, 0.5).x;
+    var push = RH.aim({ x: RH.pt(rows[1], cam).x, y: RH.pt(sum[1], cam).y }, s * 1.12, 1150, 520);
+    tl.set(cur, { x: 2010, y: 1160, opacity: 1 }, 0);
+    var b1 = RH.frame({ x: xs, y: RH.pt(sum[1], cam).y }, base);
+    RH.move(tl, cur, b1, 1.55, 0.8);
+    RH.click(tl, cur, 2.7, sum[1]);
+    toggle(0, 1, 2.75);
+    RH.cam(tl, cam, push, 2.6, 0.9);
+    tl.to(sec.querySelector(".approach-intro"), { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 2.55);
+    var b2 = RH.frame({ x: xs, y: yRunAfter }, push);
+    RH.move(tl, cur, b2, 3.95, 0.65);
+    RH.click(tl, cur, 4.7, sum[2]);
+    toggle(1, 2, 4.75);
+    RH.cam(tl, cam, RH.aim({ x: RH.pt(rows[1], cam).x, y: yRunAfter }, s * 1.12, 1150, 470), 4.6, 0.9);
+    tl.to(cur, { x: 1700, y: 1250, duration: 0.6, ease: "power3.in" }, 6.4);
+
+    restore();
+    window.__timelines["s4"] = tl;
+  });
+})();
+  </script>
+</template>

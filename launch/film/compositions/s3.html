@@ -1,0 +1,96 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .rh-title { position: absolute; left: 140px; margin: 0; font-family: "Inter Tight Variable", sans-serif;
+      font-weight: 550; font-size: 128px; line-height: 1.02; letter-spacing: -0.055em; white-space: nowrap; }
+
+    #s3-cam #workflow { background: transparent; }
+    #s3-pg2 { position: absolute; }
+    #s3-cam .workflow-bottom { visibility: hidden; }
+
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1920" data-height="1080">
+    <i id="s3-anchor" style="position:absolute;width:0;height:0"></i>
+    <div id="s3-ground" class="rh-ground" style="background:#1d221e"></div>
+    <div id="s3-cam" class="rh-cam"><div class="rh-page"><main><section class="workflow-section section" id="workflow"><div class="workflow-intro" style="visibility:hidden"><div><span class="eyebrow">02 / CONNECT THE DOTS</span><h2>Not another tool.<br><span>A better way to work.</span></h2></div><p>The magic isn’t in adding more software.<br>It’s in making the right things work together.</p></div><div id="s3-pg1" class="workflow-playground reveal"><div class="workflow-tabs" role="tablist" aria-label="Explore a connected workflow"><button id="tab-speed-to-lead" role="tab" aria-selected="true" aria-controls="workflow-panel" tabindex="0" data-workflow="speed-to-lead"><span>01</span>Faster lead response<svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></button><button id="tab-knowledge-assistant" role="tab" aria-selected="false" aria-controls="workflow-panel" tabindex="-1" data-workflow="knowledge-assistant"><span>02</span>Internal AI assistants<svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></button><button id="tab-document-automation" role="tab" aria-selected="false" aria-controls="workflow-panel" tabindex="-1" data-workflow="document-automation"><span>03</span>Documents &amp; onboarding<svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></button></div><div id="workflow-panel" class="workflow-panel" role="tabpanel" aria-labelledby="tab-speed-to-lead" tabindex="0"><div class="preview-caption"><span>EXAMPLE WORKFLOW / 01</span><span class="preview-status"><i></i> CONNECTED</span></div><div class="preview-nodes"><div class="preview-node "><span class="preview-icon"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 10-12h-7l1-8Z"></path></svg></span><small>01</small><h3>New inquiry</h3></div><span class="preview-connector"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></span><div class="preview-node middle"><span class="preview-icon"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></span><small>02</small><h3>Qualify &amp; route</h3></div><span class="preview-connector"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></span><div class="preview-node "><span class="preview-icon"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></span><small>03</small><h3>Book a conversation</h3></div></div><div class="preview-description"><p>Connect every inquiry to a clear next step. Capture, qualify, follow up, and book without the back-and-forth.</p><a class="text-link light" href="#/solutions/speed-to-lead">See the full picture <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a><button id="s3-replay" class="workflow-replay" data-play-workflow=""><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z"></path></svg> Replay flow</button></div></div></div><div id="s3-pg2" class="workflow-playground reveal"><div class="workflow-tabs" role="tablist" aria-label="Explore a connected workflow"><button id="k-tab-speed-to-lead" role="tab" aria-selected="false" aria-controls="workflow-panel" tabindex="-1" data-workflow="speed-to-lead"><span>01</span>Faster lead response<svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></button><button id="k-tab-knowledge-assistant" role="tab" aria-selected="true" aria-controls="workflow-panel" tabindex="0" data-workflow="knowledge-assistant"><span>02</span>Internal AI assistants<svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></button><button id="k-tab-document-automation" role="tab" aria-selected="false" aria-controls="workflow-panel" tabindex="-1" data-workflow="document-automation"><span>03</span>Documents &amp; onboarding<svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></button></div><div id="k-workflow-panel" class="workflow-panel" role="tabpanel" aria-labelledby="tab-knowledge-assistant" tabindex="0"><div class="preview-caption"><span>EXAMPLE WORKFLOW / 02</span><span class="preview-status"><i></i> CONNECTED</span></div><div class="preview-nodes"><div class="preview-node "><span class="preview-icon"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></span><small>01</small><h3>Team question</h3></div><span class="preview-connector"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></span><div class="preview-node middle"><span class="preview-icon"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></span><small>02</small><h3>Search approved docs</h3></div><span class="preview-connector"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"></path></svg></span><div class="preview-node "><span class="preview-icon"><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></span><small>03</small><h3>Answer with sources</h3></div></div><div class="preview-description"><p>Make SOPs, policies, and FAQs easier to find with an internal assistant grounded in your own documents.</p><a class="text-link light" href="#/solutions/knowledge-assistant">See the full picture <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a><button class="workflow-replay" data-play-workflow=""><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z"></path></svg> Replay flow</button></div></div></div><div class="workflow-bottom"><span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 3v6c0 4-4 7-8 9-4-2-8-5-8-9V6l8-3Z"></path><path d="m8 12 3 3 5-6"></path></svg> Human judgment stays in the loop.</span><a class="text-link light" href="#/working-together">Built with clear guardrails <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div></section></main></div></div>
+    <h2 id="s3-a" class="rh-title" style="top:330px;color:#f3f5ea">From first hello.</h2>
+    <h2 id="s3-b" class="rh-title" style="top:466px;color:#a9b78f">To what&#8217;s next.</h2>
+    <div id="s3-cur" class="rh-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z"/></svg></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s3-anchor"));
+
+    var cam = $("s3-cam"), pg1 = $("s3-pg1"), pg2 = $("s3-pg2"), cur = $("s3-cur");
+    var o1 = RH.off(pg1, pg1.offsetParent);
+    pg2.style.left = o1.x + "px"; pg2.style.top = o1.y + "px"; pg2.style.width = pg1.offsetWidth + "px";
+    var panel = pg1.querySelector(".workflow-panel");
+    var sP = Math.min(2.0, 1840 / panel.offsetWidth), sG = Math.min(1.4, 1780 / pg1.offsetWidth);
+    var camP = RH.aim(RH.pt(panel, cam), sP, 960, 560), camG = RH.aim(RH.pt(pg1, cam), sG, 960, 560);
+    RH.cam(tl, cam, camP, 0, 0);
+    // title on the dark ground left by the button, per word from grey
+    [["s3-a", "#f3f5ea", 0.1], ["s3-b", "#a9b78f", 0.55]].forEach(function (l) {
+      RH.words($(l[0])).forEach(function (el, i) {
+        tl.fromTo(el, { color: "#465043" }, { color: l[1], duration: 0.18, ease: "power2.out" }, l[2] + i * 0.08);
+      });
+    });
+    tl.to([$("s3-a"), $("s3-b")], { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 1.86);
+    tl.fromTo($("s3-ground"), { backgroundColor: "#1d221e" }, { backgroundColor: "#eef1e6", duration: 0.4, ease: "power2.inOut" }, 1.9);
+    tl.fromTo(pg1, { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" }, 2.0);
+    tl.set(pg2, { opacity: 0 }, 0);
+    // a flow runs node by node: icon pops, connector lands, the middle node fills lime
+    function flow(pg, t) {
+      var nodes = pg.querySelectorAll(".preview-node"), cons = pg.querySelectorAll(".preview-connector"),
+          icons = pg.querySelectorAll(".preview-icon"), status = pg.querySelector(".preview-status");
+      tl.set(nodes, { opacity: 0.25 }, 0);
+      tl.set(cons, { opacity: 0.15 }, 0);
+      tl.set(icons[1], { backgroundColor: "rgba(224,237,155,0)", borderColor: "#66665b" }, 0);
+      tl.set(status, { opacity: 0.3 }, 0);
+      [0, 1, 2].forEach(function (k) {
+        var tk = t + k * 0.42;
+        tl.to(nodes[k], { opacity: 1, duration: 0.2, ease: "power2.out" }, tk);
+        tl.fromTo(icons[k], { scale: 0.55 }, { scale: 1, duration: 0.42, ease: "back.out(2)" }, tk);
+        if (k === 1) tl.to(icons[1], { backgroundColor: "#e0ed9b", borderColor: "#e0ed9b", duration: 0.2 }, tk + 0.05);
+        if (k < 2) tl.fromTo(cons[k], { opacity: 0.15, x: -12 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, tk + 0.2);
+      });
+      tl.to(status, { opacity: 1, duration: 0.2 }, t + 1.05);
+      tl.fromTo(status, { scale: 0.85 }, { scale: 1, duration: 0.35, ease: "back.out(2.4)" }, t + 1.05);
+    }
+    flow(pg1, 3.75);
+    flow(pg2, 7.85);
+    tl.set(cur, { x: 2010, y: 1160, opacity: 1 }, 0);
+    var r = RH.frame(RH.pt($("s3-replay"), cam), camP);
+    RH.move(tl, cur, { x: r.x + 12, y: r.y + 4 }, 2.75, 0.75);
+    RH.click(tl, cur, 3.6, $("s3-replay"));
+    // pull back to the whole playground, then pick the next workflow
+    RH.cam(tl, cam, camG, 6.2, 0.8);
+    var tab = pg1.querySelector('[data-workflow="knowledge-assistant"]');
+    var tp = RH.frame(RH.pt(tab, cam, 0.35, 0.5), camG);
+    RH.move(tl, cur, { x: tp.x, y: tp.y + 6 }, 6.55, 0.8);
+    RH.click(tl, cur, 7.5, tab);
+    tl.to(pg1, { opacity: 0, duration: 0.18, ease: "power2.in" }, 7.52);
+    tl.to(pg2, { opacity: 1, duration: 0.18, ease: "power2.out" }, 7.52);
+    tl.fromTo(pg2.querySelector(".workflow-panel"), { filter: "blur(8px)" }, { filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 7.55);
+    // punch in on the answer, then whip out
+    var n3 = pg2.querySelectorAll(".preview-node")[2];
+    RH.cam(tl, cam, RH.aim(RH.pt(n3, cam), sG * 1.5, 1100, 540), 9.4, 0.6);
+    tl.to(cur, { x: 1500, y: 1250, duration: 0.6, ease: "power3.in" }, 9.4);
+    tl.to(cam, { x: "-=760", duration: 0.34, ease: "power3.in" }, 11.42);
+    tl.fromTo(cam, { filter: "blur(0px)" }, { filter: "blur(16px)", duration: 0.34, ease: "power3.in" }, 11.42);
+
+    restore();
+    window.__timelines["s3"] = tl;
+  });
+})();
+  </script>
+</template>

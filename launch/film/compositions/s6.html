@@ -1,0 +1,42 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .rh-title { position: absolute; left: 140px; margin: 0; font-family: "Inter Tight Variable", sans-serif;
+      font-weight: 550; font-size: 128px; line-height: 1.02; letter-spacing: -0.055em; white-space: nowrap; }
+
+  </style>
+  <div id="root" data-composition-id="s6" data-width="1920" data-height="1080">
+    <i id="s6-anchor" style="position:absolute;width:0;height:0"></i>
+    <div id="s6-ground" class="rh-ground" style="background:#f7f7f2"></div>
+    <h2 id="s6-a" class="rh-title" style="top:230px">A clearer business.</h2>
+    <h2 id="s6-b" class="rh-title" style="top:390px">A more useful system.</h2>
+    <h2 id="s6-c" class="rh-title" style="top:550px">A brand with feeling.</h2>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s6-anchor"));
+
+    [["s6-a", "#1d221e", 0.2], ["s6-b", "#1d221e", 1.55], ["s6-c", "#7d8c6a", 2.9]].forEach(function (l) {
+      RH.words($(l[0])).forEach(function (w, i) {
+        tl.fromTo(w, { color: "#dcdfd3" }, { color: l[1], duration: 0.2, ease: "power2.out" }, l[2] + i * 0.09);
+      });
+    });
+    tl.to([$("s6-a"), $("s6-b"), $("s6-c")], { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in", stagger: 0.03 }, 5.3);
+    tl.fromTo($("s6-ground"), { backgroundColor: "#f7f7f2" }, { backgroundColor: "#e5edcc", duration: 0.4, ease: "power2.inOut" }, 5.45);
+
+    restore();
+    window.__timelines["s6"] = tl;
+  });
+})();
+  </script>
+</template>

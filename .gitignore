@@ -17,3 +17,10 @@ chess-2p/dist/
 chess-2p/www/img/ayman.jpg
 motion/node_modules/
 motion/vendor/
+launch/spheres/
+launch/spheresA/
+launch/shots/
+launch/film/.hyperframes/
+launch/film/renders/work-*/
+launch/film/renders/.*
+launch/film/node_modules/

@@ -1,0 +1,92 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    #s7-cam .cta-section { background: transparent; }
+    #s7-lockup { position: absolute; left: 0; right: 0; top: 330px; display: flex; flex-direction: column; align-items: center; }
+    .s7-wm { position: relative; font-family: "Inter Tight Variable", sans-serif; font-weight: 720; font-size: 200px;
+      letter-spacing: -0.055em; line-height: 1; color: #1d221e; white-space: nowrap; }
+    #s7-stop { visibility: hidden; }
+    #s7-reg { font-family: "DM Sans", sans-serif; font-weight: 400; font-size: 40px; letter-spacing: 0; vertical-align: top;
+      display: inline-block; margin: 18px 0 0 10px; }
+    #s7-dot { position: absolute; border-radius: 50%; background: #e0ed9b; box-shadow: inset 0 0 0 5px #6a813e; }
+    #s7-tag { margin: 40px 0 0; font-family: "Inter Tight Variable", sans-serif; font-weight: 550; font-size: 56px;
+      letter-spacing: -0.04em; color: #7d8c6a; }
+    #s7-go { margin-top: 48px; font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 30px; color: #f7f7f2;
+      background: #1d221e; padding: 22px 44px; border-radius: 999px; }
+
+  </style>
+  <div id="root" data-composition-id="s7" data-width="1920" data-height="1080">
+    <i id="s7-anchor" style="position:absolute;width:0;height:0"></i>
+    <div class="rh-ground" style="background:#e5edcc"></div>
+    <div id="s7-cam" class="rh-cam"><div class="rh-page"><main><section class="cta-section"><div class="cta-top"><span class="eyebrow">THE NEXT GOOD THING STARTS HERE.</span><span>LESS ORDINARY. MORE POSSIBLE.</span></div><a class="cta-title magnetic" href="#/contact"><span>Let’s talk.</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a><div class="cta-bottom"><p>A complicated challenge?<br>Our favorite starting point.</p><a class="button light" id="s7-btn" href="#/contact"><span>Start a conversation</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div></section></main></div></div>
+    <div id="s7-end" class="rh-ground" style="background:#f7f7f2">
+      <div id="s7-lockup">
+        <div id="s7-wm" class="s7-wm">roundhouse<span id="s7-stop">.</span><span id="s7-reg">&#174;</span></div>
+        <div id="s7-dot"></div>
+        <p id="s7-tag">Good ideas. Made real.</p>
+        <span id="s7-go">Let&#8217;s talk</span>
+      </div>
+    </div>
+    <div id="s7-cur" class="rh-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z"/></svg></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s7-anchor"));
+
+    var cam = $("s7-cam"), cur = $("s7-cur"), sec = cam.querySelector(".cta-section"), btn = $("s7-btn");
+    var top = RH.off(sec, cam).y, h = sec.offsetHeight, s = Math.min(1, 1040 / h);
+    var base = { s: s, x: (1920 - 1920 * s) / 2, y: (1080 - h * s) / 2 - top * s };
+    RH.cam(tl, cam, base, 0, 0);
+    var title = cam.querySelector(".cta-title > span");
+    RH.letters(title).forEach(function (l, i) {
+      tl.fromTo(l, { opacity: 0, yPercent: 40 }, { opacity: 1, yPercent: 0, duration: 0.5, ease: "expo.out" }, 0.12 + i * 0.06);
+    });
+    var arrow = cam.querySelectorAll(".cta-title > svg path, .cta-title > svg line, .cta-title > svg polyline");
+    arrow.forEach(function (p) {
+      var L = (p.getTotalLength && p.getTotalLength()) || 400;
+      tl.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut" }, 0.95);
+    });
+    tl.fromTo([cam.querySelector(".cta-top"), cam.querySelector(".cta-bottom p")], { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.5);
+    tl.fromTo(btn, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, 1.1);
+    // click "Start a conversation"; the page irises open from the click onto the mark
+    var bp = RH.frame(RH.pt(btn, cam), base);
+    tl.set(cur, { x: 2010, y: 1160, opacity: 1 }, 0);
+    RH.move(tl, cur, { x: bp.x + 10, y: bp.y + 6 }, 1.75, 0.8);
+    RH.click(tl, cur, 2.9, btn);
+    var ix = bp.x, iy = bp.y;
+    tl.fromTo($("s7-end"), { clipPath: "circle(0px at " + ix + "px " + iy + "px)" },
+      { clipPath: "circle(2400px at " + ix + "px " + iy + "px)", duration: 0.5, ease: "power3.in" }, 3.0);
+    tl.to(cur, { opacity: 0, duration: 0.12 }, 3.05);
+    tl.set(cam, { opacity: 0 }, 3.52);
+    // the mark: the wordmark wipes in, a lime sphere drops into its full stop
+    var wm = $("s7-wm"), stop = $("s7-stop"), dot = $("s7-dot"), lock = $("s7-lockup");
+    var so = RH.off(stop, lock), d = stop.offsetWidth * 0.8;
+    dot.style.width = d + "px"; dot.style.height = d + "px";
+    dot.style.left = (so.x + stop.offsetWidth * 0.5 - d / 2) + "px";
+    dot.style.top = (so.y + stop.offsetHeight * 0.79 - d) + "px";
+    tl.fromTo(wm, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power3.out" }, 3.55);
+    tl.fromTo(dot, { y: -760, scaleX: 1, scaleY: 1 }, { y: 0, duration: 0.36, ease: "power3.in" }, 3.73);
+    tl.to(dot, { scaleX: 1.25, scaleY: 0.72, duration: 0.07, ease: "power2.out", transformOrigin: "50% 100%" }, 4.09);
+    tl.to(dot, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "back.out(3)" }, 4.16);
+    tl.fromTo($("s7-reg"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 4.3);
+    RH.words($("s7-tag")).forEach(function (w, i) {
+      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 4.55 + i * 0.07);
+    });
+    tl.fromTo($("s7-go"), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 5.0);
+
+    restore();
+    window.__timelines["s7"] = tl;
+  });
+})();
+  </script>
+</template>

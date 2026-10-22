@@ -1,0 +1,29 @@
+<section class="section calculator-section capacity-section" id="calculator">
+  <div class="calculator-copy"><span class="eyebrow">LESS REPETITION. MORE POSSIBILITY.</span>
+    <h2>Make room<br>for <em>better work.</em></h2>
+    <p>What if your team got some of its week back? Move the sliders. See the possibility.</p>
+    <div class="capacity-presets" role="group" aria-label="Try a planning example">
+      <span>A starting point to explore</span>
+      <button data-preset="follow-up" aria-pressed="false">Client follow-up <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+      <button data-preset="reporting" aria-pressed="false">Monthly reporting <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+      <button data-preset="admin" aria-pressed="false">Everyday admin <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+    </div>
+    <a class="text-link" href="#/contact?interest=diagnose">Find your biggest opportunity <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a>
+  </div>
+  <div class="calculator capacity-box reveal" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+    <div class="capacity-top"><span>YOUR ROOM TO GROW</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></div>
+    <div class="capacity-main" aria-live="polite" aria-atomic="true"><div><strong id="capacity-hours">43.3</strong><span>hours back / month</span></div><p>That’s about <b id="capacity-days">5.4</b><br>eight-hour working days.</p></div>
+    <div class="capacity-gauge" aria-hidden="true"><i data-capacity-bar="0" class="is-recovered"></i><i data-capacity-bar="1" class="is-recovered"></i><i data-capacity-bar="2" class="is-recovered"></i><i data-capacity-bar="3" class="is-recovered"></i><i data-capacity-bar="4" class="is-recovered"></i><i data-capacity-bar="5" class="is-recovered"></i><i data-capacity-bar="6" class="is-recovered"></i><i data-capacity-bar="7" class="is-recovered"></i><i data-capacity-bar="8" class="is-recovered"></i><i data-capacity-bar="9" class="is-recovered"></i><i data-capacity-bar="10" class="is-recovered"></i><i data-capacity-bar="11" class="is-recovered"></i><i data-capacity-bar="12" class="is-recovered"></i><i data-capacity-bar="13" class="is-recovered"></i><i data-capacity-bar="14"></i><i data-capacity-bar="15"></i><i data-capacity-bar="16"></i><i data-capacity-bar="17"></i><i data-capacity-bar="18"></i><i data-capacity-bar="19"></i><i data-capacity-bar="20"></i><i data-capacity-bar="21"></i><i data-capacity-bar="22"></i><i data-capacity-bar="23"></i><i data-capacity-bar="24"></i><i data-capacity-bar="25"></i><i data-capacity-bar="26"></i><i data-capacity-bar="27"></i></div>
+    <div class="capacity-gauge-label"><span>Repetitive work</span><span id="capacity-portion">50% potential reduction</span></div>
+    <div class="capacity-inputs">
+      <label class="range-label" for="hours"><span>Repetitive work each week</span><output id="hours-value" for="hours">20 hrs</output></label>
+      <input id="hours" type="range" min="5" max="100" step="5" value="20" style="--range-fill: 15.789473684210526%;">
+      <label class="range-label" for="reduction"><span>Potential time reduction</span><output id="reduction-value" for="reduction">50%</output></label>
+      <input id="reduction" type="range" min="10" max="80" step="5" value="50" style="--range-fill: 57.14285714285714%;">
+      <div class="rate-row"><label for="hourly-rate">Estimated hourly cost <span>USD</span></label><div class="rate-input"><span>$</span><input id="hourly-rate" type="number" min="1" max="1000" value="40" step="0.01" inputmode="decimal" aria-describedby="rate-error calculator-note" aria-invalid="false"></div></div>
+      <p id="rate-error" class="rate-error" hidden="">Enter an hourly cost between $1 and $1,000.</p>
+    </div>
+    <div class="capacity-value-row" aria-live="polite" aria-atomic="true"><span>Potential capacity value / month</span><strong id="capacity-value">$1,732</strong></div>
+    <p id="calculator-note">A planning estimate, not a guaranteed saving. Based on 4.33 weeks per month. Capacity value is time × hourly cost, not cash savings or ROI. Setup and running costs are excluded.</p>
+  </div>
+</section>

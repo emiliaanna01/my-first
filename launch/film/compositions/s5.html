@@ -1,0 +1,117 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+  </style>
+  <div id="root" data-composition-id="s5" data-width="1920" data-height="1080">
+    <i id="s5-anchor" style="position:absolute;width:0;height:0"></i>
+    <div class="rh-ground" style="background:#f7f7f2"></div>
+    <div id="s5-cam" class="rh-cam"><div class="rh-page"><main><section class="section calculator-section capacity-section" id="calculator">
+  <div class="calculator-copy"><span class="eyebrow">LESS REPETITION. MORE POSSIBILITY.</span>
+    <h2>Make room<br>for <em>better work.</em></h2>
+    <p>What if your team got some of its week back? Move the sliders. See the possibility.</p>
+    <div class="capacity-presets" role="group" aria-label="Try a planning example">
+      <span>A starting point to explore</span>
+      <button data-preset="follow-up" aria-pressed="false">Client follow-up <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+      <button data-preset="reporting" aria-pressed="false">Monthly reporting <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+      <button data-preset="admin" aria-pressed="false">Everyday admin <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+    </div>
+    <a class="text-link" href="#/contact?interest=diagnose">Find your biggest opportunity <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a>
+  </div>
+  <div class="calculator capacity-box reveal">
+    <div class="capacity-top"><span>YOUR ROOM TO GROW</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></div>
+    <div class="capacity-main" aria-live="polite" aria-atomic="true"><div><strong id="capacity-hours">43.3</strong><span>hours back / month</span></div><p>That’s about <b id="capacity-days">5.4</b><br>eight-hour working days.</p></div>
+    <div class="capacity-gauge" aria-hidden="true"><i data-capacity-bar="0" class="is-recovered"></i><i data-capacity-bar="1" class="is-recovered"></i><i data-capacity-bar="2" class="is-recovered"></i><i data-capacity-bar="3" class="is-recovered"></i><i data-capacity-bar="4" class="is-recovered"></i><i data-capacity-bar="5" class="is-recovered"></i><i data-capacity-bar="6" class="is-recovered"></i><i data-capacity-bar="7" class="is-recovered"></i><i data-capacity-bar="8" class="is-recovered"></i><i data-capacity-bar="9" class="is-recovered"></i><i data-capacity-bar="10" class="is-recovered"></i><i data-capacity-bar="11" class="is-recovered"></i><i data-capacity-bar="12" class="is-recovered"></i><i data-capacity-bar="13" class="is-recovered"></i><i data-capacity-bar="14"></i><i data-capacity-bar="15"></i><i data-capacity-bar="16"></i><i data-capacity-bar="17"></i><i data-capacity-bar="18"></i><i data-capacity-bar="19"></i><i data-capacity-bar="20"></i><i data-capacity-bar="21"></i><i data-capacity-bar="22"></i><i data-capacity-bar="23"></i><i data-capacity-bar="24"></i><i data-capacity-bar="25"></i><i data-capacity-bar="26"></i><i data-capacity-bar="27"></i></div>
+    <div class="capacity-gauge-label"><span>Repetitive work</span><span id="capacity-portion">50% potential reduction</span></div>
+    <div class="capacity-inputs">
+      <label class="range-label" for="hours"><span>Repetitive work each week</span><output id="hours-value" for="hours">20 hrs</output></label>
+      <input id="hours" type="range" min="5" max="100" step="5" value="20" style="--range-fill: 15.789473684210526%;">
+      <label class="range-label" for="reduction"><span>Potential time reduction</span><output id="reduction-value" for="reduction">50%</output></label>
+      <input id="reduction" type="range" min="10" max="80" step="5" value="50" style="--range-fill: 57.14285714285714%;">
+      <div class="rate-row"><label for="hourly-rate">Estimated hourly cost <span>USD</span></label><div class="rate-input"><span>$</span><input id="hourly-rate" type="number" min="1" max="1000" value="40" step="0.01" inputmode="decimal" aria-describedby="rate-error calculator-note" aria-invalid="false"></div></div>
+      <p id="rate-error" class="rate-error" hidden="">Enter an hourly cost between $1 and $1,000.</p>
+    </div>
+    <div class="capacity-value-row" aria-live="polite" aria-atomic="true"><span>Potential capacity value / month</span><strong id="capacity-value">$1,732</strong></div>
+    <p id="calculator-note">A planning estimate, not a guaranteed saving. Based on 4.33 weeks per month. Capacity value is time × hourly cost, not cash savings or ROI. Setup and running costs are excluded.</p>
+  </div>
+</section></main></div></div>
+    <div id="s5-dip" class="rh-ground" style="background:#000;opacity:0"></div>
+    <div id="s5-cur" class="rh-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z"/></svg></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s5-anchor"));
+
+    var cam = $("s5-cam"), cur = $("s5-cur"), card = cam.querySelector(".calculator");
+    var hours = 20, rate = 40;
+    var el = { h: cam.querySelector("#capacity-hours"), d: cam.querySelector("#capacity-days"),
+      p: cam.querySelector("#capacity-portion"), rv: cam.querySelector("#reduction-value"),
+      v: cam.querySelector("#capacity-value"), r: cam.querySelector("#reduction") };
+    var bars = Array.prototype.slice.call(cam.querySelectorAll("[data-capacity-bar]"));
+    function fmt(n) { return n.toLocaleString("en-US", { maximumFractionDigits: 1 }); }
+    // the site's own formula: hours x reduction x 4.33 weeks; value = hours back x hourly cost
+    function setVal(a) {
+      var O = hours * a / 100 * 4.33;
+      el.h.textContent = fmt(O); el.d.textContent = fmt(O / 8);
+      el.p.textContent = a + "% potential reduction"; el.rv.value = a + "%"; el.rv.textContent = a + "%";
+      el.v.textContent = (O * rate).toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+      el.r.value = a; el.r.style.setProperty("--range-fill", ((a - 10) / 70 * 100) + "%");
+      var n = Math.round(a / 100 * 28);
+      bars.forEach(function (b, i) { b.classList.toggle("is-recovered", i < n); });
+    }
+    var copy = cam.querySelector(".calculator-copy"), cL = RH.off(copy, cam).x, cR = RH.off(card, cam).x + card.offsetWidth;
+    var cH = card.offsetHeight, s = Math.min(1.12, 1010 / cH, 1780 / (cR - cL));
+    var base = { s: s, x: (1920 - (cR - cL) * s) / 2 - cL * s, y: 540 - RH.pt(card, cam).y * s };
+    RH.cam(tl, cam, base, 0, 0);
+    tl.fromTo(card, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.05);
+    var copyH = cam.querySelector(".calculator-copy h2");
+    RH.words(copyH).forEach(function (w, i) {
+      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 0.4 + i * 0.07);
+    });
+    // drag 10%% -> 50%% in the slider's real 5%% steps
+    var proxy = { a: 10 }, T0 = 3.2, T1 = 5.4;
+    tl.fromTo(proxy, { a: 10 }, { a: 50, duration: T1 - T0, ease: "none",
+      onUpdate: function () { setVal(Math.round(proxy.a / 5) * 5); } }, T0);
+    setVal(10);
+    tl.call(function () { setVal(10); }, null, 0);
+    // bars: each newly recovered bar settles in with a small spring
+    var prevN = Math.round(10 / 100 * 28);
+    bars.forEach(function (b, i) { tl.set(b, { scaleY: i < prevN ? 0.85 : 1 }, 0); });
+    for (var a = 15; a <= 50; a += 5) {
+      var n = Math.round(a / 100 * 28), tk = T0 + (a - 2.5 - 10) / 40 * (T1 - T0);
+      for (var i = prevN; i < n; i++) tl.fromTo(bars[i], { scaleY: 0.5 }, { scaleY: 0.85, duration: 0.3, ease: "back.out(2.5)" }, tk);
+      prevN = n;
+    }
+    // the cursor finds the thumb and drags it
+    var rIn = el.r, ri = RH.pt(rIn, cam, 0, 0.5), rw = rIn.offsetWidth, th = 18;
+    function thumb(a) { return RH.frame({ x: ri.x + th / 2 + (a - 10) / 70 * (rw - th), y: ri.y }, base); }
+    tl.set(cur, { x: 2010, y: 1160, opacity: 1 }, 0);
+    RH.move(tl, cur, thumb(10), 2.05, 0.85);
+    tl.to(cur, { scale: 0.86, duration: 0.1, ease: "power2.out" }, 3.05);
+    tl.to(cur, { x: thumb(50).x, duration: T1 - T0, ease: "none" }, T0);
+    tl.to(cur, { scale: 1, duration: 0.25, ease: "back.out(2.2)" }, 5.5);
+    // payoff: 43.3 lands, turns lime, the camera punches in and holds
+    tl.to(el.h, { color: "#e0ed9b", duration: 0.2, ease: "power2.out" }, 5.45);
+    tl.to(cur, { x: "+=260", y: 1260, duration: 0.5, ease: "power3.in" }, 5.75);
+    var main = cam.querySelector(".capacity-main");
+    var punch = RH.aim(RH.pt(main, cam), Math.min(2.1, 1500 / main.offsetWidth), 960, 560);
+    RH.cam(tl, cam, punch, 5.6, 0.7);
+    var row = cam.querySelector(".capacity-value-row");
+    RH.cam(tl, cam, RH.aim(RH.pt(row, cam), Math.min(1.9, 1500 / row.offsetWidth), 960, 540), 7.9, 0.8);
+    tl.to($("s5-dip"), { opacity: 0.4, duration: 0.1 }, 11.62);
+
+    restore();
+    window.__timelines["s5"] = tl;
+  });
+})();
+  </script>
+</template>
