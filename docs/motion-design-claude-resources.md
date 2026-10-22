@@ -10,6 +10,8 @@ plus the repos and pages those videos link to. YouTube has far more motion-desig
 cover, so this is a representative sample of current (2025-2026) videos ranked by reach. It is not every video
 on YouTube.
 
+**Installed in this repo:** see `motion/README.md` (skills, plugins, frameworks) and `motion/MCP.md` (connectors).
+
 **Legend:** 🆓 free / open source · 💲 freemium (free tier or trial) · 💰 paid · ⭐ most recommended across videos
 
 ---

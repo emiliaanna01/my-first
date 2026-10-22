@@ -1,0 +1,13 @@
+{
+  "name": "motion-extras",
+  "owner": { "name": "my-first" },
+  "description": "Motion design plugins that ship a plugin.json but no marketplace of their own.",
+  "plugins": [
+    {
+      "name": "video-shotcraft",
+      "source": { "source": "github", "repo": "Vincentwei1021/video-shotcraft" },
+      "description": "Cinematic product/launch videos with Remotion: shot recipe cards, motion previews, SFX, template.",
+      "license": "Apache-2.0"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "motion-toolkit",
+  "private": true,
+  "description": "Motion design frameworks used by the Claude skills and plugins in .claude/ (see motion/README.md).",
+  "scripts": {
+    "hyperframes": "hyperframes",
+    "remotion": "remotion",
+    "skills": "skills"
+  },
+  "dependencies": {
+    "@lottiefiles/dotlottie-web": "^0.81.0",
+    "@motion-canvas/2d": "^3.17.2",
+    "@motion-canvas/core": "^3.17.2",
+    "@motion-canvas/ffmpeg": "^3.17.2",
+    "@motion-canvas/ui": "^3.17.2",
+    "@motion-canvas/vite-plugin": "^3.17.2",
+    "@remotion/cli": "^4.0.538",
+    "@revideo/2d": "^0.11.0",
+    "@revideo/cli": "^0.11.0",
+    "@revideo/core": "^0.11.0",
+    "@revideo/renderer": "^0.11.0",
+    "gsap": "^3.13.0",
+    "hyperframes": "^0.8.186",
+    "lottie-web": "^5.12.2",
+    "remotion": "^4.0.538",
+    "skills": "^1.7.4",
+    "three": "^0.180.0"
+  }
+}

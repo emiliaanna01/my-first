@@ -1,10 +1,42 @@
 {
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "hyperframes@hyperframes": true,
+    "motion-design-studio@frankx-motion": true,
+    "video-shotcraft@motion-extras": true,
+    "manim-skill@manim-skill": true,
+    "figma@claude-plugins-official": true
+  },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
-      "source": { "source": "github", "repo": "anthropics/claude-plugins-official" }
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "hyperframes": {
+      "source": {
+        "source": "github",
+        "repo": "heygen-com/hyperframes"
+      }
+    },
+    "frankx-motion": {
+      "source": {
+        "source": "github",
+        "repo": "frankxai/awesome-motion-design-agent-skills"
+      }
+    },
+    "manim-skill": {
+      "source": {
+        "source": "github",
+        "repo": "Yusuke710/manim-skill"
+      }
+    },
+    "motion-extras": {
+      "source": {
+        "source": "directory",
+        "path": "./motion/marketplace"
+      }
     }
-  },
-  "enabledPlugins": {
-    "superpowers@claude-plugins-official": true
   }
 }

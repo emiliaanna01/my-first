@@ -15,3 +15,5 @@ study-abroad/bot/.env
 chess-2p/build/
 chess-2p/dist/
 chess-2p/www/img/ayman.jpg
+motion/node_modules/
+motion/vendor/

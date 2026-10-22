@@ -34,6 +34,9 @@ python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
 ## Motion design resources
 `docs/motion-design-claude-resources.md` lists the Claude skills, MCP connectors, GitHub repos, free tools/assets and
 YouTube tutorials for motion design and product launch videos.
+Everything Claude can run from that list is installed: 73 skills in `.claude/skills/`, 5 plugins (HyperFrames,
+video-shotcraft, motion-design-studio, manim-skill, Figma) and the frameworks via `./motion/setup.sh`.
+See `motion/README.md` and `motion/MCP.md`.
 
 ## Deck
 `deck/` is a free, static TweetDeck-style website with columns for today's Google Calendar, running tasks
