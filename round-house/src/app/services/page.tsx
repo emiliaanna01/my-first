@@ -57,8 +57,11 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section id="pricing" aria-label="The three steps" className="border-t border-rule bg-panel">
+      <section id="pricing" aria-labelledby="steps-title" className="border-t border-rule bg-panel">
         <div className="shell py-16 md:py-20">
+          <h2 id="steps-title" className="sr-only">
+            The three steps and their prices
+          </h2>
           <TrackLine tiers={tiers} linkPrefix="" />
         </div>
       </section>
@@ -89,7 +92,7 @@ export default function ServicesPage() {
                       Service
                     </th>
                     <th scope="col" className="t-small hidden pb-3 text-right font-semibold text-steel sm:table-cell">
-                      {t.id === "run" ? "Included in" : "Typical price"}
+                      {t.id === "run" ? "Plan" : "Typical price"}
                     </th>
                   </tr>
                 </thead>

@@ -36,8 +36,8 @@ export default function Home() {
       {/* Hero: the positioning line, and the roundhouse that routes work to the right bay. */}
       <section aria-labelledby="hero-title" className="shell drafting">
         <div className="grid-12 relative gap-y-12 pt-14 pb-20 md:pt-20 md:pb-28">
-          <div className="col-span-4 self-center md:col-span-10 lg:col-span-6">
-            <h1 id="hero-title" className="t-display max-w-[11ch]">
+          <div className="col-span-4 self-center md:col-span-10 lg:col-span-7">
+            <h1 id="hero-title" className="t-display max-w-[13ch]">
               We automate the work that slows you down.
             </h1>
             <p className="t-lead mt-7 max-w-[40ch]">
@@ -54,7 +54,7 @@ export default function Home() {
             </div>
             <HoursStatus className="mt-7" />
           </div>
-          <div className="col-span-4 md:col-span-10 md:col-start-2 lg:col-span-6 lg:col-start-7 lg:pl-4">
+          <div className="col-span-4 self-center md:col-span-10 md:col-start-2 lg:col-span-5 lg:col-start-8">
             <Roundhouse />
           </div>
         </div>

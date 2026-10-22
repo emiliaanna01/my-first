@@ -19,7 +19,7 @@ const next = [
 
 export default function ContactPage() {
   return (
-    <section aria-labelledby="page-title" className="shell drafting">
+    <section aria-labelledby="page-title" className="shell">
       <div className="grid-12 relative gap-y-14 pt-14 pb-24 md:pt-20 md:pb-32">
         <div className="col-span-4 md:col-span-12">
           <h1 id="page-title" className="t-h1 max-w-[18ch]">

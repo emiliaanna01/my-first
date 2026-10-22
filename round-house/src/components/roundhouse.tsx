@@ -46,7 +46,7 @@ const geometry = bays.map((bay, i) => {
     angle: a,
     stall: sector(R1, R2, a - STEP / 2, a + STEP / 2),
     track: [t1x, t1y, t2x, t2y] as const,
-    label: { x: lx, y: ly, anchor: (Math.abs(cos) < 0.2 ? "middle" : cos < 0 ? "end" : "start") as "middle" | "end" | "start" },
+    label: { x: lx, y: ly, anchor: (Math.abs(cos) < 0.1 ? "middle" : cos < 0 ? "end" : "start") as "middle" | "end" | "start" },
   };
 });
 
@@ -156,7 +156,7 @@ export function Roundhouse() {
                 y={g.label.y}
                 textAnchor={g.label.anchor}
                 dominantBaseline="middle"
-                className="rh-label rh-fade text-[28px] md:text-[17px]"
+                className="rh-label rh-fade text-[34px] md:text-[23px]"
               >
                 {g.name}
               </text>
