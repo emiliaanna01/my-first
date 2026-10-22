@@ -36,12 +36,12 @@
       {
         "code": "clip_media_fit",
         "severity": "warning",
-        "message": "Audio \"sfx44\" is 4.81s but its slot (data-duration) is 4.86s — the slot is shortened to the media length when rendered. Set data-duration to ~4.81s if that isn't intended.",
+        "message": "Audio \"sfx42\" is 4.81s but its slot (data-duration) is 4.86s — the slot is shortened to the media length when rendered. Set data-duration to ~4.81s if that isn't intended.",
         "selector": "[data-composition-id]",
         "dataAttributes": {
           "data-composition-id": "main",
           "data-start": "0",
-          "data-duration": "58.8",
+          "data-duration": "67.92",
           "data-width": "1920",
           "data-height": "1080"
         },
@@ -59,20 +59,96 @@
   "layout": {
     "ok": true,
     "errorCount": 0,
-    "warningCount": 0,
-    "infoCount": 64,
+    "warningCount": 1,
+    "infoCount": 42,
     "findings": [
+      {
+        "code": "escaped_container",
+        "severity": "warning",
+        "time": 41.507,
+        "selector": "#s5-cur",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": 1996.25,
+          "top": 1151.75,
+          "right": 2062.25,
+          "bottom": 1217.75,
+          "width": 66,
+          "height": 66
+        },
+        "containerSelector": "#s5 > div:nth-of-type(1)",
+        "text": "",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s5.html",
+        "bbox": {
+          "x": 1996.25,
+          "y": 1151.75,
+          "width": 66,
+          "height": 66
+        },
+        "firstSeen": 41.507,
+        "lastSeen": 49.053,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          41.507,
+          49.053
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 3.773,
+        "selector": "#s1-p2",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 1320.83,
+          "top": 446.15,
+          "right": 1501.43,
+          "bottom": 486.88,
+          "width": 180.6,
+          "height": 40.73
+        },
+        "containerSelector": "#s1-sphere",
+        "text": "Spreadsheet",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 0.81,
+        "dataAttributes": {},
+        "sourceFile": "compositions/s1.html",
+        "bbox": {
+          "x": 1320.83,
+          "y": 446.15,
+          "width": 180.6,
+          "height": 40.73
+        },
+        "firstSeen": 3.773,
+        "lastSeen": 3.773,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          3.773
+        ]
+      },
       {
         "code": "container_overflow",
         "severity": "info",
-        "time": 9.8,
+        "time": 11.32,
         "selector": "#s2-cur",
         "message": "Element extends outside a clipping layout container.",
         "rect": {
-          "left": 1966.96,
-          "top": 1163.81,
-          "right": 2032.96,
-          "bottom": 1229.81,
+          "left": 1996.25,
+          "top": 1171.75,
+          "right": 2062.25,
+          "bottom": 1237.75,
           "width": 66,
           "height": 66
         },
@@ -87,36 +163,36 @@
           "height": 1080
         },
         "overflow": {
-          "right": 112.96,
-          "bottom": 149.81
+          "right": 142.25,
+          "bottom": 157.75
         },
         "dataAttributes": {},
         "sourceFile": "compositions/s2.html",
         "bbox": {
-          "x": 1966.96,
-          "y": 1163.81,
+          "x": 1996.25,
+          "y": 1171.75,
           "width": 66,
           "height": 66
         },
-        "firstSeen": 9.8,
-        "lastSeen": 9.8,
+        "firstSeen": 11.32,
+        "lastSeen": 11.32,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          9.8
+          11.32
         ]
       },
       {
         "code": "escaped_container",
         "severity": "info",
-        "time": 9.8,
+        "time": 11.32,
         "selector": "#s2-cur",
         "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
         "rect": {
-          "left": 1966.96,
-          "top": 1163.81,
-          "right": 2032.96,
-          "bottom": 1229.81,
+          "left": 1996.25,
+          "top": 1171.75,
+          "right": 2062.25,
+          "bottom": 1237.75,
           "width": 66,
           "height": 66
         },
@@ -134,23 +210,23 @@
         "dataAttributes": {},
         "sourceFile": "compositions/s2.html",
         "bbox": {
-          "x": 1966.96,
-          "y": 1163.81,
+          "x": 1996.25,
+          "y": 1171.75,
           "width": 66,
           "height": 66
         },
-        "firstSeen": 9.8,
-        "lastSeen": 9.8,
+        "firstSeen": 11.32,
+        "lastSeen": 11.32,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          9.8
+          11.32
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#tab-speed-to-lead",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -185,18 +261,18 @@
           "width": 234.23,
           "height": 31.96
         },
-        "firstSeen": 16.333,
-        "lastSeen": 16.333,
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          16.333
+          18.867
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#tab-speed-to-lead > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -229,18 +305,18 @@
           "width": 18.19,
           "height": 24.35
         },
-        "firstSeen": 16.333,
-        "lastSeen": 16.333,
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          16.333
+          18.867
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#tab-knowledge-assistant",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -275,18 +351,18 @@
           "width": 232.97,
           "height": 31.96
         },
-        "firstSeen": 16.333,
-        "lastSeen": 16.333,
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          16.333
+          18.867
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#tab-knowledge-assistant > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -319,18 +395,18 @@
           "width": 22.85,
           "height": 24.35
         },
-        "firstSeen": 16.333,
-        "lastSeen": 16.333,
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          16.333
+          18.867
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#tab-document-automation",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -365,18 +441,18 @@
           "width": 289.76,
           "height": 31.96
         },
-        "firstSeen": 16.333,
-        "lastSeen": 16.333,
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          16.333
+          18.867
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#tab-document-automation > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -409,18 +485,18 @@
           "width": 23.31,
           "height": 24.35
         },
-        "firstSeen": 16.333,
-        "lastSeen": 16.333,
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          16.333
+          18.867
         ]
       },
       {
         "code": "container_overflow",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#s3-cam",
         "message": "Element extends outside a clipping layout container.",
         "rect": {
@@ -455,19 +531,104 @@
           "width": 2922.05,
           "height": 1348.78
         },
-        "firstSeen": 16.333,
-        "lastSeen": 22.867,
+        "firstSeen": 18.867,
+        "lastSeen": 26.413,
         "occurrences": 2,
         "heldMs": 0,
         "times": [
-          16.333,
-          22.867
+          18.867,
+          26.413
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 18.867,
+        "selector": "#s3-cur",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 1976.21,
+          "top": 1118.48,
+          "right": 2042.21,
+          "bottom": 1184.48,
+          "width": 66,
+          "height": 66
+        },
+        "containerSelector": "#s3 > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "right": 122.21,
+          "bottom": 104.48
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 1976.21,
+          "y": 1118.48,
+          "width": 66,
+          "height": 66
+        },
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          18.867
+        ]
+      },
+      {
+        "code": "escaped_container",
+        "severity": "info",
+        "time": 18.867,
+        "selector": "#s3-cur",
+        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
+        "rect": {
+          "left": 1976.21,
+          "top": 1118.48,
+          "right": 2042.21,
+          "bottom": 1184.48,
+          "width": 66,
+          "height": 66
+        },
+        "containerSelector": "#s3 > div:nth-of-type(1)",
+        "text": "",
+        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s3.html",
+        "bbox": {
+          "x": 1976.21,
+          "y": 1118.48,
+          "width": 66,
+          "height": 66
+        },
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          18.867
         ]
       },
       {
         "code": "panel_out_of_canvas",
         "severity": "info",
-        "time": 16.333,
+        "time": 18.867,
         "selector": "#s3-pg1",
         "message": "Painted panel extends outside the composition canvas.",
         "rect": {
@@ -500,27 +661,27 @@
           "width": 2678.54,
           "height": 578.61
         },
-        "firstSeen": 16.333,
-        "lastSeen": 16.333,
+        "firstSeen": 18.867,
+        "lastSeen": 18.867,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          16.333
+          18.867
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 22.867,
+        "time": 26.413,
         "selector": "#k-tab-speed-to-lead",
         "message": "Text extends outside the composition canvas.",
         "rect": {
-          "left": -1177.16,
-          "top": 404.96,
-          "right": -943.69,
-          "bottom": 436.82,
-          "width": 233.47,
-          "height": 31.86
+          "left": -643.04,
+          "top": 430.8,
+          "right": -441.2,
+          "bottom": 458.34,
+          "width": 201.84,
+          "height": 27.54
         },
         "containerSelector": "#root",
         "text": "Faster lead response",
@@ -534,39 +695,39 @@
           "height": 1080
         },
         "overflow": {
-          "left": 1177.16
+          "left": 643.04
         },
         "dataAttributes": {
           "data-workflow": "speed-to-lead"
         },
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": -1177.16,
-          "y": 404.96,
-          "width": 233.47,
-          "height": 31.86
+          "x": -643.04,
+          "y": 430.8,
+          "width": 201.84,
+          "height": 27.54
         },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
+        "firstSeen": 26.413,
+        "lastSeen": 26.413,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          22.867
+          26.413
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 22.867,
+        "time": 26.413,
         "selector": "#k-tab-speed-to-lead > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
-          "left": -1215.02,
-          "top": 408.76,
-          "right": -1196.88,
-          "bottom": 433.03,
-          "width": 18.14,
-          "height": 24.27
+          "left": -675.77,
+          "top": 434.08,
+          "right": -660.09,
+          "bottom": 455.07,
+          "width": 15.68,
+          "height": 20.99
         },
         "containerSelector": "#root",
         "text": "01",
@@ -580,37 +741,37 @@
           "height": 1080
         },
         "overflow": {
-          "left": 1215.02
+          "left": 675.77
         },
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": -1215.02,
-          "y": 408.76,
-          "width": 18.14,
-          "height": 24.27
+          "x": -675.77,
+          "y": 434.08,
+          "width": 15.68,
+          "height": 20.99
         },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
+        "firstSeen": 26.413,
+        "lastSeen": 26.413,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          22.867
+          26.413
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 22.867,
+        "time": 26.413,
         "selector": "#k-tab-knowledge-assistant",
         "message": "Text extends outside the composition canvas.",
         "rect": {
-          "left": -1172.52,
-          "top": 541.49,
-          "right": -940.3,
-          "bottom": 573.35,
-          "width": 232.22,
-          "height": 31.86
+          "left": -639.03,
+          "top": 548.84,
+          "right": -438.27,
+          "bottom": 576.38,
+          "width": 200.76,
+          "height": 27.54
         },
         "containerSelector": "#root",
         "text": "Internal AI assistants",
@@ -624,39 +785,39 @@
           "height": 1080
         },
         "overflow": {
-          "left": 1172.52
+          "left": 639.03
         },
         "dataAttributes": {
           "data-workflow": "knowledge-assistant"
         },
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": -1172.52,
-          "y": 541.49,
-          "width": 232.22,
-          "height": 31.86
+          "x": -639.03,
+          "y": 548.84,
+          "width": 200.76,
+          "height": 27.54
         },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
+        "firstSeen": 26.413,
+        "lastSeen": 26.413,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          22.867
+          26.413
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 22.867,
+        "time": 26.413,
         "selector": "#k-tab-knowledge-assistant > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
-          "left": -1215.02,
-          "top": 545.29,
-          "right": -1192.24,
-          "bottom": 569.56,
-          "width": 22.78,
-          "height": 24.27
+          "left": -675.77,
+          "top": 552.12,
+          "right": -656.08,
+          "bottom": 573.1,
+          "width": 19.69,
+          "height": 20.98
         },
         "containerSelector": "#root",
         "text": "02",
@@ -670,37 +831,37 @@
           "height": 1080
         },
         "overflow": {
-          "left": 1215.02
+          "left": 675.77
         },
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": -1215.02,
-          "y": 545.29,
-          "width": 22.78,
-          "height": 24.27
+          "x": -675.77,
+          "y": 552.12,
+          "width": 19.69,
+          "height": 20.98
         },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
+        "firstSeen": 26.413,
+        "lastSeen": 26.413,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          22.867
+          26.413
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 22.867,
+        "time": 26.413,
         "selector": "#k-tab-document-automation",
         "message": "Text extends outside the composition canvas.",
         "rect": {
-          "left": -1172.07,
-          "top": 678.02,
-          "right": -883.24,
-          "bottom": 709.88,
-          "width": 288.83,
-          "height": 31.86
+          "left": -638.64,
+          "top": 666.87,
+          "right": -388.94,
+          "bottom": 694.41,
+          "width": 249.7,
+          "height": 27.54
         },
         "containerSelector": "#root",
         "text": "Documents & onboarding",
@@ -714,39 +875,39 @@
           "height": 1080
         },
         "overflow": {
-          "left": 1172.07
+          "left": 638.64
         },
         "dataAttributes": {
           "data-workflow": "document-automation"
         },
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": -1172.07,
-          "y": 678.02,
-          "width": 288.83,
-          "height": 31.86
+          "x": -638.64,
+          "y": 666.87,
+          "width": 249.7,
+          "height": 27.54
         },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
+        "firstSeen": 26.413,
+        "lastSeen": 26.413,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          22.867
+          26.413
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 22.867,
+        "time": 26.413,
         "selector": "#k-tab-document-automation > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
-          "left": -1215.02,
-          "top": 681.82,
-          "right": -1191.79,
-          "bottom": 706.09,
-          "width": 23.23,
-          "height": 24.27
+          "left": -675.77,
+          "top": 670.15,
+          "right": -655.69,
+          "bottom": 691.14,
+          "width": 20.08,
+          "height": 20.99
         },
         "containerSelector": "#root",
         "text": "03",
@@ -760,253 +921,37 @@
           "height": 1080
         },
         "overflow": {
-          "left": 1215.02
+          "left": 675.77
         },
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": -1215.02,
-          "y": 681.82,
-          "width": 23.23,
-          "height": 24.27
+          "x": -675.77,
+          "y": 670.15,
+          "width": 20.08,
+          "height": 20.99
         },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
+        "firstSeen": 26.413,
+        "lastSeen": 26.413,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          22.867
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 22.867,
-        "selector": "#k-workflow-panel > div:nth-of-type(1) > span:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -396.79,
-          "top": 369.31,
-          "right": -170.85,
-          "bottom": 390.55,
-          "width": 225.94,
-          "height": 21.24
-        },
-        "containerSelector": "#root",
-        "text": "EXAMPLE WORKFLOW / 02",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 396.79
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": -396.79,
-          "y": 369.31,
-          "width": 225.94,
-          "height": 21.24
-        },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          22.867
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 22.867,
-        "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(1) > h3:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -372.51,
-          "top": 561.97,
-          "right": -156.29,
-          "bottom": 604.45,
-          "width": 216.22,
-          "height": 42.48
-        },
-        "containerSelector": "#root",
-        "text": "Team question",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 372.51
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": -372.51,
-          "y": 561.97,
-          "width": 216.22,
-          "height": 42.48
-        },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          22.867
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 22.867,
-        "selector": "#k-workflow-panel > div:nth-of-type(3) > p:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -396.79,
-          "top": 729.13,
-          "right": 133.15,
-          "bottom": 845.94,
-          "width": 529.94,
-          "height": 116.81
-        },
-        "containerSelector": "#root",
-        "text": "Make SOPs, policies, and FAQs easier to find with an internal assistant grounded in your own documents.",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 396.79
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": -396.79,
-          "y": 729.13,
-          "width": 529.94,
-          "height": 116.81
-        },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          22.867
-        ]
-      },
-      {
-        "code": "container_overflow",
-        "severity": "info",
-        "time": 22.867,
-        "selector": "#s3-cur",
-        "message": "Element extends outside a clipping layout container.",
-        "rect": {
-          "left": 1486.25,
-          "top": 1241.75,
-          "right": 1552.25,
-          "bottom": 1307.75,
-          "width": 66,
-          "height": 66
-        },
-        "containerSelector": "#s3 > div:nth-of-type(1)",
-        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "bottom": 227.75
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": 1486.25,
-          "y": 1241.75,
-          "width": 66,
-          "height": 66
-        },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          22.867
-        ]
-      },
-      {
-        "code": "escaped_container",
-        "severity": "info",
-        "time": 22.867,
-        "selector": "#s3-cur",
-        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
-        "rect": {
-          "left": 1486.25,
-          "top": 1241.75,
-          "right": 1552.25,
-          "bottom": 1307.75,
-          "width": 66,
-          "height": 66
-        },
-        "containerSelector": "#s3 > div:nth-of-type(1)",
-        "text": "",
-        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": 1486.25,
-          "y": 1241.75,
-          "width": 66,
-          "height": 66
-        },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          22.867
+          26.413
         ]
       },
       {
         "code": "panel_out_of_canvas",
         "severity": "info",
-        "time": 22.867,
+        "time": 26.413,
         "selector": "#s3-pg2",
         "message": "Painted panel extends outside the composition canvas.",
         "rect": {
-          "left": -1277.21,
-          "top": 322.29,
-          "right": 1392.71,
-          "bottom": 899.03,
-          "width": 2669.92,
-          "height": 576.74
+          "left": -729.54,
+          "top": 359.33,
+          "right": 1578.7,
+          "bottom": 857.94,
+          "width": 2308.24,
+          "height": 498.62
         },
         "containerSelector": "#root",
         "text": "01 Faster lead response 02 Internal AI assistant",
@@ -1020,792 +965,37 @@
           "height": 1080
         },
         "overflow": {
-          "left": 1277.21
+          "left": 729.54
         },
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": -1277.21,
-          "y": 322.29,
-          "width": 2669.92,
-          "height": 576.74
+          "x": -729.54,
+          "y": 359.33,
+          "width": 2308.24,
+          "height": 498.62
         },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
+        "firstSeen": 26.413,
+        "lastSeen": 26.413,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          22.867
-        ]
-      },
-      {
-        "code": "panel_out_of_canvas",
-        "severity": "info",
-        "time": 22.867,
-        "selector": "#k-workflow-panel > div:nth-of-type(3)",
-        "message": "Painted panel extends outside the composition canvas.",
-        "rect": {
-          "left": -396.79,
-          "top": 692.72,
-          "right": 1345.68,
-          "bottom": 852,
-          "width": 1742.46,
-          "height": 159.28
-        },
-        "containerSelector": "#root",
-        "text": "Make SOPs, policies, and FAQs easier to find wit",
-        "fixHint": "Move the panel inward, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 396.79
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": -396.79,
-          "y": 692.72,
-          "width": 1742.46,
-          "height": 159.28
-        },
-        "firstSeen": 22.867,
-        "lastSeen": 22.867,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          22.867
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > span:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -311.04,
-          "top": -118,
-          "right": 25.22,
-          "bottom": -102.32,
-          "width": 336.26,
-          "height": 15.68
-        },
-        "containerSelector": "#root",
-        "text": "02 / A LITTLE STRUCTURE. A LOT OF POSSIBILITY.",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 311.04,
-          "top": 118
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -311.04,
-          "y": -118,
-          "width": 336.26,
-          "height": 15.68
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > span:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -311.04,
-          "top": -69.07,
-          "right": -202.16,
-          "bottom": 9.33,
-          "width": 108.88,
-          "height": 78.4
-        },
-        "containerSelector": "#root",
-        "text": "Find",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 311.04,
-          "top": 69.07
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -311.04,
-          "y": -69.07,
-          "width": 108.88,
-          "height": 78.4
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > span:nth-of-type(2)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -191.48,
-          "top": -69.07,
-          "right": -107.53,
-          "bottom": 9.33,
-          "width": 83.95,
-          "height": 78.4
-        },
-        "containerSelector": "#root",
-        "text": "the",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 191.48,
-          "top": 69.07
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -191.48,
-          "y": -69.07,
-          "width": 83.95,
-          "height": 78.4
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "text_box_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > span:nth-of-type(3)",
-        "message": "Text extends outside its nearest visual/container box.",
-        "rect": {
-          "left": -96.86,
-          "top": -66.57,
-          "right": 17.61,
-          "bottom": 6.83,
-          "width": 114.47,
-          "height": 73.4
-        },
-        "containerSelector": "#s4 > div:nth-of-type(1)",
-        "text": "right",
-        "fixHint": "Text is 114px x 73px inside 1920px x 1080px and overflows by up to 97px; resize the container to at least ~2017px x 1147px, or allow wrapping with max-width/fitTextFontSize.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 96.86,
-          "top": 66.57
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -96.86,
-          "y": -66.57,
-          "width": 114.47,
-          "height": 73.4
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > span:nth-of-type(3)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -96.86,
-          "top": -69.07,
-          "right": 17.61,
-          "bottom": 9.33,
-          "width": 114.47,
-          "height": 78.4
-        },
-        "containerSelector": "#root",
-        "text": "right",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 96.86,
-          "top": 69.07
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -96.86,
-          "y": -69.07,
-          "width": 114.47,
-          "height": 78.4
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "text_box_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > span:nth-of-type(4)",
-        "message": "Text extends outside its nearest visual/container box.",
-        "rect": {
-          "left": 28.28,
-          "top": -66.57,
-          "right": 171.15,
-          "bottom": 6.83,
-          "width": 142.87,
-          "height": 73.4
-        },
-        "containerSelector": "#s4 > div:nth-of-type(1)",
-        "text": "thing.",
-        "fixHint": "Text is 143px x 73px inside 1920px x 1080px and overflows by up to 67px; increase the container height to at least ~1147px, or allow wrapping with max-width/fitTextFontSize.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "top": 66.57
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": 28.28,
-          "y": -66.57,
-          "width": 142.87,
-          "height": 73.4
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > span:nth-of-type(4)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": 28.28,
-          "top": -69.07,
-          "right": 171.15,
-          "bottom": 9.33,
-          "width": 142.87,
-          "height": 78.4
-        },
-        "containerSelector": "#root",
-        "text": "thing.",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "top": 69.07
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": 28.28,
-          "y": -69.07,
-          "width": 142.87,
-          "height": 78.4
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > em:nth-of-type(1) > span:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -311.04,
-          "top": 4.32,
-          "right": -176.82,
-          "bottom": 82.73,
-          "width": 134.22,
-          "height": 78.41
-        },
-        "containerSelector": "#root",
-        "text": "Then",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 311.04
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -311.04,
-          "y": 4.32,
-          "width": 134.22,
-          "height": 78.41
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > em:nth-of-type(1) > span:nth-of-type(2)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -166.14,
-          "top": 4.32,
-          "right": -22.97,
-          "bottom": 82.73,
-          "width": 143.17,
-          "height": 78.41
-        },
-        "containerSelector": "#root",
-        "text": "make",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 166.14
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -166.14,
-          "y": 4.32,
-          "width": 143.17,
-          "height": 78.41
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "text_box_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > em:nth-of-type(1) > span:nth-of-type(3)",
-        "message": "Text extends outside its nearest visual/container box.",
-        "rect": {
-          "left": -12.3,
-          "top": 6.82,
-          "right": 16,
-          "bottom": 80.23,
-          "width": 28.3,
-          "height": 73.41
-        },
-        "containerSelector": "#s4 > div:nth-of-type(1)",
-        "text": "it",
-        "fixHint": "Text is 28px x 73px inside 1920px x 1080px and overflows by up to 12px; widen the container to at least ~1932px, or allow wrapping with max-width/fitTextFontSize.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 12.3
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -12.3,
-          "y": 6.82,
-          "width": 28.3,
-          "height": 73.41
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > h2:nth-of-type(1) > em:nth-of-type(1) > span:nth-of-type(3)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -12.3,
-          "top": 4.32,
-          "right": 16,
-          "bottom": 82.73,
-          "width": 28.3,
-          "height": 78.41
-        },
-        "containerSelector": "#root",
-        "text": "it",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 12.3
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -12.3,
-          "y": 4.32,
-          "width": 28.3,
-          "height": 78.41
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "text_box_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > p:nth-of-type(1)",
-        "message": "Text extends outside its nearest visual/container box.",
-        "rect": {
-          "left": -311.04,
-          "top": 145.76,
-          "right": 42.53,
-          "bottom": 170.4,
-          "width": 353.57,
-          "height": 24.64
-        },
-        "containerSelector": "#s4 > div:nth-of-type(1)",
-        "text": "No six-service shopping list.A clear path, built around your outcome.",
-        "fixHint": "Text is 354px x 25px inside 1920px x 1080px and overflows by up to 311px; widen the container to at least ~2231px, or allow wrapping with max-width/fitTextFontSize.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 311.04
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -311.04,
-          "y": 145.76,
-          "width": 353.57,
-          "height": 24.64
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > p:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -311.04,
-          "top": 112.44,
-          "right": 42.53,
-          "bottom": 170.4,
-          "width": 353.57,
-          "height": 57.96
-        },
-        "containerSelector": "#root",
-        "text": "No six-service shopping list.A clear path, built around your outcome.",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 311.04
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -311.04,
-          "y": 112.44,
-          "width": 353.57,
-          "height": 57.96
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-intro > a:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": -311.04,
-          "top": 211.56,
-          "right": -146.59,
-          "bottom": 233.96,
-          "width": 164.45,
-          "height": 22.4
-        },
-        "containerSelector": "#root",
-        "text": "Explore our approach",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "left": 311.04
-        },
-        "dataAttributes": {
-          "data-hf-svg-reference-aliases": "[{\"name\":\"href\",\"localName\":\"href\",\"namespaceURI\":null,\"before\":\"#/services\",\"after\":\"#/services\"}]"
-        },
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": -311.04,
-          "y": 211.56,
-          "width": 164.45,
-          "height": 22.4
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-rows > details:nth-of-type(1) > summary:nth-of-type(1) > span:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": 660.09,
-          "top": -70.96,
-          "right": 673.47,
-          "bottom": -53.04,
-          "width": 13.38,
-          "height": 17.92
-        },
-        "containerSelector": "#root",
-        "text": "01",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "top": 70.96
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": 660.09,
-          "y": -70.96,
-          "width": 13.38,
-          "height": 17.92
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
-        ]
-      },
-      {
-        "code": "canvas_overflow",
-        "severity": "info",
-        "time": 29.4,
-        "selector": "div.approach-rows > details:nth-of-type(1) > summary:nth-of-type(1) > h3:nth-of-type(1)",
-        "message": "Text extends outside the composition canvas.",
-        "rect": {
-          "left": 701.47,
-          "top": -95.6,
-          "right": 912.49,
-          "bottom": -28.4,
-          "width": 211.02,
-          "height": 67.2
-        },
-        "containerSelector": "#root",
-        "text": "Diagnose",
-        "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "top": 95.6
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": 701.47,
-          "y": -95.6,
-          "width": 211.02,
-          "height": 67.2
-        },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          29.4
+          26.413
         ]
       },
       {
         "code": "container_overflow",
         "severity": "info",
-        "time": 29.4,
+        "time": 33.96,
         "selector": "#s4-cam",
         "message": "Element extends outside a clipping layout container.",
         "rect": {
-          "left": -400.64,
-          "top": -242.32,
-          "right": 1749.76,
-          "bottom": 650.32,
-          "width": 2150.4,
-          "height": 892.64
+          "left": -343.24,
+          "top": -37.99,
+          "right": 1774.13,
+          "bottom": 837.64,
+          "width": 2117.38,
+          "height": 875.62
         },
         "containerSelector": "#s4 > div:nth-of-type(1)",
         "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
@@ -1818,29 +1008,29 @@
           "height": 1080
         },
         "overflow": {
-          "left": 400.64,
-          "top": 242.32
+          "left": 343.24,
+          "top": 37.99
         },
         "dataAttributes": {},
         "sourceFile": "compositions/s4.html",
         "bbox": {
-          "x": -400.64,
-          "y": -242.32,
-          "width": 2150.4,
-          "height": 892.64
+          "x": -343.24,
+          "y": -37.99,
+          "width": 2117.38,
+          "height": 875.62
         },
-        "firstSeen": 29.4,
-        "lastSeen": 29.4,
+        "firstSeen": 33.96,
+        "lastSeen": 33.96,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          29.4
+          33.96
         ]
       },
       {
         "code": "container_overflow",
         "severity": "info",
-        "time": 35.933,
+        "time": 41.507,
         "selector": "#s5-cam",
         "message": "Element extends outside a clipping layout container.",
         "rect": {
@@ -1873,19 +1063,64 @@
           "width": 1941.89,
           "height": 991.36
         },
-        "firstSeen": 35.933,
-        "lastSeen": 42.467,
+        "firstSeen": 41.507,
+        "lastSeen": 49.053,
         "occurrences": 2,
         "heldMs": 0,
         "times": [
-          35.933,
-          42.467
+          41.507,
+          49.053
+        ]
+      },
+      {
+        "code": "container_overflow",
+        "severity": "info",
+        "time": 41.507,
+        "selector": "#s5-cur",
+        "message": "Element extends outside a clipping layout container.",
+        "rect": {
+          "left": 1996.25,
+          "top": 1151.75,
+          "right": 2062.25,
+          "bottom": 1217.75,
+          "width": 66,
+          "height": 66
+        },
+        "containerSelector": "#s5 > div:nth-of-type(1)",
+        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
+        "containerRect": {
+          "left": 0,
+          "top": 0,
+          "right": 1920,
+          "bottom": 1080,
+          "width": 1920,
+          "height": 1080
+        },
+        "overflow": {
+          "right": 142.25,
+          "bottom": 137.75
+        },
+        "dataAttributes": {},
+        "sourceFile": "compositions/s5.html",
+        "bbox": {
+          "x": 1996.25,
+          "y": 1151.75,
+          "width": 66,
+          "height": 66
+        },
+        "firstSeen": 41.507,
+        "lastSeen": 49.053,
+        "occurrences": 2,
+        "heldMs": 0,
+        "times": [
+          41.507,
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -1919,18 +1154,18 @@
           "width": 383.48,
           "height": 24.74
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > h2:nth-of-type(1) > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -1964,18 +1199,18 @@
           "width": 321.36,
           "height": 174.91
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > h2:nth-of-type(1) > span:nth-of-type(2)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2009,18 +1244,18 @@
           "width": 301.62,
           "height": 174.91
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > h2:nth-of-type(1) > span:nth-of-type(3)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2054,18 +1289,18 @@
           "width": 153.05,
           "height": 174.92
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > h2:nth-of-type(1) > em:nth-of-type(1) > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2099,18 +1334,18 @@
           "width": 340.31,
           "height": 174.92
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > h2:nth-of-type(1) > em:nth-of-type(1) > span:nth-of-type(2)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2144,18 +1379,18 @@
           "width": 317.86,
           "height": 174.92
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > p:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2188,18 +1423,18 @@
           "width": 672.4,
           "height": 98.06
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-presets > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2232,18 +1467,18 @@
           "width": 256.05,
           "height": 28.27
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-presets > button:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2278,18 +1513,18 @@
           "width": 196.56,
           "height": 35.34
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-presets > button:nth-of-type(2)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2324,18 +1559,18 @@
           "width": 219.78,
           "height": 35.33
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-presets > button:nth-of-type(3)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2370,18 +1605,18 @@
           "width": 195.29,
           "height": 35.34
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.calculator-copy > a:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2416,18 +1651,18 @@
           "width": 359.46,
           "height": 35.33
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-top > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2460,18 +1695,18 @@
           "width": 238.05,
           "height": 24.74
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "#capacity-hours",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2504,18 +1739,18 @@
           "width": 328.3,
           "height": 219.08
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-main > div:nth-of-type(1) > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2548,18 +1783,18 @@
           "width": 240.51,
           "height": 35.33
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-main > p:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2592,18 +1827,18 @@
           "width": 263.75,
           "height": 69.6
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "#capacity-days",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2636,18 +1871,18 @@
           "width": 48.7,
           "height": 44.17
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "div.capacity-gauge-label > span:nth-of-type(1)",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2680,18 +1915,18 @@
           "width": 138.4,
           "height": 24.74
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
+          49.053
         ]
       },
       {
         "code": "canvas_overflow",
         "severity": "info",
-        "time": 42.467,
+        "time": 49.053,
         "selector": "#capacity-portion",
         "message": "Text extends outside the composition canvas.",
         "rect": {
@@ -2724,200 +1959,31 @@
           "width": 217.79,
           "height": 24.74
         },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
+        "firstSeen": 49.053,
+        "lastSeen": 49.053,
         "occurrences": 1,
         "heldMs": 0,
         "times": [
-          42.467
-        ]
-      },
-      {
-        "code": "container_overflow",
-        "severity": "info",
-        "time": 42.467,
-        "selector": "#s5-cur",
-        "message": "Element extends outside a clipping layout container.",
-        "rect": {
-          "left": 1694.59,
-          "top": 1251.75,
-          "right": 1760.59,
-          "bottom": 1317.75,
-          "width": 66,
-          "height": 66
-        },
-        "containerSelector": "#s5 > div:nth-of-type(1)",
-        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "bottom": 237.75
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s5.html",
-        "bbox": {
-          "x": 1694.59,
-          "y": 1251.75,
-          "width": 66,
-          "height": 66
-        },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          42.467
-        ]
-      },
-      {
-        "code": "escaped_container",
-        "severity": "info",
-        "time": 42.467,
-        "selector": "#s5-cur",
-        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
-        "rect": {
-          "left": 1694.59,
-          "top": 1251.75,
-          "right": 1760.59,
-          "bottom": 1317.75,
-          "width": 66,
-          "height": 66
-        },
-        "containerSelector": "#s5 > div:nth-of-type(1)",
-        "text": "",
-        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s5.html",
-        "bbox": {
-          "x": 1694.59,
-          "y": 1251.75,
-          "width": 66,
-          "height": 66
-        },
-        "firstSeen": 42.467,
-        "lastSeen": 42.467,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          42.467
-        ]
-      },
-      {
-        "code": "container_overflow",
-        "severity": "info",
-        "time": 49,
-        "selector": "#s7-cur",
-        "message": "Element extends outside a clipping layout container.",
-        "rect": {
-          "left": 1996.25,
-          "top": 1151.75,
-          "right": 2062.25,
-          "bottom": 1217.75,
-          "width": 66,
-          "height": 66
-        },
-        "containerSelector": "#s7 > div:nth-of-type(1)",
-        "fixHint": "Resize/reposition the child or container, or mark intentional overflow with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "overflow": {
-          "right": 142.25,
-          "bottom": 137.75
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s7.html",
-        "bbox": {
-          "x": 1996.25,
-          "y": 1151.75,
-          "width": 66,
-          "height": 66
-        },
-        "firstSeen": 49,
-        "lastSeen": 49,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          49
-        ]
-      },
-      {
-        "code": "escaped_container",
-        "severity": "info",
-        "time": 49,
-        "selector": "#s7-cur",
-        "message": "Positioned element renders far outside its offset parent — its coordinates were likely computed in a different frame (canvas/viewport pixels).",
-        "rect": {
-          "left": 1996.25,
-          "top": 1151.75,
-          "right": 2062.25,
-          "bottom": 1217.75,
-          "width": 66,
-          "height": 66
-        },
-        "containerSelector": "#s7 > div:nth-of-type(1)",
-        "text": "",
-        "fixHint": "Compute left/top in the offset parent's frame (subtract its rect), or mark intentional placement with data-layout-allow-overflow.",
-        "containerRect": {
-          "left": 0,
-          "top": 0,
-          "right": 1920,
-          "bottom": 1080,
-          "width": 1920,
-          "height": 1080
-        },
-        "dataAttributes": {},
-        "sourceFile": "compositions/s7.html",
-        "bbox": {
-          "x": 1996.25,
-          "y": 1151.75,
-          "width": 66,
-          "height": 66
-        },
-        "firstSeen": 49,
-        "lastSeen": 49,
-        "occurrences": 1,
-        "heldMs": 0,
-        "times": [
-          49
+          49.053
         ]
       }
     ],
-    "duration": 58.8,
+    "duration": 67.92,
     "samples": [
-      3.267,
-      9.8,
-      16.333,
-      22.867,
-      29.4,
-      35.933,
-      42.467,
-      49,
-      55.533
+      3.773,
+      11.32,
+      18.867,
+      26.413,
+      33.96,
+      41.507,
+      49.053,
+      56.6,
+      64.147
     ],
     "transitionSamples": [],
     "transitionSamplesDropped": 0,
     "tolerance": 2,
-    "totalIssueCount": 64,
+    "totalIssueCount": 43,
     "truncated": false
   },
   "motion": {
@@ -2937,19 +2003,19 @@
     "findings": [],
     "enabled": true,
     "samples": [
-      3.267,
-      16.333,
-      29.4,
-      42.467,
-      55.533
+      3.773,
+      18.867,
+      33.96,
+      49.053,
+      64.147
     ],
-    "checked": 50,
-    "passed": 50
+    "checked": 48,
+    "passed": 48
   },
   "craft": {
     "ok": true,
     "errorCount": 0,
-    "warningCount": 12,
+    "warningCount": 9,
     "infoCount": 0,
     "findings": [
       {
@@ -2966,569 +2032,531 @@
           "width": 135.5,
           "height": 15.84
         },
-        "time": 5.992,
+        "time": 6.992,
         "times": [
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          5.992,
-          7.865,
-          7.99,
-          7.99,
+          6.742,
+          6.742,
+          6.742,
+          6.867,
+          6.867,
+          6.992,
+          6.992,
+          6.992,
+          6.992,
+          7.117,
+          7.117,
+          7.117,
+          7.866,
+          7.991,
+          7.991,
           8.115,
           8.115,
           8.115,
           8.115,
           8.115,
-          8.239,
-          8.239,
-          8.239
+          8.24,
+          8.24,
+          8.24
         ],
         "fontPx": 9,
         "floorPx": 28,
-        "seconds": 5.868,
+        "seconds": 8.989,
         "elements": [
           {
             "selector": "button.film-link > span:nth-of-type(2) > small:nth-of-type(1)",
             "text": "STUDIO FILM / 00:15",
             "fontPx": 9,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.992,
+            "seconds": 8.989
           },
           {
             "selector": "span.bubble-coordinate",
             "text": "A DIFFERENT KIND OF CONNECTED.",
             "fontPx": 9,
-            "time": 8.239,
-            "seconds": 3.621
+            "time": 8.24,
+            "seconds": 7.741
           },
           {
             "selector": "div.hero-top > span:nth-of-type(1)",
             "text": "AN INDEPENDENT STUDIO FOR WHAT’S NEXT.",
             "fontPx": 10,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.867,
+            "seconds": 9.114
           },
           {
             "selector": "span.sculpture-status",
             "text": "02 — Connection. Better together.",
             "fontPx": 10,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 7.117,
+            "seconds": 8.864
           },
           {
             "selector": "div.form-controls > div:nth-of-type(1) > button:nth-of-type(1) > span:nth-of-type(1)",
             "text": "01",
             "fontPx": 10,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 7.117,
+            "seconds": 8.864
           },
           {
             "selector": "div.form-controls > div:nth-of-type(1) > button:nth-of-type(2) > span:nth-of-type(1)",
             "text": "02",
             "fontPx": 10,
-            "time": 7.865,
-            "seconds": 3.995
+            "time": 7.866,
+            "seconds": 8.115
           },
           {
             "selector": "span.hero-location",
             "text": "STRATEGY. SYSTEMS. DIGITAL EXPERIENCES.",
             "fontPx": 10,
             "time": 8.115,
-            "seconds": 3.745
+            "seconds": 7.866
           },
           {
             "selector": "div.form-controls > div:nth-of-type(1) > button:nth-of-type(3) > span:nth-of-type(1)",
             "text": "03",
             "fontPx": 10,
             "time": 8.115,
-            "seconds": 3.745
+            "seconds": 7.866
           },
           {
             "selector": "a.hero-scroll-link",
             "text": "SCROLL FOR THE GOOD STUFF",
             "fontPx": 10,
             "time": 8.115,
-            "seconds": 3.745
+            "seconds": 7.866
           },
           {
             "selector": "div.hero-bottom > span:nth-of-type(1)",
             "text": "BUILT AROUND PEOPLE. CONNECTED BY DESIGN.",
             "fontPx": 10,
             "time": 8.115,
-            "seconds": 3.745
+            "seconds": 7.866
           },
           {
             "selector": "button.sculpture-pause",
             "text": "Pause motion",
             "fontPx": 10,
-            "time": 8.239,
-            "seconds": 3.621
+            "time": 8.24,
+            "seconds": 7.741
           },
           {
             "selector": "span.bubble-help",
             "text": "Move, drag, or give things a nudge.",
             "fontPx": 11,
-            "time": 7.99,
-            "seconds": 3.87
+            "time": 7.991,
+            "seconds": 7.99
           },
           {
             "selector": "span.hero-footnote",
             "text": "Clear thinking. Considered making. A little play.",
             "fontPx": 12,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.992,
+            "seconds": 8.989
           },
           {
             "selector": "button.film-link > span:nth-of-type(2)",
             "text": "Meet our way of thinking",
             "fontPx": 14,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.992,
+            "seconds": 8.989
           },
           {
             "selector": "div.form-controls > div:nth-of-type(1) > button:nth-of-type(1)",
             "text": "Clarity",
             "fontPx": 14,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 7.117,
+            "seconds": 8.864
           },
           {
             "selector": "div.form-controls > div:nth-of-type(1) > button:nth-of-type(2)",
             "text": "Connection",
             "fontPx": 14,
-            "time": 7.99,
-            "seconds": 3.87
+            "time": 7.991,
+            "seconds": 7.99
           },
           {
             "selector": "div.form-controls > div:nth-of-type(1) > button:nth-of-type(3)",
             "text": "Momentum",
             "fontPx": 14,
             "time": 8.115,
-            "seconds": 3.745
+            "seconds": 7.866
           },
           {
             "selector": "a.nav-cta",
             "text": "Let’s talk",
             "fontPx": 14,
-            "time": 8.239,
-            "seconds": 3.621
+            "time": 8.24,
+            "seconds": 7.741
           },
           {
             "selector": "#s2-btn > span:nth-of-type(1)",
             "text": "See what’s possible",
-            "fontPx": 14.33,
-            "time": 5.992,
-            "seconds": 5.494
+            "fontPx": 14.28,
+            "time": 6.992,
+            "seconds": 8.615
           },
           {
             "selector": "#main-nav > a:nth-of-type(1)",
             "text": "Solutions",
             "fontPx": 15,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.742,
+            "seconds": 9.239
           },
           {
             "selector": "#main-nav > a:nth-of-type(2)",
             "text": "Approach",
             "fontPx": 15,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.742,
+            "seconds": 9.239
           },
           {
             "selector": "#main-nav > a:nth-of-type(3)",
             "text": "Studio",
             "fontPx": 15,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.742,
+            "seconds": 9.239
           },
           {
             "selector": "p.hero-description",
             "text": "We connect business thinking, intelligent systems, and thoughtful design. So your team can work better. And your brand can stand apart.",
             "fontPx": 17,
-            "time": 5.992,
-            "seconds": 5.868
+            "time": 6.867,
+            "seconds": 9.114
           }
         ]
       },
       {
         "code": "line_unread",
         "severity": "warning",
-        "message": "\"See what’s possible\" (4 words) is on screen 0.41 s (±0.01 s), under its 1.27 s floor: hold it about 0.5 s + 0.3 s a word (1.70 s here) before it leaves or changes; see references/motion.md.",
+        "message": "\"See what’s possible\" (4 words) is on screen 0.43 s (±0.01 s), under its 1.27 s floor: hold it about 0.5 s + 0.3 s a word (1.70 s here) before it leaves or changes; see references/motion.md.",
         "text": "See what’s possible",
         "selector": "#s2-btn > span:nth-of-type(1)",
         "dataAttributes": {},
         "sourceFile": "compositions/s2.html",
         "bbox": {
-          "x": 0,
-          "y": 639.14,
-          "width": 397.98,
-          "height": 92.04999999999995
+          "x": 50.49,
+          "y": 670.91,
+          "width": 215.2,
+          "height": 31.539999999999964
         },
-        "time": 11.369,
+        "time": 15.474,
         "words": 4,
-        "seconds": 0.405,
+        "seconds": 0.429,
         "floorSeconds": 1.275
-      },
-      {
-        "code": "line_unread",
-        "severity": "warning",
-        "message": "\"Make SOPs, policies, and FAQs easier to find with an inte...\" (17 words) is on screen 4.07 s (±0.01 s), under its 4.20 s floor: hold it about 0.5 s + 0.3 s a word (5.60 s here) before it leaves or changes; see references/motion.md.",
-        "text": "Make SOPs, policies, and FAQs easier to find with an internal assistant grounded in your own documents.",
-        "selector": "#k-workflow-panel > div:nth-of-type(3) > p:nth-of-type(1)",
-        "dataAttributes": {},
-        "sourceFile": "compositions/s3.html",
-        "bbox": {
-          "x": 656.99,
-          "y": 684.61,
-          "width": 353.30999999999995,
-          "height": 77.88
-        },
-        "time": 19.334,
-        "words": 17,
-        "seconds": 4.073,
-        "floorSeconds": 4.2
       },
       {
         "code": "text_below_floor",
         "severity": "warning",
-        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 34 text elements stay under it for 0.5 s or more, the smallest \"CONNECTED\" at 10 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
+        "message": "Type floor is 28 px (2.6% of the 1080 px short side, what a phone can read) and 34 text elements stay under it for 0.5 s or more, the smallest \"CONNECTED\" at 11 px: set reading text to at least 28 px, or put data-layout-ignore on text that is texture rather than reading; see references/look.md.",
         "text": "CONNECTED",
         "selector": "#k-workflow-panel > div:nth-of-type(1) > span:nth-of-type(2)",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 1749.21,
-          "y": 445.23,
-          "width": 66.53,
-          "height": 13.14
+          "x": 1748.6,
+          "y": 445.09,
+          "width": 67.96,
+          "height": 13.42
         },
-        "time": 20.724,
+        "time": 24.846,
         "times": [
-          13.982,
-          13.982,
-          13.982,
-          13.982,
-          15.605,
-          15.98,
-          16.479,
-          16.604,
-          18.476,
-          18.476,
-          18.476,
-          18.476,
-          18.476,
-          18.476,
-          18.601,
-          18.601,
-          18.601,
-          19.35,
-          19.35,
-          19.35,
-          19.35,
-          19.35,
-          19.35,
-          19.35,
-          19.35,
-          19.35,
-          19.35,
-          19.725,
-          19.725,
-          20.099,
-          20.099,
-          20.599,
-          20.599,
-          20.724
+          17.979,
+          17.979,
+          17.979,
+          17.979,
+          19.727,
+          20.101,
+          20.601,
+          20.85,
+          22.474,
+          22.474,
+          22.474,
+          22.598,
+          22.598,
+          22.598,
+          22.723,
+          22.723,
+          22.723,
+          23.472,
+          23.472,
+          23.472,
+          23.472,
+          23.472,
+          23.472,
+          23.472,
+          23.472,
+          23.472,
+          23.472,
+          23.847,
+          23.847,
+          24.221,
+          24.221,
+          24.721,
+          24.721,
+          24.846
         ],
-        "fontPx": 10.33,
+        "fontPx": 10.55,
         "floorPx": 28,
-        "seconds": 2.871,
+        "seconds": 4.12,
         "elements": [
           {
             "selector": "#k-workflow-panel > div:nth-of-type(1) > span:nth-of-type(2)",
             "text": "CONNECTED",
-            "fontPx": 10.33,
-            "time": 20.724,
-            "seconds": 2.871
+            "fontPx": 10.55,
+            "time": 24.846,
+            "seconds": 4.12
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(1) > span:nth-of-type(1)",
             "text": "EXAMPLE WORKFLOW / 01",
             "fontPx": 11.13,
-            "time": 13.982,
-            "seconds": 5.493
+            "time": 17.979,
+            "seconds": 5.618
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(2) > div:nth-of-type(1) > small:nth-of-type(1)",
             "text": "01",
             "fontPx": 11.13,
-            "time": 15.605,
+            "time": 19.727,
             "seconds": 3.87
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(2) > div:nth-of-type(2) > small:nth-of-type(1)",
             "text": "02",
             "fontPx": 11.13,
-            "time": 15.98,
-            "seconds": 3.495
+            "time": 20.101,
+            "seconds": 3.496
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(2) > div:nth-of-type(3) > small:nth-of-type(1)",
             "text": "03",
             "fontPx": 11.13,
-            "time": 16.479,
+            "time": 20.601,
             "seconds": 2.996
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(1) > span:nth-of-type(2)",
             "text": "CONNECTED",
             "fontPx": 11.13,
-            "time": 16.604,
-            "seconds": 2.871
+            "time": 20.85,
+            "seconds": 2.747
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(1) > span:nth-of-type(1)",
             "text": "EXAMPLE WORKFLOW / 02",
             "fontPx": 11.13,
-            "time": 19.35,
-            "seconds": 2.248
+            "time": 23.472,
+            "seconds": 3.122
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(1) > small:nth-of-type(1)",
             "text": "01",
             "fontPx": 11.13,
-            "time": 19.725,
-            "seconds": 3.745
+            "time": 23.847,
+            "seconds": 4.994
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(2) > small:nth-of-type(1)",
             "text": "02",
             "fontPx": 11.13,
-            "time": 20.099,
-            "seconds": 3.496
+            "time": 24.221,
+            "seconds": 4.745
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(3) > small:nth-of-type(1)",
             "text": "03",
             "fontPx": 11.13,
-            "time": 20.599,
-            "seconds": 2.996
+            "time": 24.721,
+            "seconds": 4.245
           },
           {
             "selector": "#tab-knowledge-assistant > span:nth-of-type(1)",
             "text": "02",
-            "fontPx": 11.54,
-            "time": 18.601,
+            "fontPx": 11.53,
+            "time": 22.723,
             "seconds": 0.874
           },
           {
             "selector": "#tab-speed-to-lead > span:nth-of-type(1)",
             "text": "01",
             "fontPx": 12.14,
-            "time": 18.601,
+            "time": 22.723,
             "seconds": 0.874
           },
           {
             "selector": "#tab-document-automation > span:nth-of-type(1)",
             "text": "03",
             "fontPx": 12.14,
-            "time": 18.601,
+            "time": 22.723,
             "seconds": 0.874
           },
           {
             "selector": "#k-tab-speed-to-lead > span:nth-of-type(1)",
             "text": "01",
             "fontPx": 12.14,
-            "time": 19.35,
-            "seconds": 1.998
+            "time": 23.472,
+            "seconds": 2.872
           },
           {
             "selector": "#k-tab-knowledge-assistant > span:nth-of-type(1)",
             "text": "02",
             "fontPx": 12.14,
-            "time": 19.35,
-            "seconds": 1.998
+            "time": 23.472,
+            "seconds": 2.872
           },
           {
             "selector": "#k-tab-document-automation > span:nth-of-type(1)",
             "text": "03",
             "fontPx": 12.14,
-            "time": 19.35,
-            "seconds": 1.998
+            "time": 23.472,
+            "seconds": 2.872
           },
           {
             "selector": "#s3-replay",
             "text": "Replay flow",
             "fontPx": 13.15,
-            "time": 13.982,
-            "seconds": 5.493
+            "time": 17.979,
+            "seconds": 5.618
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(3) > button:nth-of-type(1)",
             "text": "Replay flow",
             "fontPx": 13.15,
-            "time": 19.35,
-            "seconds": 4.245
+            "time": 23.472,
+            "seconds": 5.494
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(3) > a:nth-of-type(1)",
             "text": "See the full picture",
             "fontPx": 15.17,
-            "time": 13.982,
-            "seconds": 5.493
+            "time": 17.979,
+            "seconds": 5.618
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(3) > a:nth-of-type(1)",
             "text": "See the full picture",
             "fontPx": 15.17,
-            "time": 19.35,
-            "seconds": 4.245
+            "time": 23.472,
+            "seconds": 5.494
           },
           {
             "selector": "#tab-knowledge-assistant",
             "text": "Internal AI assistants",
-            "fontPx": 15.39,
-            "time": 18.476,
+            "fontPx": 15.37,
+            "time": 22.598,
             "seconds": 0.999
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(3) > p:nth-of-type(1)",
             "text": "Connect every inquiry to a clear next step. Capture, qualify, follow up, and book without the back-and-forth.",
             "fontPx": 16.18,
-            "time": 13.982,
-            "seconds": 5.493
+            "time": 17.979,
+            "seconds": 5.618
           },
           {
             "selector": "#tab-speed-to-lead",
             "text": "Faster lead response",
             "fontPx": 16.18,
-            "time": 18.476,
+            "time": 22.598,
             "seconds": 0.999
           },
           {
             "selector": "#tab-document-automation",
             "text": "Documents & onboarding",
             "fontPx": 16.18,
-            "time": 18.476,
+            "time": 22.598,
             "seconds": 0.999
           },
           {
             "selector": "#k-tab-speed-to-lead",
             "text": "Faster lead response",
             "fontPx": 16.18,
-            "time": 19.35,
-            "seconds": 2.123
+            "time": 23.472,
+            "seconds": 2.872
           },
           {
             "selector": "#k-tab-knowledge-assistant",
             "text": "Internal AI assistants",
             "fontPx": 16.18,
-            "time": 19.35,
-            "seconds": 2.123
+            "time": 23.472,
+            "seconds": 2.872
           },
           {
             "selector": "#k-tab-document-automation",
             "text": "Documents & onboarding",
             "fontPx": 16.18,
-            "time": 19.35,
-            "seconds": 2.123
+            "time": 23.472,
+            "seconds": 2.872
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(3) > p:nth-of-type(1)",
             "text": "Make SOPs, policies, and FAQs easier to find with an internal assistant grounded in your own documents.",
             "fontPx": 16.18,
-            "time": 19.35,
-            "seconds": 4.12
+            "time": 23.472,
+            "seconds": 5.369
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(2) > div:nth-of-type(1) > h3:nth-of-type(1)",
             "text": "New inquiry",
             "fontPx": 21.24,
-            "time": 18.476,
-            "seconds": 0.999
+            "time": 22.474,
+            "seconds": 1.123
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(2) > div:nth-of-type(2) > h3:nth-of-type(1)",
             "text": "Qualify & route",
             "fontPx": 21.24,
-            "time": 18.476,
-            "seconds": 0.999
+            "time": 22.474,
+            "seconds": 1.123
           },
           {
             "selector": "#workflow-panel > div:nth-of-type(2) > div:nth-of-type(3) > h3:nth-of-type(1)",
             "text": "Book a conversation",
             "fontPx": 21.24,
-            "time": 18.476,
-            "seconds": 0.999
+            "time": 22.474,
+            "seconds": 1.123
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(1) > h3:nth-of-type(1)",
             "text": "Team question",
             "fontPx": 21.24,
-            "time": 19.725,
-            "seconds": 1.873
+            "time": 23.847,
+            "seconds": 2.622
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(2) > h3:nth-of-type(1)",
             "text": "Search approved docs",
             "fontPx": 21.24,
-            "time": 20.099,
-            "seconds": 1.499
+            "time": 24.221,
+            "seconds": 2.248
           },
           {
             "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(3) > h3:nth-of-type(1)",
             "text": "Answer with sources",
             "fontPx": 21.24,
-            "time": 20.599,
-            "seconds": 0.999
+            "time": 24.721,
+            "seconds": 1.748
           }
         ]
       },
       {
         "code": "line_unread",
         "severity": "warning",
-        "message": "\"Team question\" (2 words) is on screen 0.20 s (±0.01 s), under its 0.40 s floor: hold it about 0.5 s + 0.3 s a word (1.10 s here) before it leaves or changes; see references/motion.md.",
+        "message": "\"Team question\" (2 words) is on screen 0.23 s (±0.01 s), under its 0.40 s floor: hold it about 0.5 s + 0.3 s a word (1.10 s here) before it leaves or changes; see references/motion.md.",
         "text": "Team question",
         "selector": "#k-workflow-panel > div:nth-of-type(2) > div:nth-of-type(1) > h3:nth-of-type(1)",
         "dataAttributes": {},
         "sourceFile": "compositions/s3.html",
         "bbox": {
-          "x": 116.26,
-          "y": 567.22,
-          "width": 182.54000000000002,
-          "height": 35.85000000000002
+          "x": 358.32,
+          "y": 569.78,
+          "width": 165.84999999999997,
+          "height": 32.58000000000004
         },
-        "time": 21.371,
+        "time": 26.274,
         "words": 2,
-        "seconds": 0.202,
+        "seconds": 0.227,
         "floorSeconds": 0.4
-      },
-      {
-        "code": "line_unread",
-        "severity": "warning",
-        "message": "\"Know where the friction is, what it costs, and what is wo...\" (14 words) is on screen 2.76 s (±0.01 s), under its 3.53 s floor: hold it about 0.5 s + 0.3 s a word (4.70 s here) before it leaves or changes; see references/motion.md.",
-        "text": "Know where the friction is, what it costs, and what is worth fixing first.",
-        "selector": "div.approach-rows > details:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)",
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": 1408.14,
-          "y": 360.5,
-          "width": 385.70000000000005,
-          "height": 49
-        },
-        "time": 23.54,
-        "words": 14,
-        "seconds": 2.762,
-        "floorSeconds": 3.525
       },
       {
         "code": "text_below_floor",
@@ -3539,225 +2567,206 @@
         "dataAttributes": {},
         "sourceFile": "compositions/s4.html",
         "bbox": {
-          "x": 501.06,
+          "x": 464.07,
           "y": 252.5,
           "width": 300.23,
           "height": 14
         },
-        "time": 23.595,
+        "time": 28.966,
         "times": [
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          23.595,
-          26.716,
-          26.716,
-          26.716,
-          26.716,
-          26.841,
-          28.713,
-          28.713,
-          28.713,
-          28.713,
-          28.838
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          28.966,
+          33.835,
+          33.835,
+          33.96,
+          33.96,
+          34.085,
+          35.958,
+          35.958,
+          36.083,
+          36.083,
+          36.207
         ],
         "fontPx": 11,
         "floorPx": 28,
-        "seconds": 4.994,
+        "seconds": 4.62,
         "elements": [
           {
             "selector": "div.approach-intro > span:nth-of-type(1)",
             "text": "02 / A LITTLE STRUCTURE. A LOT OF POSSIBILITY.",
             "fontPx": 11,
-            "time": 23.595,
-            "seconds": 4.994
+            "time": 28.966,
+            "seconds": 4.62
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(2) > summary:nth-of-type(1) > span:nth-of-type(1)",
             "text": "02",
-            "fontPx": 11.6,
-            "time": 23.595,
-            "seconds": 7.865
+            "fontPx": 11.82,
+            "time": 28.966,
+            "seconds": 10.613
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(1) > summary:nth-of-type(1) > span:nth-of-type(1)",
             "text": "01",
             "fontPx": 12,
-            "time": 23.595,
-            "seconds": 5.119
+            "time": 28.966,
+            "seconds": 7.117
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(3) > summary:nth-of-type(1) > span:nth-of-type(1)",
             "text": "03",
             "fontPx": 12,
-            "time": 23.595,
-            "seconds": 7.865
+            "time": 28.966,
+            "seconds": 10.613
           },
           {
             "selector": "div.approach-intro > a:nth-of-type(1)",
             "text": "Explore our approach",
             "fontPx": 15,
-            "time": 23.595,
-            "seconds": 3.121
+            "time": 28.966,
+            "seconds": 4.62
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1)",
             "text": "Start with clarity",
             "fontPx": 15,
-            "time": 23.595,
-            "seconds": 2.747
+            "time": 28.966,
+            "seconds": 4.62
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)",
             "text": "Know where the friction is, what it costs, and what is worth fixing first.",
             "fontPx": 16,
-            "time": 23.595,
-            "seconds": 2.996
+            "time": 28.966,
+            "seconds": 4.869
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1)",
             "text": "Workflow & AI readiness review",
             "fontPx": 16,
-            "time": 23.595,
-            "seconds": 2.747
+            "time": 28.966,
+            "seconds": 4.62
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2)",
             "text": "Tool-spend and data-quality audit",
             "fontPx": 16,
-            "time": 23.595,
-            "seconds": 2.747
+            "time": 28.966,
+            "seconds": 4.62
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3)",
             "text": "Customer journey, brand & web review",
             "fontPx": 16,
-            "time": 23.595,
-            "seconds": 2.747
+            "time": 28.966,
+            "seconds": 4.62
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(2) > div:nth-of-type(1) > a:nth-of-type(1)",
             "text": "Talk through a project",
-            "fontPx": 16.48,
-            "time": 26.716,
-            "seconds": 1.873
+            "fontPx": 16.18,
+            "time": 33.835,
+            "seconds": 1.998
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(3) > div:nth-of-type(1) > a:nth-of-type(1)",
             "text": "Plan ongoing support",
             "fontPx": 16.8,
-            "time": 28.713,
-            "seconds": 2.747
+            "time": 35.958,
+            "seconds": 3.621
           },
           {
             "selector": "div.approach-intro > p:nth-of-type(1)",
             "text": "No six-service shopping list.A clear path, built around your outcome.",
             "fontPx": 17,
-            "time": 23.595,
-            "seconds": 7.865
+            "time": 28.966,
+            "seconds": 4.62
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)",
             "text": "Turn a clear priority into a useful automation, AI assistant, or brand and web experience.",
-            "fontPx": 17.57,
-            "time": 26.716,
-            "seconds": 1.873
+            "fontPx": 17.26,
+            "time": 33.835,
+            "seconds": 2.123
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1)",
             "text": "Agreed scope, milestones & baseline",
-            "fontPx": 17.57,
-            "time": 26.716,
-            "seconds": 1.873
+            "fontPx": 17.64,
+            "time": 33.96,
+            "seconds": 1.998
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2)",
             "text": "Connected workflows or digital experience",
-            "fontPx": 17.57,
-            "time": 26.716,
-            "seconds": 1.873
+            "fontPx": 17.64,
+            "time": 33.96,
+            "seconds": 1.998
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3)",
             "text": "Human approvals & acceptance testing",
-            "fontPx": 17.85,
-            "time": 26.841,
+            "fontPx": 17.87,
+            "time": 34.085,
             "seconds": 1.748
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(3) > div:nth-of-type(1) > p:nth-of-type(1)",
             "text": "Keep your systems useful as your tools, team, and business change.",
             "fontPx": 17.92,
-            "time": 28.713,
-            "seconds": 2.747
+            "time": 35.958,
+            "seconds": 3.621
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(3) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1)",
             "text": "Monitoring, support & maintenance",
             "fontPx": 17.92,
-            "time": 28.713,
-            "seconds": 2.747
+            "time": 36.083,
+            "seconds": 3.496
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(3) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2)",
             "text": "Monthly workflow or prompt improvements",
             "fontPx": 17.92,
-            "time": 28.713,
-            "seconds": 2.747
+            "time": 36.083,
+            "seconds": 3.496
           },
           {
             "selector": "div.approach-rows > details:nth-of-type(3) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3)",
             "text": "Reporting on agreed outcome metrics",
             "fontPx": 17.92,
-            "time": 28.838,
-            "seconds": 2.622
+            "time": 36.207,
+            "seconds": 3.372
           }
         ]
       },
       {
         "code": "line_unread",
         "severity": "warning",
-        "message": "\"Turn a clear priority into a useful automation, AI assist...\" (15 words) is on screen 1.90 s (±0.01 s), under its 3.75 s floor: hold it about 0.5 s + 0.3 s a word (5.00 s here) before it leaves or changes; see references/motion.md.",
+        "message": "\"Turn a clear priority into a useful automation, AI assist...\" (15 words) is on screen 2.04 s (±0.01 s), under its 3.75 s floor: hold it about 0.5 s + 0.3 s a word (5.00 s here) before it leaves or changes; see references/motion.md.",
         "text": "Turn a clear priority into a useful automation, AI assistant, or brand and web experience.",
         "selector": "div.approach-rows > details:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)",
         "dataAttributes": {},
         "sourceFile": "compositions/s4.html",
         "bbox": {
-          "x": 755.6,
-          "y": 332.14,
-          "width": 384.17999999999995,
-          "height": 53.81999999999999
+          "x": 801.52,
+          "y": 360.86,
+          "width": 377.3600000000001,
+          "height": 52.870000000000005
         },
-        "time": 26.607,
+        "time": 33.804,
         "words": 15,
-        "seconds": 1.896,
+        "seconds": 2.037,
         "floorSeconds": 3.75
-      },
-      {
-        "code": "line_unread",
-        "severity": "warning",
-        "message": "\"Keep your systems useful as your tools, team, and busines...\" (11 words) is on screen 2.77 s (±0.01 s), under its 2.85 s floor: hold it about 0.5 s + 0.3 s a word (3.80 s here) before it leaves or changes; see references/motion.md.",
-        "text": "Keep your systems useful as your tools, team, and business change.",
-        "selector": "div.approach-rows > details:nth-of-type(3) > div:nth-of-type(1) > p:nth-of-type(1)",
-        "dataAttributes": {},
-        "sourceFile": "compositions/s4.html",
-        "bbox": {
-          "x": 704.89,
-          "y": 282.94,
-          "width": 411.4900000000001,
-          "height": 54.879999999999995
-        },
-        "time": 28.604,
-        "words": 11,
-        "seconds": 2.77,
-        "floorSeconds": 2.85
       },
       {
         "code": "text_below_floor",
@@ -3773,188 +2782,188 @@
           "width": 219.52,
           "height": 14.16
         },
-        "time": 31.46,
+        "time": 39.578,
         "times": [
-          31.46,
-          31.46,
-          31.46,
-          31.46,
-          31.46,
-          31.46,
-          31.46,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585,
-          31.585
+          39.578,
+          39.578,
+          39.578,
+          39.578,
+          39.578,
+          39.578,
+          39.578,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703,
+          39.703
         ],
         "fontPx": 11.13,
         "floorPx": 28,
-        "seconds": 5.868,
+        "seconds": 5.869,
         "elements": [
           {
             "selector": "div.calculator-copy > span:nth-of-type(1)",
             "text": "LESS REPETITION. MORE POSSIBILITY.",
             "fontPx": 11.13,
-            "time": 31.46,
-            "seconds": 5.868
+            "time": 39.578,
+            "seconds": 5.869
           },
           {
             "selector": "div.capacity-top > span:nth-of-type(1)",
             "text": "YOUR ROOM TO GROW",
             "fontPx": 11.13,
-            "time": 31.585,
-            "seconds": 8.115
+            "time": 39.703,
+            "seconds": 8.116
           },
           {
             "selector": "div.capacity-gauge-label > span:nth-of-type(1)",
             "text": "Repetitive work",
             "fontPx": 11.13,
-            "time": 31.585,
-            "seconds": 8.364
+            "time": 39.703,
+            "seconds": 8.366
           },
           {
             "selector": "#capacity-portion",
             "text": "10% potential reduction",
             "fontPx": 11.13,
-            "time": 31.585,
-            "seconds": 8.364
+            "time": 39.703,
+            "seconds": 8.366
           },
           {
             "selector": "div.rate-row > label:nth-of-type(1) > span:nth-of-type(1)",
             "text": "USD",
             "fontPx": 11.13,
-            "time": 31.585,
-            "seconds": 5.867
+            "time": 39.703,
+            "seconds": 5.868
           },
           {
             "selector": "div.capacity-presets > span:nth-of-type(1)",
             "text": "A starting point to explore",
             "fontPx": 12.14,
-            "time": 31.46,
-            "seconds": 5.868
+            "time": 39.578,
+            "seconds": 5.869
           },
           {
             "selector": "#calculator-note",
             "text": "A planning estimate, not a guaranteed saving. Based on 4.33 weeks per month. Capacity value is time × hourly cost, not cash savings or ROI. Setup and running costs are excluded.",
             "fontPx": 12.14,
-            "time": 31.585,
-            "seconds": 5.743
+            "time": 39.703,
+            "seconds": 5.744
           },
           {
             "selector": "div.capacity-main > p:nth-of-type(1)",
             "text": "That’s about eight-hour working days.",
             "fontPx": 13.15,
-            "time": 31.585,
-            "seconds": 8.239
+            "time": 39.703,
+            "seconds": 8.241
           },
           {
             "selector": "div.capacity-value-row > span:nth-of-type(1)",
             "text": "Potential capacity value / month",
             "fontPx": 13.15,
-            "time": 31.585,
-            "seconds": 5.743
+            "time": 39.703,
+            "seconds": 5.744
           },
           {
             "selector": "div.rate-row > label:nth-of-type(1)",
             "text": "Estimated hourly cost",
             "fontPx": 14.16,
-            "time": 31.585,
-            "seconds": 5.867
+            "time": 39.703,
+            "seconds": 5.868
           },
           {
             "selector": "div.rate-input > span:nth-of-type(1)",
             "text": "$",
             "fontPx": 14.16,
-            "time": 31.585,
-            "seconds": 5.867
+            "time": 39.703,
+            "seconds": 5.868
           },
           {
             "selector": "div.capacity-presets > button:nth-of-type(1)",
             "text": "Client follow-up",
             "fontPx": 15.17,
-            "time": 31.46,
-            "seconds": 5.743
+            "time": 39.578,
+            "seconds": 5.869
           },
           {
             "selector": "div.capacity-presets > button:nth-of-type(2)",
             "text": "Monthly reporting",
             "fontPx": 15.17,
-            "time": 31.46,
-            "seconds": 5.868
+            "time": 39.578,
+            "seconds": 5.869
           },
           {
             "selector": "div.capacity-presets > button:nth-of-type(3)",
             "text": "Everyday admin",
             "fontPx": 15.17,
-            "time": 31.46,
-            "seconds": 5.743
+            "time": 39.578,
+            "seconds": 5.869
           },
           {
             "selector": "div.calculator-copy > a:nth-of-type(1)",
             "text": "Find your biggest opportunity",
             "fontPx": 15.17,
-            "time": 31.46,
-            "seconds": 5.868
+            "time": 39.578,
+            "seconds": 5.869
           },
           {
             "selector": "div.capacity-main > div:nth-of-type(1) > span:nth-of-type(1)",
             "text": "hours back / month",
             "fontPx": 15.17,
-            "time": 31.585,
-            "seconds": 8.239
+            "time": 39.703,
+            "seconds": 8.241
           },
           {
             "selector": "div.capacity-inputs > label:nth-of-type(1) > span:nth-of-type(1)",
             "text": "Repetitive work each week",
             "fontPx": 15.17,
-            "time": 31.585,
-            "seconds": 11.61
+            "time": 39.703,
+            "seconds": 11.612
           },
           {
             "selector": "#hours-value",
             "text": "20 hrs",
             "fontPx": 15.17,
-            "time": 31.585,
-            "seconds": 11.61
+            "time": 39.703,
+            "seconds": 11.612
           },
           {
             "selector": "div.capacity-inputs > label:nth-of-type(2) > span:nth-of-type(1)",
             "text": "Potential time reduction",
             "fontPx": 15.17,
-            "time": 31.585,
-            "seconds": 5.992
+            "time": 39.703,
+            "seconds": 5.993
           },
           {
             "selector": "#reduction-value",
             "text": "10%",
             "fontPx": 15.17,
-            "time": 31.585,
-            "seconds": 5.992
+            "time": 39.703,
+            "seconds": 5.993
           },
           {
             "selector": "div.calculator-copy > p:nth-of-type(1)",
             "text": "What if your team got some of its week back? Move the sliders. See the possibility.",
             "fontPx": 18.21,
-            "time": 31.46,
-            "seconds": 5.868
+            "time": 39.578,
+            "seconds": 5.869
           },
           {
             "selector": "#capacity-days",
             "text": "1.1",
             "fontPx": 19.22,
-            "time": 31.585,
-            "seconds": 5.867
+            "time": 39.703,
+            "seconds": 5.868
           }
         ]
       },
@@ -3968,13 +2977,13 @@
         "sourceFile": "compositions/s5.html",
         "bbox": {
           "x": 959.02,
-          "y": 870.84,
+          "y": 869.1,
           "width": 842.44,
           "height": 38.01999999999998
         },
-        "time": 31.507,
+        "time": 39.641,
         "words": 31,
-        "seconds": 5.766,
+        "seconds": 5.767,
         "floorSeconds": 7.35
       },
       {
@@ -3991,51 +3000,51 @@
           "width": 226.95,
           "height": 14
         },
-        "time": 49.687,
+        "time": 57.807,
         "times": [
-          49.687,
-          49.687,
-          49.687,
-          50.186
+          57.807,
+          57.807,
+          57.807,
+          58.306
         ],
         "fontPx": 11,
         "floorPx": 28,
-        "seconds": 2.871,
+        "seconds": 4.245,
         "elements": [
           {
             "selector": "div.cta-top > span:nth-of-type(1)",
             "text": "THE NEXT GOOD THING STARTS HERE.",
             "fontPx": 11,
-            "time": 49.687,
-            "seconds": 2.871
+            "time": 57.807,
+            "seconds": 4.245
           },
           {
             "selector": "div.cta-top > span:nth-of-type(2)",
             "text": "LESS ORDINARY. MORE POSSIBLE.",
             "fontPx": 11,
-            "time": 49.687,
-            "seconds": 2.871
+            "time": 57.807,
+            "seconds": 4.245
           },
           {
             "selector": "#s7-btn > span:nth-of-type(1)",
             "text": "Start a conversation",
-            "fontPx": 15.44,
-            "time": 50.186,
-            "seconds": 2.372
+            "fontPx": 15.21,
+            "time": 58.306,
+            "seconds": 3.746
           },
           {
             "selector": "div.cta-bottom > p:nth-of-type(1)",
             "text": "A complicated challenge?Our favorite starting point.",
             "fontPx": 17,
-            "time": 49.687,
-            "seconds": 2.871
+            "time": 57.807,
+            "seconds": 4.245
           }
         ]
       }
     ],
     "enabled": true,
     "step": 0.125,
-    "samples": 471
+    "samples": 544
   },
   "hdr": {
     "autoPromotion": null,
@@ -4048,10 +3057,10 @@
     "findingFiles": []
   },
   "saved": {
-    "id": "ca19e392-d2d0-4adc-b27e-f012610c7a5f",
-    "revision": null,
-    "report": "/home/user/my-first/launch/film/.hyperframes/artifacts/checks/ca19e392-d2d0-4adc-b27e-f012610c7a5f.json",
-    "attribution": "unversioned"
+    "id": "62a801e2-edd0-41f3-bb38-684dcd1d4706",
+    "revision": "6a52df58-95fa-4163-ba35-26746e1a4f1d",
+    "report": "/home/user/my-first/launch/film/.hyperframes/artifacts/checks/62a801e2-edd0-41f3-bb38-684dcd1d4706.json",
+    "attribution": "recorded-revision"
   },
   "_meta": {
     "version": "0.8.186",

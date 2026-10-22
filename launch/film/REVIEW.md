@@ -29,3 +29,25 @@ texture rather than text. With more time I would punch in to 1.6× on each row a
 
 **Licences.** Music is "House Vibez" (Lily J) and the effects are Mixkit, all under Mixkit free licences, from video-shotcraft's bundle.
 Re-check `pop.mp3` and `riser-cine.mp3` before paid use; that bundle records no source URL for them.
+
+## Voiceover version (roundhouse-launch-voiceover.mp4, 68 s)
+
+**Changes.** The voiceover runs on Kokoro (`af_heart`, 0.92×, on device and free) and the script in `build/vo.txt` uses the site's own copy.
+The music is now a light bed, "Inspiration profonde" (Monplaisir, CC0), at volume 0.10.
+
+I lengthened scenes so the voice carries each one:
+- s2: 10 s (holds on the hero during the studio line).
+- s3: 13 s (the assistant line plays over tab 02).
+- s4: 10.6 s (the cursor hovers Diagnose as it is named; Build and Run are clicked on their words).
+- s7: 10.8 s (the click comes after "Let's talk"; the mark lands with "Round House. Good ideas, made real.").
+
+The effects are 3–6 dB quieter, so they sit under the voice.
+
+**Measured.**
+- Voice is about −22 LUFS and the bed about −31 LUFS, roughly 9 dB under it.
+- Final mix: −15.2 LUFS integrated, −1.9 dBTP, no clipping.
+- No voice line overlaps the next one or crosses a scene cut.
+
+The click-to-word sync is estimated from character position in each line, not from word timestamps. Nobody has listened to the mix.
+
+**Weakest part.** Kokoro sounds clean but synthetic next to a human or ElevenLabs voice. The voice files are the only thing to swap.

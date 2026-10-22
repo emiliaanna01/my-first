@@ -114,7 +114,7 @@ hero = hero.replace('<a class="button dark" href="#/solutions">', '<a class="but
 hero = hero.replace("<h1 ", '<h1 id="s2-h1" ')
 s2_body = f"""    <div class="rh-ground" style="background:#f7f7f2"></div>
     <div id="s2-cam" class="rh-cam"><div class="rh-page"><main>{dom("header")}{hero}</main></div>
-      <video id="s2-sph" class="clip" src="assets/spheres.webm" data-start="0" data-duration="5.88" muted playsinline></video>
+      <video id="s2-sph" class="clip" src="assets/spheres.webm" data-start="0" data-duration="10" muted playsinline></video>
     </div>
     {CURSOR.format(id="s2-cur")}
 """
@@ -156,11 +156,11 @@ s2_js = """
     // the cursor arrives and clicks the real call to action
     var b = RH.frame(RH.pt(btn, cam), full);
     tl.set(cur, { x: 2010, y: 1180, opacity: 1 }, 0);
-    RH.move(tl, cur, { x: b.x + 18, y: b.y + 6 }, 3.75, 0.8);
-    RH.click(tl, cur, 4.9, btn);
-    tl.to(cur, { opacity: 0, duration: 0.12 }, 5.18);
+    RH.move(tl, cur, { x: b.x + 18, y: b.y + 6 }, 7.87, 0.8);
+    RH.click(tl, cur, 9.02, btn);
+    tl.to(cur, { opacity: 0, duration: 0.12 }, 9.3);
     // zoom through the button: its dark fill becomes the next world
-    tl.to(btn, { scale: 42, duration: 0.6, ease: "power3.in" }, 5.26);
+    tl.to(btn, { scale: 42, duration: 0.6, ease: "power3.in" }, 9.38);
 """
 
 # ---------------------------------------------------------------- 3 workflow: one inquiry, one clear next step
@@ -236,10 +236,10 @@ s3_js = """
     tl.fromTo(pg2.querySelector(".workflow-panel"), { filter: "blur(8px)" }, { filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 7.55);
     // punch in on the answer, then whip out
     var n3 = pg2.querySelectorAll(".preview-node")[2];
-    RH.cam(tl, cam, RH.aim(RH.pt(n3, cam), sG * 1.5, 1100, 540), 9.4, 0.6);
-    tl.to(cur, { x: 1500, y: 1250, duration: 0.6, ease: "power3.in" }, 9.4);
-    tl.to(cam, { x: "-=760", duration: 0.34, ease: "power3.in" }, 11.42);
-    tl.fromTo(cam, { filter: "blur(0px)" }, { filter: "blur(16px)", duration: 0.34, ease: "power3.in" }, 11.42);
+    RH.cam(tl, cam, RH.aim(RH.pt(n3, cam), sG * 1.5, 1100, 540), 10.2, 0.6);
+    tl.to(cur, { x: 1500, y: 1250, duration: 0.6, ease: "power3.in" }, 10.2);
+    tl.to(cam, { x: "-=760", duration: 0.34, ease: "power3.in" }, 12.66);
+    tl.fromTo(cam, { filter: "blur(0px)" }, { filter: "blur(16px)", duration: 0.34, ease: "power3.in" }, 12.66);
 """
 
 # ---------------------------------------------------------------- 4 approach: diagnose, build, run
@@ -295,17 +295,19 @@ s4_js = """
     var push = RH.aim({ x: RH.pt(rows[1], cam).x, y: RH.pt(sum[1], cam).y }, s * 1.12, 1150, 520);
     tl.set(cur, { x: 2010, y: 1160, opacity: 1 }, 0);
     var b1 = RH.frame({ x: xs, y: RH.pt(sum[1], cam).y }, base);
-    RH.move(tl, cur, b1, 1.55, 0.8);
-    RH.click(tl, cur, 2.7, sum[1]);
-    toggle(0, 1, 2.75);
-    RH.cam(tl, cam, push, 2.6, 0.9);
-    tl.to(sec.querySelector(".approach-intro"), { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 2.55);
+    var b0 = RH.frame({ x: xs, y: RH.pt(sum[0], cam).y }, base);
+    RH.move(tl, cur, b0, 1.9, 0.75);
+    RH.move(tl, cur, b1, 3.7, 0.7);
+    RH.click(tl, cur, 4.55, sum[1]);
+    toggle(0, 1, 4.6);
+    RH.cam(tl, cam, push, 4.45, 0.9);
+    tl.to(sec.querySelector(".approach-intro"), { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 4.4);
     var b2 = RH.frame({ x: xs, y: yRunAfter }, push);
-    RH.move(tl, cur, b2, 3.95, 0.65);
-    RH.click(tl, cur, 4.7, sum[2]);
-    toggle(1, 2, 4.75);
-    RH.cam(tl, cam, RH.aim({ x: RH.pt(rows[1], cam).x, y: yRunAfter }, s * 1.12, 1150, 470), 4.6, 0.9);
-    tl.to(cur, { x: 1700, y: 1250, duration: 0.6, ease: "power3.in" }, 6.4);
+    RH.move(tl, cur, b2, 5.85, 0.65);
+    RH.click(tl, cur, 6.65, sum[2]);
+    toggle(1, 2, 6.7);
+    RH.cam(tl, cam, RH.aim({ x: RH.pt(rows[1], cam).x, y: yRunAfter }, s * 1.12, 1150, 470), 6.55, 0.9);
+    tl.to(cur, { x: 1700, y: 1250, duration: 0.6, ease: "power3.in" }, 8.6);
 """
 
 # ---------------------------------------------------------------- 5 payoff: the calculator, real formula
@@ -441,92 +443,92 @@ s7_js = """
     // click "Start a conversation"; the page irises open from the click onto the mark
     var bp = RH.frame(RH.pt(btn, cam), base);
     tl.set(cur, { x: 2010, y: 1160, opacity: 1 }, 0);
-    RH.move(tl, cur, { x: bp.x + 10, y: bp.y + 6 }, 1.75, 0.8);
-    RH.click(tl, cur, 2.9, btn);
+    RH.move(tl, cur, { x: bp.x + 10, y: bp.y + 6 }, 3.0, 0.8);
+    RH.click(tl, cur, 4.2, btn);
     var ix = bp.x, iy = bp.y;
     tl.fromTo($("s7-end"), { clipPath: "circle(0px at " + ix + "px " + iy + "px)" },
-      { clipPath: "circle(2400px at " + ix + "px " + iy + "px)", duration: 0.5, ease: "power3.in" }, 3.0);
-    tl.to(cur, { opacity: 0, duration: 0.12 }, 3.05);
-    tl.set(cam, { opacity: 0 }, 3.52);
+      { clipPath: "circle(2400px at " + ix + "px " + iy + "px)", duration: 0.5, ease: "power3.in" }, 4.3);
+    tl.to(cur, { opacity: 0, duration: 0.12 }, 4.35);
+    tl.set(cam, { opacity: 0 }, 4.82);
     // the mark: the wordmark wipes in, a lime sphere drops into its full stop
     var wm = $("s7-wm"), stop = $("s7-stop"), dot = $("s7-dot"), lock = $("s7-lockup");
     var so = RH.off(stop, lock), d = stop.offsetWidth * 0.8;
     dot.style.width = d + "px"; dot.style.height = d + "px";
     dot.style.left = (so.x + stop.offsetWidth * 0.5 - d / 2) + "px";
     dot.style.top = (so.y + stop.offsetHeight * 0.79 - d) + "px";
-    tl.fromTo(wm, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power3.out" }, 3.55);
-    tl.fromTo(dot, { y: -760, scaleX: 1, scaleY: 1 }, { y: 0, duration: 0.36, ease: "power3.in" }, 3.73);
-    tl.to(dot, { scaleX: 1.25, scaleY: 0.72, duration: 0.07, ease: "power2.out", transformOrigin: "50% 100%" }, 4.09);
-    tl.to(dot, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "back.out(3)" }, 4.16);
-    tl.fromTo($("s7-reg"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 4.3);
+    tl.fromTo(wm, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power3.out" }, 4.85);
+    tl.fromTo(dot, { y: -760, scaleX: 1, scaleY: 1 }, { y: 0, duration: 0.36, ease: "power3.in" }, 5.03);
+    tl.to(dot, { scaleX: 1.25, scaleY: 0.72, duration: 0.07, ease: "power2.out", transformOrigin: "50% 100%" }, 5.39);
+    tl.to(dot, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "back.out(3)" }, 5.46);
+    tl.fromTo($("s7-reg"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 5.6);
     RH.words($("s7-tag")).forEach(function (w, i) {
-      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 4.55 + i * 0.07);
+      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 6.3 + i * 0.07);
     });
-    tl.fromTo($("s7-go"), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 5.0);
+    tl.fromTo($("s7-go"), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 6.9);
 """
 
-SCENES = [
-    ("s1", 0.0, 5.88, s1_css, s1_body, s1_js),
-    ("s2", 5.88, 5.88, s2_css, s2_body, s2_js),
-    ("s3", 11.76, 11.76, s3_css, s3_body, s3_js),
-    ("s4", 23.52, 7.84, s4_css, s4_body, s4_js),
-    ("s5", 31.36, 11.76, s5_css, s5_body, s5_js),
-    ("s6", 43.12, 5.88, s6_css, s6_body, s6_js),
-    ("s7", 49.0, 9.8, s7_css, s7_body, s7_js),
-]
-TOTAL = 58.8
+DUR = {"s1": 5.88, "s2": 10.0, "s3": 13.0, "s4": 10.6, "s5": 11.76, "s6": 5.88, "s7": 10.8}
+JS = {"s1": (s1_css, s1_body, s1_js), "s2": (s2_css, s2_body, s2_js), "s3": (s3_css, s3_body, s3_js),
+      "s4": (s4_css, s4_body, s4_js), "s5": (s5_css, s5_body, s5_js), "s6": (s6_css, s6_body, s6_js),
+      "s7": (s7_css, s7_body, s7_js)}
+ST, t = {}, 0.0
+for k in DUR:
+    ST[k] = round(t, 3); t += DUR[k]
+TOTAL = round(t, 3)
+SCENES = [(k, ST[k], DUR[k]) + JS[k] for k in DUR]
 
 for cid, start, dur, css, body, js in SCENES:
     (OUT / f"{cid}.html").write_text(scene(cid, css, body, js))
 
-# ---------------------------------------------------------------- sound: music bed + effects on visible actions
+# ---------------------------------------------------------------- voiceover: the clock of each scene (Kokoro af_heart, 0.92x)
+VO = [("L1", "s1", 0.3), ("L2", "s2", 0.35), ("L3", "s3", 0.3), ("L4", "s3", 7.55), ("L5", "s4", 0.3),
+      ("L6", "s5", 1.0), ("L7", "s6", 0.2), ("L8", "s7", 0.15), ("L9", "s7", 5.45)]
+vo_durs = dict(l.split() for l in (HERE / "vo_durations.txt").read_text().splitlines())
+
+# ---------------------------------------------------------------- effects on visible actions, under the voice
 SFX_DIR = "assets/audio/sfx"
-# (time in film seconds, file, volume); each placed so its peak lands a frame after the picture (see sound.md)
-CUES = []
+# (scene, local time, file, volume); each placed so its peak lands a frame after the picture (see sound.md)
+C = []
 pill_takes = ["ui/pop.mp3", "ui/ui-message-pop.mp3", "ui/pop-electric.mp3"]
 for k in range(8):
-    CUES.append((0.25 + 0.245 * k, pill_takes[k % 3], 0.55))
-CUES += [
-    (3.62, "transition/air-zoom-vacuum.mp3", 0.8),     # tools sucked into the sphere
-    (5.22, "transition/swoosh-slow.mp3", 0.7),         # sphere becomes the world
-    (5.88 + 0.98, "text/marker-pen-line.mp3", 0.5),    # highlight under "real"
-    (5.88 + 4.9, "ui/switch-click-quick.mp3", 1.0),    # click: See what's possible
-    (5.88 + 5.26, "transition/air-woosh-quick.mp3", 0.8),  # zoom through the button
-    (11.76 + 1.9, "transition/swoosh-quick.mp3", 0.6),     # flood to the workflow
-    (11.76 + 3.6, "ui/switch-tap.mp3", 1.0),               # click: Replay flow
-    (11.76 + 3.75, "ui/pop.mp3", 0.6),
-    (11.76 + 4.17, "light/sparkle-touch.mp3", 0.6),
-    (11.76 + 4.59, "ui/pop-electric.mp3", 0.5),
-    (11.76 + 7.5, "ui/switch-click-quick.mp3", 1.0),       # click: tab 02
-    (11.76 + 7.85, "ui/ui-message-pop.mp3", 0.45),
-    (11.76 + 8.27, "light/sparkle-touch.mp3", 0.45),
-    (11.76 + 8.69, "ui/pop.mp3", 0.45),
-    (11.76 + 9.4, "transition/sweep-short.mp3", 0.5),      # punch in
-    (11.76 + 11.4, "transition/sweep-fast.mp3", 0.8),      # whip out
-    (23.52 + 2.7, "ui/switch-tap.mp3", 1.0),               # click: Build
-    (23.52 + 2.78, "paper/paper-slide.mp3", 0.5),
-    (23.52 + 4.7, "ui/switch-click-quick.mp3", 1.0),       # click: Run
-    (23.52 + 4.78, "paper/paper-slide.mp3", 0.45),
-    (31.36 - 0.05, "transition/transition-snap.mp3", 0.6),  # cut to the calculator
-    (31.36 + 3.05, "ui/switch-tap.mp3", 0.9),               # grab the slider
-    (31.36 + 5.45, "impact/impact-zoom-quick.mp3", 0.8),    # 43.3 lands
-    (31.36 + 5.6, "transition/air-woosh-quick.mp3", 0.5),   # punch in
-    (31.36 + 7.9, "transition/swoosh-slow.mp3", 0.45),      # pan to the value
-    (43.12 + 5.42, "transition/swoosh-slow.mp3", 0.5),      # flood to lime
-    (49.0 + 0.95, "text/marker-pen-line.mp3", 0.5),         # arrow draws
-    (49.0 + 2.9, "ui/switch-click-quick.mp3", 1.0),        # click: Start a conversation
-    (49.0 + 3.0, "transition/air-zoom-vacuum.mp3", 0.6),    # iris
-    (49.0 + 4.3, "ui/pop.mp3", 0.5),                        # registered mark
+    C.append(("s1", 0.25 + 0.245 * k, pill_takes[k % 3], 0.35))
+C += [
+    ("s1", 3.62, "transition/air-zoom-vacuum.mp3", 0.5),     # tools sucked into the sphere
+    ("s1", 5.22, "transition/swoosh-slow.mp3", 0.45),        # sphere becomes the world
+    ("s2", 0.98, "text/marker-pen-line.mp3", 0.35),          # highlight under "real"
+    ("s2", 9.02, "ui/switch-click-quick.mp3", 0.7),          # click: See what's possible
+    ("s2", 9.38, "transition/air-woosh-quick.mp3", 0.5),     # zoom through the button
+    ("s3", 1.9, "transition/swoosh-quick.mp3", 0.4),         # flood to the workflow
+    ("s3", 3.6, "ui/switch-tap.mp3", 0.8),                   # click: Replay flow
+    ("s3", 3.75, "ui/pop.mp3", 0.4),
+    ("s3", 4.17, "light/sparkle-touch.mp3", 0.35),
+    ("s3", 4.59, "ui/pop-electric.mp3", 0.3),
+    ("s3", 7.5, "ui/switch-click-quick.mp3", 0.7),           # click: tab 02
+    ("s3", 7.85, "ui/ui-message-pop.mp3", 0.3),
+    ("s3", 8.69, "ui/pop.mp3", 0.3),
+    ("s3", 10.2, "transition/sweep-short.mp3", 0.3),         # punch in
+    ("s3", 12.64, "transition/sweep-fast.mp3", 0.5),         # whip out
+    ("s4", 4.55, "ui/switch-tap.mp3", 0.8),                  # click: Build
+    ("s4", 4.63, "paper/paper-slide.mp3", 0.35),
+    ("s4", 6.65, "ui/switch-click-quick.mp3", 0.7),          # click: Run
+    ("s4", 6.73, "paper/paper-slide.mp3", 0.3),
+    ("s5", -0.05, "transition/transition-snap.mp3", 0.4),    # cut to the calculator
+    ("s5", 3.05, "ui/switch-tap.mp3", 0.7),                  # grab the slider
+    ("s5", 5.45, "impact/impact-zoom-quick.mp3", 0.5),       # 43.3 lands
+    ("s5", 7.9, "transition/swoosh-slow.mp3", 0.3),          # pan to the value
+    ("s6", 5.42, "transition/swoosh-slow.mp3", 0.35),        # flood to lime
+    ("s7", 0.95, "text/marker-pen-line.mp3", 0.35),          # arrow draws
+    ("s7", 4.2, "ui/switch-click-quick.mp3", 0.7),           # click: Start a conversation
+    ("s7", 4.3, "transition/air-zoom-vacuum.mp3", 0.4),      # iris
+    ("s7", 5.6, "ui/pop.mp3", 0.35),                         # registered mark
 ]
-# slider ticks: one per 5% step, as the thumb snaps
-for a in range(15, 55, 5):
-    CUES.append((31.36 + 3.2 + (a - 2.5 - 10) / 40 * 2.2, "counter/clock-tick-single.mp3", 3.5))
-# the one riser in the film: into the mark landing at 53.09 (section E of the track)
-RISER_LEN = 0.0  # filled from riser_peak.txt by the sound step
+for a in range(15, 55, 5):  # slider ticks: one per 5% step, as the thumb snaps
+    C.append(("s5", 3.2 + (a - 2.5 - 10) / 40 * 2.2, "counter/clock-tick-single.mp3", 2.4))
 riser = (HERE / "riser_peak.txt")
 riser_peak = float(riser.read_text()) if riser.exists() else 2.0
-CUES.append((53.09 - riser_peak, "riser/riser-cine.mp3", 0.7))
-CUES.append((53.09, "impact/bass-hit-futuristic.mp3", 0.9))
+C.append(("s7", 5.39 - riser_peak, "riser/riser-cine.mp3", 0.45))  # the one riser: into the mark
+C.append(("s7", 5.39, "impact/bass-hit-futuristic.mp3", 0.6))
+CUES = [(ST[s] + t, f, v) for s, t, f, v in C]
 
 peaks = {}
 pf = HERE / "peaks.txt"
@@ -578,8 +580,10 @@ index = f"""<!doctype html>
 for i, (cid, start, dur, *_rest) in enumerate(SCENES):
     index += f"""      <div id="{cid}" data-composition-id="{cid}" data-composition-src="compositions/{cid}.html" data-start="{start}" data-duration="{dur}" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
 """
-index += f"""      <audio id="music" class="clip" src="assets/audio/house-vibez.mp3" data-start="0" data-duration="{TOTAL}" data-media-start="9.915" data-volume="0.42" data-fade-in="0.3" data-fade-out="1.6" data-track-index="2"></audio>
-""" + "\n".join(audio) + """
+index += f"""      <audio id="music" class="clip" src="assets/audio/bgm-inspiration-profonde.mp3" data-start="0" data-duration="{TOTAL}" data-media-start="0" data-volume="0.1" data-fade-in="1.2" data-fade-out="2.5" data-track-index="2"></audio>
+""" + "".join(
+    f'      <audio id="vo-{lid}" class="clip" src="assets/audio/vo/{lid}.wav" data-start="{round(ST[s] + t, 3)}" data-duration="{vo_durs[lid]}" data-volume="1" data-track-index="20"></audio>\n'
+    for lid, s, t in VO) + "\n".join(audio) + """
     </div>
     <script>
       window.__timelines = window.__timelines || {};

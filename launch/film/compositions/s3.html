@@ -83,10 +83,10 @@
     tl.fromTo(pg2.querySelector(".workflow-panel"), { filter: "blur(8px)" }, { filter: "blur(0px)", duration: 0.2, ease: "power2.out" }, 7.55);
     // punch in on the answer, then whip out
     var n3 = pg2.querySelectorAll(".preview-node")[2];
-    RH.cam(tl, cam, RH.aim(RH.pt(n3, cam), sG * 1.5, 1100, 540), 9.4, 0.6);
-    tl.to(cur, { x: 1500, y: 1250, duration: 0.6, ease: "power3.in" }, 9.4);
-    tl.to(cam, { x: "-=760", duration: 0.34, ease: "power3.in" }, 11.42);
-    tl.fromTo(cam, { filter: "blur(0px)" }, { filter: "blur(16px)", duration: 0.34, ease: "power3.in" }, 11.42);
+    RH.cam(tl, cam, RH.aim(RH.pt(n3, cam), sG * 1.5, 1100, 540), 10.2, 0.6);
+    tl.to(cur, { x: 1500, y: 1250, duration: 0.6, ease: "power3.in" }, 10.2);
+    tl.to(cam, { x: "-=760", duration: 0.34, ease: "power3.in" }, 12.66);
+    tl.fromTo(cam, { filter: "blur(0px)" }, { filter: "blur(16px)", duration: 0.34, ease: "power3.in" }, 12.66);
 
     restore();
     window.__timelines["s3"] = tl;

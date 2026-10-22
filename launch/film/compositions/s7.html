@@ -61,28 +61,28 @@
     // click "Start a conversation"; the page irises open from the click onto the mark
     var bp = RH.frame(RH.pt(btn, cam), base);
     tl.set(cur, { x: 2010, y: 1160, opacity: 1 }, 0);
-    RH.move(tl, cur, { x: bp.x + 10, y: bp.y + 6 }, 1.75, 0.8);
-    RH.click(tl, cur, 2.9, btn);
+    RH.move(tl, cur, { x: bp.x + 10, y: bp.y + 6 }, 3.0, 0.8);
+    RH.click(tl, cur, 4.2, btn);
     var ix = bp.x, iy = bp.y;
     tl.fromTo($("s7-end"), { clipPath: "circle(0px at " + ix + "px " + iy + "px)" },
-      { clipPath: "circle(2400px at " + ix + "px " + iy + "px)", duration: 0.5, ease: "power3.in" }, 3.0);
-    tl.to(cur, { opacity: 0, duration: 0.12 }, 3.05);
-    tl.set(cam, { opacity: 0 }, 3.52);
+      { clipPath: "circle(2400px at " + ix + "px " + iy + "px)", duration: 0.5, ease: "power3.in" }, 4.3);
+    tl.to(cur, { opacity: 0, duration: 0.12 }, 4.35);
+    tl.set(cam, { opacity: 0 }, 4.82);
     // the mark: the wordmark wipes in, a lime sphere drops into its full stop
     var wm = $("s7-wm"), stop = $("s7-stop"), dot = $("s7-dot"), lock = $("s7-lockup");
     var so = RH.off(stop, lock), d = stop.offsetWidth * 0.8;
     dot.style.width = d + "px"; dot.style.height = d + "px";
     dot.style.left = (so.x + stop.offsetWidth * 0.5 - d / 2) + "px";
     dot.style.top = (so.y + stop.offsetHeight * 0.79 - d) + "px";
-    tl.fromTo(wm, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power3.out" }, 3.55);
-    tl.fromTo(dot, { y: -760, scaleX: 1, scaleY: 1 }, { y: 0, duration: 0.36, ease: "power3.in" }, 3.73);
-    tl.to(dot, { scaleX: 1.25, scaleY: 0.72, duration: 0.07, ease: "power2.out", transformOrigin: "50% 100%" }, 4.09);
-    tl.to(dot, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "back.out(3)" }, 4.16);
-    tl.fromTo($("s7-reg"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 4.3);
+    tl.fromTo(wm, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power3.out" }, 4.85);
+    tl.fromTo(dot, { y: -760, scaleX: 1, scaleY: 1 }, { y: 0, duration: 0.36, ease: "power3.in" }, 5.03);
+    tl.to(dot, { scaleX: 1.25, scaleY: 0.72, duration: 0.07, ease: "power2.out", transformOrigin: "50% 100%" }, 5.39);
+    tl.to(dot, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "back.out(3)" }, 5.46);
+    tl.fromTo($("s7-reg"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 5.6);
     RH.words($("s7-tag")).forEach(function (w, i) {
-      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 4.55 + i * 0.07);
+      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 6.3 + i * 0.07);
     });
-    tl.fromTo($("s7-go"), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 5.0);
+    tl.fromTo($("s7-go"), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 6.9);
 
     restore();
     window.__timelines["s7"] = tl;

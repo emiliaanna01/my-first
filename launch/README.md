@@ -1,11 +1,13 @@
 # Round House launch film
 
-A ~59 s website launch + "how it works" film for Round House, built from the site itself
-(`site/index.html`, the uploaded file) in HyperFrames, with cursor moves, clicks and sound design.
+A website launch + "how it works" film for Round House, built from the site itself
+(`site/index.html`, the uploaded file) in HyperFrames, with cursor moves, clicks, sound design and a voiceover.
 
 | Path | What it is |
 |---|---|
-| `film/renders/roundhouse-launch.mp4` | The rendered film (1920×1080, 30 fps, stereo) |
+| `film/renders/roundhouse-launch-voiceover.mp4` | **Current film**: 68 s with voiceover and a light music bed (1920×1080, 30 fps, −15 LUFS) |
+| `film/renders/roundhouse-launch.mp4` | Earlier 59 s cut: music and SFX only, no voice |
+| `film/build/vo.txt` | The voiceover script (one line per scene); re-generate with `hyperframes tts` |
 | `film/SPEC.md` | The director's brief: every shot with its frames, colours, eases and sounds |
 | `film/REVIEW.md` | What was checked, what was only measured, what is weakest |
 | `film/build/build.py` | Generates every scene from the site's own DOM and the sound cues; re-run after edits |
@@ -55,8 +57,19 @@ Everything below is free.
 Not needed for launch films: the Manim skills (math explainers), Orkas `stage-*` (needs Orkas' own CLI),
 `ltx2`, `qwen-edit`, `runpod`, `ideogram4` (AI generation, paid GPU/API).
 
+## Voiceover
+Kokoro-82M on device (free, no account), voice `af_heart` at 0.92× speed:
+```bash
+python3 -m venv ~/.venvs/tts && ~/.venvs/tts/bin/pip install kokoro-onnx soundfile
+export PATH=~/.venvs/tts/bin:$PATH
+npx --prefix ../../motion hyperframes tts "<line>" -v af_heart -s 0.92 -o assets/audio/vo/L1.wav
+```
+Then update `build/vo_durations.txt`, run `python3 build/build.py`, render and normalise
+(`ffmpeg ... -af loudnorm=I=-15:TP=-2`). For a more human voice, ElevenLabs or HeyGen voices plug in the same way (paid credits).
+
 ## Credits
-Music: "House Vibez" by Lily J (Mixkit Stock Music Free License). Sound effects: Mixkit Sound Effects Free License,
+Voiceover music bed: "Inspiration profonde" by Monplaisir (CC0, via SoundSafari/CC0-1.0-Music).
+Earlier cut's music: "House Vibez" by Lily J (Mixkit Stock Music Free License). Sound effects: Mixkit Sound Effects Free License,
 via video-shotcraft's bundled library. A few base files in that library have no recorded source URL
 (see `assets/audio` ATTRIBUTION in video-shotcraft); the ones used here (`pop.mp3`, `riser-cine.mp3`) should be
 re-checked before paid commercial use.
