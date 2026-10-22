@@ -10,3 +10,8 @@ edit/*/sets/
 
 # Path Abroad bot keys
 study-abroad/bot/.env
+
+# Pass & Play Chess: build output, and the player photo stays out of the public repo
+chess-2p/build/
+chess-2p/dist/
+chess-2p/www/img/ayman.jpg

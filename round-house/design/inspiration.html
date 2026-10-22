@@ -1,0 +1,703 @@
+<title>Round House Inspiration List</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+<style>
+/* Layout: a spec-sheet index. Filters on top, then grouped rows of sites; each row reads like a line item: name, evidence, what to watch, what to take. */
+:root {
+  --plant: #e8ebe9; --panel: #f6f7f6; --ink: #151a1e; --steel: #4f5a63; --rule: #bcc3c2; --signal: #ffc21a; --run: #186b3c;
+  --on-signal: #151a1e;
+  --font: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --plant: #15191c; --panel: #1d2226; --ink: #e6e9e7; --steel: #a3adb3; --rule: #3a434a; --signal: #ffc21a; --run: #5fc48d; color-scheme: dark } }
+:root[data-theme="dark"] { --plant: #15191c; --panel: #1d2226; --ink: #e6e9e7; --steel: #a3adb3; --rule: #3a434a; --signal: #ffc21a; --run: #5fc48d; color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--plant); color: var(--ink); font: 400 16px/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 80px; }
+a { color: inherit; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+p { margin: 0; text-wrap: pretty; }
+.intro { display: grid; gap: 16px; max-width: 70ch; }
+h1 { font-stretch: 118%; font-weight: 760; letter-spacing: -0.025em; line-height: 1; font-size: clamp(2.2rem, 1.4rem + 3.4vw, 3.8rem); }
+.lead { font-size: 1.125rem; color: var(--steel); }
+.method { font-size: 0.9375rem; color: var(--steel); border-top: 1px solid var(--rule); padding-top: 14px; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 28px; font-variant-numeric: tabular-nums; }
+.stats div { display: grid; }
+.stats b { font-stretch: 118%; font-weight: 760; font-size: 1.75rem; line-height: 1.1; }
+.stats span { font-size: 0.875rem; color: var(--steel); }
+.controls { background: var(--plant); border-block: 1px solid var(--rule); margin-top: 32px; padding-block: 12px; display: grid; gap: 10px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--plant); }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.row-label { font-size: 0.8125rem; font-weight: 600; color: var(--steel); margin-right: 4px; min-width: 64px; }
+.chip { font: 600 0.875rem/1 var(--font); color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 2px; min-height: 36px; padding: 0 12px; cursor: pointer; }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--plant); border-color: var(--ink); }
+.status { font-size: 0.875rem; color: var(--steel); font-variant-numeric: tabular-nums; }
+.group { margin-top: 48px; }
+.group-head { display: grid; gap: 6px; max-width: 72ch; margin-bottom: 16px; }
+h2 { font-stretch: 112%; font-weight: 700; letter-spacing: -0.015em; font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem); }
+h2 .count { font-size: 0.6em; color: var(--steel); font-weight: 600; font-variant-numeric: tabular-nums; }
+.group-head p { color: var(--steel); }
+.cards { border-bottom: 1px solid var(--ink); }
+.site { border-top: 1px solid var(--ink); padding-block: 20px; display: grid; gap: 14px; }
+.site.is-seen .site-title h3 a { color: var(--steel); }
+.site-head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: start; }
+.seen { position: relative; display: grid; place-items: center; width: 44px; height: 44px; margin: -8px 0 0 -10px; cursor: pointer; }
+.seen input { width: 20px; height: 20px; accent-color: var(--ink); cursor: pointer; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+h3 { font-weight: 650; font-size: 1.25rem; line-height: 1.2; }
+h3 a { text-decoration: underline; text-decoration-thickness: 1px; }
+h3 a:hover { text-decoration-thickness: 2px; }
+.award { margin-top: 4px; font-size: 0.9375rem; }
+.by { font-size: 0.8125rem; color: var(--steel); }
+.badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.pick { font-size: 0.8125rem; font-weight: 700; background: var(--signal); color: var(--on-signal); padding: 4px 8px; border-radius: 2px; white-space: nowrap; }
+.score { font-size: 0.8125rem; font-weight: 700; border: 1px solid var(--rule); padding: 3px 8px; border-radius: 2px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.score small { font-weight: 500; color: var(--steel); }
+dl { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; padding-left: 48px; }
+dl div { min-width: 0; }
+dt { font-size: 0.8125rem; font-weight: 700; margin-bottom: 2px; }
+dd { margin: 0; }
+dl div:last-child dd { color: var(--ink); }
+dl div:first-child dd { color: var(--steel); }
+.site-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; align-items: center; padding-left: 48px; }
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { font-size: 0.75rem; font-weight: 600; color: var(--steel); background: var(--panel); border: 1px solid var(--rule); padding: 2px 7px; border-radius: 2px; }
+.proof { font-size: 0.8125rem; color: var(--steel); }
+.empty { margin-top: 40px; padding: 24px; border: 1px solid var(--rule); background: var(--panel); }
+.more { margin-top: 56px; border-top: 1px solid var(--ink); padding-top: 20px; display: grid; gap: 10px; max-width: 72ch; }
+.more ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+@media (max-width: 760px) {
+  dl { grid-template-columns: 1fr; padding-left: 0; }
+  .site-foot { padding-left: 0; }
+  .site-head { grid-template-columns: auto minmax(0, 1fr); }
+  .badges { grid-column: 2; justify-content: flex-start; }
+  .row-label { width: 100%; }
+}
+@media (min-width: 761px) { .controls { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; } }
+@media (prefers-reduced-motion: no-preference) { .site { transition: opacity .15s ease; } }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <h1>Sites worth studying for Round House</h1>
+    <p class="lead">Award-winning and category-leading sites in automation, AI, industrial tech and design agencies, with what each one animates and what is worth borrowing. Tick each one off as you review it.</p>
+    <p class="method">How this was checked: animation notes come from each site's Awwwards entry (the elements the studio submitted and the jury's Animations / Transitions score, shown as "Animation 9.2/10") and from the sites' own pages. My browser could not open the sites directly, so open each one to see the motion for yourself. Sites without an Awwwards entry are here for positioning and content, and say so.</p>
+    <div class="stats">
+      <div><b>30</b><span>sites in 5 groups</span></div>
+      <div><b>13</b><span>with a jury animation score</span></div>
+      <div><b id="seen-count">0</b><span>reviewed by you</span></div>
+    </div>
+  </header>
+
+  <div class="controls" role="region" aria-label="Filters">
+    <div class="row" role="group" aria-label="Filter by group"><span class="row-label">Group</span><button type="button" class="chip" data-filter-g="ai" aria-pressed="false">AI and automation companies</button><button type="button" class="chip" data-filter-g="industrial" aria-pressed="false">Industrial and manufacturing</button><button type="button" class="chip" data-filter-g="saas" aria-pressed="false">Automation software (product is the demo)</button><button type="button" class="chip" data-filter-g="agency" aria-pressed="false">Award-winning agencies and studios</button><button type="button" class="chip" data-filter-g="bench" aria-pressed="false">Motion benchmarks</button></div>
+    <div class="row" role="group" aria-label="Filter by animation technique"><span class="row-label">Technique</span><button type="button" class="chip" data-filter-t="webgl" aria-pressed="false">WebGL / 3D</button><button type="button" class="chip" data-filter-t="scroll" aria-pressed="false">Scroll-driven</button><button type="button" class="chip" data-filter-t="cursor" aria-pressed="false">Cursor / hover</button><button type="button" class="chip" data-filter-t="loader" aria-pressed="false">Loader / intro</button><button type="button" class="chip" data-filter-t="transition" aria-pressed="false">Page and menu transitions</button><button type="button" class="chip" data-filter-t="kinetic" aria-pressed="false">Kinetic type</button><button type="button" class="chip" data-filter-t="demo" aria-pressed="false">Live product demo</button><button type="button" class="chip" data-filter-t="data" aria-pressed="false">Live numbers and status</button><button type="button" class="chip" data-filter-t="lottie" aria-pressed="false">Lottie / vector</button></div>
+    <div class="row"><span class="row-label">Show</span>
+      <button type="button" class="chip" id="only-top" aria-pressed="false">Start here picks only</button>
+      <button type="button" class="chip" id="hide-seen" aria-pressed="false">Hide reviewed</button>
+      <button type="button" class="chip" id="clear">Clear filters</button>
+      <span class="status" id="status" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <main>
+    <section class="group" data-group="ai" aria-labelledby="h-ai"><header class="group-head"><h2 id="h-ai">AI and automation companies <span class="count">6</span></h2><p>Closest to what Round House sells. Look at how they make an invisible product feel concrete.</p></header><div class="cards"><article class="site" data-g="ai" data-tags="webgl loader lottie data" data-top="1" id="s0">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s0-seen" data-id="s0"><span class="sr">Mark Cerebrium as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://cerebrium.ai/" target="_blank" rel="noopener">Cerebrium</a></h3>
+      <p class="award">Awwwards Site of the Day, Sep 10 2026</p><p class="by">By Louis Paquet, KOKI-KIKO, Domaine Public</p>
+    </div>
+    <div class="badges"><span class="pick">Start here</span><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 8.2<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Intro animation into an interactive WebGL scene; Lottie animations on each feature; a WebGL 3D scene with a parallax mask on the About page; a transparent pricing calculator.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The pricing calculator. It is the most direct model for your published price ranges: let a buyer move sliders and see a Diagnose or Run price.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Loader / intro</li><li>Lottie / vector</li><li>Live numbers and status</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/cerebrium" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="ai" data-tags="loader cursor scroll" data-top="0" id="s1">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s1-seen" data-id="s1"><span class="sr">Mark Heron AI as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://heronaiapp.com/" target="_blank" rel="noopener">Heron AI</a></h3>
+      <p class="award">Awwwards Site of the Day, Oct 12 2026</p><p class="by">By Bearplus, Kenny Ho</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 7.6<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Preloader, an interactive hero, scroll storytelling and a designed 404. Two colours only: red-orange #F15534 on graphite #282828.</dd></div>
+    <div><dt>Take for Round House</dt><dd>An AI agent built by architects for architects. Same move as yours: an industry insider&#x27;s AI, not a generic one. Note how two colours carry the whole site.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Loader / intro</li><li>Cursor / hover</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/heron-ai" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="ai" data-tags="loader scroll transition" data-top="0" id="s2">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s2-seen" data-id="s2"><span class="sr">Mark Fourmula AI as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.awwwards.com/sites/fourmula-ai" target="_blank" rel="noopener">Fourmula AI</a></h3>
+      <p class="award">Awwwards Site of the Day, May 2 2026</p><p class="by">By Fourmeta Agency</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Loading sequence, a dynamic hero, seamless scroll, navigation transition and an interactive footer. Near-black #020108 with one orange #FF6B02.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The interactive footer. Your footer title block could react (the turntable hub lights as you approach Book a call).</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Loader / intro</li><li>Scroll-driven</li><li>Page and menu transitions</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/fourmula-ai" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="ai" data-tags="data" data-top="1" id="s3">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s3-seen" data-id="s3"><span class="sr">Mark Distyl AI as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.distyl.ai/" target="_blank" rel="noopener">Distyl AI</a></h3>
+      <p class="award">AI consultancy, ex-Palantir founders, $1.8B valuation</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"><span class="pick">Start here</span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Not an awards site. It is the reference for positioning: forward-deployed engineers who &quot;own the outcome&quot;, proof as numbers (150M+ end users), production in weeks.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Your closest business model at enterprise scale. Borrow the language of outcome ownership and the numbers-first proof row, not the visuals.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Live numbers and status</li></ul>
+    <a class="proof" href="https://www.distyl.ai/about" target="_blank" rel="noopener">Evidence: distyl.ai</a>
+  </div>
+</article><article class="site" data-g="ai" data-tags="data" data-top="0" id="s4">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s4-seen" data-id="s4"><span class="sr">Mark Fractional AI as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.fractional.ai/" target="_blank" rel="noopener">Fractional AI</a></h3>
+      <p class="award">AI automation consultancy (Zapier, Airbyte clients)</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Case studies titled by the result: &quot;Reducing hallucinations by over 80%&quot; (Zapier), &quot;10x&#x27;ing the speed of building connectors&quot; (Airbyte).</dd></div>
+    <div><dt>Take for Round House</dt><dd>Result-first case-study titles with a named client. The format your sample studies already use, so swap in real names as soon as you can.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Live numbers and status</li></ul>
+    <a class="proof" href="https://www.fractional.ai/" target="_blank" rel="noopener">Evidence: fractional.ai</a>
+  </div>
+</article><article class="site" data-g="ai" data-tags="" data-top="0" id="s5">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s5-seen" data-id="s5"><span class="sr">Mark Tribe AI as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.tribe.ai/" target="_blank" rel="noopener">Tribe AI</a></h3>
+      <p class="award">AI consultancy and talent network, AWS Gen AI Competency</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Leads with a client quote: &quot;We didn&#x27;t want consultants. We wanted practitioners.&quot; Badges (AWS competency) sit in the announcement bar.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Your About page could lead with a quote like that once you have one. Put certifications where Tribe does, in the top bar.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"></ul>
+    <a class="proof" href="https://www.tribe.ai/" target="_blank" rel="noopener">Evidence: tribe.ai</a>
+  </div>
+</article></div></section>
+<section class="group" data-group="industrial" aria-labelledby="h-industrial"><header class="group-head"><h2 id="h-industrial">Industrial and manufacturing <span class="count">7</span></h2><p>The world your factory-floor buyers live in. Look at how they show live status, numbers and machinery.</p></header><div class="cards"><article class="site" data-g="industrial" data-tags="data kinetic" data-top="1" id="s6">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s6-seen" data-id="s6"><span class="sr">Mark Isembard as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://isembard.com/us/" target="_blank" rel="noopener">Isembard</a></h3>
+      <p class="award">Manufacturing network for aerospace and defense</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"><span class="pick">Start here</span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A live factory list with coordinates and status (Exeter 50.82°N, Live; Leicester, Onboarding), running counters (71,290 parts manufactured) and a numbered five-step joining process.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The closest thing to an HMI on a marketing site. Your schematic bays could show a status chip (Running, Building) the same way.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Live numbers and status</li><li>Kinetic type</li></ul>
+    <a class="proof" href="https://isembard.com/us/" target="_blank" rel="noopener">Evidence: isembard.com</a>
+  </div>
+</article><article class="site" data-g="industrial" data-tags="kinetic" data-top="0" id="s7">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s7-seen" data-id="s7"><span class="sr">Mark Hadrian as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.hadrian.co/" target="_blank" rel="noopener">Hadrian</a></h3>
+      <p class="award">Automated factories, $260M Series C</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A repeating marquee headline (&quot;Manufacture the future at Hadrian&quot;) and a single mission line: &quot;Reindustrialize America&quot;.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The US-industrial tone your buyers respond to: plain, patriotic, confident. Useful for the About page voice.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Kinetic type</li></ul>
+    <a class="proof" href="https://www.hadrian.co/press" target="_blank" rel="noopener">Evidence: hadrian.co</a>
+  </div>
+</article><article class="site" data-g="industrial" data-tags="webgl scroll" data-top="1" id="s8">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s8-seen" data-id="s8"><span class="sr">Mark Intrepid Automation as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.intrepidautomation.com/" target="_blank" rel="noopener">Intrepid Automation</a></h3>
+      <p class="award">Awwwards Site of the Day, Sep 4 2024</p><p class="by">By REJOUICE</p>
+    </div>
+    <div class="badges"><span class="pick">Start here</span><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 7.0<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Motion design and 3D throughout, for software and hardware that cut manufacturing cost and lead times.</dd></div>
+    <div><dt>Take for Round House</dt><dd>A manufacturing company that won with motion and colour rather than grey stock photos. Proof the factory-floor buyer accepts craft.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/intrepid-site" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="industrial" data-tags="webgl scroll cursor" data-top="0" id="s9">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s9-seen" data-id="s9"><span class="sr">Mark Q Industrial as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.awwwards.com/sites/q-industrial" target="_blank" rel="noopener">Q Industrial</a></h3>
+      <p class="award">Awwwards Site of the Day, Jun 2 2024</p><p class="by">By Artemii Lebedev, The Thirty7, Le:mma Studio</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Home page 3D motion on scroll and animated service interactions. Palette: light grey #E6E6E6 with one red #CA0000.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Almost your exact colour rule (grey ground, one accent). See how they keep the red to the moments that matter.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Scroll-driven</li><li>Cursor / hover</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/q-industrial" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="industrial" data-tags="webgl loader" data-top="0" id="s10">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s10-seen" data-id="s10"><span class="sr">Mark Serve Robotics as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.serverobotics.com/" target="_blank" rel="noopener">Serve Robotics</a></h3>
+      <p class="award">Awwwards Site of the Day, Jun 11 2026</p><p class="by">By WILD, Mach Studio</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 7.8<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>An animated hero intro, 3D robot assets on the Robot page, deep green #0F4233 with mint #61E5C0.</dd></div>
+    <div><dt>Take for Round House</dt><dd>How a robotics company introduces a machine in the hero. Compare with your turntable intro for pacing.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Loader / intro</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/serve-robotics" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="industrial" data-tags="loader scroll" data-top="0" id="s11">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s11-seen" data-id="s11"><span class="sr">Mark Midlife Engineering as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.awwwards.com/sites/midlife-engineering" target="_blank" rel="noopener">Midlife Engineering</a></h3>
+      <p class="award">Awwwards Site of the Day, Jan 18 2026</p><p class="by">By Lee Black</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A preloading sequence and a scroll-driven page. Orange #FF611A on charcoal #262626.</dd></div>
+    <div><dt>Take for Round House</dt><dd>An engineering brand done with two colours and motion. Worth five minutes for the scroll pacing.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Loader / intro</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/midlife-engineering" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="industrial" data-tags="" data-top="0" id="s12">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s12-seen" data-id="s12"><span class="sr">Mark Anduril as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.anduril.com/" target="_blank" rel="noopener">Anduril</a></h3>
+      <p class="award">Awwwards Honorable Mention, May 2020</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Black and white, typography-led, retro technical feel. Product sections named by domain (Sea, Land, Air, Space).</dd></div>
+    <div><dt>Take for Round House</dt><dd>Navigation by domain is like your bays. A hard-tech brand that sells reliability with almost no decoration.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/anduril-industries" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article></div></section>
+<section class="group" data-group="saas" aria-labelledby="h-saas"><header class="group-head"><h2 id="h-saas">Automation software (product is the demo) <span class="count">4</span></h2><p>The sites your buyers already use. Look at how the product itself becomes the hero animation.</p></header><div class="cards"><article class="site" data-g="saas" data-tags="kinetic demo" data-top="1" id="s13">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s13-seen" data-id="s13"><span class="sr">Mark Linear as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://linear.app/" target="_blank" rel="noopener">Linear</a></h3>
+      <p class="award">Most-cited B2B SaaS design of 2024–2026</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"><span class="pick">Start here</span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A kinetic headline that swaps &quot;teams&quot; and &quot;agents&quot;, and below it a mock issue in which an AI agent picks up the task, comments and opens a PR, all animating on its own.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The &quot;product is the demo&quot; hero. Your version: a bay on the turntable runs a 10-second mock (enquiry arrives, reply sent in 90 s, call booked).</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Kinetic type</li><li>Live product demo</li></ul>
+    <a class="proof" href="https://toimi.pro/blog/best-saas-website-designs/" target="_blank" rel="noopener">Evidence: toimi.pro</a>
+  </div>
+</article><article class="site" data-g="saas" data-tags="webgl" data-top="0" id="s14">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s14-seen" data-id="s14"><span class="sr">Mark Stripe as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://stripe.com/" target="_blank" rel="noopener">Stripe</a></h3>
+      <p class="award">Enterprise SaaS design benchmark</p><p class="by">By In-house</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>The flowing WebGL mesh gradient in the hero, drawn with Stripe&#x27;s own small WebGL library. The most copied hero in SaaS.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Mostly what not to copy: the gradient is a cliché now. Study instead how it pauses when off-screen to stay fast.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li></ul>
+    <a class="proof" href="https://toimi.pro/blog/best-saas-website-designs/" target="_blank" rel="noopener">Evidence: toimi.pro</a>
+  </div>
+</article><article class="site" data-g="saas" data-tags="demo scroll" data-top="0" id="s15">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s15-seen" data-id="s15"><span class="sr">Mark Attio as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://attio.com/" target="_blank" rel="noopener">Attio</a></h3>
+      <p class="award">Rivals Linear for top B2B site of 2026</p><p class="by">By Ana Moreno</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>An &quot;Ask Attio&quot; query running live in the hero, a dashboard preview that switches from dark to light as you scroll, testimonials in a marquee.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The scroll-driven theme switch. A CRM sold to the same ops buyers as yours.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Live product demo</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.designrush.com/best-designs/websites/attio-website-design" target="_blank" rel="noopener">Evidence: designrush.com</a>
+  </div>
+</article><article class="site" data-g="saas" data-tags="webgl" data-top="0" id="s16">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s16-seen" data-id="s16"><span class="sr">Mark Vercel as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://vercel.com/" target="_blank" rel="noopener">Vercel</a></h3>
+      <p class="award">Developer platform design benchmark</p><p class="by">By In-house design engineering team</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Near-black monochrome with shader-animated gradients on product pages. Their design-engineering blog explains the process.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Read the design-engineering post; it is how a small team keeps motion consistent across many pages.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li></ul>
+    <a class="proof" href="https://vercel.com/blog/design-engineering-at-vercel" target="_blank" rel="noopener">Evidence: vercel.com</a>
+  </div>
+</article></div></section>
+<section class="group" data-group="agency" aria-labelledby="h-agency"><header class="group-head"><h2 id="h-agency">Award-winning agencies and studios <span class="count">11</span></h2><p>Your direct competition for craft. Look at one signature interaction carried with discipline.</p></header><div class="cards"><article class="site" data-g="agency" data-tags="scroll transition cursor" data-top="1" id="s17">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s17-seen" data-id="s17"><span class="sr">Mark Immersive Garden as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://immersive-g.com/" target="_blank" rel="noopener">Immersive Garden</a></h3>
+      <p class="award">Awwwards Agency of the Year 2025</p><p class="by">By Immersive Garden</p>
+    </div>
+    <div class="badges"><span class="pick">Start here</span><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 8.8<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A rapid-scroll project index, a menu transition, a bas-relief hover interaction. Only two colours: black and #C2C2C2.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Restraint. The same discipline as your grey-and-signal rule; the work supplies the colour.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Scroll-driven</li><li>Page and menu transitions</li><li>Cursor / hover</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/immersive-garden-website" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="webgl cursor scroll" data-top="0" id="s18">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s18-seen" data-id="s18"><span class="sr">Mark Lusion as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://lusion.co/" target="_blank" rel="noopener">Lusion</a></h3>
+      <p class="award">Awwwards Site of the Day (Lusion v3)</p><p class="by">By Lusion</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 10.0<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A cursor-reactive 3D scene and scroll animation. Jury gave Animations / Transitions a perfect 10. One saturated blue #1a2ffb on near-white.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The best reference for a cursor-reactive hero. Use it to judge whether your turntable should respond to the pointer.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Cursor / hover</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/lusion-v3" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="webgl cursor transition" data-top="0" id="s19">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s19-seen" data-id="s19"><span class="sr">Mark Active Theory as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://activetheory.net/" target="_blank" rel="noopener">Active Theory</a></h3>
+      <p class="award">Awwwards Site of the Day (V6)</p><p class="by">By Active Theory</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 9.6<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A particle effect that follows the mouse and a fully animated home navigation.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Motion-heavy: good for calibrating how far is too far for a COO audience.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Cursor / hover</li><li>Page and menu transitions</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/active-theory-v6" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="loader transition scroll" data-top="0" id="s20">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s20-seen" data-id="s20"><span class="sr">Mark Unseen Studio as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://unseen.co/" target="_blank" rel="noopener">Unseen Studio</a></h3>
+      <p class="award">Awwwards Site of the Day</p><p class="by">By Unseen Studio</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 9.2<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>A playful loader, menu effects, gallery-to-project transitions, an infinite grid on the World page, an index-to-contact transition.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Page-to-page transitions. Your Work list to case-study jump could carry the case&#x27;s headline figure across.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Loader / intro</li><li>Page and menu transitions</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/unseen-studio" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="transition scroll" data-top="0" id="s21">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s21-seen" data-id="s21"><span class="sr">Mark Exo Ape as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.exoape.com/" target="_blank" rel="noopener">Exo Ape</a></h3>
+      <p class="award">Awwwards Site of the Day</p><p class="by">By Exo Ape</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 9.0<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Animated case-study headers, a showreel tied into the navigation, a crafted footer. White and #14181A only.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Case-study headers. A clear model for the top of your /work pages.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Page and menu transitions</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/exo-ape" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="webgl transition" data-top="0" id="s22">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s22-seen" data-id="s22"><span class="sr">Mark Malvah as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://malvah.co/" target="_blank" rel="noopener">Malvah</a></h3>
+      <p class="award">Awwwards Studio of the Year 2025, 21 Sites of the Day</p><p class="by">By Malvah</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Branding, digital design, motion and 3D from a small Cape Town team. Their Studio page has a 3D &quot;S&quot; that morphs.</dd></div>
+    <div><dt>Take for Round House</dt><dd>A small team at the top of the craft table. Its Studio page shows how to present a small team as a strength.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Page and menu transitions</li></ul>
+    <a class="proof" href="https://www.awwwards.com/Malvah.Studio/" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="webgl transition" data-top="0" id="s23">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s23-seen" data-id="s23"><span class="sr">Mark basement.studio as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://basement.studio/" target="_blank" rel="noopener">basement.studio</a></h3>
+      <p class="award">Awwwards Sites of the Day and Developer Awards</p><p class="by">By basement.studio</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 7.2<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Their &quot;chronicles&quot; site is a pixel-art game scene with transition effects. The main site leads case studies with results.</dd></div>
+    <div><dt>Take for Round House</dt><dd>A studio outside the US selling to San Francisco clients, which is your model. Note the separate sales and hello emails.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Page and menu transitions</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/basement-chronicles" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="webgl cursor scroll transition" data-top="0" id="s24">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s24-seen" data-id="s24"><span class="sr">Mark Noomo Agency as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://noomoagency.com/" target="_blank" rel="noopener">Noomo Agency</a></h3>
+      <p class="award">Awwwards Site of the Year 2023</p><p class="by">By Noomo</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>3D hover effects, button hover interaction, 3D case animations, glass cards on scroll, 3D transitions. Contact form asks for budget in USD bands.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Budget bands on the contact form, which your form already has. Skip the glass cards.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Cursor / hover</li><li>Scroll-driven</li><li>Page and menu transitions</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/noomo-agency" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="cursor transition scroll" data-top="0" id="s25">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s25-seen" data-id="s25"><span class="sr">Mark Cuberto as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://cuberto.com/" target="_blank" rel="noopener">Cuberto</a></h3>
+      <p class="award">Awwwards Site of the Day</p><p class="by">By Cuberto</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 7.7<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>An interactive transition and scroll-animated project pages. Known for magnetic cursor and button effects.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Magnetic buttons. A small touch that could suit your Book a call button on desktop only.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Cursor / hover</li><li>Page and menu transitions</li><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/cuberto" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="scroll" data-top="0" id="s26">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s26-seen" data-id="s26"><span class="sr">Mark Locomotive as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://locomotive.ca/en" target="_blank" rel="noopener">Locomotive</a></h3>
+      <p class="award">Long-running Sites of the Day; makers of Locomotive Scroll</p><p class="by">By Locomotive</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Smooth-scroll project slideshows and an animated team page. They wrote the Locomotive Scroll library.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Sells the full lifecycle (strategy to maintenance), like your Diagnose, Build, Run.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>Scroll-driven</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/locomotive-1" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="agency" data-tags="" data-top="0" id="s27">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s27-seen" data-id="s27"><span class="sr">Mark Instrument as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.instrument.com/" target="_blank" rel="noopener">Instrument</a></h3>
+      <p class="award">Campaign US Design Studio of the Year 2026</p><p class="by">By Instrument</p>
+    </div>
+    <div class="badges"></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Calm US-corporate clarity, work filterable by discipline, services in one sentence.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Your Work filter follows this. Compare their one-sentence services line with yours.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"></ul>
+    <a class="proof" href="https://www.instrument.com/" target="_blank" rel="noopener">Evidence: instrument.com</a>
+  </div>
+</article></div></section>
+<section class="group" data-group="bench" aria-labelledby="h-bench"><header class="group-head"><h2 id="h-bench">Motion benchmarks <span class="count">2</span></h2><p>Sites of the Year. Too far from your niche to copy, but they set the ceiling for animation craft.</p></header><div class="cards"><article class="site" data-g="bench" data-tags="webgl scroll transition" data-top="0" id="s28">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s28-seen" data-id="s28"><span class="sr">Mark Lando Norris as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://landonorris.com/" target="_blank" rel="noopener">Lando Norris</a></h3>
+      <p class="award">Awwwards Site of the Year 2025</p><p class="by">By OFF+BRAND</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 8.6<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Site of the Year. Lime #D2FF00 on near-black, built in Webflow with heavy motion.</dd></div>
+    <div><dt>Take for Round House</dt><dd>The current ceiling. Watch for timing and easing, not for anything to copy.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Scroll-driven</li><li>Page and menu transitions</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/lando-norris" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article><article class="site" data-g="bench" data-tags="webgl scroll transition" data-top="0" id="s29">
+  <div class="site-head">
+    <label class="seen"><input type="checkbox" id="s29-seen" data-id="s29"><span class="sr">Mark Igloo Inc as reviewed</span></label>
+    <div class="site-title">
+      <h3><a href="https://www.igloo.inc/" target="_blank" rel="noopener">Igloo Inc</a></h3>
+      <p class="award">Awwwards Site of the Year 2024</p><p class="by">By abeto</p>
+    </div>
+    <div class="badges"><span class="score" title="Awwwards jury score for Animations / Transitions">Animation 9.6<small>/10</small></span></div>
+  </div>
+  <dl>
+    <div><dt>What to watch</dt><dd>Infinite scroll through a 3D world with transitions; jury Animations / Transitions 9.6.</dd></div>
+    <div><dt>Take for Round House</dt><dd>Reference for scroll-linked 3D, if you ever build a deeper interactive roundhouse.</dd></div>
+  </dl>
+  <div class="site-foot">
+    <ul class="tags"><li>WebGL / 3D</li><li>Scroll-driven</li><li>Page and menu transitions</li></ul>
+    <a class="proof" href="https://www.awwwards.com/sites/igloo-inc" target="_blank" rel="noopener">Evidence: awwwards.com</a>
+  </div>
+</article></div></section>
+    <p class="empty" id="empty" hidden>No site matches these filters. Clear a filter to see more.</p>
+  </main>
+
+  <section class="more" aria-labelledby="more-h">
+    <h2 id="more-h">Where to keep looking</h2>
+    <ul>
+      <li><a href="https://www.awwwards.com/websites/business-corporate/" target="_blank" rel="noopener">Awwwards: Business &amp; Corporate winners</a>, the closest category to your buyers.</li>
+      <li><a href="https://www.awwwards.com/websites/animation" target="_blank" rel="noopener">Awwwards: Animation</a>, filterable, each with video of the element.</li>
+      <li><a href="https://www.awwwards.com/awwwards/collections/agency-portfolios/" target="_blank" rel="noopener">Awwwards: Agency Portfolios collection</a>, 300+ agency sites with their signature interactions.</li>
+      <li><a href="https://godly.website/" target="_blank" rel="noopener">Godly</a>, curated sites with video previews, so you can see motion without opening each one.</li>
+      <li><a href="https://land-book.com/" target="_blank" rel="noopener">Land-book</a>, filter by SaaS and Technology for landing-page structure.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+(function () {
+  var KEY = "rh-inspiration-seen";
+  var seen = {};
+  try { seen = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { seen = {}; }
+  var save = function () { try { localStorage.setItem(KEY, JSON.stringify(seen)); } catch (e) {} };
+  var sites = Array.prototype.slice.call(document.querySelectorAll(".site"));
+  var groups = Array.prototype.slice.call(document.querySelectorAll(".group"));
+  var state = { g: null, t: null, top: false, hideSeen: false };
+
+  function countSeen() { document.getElementById("seen-count").textContent = sites.filter(function (s) { return seen[s.id]; }).length; }
+
+  sites.forEach(function (s) {
+    var box = s.querySelector("input[type=checkbox]");
+    box.checked = !!seen[s.id];
+    s.classList.toggle("is-seen", box.checked);
+    box.addEventListener("change", function () {
+      if (box.checked) seen[s.id] = 1; else delete seen[s.id];
+      s.classList.toggle("is-seen", box.checked);
+      save(); countSeen(); apply();
+    });
+  });
+
+  function apply() {
+    var shown = 0;
+    sites.forEach(function (s) {
+      var ok = (!state.g || s.dataset.g === state.g)
+        && (!state.t || (" " + s.dataset.tags + " ").indexOf(" " + state.t + " ") > -1)
+        && (!state.top || s.dataset.top === "1")
+        && (!state.hideSeen || !seen[s.id]);
+      s.hidden = !ok; if (ok) shown++;
+    });
+    groups.forEach(function (g) { g.hidden = !g.querySelector(".site:not([hidden])"); });
+    document.getElementById("empty").hidden = shown > 0;
+    document.getElementById("status").textContent = "Showing " + shown + " of " + sites.length;
+  }
+
+  function single(attr, key) {
+    var btns = Array.prototype.slice.call(document.querySelectorAll("[" + attr + "]"));
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var v = b.getAttribute(attr);
+        state[key] = state[key] === v ? null : v;
+        btns.forEach(function (o) { o.setAttribute("aria-pressed", String(o.getAttribute(attr) === state[key])); });
+        apply();
+      });
+    });
+    return btns;
+  }
+  var gBtns = single("data-filter-g", "g");
+  var tBtns = single("data-filter-t", "t");
+  function toggle(id, key) {
+    var b = document.getElementById(id);
+    b.addEventListener("click", function () { state[key] = !state[key]; b.setAttribute("aria-pressed", String(state[key])); apply(); });
+    return b;
+  }
+  var topBtn = toggle("only-top", "top");
+  var seenBtn = toggle("hide-seen", "hideSeen");
+  document.getElementById("clear").addEventListener("click", function () {
+    state = { g: null, t: null, top: false, hideSeen: false };
+    gBtns.concat(tBtns, [topBtn, seenBtn]).forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+    apply();
+  });
+  countSeen(); apply();
+})();
+</script>
