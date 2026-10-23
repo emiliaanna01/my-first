@@ -27,3 +27,8 @@ launch/film/node_modules/
 launch/review/.hyperframes/
 launch/review/renders/work-*/
 launch/review/renders/.*
+launch/reel/film/.hyperframes/
+launch/reel/film/renders/work-*/
+launch/reel/film/renders/.*
+launch/reel/audition/seg*.mp4
+launch/reel/audition/list.txt

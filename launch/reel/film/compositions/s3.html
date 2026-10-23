@@ -1,0 +1,99 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .mini { position: absolute; left: 0; top: 0; width: 1920px; transform-origin: 0 0; }
+    .mini .showcase-copy, .mini .calculator-copy { visibility: hidden; }
+    .mini .showcase-panel { transform: none !important; background: transparent !important; box-shadow: none !important; border: 0 !important; }
+    .mini .case-art { background: transparent !important; }
+    .mini .art-index, .mini .art-category { visibility: hidden; }
+    .mini .product-browser { transform: none !important; rotate: none !important; }
+    .k-title { position: absolute; left: 140px; margin: 0; font-family: "Inter Tight Variable", sans-serif; font-weight: 550;
+      letter-spacing: -0.055em; line-height: 1.02; white-space: nowrap; color: #1d221e; }
+
+    #s3-lab { position: absolute; left: 140px; top: 80px; height: 160px; width: 1600px; }
+    .lab { position: absolute; left: 0; top: 0; }
+    .lab span { display: block; font: 500 22px "DM Sans", sans-serif; letter-spacing: 0.08em; color: #6a813e; }
+    .lab b { display: block; margin-top: 10px; font: 550 92px/1 "Inter Tight Variable", sans-serif; letter-spacing: -0.055em; color: #1d221e; white-space: nowrap; }
+
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1920" data-height="1080">
+    <i id="s3-anchor" style="position:absolute;width:0;height:0"></i>
+    <div id="s3-ground" class="rh-ground" style="background:#1d221e"></div>
+    <div id="s3-f0" class="mini feat"><article class="showcase-panel showcase-0"><div class="showcase-copy"><span class="eyebrow">01 / REVENUE</span><h3>From first hello.<br>To what’s next.</h3><p>Connect every inquiry to a clear next step. Capture, qualify, follow up, and book without the back-and-forth.</p><div class="showcase-tags"><span>Lead capture</span><span>CRM setup &amp; migration</span></div><a class="text-link" href="#/solutions/speed-to-lead">Explore the possibility <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="case-art product-visual product-speed-to-lead" aria-hidden="true" data-assembly-bound="true"><span class="art-index">ROUND HOUSE / 01</span><span class="sample-label">ILLUSTRATIVE CONCEPT</span><div class="product-browser lead-browser" style=""><div class="browser-top"><span><i></i><i></i><i></i></span><small>Business, in motion.</small><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></div><div class="lead-app"><div class="app-sidebar"><b>rh.</b><i></i><i></i><i></i><i></i></div><div class="app-main"><div class="app-greeting"><span>THE CUSTOMER JOURNEY</span><strong>Every hello.<br>A little further.</strong></div><div class="pipeline"><div style=""><span class="step-marker">01</span><small>New inquiry</small><b>Let’s talk.</b><span class="pipeline-tag">Captured</span></div><span>→</span><div style=""><span class="step-marker">02</span><small>Qualified lead</small><b>A good fit.</b><span class="pipeline-tag">Connected</span></div><span>→</span><div style=""><span class="step-marker">03</span><small>Next step</small><b>You’re booked.</b><span class="pipeline-tag dark">Moving forward</span></div></div><div class="app-bottom"><span class="activity-dot"></span>A clearer journey. A more human experience.</div></div></div></div><span class="art-category">REVENUE</span></div></article></div>
+    <div id="s3-f1" class="mini feat"><article class="showcase-panel showcase-1"><div class="showcase-copy"><span class="eyebrow">02 / OPERATIONS</span><h3>Your team’s knowledge.<br>At their fingertips.</h3><p>Make SOPs, policies, and FAQs easier to find with an internal assistant grounded in your own documents.</p><div class="showcase-tags"><span>Knowledge-base assistant</span><span>Data readiness</span></div><a class="text-link" href="#/solutions/knowledge-assistant">Explore the possibility <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="case-art product-visual product-knowledge-assistant" aria-hidden="true" data-assembly-bound="true"><span class="art-index">ROUND HOUSE / 02</span><span class="sample-label">ILLUSTRATIVE CONCEPT</span><div class="product-browser knowledge-browser" style=""><div class="browser-top"><span><i></i><i></i><i></i></span><small>Your knowledge, connected.</small><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></div><div class="knowledge-app"><span class="knowledge-symbol" style=""><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></span><strong>Good question.<br>Here’s a useful answer.</strong><div class="question-bubble" style="">Where do we start with a new client?</div><div class="answer-card" style=""><span>YOUR INTERNAL ASSISTANT</span><p>Start with the onboarding checklist. Here are the steps and the source documents.</p><div><i>01</i><span>Client onboarding guide</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></div><div><i>02</i><span>Team responsibilities</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></div></div><div class="prompt-input" style="">Ask your team’s knowledge… <span>↑</span></div></div></div><span class="art-category">OPERATIONS</span></div></article></div>
+    <div id="s3-f2" class="mini feat" data-layout-allow-overlap data-layout-allow-occlusion><article class="showcase-panel showcase-2"><div class="showcase-copy"><span class="eyebrow">03 / BRAND &amp; DIGITAL</span><h3>A brand that feels<br>like your business.</h3><p>Connect your positioning, visual identity, and website so the right people understand your value and know what to do next.</p><div class="showcase-tags"><span>Brand strategy &amp; identity</span><span>UI / UX design</span></div><a class="text-link" href="#/solutions/brand-and-web">Explore the possibility <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="case-art product-visual product-brand-and-web" aria-hidden="true" data-assembly-bound="true"><span class="art-index">ROUND HOUSE / 05</span><span class="sample-label">ILLUSTRATIVE CONCEPT</span><div class="brand-composition"><div class="identity-card" style=""><span>THOUGHTFULLY MADE.</span><strong>form<br>+ feeling.</strong><i>f.</i><small>A BRAND WITH A POINT OF VIEW.</small></div><div class="brand-site" style=""><div class="brand-site-nav"><b>form + feeling</b><span>Objects · About · Journal</span></div><div class="brand-site-body"><span>MAKE ROOM FOR THE EVERYDAY.</span><h4>Live a little<br>more <em>considered.</em></h4><div class="design-object"><i></i><i></i></div><small>Objects with purpose. Made to stay.</small></div></div></div><span class="art-category">BRAND &amp; DIGITAL</span></div></article></div>
+    <div id="s3-lab">
+      <div class="lab" id="s3-l0"><span>01 / REVENUE</span><b>Faster lead response.</b></div>
+      <div class="lab" id="s3-l1"><span>02 / OPERATIONS</span><b>Internal AI assistants.</b></div>
+      <div class="lab" id="s3-l2"><span>03 / BRAND &amp; DIGITAL</span><b>A brand that feels like you.</b></div>
+    </div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s3-anchor"));
+    var ROOT = document.getElementById("s3-anchor").parentElement;
+
+    function fit(wrap, inner, cx, cy, w) {
+      var o = RH.off(inner, wrap), s = w / inner.offsetWidth;
+      return { s: s, x: cx - (o.x + inner.offsetWidth / 2) * s, y: cy - (o.y + inner.offsetHeight / 2) * s };
+    }
+    function put(tl, wrap, st, t, d, ease) {
+      if (!d) { tl.set(wrap, { scale: st.s, x: st.x, y: st.y }, t); return; }
+      tl.to(wrap, { scale: st.s, x: st.x, y: st.y, duration: d, ease: ease || "power3.inOut" }, t);
+    }
+
+    var F = [$("s3-f0"), $("s3-f1"), $("s3-f2")];
+    var inner = [F[0].querySelector(".product-browser"), F[1].querySelector(".product-browser"), F[2].querySelector(".case-art")];
+    // three depths of the fan: front centre, back left, back right
+    var slot = { front: [960, 650, 1000], left: [235, 650, 430], right: [1685, 650, 430] };
+    function st(i, where) { var s = slot[where]; return fit(F[i], inner[i], s[0], s[1], s[2]); }
+    var order = [["front", "right", "left"], ["left", "front", "right"], ["right", "left", "front"]];
+    var times = [0, 6.55, 11.35];
+    tl.fromTo($("s3-ground"), { backgroundColor: "#1d221e" }, { backgroundColor: "#e1e8cd", duration: 0.35, ease: "power2.inOut" }, 0.0);
+    order.forEach(function (o, step) {
+      var t = times[step];
+      F.forEach(function (f, i) {
+        var where = o[i], front = where === "front", target = st(i, where);
+        if (step === 0) { put(tl, f, { s: target.s * 0.8, x: target.x + (front ? 0 : (where === "left" ? -300 : 300)), y: target.y + 120 }, 0); }
+        put(tl, f, target, step === 0 ? 0.15 : t, step === 0 ? 0.9 : 0.75, step === 0 ? "expo.out" : "power3.inOut");
+        tl.to(f, { opacity: front ? 1 : 0.5, filter: front ? "blur(0px)" : "blur(4px)", zIndex: front ? 3 : 1, duration: step === 0 ? 0.5 : 0.6 }, step === 0 ? 0.15 : t);
+      });
+      var lab = $("s3-l" + step);
+      tl.fromTo(lab, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "expo.out" }, t + 0.25);
+      if (step < 2) tl.to(lab, { opacity: 0, y: -16, duration: 0.25, ease: "power2.in" }, times[step + 1] - 0.05);
+    });
+    // lead: the journey lights up on "captured, qualified, booked"
+    var steps = F[0].querySelectorAll(".pipeline > div"), tags = F[0].querySelectorAll(".pipeline-tag");
+    tl.set(steps, { opacity: 0.35 }, 0); tl.set(tags, { opacity: 0, scale: 0.6 }, 0);
+    [2.85, 3.85, 4.6].forEach(function (t, k) {
+      tl.to(steps[k], { opacity: 1, duration: 0.2 }, t);
+      tl.to(tags[k], { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.4)" }, t + 0.1);
+    });
+    // assistant: the question lands, then an answer with its sources
+    var q = F[1].querySelector(".question-bubble"), a = F[1].querySelector(".answer-card"), rows = F[1].querySelectorAll(".answer-card > div");
+    tl.set([q, a], { opacity: 0 }, 0); tl.set(rows, { opacity: 0, x: -10 }, 0);
+    tl.fromTo(q, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.8)" }, 7.4);
+    tl.fromTo(a, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" }, 8.3);
+    rows.forEach(function (r, i) { tl.to(r, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 8.9 + i * 0.35); });
+    // brand: a slow push into the identity card
+    var push = st(2, "front"); push = { s: push.s * 1.12, x: push.x - (push.s * 0.12) * (RH.off(inner[2], F[2]).x + inner[2].offsetWidth / 2), y: push.y - (push.s * 0.12) * (RH.off(inner[2], F[2]).y + inner[2].offsetHeight / 2) };
+    put(tl, F[2], push, 12.2, 3.6, "power1.inOut");
+    tl.to(F, { opacity: 0, filter: "blur(10px)", duration: 0.3, ease: "power2.in" }, 16.1);
+    tl.to($("s3-l2"), { opacity: 0, duration: 0.2 }, 16.1);
+
+    restore();
+    window.__timelines["s3"] = tl;
+  });
+})();
+  </script>
+</template>

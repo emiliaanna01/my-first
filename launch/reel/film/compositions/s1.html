@@ -1,0 +1,173 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .mini { position: absolute; left: 0; top: 0; width: 1920px; transform-origin: 0 0; }
+    .mini .showcase-copy, .mini .calculator-copy { visibility: hidden; }
+    .mini .showcase-panel { transform: none !important; background: transparent !important; box-shadow: none !important; border: 0 !important; }
+    .mini .case-art { background: transparent !important; }
+    .mini .art-index, .mini .art-category { visibility: hidden; }
+    .mini .product-browser { transform: none !important; rotate: none !important; }
+    .k-title { position: absolute; left: 140px; margin: 0; font-family: "Inter Tight Variable", sans-serif; font-weight: 550;
+      letter-spacing: -0.055em; line-height: 1.02; white-space: nowrap; color: #1d221e; }
+
+    .ib-card { position: absolute; width: 520px; display: flex; align-items: center; gap: 16px; padding: 20px 22px; background: #fff;
+      border-radius: 20px; box-shadow: 0 16px 34px rgba(20,24,18,.14), 0 0 0 1px rgba(29,34,30,.05); font-family: "DM Sans", sans-serif; box-sizing: border-box; }
+    .ib-card i { flex: none; width: 48px; height: 48px; border-radius: 50%; background: #e0ed9b; font: 500 22px/48px "DM Sans"; text-align: center; font-style: normal; color: #1d221e; }
+    .ib-fup i { background: #f9e9d7; }
+    .ib-card b { display: block; font-weight: 500; font-size: 24px; color: #1d221e; white-space: nowrap; }
+    .ib-card small { font-size: 17px; color: #7a7f73; }
+    .ib-card span { margin-left: auto; font-size: 17px; font-weight: 500; padding: 6px 12px; border-radius: 999px; background: #ec644f; color: #fff; white-space: nowrap; }
+    .ib-fup span { background: #b52b18; }
+    .ib-search { position: absolute; left: 1400px; top: 140px; width: 460px; box-sizing: border-box; padding: 18px 22px; background: #fff; border-radius: 16px;
+      font: 400 22px "DM Sans", sans-serif; color: #1d221e; box-shadow: 0 16px 34px rgba(20,24,18,.14); display: flex; gap: 12px; align-items: center; white-space: nowrap; }
+    .ib-search i { font-style: normal; color: #7a7f73; }
+    .ib-search span { margin-left: auto; font-size: 16px; color: #b52b18; }
+    .ib-file { position: absolute; left: 1430px; width: 420px; box-sizing: border-box; display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+      background: #fff; border-radius: 14px; font: 400 21px "DM Sans", sans-serif; color: #2b322b; box-shadow: 0 12px 26px rgba(20,24,18,.12); white-space: nowrap; }
+    .ib-file i { font: 500 13px/34px "DM Sans"; font-style: normal; width: 44px; height: 34px; border-radius: 8px; background: #20271f; color: #e0ed9b; text-align: center; }
+    .ib-week { position: absolute; left: 1330px; top: 640px; display: flex; gap: 10px; padding: 22px; background: #fff; border-radius: 20px; box-shadow: 0 16px 34px rgba(20,24,18,.12); }
+    .ib-day { width: 88px; display: flex; flex-direction: column; gap: 8px; }
+    .ib-day b { font: 500 18px "DM Sans"; color: #1d221e; }
+    .ib-day .adm { height: 40px; border-radius: 8px; background: #d9dbd2; }
+    .ib-count { position: absolute; right: 70px; top: 60px; font: 500 26px "DM Sans", sans-serif; color: #fff; background: #ec644f; padding: 10px 20px; border-radius: 999px; }
+    #s1-dot { position: absolute; left: 948px; top: 528px; width: 24px; height: 24px; border-radius: 50%; background: #e0ed9b; box-shadow: inset 0 0 0 4px #6a813e; }
+
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <i id="s1-anchor" style="position:absolute;width:0;height:0"></i>
+    <div id="s1-ground" class="rh-ground" style="background:#f7f7f2"></div>
+    <div id="s1-m0" class="mini" data-layout-allow-overlap data-layout-allow-occlusion><article class="showcase-panel showcase-0"><div class="showcase-copy"><span class="eyebrow">01 / REVENUE</span><h3>From first hello.<br>To what’s next.</h3><p>Connect every inquiry to a clear next step. Capture, qualify, follow up, and book without the back-and-forth.</p><div class="showcase-tags"><span>Lead capture</span><span>CRM setup &amp; migration</span></div><a class="text-link" href="#/solutions/speed-to-lead">Explore the possibility <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="case-art product-visual product-speed-to-lead" aria-hidden="true" data-assembly-bound="true"><span class="art-index">ROUND HOUSE / 01</span><span class="sample-label">ILLUSTRATIVE CONCEPT</span><div class="product-browser lead-browser" style=""><div class="browser-top"><span><i></i><i></i><i></i></span><small>Business, in motion.</small><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></div><div class="lead-app"><div class="app-sidebar"><b>rh.</b><i></i><i></i><i></i><i></i></div><div class="app-main"><div class="app-greeting"><span>THE CUSTOMER JOURNEY</span><strong>Every hello.<br>A little further.</strong></div><div class="pipeline"><div style=""><span class="step-marker">01</span><small>New inquiry</small><b>Let’s talk.</b><span class="pipeline-tag">Captured</span></div><span>→</span><div style=""><span class="step-marker">02</span><small>Qualified lead</small><b>A good fit.</b><span class="pipeline-tag">Connected</span></div><span>→</span><div style=""><span class="step-marker">03</span><small>Next step</small><b>You’re booked.</b><span class="pipeline-tag dark">Moving forward</span></div></div><div class="app-bottom"><span class="activity-dot"></span>A clearer journey. A more human experience.</div></div></div></div><span class="art-category">REVENUE</span></div></article></div>
+    <div id="s1-m1" class="mini" data-layout-allow-overlap data-layout-allow-occlusion><article class="showcase-panel showcase-1"><div class="showcase-copy"><span class="eyebrow">02 / OPERATIONS</span><h3>Your team’s knowledge.<br>At their fingertips.</h3><p>Make SOPs, policies, and FAQs easier to find with an internal assistant grounded in your own documents.</p><div class="showcase-tags"><span>Knowledge-base assistant</span><span>Data readiness</span></div><a class="text-link" href="#/solutions/knowledge-assistant">Explore the possibility <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="case-art product-visual product-knowledge-assistant" aria-hidden="true" data-assembly-bound="true"><span class="art-index">ROUND HOUSE / 02</span><span class="sample-label">ILLUSTRATIVE CONCEPT</span><div class="product-browser knowledge-browser" style=""><div class="browser-top"><span><i></i><i></i><i></i></span><small>Your knowledge, connected.</small><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></div><div class="knowledge-app"><span class="knowledge-symbol" style=""><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></span><strong>Good question.<br>Here’s a useful answer.</strong><div class="question-bubble" style="">Where do we start with a new client?</div><div class="answer-card" style=""><span>YOUR INTERNAL ASSISTANT</span><p>Start with the onboarding checklist. Here are the steps and the source documents.</p><div><i>01</i><span>Client onboarding guide</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></div><div><i>02</i><span>Team responsibilities</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></div></div><div class="prompt-input" style="">Ask your team’s knowledge… <span>↑</span></div></div></div><span class="art-category">OPERATIONS</span></div></article></div>
+    <div id="s1-m2" class="mini" data-layout-allow-overlap data-layout-allow-occlusion><article class="showcase-panel showcase-2"><div class="showcase-copy"><span class="eyebrow">03 / BRAND &amp; DIGITAL</span><h3>A brand that feels<br>like your business.</h3><p>Connect your positioning, visual identity, and website so the right people understand your value and know what to do next.</p><div class="showcase-tags"><span>Brand strategy &amp; identity</span><span>UI / UX design</span></div><a class="text-link" href="#/solutions/brand-and-web">Explore the possibility <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="case-art product-visual product-brand-and-web" aria-hidden="true" data-assembly-bound="true"><span class="art-index">ROUND HOUSE / 05</span><span class="sample-label">ILLUSTRATIVE CONCEPT</span><div class="brand-composition"><div class="identity-card" style=""><span>THOUGHTFULLY MADE.</span><strong>form<br>+ feeling.</strong><i>f.</i><small>A BRAND WITH A POINT OF VIEW.</small></div><div class="brand-site" style=""><div class="brand-site-nav"><b>form + feeling</b><span>Objects · About · Journal</span></div><div class="brand-site-body"><span>MAKE ROOM FOR THE EVERYDAY.</span><h4>Live a little<br>more <em>considered.</em></h4><div class="design-object"><i></i><i></i></div><small>Objects with purpose. Made to stay.</small></div></div></div><span class="art-category">BRAND &amp; DIGITAL</span></div></article></div>
+    <div id="s1-m3" class="mini" data-layout-allow-overlap data-layout-allow-occlusion><section class="section calculator-section capacity-section" id="calculator">
+  <div class="calculator-copy"><span class="eyebrow">LESS REPETITION. MORE POSSIBILITY.</span>
+    <h2>Make room<br>for <em>better work.</em></h2>
+    <p>What if your team got some of its week back? Move the sliders. See the possibility.</p>
+    <div class="capacity-presets" role="group" aria-label="Try a planning example">
+      <span>A starting point to explore</span>
+      <button data-preset="follow-up" aria-pressed="false">Client follow-up <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+      <button data-preset="reporting" aria-pressed="false">Monthly reporting <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+      <button data-preset="admin" aria-pressed="false">Everyday admin <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></button>
+    </div>
+    <a class="text-link" href="#/contact?interest=diagnose">Find your biggest opportunity <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a>
+  </div>
+  <div class="calculator capacity-box reveal">
+    <div class="capacity-top"><span>YOUR ROOM TO GROW</span><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6L12 3Z"></path></svg></div>
+    <div class="capacity-main" aria-live="polite" aria-atomic="true"><div><strong id="capacity-hours">43.3</strong><span>hours back / month</span></div><p>That’s about <b id="capacity-days">5.4</b><br>eight-hour working days.</p></div>
+    <div class="capacity-gauge" aria-hidden="true"><i data-capacity-bar="0" class="is-recovered"></i><i data-capacity-bar="1" class="is-recovered"></i><i data-capacity-bar="2" class="is-recovered"></i><i data-capacity-bar="3" class="is-recovered"></i><i data-capacity-bar="4" class="is-recovered"></i><i data-capacity-bar="5" class="is-recovered"></i><i data-capacity-bar="6" class="is-recovered"></i><i data-capacity-bar="7" class="is-recovered"></i><i data-capacity-bar="8" class="is-recovered"></i><i data-capacity-bar="9" class="is-recovered"></i><i data-capacity-bar="10" class="is-recovered"></i><i data-capacity-bar="11" class="is-recovered"></i><i data-capacity-bar="12" class="is-recovered"></i><i data-capacity-bar="13" class="is-recovered"></i><i data-capacity-bar="14"></i><i data-capacity-bar="15"></i><i data-capacity-bar="16"></i><i data-capacity-bar="17"></i><i data-capacity-bar="18"></i><i data-capacity-bar="19"></i><i data-capacity-bar="20"></i><i data-capacity-bar="21"></i><i data-capacity-bar="22"></i><i data-capacity-bar="23"></i><i data-capacity-bar="24"></i><i data-capacity-bar="25"></i><i data-capacity-bar="26"></i><i data-capacity-bar="27"></i></div>
+    <div class="capacity-gauge-label"><span>Repetitive work</span><span id="capacity-portion">50% potential reduction</span></div>
+    <div class="capacity-inputs">
+      <label class="range-label" for="hours"><span>Repetitive work each week</span><output id="hours-value" for="hours">20 hrs</output></label>
+      <input id="hours" type="range" min="5" max="100" step="5" value="20" style="--range-fill: 15.789473684210526%;">
+      <label class="range-label" for="reduction"><span>Potential time reduction</span><output id="reduction-value" for="reduction">50%</output></label>
+      <input id="reduction" type="range" min="10" max="80" step="5" value="50" style="--range-fill: 57.14285714285714%;">
+      <div class="rate-row"><label for="hourly-rate">Estimated hourly cost <span>USD</span></label><div class="rate-input"><span>$</span><input id="hourly-rate" type="number" min="1" max="1000" value="40" step="0.01" inputmode="decimal" aria-describedby="rate-error calculator-note" aria-invalid="false"></div></div>
+      <p id="rate-error" class="rate-error" hidden="">Enter an hourly cost between $1 and $1,000.</p>
+    </div>
+    <div class="capacity-value-row" aria-live="polite" aria-atomic="true"><span>Potential capacity value / month</span><strong id="capacity-value">$1,732</strong></div>
+    <p id="calculator-note">A planning estimate, not a guaranteed saving. Based on 4.33 weeks per month. Capacity value is time × hourly cost, not cash savings or ROI. Setup and running costs are excluded.</p>
+  </div>
+</section></div>
+    <h1 id="s1-a" class="k-title" style="top:330px;font-size:230px">Good ideas</h1>
+    <h2 id="s1-b" class="k-title" style="top:580px;font-size:84px;color:#7d8c6a">are everywhere.</h2>
+    <h1 id="s1-c" data-layout-allow-overlap data-layout-allow-occlusion class="k-title" style="top:360px;font-size:170px">Making them real?</h1>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq" id="s1-i0" style="left:150px;top:150px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply &#183; 2d</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq" id="s1-i1" style="left:190px;top:230px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply &#183; 1d</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq" id="s1-i2" style="left:230px;top:310px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply &#183; 9h</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq" id="s1-i3" style="left:270px;top:390px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply &#183; 4h</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-fup" id="s1-f0" style="left:760px;top:130px"><i>&#8635;</i><div><b>Follow up: quote request</b><small>Reminder</small></div><span>Overdue 5d</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-fup" id="s1-f1" style="left:800px;top:220px"><i>&#8635;</i><div><b>Call back about pricing</b><small>Reminder</small></div><span>Overdue 3d</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-fup" id="s1-f2" style="left:840px;top:310px"><i>&#8635;</i><div><b>Send the proposal</b><small>Reminder</small></div><span>Due yesterday</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-fup" id="s1-f3" style="left:880px;top:400px"><i>&#8635;</i><div><b>Check in after the demo</b><small>Reminder</small></div><span>Overdue 1w</span></div>
+    <div class="ib-search" id="s1-q"><i>&#9906;</i>Where&#8217;s the refund policy?<span id="s1-q0">0 results</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-file" id="s1-d0" style="top:250px"><i>PDF</i>Onboarding_v7_FINAL.pdf</div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-file" id="s1-d1" style="top:342px"><i>PDF</i>Pricing (old) (2).docx</div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-file" id="s1-d2" style="top:434px"><i>PDF</i>SOP new client - copy.pdf</div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-file" id="s1-d3" style="top:526px"><i>PDF</i>Policies_2024_draft.pdf</div>
+
+    <div class="ib-week" id="s1-week"><div class="ib-day"><b>Mon</b><i class="adm" id="s1-w00"></i><i class="adm" id="s1-w01"></i><i class="adm" id="s1-w02"></i><i class="adm" id="s1-w03"></i></div><div class="ib-day"><b>Tue</b><i class="adm" id="s1-w10"></i><i class="adm" id="s1-w11"></i><i class="adm" id="s1-w12"></i><i class="adm" id="s1-w13"></i></div><div class="ib-day"><b>Wed</b><i class="adm" id="s1-w20"></i><i class="adm" id="s1-w21"></i><i class="adm" id="s1-w22"></i><i class="adm" id="s1-w23"></i></div><div class="ib-day"><b>Thu</b><i class="adm" id="s1-w30"></i><i class="adm" id="s1-w31"></i><i class="adm" id="s1-w32"></i><i class="adm" id="s1-w33"></i></div><div class="ib-day"><b>Fri</b><i class="adm" id="s1-w40"></i><i class="adm" id="s1-w41"></i><i class="adm" id="s1-w42"></i><i class="adm" id="s1-w43"></i></div></div>
+    <div class="ib-count" id="s1-cnt"><span id="s1-cntv">12</span> unread</div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o0" style="left:120px;top:240px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o1" style="left:560px;top:180px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o2" style="left:1020px;top:220px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o3" style="left:1380px;top:160px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o4" style="left:300px;top:420px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o5" style="left:720px;top:380px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o6" style="left:1180px;top:420px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div data-layout-allow-overlap data-layout-allow-occlusion class="ib-card ib-inq ib-over" id="s1-o7" style="left:1540px;top:360px"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span>No reply</span></div>
+    <div id="s1-dot"></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s1-anchor"));
+    var ROOT = document.getElementById("s1-anchor").parentElement;
+
+    function fit(wrap, inner, cx, cy, w) {
+      var o = RH.off(inner, wrap), s = w / inner.offsetWidth;
+      return { s: s, x: cx - (o.x + inner.offsetWidth / 2) * s, y: cy - (o.y + inner.offsetHeight / 2) * s };
+    }
+    function put(tl, wrap, st, t, d, ease) {
+      if (!d) { tl.set(wrap, { scale: st.s, x: st.x, y: st.y }, t); return; }
+      tl.to(wrap, { scale: st.s, x: st.x, y: st.y, duration: d, ease: ease || "power3.inOut" }, t);
+    }
+
+    // live product glimpses float around the opening line (the site's own UI, small)
+    var minis = [["s1-m0", ".product-browser", 1490, 240, 560], ["s1-m1", ".product-browser", 1530, 790, 520],
+                 ["s1-m2", ".identity-card", 330, 850, 230], ["s1-m3", ".calculator", 300, 235, 300]];
+    var mst = minis.map(function (m) { var w = $(m[0]); return fit(w, w.querySelector(m[1]), m[2], m[3], m[4]); });
+    minis.forEach(function (m, i) {
+      var w = $(m[0]), st = mst[i];
+      put(tl, w, st, 0);
+      tl.fromTo(w, { opacity: i === 0 ? 1 : 0, rotation: 0 }, { opacity: 1, duration: 0.3 }, i === 0 ? 0 : 0.25 * i);
+      tl.fromTo(w, { y: st.y + (i === 0 ? 0 : 40) }, { y: st.y, duration: 0.6, ease: "expo.out" }, i === 0 ? 0 : 0.25 * i);
+      // "messy": they tip and slide in on each other, then leave for the pile-up
+      tl.to(w, { rotation: [-7, 6, -5, 8][i], x: st.x + [-120, -160, 140, 160][i], y: st.y + [80, -60, -90, 60][i], duration: 0.7, ease: "power3.inOut" }, 3.9 + i * 0.05);
+      tl.to(w, { opacity: 0, filter: "blur(8px)", duration: 0.3, ease: "power2.in" }, 5.1 + i * 0.04);
+    });
+    tl.fromTo($("s1-a"), { scale: 1.04 }, { scale: 1, duration: 0.9, ease: "expo.out", transformOrigin: "0% 50%" }, 0);
+    tl.fromTo($("s1-b"), { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.18, ease: "expo.out" }, 1.0);
+    tl.to([$("s1-a"), $("s1-b")], { opacity: 0, filter: "blur(10px)", duration: 0.16, ease: "power2.in" }, 2.3);
+    RH.words($("s1-c")).forEach(function (w, i) {
+      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 2.45 + i * 0.12);
+    });
+    tl.to($("s1-c"), { rotation: -3, y: 20, duration: 0.5, ease: "back.out(2)" }, 3.95);
+    tl.to($("s1-c"), { opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 5.2);
+    // the inbox overflows, one kind of mess per line of voice
+    function pop(el, t, rot) { tl.fromTo(el, { opacity: 0, scale: 0.7, y: -30, rotation: 0 }, { opacity: 1, scale: 1, y: 0, rotation: rot || 0, duration: 0.45, ease: "back.out(1.9)" }, t); }
+    [0, 1, 2, 3].forEach(function (k) { pop($("s1-i" + k), 5.65 + k * 0.28, [-2, 1.5, -1, 2][k]); });
+    [0, 1, 2, 3].forEach(function (k) { pop($("s1-f" + k), 7.65 + k * 0.28, [1.5, -2, 2, -1][k]); });
+    pop($("s1-q"), 9.6, 0);
+    [0, 1, 2, 3].forEach(function (k) { pop($("s1-d" + k), 10.0 + k * 0.25, [-1.5, 1, -2, 1.5][k]); });
+    tl.fromTo($("s1-q0"), { opacity: 0 }, { opacity: 1, duration: 0.2 }, 11.0);
+    pop($("s1-week"), 12.55, -1);
+    var blocks = [];
+    for (var j = 0; j < 5; j++) for (var k = 0; k < 4; k++) blocks.push($("s1-w" + j + k));
+    blocks.forEach(function (b, i) { tl.fromTo(b, { backgroundColor: "#eeeee8", scaleX: 0.3 }, { backgroundColor: "#b9bdb0", scaleX: 1, duration: 0.25, ease: "power3.out" }, 12.85 + i * 0.06); });
+    pop($("s1-cnt"), 5.8, 0);
+    var cnt = $("s1-cntv");
+    RH.drive(tl, 15, function (T) { cnt.textContent = String(Math.round(12 + Math.max(0, Math.min(1, (T - 5.8) / 8.2)) * 35)); });
+    for (var o = 0; o < 8; o++) pop($("s1-o" + o), 13.1 + o * 0.11, [-6, 5, -4, 7, -8, 4, -3, 6][o]);
+    // silence before the drop: everything is pulled into one lime dot
+    var all = Array.prototype.slice.call(ROOT.querySelectorAll(".ib-card,.ib-search,.ib-file,.ib-week,.ib-count"));
+    all.forEach(function (el, i) {
+      var cx = el.offsetLeft + el.offsetWidth / 2, cy = el.offsetTop + el.offsetHeight / 2;
+      tl.to(el, { x: 960 - cx, y: 540 - cy, scale: 0.08, opacity: 0, rotation: 0, duration: 0.5, ease: "power3.in" }, 14.05 + (i % 6) * 0.025);
+    });
+    tl.fromTo($("s1-dot"), { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 14.45);
+
+    restore();
+    window.__timelines["s1"] = tl;
+  });
+})();
+  </script>
+</template>
