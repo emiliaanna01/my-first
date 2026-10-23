@@ -1,0 +1,155 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .proto-cam .showcase-copy { visibility: hidden; }
+    .proto-cam .showcase-panel { transform: none !important; background: transparent !important; box-shadow: none !important; border: 0 !important; }
+    .proto-cam .case-art { background: transparent !important; }
+    .proto-cam .product-browser, .proto-cam .lead-browser { transform: none !important; rotate: none !important; }
+    .rh-ver { position: absolute; z-index: 5; font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 15px;
+      color: #1d221e; background: #e0ed9b; border-radius: 999px; padding: 6px 13px; letter-spacing: 0.02em; }
+    .rh-chip { position: absolute; z-index: 6; font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 11px;
+      color: #1d221e; background: #e0ed9b; border-radius: 999px; padding: 4px 9px; white-space: nowrap; }
+    .rh-pin { position: absolute; z-index: 8; width: 30px; height: 30px; margin: -30px 0 0 0; border-radius: 15px 15px 15px 3px;
+      background: #1d221e; color: #e0ed9b; font: 500 13px/30px "DM Sans", sans-serif; text-align: center;
+      box-shadow: 0 6px 14px rgba(20,24,18,.25); }
+    .rh-pin.done { background: #e0ed9b; color: #1d221e; }
+    .rh-bubble { position: absolute; z-index: 9; width: 250px; background: #fff; border-radius: 14px; padding: 12px 14px;
+      box-shadow: 0 14px 30px rgba(20,24,18,.16), 0 0 0 1px rgba(29,34,30,.06); font-family: "DM Sans", sans-serif; }
+    .rh-bubble b { display: block; font-weight: 500; font-size: 12px; color: #1d221e; }
+    .rh-bubble b small { font-weight: 400; color: #8a8f82; margin-left: 6px; }
+    .rh-bubble p { margin: 5px 0 0; font-size: 13px; line-height: 1.4; color: #2b322b; white-space: nowrap; }
+
+    .s3-bar { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; bottom: 46px; display: flex; gap: 6px; padding: 8px;
+      background: #1d221e; border-radius: 999px; box-shadow: 0 18px 40px rgba(20,24,18,.28); z-index: 20; }
+    .s3-btn { display: flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 999px; color: #f3f5ea;
+      font: 500 24px "DM Sans", sans-serif; white-space: nowrap; }
+    .s3-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+    .s3-dot { width: 14px; height: 14px; border-radius: 50%; background: #ec644f; }
+    .s3-btn em { font-style: normal; font-size: 16px; background: #e0ed9b; color: #1d221e; border-radius: 999px; padding: 2px 9px; }
+    .s3-vid { position: absolute; z-index: 9; display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; background: #1d221e;
+      border-radius: 999px; box-shadow: 0 12px 26px rgba(20,24,18,.25); }
+    .s3-vid > i { width: 34px; height: 34px; border-radius: 50%; background: #e0ed9b; color: #1d221e; font: 500 15px/34px "DM Sans"; text-align: center; font-style: normal; }
+    .s3-wave { display: flex; align-items: center; gap: 3px; height: 30px; }
+    .s3-wave b { width: 3px; height: calc(var(--h) * 1px); background: #e0ed9b; border-radius: 2px; }
+    #s3-rec { font: 500 14px "DM Sans", sans-serif; color: #f3f5ea; }
+    .s3-thread { position: absolute; right: 70px; top: 120px; width: 560px; background: #fff; border-radius: 24px; padding: 26px 28px 10px;
+      box-shadow: 0 30px 60px rgba(20,24,18,.14), 0 0 0 1px rgba(29,34,30,.06); font-family: "DM Sans", sans-serif; z-index: 15; }
+    .s3-head { font: 500 26px "DM Sans", sans-serif; color: #1d221e; padding-bottom: 18px; border-bottom: 1px solid #e6e7e0; }
+    .s3-head small { float: right; font-size: 16px; color: #6a813e; background: #eef3d6; padding: 5px 12px; border-radius: 999px; }
+    .s3-msg { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid #f0f1ea; }
+    .s3-msg > i { flex: none; width: 46px; height: 46px; border-radius: 12px; background: #e0ed9b; font: 500 20px/46px "DM Sans"; text-align: center; font-style: normal; color: #1d221e; }
+    .s3-msg > i.s { background: #cfd8c2; }
+    .s3-msg b { font-weight: 500; font-size: 22px; color: #1d221e; }
+    .s3-msg b small { font-weight: 400; font-size: 17px; color: #8a8f82; margin-left: 6px; }
+    .s3-msg p { margin: 6px 0 0; font-size: 22px; line-height: 1.35; color: #2b322b; }
+    .s3-msg span { display: inline-block; margin-top: 8px; font-size: 16px; color: #6a813e; }
+    .s3-play { display: inline-block; background: #1d221e; color: #f3f5ea !important; padding: 8px 14px; border-radius: 10px; font-size: 19px !important; }
+
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1920" data-height="1080">
+    <i id="s3-anchor" style="position:absolute;width:0;height:0"></i>
+    <div class="rh-ground" style="background:#e1e8cd"></div>
+    <div id="s3-cam" class="rh-cam proto-cam"><div class="rh-page"><main><article class="showcase-panel showcase-0"><div class="showcase-copy"><span class="eyebrow">01 / REVENUE</span><h3>From first hello.<br>To what’s next.</h3><p>Connect every inquiry to a clear next step. Capture, qualify, follow up, and book without the back-and-forth.</p><div class="showcase-tags"><span>Lead capture</span><span>CRM setup &amp; migration</span></div><a class="text-link" href="#/solutions/speed-to-lead">Explore the possibility <svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></a></div><div class="case-art product-visual product-speed-to-lead" aria-hidden="true" data-assembly-bound="true"><span class="art-index">ROUND HOUSE / 01</span><span class="sample-label">ILLUSTRATIVE CONCEPT</span><div class="product-browser lead-browser" style=""><div class="browser-top"><span><i></i><i></i><i></i></span><small>Business, in motion.</small><svg class="icon " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"></path></svg></div><div class="lead-app"><div class="app-sidebar"><b>rh.</b><i></i><i></i><i></i><i></i></div><div class="app-main"><div class="app-greeting"><span>THE CUSTOMER JOURNEY</span><strong>Every hello.<br>A little further.</strong></div><div class="pipeline"><div style=""><span class="step-marker">01</span><small>New inquiry</small><b>Let’s talk.</b><span class="pipeline-tag">Captured</span></div><span>→</span><div style=""><span class="step-marker">02</span><small>Qualified lead</small><b>A good fit.</b><span class="pipeline-tag">Connected</span></div><span>→</span><div style=""><span class="step-marker">03</span><small>Next step</small><b>You’re booked.</b><span class="pipeline-tag dark">Moving forward</span></div></div><div class="app-bottom"><span class="activity-dot"></span>A clearer journey. A more human experience.</div></div></div></div><span class="art-category">REVENUE</span></div></article></main></div>
+      <span id="s3-ver" class="rh-ver">prototype &#183; v1</span>
+      <span id="s3-pin1" class="rh-pin">M</span>
+      <div id="s3-b1" class="rh-bubble" data-layout-allow-occlusion><b>Maya<small>just now</small></b><p id="s3-b1t">Can we flag repeat customers here?</p></div>
+      <span id="s3-pin2" class="rh-pin">M</span>
+      <div id="s3-vid" class="s3-vid" data-layout-allow-occlusion><i>M</i><div class="s3-wave"><b style="--h:8"></b><b style="--h:14"></b><b style="--h:22"></b><b style="--h:12"></b><b style="--h:26"></b><b style="--h:18"></b><b style="--h:10"></b><b style="--h:24"></b><b style="--h:16"></b><b style="--h:28"></b><b style="--h:12"></b><b style="--h:20"></b><b style="--h:9"></b><b style="--h:17"></b><b style="--h:25"></b><b style="--h:13"></b></div><span id="s3-rec">0:07</span></div>
+    </div>
+    <div id="s3-bar" class="s3-bar">
+      <span id="s3-bc" class="s3-btn"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H10l-5 4z"/></svg>Comment</span>
+      <span id="s3-br" class="s3-btn"><i class="s3-dot"></i>Record</span>
+      <span id="s3-bn" class="s3-btn">Next steps<em>3</em></span>
+    </div>
+    <div id="s3-thread" class="s3-thread" data-layout-allow-occlusion>
+      <div class="s3-head"># lead-flow-review<small>synced</small></div>
+      <div class="s3-msg" id="s3-m1"><i>M</i><div><b>Maya <small>11:02</small></b><p>Can we flag repeat customers here?</p><span>&#8599; Qualified lead &#183; v1</span></div></div>
+      <div class="s3-msg" id="s3-m2"><i>M</i><div><b>Maya <small>11:03</small></b><p class="s3-play">&#9654; Walkthrough &#183; 0:24</p></div></div>
+      <div class="s3-msg" id="s3-m3"><i class="s">S</i><div><b>Sam <small>11:05</small></b><p>Yes, and send a text reply after hours.</p></div></div>
+    </div>
+    <div id="s3-cur" class="rh-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z"/></svg><span class="rh-tag" data-layout-allow-occlusion data-layout-allow-overlap>Maya &#183; Ops</span></div>
+    <div id="s3-iris" class="rh-ground" style="background:#20271f;z-index:40"></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s3-anchor"));
+
+    var cam = $("s3-cam"), browser = cam.querySelector(".product-browser");
+    var steps = Array.prototype.slice.call(cam.querySelectorAll(".pipeline > div"));
+    var bw = browser.offsetWidth, sB = Math.min(1.9, 1500 / bw);
+    var full = RH.aim(RH.pt(browser, cam), sB, 960, 560);
+    function place(el, target, fx, fy, dx, dy) {
+      var p = RH.pt(target, cam, fx, fy); el.style.left = (p.x + (dx || 0)) + "px"; el.style.top = (p.y + (dy || 0)) + "px";
+    }
+
+    var cur = $("s3-cur"), pin1 = $("s3-pin1"), b1 = $("s3-b1"), pin2 = $("s3-pin2"), vid = $("s3-vid");
+    place($("s3-ver"), browser, 0, 0, 14, -46);
+    place(pin1, steps[1], 0.92, 0.12);
+    place(b1, steps[1], 0.92, 0, 26, -86);
+    place(pin2, steps[2], 0.92, 0.12);
+    place(vid, steps[2], 0.05, 1.0, 0, 14);
+    RH.cam(tl, cam, full, 0, 0);
+    tl.set([pin1, pin2], { scale: 0, transformOrigin: "0% 100%" }, 0);
+    tl.set([b1, vid], { opacity: 0, scale: 0.6, transformOrigin: "0% 0%" }, 0);
+    // the review toolbar arrives on the prototype
+    var tb = function (id, fx) { var r = $(id).getBoundingClientRect(), root = $("s3-anchor").parentElement.getBoundingClientRect();
+      var k = 1920 / root.width; return { x: (r.left - root.left) * k + r.width * k * (fx || 0.5), y: (r.top - root.top) * k + r.height * k * 0.55 }; };
+    var bc = tb("s3-bc", 0.35), br = tb("s3-br", 0.35), bn = tb("s3-bn", 0.35);
+    tl.fromTo($("s3-bar"), { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.4);
+    // Maya picks Comment, pins the qualified step, types her note
+    tl.set(cur, { x: 2000, y: 1160, opacity: 1 }, 0);
+    RH.move(tl, cur, bc, 1.0, 0.7);
+    RH.click(tl, cur, 1.8, $("s3-bc"));
+    tl.to($("s3-bc"), { backgroundColor: "#e0ed9b", color: "#1d221e", duration: 0.15 }, 1.82);
+    var p1 = RH.frame(RH.pt(steps[1], cam, 0.92, 0.12), full);
+    RH.move(tl, cur, { x: p1.x + 4, y: p1.y + 4 }, 2.05, 0.7);
+    RH.click(tl, cur, 2.9);
+    tl.to(pin1, { scale: 1, duration: 0.4, ease: "back.out(2.6)" }, 2.92);
+    tl.to(b1, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, 3.05);
+    var txt = $("s3-b1t"), full1 = txt.textContent, rec = $("s3-rec");
+    RH.drive(tl, 14, function (T) {
+      txt.textContent = full1.slice(0, Math.max(0, Math.min(full1.length, Math.round((T - 3.2) / 1.2 * full1.length))));
+      var s = Math.max(0, Math.min(24, Math.round((T - 6.5) / 1.8 * 24)));
+      rec.textContent = "0:" + (s < 10 ? "0" : "") + s;
+    });
+    tl.to($("s3-bc"), { backgroundColor: "rgba(224,237,155,0)", color: "#f3f5ea", duration: 0.2 }, 4.6);
+    // a quick walkthrough: Record, the waveform runs, the clip pins to the booking step
+    RH.move(tl, cur, br, 5.4, 0.7);
+    RH.click(tl, cur, 6.3, $("s3-br"));
+    tl.to(vid, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 6.4);
+    var bars = vid.querySelectorAll(".s3-wave b");
+    bars.forEach(function (b, i) {
+      tl.fromTo(b, { scaleY: 0.3 }, { scaleY: 1.25, duration: 0.18 + (i % 4) * 0.05, ease: "sine.inOut", yoyo: true, repeat: 7 }, 6.5 + i * 0.03);
+    });
+    tl.to(pin2, { scale: 1, duration: 0.4, ease: "back.out(2.6)" }, 8.4);
+    // the notes sync into the team's thread
+    var shrink = RH.aim(RH.pt(browser, cam), full.s * 0.74, 640, 560);
+    RH.cam(tl, cam, shrink, 8.6, 0.8);
+    tl.fromTo($("s3-thread"), { x: 640, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "expo.out" }, 8.7);
+    [["s3-m1", 9.4], ["s3-m2", 10.0], ["s3-m3", 10.9]].forEach(function (m) {
+      tl.fromTo($(m[0]), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.8)" }, m[1]);
+    });
+    tl.fromTo($("s3-bn").querySelector("em"), { scale: 1 }, { scale: 1.35, duration: 0.15, yoyo: true, repeat: 1 }, 11.2);
+    // Next steps: the button becomes the agent's world
+    RH.move(tl, cur, bn, 12.0, 0.7);
+    RH.click(tl, cur, 12.95, $("s3-bn"));
+    tl.to(cur, { opacity: 0, duration: 0.1 }, 13.15);
+    tl.fromTo($("s3-iris"), { clipPath: "circle(0px at " + bn.x + "px " + bn.y + "px)" },
+      { clipPath: "circle(2300px at " + bn.x + "px " + bn.y + "px)", duration: 0.55, ease: "power3.in" }, 13.1);
+
+    restore();
+    window.__timelines["s3"] = tl;
+  });
+})();
+  </script>
+</template>

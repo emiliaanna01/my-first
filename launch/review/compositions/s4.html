@@ -1,0 +1,92 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .s4-win { position: absolute; left: 230px; top: 110px; width: 1460px; height: 760px; background: #151a14; border-radius: 26px;
+      box-shadow: 0 40px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(224,237,155,.08); overflow: hidden; }
+    .s4-top { height: 64px; display: flex; align-items: center; gap: 22px; padding: 0 26px; color: #8f9a85;
+      font: 400 22px "JetBrains Mono", monospace; border-bottom: 1px solid #262d24; }
+    .s4-top span { display: flex; gap: 9px; } .s4-top i { width: 14px; height: 14px; border-radius: 50%; background: #3a4337; }
+    .s4-body { padding: 34px 44px; font: 400 30px/1.55 "JetBrains Mono", monospace; color: #d9dfcf; }
+    .tl { white-space: nowrap; }
+    .tl.prompt { color: #f3f5ea; margin-bottom: 16px; }
+    .tl.tool { color: #e0ed9b; } .tl.sub { color: #8f9a85; padding-left: 26px; margin-bottom: 8px; }
+    .tl.step { padding-left: 52px; display: flex; align-items: center; gap: 18px; }
+    .tl .box { width: 24px; height: 24px; border: 2px solid #8f9a85; border-radius: 6px; flex: none; position: relative; }
+    .tl .box.on { background: #e0ed9b; border-color: #e0ed9b; }
+    .tl.work { color: #e0ed9b; margin-top: 16px; } .tl.ask { color: #f3f5ea; margin-top: 18px; }
+    .tl.done { color: #e0ed9b; margin-top: 18px; }
+    .s4-ok { display: flex; gap: 14px; margin: 14px 0 0 0; }
+    .s4-ok span { font: 500 24px "DM Sans", sans-serif; padding: 12px 22px; border-radius: 12px; background: #e0ed9b; color: #1d221e; }
+    .s4-ok .no { background: #262d24; color: #8f9a85; }
+    .s4-note { position: absolute; left: 0; right: 0; bottom: 70px; margin: 0; text-align: center; font: 550 44px "Inter Tight Variable", sans-serif;
+      letter-spacing: -0.03em; color: #a9b78f; }
+
+  </style>
+  <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <i id="s4-anchor" style="position:absolute;width:0;height:0"></i>
+    <div class="rh-ground" style="background:#20271f"></div>
+    <div id="s4-win" class="s4-win">
+      <div class="s4-top"><span><i></i><i></i><i></i></span>agent &#8212; ~/lead-flow</div>
+      <div class="s4-body"><div class="tl prompt" id="s4-t1"><span id="s4-t1t">&#8250; Pull the review notes and build v2</span></div><div class="tl tool" id="s4-t2"><span id="s4-t2t">&#9210; roundhouse &#183; get_feedback</span></div><div class="tl sub" id="s4-t3"><span id="s4-t3t">&#9151; 3 next steps on lead-flow v1</span></div><div class="tl step" id="s4-t4"><span class="box" id="s4-t4b"></span><span>Flag repeat customers at the qualify step</span></div><div class="tl step" id="s4-t5"><span class="box" id="s4-t5b"></span><span>Send a text reply to after-hours inquiries</span></div><div class="tl step" id="s4-t6"><span class="box" id="s4-t6b"></span><span>Book straight into the team calendar</span></div><div class="tl work" id="s4-t7"><span id="s4-t7t">&#10043; Working&#8230;</span></div><div class="tl ask" id="s4-t8"><span id="s4-t8t">Approve changes to lead-flow?</span></div><div class="tl done" id="s4-t9"><span id="s4-t9t">&#10003; v2 is ready for review &#183; lead-flow/v2 &#8599;</span></div>
+        <div class="s4-ok" id="s4-ok"><span id="s4-yes">Yes, ship v2 for review</span><span class="no">Not yet</span></div>
+      </div>
+    </div>
+    <p id="s4-note" class="s4-note">Human judgment stays in the loop.</p>
+    <div id="s4-cur" class="rh-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z"/></svg><span class="rh-tag" data-layout-allow-occlusion data-layout-allow-overlap>Round House</span></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s4-anchor"));
+
+    var cur = $("s4-cur");
+    tl.fromTo($("s4-win"), { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "expo.out" }, 0.05);
+    var lines = ["t1","t2","t3","t4","t5","t6","t7","t8","t9"].map(function (k) { return $("s4-" + k); });
+    tl.set(lines, { opacity: 0 }, 0);
+    tl.set([$("s4-ok"), $("s4-note")], { opacity: 0 }, 0);
+    // the request types out, then the tool call answers
+    var p = $("s4-t1t"), ptxt = p.textContent;
+    tl.set(lines[0], { opacity: 1 }, 0.35);
+    [[1, 1.75], [2, 2.05], [3, 2.6], [4, 2.85], [5, 3.1], [6, 4.0]].forEach(function (l) {
+      tl.fromTo(lines[l[0]], { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.25, ease: "power3.out" }, l[1]);
+    });
+    // the working line cycles its glyph, the steps tick off one by one
+    var w = $("s4-t7t"), glyphs = ["✻", "✽", "✳", "✻"], boxes = [["s4-t4b", 4.6], ["s4-t5b", 5.4], ["s4-t6b", 6.2]];
+    RH.drive(tl, 12, function (T) {
+      p.textContent = ptxt.slice(0, Math.max(0, Math.min(ptxt.length, Math.round((T - 0.35) / 1.1 * ptxt.length))));
+      w.textContent = T >= 7.0 ? "✓ 3 of 3 done" : glyphs[Math.max(0, Math.floor((T - 4.0) / 0.3)) % 4] + " Working…";
+      boxes.forEach(function (b) { $(b[0]).classList.toggle("on", T >= b[1]); });
+    });
+    boxes.forEach(function (b) { tl.fromTo($(b[0]), { scale: 0.6 }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, b[1]); });
+    // a person approves before anything ships
+    tl.fromTo(lines[7], { opacity: 0 }, { opacity: 1, duration: 0.25 }, 7.4);
+    tl.fromTo($("s4-ok"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.8)" }, 7.6);
+    tl.fromTo($("s4-note"), { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "expo.out" }, 6.8);
+    var yes = $("s4-yes"), root = $("s4-anchor").parentElement;
+    var yp = RH.pt(yes, root, 0.4, 0.55);
+    tl.set(cur, { x: 2000, y: 1160, opacity: 1 }, 0);
+    RH.move(tl, cur, yp, 8.2, 0.8);
+    RH.click(tl, cur, 9.2, yes);
+    tl.fromTo(lines[8], { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, 9.5);
+    tl.to(cur, { x: 2000, y: 1250, duration: 0.5, ease: "power3.in" }, 10.2);
+    // zoom through the link into v2
+    var lp = RH.pt(lines[8], root, 0.5, 0.5);
+    tl.to($("s4-win"), { scale: 3.2, transformOrigin: lp.x - 230 + "px " + (lp.y - 110) + "px", opacity: 0, filter: "blur(6px)",
+      duration: 0.6, ease: "power3.in" }, 11.35);
+    tl.to($("s4-note"), { opacity: 0, duration: 0.2 }, 11.3);
+
+    restore();
+    window.__timelines["s4"] = tl;
+  });
+})();
+  </script>
+</template>

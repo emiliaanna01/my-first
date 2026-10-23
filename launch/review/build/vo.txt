@@ -1,0 +1,11 @@
+V1	A new inquiry lands just before midnight. By morning, it's still waiting for a reply.
+V2	Round House fixes that with you, starting from a real, working prototype.
+V3	Every inquiry is captured, qualified, and routed to a clear next step. No back-and-forth.
+V4	Your team reviews it right where it lives. Pin a comment to the exact step.
+V5	Or record a quick walkthrough. Every note stays in sync with your team's thread.
+V6	Then our agents turn that feedback into clear next steps, and build the next version.
+V7	Human judgment stays in the loop, with approvals at every step.
+V8	Version two is ready for review. Repeat customers flagged, replies sent, conversations booked.
+V9	Less repetition. More room for better work.
+V10	Diagnose. Build. Run. Not another tool. A better way to work.
+V11	Round House. Good ideas, made real. Let's talk.

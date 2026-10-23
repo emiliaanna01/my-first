@@ -1,0 +1,64 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    #s7-lockup { position: absolute; left: 0; right: 0; top: 300px; display: flex; flex-direction: column; align-items: center; }
+    .s7-wm { position: relative; font-family: "Inter Tight Variable", sans-serif; font-weight: 720; font-size: 200px;
+      letter-spacing: -0.055em; line-height: 1; color: #1d221e; white-space: nowrap; }
+    #s7-stop { visibility: hidden; }
+    #s7-reg { font-family: "DM Sans", sans-serif; font-size: 40px; letter-spacing: 0; vertical-align: top; display: inline-block; margin: 18px 0 0 10px; }
+    #s7-dot { position: absolute; border-radius: 50%; background: #e0ed9b; box-shadow: inset 0 0 0 5px #6a813e; }
+    #s7-tag { margin: 40px 0 0; font-family: "Inter Tight Variable", sans-serif; font-weight: 550; font-size: 56px; letter-spacing: -0.04em; color: #4f5c42; }
+    #s7-go { margin-top: 48px; font-family: "DM Sans", sans-serif; font-weight: 500; font-size: 32px; color: #f7f7f2;
+      background: #1d221e; padding: 24px 48px; border-radius: 999px; }
+
+  </style>
+  <div id="root" data-composition-id="s7" data-width="1920" data-height="1080">
+    <i id="s7-anchor" style="position:absolute;width:0;height:0"></i>
+    <div class="rh-ground" style="background:#e5edcc"></div>
+    <div id="s7-lockup">
+      <div id="s7-wm" class="s7-wm">roundhouse<span id="s7-stop">.</span><span id="s7-reg">&#174;</span></div>
+      <div id="s7-dot"></div>
+      <p id="s7-tag">Good ideas. Made real.</p>
+      <span id="s7-go">Let&#8217;s talk &#8599;</span>
+    </div>
+    <div id="s7-cur" class="rh-cur" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3 L5 19 L9 15 L12 22 L15 20.5 L11.5 14 L18 14 Z"/></svg></div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s7-anchor"));
+
+    var wm = $("s7-wm"), stop = $("s7-stop"), dot = $("s7-dot"), lock = $("s7-lockup"), cur = $("s7-cur"), go = $("s7-go");
+    var so = RH.off(stop, lock), d = stop.offsetWidth * 0.8;
+    dot.style.width = d + "px"; dot.style.height = d + "px";
+    dot.style.left = (so.x + stop.offsetWidth * 0.5 - d / 2) + "px"; dot.style.top = (so.y + stop.offsetHeight * 0.79 - d) + "px";
+    tl.fromTo(wm, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "power3.out" }, 0.3);
+    tl.fromTo(dot, { y: -760 }, { y: 0, duration: 0.36, ease: "power3.in" }, 0.62);
+    tl.to(dot, { scaleX: 1.25, scaleY: 0.72, duration: 0.07, transformOrigin: "50% 100%" }, 0.98);
+    tl.to(dot, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "back.out(3)" }, 1.05);
+    tl.fromTo($("s7-reg"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2.4)" }, 1.2);
+    RH.words($("s7-tag")).forEach(function (w, i) {
+      tl.fromTo(w, { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.16, ease: "expo.out" }, 1.6 + i * 0.08);
+    });
+    tl.fromTo(go, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 2.75);
+    var gp = RH.pt(go, $("s7-anchor").parentElement, 0.5, 0.55);
+    tl.set(cur, { x: 2000, y: 1160, opacity: 1 }, 0);
+    RH.move(tl, cur, { x: gp.x + 20, y: gp.y + 8 }, 3.1, 0.8);
+    RH.click(tl, cur, 4.15, go);
+    tl.to(go, { backgroundColor: "#6a813e", duration: 0.15 }, 4.18);
+
+    restore();
+    window.__timelines["s7"] = tl;
+  });
+})();
+  </script>
+</template>

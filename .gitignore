@@ -24,3 +24,6 @@ launch/film/.hyperframes/
 launch/film/renders/work-*/
 launch/film/renders/.*
 launch/film/node_modules/
+launch/review/.hyperframes/
+launch/review/renders/work-*/
+launch/review/renders/.*

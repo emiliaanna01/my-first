@@ -1,0 +1,76 @@
+<template>
+  <style>
+
+@font-face{font-family:"DM Sans";font-weight:400;src:url("assets/fonts/DMSans-400-normal.woff2")}
+@font-face{font-family:"DM Sans";font-weight:500;src:url("assets/fonts/DMSans-500-normal.woff2")}
+@font-face{font-family:"Inter Tight Variable";font-weight:100 900;src:url("assets/fonts/InterTightVariable-100-900-normal.woff2")}
+
+    #root { position: absolute; inset: 0; overflow: hidden; }
+
+    .s1-clock { position: absolute; left: 140px; top: 330px; height: 230px; overflow: hidden; font-family: "Inter Tight Variable", sans-serif;
+      font-weight: 550; font-size: 200px; letter-spacing: -0.06em; line-height: 230px; color: #f3f5ea; }
+    .s1-clock span { display: block; white-space: nowrap; }
+    .s1-cap { position: absolute; left: 146px; top: 580px; margin: 0; font: 400 34px "DM Sans", sans-serif; color: #a9b78f; }
+    #s1-stack { position: absolute; left: 1080px; top: 330px; width: 640px; height: 330px; }
+    .s1-card { position: absolute; left: 0; top: 0; width: 640px; background: #f7f7f2; border-radius: 26px; padding: 30px 34px;
+      box-shadow: 0 30px 60px rgba(0,0,0,.35); font-family: "DM Sans", sans-serif; color: #1d221e; box-sizing: border-box; }
+    .s1-back { height: 250px; background: #e5e7dc; }
+    .s1-row { display: flex; align-items: center; gap: 18px; }
+    .s1-row i { width: 58px; height: 58px; border-radius: 50%; background: #e0ed9b; font: 500 26px/58px "DM Sans"; text-align: center; font-style: normal; }
+    .s1-row b { display: block; font-weight: 500; font-size: 28px; }
+    .s1-row small { font-size: 20px; color: #6b7064; }
+    .s1-row span { margin-left: auto; font-size: 20px; color: #6b7064; }
+    .s1-card p { margin: 22px 0 0; font-size: 30px; line-height: 1.35; }
+    .s1-foot { display: flex; gap: 12px; margin-top: 24px; }
+    .s1-foot span { font-size: 18px; font-weight: 500; padding: 7px 14px; border-radius: 999px; background: #1d221e; color: #f7f7f2; }
+    #s1-waiting { background: #ec644f; color: #fff; }
+
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <i id="s1-anchor" style="position:absolute;width:0;height:0"></i>
+    <div id="s1-ground" class="rh-ground" style="background:#1d221e"></div>
+    <div id="s1-clock" class="s1-clock"><span id="s1-t1">11:48 PM</span><span id="s1-t2">8:30 AM</span></div>
+    <p id="s1-cap" class="s1-cap">Your website, tonight.</p>
+    <div id="s1-stack">
+      <div class="s1-card s1-back" id="s1-c3"></div>
+      <div class="s1-card s1-back" id="s1-c2"></div>
+      <div class="s1-card" id="s1-c1">
+        <div class="s1-row"><i>W</i><div><b>New inquiry</b><small>Website form</small></div><span id="s1-time">11:48 PM</span></div>
+        <p>&#8220;Hi, do you have availability next week?&#8221;</p>
+        <div class="s1-foot"><span id="s1-unread">Unread</span><span id="s1-waiting">No reply &#183; 9h</span></div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+(function () {
+  var tl = gsap.timeline({ paused: true });
+  var $ = function (id) { return document.getElementById(id); };
+  document.fonts.ready.then(function () {
+    var restore = RH.unhide(document.getElementById("s1-anchor"));
+
+    var t1 = $("s1-t1"), t2 = $("s1-t2");
+    tl.fromTo($("s1-c1"), { y: -24 }, { y: 0, duration: 0.6, ease: "expo.out" }, 0);
+    tl.fromTo($("s1-cap"), { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.5);
+    tl.set($("s1-waiting"), { scale: 0, opacity: 0 }, 0);
+    // the night passes: the clock rolls like a counter
+    tl.to([t1, t2], { yPercent: -100, duration: 0.45, ease: "power3.inOut" }, 2.6);
+    tl.to($("s1-time"), { opacity: 0.5, duration: 0.2 }, 2.6);
+    tl.to($("s1-cap"), { opacity: 0, duration: 0.15 }, 2.55);
+    tl.call(function () {}, null, 2.7);
+    tl.to($("s1-waiting"), { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2.2)" }, 3.15);
+    // more inquiries pile up behind it
+    tl.fromTo($("s1-c2"), { y: 0, x: 0, opacity: 0 }, { y: 26, x: 18, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, 3.7);
+    tl.fromTo($("s1-c3"), { y: 0, x: 0, opacity: 0 }, { y: 50, x: 36, opacity: 1, duration: 0.45, ease: "back.out(1.8)" }, 4.0);
+    tl.fromTo($("s1-stack"), { rotation: 0 }, { rotation: -1.5, duration: 0.4, ease: "power2.out" }, 3.7);
+    // morning becomes the studio's world: the card lifts away and paper floods in
+    tl.to([$("s1-clock")], { opacity: 0, filter: "blur(10px)", duration: 0.22, ease: "power2.in" }, 6.25);
+    tl.to($("s1-stack"), { scale: 1.5, opacity: 0, filter: "blur(10px)", duration: 0.5, ease: "power3.in" }, 6.3);
+    tl.fromTo($("s1-ground"), { backgroundColor: "#1d221e" }, { backgroundColor: "#e1e8cd", duration: 0.4, ease: "power2.inOut" }, 6.55);
+
+    restore();
+    window.__timelines["s1"] = tl;
+  });
+})();
+  </script>
+</template>
