@@ -33,5 +33,6 @@ launch/reel/film/renders/.*
 launch/reel/audition/seg*.mp4
 launch/reel/audition/list.txt
 
-# day-trader skill working state (portfolio, orders, config)
-trader/
+# day-trader skill working state (portfolio, orders, prices); only the rules are kept
+trader/*
+!trader/config.json
