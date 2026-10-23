@@ -34,8 +34,10 @@ python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
 ## Motion design resources
 `docs/motion-design-claude-resources.md` lists the Claude skills, MCP connectors, GitHub repos, free tools/assets and
 YouTube tutorials for motion design and product launch videos.
-Everything Claude can run from that list is installed: 73 skills in `.claude/skills/`, 5 plugins (HyperFrames,
-video-shotcraft, motion-design-studio, manim-skill, Figma) and the frameworks via `./motion/setup.sh`.
+Everything Claude can run from that list is installed: 78 skills in `.claude/skills/` (incl. `hallmark`), 6 plugins
+(HyperFrames, video-shotcraft, motion-design-studio, manim-skill, Figma, superpowers) and the frameworks via
+`./motion/setup.sh`. A SessionStart hook (`.claude/hooks/session-start.sh`) rebuilds the plugins and tools in every
+fresh cloud container, so nothing is lost when it resets.
 See `motion/README.md` and `motion/MCP.md`.
 
 ## Deck

@@ -3,9 +3,13 @@
 Everything from `docs/motion-design-claude-resources.md` that Claude can run, installed into this repo.
 
 ```bash
-./motion/setup.sh          # npm frameworks, Manim venv, reference repos (idempotent)
+./motion/setup.sh          # npm frameworks, Manim + Kokoro TTS venvs, reference repos (idempotent)
 FULL=1 ./motion/setup.sh   # also the 470 MB Math-To-Manim examples
 ```
+
+In cloud sessions none of this needs running by hand: `.claude/hooks/session-start.sh` (a SessionStart hook in
+`.claude/settings.json`) reinstalls any declared plugin that is missing and runs `setup.sh` whenever a fresh container
+starts. Skills are committed, so they never need reinstalling.
 
 ## What loads by itself (committed in `.claude/`)
 
@@ -36,10 +40,13 @@ FULL=1 ./motion/setup.sh   # also the 470 MB Math-To-Manim examples
 Not copied: Orkas' and digitalsamba's `frontend-design` (one already exists) and digitalsamba's `remotion-official`
 (same as `remotion-best-practices`). HeyGen's own marketplace file fails validation, so its skills were copied instead.
 GSAP skills (`gsap-*`) were already here.
+Added 2026-10-23: `hallmark` (nutlope/hallmark, design skill for new websites and pages) and the standalone HyperFrames
+skills `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use` (same as the plugin's, usable without it).
 
 ## What `setup.sh` installs
 - **npm (`motion/node_modules`):** `hyperframes` CLI, `remotion` + `@remotion/cli`, Motion Canvas, Revideo, GSAP, Lottie (`lottie-web`, dotLottie), Three.js, `skills` CLI. Run with `npx --prefix motion <cli>`.
 - **Python (`~/.venvs/manim`):** Manim Community + `mcp`. Run `~/.venvs/manim/bin/manim -ql scene.py Scene`.
+- **Python (`~/.venvs/tts`):** `kokoro-onnx` + `soundfile` for `hyperframes tts` (the hook puts it on `PATH`).
 - **Reference repos (`motion/vendor/`, gitignored):** Claude-Code-Video-Toolkit, hyperframes-prompts, claude-code-video-toolkit, awesome-motion-design-agent-skills, SkillSpector, ae-motion, blender-mcp, manim-mcp-server, motion-canvas, revideo.
 
 ## MCP connectors

@@ -18,6 +18,11 @@ fi
 "$VENV/bin/pip" install -q --upgrade pip
 "$VENV/bin/pip" install -q manim mcp
 
+# Kokoro-82M voiceover for `hyperframes tts` (the films use voice af_heart)
+TTS=~/.venvs/tts
+[ -x "$TTS/bin/python" ] || python3 -m venv "$TTS"
+"$TTS/bin/pip" install -q kokoro-onnx soundfile
+
 # Reference repos: prompts, toolkits, templates and the desktop MCP servers (see motion/MCP.md)
 mkdir -p "$HERE/vendor"
 clone() { [ -d "$HERE/vendor/${1#*/}" ] || git clone -q --depth 1 "https://github.com/$1" "$HERE/vendor/${1#*/}"; }
@@ -39,3 +44,4 @@ echo "motion toolkit ready:"
 echo "  hyperframes $(cd "$HERE" && npx --no-install hyperframes --version 2>/dev/null | tail -1)"
 echo "  remotion    $(node -p "require('$HERE/node_modules/remotion/package.json').version")"
 echo "  manim       $("$VENV/bin/manim" --version 2>/dev/null | head -1)"
+echo "  kokoro      $("$TTS/bin/pip" show kokoro-onnx 2>/dev/null | sed -n 's/^Version: //p')"
