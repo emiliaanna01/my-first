@@ -622,12 +622,18 @@ window.REEL = { ready, renderFrame, canvas: cv, FRAMES, FPS, CONFIG };
 const $ = id => document.getElementById(id), scrub = $("scrub"), timeEl = $("time"), playBtn = $("play"), mb = $("mb");
 scrub.max = FRAMES - 1;
 let frame = 0, playing = false, t0 = 0, f0 = 0;
+const AUDIO_SRC = "__AUDIO__", snd = AUDIO_SRC.startsWith("data:") ? new Audio(AUDIO_SRC) : null;
 const show = f => { frame = Math.max(0, Math.min(FRAMES - 1, f)); renderFrame(frame, mb.checked ? 4 : 1); scrub.value = frame;
   timeEl.textContent = `${(frame / FPS).toFixed(2).padStart(5, "0")} / ${DUR.toFixed(2)}  f${frame}`; };
-const loop = now => { if (!playing) return; const f = f0 + Math.floor((now - t0) / 1000 * FPS); show(f % FRAMES); requestAnimationFrame(loop); };
-const toggle = () => { playing = !playing; playBtn.textContent = playing ? "Pause" : "Play"; if (playing) { t0 = performance.now(); f0 = frame; requestAnimationFrame(loop); } };
+const loop = now => { if (!playing) return;
+  const f = snd ? Math.floor(snd.currentTime * FPS) : f0 + Math.floor((now - t0) / 1000 * FPS);
+  if (snd && snd.ended) { snd.currentTime = 0; snd.play(); }
+  show(f % FRAMES); requestAnimationFrame(loop); };
+const toggle = () => { playing = !playing; playBtn.textContent = playing ? "Pause" : "Play";
+  if (playing) { t0 = performance.now(); f0 = frame; if (snd) { snd.currentTime = frame / FPS; snd.play(); } requestAnimationFrame(loop); }
+  else if (snd) snd.pause(); };
 playBtn.onclick = toggle; $("prev").onclick = () => show(frame - 1); $("next").onclick = () => show(frame + 1);
-scrub.oninput = () => { playing = false; playBtn.textContent = "Play"; show(+scrub.value); };
+scrub.oninput = () => { playing = false; playBtn.textContent = "Play"; if (snd) snd.pause(); show(+scrub.value); };
 mb.onchange = () => show(frame);
 addEventListener("keydown", e => { if (e.code === "Space") { e.preventDefault(); toggle(); } if (e.key === "ArrowLeft") show(frame - 1); if (e.key === "ArrowRight") show(frame + 1); });
 const bx = $("beats");

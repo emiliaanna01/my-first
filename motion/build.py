@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Inline subset fonts into the reel HTML so the delivered file is self-contained.
 
-usage: python3 motion/build.py motion/src/control-reel.html exports/control-reel.html
+usage: python3 motion/build.py motion/src/control-reel.html exports/control-reel.html [soundtrack.m4a]
 """
 import base64
 import io
@@ -35,15 +35,18 @@ def woff2_b64(path):
     return base64.b64encode(buf.getvalue()).decode()
 
 
-def main(src, dst):
+def main(src, dst, audio=None):
     html = open(src, encoding="utf-8").read()
     faces = "\n".join(
         f'@font-face{{font-family:"{name}";src:url(data:font/woff2;base64,{woff2_b64(path)}) format("woff2");font-display:block;}}'
         for name, path in FONTS.items()
     )
-    open(dst, "w", encoding="utf-8").write(html.replace("/*FONTS*/", faces))
+    html = html.replace("/*FONTS*/", faces)
+    if audio:
+        html = html.replace("__AUDIO__", "data:audio/mp4;base64," + base64.b64encode(open(audio, "rb").read()).decode())
+    open(dst, "w", encoding="utf-8").write(html)
     print(f"wrote {dst} ({len(html) // 1024} KB source, fonts inlined)")
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:3])
+    main(*sys.argv[1:4])
