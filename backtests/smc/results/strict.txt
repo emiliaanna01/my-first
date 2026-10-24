@@ -1,0 +1,41 @@
+XAUUSD: 1299748 one-minute bars, 2023-01-02 to 2026-10-16
+EURUSD: 1360599 one-minute bars, 2023-01-01 to 2026-10-16
+GBPUSD: 1358912 one-minute bars, 2023-01-01 to 2026-10-16
+USDJPY: 1360698 one-minute bars, 2023-01-01 to 2026-10-16
+
+                           n     win      avg R ±95%     PF   RRpl      P&L $
+-----------------------------------------------------------------------------
+ALL                       15    6.7%  -0.030 ±1.942   0.58    7.7     -90.10
+XAUUSD                     3    0.0%  -1.000 ±0.000   0.00    5.0     -63.35
+EURUSD                     3   33.3%  +3.854 ±9.707   8.71    6.9    +108.99
+GBPUSD                     2    0.0%  -1.000 ±0.000   0.00    7.9     -30.79
+USDJPY                     7    0.0%  -1.002 ±0.003   0.00    9.0    -104.95
+long                       7    0.0%  -1.000 ±0.000   0.00    5.6    -110.99
+short                      8   12.5%  +0.819 ±3.641   1.20    9.4     +20.88
+2023                       5   20.0%  +1.912 ±5.824   1.83   12.1     +55.67
+2024                       3    0.0%  -1.004 ±0.008   0.00    3.7     -43.90
+2025                       4    0.0%  -1.000 ±0.000   0.00    6.4     -67.41
+2026                       3    0.0%  -1.000 ±0.000   0.00    5.9     -34.46
+1H POI = FVG               4   25.0%  +2.640 ±7.281   2.40   13.7     +71.91
+1H POI = OB               11    0.0%  -1.001 ±0.002   0.00    5.5    -162.01
+
+exits: {'stop': 14, 'target': 1}
+$1,000 account at $20 risk a trade: final $909.90 (-9.0%), max drawdown $145.77
+
+funnel:
+                         XAUUSD   EURUSD   GBPUSD   USDJPY
+poi_FVG                     210      221      197      229
+poi_OB                      159      177      182      194
+poi_touched                 221      262      245      267
+ltf_choch                   707      721      824     1055
+ltf_bos                     750      666      755     1078
+ltf_fvg_in_poi               20       18       25       25
+retest_timeout               10        5        7        8
+fvg_failed                    7       10       15       10
+rejection                     3        3        3        7
+skip_no_target                0        0        0        0
+skip_rr                       0        0        1        0
+skip_gap_past_stop            0        0        0        0
+trades                        3        3        2        7
+poi_invalidated_close       130      170      150      139
+poi_invalidated_choch       236      224      226      277

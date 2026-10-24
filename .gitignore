@@ -36,3 +36,6 @@ launch/reel/audition/list.txt
 # day-trader skill working state (portfolio, orders, prices); only the rules are kept
 trader/*
 !trader/config.json
+
+# backtest price data (re-download with the fetch scripts)
+backtests/*/data/
