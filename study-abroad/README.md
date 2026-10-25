@@ -62,6 +62,12 @@ Ways to open it, none needing a Claude login:
 
 To rebuild after editing the data: `python3 study-abroad/bot/build_compass.py`.
 
+**Update alerts.** Each signal and opportunity carries the date it was logged (`added`), and the
+recommendation carries `changedOn` and `changeNote`. On the page, anything new since you last pressed
+*Mark as read* gets a NEW highlight, a pop-up lists it, and the tab title and app icon show the count. While the
+page or installed app is open it checks for the morning update every 10 minutes; press *Turn on desktop alerts*
+once to get a Windows notification when it arrives. The 11:30 Telegram message also lists what was added that day.
+
 ## Daily research run
 
 A scheduled Claude task runs every morning. It searches for new scholarships and programme

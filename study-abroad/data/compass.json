@@ -245,7 +245,9 @@
     "Ask target French universities how they nominate for Eiffel and their internal deadline.",
     "Keep the Italy applications running until an award letter arrives."
    ]
-  }
+  },
+  "changedOn": "2026-10-25",
+  "changeNote": "Hungary and France added. Italy leads if self-funded; Germany leads with a scholarship."
  },
  "signals": [
   {
@@ -257,7 +259,8 @@
    "impact": "down",
    "factor": "visa",
    "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "de-scholar-fasttrack",
@@ -268,7 +271,8 @@
    "impact": "up",
    "factor": "visa",
    "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "de-blocked-11904",
@@ -279,7 +283,8 @@
    "impact": "watch",
    "factor": "cost",
    "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "de-bavaria-fees",
@@ -290,7 +295,8 @@
    "impact": "watch",
    "factor": "cost",
    "link": "https://msingermany.com/blog/is-germany-still-free-2026-tuition-tracker",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "it-dhaka-vfs-notice",
@@ -301,7 +307,8 @@
    "impact": "up",
    "factor": "visa",
    "link": "https://ambdhaka.esteri.it/en/news/dall_ambasciata/2026/06/notice-for-student-visa-applicants/",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "it-backlog-20k",
@@ -312,7 +319,8 @@
    "impact": "watch",
    "factor": "visa",
    "link": "https://bdnews24.com/bangladesh/57ae4344c55e",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "it-dsu-2026-amount",
@@ -323,7 +331,8 @@
    "impact": "up",
    "factor": "funding",
    "link": "https://guides.scholarshipunion.com/italy-dsu/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "it-family-income-2026",
@@ -334,7 +343,8 @@
    "impact": "watch",
    "factor": "family",
    "link": "https://prefettura.interno.gov.it/sites/default/files/98/2023-12/family_reunification.pdf",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "it-iyt-next-call",
@@ -345,7 +355,8 @@
    "impact": "watch",
    "factor": "funding",
    "link": "https://www.esteri.it/en/servizi-opportunita/opportunita/borse-di-studio/per-cittadini-stranieri/progetti-speciali/invest-your-talent-in-italy/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "hu-sh-2027-deadline",
@@ -356,7 +367,8 @@
    "impact": "up",
    "factor": "funding",
    "link": "https://stipendiumhungaricum.hu/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "hu-sh-stipend",
@@ -367,7 +379,8 @@
    "impact": "watch",
    "factor": "cost",
    "link": "https://english.kre.hu/index.php/admission-degree-programmes/scholarships-for-international-students/stipendium-hungaricum.html",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "hu-no-family-reunion",
@@ -378,7 +391,8 @@
    "impact": "down",
    "factor": "family",
    "link": "https://tehran.mfa.gov.hu/asset/view/197489/Checklist%20SH_2025.pdf",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "fr-fees-2026",
@@ -389,7 +403,8 @@
    "impact": "down",
    "factor": "cost",
    "link": "https://iasservices.org.uk/france-tuition-fees-2026-2027-what-non-eu-students-need-to-know/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "fr-spouse-visa",
@@ -400,7 +415,8 @@
    "impact": "down",
    "factor": "family",
    "link": "https://bangladesh.campusfrance.org/fr/node/166",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "fr-funds-raised",
@@ -411,7 +427,8 @@
    "impact": "watch",
    "factor": "cost",
    "link": "https://bangladesh.campusfrance.org/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "eu-erasmus-2027-cycle",
@@ -422,7 +439,8 @@
    "impact": "up",
    "factor": "funding",
    "link": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "eu-finland-family-wait",
@@ -433,7 +451,8 @@
    "impact": "watch",
    "factor": "family",
    "link": "https://eiglaw.com/finland-proposes-student-family-reunification-waiting-period/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   }
  ],
  "picks": [
@@ -447,7 +466,8 @@
    "fit": "high",
    "why": "German and French partners, so a win can mean Germany without the visa queue.",
    "link": "https://www.epog.eu/admission-and-scholarships/admission/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "emjm-grenfin",
@@ -459,7 +479,8 @@
    "fit": "high",
    "why": "Bologna-led with a Paris track. Search 'GrEnFIn' in the catalogue for the official page.",
    "link": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "emjm-catalogue",
@@ -471,7 +492,8 @@
    "fit": "high",
    "why": "Finish a shortlist of 3 by this date.",
    "link": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "it-unibo-qf",
@@ -483,7 +505,8 @@
    "fit": "high",
    "why": "English-taught; non-EU windows usually Mar–May.",
    "link": "https://www.unibo.it/en/study/second-cycle-degree/programme/2012/8409",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "it-unito-qfi",
@@ -495,7 +518,8 @@
    "fit": "high",
    "why": "English B2 checked at interview; Turin is cheaper than Milan.",
    "link": "https://apply.unito.it/it_IT/courses/course/288-quantitative-finance-and-insurance",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "it-unimi-mef",
@@ -507,7 +531,8 @@
    "fit": "medium",
    "why": "Last cycle's non-EU window was 22 Jan – 30 Apr.",
    "link": "https://apps.unimi.it/files/bandi/avviso-ammissione-2027-1-finance-and-economics-%28mef%29-%28classe-lm-16-r%29.pdf?30-MAR-26",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "it-unipv-finance",
@@ -519,7 +544,8 @@
    "fit": "medium",
    "why": "Small city, lower rent, near Milan's finance jobs.",
    "link": "https://portale.unipv.it/it/didattica/corsi-di-laurea/corsi-di-laurea-magistrale/finance",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "it-dsu",
@@ -531,7 +557,8 @@
    "fit": "high",
    "why": "Calls open around June 2027; start the legalised family income papers in spring.",
    "link": "https://www.er-go.it/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "it-iyt",
@@ -543,7 +570,8 @@
    "fit": "medium",
    "why": "Next call expected early 2027; check the country list and age limit.",
    "link": "https://www.esteri.it/en/servizi-opportunita/opportunita/borse-di-studio/per-cittadini-stranieri/progetti-speciali/invest-your-talent-in-italy/",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   },
   {
    "id": "hu-sh",
@@ -555,7 +583,8 @@
    "fit": "high",
    "why": "Bangladesh is a partner country; you also need the Ministry of Education's nomination.",
    "link": "https://stipendiumhungaricum.hu/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "hu-corvinus-finance",
@@ -567,7 +596,8 @@
    "fit": "medium",
    "why": "Hungary's top business school; pick it as one of your two SH choices.",
    "link": "https://www.uni-corvinus.hu/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "hu-debrecen-business",
@@ -579,7 +609,8 @@
    "fit": "medium",
    "why": "Large international intake and a South Asia office.",
    "link": "https://southasia.edu.unideb.hu/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "fr-eiffel",
@@ -591,7 +622,8 @@
    "fit": "medium",
    "why": "Your French university nominates you; ask each programme for its internal deadline (usually Dec–Jan).",
    "link": "https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "fr-campus-bd",
@@ -603,7 +635,8 @@
    "fit": "medium",
    "why": "Every French application from Bangladesh goes through this portal and its interview.",
    "link": "https://bangladesh.campusfrance.org/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "de-goethe-mmf",
@@ -615,7 +648,8 @@
    "fit": "medium",
    "why": "Realistic for 2027 only with a funded scholarship because of the visa queue.",
    "link": "https://www.wiwi.uni-frankfurt.de/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "de-magdeburg-imf",
@@ -627,7 +661,8 @@
    "fit": "high",
    "why": "Good fit for your grades; pair it with an Erasmus or DAAD award.",
    "link": "https://www.fww.ovgu.de/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "de-fu-finance",
@@ -639,7 +674,8 @@
    "fit": "medium",
    "why": "Berlin jobs but high rent. Confirm the 2027 date.",
    "link": "https://www.wiwiss.fu-berlin.de/",
-   "verified": false
+   "verified": false,
+   "added": "2026-10-25"
   },
   {
    "id": "de-daad-db",
@@ -651,7 +687,8 @@
    "fit": "high",
    "why": "Target date for the German shortlist.",
    "link": "https://www2.daad.de/deutschland/studienangebote/international-programmes/en/",
-   "verified": true
+   "verified": true,
+   "added": "2026-10-25"
   }
  ]
 }

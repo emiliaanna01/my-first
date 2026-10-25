@@ -1,5 +1,5 @@
 // Network first, so the daily update shows as soon as it is online; the last copy is kept for offline use.
-const CACHE = "compass-v1";
+const CACHE = "compass-v2";
 const FILES = ["./", "index.html", "data.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -16,4 +16,13 @@ self.addEventListener("fetch", (e) => {
       .then((res) => { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); return res; })
       .catch(() => caches.match(e.request).then((r) => r || caches.match("index.html")))
   );
+});
+
+// Clicking a desktop alert brings the compass window forward (or opens it).
+self.addEventListener("notificationclick", (e) => {
+  e.notification.close();
+  e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((list) => {
+    const win = list.find((c) => c.url.includes("/site/") || c.url.endsWith("/"));
+    return win ? win.focus() : self.clients.openWindow("./");
+  }));
 });

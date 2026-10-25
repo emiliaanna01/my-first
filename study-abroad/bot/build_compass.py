@@ -45,6 +45,8 @@ def check(data):
 def main():
     data = json.loads(SRC.read_text(encoding="utf-8"))
     check(data)
+    for row in data["signals"] + data["picks"]:
+        row.setdefault("added", data["updated"])  # the day it was logged; drives the NEW highlights
     data["builtAt"] = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     (SITE / "data.js").write_text(f"window.COMPASS = {payload};\n", encoding="utf-8")
