@@ -37,6 +37,37 @@ Test locally without sending:
 python3 study-abroad/bot/telegram_digest.py --dry-run --digest
 ```
 
+## Study Europe Compass (Germany, Italy, Hungary, France)
+
+A four-country comparison for this profile: the recommendation for the self-funded and scholarship scenarios,
+a ranking, factor scores with adjustable weights, two-year cost against the 15–25 lakh budget, cash needed before
+the visa, a timeline to a September 2027 start, the latest signals and top opportunities.
+
+| Path | What it is |
+|---|---|
+| `data/compass.json` | The data: scores, recommendation, signals, opportunities. The daily research run edits this file. |
+| `bot/build_compass.py` | Checks `compass.json` and builds `site/data.js` and `compass.html` |
+| `site/` | The website (no login): `index.html`, `data.js`, app manifest, offline worker, icons |
+| `compass.html` | The same page with the data inlined, published to claude.ai (adds an "Ask Claude" box) |
+| `open_compass.bat` | Windows: pulls the latest version and opens the page in your browser |
+
+Ways to open it, none needing a Claude login:
+
+- **Web link:** https://raw.githack.com/emiliaanna01/my-first/claude/friendly-cerf-x5ro5z/study-abroad/site/index.html
+  (served straight from this branch; updates show within a few minutes of each push).
+- **As a desktop app:** open the link in Chrome, then menu ⋮ → *Cast, save and share* → *Install page as app*
+  (or the *Install as an app* button on the page). You get a desktop and taskbar icon that opens in its own window.
+- **Offline / on your PC:** with this repo cloned, double-click `study-abroad/open_compass.bat`.
+- **Inside claude.ai:** https://claude.ai/artifact/ToiYYKs82G9wXLUcNGBysR
+
+To rebuild after editing the data: `python3 study-abroad/bot/build_compass.py`.
+
+**Update alerts.** Each signal and opportunity carries the date it was logged (`added`), and the
+recommendation carries `changedOn` and `changeNote`. On the page, anything new since you last pressed
+*Mark as read* gets a NEW highlight, a pop-up lists it, and the tab title and app icon show the count. While the
+page or installed app is open it checks for the morning update every 10 minutes; press *Turn on desktop alerts*
+once to get a Windows notification when it arrives. The 11:30 Telegram message also lists what was added that day.
+
 ## Daily research run
 
 A scheduled Claude task runs every morning. It searches for new scholarships and programme

@@ -4,6 +4,7 @@ Reads data/opportunities.json, data/roadmap.json and data/daily_plan.json and po
   - today's study / application session (every day)
   - an alert for anything due in exactly 30, 14, 7, 3 or 1 days (or today)
   - a full digest on Mondays, or whenever --digest is passed
+  - what the morning research run added to the Study Europe Compass today (data/compass.json)
 
 Needs TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID in the environment.
 Standard library only, so the GitHub Action needs no pip install.
@@ -11,6 +12,7 @@ Standard library only, so the GitHub Action needs no pip install.
 
 import argparse
 import datetime as dt
+import html
 import json
 import os
 import pathlib
@@ -21,6 +23,8 @@ import urllib.request
 DATA = pathlib.Path(__file__).resolve().parent.parent / "data"
 ALERT_DAYS = {30, 14, 7, 3, 1, 0}
 DONE_STATUSES = {"applied", "accepted", "rejected", "dropped"}
+COMPASS_URL = "https://raw.githack.com/emiliaanna01/my-first/claude/friendly-cerf-x5ro5z/study-abroad/site/index.html"
+FLAGS = {"de": "🇩🇪", "it": "🇮🇹", "hu": "🇭🇺", "fr": "🇫🇷", "eu": "🇪🇺"}
 
 
 def load(name):
@@ -69,6 +73,29 @@ def todays_session(today):
     return text + f"\nLast 7 days: {done}/7 sessions done."
 
 
+def compass_news(today):
+    """Signals, opportunities and a recommendation change logged today, or "" when there are none."""
+    path = DATA / "compass.json"
+    if not path.exists():
+        return ""
+    data = json.loads(path.read_text(encoding="utf-8"))
+    day = today.isoformat()
+    lines = []
+    analysis = data.get("analysis", {})
+    if analysis.get("changedOn") == day:
+        lines.append(f"• <b>Recommendation changed:</b> {html.escape(analysis.get('changeNote', ''), quote=False)}")
+    for s in data.get("signals", []):
+        if s.get("added") == day:
+            lines.append(f"• {FLAGS.get(s.get('country'), '')} {html.escape(s['title'], quote=False)}")
+    for p in data.get("picks", []):
+        if p.get("added") == day:
+            lines.append(f"• {FLAGS.get(p.get('country'), '')} New opportunity: {html.escape(p['name'], quote=False)}")
+    if not lines:
+        return ""
+    more = f"\n…and {len(lines) - 8} more" if len(lines) > 8 else ""
+    return "🆕 <b>Study Europe Compass updated</b>\n" + "\n".join(lines[:8]) + more + f'\n<a href="{COMPASS_URL}">Open the compass</a>'
+
+
 def build_message(today, digest):
     items = sorted(open_items(today))
     alerts = [i for i in items if i[0] in ALERT_DAYS or i[0] < 0]
@@ -76,6 +103,9 @@ def build_message(today, digest):
     session = todays_session(today)
     if session:
         parts.append(session)
+    news = compass_news(today)
+    if news:
+        parts.append(news)
     if alerts:
         parts.append("⏰ <b>Deadline alerts</b>\n" + "\n".join(line(*i) for i in alerts))
     if digest:

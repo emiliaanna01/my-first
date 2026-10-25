@@ -1,0 +1,694 @@
+{
+ "updated": "2026-10-25",
+ "countries": [
+  {
+   "id": "de",
+   "name": "Germany"
+  },
+  {
+   "id": "it",
+   "name": "Italy"
+  },
+  {
+   "id": "hu",
+   "name": "Hungary"
+  },
+  {
+   "id": "fr",
+   "name": "France"
+  }
+ ],
+ "factors": [
+  {
+   "id": "visa",
+   "name": "Visa from Dhaka",
+   "weight": 3,
+   "self": {
+    "de": 2,
+    "it": 6,
+    "hu": 7,
+    "fr": 5
+   },
+   "sch": {
+    "de": 9,
+    "it": 7,
+    "hu": 8,
+    "fr": 7
+   },
+   "note": {
+    "self": "Germany: 27+ month queue for self-funded Master's. Italy: VFS via Universitaly, summer rush. Hungary: embassy route, fairly quick. France: Campus France, 3 interviews, about 3 months.",
+    "sch": "German-gov / EU-funded scholars skip Germany's queue. Stipendium Hungaricum and Eiffel holders get priority handling."
+   }
+  },
+  {
+   "id": "cost",
+   "name": "Tuition and living cost",
+   "weight": 3,
+   "self": {
+    "de": 6,
+    "it": 8,
+    "hu": 6,
+    "fr": 6
+   },
+   "sch": {
+    "de": 9,
+    "it": 9,
+    "hu": 7,
+    "fr": 9
+   },
+   "note": {
+    "self": "Germany: no tuition but €11,904 blocked. Italy: income-based fees, cheap rent. Hungary: €3–5k fees, cheapest living. France: about €3,950/yr fees.",
+    "sch": "Erasmus €1,400/month, DAAD ~€992, Eiffel ~€1,181. Hungary's stipend (HUF 43,700 ≈ €110) covers little beyond the dorm."
+   }
+  },
+  {
+   "id": "funding",
+   "name": "Scholarship odds for you",
+   "weight": 2,
+   "self": {
+    "de": 4,
+    "it": 8,
+    "hu": 6,
+    "fr": 4
+   },
+   "sch": {
+    "de": 10,
+    "it": 10,
+    "hu": 10,
+    "fr": 10
+   },
+   "note": {
+    "self": "Italy's DSU is income-based, so most Bangladeshi families qualify. Stipendium Hungaricum is open to Bangladesh with ministry nomination. German and French awards are few and competitive.",
+    "sch": "Scenario assumes you already hold the award."
+   }
+  },
+  {
+   "id": "family",
+   "name": "Bringing your wife",
+   "weight": 2,
+   "self": {
+    "de": 6,
+    "it": 5,
+    "hu": 2,
+    "fr": 4
+   },
+   "sch": {
+    "de": 6,
+    "it": 5,
+    "hu": 2,
+    "fr": 4
+   },
+   "note": {
+    "self": "Germany: spouse visa with A1 German and funds. Italy: ~€10,650/yr income + housing. Hungary: no family reunification for study permits. France: spouse needs a separate visitor visa, no work.",
+    "sch": "Same rules; a stipend helps show funds in Germany and Italy."
+   }
+  },
+  {
+   "id": "careers",
+   "name": "Jobs after the degree",
+   "weight": 2,
+   "self": {
+    "de": 9,
+    "it": 5,
+    "hu": 4,
+    "fr": 6
+   },
+   "sch": {
+    "de": 9,
+    "it": 5,
+    "hu": 4,
+    "fr": 6
+   },
+   "note": {
+    "self": "Germany: 18-month job-search permit, Frankfurt. France: 1-year post-study permit, Paris finance. Italy: 9–12 months. Hungary: small market, low pay.",
+    "sch": "Unchanged by funding."
+   }
+  },
+  {
+   "id": "programmes",
+   "name": "Finance programme fit",
+   "weight": 1,
+   "self": {
+    "de": 8,
+    "it": 7,
+    "hu": 6,
+    "fr": 7
+   },
+   "sch": {
+    "de": 8,
+    "it": 7,
+    "hu": 6,
+    "fr": 7
+   },
+   "note": {
+    "self": "Germany: Frankfurt, Magdeburg, FU Berlin. Italy: Bologna, Turin, Milan, Pavia. Hungary: Corvinus, Debrecen. France: strong but many English finance MSc are at fee-charging schools.",
+    "sch": "Unchanged by funding."
+   }
+  },
+  {
+   "id": "admission",
+   "name": "Admission odds at CGPA 3.21",
+   "weight": 1,
+   "self": {
+    "de": 6,
+    "it": 8,
+    "hu": 7,
+    "fr": 6
+   },
+   "sch": {
+    "de": 6,
+    "it": 8,
+    "hu": 7,
+    "fr": 6
+   },
+   "note": {
+    "self": "German 1.79 clears most cut-offs. Italian pre-evaluation and Hungarian entrance interviews are broader. French public Master's are selective.",
+    "sch": "Unchanged by funding."
+   }
+  },
+  {
+   "id": "language",
+   "name": "Daily life in English",
+   "weight": 1,
+   "self": {
+    "de": 5,
+    "it": 4,
+    "hu": 4,
+    "fr": 3
+   },
+   "sch": {
+    "de": 5,
+    "it": 4,
+    "hu": 4,
+    "fr": 3
+   },
+   "note": {
+    "self": "All teach in English; part-time jobs and paperwork need the local language, most of all in France.",
+    "sch": "Unchanged by funding."
+   }
+  }
+ ],
+ "analysis": {
+  "self": {
+   "headline": "Self-funded, Italy is your best 2027 route. Apply to Stipendium Hungaricum and Erasmus Mundus in parallel; Germany's Dhaka visa queue (27+ months) blocks a self-funded start.",
+   "routes": [
+    {
+     "country": "it",
+     "title": "Italy with a DSU regional grant",
+     "status": "go",
+     "detail": "Apply Jan–Apr 2027, pre-enrol on Universitaly. DSU pays up to about €8,246/year plus a fee waiver if your family's income qualifies."
+    },
+    {
+     "country": "eu",
+     "title": "Erasmus Mundus + Stipendium Hungaricum, in parallel",
+     "status": "watch",
+     "detail": "Both are free to apply and close in January. Hungary is fully funded, but your wife can't join on family reunification while you study."
+    },
+    {
+     "country": "de",
+     "title": "Germany, self-funded",
+     "status": "blocked",
+     "detail": "Admission in mid-2027 means a visa appointment around late 2029. Keep Germany for an award or a job move after an EU degree."
+    }
+   ],
+   "next": [
+    "Take IELTS on 5 Dec; book a backup date in January.",
+    "Shortlist 3 Erasmus Mundus programmes; submit before 7–27 Jan.",
+    "Stipendium Hungaricum: register on DreamApply when the call opens (Nov) and pick 2 finance programmes; deadline expected 15 Jan.",
+    "Start Italian paperwork: Declaration of Value or CIMEA, and legalised family income papers for DSU."
+   ]
+  },
+  "sch": {
+   "headline": "With an EU- or government-funded award, Germany moves to first, France second: both skip the queue and have the stronger job markets.",
+   "routes": [
+    {
+     "country": "de",
+     "title": "Germany on Erasmus / DAAD",
+     "status": "go",
+     "detail": "Funded scholars are processed right after Consular Services Portal registration. Arrive Oct 2027."
+    },
+    {
+     "country": "fr",
+     "title": "France on Eiffel, or Italy on Erasmus",
+     "status": "go",
+     "detail": "Eiffel covers ~€1,181/month and fees; universities nominate you, usually by January."
+    },
+    {
+     "country": "hu",
+     "title": "Hungary on Stipendium Hungaricum",
+     "status": "watch",
+     "detail": "Fees and dorm covered, but the stipend is small and your wife can't join on family reunification."
+    }
+   ],
+   "next": [
+    "Pick Erasmus programmes with a German or French partner (EPOG has both).",
+    "Ask target French universities how they nominate for Eiffel and their internal deadline.",
+    "Keep the Italy applications running until an award letter arrives."
+   ]
+  },
+  "changedOn": "2026-10-25",
+  "changeNote": "Hungary and France added. Italy leads if self-funded; Germany leads with a scholarship."
+ },
+ "signals": [
+  {
+   "id": "de-dhaka-queue-27m",
+   "date": "2026-06-04",
+   "country": "de",
+   "title": "Dhaka: self-funded Master's visas wait more than 27 months",
+   "detail": "The German Embassy says the wait for students without a German or EU scholarship is more than 27 months and is not expected to fall. Registration opens only after admission.",
+   "impact": "down",
+   "factor": "visa",
+   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "de-scholar-fasttrack",
+   "date": "2026-06-04",
+   "country": "de",
+   "title": "German-gov or EU-funded scholars skip the queue",
+   "detail": "Scholarship applicants are processed right after CSP registration. Only German-government or EU-funded awards (DAAD, Erasmus Mundus) count.",
+   "impact": "up",
+   "factor": "visa",
+   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "de-blocked-11904",
+   "date": "2026-06-04",
+   "country": "de",
+   "title": "Blocked account stays at €11,904 (€992/month)",
+   "detail": "Minimum balance for the student visa, per the Dhaka embassy page. About 16.7 lakh BDT at 140.",
+   "impact": "watch",
+   "factor": "cost",
+   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "de-bavaria-fees",
+   "date": "2026-05-01",
+   "country": "de",
+   "title": "Bavaria: more universities may charge non-EU fees",
+   "detail": "TUM charges €4,000–6,000 per semester for Master's; one tracker says FAU starts from summer 2027. Baden-Württemberg charges €1,500. Other states stay free.",
+   "impact": "watch",
+   "factor": "cost",
+   "link": "https://msingermany.com/blog/is-germany-still-free-2026-tuition-tracker",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-dhaka-vfs-notice",
+   "date": "2026-06-10",
+   "country": "it",
+   "title": "Italy: VFS emails Universitaly registrants for visa appointments",
+   "detail": "No separate booking. Deadline for 2026/27 applications is 30 Nov 2026. A CIMEA certificate or Declaration of Value is required; relatives may guarantee funds.",
+   "impact": "up",
+   "factor": "visa",
+   "link": "https://ambdhaka.esteri.it/en/news/dall_ambasciata/2026/06/notice-for-student-visa-applicants/",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-backlog-20k",
+   "date": "2026-08-21",
+   "country": "it",
+   "title": "Italian embassy promises to clear ~20,000 pending Bangladeshi visas",
+   "detail": "Mostly work visas, but it strains the same embassy. Expect slow summer appointments; register on Universitaly early.",
+   "impact": "watch",
+   "factor": "visa",
+   "link": "https://bdnews24.com/bangladesh/57ae4344c55e",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-dsu-2026-amount",
+   "date": "2026-10-06",
+   "country": "it",
+   "title": "DSU 2026/27 top grant about €8,246/year (ER.GO, Padova)",
+   "detail": "Income-based; non-EU students compete on equal terms using an ISEE parificato. 2027/28 calls expected from June 2027.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://guides.scholarshipunion.com/italy-dsu/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-family-income-2026",
+   "date": "2026-10-01",
+   "country": "it",
+   "title": "Italy spouse reunification: about €10,652/year income",
+   "detail": "Based on the 2026 social allowance (€7,101) plus 50%. Also needs housing and a residence permit valid for at least a year.",
+   "impact": "watch",
+   "factor": "family",
+   "link": "https://prefettura.interno.gov.it/sites/default/files/98/2023-12/family_reunification.pdf",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-iyt-next-call",
+   "date": "2026-10-25",
+   "country": "it",
+   "title": "Invest Your Talent in Italy: next call expected early 2027",
+   "detail": "Last round ran 20 Apr – 11 May 2026. Needs B2 English, birth on/after 1 Jan 2000; can't be combined with DSU.",
+   "impact": "watch",
+   "factor": "funding",
+   "link": "https://www.esteri.it/en/servizi-opportunita/opportunita/borse-di-studio/per-cittadini-stranieri/progetti-speciali/invest-your-talent-in-italy/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "hu-sh-2027-deadline",
+   "date": "2026-10-25",
+   "country": "hu",
+   "title": "Stipendium Hungaricum 2027/28: deadline expected 15 Jan 2027",
+   "detail": "The official call isn't out yet; last year's closed 15 Jan at 14:00 CET. Apply on DreamApply and get nominated by Bangladesh's Ministry of Education.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://stipendiumhungaricum.hu/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "hu-sh-stipend",
+   "date": "2026-10-25",
+   "country": "hu",
+   "title": "Stipendium Hungaricum pays HUF 43,700/month + dorm",
+   "detail": "Tuition is free and you get a dorm place or HUF 40,000/month for housing. The cash stipend is small, so plan your own living money.",
+   "impact": "watch",
+   "factor": "cost",
+   "link": "https://english.kre.hu/index.php/admission-degree-programmes/scholarships-for-international-students/stipendium-hungaricum.html",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "hu-no-family-reunion",
+   "date": "2025-09-01",
+   "country": "hu",
+   "title": "Hungary: no family reunification for study permits",
+   "detail": "A Hungarian embassy checklist says family members of students can't apply on family reunification. Confirm with the embassy covering Bangladesh.",
+   "impact": "down",
+   "factor": "family",
+   "link": "https://tehran.mfa.gov.hu/asset/view/197489/Checklist%20SH_2025.pdf",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "fr-fees-2026",
+   "date": "2026-05-21",
+   "country": "fr",
+   "title": "France: non-EU Master's fees about €3,950/yr; exemptions capped",
+   "detail": "A May 2026 decree limits universities to exempting 30% of non-EU students in 2026/27, falling to 20%. Eiffel and French-government scholars pay nothing.",
+   "impact": "down",
+   "factor": "cost",
+   "link": "https://iasservices.org.uk/france-tuition-fees-2026-2027-what-non-eu-students-need-to-know/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "fr-spouse-visa",
+   "date": "2026-10-25",
+   "country": "fr",
+   "title": "France: the student visa doesn't cover your wife",
+   "detail": "Campus France Bangladesh says the student visa is for the student only; a spouse applies separately as a long-stay visitor and can't work.",
+   "impact": "down",
+   "factor": "family",
+   "link": "https://bangladesh.campusfrance.org/fr/node/166",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "fr-funds-raised",
+   "date": "2026-08-01",
+   "country": "fr",
+   "title": "France raised the student-visa funds requirement from 1 Aug 2026",
+   "detail": "The old figure was €615/month. Check the new amount on the Campus France Bangladesh checklist before you plan.",
+   "impact": "watch",
+   "factor": "cost",
+   "link": "https://bangladesh.campusfrance.org/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "eu-erasmus-2027-cycle",
+   "date": "2026-10-20",
+   "country": "eu",
+   "title": "Erasmus Mundus 2027 cycle is open: most deadlines Dec – Jan",
+   "detail": "Up to 3 applications. €1,400/month plus fees and travel. A win also clears the German visa queue.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "eu-finland-family-wait",
+   "date": "2026-09-10",
+   "country": "eu",
+   "title": "Finland bill: students' families wait 1 year before applying",
+   "detail": "Proposed to start 5 Apr 2027. With €10–12k fees, it's why Finland isn't in your top four.",
+   "impact": "watch",
+   "factor": "family",
+   "link": "https://eiglaw.com/finland-proposes-student-family-reunification-waiting-period/",
+   "verified": false,
+   "added": "2026-10-25"
+  }
+ ],
+ "picks": [
+  {
+   "id": "emjm-epog",
+   "name": "Erasmus Mundus EPOG (economic policies, finance track)",
+   "country": "eu",
+   "kind": "scholarship",
+   "funding": "Full: fees + €1,400/month",
+   "deadline": "2027-01-27",
+   "fit": "high",
+   "why": "German and French partners, so a win can mean Germany without the visa queue.",
+   "link": "https://www.epog.eu/admission-and-scholarships/admission/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "emjm-grenfin",
+   "name": "Erasmus Mundus GrEnFIn (energy markets and finance)",
+   "country": "eu",
+   "kind": "scholarship",
+   "funding": "Full: fees + €1,400/month",
+   "deadline": "2027-01-07",
+   "fit": "high",
+   "why": "Bologna-led with a Paris track. Search 'GrEnFIn' in the catalogue for the official page.",
+   "link": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "emjm-catalogue",
+   "name": "Erasmus Mundus catalogue: finance, data, management",
+   "country": "eu",
+   "kind": "search",
+   "funding": "Full: fees + €1,400/month",
+   "deadline": "2026-12-15",
+   "fit": "high",
+   "why": "Finish a shortlist of 3 by this date.",
+   "link": "https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-unibo-qf",
+   "name": "University of Bologna: MSc Quantitative Finance",
+   "country": "it",
+   "kind": "program",
+   "funding": "Income-based fees; ER.GO DSU up to ~€8,246/yr",
+   "deadline": null,
+   "fit": "high",
+   "why": "English-taught; non-EU windows usually Mar–May.",
+   "link": "https://www.unibo.it/en/study/second-cycle-degree/programme/2012/8409",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-unito-qfi",
+   "name": "University of Turin: Quantitative Finance and Insurance",
+   "country": "it",
+   "kind": "program",
+   "funding": "Low fees (listed ~€600/yr); EDISU DSU",
+   "deadline": null,
+   "fit": "high",
+   "why": "English B2 checked at interview; Turin is cheaper than Milan.",
+   "link": "https://apply.unito.it/it_IT/courses/course/288-quantitative-finance-and-insurance",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-unimi-mef",
+   "name": "University of Milan: Finance and Economics (MEF)",
+   "country": "it",
+   "kind": "program",
+   "funding": "Income-based fees; Lombardy DSU",
+   "deadline": "2027-04-30",
+   "fit": "medium",
+   "why": "Last cycle's non-EU window was 22 Jan – 30 Apr.",
+   "link": "https://apps.unimi.it/files/bandi/avviso-ammissione-2027-1-finance-and-economics-%28mef%29-%28classe-lm-16-r%29.pdf?30-MAR-26",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-unipv-finance",
+   "name": "University of Pavia: MSc Finance",
+   "country": "it",
+   "kind": "program",
+   "funding": "Income-based fees; Lombardy DSU",
+   "deadline": null,
+   "fit": "medium",
+   "why": "Small city, lower rent, near Milan's finance jobs.",
+   "link": "https://portale.unipv.it/it/didattica/corsi-di-laurea/corsi-di-laurea-magistrale/finance",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-dsu",
+   "name": "DSU regional grant (ER.GO, ESU Padova, EDISU …)",
+   "country": "it",
+   "kind": "scholarship",
+   "funding": "Up to ~€8,246/yr + fee waiver + meals/housing",
+   "deadline": null,
+   "fit": "high",
+   "why": "Calls open around June 2027; start the legalised family income papers in spring.",
+   "link": "https://www.er-go.it/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "it-iyt",
+   "name": "Invest Your Talent in Italy",
+   "country": "it",
+   "kind": "scholarship",
+   "funding": "Ministry scholarship for selected Master's",
+   "deadline": null,
+   "fit": "medium",
+   "why": "Next call expected early 2027; check the country list and age limit.",
+   "link": "https://www.esteri.it/en/servizi-opportunita/opportunita/borse-di-studio/per-cittadini-stranieri/progetti-speciali/invest-your-talent-in-italy/",
+   "verified": true,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "hu-sh",
+   "name": "Stipendium Hungaricum (Hungarian government)",
+   "country": "hu",
+   "kind": "scholarship",
+   "funding": "Full tuition + HUF 43,700/month + dorm + insurance",
+   "deadline": "2027-01-15",
+   "fit": "high",
+   "why": "Bangladesh is a partner country; you also need the Ministry of Education's nomination.",
+   "link": "https://stipendiumhungaricum.hu/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "hu-corvinus-finance",
+   "name": "Corvinus University of Budapest: MSc Finance",
+   "country": "hu",
+   "kind": "program",
+   "funding": "Stipendium Hungaricum eligible",
+   "deadline": null,
+   "fit": "medium",
+   "why": "Hungary's top business school; pick it as one of your two SH choices.",
+   "link": "https://www.uni-corvinus.hu/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "hu-debrecen-business",
+   "name": "University of Debrecen: business and finance Master's",
+   "country": "hu",
+   "kind": "program",
+   "funding": "Stipendium Hungaricum eligible",
+   "deadline": null,
+   "fit": "medium",
+   "why": "Large international intake and a South Asia office.",
+   "link": "https://southasia.edu.unideb.hu/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "fr-eiffel",
+   "name": "Eiffel Excellence Scholarship (Master's)",
+   "country": "fr",
+   "kind": "scholarship",
+   "funding": "~€1,181/month + travel + insurance; no fees",
+   "deadline": null,
+   "fit": "medium",
+   "why": "Your French university nominates you; ask each programme for its internal deadline (usually Dec–Jan).",
+   "link": "https://www.campusfrance.org/en/eiffel-scholarship-program-of-excellence",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "fr-campus-bd",
+   "name": "Campus France Bangladesh: Études en France",
+   "country": "fr",
+   "kind": "search",
+   "funding": "Public Master's ~€3,950/yr",
+   "deadline": null,
+   "fit": "medium",
+   "why": "Every French application from Bangladesh goes through this portal and its interview.",
+   "link": "https://bangladesh.campusfrance.org/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "de-goethe-mmf",
+   "name": "Goethe Univ. Frankfurt: MSc Money, Macro and Finance",
+   "country": "de",
+   "kind": "program",
+   "funding": "No tuition; semester fee only",
+   "deadline": "2027-05-15",
+   "fit": "medium",
+   "why": "Realistic for 2027 only with a funded scholarship because of the visa queue.",
+   "link": "https://www.wiwi.uni-frankfurt.de/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "de-magdeburg-imf",
+   "name": "Univ. of Magdeburg: International Management and Finance",
+   "country": "de",
+   "kind": "program",
+   "funding": "No tuition; low living costs",
+   "deadline": "2027-05-31",
+   "fit": "high",
+   "why": "Good fit for your grades; pair it with an Erasmus or DAAD award.",
+   "link": "https://www.fww.ovgu.de/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "de-fu-finance",
+   "name": "Freie Universität Berlin: MSc Finance",
+   "country": "de",
+   "kind": "program",
+   "funding": "No tuition; semester fee only",
+   "deadline": "2027-05-31",
+   "fit": "medium",
+   "why": "Berlin jobs but high rent. Confirm the 2027 date.",
+   "link": "https://www.wiwiss.fu-berlin.de/",
+   "verified": false,
+   "added": "2026-10-25"
+  },
+  {
+   "id": "de-daad-db",
+   "name": "DAAD database: English, tuition-free finance MSc",
+   "country": "de",
+   "kind": "search",
+   "funding": "No tuition outside Bavaria and Baden-Württemberg",
+   "deadline": "2027-02-15",
+   "fit": "high",
+   "why": "Target date for the German shortlist.",
+   "link": "https://www2.daad.de/deutschland/studienangebote/international-programmes/en/",
+   "verified": true,
+   "added": "2026-10-25"
+  }
+ ]
+}
