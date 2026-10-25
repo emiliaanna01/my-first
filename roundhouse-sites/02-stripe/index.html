@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RoundHouse | Automation infrastructure for growing businesses</title>
+<meta name="description" content="RoundHouse is the automation team behind US businesses: lead replies, documents, CRM, AI agents and reporting, built at a fixed price.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap">
+<style>
+/* Look and feel after stripe.com: skewed animated gradient hero, navy type, purple pill CTAs with hover arrows, product UI mockups, dark developer band. */
+:root{--navy:#0A2540;--slate:#425466;--purple:#635BFF;--purple2:#7A73FF;--cyan:#00D4FF;--bg:#FFFFFF;--soft:#F6F9FC;--line:#E3E8EE;--sans:"Instrument Sans","Helvetica Neue",Arial,sans-serif;--mono:"Source Code Pro",Menlo,monospace;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--navy);font:400 17px/1.6 var(--sans);overflow-x:hidden}
+a{color:var(--purple);text-decoration:none}
+:focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(24px, env(safe-area-inset-left,0px));padding-right:max(24px, env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;text-wrap:balance}
+h2{font-size:clamp(30px,3.6vw,48px);line-height:1.12;font-weight:600;letter-spacing:-.02em}
+h3{font-size:17px;font-weight:600;line-height:1.4}
+p{margin:0}
+.cap{color:var(--purple);font-weight:600;font-size:17px}
+.body{color:var(--slate);font-size:18px;line-height:1.65;max-width:560px}
+
+/* hover arrow, as on the reference */
+.arrow{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.arrow svg{transition:transform .15s}
+.arrow svg .ln{opacity:0;transition:opacity .15s}
+.arrow:hover svg{transform:translateX(2px)}
+.arrow:hover svg .ln{opacity:1}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:#fff;padding:8px 14px 8px 18px;border-radius:999px;font:600 15px var(--sans);border:0;cursor:pointer}
+.pill.p{background:var(--purple)}
+.pill.p:hover{background:var(--navy)}
+.pill.w{background:#fff;color:var(--navy)}
+.pill:hover{opacity:.92}
+
+/* gradient hero */
+.hero{position:relative;padding-top:0}
+.grad{position:absolute;inset:-300px 0 auto 0;height:960px;transform:skewY(-12deg);transform-origin:0 0;overflow:hidden;z-index:-1}
+.grad::before{content:"";position:absolute;inset:-50%;background:
+  radial-gradient(40% 50% at 20% 60%,#A960EE 0,transparent 70%),
+  radial-gradient(35% 45% at 70% 40%,#FF333D 0,transparent 70%),
+  radial-gradient(45% 45% at 85% 70%,#90E0FF 0,transparent 70%),
+  radial-gradient(40% 50% at 45% 75%,#FFCB57 0,transparent 70%),#EF008F;
+  filter:saturate(1.1);animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(-6%,4%) rotate(8deg)}100%{transform:translate(4%,-3%) rotate(-6deg)}}
+.grad-mask{position:absolute;left:0;right:0;top:0;height:900px;z-index:-1;background:linear-gradient(90deg,rgba(255,255,255,.98) 0,rgba(255,255,255,.92) 38%,rgba(255,255,255,0) 62%)}
+nav.top{position:relative;z-index:5}
+nav.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:84px}
+.logo{font:700 26px var(--sans);letter-spacing:-.04em;color:var(--navy)}
+nav.top ul{list-style:none;display:flex;gap:30px;margin:0;padding:0}
+nav.top ul a{color:var(--navy);font-weight:600;font-size:15px;opacity:.95}
+nav.top ul a:hover{opacity:.65}
+nav.top .rt{display:flex;gap:18px;align-items:center}
+nav.top .rt .arrow{color:var(--navy);font-size:15px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;padding-block:72px 120px;align-items:center}
+.hero-grid > *{min-width:0}
+h1{font-size:clamp(46px,7vw,92px);line-height:1.02;letter-spacing:-.045em;font-weight:600;color:var(--navy);mix-blend-mode:color-burn}
+.hero .body{margin-top:28px}
+form.signup{background:none;box-shadow:none;padding:0;border-radius:0}
+.signup{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:32px;max-width:520px}
+.signup input{flex:1;min-width:220px;border:0;background:var(--soft);border-radius:999px;padding:12px 18px;font:400 16px var(--sans);color:var(--navy);box-shadow:inset 0 0 0 1px var(--line)}
+.signup .arrow{color:var(--navy);font-size:15px}
+/* product mockups */
+.mocks{position:relative;height:520px}
+.dash{position:absolute;left:30px;top:20px;width:520px;max-width:none;background:#fff;border-radius:10px;box-shadow:0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);padding:18px;font-size:12px}
+.dash .hd{display:flex;justify-content:space-between;color:var(--slate);font-weight:600;margin-bottom:10px}
+.dash .big{font-size:26px;font-weight:600;letter-spacing:-.02em}
+.dash .up{color:#0E9F6E;font-weight:600}
+.dash svg{width:100%;height:110px;display:block;margin:6px 0 14px}
+.dash .tbl{display:grid;gap:6px}
+.dash .tr{display:grid;grid-template-columns:1.4fr 1fr .8fr;gap:8px;padding:6px 0;border-top:1px solid var(--line);color:var(--slate)}
+.dash .st{justify-self:start;border-radius:4px;padding:0 6px;font-weight:600;font-size:11px}
+.st.ok{background:#CBF4C9;color:#0E6245}
+.st.run{background:#D6ECFF;color:#3D4EAC}
+.phone{position:absolute;left:-30px;top:120px;width:220px;height:420px;background:#fff;border-radius:34px;box-shadow:0 50px 100px -20px rgba(50,50,93,.3),0 30px 60px -30px rgba(0,0,0,.35),inset 0 0 0 8px #F6F9FC;padding:28px 18px;display:grid;gap:10px;align-content:start;font-size:12px}
+.phone .msg{background:var(--soft);border-radius:12px;padding:10px;color:var(--slate)}
+.phone .msg.me{background:var(--purple);color:#fff;justify-self:end;max-width:85%}
+.phone .slot{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.phone .slot span{border:1px solid var(--line);border-radius:8px;padding:6px;text-align:center;font-weight:600;color:var(--navy)}
+.phone .slot span.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.phone .bk{background:var(--navy);color:#fff;border-radius:999px;padding:9px;text-align:center;font-weight:600}
+
+/* logos */
+.logos{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 24px;padding-block:24px 80px;align-items:center}
+.logos span{font-weight:700;font-size:22px;color:#0A2540;opacity:.85;letter-spacing:-.02em;text-align:center}
+.logos span:nth-child(2n){font-weight:500;font-style:italic;letter-spacing:.02em}
+.logos span:nth-child(3n){font-family:Georgia,serif}
+
+section{padding-block:96px}
+.sec-head{display:grid;gap:16px;margin-bottom:56px}
+
+/* modular grid */
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mod{background:var(--soft);border-radius:12px;padding:24px;display:grid;gap:12px;align-content:start;min-height:280px}
+.mod .ui{background:#fff;border-radius:8px;box-shadow:0 13px 27px -5px rgba(50,50,93,.15),0 8px 16px -8px rgba(0,0,0,.2);padding:12px;font-size:12px;color:var(--slate);display:grid;gap:6px}
+.mod .ui b{color:var(--navy)}
+.mod p{color:var(--slate);font-size:15px}
+.mod .price{font-weight:600;color:var(--navy);font-size:15px}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan))}
+
+/* dark developer band */
+.dark{background:var(--navy);color:#fff;position:relative;overflow:hidden;transform:skewY(-6deg);margin-block:80px}
+.dark > .wrap{transform:skewY(6deg);padding-block:120px}
+.dark .cap{color:var(--cyan)}
+.dark .body{color:#ADBDCC}
+.dark-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.dark-grid > *{min-width:0}
+.code{background:#1C3A57;border-radius:10px;box-shadow:0 30px 60px -12px rgba(0,0,0,.5);overflow:hidden}
+.code .tabs{display:flex;gap:16px;padding:10px 16px;background:#173350;font:500 13px var(--mono);color:#7F95AD}
+.code .tabs span.on{color:#fff}
+.code pre{margin:0;padding:18px;font:400 13.5px/1.7 var(--mono);color:#E6EDF5;overflow-x:auto}
+.k{color:#FF9F43}.s{color:#7EE787}.c{color:#7F95AD}.f{color:var(--cyan)}
+.feat-row{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:40px}
+.feat-row div{border-left:1px solid #3B5A7A;padding-left:16px;display:grid;gap:6px}
+.feat-row p{color:#ADBDCC;font-size:15px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat{border-left:1px solid var(--purple);padding-left:16px;display:grid;gap:4px}
+.stat b{font-size:clamp(30px,3vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.stat span{color:var(--slate);font-size:15px}
+.fine{color:var(--slate);font-size:13px;margin-top:24px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{border-top:1px solid var(--line);padding-top:24px;display:grid;gap:10px;align-content:start}
+.step .price{font-weight:600}
+.step p{color:var(--slate);font-size:16px}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.plan{border-radius:12px;padding:28px;display:grid;gap:14px;align-content:start;background:#fff;box-shadow:0 0 0 1px var(--line)}
+.plan.pick{box-shadow:0 0 0 2px var(--purple),0 30px 60px -12px rgba(50,50,93,.18)}
+.plan .pr{font-size:40px;font-weight:600;letter-spacing:-.03em}
+.plan .pr small{font-size:15px;color:var(--slate);font-weight:500;letter-spacing:0}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--slate);font-size:15px}
+.plan li{padding-left:22px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:7px;width:12px;height:7px;border-left:2px solid var(--purple);border-bottom:2px solid var(--purple);transform:rotate(-45deg)}
+
+/* CTA + form */
+.cta{background:var(--soft)}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+form{background:#fff;border-radius:12px;box-shadow:0 30px 60px -12px rgba(50,50,93,.18),0 18px 36px -18px rgba(0,0,0,.2);padding:28px;display:grid;gap:14px}
+label{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--slate)}
+input.f,select.f,textarea.f{border:1px solid var(--line);border-radius:6px;padding:10px 12px;font:400 16px var(--sans);color:var(--navy);width:100%;box-shadow:0 1px 1px rgba(0,0,0,.04)}
+input.f:focus,select.f:focus,textarea.f:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(99,91,255,.25)}
+textarea.f{min-height:100px;resize:vertical}
+.err{color:#DF1B41;font-size:14px;min-height:1em}
+.ok{background:var(--soft);border-radius:8px;padding:14px;display:grid;gap:10px}
+.ok pre{white-space:pre-wrap;margin:0;font:400 13px/1.5 var(--mono);max-height:180px;overflow:auto}
+.links2{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:32px}
+.links2 div{display:grid;gap:8px;align-content:start}
+.links2 p{color:var(--slate);font-size:15px}
+
+footer{padding-block:72px 48px;border-top:1px solid var(--line)}
+footer .cols{display:grid;grid-template-columns:1.2fr repeat(4,1fr);gap:24px}
+footer h4{margin:0 0 12px;font-size:14px;font-weight:600}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer ul a{color:var(--slate);font-size:14px}
+footer ul a:hover{color:var(--navy)}
+footer .meta{color:var(--slate);font-size:14px;display:grid;gap:8px}
+
+@media (max-width:960px){
+  nav.top ul{display:none}
+  .hero-grid,.dark-grid,.cta-grid{grid-template-columns:1fr}
+  .mocks{height:440px;transform:scale(.8);transform-origin:left top;margin-bottom:-80px}
+  .mods,.steps,.plans{grid-template-columns:1fr}
+  .stats,.logos{grid-template-columns:repeat(2,1fr)}
+  footer .cols{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .mocks{transform:scale(.62);margin-bottom:-190px}
+  .feat-row,.links2{grid-template-columns:1fr}
+  nav.top .rt .arrow{display:none}
+}
+@media (prefers-reduced-motion:reduce){.grad::before{animation:none}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="grad" aria-hidden="true"></div>
+  <div class="grad-mask" aria-hidden="true"></div>
+  <nav class="top" aria-label="Main">
+    <div class="wrap">
+      <a class="logo" href="#top">roundhouse</a>
+      <ul>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#how">Solutions</a></li>
+        <li><a href="#stack">Integrations</a></li>
+        <li><a href="#results">Customers</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+      <div class="rt">
+        <a class="arrow" href="#contact">Sign in <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path class="ln" d="M0 5h7" stroke="currentColor" stroke-width="1.6"/><path d="M1 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></a>
+        <a class="pill w" href="#contact">Contact sales <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></a>
+      </div>
+    </div>
+  </nav>
+  <main id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Automation infrastructure to grow your business</h1>
+      <p class="body">Join the field-service companies, fabricators, logistics providers and clinics that use RoundHouse to answer every lead in seconds, send quotes in hours and close the books without re-keying a single invoice.</p>
+      <form class="signup" id="quick" novalidate>
+        <label for="q-email" style="position:absolute;left:-9999px">Work email</label>
+        <input id="q-email" type="email" placeholder="Work email" autocomplete="email">
+        <button class="pill p" type="submit">Start now <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button>
+        <a class="arrow" href="#pricing">See pricing <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path class="ln" d="M0 5h7" stroke="currentColor" stroke-width="1.6"/><path d="M1 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></a>
+      </form>
+    </div>
+    <div class="mocks" aria-hidden="true">
+      <div class="dash">
+        <div class="hd"><span>Today</span><span>Lead response</span></div>
+        <div style="display:flex;gap:28px;align-items:end">
+          <div><div style="color:var(--slate)">Booked jobs</div><div class="big">147</div></div>
+          <div><div style="color:var(--slate)">Avg. first reply</div><div class="big">1m 30s</div></div>
+          <div class="up">+38.0%</div>
+        </div>
+        <svg viewBox="0 0 480 110" preserveAspectRatio="none"><defs><linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#635BFF" stop-opacity=".25"/><stop offset="1" stop-color="#635BFF" stop-opacity="0"/></linearGradient></defs><path d="M0 90 C40 85 60 70 100 74 S160 50 200 56 260 30 300 40 380 18 420 22 460 10 480 12 V110 H0Z" fill="url(#g1)"/><path d="M0 90 C40 85 60 70 100 74 S160 50 200 56 260 30 300 40 380 18 420 22 460 10 480 12" fill="none" stroke="#635BFF" stroke-width="2.5"/><path d="M0 96 C60 95 120 92 200 90 S340 86 480 84" fill="none" stroke="#C1C9D2" stroke-width="2" stroke-dasharray="4 4"/></svg>
+        <div class="tbl">
+          <div class="tr"><b style="color:var(--navy)">Automation</b><b style="color:var(--navy)">Last run</b><b style="color:var(--navy)">Status</b></div>
+          <div class="tr"><span>Instant lead reply</span><span>12 s ago</span><span class="st ok">Healthy</span></div>
+          <div class="tr"><span>Quote generator</span><span>3 min ago</span><span class="st ok">Healthy</span></div>
+          <div class="tr"><span>Carrier invoice match</span><span>Running</span><span class="st run">Processing</span></div>
+          <div class="tr"><span>Weekly ops report</span><span>Mon 7:00</span><span class="st ok">Sent</span></div>
+        </div>
+      </div>
+      <div class="phone">
+        <div class="msg">Hi Dana, thanks for reaching out about your AC. Is this an emergency?</div>
+        <div class="msg me">Not urgent, it's blowing warm air</div>
+        <div class="msg">Here are open slots near 75204:</div>
+        <div class="slot"><span>Tue 9:00</span><span class="on">Tue 2:00</span><span>Wed 8:30</span><span>Wed 1:00</span></div>
+        <div class="bk">Book Tue 2:00</div>
+        <div style="text-align:center;color:var(--slate)">Replied in 42 seconds</div>
+      </div>
+    </div>
+  </div>
+  </main>
+</div>
+
+<div class="wrap logos" aria-label="Sample client types">
+  <span>NORTHLINE HVAC</span><span>Keller Fab</span><span>Peachtree 3PL</span><span>CAROLINA PT</span>
+  <span>Redline Plumbing</span><span>OHIO STEELWORKS</span><span>Bluegrass Freight</span><span>Summit Clinics</span>
+</div>
+
+<section id="products">
+  <div class="wrap">
+    <div class="sec-head"><p class="cap">Modular solutions</p><h2>A fully integrated suite of automation products</h2><p class="body">We bring together the replies, documents, data and reporting your operations run on. Start with one product, add the rest as the roadmap calls for them.</p></div>
+    <div class="mods">
+      <article class="mod"><div class="ui"><b>New lead, web form</b><span>Reply sent in 0:42 · SMS + email</span><div class="bar"><i style="width:92%"></i></div></div><h3>Leads</h3><p>A reply within two minutes to every form, missed call and chat, with qualifying questions and a booking link.</p><p class="price">$8,000–$20,000</p></article>
+      <article class="mod"><div class="ui"><b>Quote Q-2291</b><span>Steel, 14 parts · $18,420.00</span><div class="bar"><i style="width:70%"></i></div></div><h3>Documents</h3><p>Proposals, quotes, contracts, invoices and reports generated from templates and your data.</p><p class="price">$8,000–$25,000</p></article>
+      <article class="mod"><div class="ui"><b>Inbox</b><span>38 sorted · 12 drafts ready</span><div class="bar"><i style="width:55%"></i></div></div><h3>Inbox</h3><p>Sorting, drafted replies and follow-ups that go out on time.</p><p class="price">$6,000–$15,000</p></article>
+      <article class="mod"><div class="ui"><b>Pipeline</b><span>214 deals · 1 owner each</span><div class="bar"><i style="width:80%"></i></div></div><h3>CRM</h3><p>HubSpot, GoHighLevel or Pipedrive set up properly, and moved over from what you use now.</p><p class="price">$6,000–$20,000</p></article>
+      <article class="mod"><div class="ui"><b>Ask the SOPs</b><span>"How do we warranty a compressor?"</span><div class="bar"><i style="width:64%"></i></div></div><h3>AI agents</h3><p>Assistants trained on your SOPs, documents and FAQs, working inside the tools you use.</p><p class="price">$12,000–$35,000</p></article>
+      <article class="mod"><div class="ui"><b>Weekly ops</b><span>Hours saved 26.5 · Enquiries +24%</span><div class="bar"><i style="width:88%"></i></div></div><h3>Reporting</h3><p>Live numbers from your CRM, ads and accounting tools in one place.</p><p class="price">$5,000–$15,000</p></article>
+    </div>
+  </div>
+</section>
+
+<div class="dark" id="stack">
+  <div class="wrap">
+    <div class="dark-grid">
+      <div style="display:grid;gap:18px">
+        <p class="cap">Built inside your stack</p>
+        <h2>No new platform to adopt</h2>
+        <p class="body">We build in the CRM, accounts and tools you already pay for, so your team keeps working where it works today. Everything is documented, and you own the code, automations and prompts.</p>
+        <a class="pill w" href="#contact" style="justify-self:start">Talk to an engineer <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></a>
+        <div class="feat-row">
+          <div><h3>Least-privilege access</h3><p>We work in your accounts with MFA and remove access at handover.</p></div>
+          <div><h3>No training on your data</h3><p>AI providers that delete data after each request, where offered.</p></div>
+        </div>
+      </div>
+      <div class="code">
+        <div class="tabs"><span class="on">lead-reply.flow</span><span>quote.flow</span><span>report.flow</span></div>
+<pre><span class="c"># Runs on every new form, missed call or chat</span>
+<span class="k">on</span> <span class="f">lead.created</span>:
+  reply  = <span class="f">sms.send</span>(lead.phone, template=<span class="s">"first-reply"</span>)
+  answer = <span class="f">claude.qualify</span>(lead, ask=[<span class="s">"service"</span>, <span class="s">"urgency"</span>, <span class="s">"zip"</span>])
+  <span class="k">if</span> answer.urgency == <span class="s">"emergency"</span>:
+    <span class="f">page</span>(on_call_tech)
+  slot = <span class="f">calendar.offer</span>(answer.zip, open_only=<span class="k">true</span>)
+  <span class="f">hubspot.log</span>(lead, source=lead.channel, booked=slot)
+
+<span class="c"># Average first reply: 90 s (was 3 h 40 min)</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="results">
+  <div class="wrap">
+    <div class="sec-head"><p class="cap">Measured results</p><h2>The backbone of operations teams that stopped re-keying</h2></div>
+    <div class="stats">
+      <div class="stat"><b>90 s</b><span>First reply to a lead, down from 3 h 40 min</span></div>
+      <div class="stat"><b>4 h</b><span>Quote turnaround, down from 3 days</span></div>
+      <div class="stat"><b>−70%</b><span>Time to process a carrier invoice</span></div>
+      <div class="stat"><b>$38,400</b><span>Yearly software spend removed after one audit</span></div>
+    </div>
+    <p class="fine">Figures from sample engagements, replaced with client results before launch.</p>
+  </div>
+</section>
+
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><p class="cap">How it works</p><h2>Diagnose, build, run</h2></div>
+    <div class="steps">
+      <div class="step"><h3>Diagnose</h3><p>A paid audit of your tools, data and workflows, with a 90-day roadmap ranked by hours saved.</p><p class="price">$2,500–$6,000</p><p>Fee credited to your build within 60 days.</p></div>
+      <div class="step"><h3>Build</h3><p>The automation, AI agent, CRM, brand or website the roadmap calls for, at a fixed price.</p><p class="price">$4,000–$40,000</p><p>Scope and price agreed before work starts.</p></div>
+      <div class="step"><h3>Run</h3><p>Monitoring, fixes when tools change, new automations each month and a report on hours saved.</p><p class="price">from $1,800/mo</p><p>Month to month after three months.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><p class="cap">Pricing</p><h2>Simple retainers after launch</h2><p class="body">Every price is published. No platform fees, no lock-in.</p></div>
+    <div class="plans">
+      <div class="plan"><h3>Starter</h3><p class="pr">$1,800<small> per month</small></p><ul><li>Monitoring for up to 5 automations</li><li>Fixes within one business day</li><li>4 hours of small changes a month</li><li>Monthly report on hours saved</li></ul><a class="pill" href="#contact" style="justify-self:start">Get started</a></div>
+      <div class="plan pick"><h3>Growth</h3><p class="pr">$4,200<small> per month</small></p><ul><li>Up to 15 automations</li><li>Two new automations or improvements a month</li><li>Prompt and agent tuning</li><li>Website care plan</li><li>Same-day response in US hours</li></ul><a class="pill p" href="#contact" style="justify-self:start">Get started</a></div>
+      <div class="plan"><h3>Scale</h3><p class="pr">$8,500<small> per month</small></p><ul><li>No automation cap</li><li>A named automation lead, 20 hours a month</li><li>Quarterly roadmap with leadership</li><li>4-hour response in US hours</li></ul><a class="pill" href="#contact" style="justify-self:start">Contact sales</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap cta-grid">
+    <div>
+      <h2>Ready to get started?</h2>
+      <p class="body" style="margin-top:16px">Tell us where work waits. The person who would run your audit replies within one business day, 9am–6pm Eastern.</p>
+      <div class="links2">
+        <div><h3>Fixed prices</h3><p>Every engagement runs on a master services agreement and a fixed-price statement of work.</p></div>
+        <div><h3>NDA first</h3><p>Mutual NDA before any discovery call that involves your data. Or write to hello@roundhouse.studio.</p></div>
+      </div>
+    </div>
+    <form id="form" novalidate>
+      <label for="f-name">Full name<input class="f" id="f-name" name="name" autocomplete="name"></label>
+      <label for="f-email">Work email<input class="f" id="f-email" name="email" type="email" autocomplete="email"></label>
+      <label for="f-budget">Budget<select class="f" id="f-budget" name="budget"><option>Under $10k</option><option>$10k–$25k</option><option>$25k–$50k</option><option>$50k+</option></select></label>
+      <label for="f-msg">Where does work wait?<textarea class="f" id="f-msg" name="message"></textarea></label>
+      <p class="err" id="f-err" role="alert"></p>
+      <div><button class="pill p" type="submit">Contact sales <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none"/></svg></button></div>
+      <div class="ok" id="f-ok" hidden><p><b>Your enquiry is ready.</b> Copy it and send it to hello@roundhouse.studio.</p><pre id="f-out"></pre><div><button class="pill" type="button" id="f-copy">Copy enquiry</button></div></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap cols">
+    <div class="meta"><a class="logo" href="#top">roundhouse</a><span>United States (English)</span><span>© 2026 RoundHouse</span><a href="../index.html">All 10 concepts</a></div>
+    <div><h4>Products</h4><ul><li><a href="#products">Leads</a></li><li><a href="#products">Documents</a></li><li><a href="#products">Inbox</a></li><li><a href="#products">CRM</a></li><li><a href="#products">Reporting</a></li></ul></div>
+    <div><h4>Solutions</h4><ul><li><a href="#how">Field services</a></li><li><a href="#how">Manufacturing</a></li><li><a href="#how">Logistics</a></li><li><a href="#how">Clinics</a></li></ul></div>
+    <div><h4>Resources</h4><ul><li><a href="#results">Case studies</a></li><li><a href="#stack">Security</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#contact">Contact</a></li><li><a href="#contact">Careers</a></li><li><a href="#stack">Privacy</a></li></ul></div>
+  </div>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+$("quick").addEventListener("submit",e=>{e.preventDefault();$("f-email").value=$("q-email").value;$("contact").scrollIntoView({behavior:"smooth"});setTimeout(()=>$("f-name").focus(),500)});
+const form=$("form");
+form.addEventListener("submit",e=>{e.preventDefault();const d=new FormData(form);
+  if(!d.get("name")||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.get("email")||"")||!d.get("message")){$("f-err").textContent="Enter your name, a valid work email and where work waits.";return}
+  $("f-err").textContent="";$("f-out").textContent=`To: hello@roundhouse.studio\nFrom: ${d.get("name")} <${d.get("email")}>\nBudget: ${d.get("budget")}\n\n${d.get("message")}`;$("f-ok").hidden=false});
+$("f-copy").addEventListener("click",e=>{navigator.clipboard?.writeText($("f-out").textContent).then(()=>e.target.textContent="Copied").catch(()=>{const r=document.createRange();r.selectNodeContents($("f-out"));getSelection().removeAllRanges();getSelection().addRange(r)})});
+</script>
+</body>
+</html>
