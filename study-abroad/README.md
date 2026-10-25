@@ -9,6 +9,7 @@ Plan: Master's (Finance / Business Analytics / FinTech / Management), Germany fi
 | `data/daily_plan.json` | One 30–60 minute session per day (IELTS prep, then applications) |
 | `data/documents.json`, `data/profile.json` | Papers checklist and your current status |
 | `tracker.html` | Source of the tracker web page (published as a private claude.ai artifact) |
+| `compass.html` | Source of **Germany or Italy**, the country comparison page (private artifact https://claude.ai/artifact/ToiYYKs82G9wXLUcNGBysR) |
 | `bot/telegram_digest.py` | Sends today's session and deadline alerts to Telegram |
 | `bot/menu_bot.py` | The Path Abroad command menu (/today, /week, /deadlines …) |
 | `bot/sync_from_tracker.py` | Copies what you tick on the page back into `data/`, so the bot stays current |
@@ -36,6 +37,18 @@ Test locally without sending:
 ```bash
 python3 study-abroad/bot/telegram_digest.py --dry-run --digest
 ```
+
+## Germany or Italy (country comparison)
+
+`compass.html` compares the two countries for this profile: a recommendation for the self-funded and
+scholarship scenarios, weighted factor scores (the weights are adjustable), a two-year cost chart against the
+15–25 lakh budget, a timeline to a September 2027 start, the latest signals, top opportunities, and an
+"Ask" box that asks Claude about the data on the page. Signals, opportunities and the current recommendation live in the
+page's database, and the daily research run updates them (step 4 of its prompt).
+
+Baseline finding (25 Oct 2026): the German Embassy in Dhaka quotes a wait of more than 27 months for self-funded
+Master's visas, while German-government or EU-funded scholars are processed right away. Self-funded, Italy (with a
+DSU regional grant) is the realistic 2027 route; with an Erasmus Mundus or DAAD award, Germany moves to first.
 
 ## Daily research run
 

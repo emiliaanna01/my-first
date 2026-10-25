@@ -1,0 +1,675 @@
+<title>Germany or Italy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,650&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column of analysis panels, verdict first, then the evidence (scores, money, time, news, picks). */
+:root {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --sunk: #eef2f6;
+  --ink: #1c2431;
+  --muted: #5a6577;
+  --faint: #8a94a5;
+  --line: #e1e6ee;
+  --de: #3f5f9e;        /* Germany: steel blue */
+  --de-soft: #e3eaf7;
+  --it: #2e8a73;        /* Italy: sage green */
+  --it-soft: #dff1ea;
+  --accent: #b5762c;    /* budget / highlight: muted amber */
+  --accent-soft: #f6ead9;
+  --good: #2f8550;
+  --warn: #a8701d;
+  --bad: #b34a42;
+  --good-soft: #e2f2e7;
+  --warn-soft: #f7ecd7;
+  --bad-soft: #f6e1df;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141922; --surface: #1b212c; --sunk: #222a36; --ink: #e6eaf1; --muted: #a3adbd; --faint: #7a8597; --line: #2c3442;
+    --de: #8ea9e0; --de-soft: #263450; --it: #6cc4a8; --it-soft: #1f3a33; --accent: #e0a65e; --accent-soft: #3a2e1f;
+    --good: #6fc48c; --warn: #e0b060; --bad: #e88a82; --good-soft: #1f3528; --warn-soft: #3a3020; --bad-soft: #3d2423;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141922; --surface: #1b212c; --sunk: #222a36; --ink: #e6eaf1; --muted: #a3adbd; --faint: #7a8597; --line: #2c3442;
+  --de: #8ea9e0; --de-soft: #263450; --it: #6cc4a8; --it-soft: #1f3a33; --accent: #e0a65e; --accent-soft: #3a2e1f;
+  --good: #6fc48c; --warn: #e0b060; --bad: #e88a82; --good-soft: #1f3528; --warn-soft: #3a3020; --bad-soft: #3d2423;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+.wrap { max-width: 1080px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 22px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 650; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.08; }
+h2 { font-size: 21px; }
+h3 { font-size: 16px; }
+p { margin: 0; }
+a { color: var(--de); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.eyebrow { font: 500 12px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+
+/* header */
+header { display: grid; gap: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 12.5px; padding: 4px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); }
+.chip b { color: var(--ink); font-weight: 600; }
+.flag { display: inline-block; width: 10px; height: 10px; border-radius: 3px; vertical-align: 0; margin-right: 6px; }
+.flag.de { background: var(--de); } .flag.it { background: var(--it); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 16px; min-width: 0; }
+.panel-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 16px; }
+
+/* verdict */
+.verdict { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 22px; }
+.verdict-lead { font-family: var(--display); font-size: clamp(20px, 2.6vw, 25px); line-height: 1.28; font-weight: 500; text-wrap: pretty; }
+.routes { display: grid; gap: 10px; }
+.route { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; padding: 12px 14px; border-radius: 10px; background: var(--sunk); }
+.route .rank { font: 600 13px var(--mono); color: var(--muted); padding-top: 2px; }
+.route .r-title { font-weight: 600; }
+.route .r-detail { grid-column: 2; font-size: 13.5px; color: var(--muted); }
+.pill { display: inline-block; font: 500 11px/1 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 7px; border-radius: 6px; margin-left: 6px; vertical-align: 2px; }
+.pill.go { background: var(--good-soft); color: var(--good); }
+.pill.watch { background: var(--warn-soft); color: var(--warn); }
+.pill.blocked { background: var(--bad-soft); color: var(--bad); }
+.gauges { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+.gauge { display: grid; justify-items: center; gap: 6px; padding: 14px 8px; border-radius: 12px; background: var(--sunk); }
+.gauge svg { width: 112px; height: 112px; max-width: 100%; }
+.gauge .g-label { font-weight: 600; font-size: 14px; }
+.seg { display: inline-flex; background: var(--sunk); border: 1px solid var(--line); border-radius: 10px; padding: 3px; gap: 3px; flex-wrap: wrap; }
+.seg button { font: 500 13px var(--body); border: 0; background: transparent; color: var(--muted); padding: 7px 12px; border-radius: 7px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(20, 30, 50, 0.12); }
+.next { display: grid; gap: 6px; margin: 0; padding-left: 20px; }
+.next li { font-size: 14px; }
+.updated { font: 12px var(--mono); color: var(--faint); }
+
+/* factor chart */
+.factors { display: grid; gap: 4px; }
+.frow { display: grid; grid-template-columns: minmax(150px, 1.1fr) minmax(0, 2fr) 96px; gap: 6px 16px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.frow:first-child { border-top: 0; }
+.f-name { font-weight: 600; font-size: 14px; }
+.f-note { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
+.bars { display: grid; gap: 5px; }
+.bar { display: grid; grid-template-columns: 22px minmax(0, 1fr) 28px; align-items: center; gap: 8px; font-size: 12px; }
+.track { height: 10px; border-radius: 5px; background: var(--sunk); position: relative; overflow: hidden; background-image: repeating-linear-gradient(90deg, transparent 0 calc(20% - 1px), var(--line) calc(20% - 1px) 20%); }
+.fill { position: absolute; inset: 0 auto 0 0; border-radius: 5px; transition: width 0.35s ease; }
+.fill.de { background: var(--de); } .fill.it { background: var(--it); }
+.weight { display: grid; gap: 4px; justify-items: start; }
+.weight label { font: 11px var(--mono); color: var(--faint); text-transform: uppercase; letter-spacing: 0.06em; }
+.weight input { width: 96px; accent-color: var(--accent); }
+
+/* cost chart */
+.costs { display: grid; gap: 14px; }
+.crow { display: grid; grid-template-columns: 170px minmax(0, 1fr) 84px; gap: 12px; align-items: center; }
+.c-name { font-size: 13.5px; font-weight: 600; }
+.c-name .sub { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
+.ctrack { position: relative; height: 26px; border-radius: 6px; background: var(--sunk); }
+.band { position: absolute; top: -6px; bottom: -6px; background: var(--accent-soft); border-left: 1.5px dashed var(--accent); border-right: 1.5px dashed var(--accent); }
+.stack { position: absolute; inset: 3px auto 3px 0; display: flex; border-radius: 4px; overflow: hidden; }
+.stack i { display: block; height: 100%; }
+.axis { display: grid; grid-template-columns: 170px minmax(0, 1fr) 84px; gap: 12px; }
+.ticks { position: relative; height: 18px; font: 11px var(--mono); color: var(--faint); }
+.ticks span { position: absolute; transform: translateX(-50%); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.upfront { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.tile { padding: 14px 16px; border-radius: 10px; background: var(--sunk); display: grid; gap: 4px; }
+.tile .big { font: 600 24px var(--mono); font-variant-numeric: tabular-nums; }
+
+/* timeline */
+.tl-scroll { overflow-x: auto; }
+.tl { min-width: 940px; display: grid; grid-template-columns: 120px repeat(13, minmax(0, 1fr)); position: relative; }
+.tl .m { font: 11px var(--mono); color: var(--faint); text-transform: uppercase; padding: 0 0 8px 4px; border-left: 1px solid var(--line); }
+.lane-name { font-weight: 600; font-size: 13.5px; padding: 8px 8px 8px 0; align-self: start; }
+.lane { grid-column: 2 / -1; position: relative; min-height: 30px; border-top: 1px solid var(--line); }
+.ev { position: absolute; height: 22px; border-radius: 5px; font-size: 11.5px; line-height: 22px; padding: 0 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink); }
+.ev.de { background: var(--de-soft); border-left: 3px solid var(--de); }
+.ev.it { background: var(--it-soft); border-left: 3px solid var(--it); }
+.ev.eu { background: var(--accent-soft); border-left: 3px solid var(--accent); }
+.ev.block { background: var(--bad-soft); border-left: 3px solid var(--bad); color: var(--bad); font-weight: 600; }
+.today { position: absolute; top: 0; bottom: 0; width: 0; border-left: 2px solid var(--accent); z-index: 2; }
+.today span { position: absolute; top: -2px; left: 4px; font: 600 10.5px var(--mono); color: var(--accent); background: var(--surface); padding: 0 3px; }
+
+/* feed + picks */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.filters button { font: 500 12.5px var(--body); border: 1px solid var(--line); background: var(--surface); color: var(--muted); padding: 5px 11px; border-radius: 999px; cursor: pointer; }
+.filters button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+.list { display: grid; gap: 0; }
+.item { display: grid; grid-template-columns: 6px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); }
+.item:first-child { border-top: 0; }
+.stripe { border-radius: 3px; }
+.stripe.up { background: var(--good); } .stripe.down { background: var(--bad); } .stripe.watch { background: var(--warn); }
+.stripe.high { background: var(--good); } .stripe.medium { background: var(--warn); } .stripe.low { background: var(--faint); }
+.i-top { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.i-title { font-weight: 600; font-size: 14px; }
+.i-meta { font: 11.5px var(--mono); color: var(--faint); }
+.i-body { font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+.i-link { font-size: 12.5px; word-break: break-all; }
+.tag { font: 500 10.5px var(--mono); padding: 2px 6px; border-radius: 4px; background: var(--sunk); color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.tag.de { background: var(--de-soft); color: var(--de); } .tag.it { background: var(--it-soft); color: var(--it); } .tag.eu { background: var(--accent-soft); color: var(--accent); }
+.empty { padding: 18px; border-radius: 10px; background: var(--sunk); color: var(--muted); font-size: 13.5px; }
+
+/* contenders */
+.tbl-scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 13.5px; }
+th, td { text-align: left; padding: 10px 10px; border-top: 1px solid var(--line); vertical-align: top; }
+th { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); border-top: 0; }
+.dots { white-space: nowrap; letter-spacing: 2px; color: var(--line); }
+.dots b { color: var(--ink); font-weight: 400; }
+tr.top td:first-child { font-weight: 600; }
+
+/* ask */
+.ask-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.ask-row textarea { flex: 1 1 320px; min-height: 46px; resize: vertical; font: 14px var(--body); padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.btn { font: 600 14px var(--body); border-radius: 10px; padding: 10px 16px; cursor: pointer; border: 1px solid var(--ink); background: var(--ink); color: var(--surface); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:disabled { opacity: 0.5; cursor: default; }
+.answer { padding: 16px 18px; border-radius: 10px; background: var(--sunk); font-size: 14.5px; line-height: 1.6; max-width: 75ch; }
+.answer ul { margin: 6px 0; padding-left: 20px; }
+.answer p + p, .answer p + ul, .answer ul + p { margin-top: 8px; }
+footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; max-width: 80ch; }
+
+@media (max-width: 820px) {
+  .verdict, .two { grid-template-columns: 1fr; }
+  .frow { grid-template-columns: 1fr; gap: 8px; }
+  .crow, .axis { grid-template-columns: 1fr; gap: 6px; }
+  .axis > :first-child, .axis > :last-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Path Abroad · country analysis for a Bangladeshi Master's applicant</div>
+    <h1>Germany or Italy: which route gets you to Europe in 2027?</h1>
+    <div class="chips" id="profileChips">
+      <span class="chip"><b>BBA Finance</b>, NSU</span>
+      <span class="chip">CGPA <b>3.21</b> ≈ German <b>1.79</b></span>
+      <span class="chip">IELTS target <b>7.0</b>, test 5 Dec 2026</span>
+      <span class="chip">Budget <b>15–25 lakh BDT</b></span>
+      <span class="chip">Married, wife joins later</span>
+      <span class="chip">Intake <b>Sep–Oct 2027</b></span>
+    </div>
+  </header>
+
+  <section class="panel" aria-labelledby="vTitle">
+    <div class="panel-head">
+      <h2 id="vTitle">Current recommendation</h2>
+      <div class="seg" role="group" aria-label="Funding scenario">
+        <button type="button" id="scSelf" aria-pressed="true">Self-funded</button>
+        <button type="button" id="scSch" aria-pressed="false">With an EU / German-gov scholarship</button>
+      </div>
+    </div>
+    <div class="verdict">
+      <div style="display:grid;gap:16px;min-width:0">
+        <p class="verdict-lead" id="headline"></p>
+        <div class="routes" id="routes"></div>
+        <div>
+          <h3 style="margin-bottom:8px">Do next</h3>
+          <ol class="next" id="nextSteps"></ol>
+        </div>
+        <div class="updated" id="analysisStamp"></div>
+      </div>
+      <div style="display:grid;gap:12px;align-content:start">
+        <div class="gauges">
+          <div class="gauge"><svg viewBox="0 0 120 120" id="gDE" role="img" aria-label="Germany score"></svg><div class="g-label"><span class="flag de"></span>Germany</div></div>
+          <div class="gauge"><svg viewBox="0 0 120 120" id="gIT" role="img" aria-label="Italy score"></svg><div class="g-label"><span class="flag it"></span>Italy</div></div>
+        </div>
+        <p class="small muted" id="scoreNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="fTitle">
+    <div class="panel-head">
+      <h2 id="fTitle">How the two compare for your profile</h2>
+      <span class="small muted">Scores out of 10. Drag a weight to match what matters to you; the totals above update.</span>
+    </div>
+    <div class="legend"><span><i style="background:var(--de)"></i>Germany</span><span><i style="background:var(--it)"></i>Italy</span></div>
+    <div class="factors" id="factors"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="cTitle">
+    <div class="panel-head">
+      <h2 id="cTitle">Two-year cost against your budget</h2>
+      <span class="small muted num" id="fxNote"></span>
+    </div>
+    <div class="costs" id="costs"></div>
+    <div class="legend" id="costLegend"></div>
+    <div class="upfront" id="upfront"></div>
+  </section>
+
+  <section class="panel" aria-labelledby="tTitle">
+    <div class="panel-head">
+      <h2 id="tTitle">Timeline to a September 2027 start</h2>
+      <span class="small muted">Oct 2026 – Oct 2027</span>
+    </div>
+    <div class="tl-scroll"><div class="tl" id="timeline"></div></div>
+  </section>
+
+  <div class="two">
+    <section class="panel" aria-labelledby="sTitle">
+      <div class="panel-head"><h2 id="sTitle">Latest signals</h2><span class="updated" id="sigCount"></span></div>
+      <div class="filters" id="sigFilters" role="group" aria-label="Filter signals"></div>
+      <div class="list" id="signals"><div class="empty">Loading the research log…</div></div>
+    </section>
+    <section class="panel" aria-labelledby="pTitle">
+      <div class="panel-head"><h2 id="pTitle">Top opportunities</h2><span class="updated" id="pickCount"></span></div>
+      <div class="filters" id="pickFilters" role="group" aria-label="Filter opportunities"></div>
+      <div class="list" id="picks"><div class="empty">Loading the shortlist…</div></div>
+    </section>
+  </div>
+
+  <section class="panel" aria-labelledby="kTitle">
+    <div class="panel-head"><h2 id="kTitle">Why these two</h2><span class="small muted">The five countries Bangladeshi Master's applicants weigh most, scored for your situation</span></div>
+    <div class="tbl-scroll"><table id="contenders"></table></div>
+  </section>
+
+  <section class="panel" aria-labelledby="aTitle" id="askPanel">
+    <div class="panel-head"><h2 id="aTitle">Ask for a fresh take</h2><span class="small muted">Claude reads the scores, signals and shortlist on this page</span></div>
+    <div class="ask-row">
+      <textarea id="askBox" placeholder="e.g. If I get only a partial scholarship, which country should I pick?"></textarea>
+      <button class="btn" type="button" id="askBtn">Ask</button>
+      <button class="btn ghost" type="button" id="recheckBtn">Re-check my recommendation</button>
+    </div>
+    <div class="answer" id="answer" hidden></div>
+  </section>
+
+  <footer>
+    <p>The daily research run (7:12 Dhaka time) searches for new scholarships, programme deadlines and visa news, then adds them to <b>Latest signals</b> and <b>Top opportunities</b> and refreshes the recommendation. Items marked <i>unverified</i> came from a third-party site; check the official page before you rely on them.</p>
+    <p>Baseline research: 25 October 2026. Main official sources: <a href="https://dhaka.diplo.de/bd-en/service/2685884-2685884" target="_blank" rel="noopener">German Embassy Dhaka, study visa</a> · <a href="https://ambdhaka.esteri.it/en/news/dall_ambasciata/2026/06/notice-for-student-visa-applicants/" target="_blank" rel="noopener">Embassy of Italy Dhaka, student visa notice</a> · <a href="https://www.eacea.ec.europa.eu/scholarships/erasmus-mundus-catalogue_en" target="_blank" rel="noopener">Erasmus Mundus catalogue</a> · <a href="https://www2.daad.de/deutschland/studienangebote/international-programmes/en/" target="_blank" rel="noopener">DAAD programme database</a> · <a href="https://www.universitaly.it/" target="_blank" rel="noopener">Universitaly</a>.</p>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const EUR_BDT = 140;
+  const BUDGET = [15, 25]; // lakh BDT
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const safeUrl = (u) => (/^https?:\/\//i.test(String(u || "")) ? String(u) : "");
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  };
+
+  /* ---------- scoring model (baseline research, 25 Oct 2026) ---------- */
+  const FACTORS = [
+    { id: "visa", name: "Visa from Dhaka", w: 3,
+      self: { de: 2, it: 6 }, sch: { de: 9, it: 7 },
+      note: { self: "German Embassy quotes 27+ months for self-funded Master's. Italy books VFS through Universitaly; the summer rush is the risk.",
+              sch: "German-gov or EU-funded scholars are processed right after registration. Italy is unchanged." } },
+    { id: "cost", name: "Tuition and living cost", w: 3,
+      self: { de: 6, it: 8 }, sch: { de: 9, it: 9 },
+      note: { self: "Germany: no tuition, but €11,904 blocked up front. Italy: income-based fees and cheaper rent.",
+              sch: "Erasmus pays €1,400/month and fees; DAAD about €992/month. Either covers you." } },
+    { id: "funding", name: "Scholarship odds for you", w: 2,
+      self: { de: 4, it: 8 }, sch: { de: 10, it: 10 },
+      note: { self: "German awards are few and competitive (EPOS needs 2 years' work). Italy's DSU grant is income-based, so most Bangladeshi applicants qualify.",
+              sch: "Scenario assumes you already hold the award." } },
+    { id: "family", name: "Bringing your wife", w: 2,
+      self: { de: 6, it: 5 }, sch: { de: 6, it: 5 },
+      note: { self: "Germany: spouse visa needs A1 German and extra funds. Italy: about €10,650/year income and housing, through a nulla osta.",
+              sch: "Same rules; a stipend helps show funds in both." } },
+    { id: "careers", name: "Jobs after the degree", w: 2,
+      self: { de: 9, it: 5 }, sch: { de: 9, it: 5 },
+      note: { self: "Germany: 18-month job-search permit and Frankfurt's finance sector. Italy: 9–12 month permit and lower pay.",
+              sch: "Unchanged by funding." } },
+    { id: "programmes", name: "Finance programme fit", w: 1,
+      self: { de: 8, it: 7 }, sch: { de: 8, it: 7 },
+      note: { self: "Germany: Frankfurt, Magdeburg, FU Berlin. Italy: Bologna, Turin, Milan, Pavia.",
+              sch: "Unchanged by funding." } },
+    { id: "admission", name: "Admission odds at CGPA 3.21", w: 1,
+      self: { de: 6, it: 8 }, sch: { de: 6, it: 8 },
+      note: { self: "German 1.79 clears most cut-offs, but finance MSc programmes check ECTS in maths. Italian pre-evaluation is broader.",
+              sch: "Unchanged by funding." } },
+    { id: "language", name: "Daily life in English", w: 1,
+      self: { de: 5, it: 4 }, sch: { de: 5, it: 4 },
+      note: { self: "Both teach in English; part-time jobs need German or Italian.",
+              sch: "Unchanged by funding." } },
+  ];
+
+  const BASE_ANALYSIS = {
+    updated: "2026-10-25",
+    self: {
+      headline: "Self-funded, Italy is the realistic 2027 route. Germany's Dhaka visa queue (27+ months) rules out a self-funded 2027 start.",
+      routes: [
+        { title: "Italy with a DSU regional grant", status: "go", detail: "Apply Jan–Apr 2027, pre-enrol on Universitaly, DSU covers up to about €8,246/year plus a fee waiver if your family's income qualifies." },
+        { title: "Erasmus Mundus (either country)", status: "watch", detail: "Apply in parallel: GrEnFIn 7 Jan, EPOG 27 Jan. A win also removes the German visa queue." },
+        { title: "Germany, self-funded", status: "blocked", detail: "An admission in mid-2027 means a visa appointment around late 2029. Keep Germany for a job move after an EU degree." },
+      ],
+      next: [
+        "Take IELTS on 5 Dec; book a backup date in January.",
+        "Shortlist 3 Erasmus Mundus programmes and submit before 7–27 Jan.",
+        "Start Italian paperwork now: Declaration of Value or CIMEA for your NSU degree.",
+        "Collect family income and property papers for the DSU 'ISEE parificato' (legalised, translated).",
+      ],
+    },
+    sch: {
+      headline: "With an EU- or German-government-funded scholarship, Germany moves to first: you skip the visa queue and keep the stronger job market.",
+      routes: [
+        { title: "Germany on Erasmus / DAAD", status: "go", detail: "Funded scholars are processed right after Consular Services Portal registration. Arrive Oct 2027." },
+        { title: "Italy on Erasmus or DSU", status: "go", detail: "Equally reachable. Choose by programme quality and where the consortium places you." },
+        { title: "Germany with a private or partial award", status: "blocked", detail: "Only German-government or EU-funded awards count as 'qualified students'. Others wait in the normal queue." },
+      ],
+      next: [
+        "Pick Erasmus programmes with a German partner (EPOG has one).",
+        "Prepare a German A1 start so the spouse visa is quicker later.",
+        "Keep the Italy applications running as the fallback until the award letter arrives.",
+      ],
+    },
+  };
+
+  /* ---------- state ---------- */
+  let scenario = store.get("compass.scenario") === "sch" ? "sch" : "self";
+  const weights = {};
+  FACTORS.forEach((f) => { const v = Number(store.get("compass.w." + f.id)); weights[f.id] = Number.isFinite(v) && store.get("compass.w." + f.id) !== null ? v : f.w; });
+  let analysis = null;         // db analysis/current
+  let signals = [];            // db signals
+  let picks = [];              // db picks
+  let sigFilter = "all", pickFilter = "all";
+  let dbState = "loading";     // loading | live | off
+
+  function factorScores(f) {
+    const ov = analysis?.scores?.[scenario]?.[f.id];
+    const base = f[scenario];
+    return { de: Number(ov?.de ?? base.de), it: Number(ov?.it ?? base.it) };
+  }
+  function totals() {
+    let wd = 0, wi = 0, wt = 0;
+    FACTORS.forEach((f) => { const s = factorScores(f), w = weights[f.id]; wd += w * s.de; wi += w * s.it; wt += w * 10; });
+    return wt ? { de: Math.round((wd / wt) * 100), it: Math.round((wi / wt) * 100) } : { de: 0, it: 0 };
+  }
+
+  /* ---------- verdict ---------- */
+  function gauge(svg, value, color) {
+    const r = 48, c = 2 * Math.PI * r, off = c * (1 - value / 100);
+    svg.innerHTML = `<circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--line)" stroke-width="11"/>` +
+      `<circle cx="60" cy="60" r="${r}" fill="none" stroke="${color}" stroke-width="11" stroke-linecap="round" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}" transform="rotate(-90 60 60)" style="transition:stroke-dashoffset .4s ease"/>` +
+      `<text x="60" y="58" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="27" font-weight="600" fill="var(--ink)">${value}</text>` +
+      `<text x="60" y="78" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="var(--muted)">of 100</text>`;
+    svg.setAttribute("aria-label", svg.getAttribute("aria-label").split(":")[0] + ": " + value + " of 100");
+  }
+  function renderVerdict() {
+    const live = analysis?.[scenario];
+    const a = live && live.headline ? live : BASE_ANALYSIS[scenario];
+    $("headline").textContent = a.headline;
+    $("routes").innerHTML = (a.routes || []).map((r, i) => {
+      const st = ["go", "watch", "blocked"].includes(r.status) ? r.status : "watch";
+      const label = { go: "go", watch: "parallel", blocked: "blocked" }[st];
+      return `<div class="route"><span class="rank">${i + 1}</span><div class="r-title">${esc(r.title)}<span class="pill ${st}">${label}</span></div><p class="r-detail">${esc(r.detail)}</p></div>`;
+    }).join("");
+    $("nextSteps").innerHTML = (a.next || []).map((n) => `<li>${esc(n)}</li>`).join("");
+    const when = live && live.headline ? (analysis.updated || "") : BASE_ANALYSIS.updated;
+    $("analysisStamp").textContent = (live && live.headline ? "Analysis updated " : "Baseline analysis ") + when + (dbState === "live" ? " · live research log connected" : dbState === "off" ? " · research log not available in this view" : "");
+    const t = totals();
+    gauge($("gDE"), t.de, "var(--de)");
+    gauge($("gIT"), t.it, "var(--it)");
+    const lead = t.de === t.it ? "Tied" : t.de > t.it ? `Germany leads by ${t.de - t.it}` : `Italy leads by ${t.it - t.de}`;
+    $("scoreNote").textContent = `${lead} under the ${scenario === "self" ? "self-funded" : "scholarship"} scenario, using your weights below.`;
+    $("scSelf").setAttribute("aria-pressed", String(scenario === "self"));
+    $("scSch").setAttribute("aria-pressed", String(scenario === "sch"));
+  }
+
+  /* ---------- factors ---------- */
+  function renderFactors() {
+    $("factors").innerHTML = FACTORS.map((f) => {
+      const s = factorScores(f);
+      return `<div class="frow">
+        <div><div class="f-name">${esc(f.name)}</div><div class="f-note">${esc(f.note[scenario])}</div></div>
+        <div class="bars">
+          <div class="bar"><span class="num muted">DE</span><span class="track"><span class="fill de" style="width:${s.de * 10}%"></span></span><span class="num">${s.de}</span></div>
+          <div class="bar"><span class="num muted">IT</span><span class="track"><span class="fill it" style="width:${s.it * 10}%"></span></span><span class="num">${s.it}</span></div>
+        </div>
+        <div class="weight"><label for="w-${f.id}">Weight <span class="num" id="wv-${f.id}">${weights[f.id]}</span></label><input type="range" id="w-${f.id}" min="0" max="3" step="1" value="${weights[f.id]}"></div>
+      </div>`;
+    }).join("");
+    FACTORS.forEach((f) => {
+      $("w-" + f.id).addEventListener("input", (e) => {
+        weights[f.id] = Number(e.target.value);
+        $("wv-" + f.id).textContent = weights[f.id];
+        store.set("compass.w." + f.id, String(weights[f.id]));
+        renderVerdict();
+      });
+    });
+  }
+
+  /* ---------- costs ---------- */
+  const COST_PARTS = [
+    { id: "living", label: "Living (rent, food, insurance)", color: "var(--de)" },
+    { id: "fees", label: "Tuition and semester fees", color: "var(--accent)" },
+    { id: "setup", label: "Visa, flights, document checks", color: "var(--faint)" },
+  ];
+  const COSTS = [
+    { name: "Germany", sub: "self-funded", country: "de", parts: { living: 23808, fees: 1400, setup: 1500 }, note: "€992/month (official blocked-account rate) × 24, 4 semester fees" },
+    { name: "Italy", sub: "self-funded", country: "it", parts: { living: 20400, fees: 2000, setup: 1500 }, note: "about €850/month in Bologna or Turin, income-based fees" },
+    { name: "Italy", sub: "with full DSU grant", country: "it", parts: { living: 3908, fees: 0, setup: 1500 }, note: "DSU up to about €8,246/year, fees waived" },
+    { name: "Either", sub: "on Erasmus Mundus", country: "eu", parts: { living: 0, fees: 0, setup: 0 }, note: "€1,400/month + fees + travel covered" },
+  ];
+  const lakh = (eur) => (eur * EUR_BDT) / 100000;
+  function renderCosts() {
+    const MAX = 40; // lakh on the axis
+    const pct = (l) => Math.min(100, (l / MAX) * 100);
+    const band = `<span class="band" style="left:${pct(BUDGET[0])}%;width:${pct(BUDGET[1]) - pct(BUDGET[0])}%" title="Your budget: ${BUDGET[0]}–${BUDGET[1]} lakh BDT"></span>`;
+    const rows = COSTS.map((c) => {
+      const total = Object.values(c.parts).reduce((a, b) => a + b, 0);
+      const segs = COST_PARTS.map((p) => c.parts[p.id] ? `<i style="width:${pct(lakh(c.parts[p.id]))}%;background:${c.country === "it" && p.id === "living" ? "var(--it)" : p.color}" title="${esc(p.label)}: €${c.parts[p.id].toLocaleString("en")}"></i>` : "").join("");
+      const totalL = lakh(total);
+      return `<div class="crow">
+        <div class="c-name"><span class="flag ${c.country}" style="${c.country === "eu" ? "background:var(--accent)" : ""}"></span>${esc(c.name)}<span class="sub">${esc(c.sub)}</span></div>
+        <div class="ctrack" role="img" aria-label="${esc(c.name + " " + c.sub)}: about ${totalL.toFixed(1)} lakh BDT">${band}<span class="stack" style="width:100%">${segs}</span></div>
+        <div><div class="num" style="font-weight:600">${total ? "৳" + totalL.toFixed(1) + " L" : "≈ ৳0"}</div><div class="num small muted">€${total.toLocaleString("en")}</div></div>
+      </div>`;
+    }).join("");
+    const ticks = [0, 10, 20, 30, 40].map((t) => `<span style="left:${pct(t)}%">${t}</span>`).join("");
+    $("costs").innerHTML = rows + `<div class="axis"><span></span><div class="ticks">${ticks}</div><span class="small muted">lakh BDT</span></div>`;
+    $("costLegend").innerHTML = `<span><i style="background:var(--de)"></i>Living, Germany</span><span><i style="background:var(--it)"></i>Living, Italy</span><span><i style="background:var(--accent)"></i>Fees</span><span><i style="background:var(--faint)"></i>Visa, flights, document checks</span><span><i style="background:var(--accent-soft);border:1.5px dashed var(--accent)"></i>Your budget, 15–25 lakh</span>`;
+    $("fxNote").textContent = `€1 = ৳${EUR_BDT} · 2-year Master's`;
+    $("upfront").innerHTML = `
+      <div class="tile"><span class="eyebrow"><span class="flag de"></span>Germany, cash before the visa</span><span class="big">৳${lakh(11904 + 1500).toFixed(1)} L</span><span class="small muted">€11,904 blocked account (official, 2026) plus about €1,500 for flights, insurance and fees.</span></div>
+      <div class="tile"><span class="eyebrow"><span class="flag it"></span>Italy, cash before the visa</span><span class="big">৳${lakh(7100 + 1500).toFixed(1)} L</span><span class="small muted">Proof of about €7,100 for one year (sources range €6,000–10,180; confirm on the VFS checklist) plus about €1,500. Relatives can sponsor.</span></div>
+      <div class="tile"><span class="eyebrow">Part-time work</span><span class="big">20 h/week</span><span class="small muted">Allowed in both during term. Germany pays more, but jobs mostly need some German.</span></div>`;
+  }
+
+  /* ---------- timeline ---------- */
+  const MONTHS = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+  const START = new Date(2026, 9, 1), END = new Date(2027, 10, 1);
+  const pos = (y, m, d) => ((new Date(y, m - 1, d) - START) / (END - START)) * 100;
+  const LANES = [
+    { name: "Both", events: [
+      { c: "eu", from: [2026, 11, 20], to: [2026, 12, 31], t: "IELTS 5 Dec" },
+      { c: "eu", from: [2027, 1, 1], to: [2027, 1, 31], t: "Erasmus: GrEnFIn 7 Jan · EPOG 27 Jan" },
+      { c: "eu", from: [2027, 3, 15], to: [2027, 5, 10], t: "Erasmus results" },
+    ] },
+    { name: "Germany", events: [
+      { c: "de", from: [2027, 2, 1], to: [2027, 3, 31], t: "Shortlist + uni-assist VPD" },
+      { c: "de", from: [2027, 4, 1], to: [2027, 5, 31], t: "Apply (most close 31 May)" },
+      { c: "de", from: [2027, 6, 1], to: [2027, 7, 31], t: "Admission → register on CSP" },
+      { c: "block", from: [2027, 8, 1], to: [2027, 10, 31], t: "Self-funded: queue 27+ months →" },
+    ] },
+    { name: "Germany + award", events: [
+      { c: "de", from: [2027, 6, 1], to: [2027, 7, 15], t: "Admission + CSP" },
+      { c: "de", from: [2027, 7, 15], to: [2027, 9, 10], t: "VFS + visa (≈4 wks)" },
+      { c: "de", from: [2027, 9, 20], to: [2027, 10, 31], t: "Arrive" },
+    ] },
+    { name: "Italy", events: [
+      { c: "it", from: [2026, 10, 25], to: [2027, 1, 31], t: "Declaration of Value / CIMEA" },
+      { c: "it", from: [2027, 2, 1], to: [2027, 4, 30], t: "Pre-evaluation applications" },
+      { c: "it", from: [2027, 5, 1], to: [2027, 6, 30], t: "Universitaly pre-enrolment" },
+      { c: "it", from: [2027, 7, 1], to: [2027, 8, 31], t: "VFS appointment + visa" },
+      { c: "it", from: [2027, 9, 1], to: [2027, 10, 31], t: "Arrive · permesso" },
+    ] },
+    { name: "Italy DSU", events: [
+      { c: "it", from: [2027, 2, 15], to: [2027, 5, 31], t: "Family income papers → ISEE parificato" },
+      { c: "it", from: [2027, 6, 15], to: [2027, 9, 15], t: "Regional DSU call (expected)" },
+    ] },
+  ];
+  function renderTimeline() {
+    const now = new Date();
+    const todayPct = ((now - START) / (END - START)) * 100;
+    let html = `<div></div>` + MONTHS.map((m, i) => `<div class="m">${m}${i === 0 ? " ’26" : i === 3 ? " ’27" : ""}</div>`).join("");
+    LANES.forEach((lane) => {
+      const rows = lane.events.length > 3 && lane.events.some((e, i) => i && pos(...e.from) < pos(...lane.events[i - 1].to)) ? 2 : 1;
+      html += `<div class="lane-name">${esc(lane.name)}</div><div class="lane" style="min-height:${rows * 28 + 8}px">`;
+      lane.events.forEach((e) => {
+        const l = pos(...e.from), w = Math.max(3, pos(...e.to) - l);
+        html += `<span class="ev ${e.c}" style="left:${l}%;width:${w}%;top:4px" title="${esc(e.t)}">${esc(e.t)}</span>`;
+      });
+      if (todayPct >= 0 && todayPct <= 100) html += `<span class="today" style="left:${todayPct}%"></span>`;
+      html += `</div>`;
+    });
+    $("timeline").innerHTML = html;
+    if (todayPct >= 0 && todayPct <= 100) {
+      const first = $("timeline").querySelector(".lane .today");
+      if (first) first.innerHTML = "<span>today</span>";
+    }
+  }
+
+  /* ---------- contenders ---------- */
+  const CONTENDERS = [
+    { c: "Germany", top: true, cost: 4, fund: 3, visa: 1, fam: 3, jobs: 5, why: "Tuition-free and the best job market, but self-funded visas from Dhaka wait 27+ months." },
+    { c: "Italy", top: true, cost: 5, fund: 5, visa: 3, fam: 3, jobs: 3, why: "Income-based DSU grants and low fees; the most reachable funded option for a 2027 start." },
+    { c: "Hungary", cost: 4, fund: 4, visa: 3, fam: 2, jobs: 2, why: "Stipendium Hungaricum is fully funded (deadline expected 15 Jan 2027) but few places and a smaller job market. Keep as backup." },
+    { c: "Finland", cost: 2, fund: 3, visa: 4, fam: 1, jobs: 3, why: "Tuition €8–18k. A bill would make students' families wait 1 year before applying (from Apr 2027)." },
+    { c: "France", cost: 3, fund: 2, visa: 3, fam: 3, jobs: 3, why: "Public fees about €3,900/year for non-EU Master's; Eiffel awards are very competitive." },
+  ];
+  function dots(n) { return `<span class="dots" aria-label="${n} of 5"><b>${"●".repeat(n)}</b>${"●".repeat(5 - n)}</span>`; }
+  function renderContenders() {
+    $("contenders").innerHTML = `<thead><tr><th>Country</th><th>Cost</th><th>Funding</th><th>Visa from Dhaka</th><th>Family</th><th>Jobs</th><th>For you</th></tr></thead><tbody>` +
+      CONTENDERS.map((r) => `<tr class="${r.top ? "top" : ""}"><td>${r.top ? `<span class="flag ${r.c === "Germany" ? "de" : "it"}"></span>` : ""}${esc(r.c)}</td><td>${dots(r.cost)}</td><td>${dots(r.fund)}</td><td>${dots(r.visa)}</td><td>${dots(r.fam)}</td><td>${dots(r.jobs)}</td><td class="muted">${esc(r.why)}</td></tr>`).join("") + `</tbody>`;
+  }
+
+  /* ---------- signals + picks (live from db) ---------- */
+  const CTRY = { DE: ["de", "Germany"], IT: ["it", "Italy"], EU: ["eu", "EU-wide"], OTHER: ["", "Other"] };
+  function filterButtons(el, current, counts, onPick) {
+    const opts = [["all", "All"], ["DE", "Germany"], ["IT", "Italy"], ["EU", "EU-wide"]];
+    el.innerHTML = opts.map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${current === k}">${l}${counts[k] ? ` <span class="num">${counts[k]}</span>` : ""}</button>`).join("");
+    el.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => onPick(b.dataset.k)));
+  }
+  function countBy(rows) { const c = { all: rows.length }; rows.forEach((r) => { const k = String(r.country || "OTHER").toUpperCase(); c[k] = (c[k] || 0) + 1; }); return c; }
+  function fmtDate(d) { const t = Date.parse(d); return Number.isFinite(t) ? new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : (d || "No date"); }
+  function emptyMsg(kind) {
+    if (dbState === "loading") return `<div class="empty">Loading the ${kind}…</div>`;
+    if (dbState === "off") return `<div class="empty">The live ${kind} shows when you open this page on claude.ai while signed in. The analysis above still works.</div>`;
+    return `<div class="empty">Nothing here yet. The daily research run adds items each morning.</div>`;
+  }
+  function renderSignals() {
+    filterButtons($("sigFilters"), sigFilter, countBy(signals), (k) => { sigFilter = k; renderSignals(); });
+    const rows = signals.filter((s) => sigFilter === "all" || String(s.country).toUpperCase() === sigFilter);
+    $("sigCount").textContent = signals.length ? `${signals.length} logged` : "";
+    if (!rows.length) { $("signals").innerHTML = emptyMsg("research log"); return; }
+    $("signals").innerHTML = rows.slice(0, 30).map((s) => {
+      const [cc, cn] = CTRY[String(s.country).toUpperCase()] || CTRY.OTHER;
+      const imp = ["up", "down", "watch"].includes(s.impact) ? s.impact : "watch";
+      const impLabel = { up: "helps", down: "hurts", watch: "watch" }[imp];
+      const url = safeUrl(s.link);
+      return `<div class="item"><span class="stripe ${imp}" aria-hidden="true"></span><div>
+        <div class="i-top"><span class="i-title">${esc(s.title)}</span><span class="tag ${cc}">${esc(cn)}</span><span class="tag">${impLabel}</span></div>
+        <div class="i-meta">${esc(fmtDate(s.date))}${s.verified === false ? " · unverified" : s.verified ? " · official source" : ""}</div>
+        <p class="i-body">${esc(s.detail)}</p>
+        ${url ? `<a class="i-link" href="${esc(url)}" target="_blank" rel="noopener">${esc(url.replace(/^https?:\/\//, "").slice(0, 70))}</a>` : ""}
+      </div></div>`;
+    }).join("");
+  }
+  function daysTo(d) { const t = Date.parse(d); return Number.isFinite(t) ? Math.ceil((t - Date.now()) / 86400000) : null; }
+  function renderPicks() {
+    filterButtons($("pickFilters"), pickFilter, countBy(picks), (k) => { pickFilter = k; renderPicks(); });
+    const rank = { high: 0, medium: 1, low: 2 };
+    const rows = picks.filter((p) => pickFilter === "all" || String(p.country).toUpperCase() === pickFilter)
+      .sort((a, b) => (rank[a.fit] ?? 3) - (rank[b.fit] ?? 3) || String(a.deadline || "9999").localeCompare(String(b.deadline || "9999")));
+    $("pickCount").textContent = picks.length ? `${picks.length} tracked` : "";
+    if (!rows.length) { $("picks").innerHTML = emptyMsg("shortlist"); return; }
+    $("picks").innerHTML = rows.map((p) => {
+      const [cc, cn] = CTRY[String(p.country).toUpperCase()] || CTRY.OTHER;
+      const fit = ["high", "medium", "low"].includes(p.fit) ? p.fit : "low";
+      const dd = daysTo(p.deadline);
+      const due = p.deadline ? `${fmtDate(p.deadline)}${dd !== null ? (dd < 0 ? " · passed" : ` · ${dd} days`) : ""}` : "Rolling / see notes";
+      const url = safeUrl(p.link);
+      return `<div class="item"><span class="stripe ${fit}" aria-hidden="true"></span><div>
+        <div class="i-top"><span class="i-title">${esc(p.name)}</span><span class="tag ${cc}">${esc(cn)}</span><span class="tag">${esc(fit)} fit</span></div>
+        <div class="i-meta">${esc(due)}${p.verified === false ? " · unverified" : p.verified ? " · official source" : ""}</div>
+        <p class="i-body"><b style="color:var(--ink);font-weight:500">${esc(p.funding)}</b>${p.why ? " — " + esc(p.why) : ""}</p>
+        ${url ? `<a class="i-link" href="${esc(url)}" target="_blank" rel="noopener">${esc(url.replace(/^https?:\/\//, "").slice(0, 70))}</a>` : ""}
+      </div></div>`;
+    }).join("");
+  }
+
+  /* ---------- ask Claude ---------- */
+  let sampleFn = null, ctl = null;
+  function mdLite(text) {
+    const lines = esc(text).split(/\n/);
+    let out = "", inList = false;
+    lines.forEach((ln) => {
+      const b = ln.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+      if (/^\s*[-*•]\s+/.test(b)) { if (!inList) { out += "<ul>"; inList = true; } out += `<li>${b.replace(/^\s*[-*•]\s+/, "")}</li>`; }
+      else { if (inList) { out += "</ul>"; inList = false; } if (b.trim()) out += `<p>${b.replace(/^#+\s*/, "")}</p>`; }
+    });
+    return out + (inList ? "</ul>" : "");
+  }
+  function context() {
+    const t = totals();
+    return [
+      "PROFILE: Khandaker Ayman, Bangladeshi, BBA Finance at North South University, CGPA 3.21/4 (German grade 1.79). IELTS target 7.0, test 5 Dec 2026. Married; wife to follow later. Budget 15-25 lakh BDT (EUR 1 = BDT 140). Target: Master's in Finance / Business Analytics / FinTech / Management, Sep-Oct 2027 intake. Today is " + new Date().toISOString().slice(0, 10) + ".",
+      "SCENARIO: " + (scenario === "self" ? "self-funded" : "holds an EU- or German-government-funded scholarship"),
+      "FACTOR SCORES (0-10, Germany vs Italy, viewer weight 0-3):\n" + FACTORS.map((f) => { const s = factorScores(f); return `- ${f.name}: DE ${s.de}, IT ${s.it}, weight ${weights[f.id]}. ${f.note[scenario]}`; }).join("\n"),
+      `TOTALS: Germany ${t.de}/100, Italy ${t.it}/100`,
+      "LATEST SIGNALS:\n" + (signals.slice(0, 20).map((s) => `- [${s.date}] [${s.country}] ${s.title}: ${s.detail} (${s.impact}${s.verified === false ? ", unverified" : ""})`).join("\n") || "- none loaded"),
+      "SHORTLIST:\n" + (picks.slice(0, 25).map((p) => `- [${p.country}] ${p.name} | ${p.funding} | deadline ${p.deadline || "n/a"} | fit ${p.fit}`).join("\n") || "- none loaded"),
+    ].join("\n\n");
+  }
+  async function ask(question) {
+    if (!sampleFn) return;
+    ctl?.abort();
+    ctl = new AbortController();
+    const box = $("answer");
+    box.hidden = false;
+    box.textContent = "Thinking…";
+    $("askBtn").disabled = $("recheckBtn").disabled = true;
+    const prompt = "You advise a Bangladeshi student choosing between Germany and Italy for a Master's. Use only the data below; say when something needs checking on an official page. Be specific and plain, under 220 words, short paragraphs or '-' bullets, no headings.\n\n" + context() + "\n\nQUESTION: " + question;
+    try {
+      const { text } = await sampleFn(prompt, { signal: ctl.signal, onText: ({ text }) => { box.innerHTML = mdLite(text); } });
+      box.innerHTML = mdLite(text);
+    } catch (e) {
+      if (e?.code === "not_granted" || e?.code === "sampling_disabled" || e?.code === "capability_disabled") { $("askPanel").hidden = true; }
+      else if (e?.code === "rate_limited") box.textContent = "Too many questions at once. Wait a minute, then ask again.";
+      else if (e?.code !== "cancelled") box.innerHTML = (e?.text ? mdLite(e.text) : "") + "<p class=\"muted\">The answer stopped early. Ask again.</p>";
+    } finally {
+      $("askBtn").disabled = $("recheckBtn").disabled = false;
+    }
+  }
+  $("askBtn").addEventListener("click", () => { const q = $("askBox").value.trim(); if (q) ask(q); else $("askBox").focus(); });
+  $("recheckBtn").addEventListener("click", () => ask("Given the latest signals and shortlist, is the current recommendation still right? Rank Germany vs Italy for me now, name the single most important action for the next 14 days, and flag any deadline within 30 days."));
+
+  /* ---------- wire up ---------- */
+  function setScenario(s) { scenario = s; store.set("compass.scenario", s); renderVerdict(); renderFactors(); }
+  $("scSelf").addEventListener("click", () => setScenario("self"));
+  $("scSch").addEventListener("click", () => setScenario("sch"));
+
+  function renderAll() { renderVerdict(); renderFactors(); renderSignals(); renderPicks(); }
+  renderAll(); renderCosts(); renderTimeline(); renderContenders();
+
+  (async () => {
+    if (!window.claude?.use) { dbState = "off"; $("askPanel").hidden = true; renderAll(); return; }
+    claude.use("sample").then((s) => { sampleFn = s; if (!s) $("askPanel").hidden = true; });
+    const db = await claude.use("db");
+    if (!db) { dbState = "off"; renderAll(); return; }
+    dbState = "live";
+    const fail = () => { dbState = "off"; renderAll(); };
+    db.doc("analysis/current").onSnapshot((snap) => { analysis = snap.exists === false ? null : (snap.data() || null); renderVerdict(); renderFactors(); }, fail);
+    db.collection("signals").orderBy("date", "desc").limit(200).onSnapshot((snap) => { signals = snap.docs.map((d) => ({ id: d.id, ...d.data() })); renderSignals(); }, fail);
+    db.collection("picks").limit(300).onSnapshot((snap) => { picks = snap.docs.map((d) => ({ id: d.id, ...d.data() })); renderPicks(); }, fail);
+    renderAll();
+  })();
+})();
+</script>
