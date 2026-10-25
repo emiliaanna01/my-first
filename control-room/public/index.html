@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control room</title>
+  <meta name="description" content="Calendar, Notion tasks, feeds, system checks and work tabs on one screen.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23BEC3C6'/%3E%3Cpath d='M16 6 26 16 16 26 6 16Z' fill='%23D3201B'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <h1 id="title">Control room</h1>
+    <div class="clock">
+      <time id="clock-time">--:--:--</time>
+      <span id="clock-date"></span>
+    </div>
+    <div id="weather" class="weather"></div>
+    <div class="tools">
+      <button type="button" id="focus-btn" class="tool">Start focus</button>
+      <button type="button" id="notify-btn" class="tool">Turn on notifications</button>
+      <button type="button" id="theme-btn" class="tool">Dark theme</button>
+      <button type="button" id="palette-btn" class="tool"><kbd>Ctrl K</kbd> Search</button>
+    </div>
+  </header>
+
+  <section id="alarms" class="alarms" aria-label="Alarms" aria-live="polite"></section>
+
+  <section class="panel trend" aria-labelledby="trend-h">
+    <div class="panel-head">
+      <h2 id="trend-h">Today</h2>
+      <span id="trend-date" class="panel-sub"></span>
+    </div>
+    <div id="allday" class="allday"></div>
+    <div id="trend"></div>
+  </section>
+
+  <main class="grid">
+    <section class="panel agenda" aria-labelledby="agenda-h">
+      <div class="panel-head">
+        <h2 id="agenda-h">Calendar</h2>
+        <button type="button" class="status" data-status="calendar" title="Refresh now"></button>
+      </div>
+      <p class="hint" data-hint="calendar" hidden></p>
+      <div id="next-up"></div>
+      <div id="agenda" class="scroll"></div>
+    </section>
+
+    <section class="panel tasks" aria-labelledby="tasks-h">
+      <div class="panel-head">
+        <h2 id="tasks-h">Tasks</h2>
+        <button type="button" class="status" data-status="tasks" title="Refresh now"></button>
+      </div>
+      <p class="hint" data-hint="tasks" hidden></p>
+      <form id="task-form" class="task-form">
+        <label class="sr" for="task-title">New task</label>
+        <input id="task-title" name="title" autocomplete="off" placeholder="Add a task" maxlength="200">
+        <label class="sr" for="task-due">Due</label>
+        <select id="task-due" name="due">
+          <option value="">No date</option>
+          <option value="0">Today</option>
+          <option value="1">Tomorrow</option>
+          <option value="7">Next week</option>
+        </select>
+        <button type="submit">Add</button>
+      </form>
+      <div id="tasks" class="scroll"></div>
+      <h3 class="subhead">Today's three</h3>
+      <ul id="top3" class="top3"></ul>
+      <h3 class="subhead"><label for="scratch">Notes</label></h3>
+      <textarea id="scratch" rows="5" placeholder="Anything you need to remember today"></textarea>
+    </section>
+
+    <section class="panel feeds" aria-labelledby="feeds-h">
+      <div class="panel-head">
+        <h2 id="feeds-h">Feeds</h2>
+        <button type="button" class="status" data-status="feeds" title="Refresh now"></button>
+      </div>
+      <div id="feed-tabs" class="tabs" role="tablist" aria-label="Feeds"></div>
+      <p class="hint" id="feed-hint" hidden></p>
+      <div id="feed-body" class="scroll" role="tabpanel" aria-labelledby="feeds-h"></div>
+    </section>
+
+    <section class="panel systems" aria-labelledby="systems-h">
+      <div class="panel-head">
+        <h2 id="systems-h">Systems</h2>
+        <button type="button" class="status" data-status="systems" title="Check again now"></button>
+      </div>
+      <ul id="systems" class="sys-list"></ul>
+    </section>
+
+    <section class="panel launchpad" aria-labelledby="launch-h">
+      <div class="panel-head">
+        <h2 id="launch-h">Work tabs</h2>
+        <span class="panel-sub" id="config-file"></span>
+      </div>
+      <div id="launchpad" class="launch-groups"></div>
+    </section>
+  </main>
+
+  <dialog id="palette" aria-label="Search">
+    <form method="dialog" class="palette-form">
+      <label class="sr" for="palette-input">Search links, tasks, events and actions</label>
+      <input id="palette-input" autocomplete="off" placeholder="Search links, tasks, events and actions" role="combobox" aria-controls="palette-list" aria-expanded="true">
+      <ul id="palette-list" role="listbox"></ul>
+      <p class="palette-help"><kbd>↑</kbd> <kbd>↓</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</p>
+    </form>
+  </dialog>
+
+  <dialog id="login" aria-labelledby="login-h">
+    <form id="login-form" class="login-form">
+      <h2 id="login-h">Sign in</h2>
+      <p>This dashboard shows your calendar and tasks, so it needs the password you set as <code>APP_PASSWORD</code>.</p>
+      <label for="login-password">Password</label>
+      <input id="login-password" type="password" autocomplete="current-password" required>
+      <p id="login-error" class="login-error" role="alert"></p>
+      <button type="submit">Sign in</button>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

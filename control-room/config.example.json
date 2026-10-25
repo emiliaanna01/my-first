@@ -1,0 +1,85 @@
+{
+  "title": "Control room",
+  "dayWindow": { "start": 7, "end": 19 },
+  "agendaDays": 7,
+  "alarms": { "meetingLeadMinutes": 10, "advisoryDays": 7 },
+
+  "weather": null,
+
+  "notion": {
+    "databaseId": "",
+    "titleProperty": "",
+    "statusProperty": "",
+    "doneValue": "Done",
+    "dueProperty": ""
+  },
+
+  "feeds": [
+    {
+      "name": "X",
+      "sources": [
+        { "type": "x", "user": "your_x_handle" }
+      ]
+    },
+    {
+      "name": "Industry",
+      "sources": [
+        { "type": "rss", "url": "https://www.realpars.com/blog/rss.xml", "label": "RealPars" },
+        { "type": "rss", "url": "https://www.plctalk.net/forums/forums/-/index.rss", "label": "PLCtalk" }
+      ]
+    },
+    {
+      "name": "ICS advisories",
+      "sources": [
+        {
+          "type": "rss",
+          "url": "https://www.cisa.gov/cybersecurity-advisories/ics-advisories.xml",
+          "label": "CISA",
+          "watch": ["Siemens", "Rockwell", "Schneider Electric", "Inductive Automation"]
+        }
+      ]
+    },
+    {
+      "name": "Tech",
+      "sources": [
+        { "type": "rss", "url": "https://hnrss.org/frontpage", "label": "Hacker News" }
+      ]
+    }
+  ],
+
+  "systems": [
+    { "name": "Internet", "type": "http", "url": "https://www.google.com/generate_204", "critical": true },
+    { "name": "GitHub", "type": "http", "url": "https://github.com" },
+    { "name": "Notion", "type": "http", "url": "https://www.notion.so" },
+    { "name": "Ignition gateway (example)", "type": "http", "url": "http://localhost:8088/StatusPing" },
+    { "name": "PLC-01 Modbus (example)", "type": "tcp", "host": "192.168.1.10", "port": 502 }
+  ],
+
+  "launchpad": [
+    {
+      "name": "Daily",
+      "links": [
+        { "label": "Gmail", "url": "https://mail.google.com" },
+        { "label": "Google Calendar", "url": "https://calendar.google.com" },
+        { "label": "Notion", "url": "https://www.notion.so" },
+        { "label": "X", "url": "https://x.com/home" }
+      ]
+    },
+    {
+      "name": "Engineering",
+      "links": [
+        { "label": "GitHub", "url": "https://github.com" },
+        { "label": "Rockwell literature library", "url": "https://literature.rockwellautomation.com" },
+        { "label": "Siemens industry support", "url": "https://support.industry.siemens.com" },
+        { "label": "Ignition user manual", "url": "https://docs.inductiveautomation.com" },
+        { "label": "CISA ICS advisories", "url": "https://www.cisa.gov/news-events/cybersecurity-advisories?f%5B0%5D=advisory_type%3A95" }
+      ]
+    },
+    {
+      "name": "Plant",
+      "links": [
+        { "label": "Ignition gateway", "url": "http://localhost:8088" }
+      ]
+    }
+  ]
+}
