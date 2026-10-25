@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RoundHouse | Automations, audits and retainers for US businesses</title>
+<meta name="description" content="Find the automation your business needs. Lead replies, quotes, CRM, AI assistants and more, with prices up front.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+/* Look and feel after airbnb.com: coral brand, category tabs, pill search bar, listing-card rows, listing modal with a reserve card, grey footer. */
+:root{--coral:#FF385C;--coral2:#E31C5F;--ink:#222222;--ink2:#6A6A6A;--line:#DDDDDD;--soft:#F7F7F7;--bg:#fff;--font:"Figtree","Circular",-apple-system,"Helvetica Neue",Arial,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.43 var(--font)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:8px}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1760px;margin:0 auto;padding-left:max(80px, env(safe-area-inset-left,0px));padding-right:max(80px, env(safe-area-inset-right,0px))}
+
+/* header */
+header{background:linear-gradient(#fff,#FBFBFB);border-bottom:1px solid #EBEBEB;position:sticky;top:env(safe-area-inset-top,0px);z-index:40}
+.h1row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:88px;gap:16px}
+.logo{display:flex;align-items:center;gap:6px;color:var(--coral);font-weight:800;font-size:24px;letter-spacing:-.04em}
+.cats{display:flex;gap:28px;align-items:center}
+.cat{display:flex;align-items:center;gap:8px;background:transparent;border:0;font:500 16px var(--font);color:var(--ink2);cursor:pointer;padding:10px 4px;border-bottom:3px solid transparent}
+.cat[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+.cat svg{width:40px;height:40px;transition:transform .2s}
+.cat:hover svg{transform:scale(1.08)}
+.hr{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.hr a.host{font-weight:500;font-size:15px;padding:12px;border-radius:999px}
+.hr a.host:hover{background:var(--soft)}
+.hr .glb{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#F2F2F2}
+.hr .menu{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:6px 6px 6px 12px;background:#fff}
+.hr .menu:hover{box-shadow:0 2px 4px rgba(0,0,0,.18)}
+.hr .av{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+
+/* search pill */
+.search{display:flex;align-items:center;max-width:850px;margin:0 auto 24px;border:1px solid var(--line);border-radius:999px;background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.1);position:relative}
+.seg{flex:1;padding:12px 24px;border-radius:999px;display:grid;gap:0;position:relative;min-width:0}
+.seg:hover{background:#EBEBEB}
+.seg + .seg::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:1px;background:var(--line)}
+.seg label{font-size:12px;font-weight:600}
+.seg select{appearance:none;border:0;background:transparent;font:400 14px var(--font);color:var(--ink2);padding:0;cursor:pointer;width:100%;text-overflow:ellipsis}
+.seg select:focus{outline:none}
+.go{flex:none;width:48px;height:48px;border-radius:50%;border:0;background:var(--coral);color:#fff;display:grid;place-items:center;margin:8px 8px 8px 0;cursor:pointer;transition:background .2s}
+.go:hover{background:var(--coral2)}
+
+/* rows */
+main{padding-block:32px 48px}
+.row{margin-bottom:40px}
+.row-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.row-h h2{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.row-h h2 a::after{content:" ›";font-weight:600}
+.arrows{display:flex;gap:8px}
+.arrows button{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center}
+.arrows button:hover{box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 5*16px)/6.2);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.track::-webkit-scrollbar{display:none}
+.lc{scroll-snap-align:start;display:grid;gap:8px;cursor:pointer;background:transparent;border:0;padding:0;text-align:left;font:inherit;color:inherit}
+.ph{position:relative;aspect-ratio:20/19;border-radius:16px;overflow:hidden;display:grid;place-items:center}
+.ph svg.art{width:58%;height:58%}
+.fav{position:absolute;top:12px;left:12px;background:#fff;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.heart{position:absolute;top:10px;right:10px;width:32px;height:32px;display:grid;place-items:center;background:transparent;border:0;cursor:pointer}
+.heart svg{width:24px;height:24px;fill:rgba(0,0,0,.5);stroke:#fff;stroke-width:2}
+.heart[aria-pressed="true"] svg{fill:var(--coral)}
+.lc h3{font-size:15px;font-weight:600;line-height:1.3}
+.lc .s{font-size:14px;color:var(--ink2)}
+.lc .pr{font-size:14px;color:var(--ink2)}
+.lc .pr b{color:var(--ink);font-weight:600}
+.empty{color:var(--ink2);padding:24px 0}
+
+/* how it works band */
+.how{border-top:1px solid var(--line);padding-top:48px}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.hw{border:1px solid var(--line);border-radius:16px;padding:24px;display:grid;gap:10px;align-content:start}
+.hw .n{font-weight:700;font-size:22px}
+.hw p{color:var(--ink2)}
+.hw b.p{font-size:18px}
+
+/* modal */
+dialog{border:0;border-radius:16px;padding:0;max-width:1120px;width:calc(100% - 32px);max-height:calc(100% - 48px);box-shadow:0 8px 28px rgba(0,0,0,.28)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.md{padding:24px 40px 40px;overflow:auto}
+.md-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.md-top button{border:0;background:transparent;cursor:pointer;width:36px;height:36px;border-radius:50%;display:grid;place-items:center}
+.md-top button:hover{background:var(--soft)}
+.md h2{font-size:26px;font-weight:600}
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:180px 180px;gap:8px;border-radius:12px;overflow:hidden;margin:20px 0 32px}
+.gallery div{display:grid;place-items:center}
+.gallery div:first-child{grid-row:span 2}
+.md-body{display:grid;grid-template-columns:1fr 380px;gap:64px;align-items:start}
+.md-body h3{font-size:22px;font-weight:600}
+.md-body .lead{color:var(--ink2);margin-top:4px}
+.sep{border-top:1px solid var(--line);margin:24px 0}
+.amen{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.amen div{display:flex;gap:12px;align-items:center}
+.host-row{display:flex;gap:16px;align-items:center}
+.host-row .av{width:48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:600}
+.reserve{border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:0 6px 16px rgba(0,0,0,.12);display:grid;gap:16px;position:sticky;top:0}
+.reserve .p{font-size:22px}
+.reserve .p b{font-weight:600}
+.pick{border:1px solid #B0B0B0;border-radius:8px;display:grid;grid-template-columns:1fr 1fr}
+.pick > div{padding:10px 12px;display:grid}
+.pick > div + div{border-left:1px solid #B0B0B0}
+.pick .full{grid-column:1 / -1;border-top:1px solid #B0B0B0;border-left:0}
+.pick label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.pick select{border:0;background:transparent;font:400 14px var(--font);padding:0}
+.rbtn{background:linear-gradient(to right,#E61E4D 0%,#E31C5F 50%,#D70466 100%);color:#fff;border:0;border-radius:8px;padding:14px;font:600 16px var(--font);cursor:pointer;width:100%}
+.reserve .note{text-align:center;font-size:14px;color:var(--ink2)}
+.reserve .ln{display:flex;justify-content:space-between;color:var(--ink2)}
+.reserve .tot{display:flex;justify-content:space-between;font-weight:600;border-top:1px solid var(--line);padding-top:16px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:48px;border-top:1px solid var(--line);padding-top:48px;margin-top:16px}
+#form{display:grid;gap:0;border:1px solid #B0B0B0;border-radius:12px;overflow:hidden}
+.fi{padding:10px 14px;display:grid;gap:2px;border-top:1px solid #B0B0B0}
+.fi:first-child{border-top:0}
+.fi label{font-size:12px;color:var(--ink2)}
+.fi input,.fi select,.fi textarea{border:0;font:400 16px var(--font);padding:2px 0;width:100%;background:transparent;color:var(--ink)}
+.fi textarea{min-height:90px;resize:vertical}
+.fi:focus-within{box-shadow:inset 0 0 0 2px var(--ink);border-radius:8px}
+.fi input:focus,.fi select:focus,.fi textarea:focus{outline:none}
+.fa{padding:14px;border-top:1px solid #B0B0B0;display:grid;gap:10px}
+.err{color:#C13515;font-size:14px;min-height:1em}
+.ok{background:var(--soft);border-radius:12px;padding:14px;display:grid;gap:10px;margin-top:12px}
+.ok pre{white-space:pre-wrap;margin:0;font:400 14px/1.5 var(--font);max-height:180px;overflow:auto}
+
+footer{background:var(--soft);border-top:1px solid var(--line);padding-block:48px 24px}
+footer .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+footer h4{margin:0 0 12px;font-size:14px;font-weight:600}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:14px}
+footer ul a:hover{text-decoration:underline}
+footer .bot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:24px;font-size:14px}
+footer .bot span a{margin-left:12px}
+
+@media (max-width:1280px){.track{grid-auto-columns:calc((100% - 3*16px)/4.2)}}
+@media (max-width:950px){
+  .wrap{padding-left:max(24px, env(safe-area-inset-left,0px));padding-right:max(24px, env(safe-area-inset-right,0px))}
+  .h1row{grid-template-columns:auto 1fr;height:auto;padding-block:12px}
+  .cats{grid-column:1 / -1;grid-row:2;justify-content:center;gap:16px}
+  .hr a.host,.hr .glb{display:none}
+  .seg.opt{display:none}
+  .track{grid-auto-columns:calc((100% - 16px)/2.2)}
+  .how-grid,.md-body,.contact,footer .cols{grid-template-columns:1fr}
+  .md{padding:16px 20px 28px}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:140px 100px}
+  .gallery div:first-child{grid-column:1 / -1;grid-row:auto}
+  .gallery div:nth-child(n+4){display:none}
+  .arrows{display:none}
+}
+@media (max-width:520px){.cat svg{width:32px;height:32px}.cat{font-size:14px}.track{grid-auto-columns:78%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="h1row">
+      <a class="logo" href="#top"><svg width="30" height="32" viewBox="0 0 30 32" aria-hidden="true"><circle cx="15" cy="16" r="13" fill="none" stroke="#FF385C" stroke-width="3.2"/><circle cx="15" cy="16" r="5" fill="#FF385C"/></svg>roundhouse</a>
+      <div class="cats" role="group" aria-label="Browse">
+        <button class="cat" type="button" aria-pressed="true" data-k="build"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="c1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF8A65"/><stop offset="1" stop-color="#E64A19"/></linearGradient></defs><rect x="6" y="10" width="28" height="22" rx="5" fill="url(#c1)"/><rect x="11" y="15" width="12" height="4" rx="2" fill="#fff"/><rect x="11" y="22" width="18" height="4" rx="2" fill="#fff" opacity=".7"/></svg>Automations</button>
+        <button class="cat" type="button" aria-pressed="false" data-k="audit"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="c2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#81D4FA"/><stop offset="1" stop-color="#0277BD"/></linearGradient></defs><circle cx="18" cy="18" r="10" fill="url(#c2)"/><path d="M25 25l8 8" stroke="#0277BD" stroke-width="5" stroke-linecap="round"/><circle cx="18" cy="18" r="5" fill="#fff" opacity=".6"/></svg>Audits</button>
+        <button class="cat" type="button" aria-pressed="false" data-k="run"><svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="c3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C5E1A5"/><stop offset="1" stop-color="#558B2F"/></linearGradient></defs><circle cx="20" cy="20" r="14" fill="url(#c3)"/><path d="M13 20l5 5 10-10" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>Retainers</button>
+      </div>
+      <div class="hr">
+        <a class="host" href="#contact">Become a client</a>
+        <span class="glb" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#222" stroke-width="1.3"/><path d="M1 8h14M8 1c3 3 3 11 0 14M8 1c-3 3-3 11 0 14" fill="none" stroke="#222" stroke-width="1.3"/></svg></span>
+        <a class="menu" href="#contact" aria-label="Menu and contact"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" stroke="#222" stroke-width="2" stroke-linecap="round"/></svg><span class="av">RH</span></a>
+      </div>
+    </div>
+    <form class="search" id="search" role="search" aria-label="Find an automation">
+      <div class="seg"><label for="s-what">What</label><select id="s-what"><option value="">Any process</option><option value="leads">Leads</option><option value="docs">Quotes and invoices</option><option value="crm">CRM</option><option value="report">Reporting</option><option value="ai">AI assistant</option><option value="web">Brand and web</option></select></div>
+      <div class="seg opt"><label for="s-ind">Industry</label><select id="s-ind"><option value="">Any industry</option><option>Field services</option><option>Manufacturing</option><option>Logistics</option><option>Clinics</option></select></div>
+      <div class="seg opt"><label for="s-time">Timeline</label><select id="s-time"><option value="99">Any time</option><option value="6">Under 6 weeks</option><option value="10">Under 10 weeks</option></select></div>
+      <div class="seg"><label for="s-budget">Budget</label><select id="s-budget"><option value="999999">Any budget</option><option value="10000">Up to $10k</option><option value="25000">Up to $25k</option><option value="40000">Up to $40k</option></select></div>
+      <button class="go" type="submit" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M11 11l4 4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+    </form>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+  <div id="rows"></div>
+
+  <section class="how" aria-labelledby="hh">
+    <div class="row-h"><h2 id="hh">How booking works</h2></div>
+    <div class="how-grid">
+      <div class="hw"><span class="n">Diagnose</span><p>A paid audit of your tools, data and workflows, with a 90-day roadmap ranked by hours saved.</p><b class="p">$2,500–$6,000</b><p>Credited to your build within 60 days.</p></div>
+      <div class="hw"><span class="n">Build</span><p>The automation, AI agent, CRM, brand or website the roadmap calls for, at a fixed price.</p><b class="p">$4,000–$40,000</b><p>Scope and price fixed before work starts.</p></div>
+      <div class="hw"><span class="n">Run</span><p>Monitoring, fixes when tools change, new automations monthly and a report on hours saved.</p><b class="p">from $1,800/mo</b><p>Month to month after three months.</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="ch">
+    <div style="display:grid;gap:14px;align-content:start">
+      <h2 id="ch" style="font-size:32px;font-weight:600;letter-spacing:-.02em">Questions before you book?</h2>
+      <p style="color:var(--ink2)">Send a message to the person who would run your audit. We reply within one business day, 9am–6pm Eastern.</p>
+      <p><b>hello@roundhouse.studio</b></p>
+      <p style="color:var(--ink2);font-size:14px">Mutual NDA available before we discuss your data. You own everything we build.</p>
+    </div>
+    <div>
+      <form id="form" novalidate>
+        <div class="fi"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name"></div>
+        <div class="fi"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="fi"><label for="f-budget">Budget</label><select id="f-budget" name="budget"><option>Under $10k</option><option>$10k–$25k</option><option>$25k–$50k</option><option>$50k+</option></select></div>
+        <div class="fi"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Tell us what slows your team down"></textarea></div>
+        <div class="fa"><p class="err" id="f-err" role="alert"></p><button class="rbtn" type="submit">Continue</button></div>
+      </form>
+      <div class="ok" id="f-ok" hidden><p><b>Your message is ready.</b> Copy it and send it to hello@roundhouse.studio.</p><pre id="f-out"></pre><div><button class="rbtn" style="width:auto;padding:10px 18px" type="button" id="f-copy">Copy message</button></div></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg" aria-labelledby="md-title"><div class="md" id="md"></div></dialog>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h4>Support</h4><ul><li><a href="#contact">Help Center</a></li><li><a href="#contact">Security and NDAs</a></li><li><a href="#contact">Data handling</a></li></ul></div>
+      <div><h4>Working with us</h4><ul><li><a href="#top">Automations</a></li><li><a href="#top">Audits</a></li><li><a href="#top">Retainers</a></li></ul></div>
+      <div><h4>RoundHouse</h4><ul><li><a href="#contact">About</a></li><li><a href="#contact">Careers</a></li><li><a href="../index.html">All 10 concepts</a></li></ul></div>
+    </div>
+    <div class="bot"><span>© 2026 RoundHouse, Inc.<a href="#top">Privacy</a><a href="#top">Terms</a></span><span>English (US) &nbsp; $ USD &nbsp; 9am–6pm ET</span></div>
+  </div>
+</footer>
+
+<script>
+const L=[
+ {id:"leads",k:"build",t:"Instant lead replies",s:"Built for HVAC and plumbing",wk:5,lo:8000,hi:20000,r:"4.97",fav:1,c:["#FFE0D6","#FF8A65"],icon:"chat",ind:"Field services",d:"A text and an email within two minutes of every form, missed call and chat, at any hour. An AI assistant asks about service, urgency and ZIP code, flags emergencies to the on-call tech and books into open slots.",res:"First reply went from 3 h 40 min to 90 s for a 6-location HVAC company (sample)."},
+ {id:"docs",k:"build",t:"Quote engine",s:"Built for fabrication shops",wk:7,lo:8000,hi:25000,r:"4.95",fav:1,c:["#E3F2FD","#42A5F5"],icon:"doc",ind:"Manufacturing",d:"Drawings in, priced quote out, using the material costs and machine rates already in your ERP. Branded PDFs ready for e-signature, and nothing goes out without an estimator's approval.",res:"Quotes went from 3 days to 4 hours, win rate 22% to 29% (sample)."},
+ {id:"docs",k:"build",t:"Invoice matching",s:"Built for logistics",wk:8,lo:8000,hi:25000,r:"4.92",c:["#E8F5E9","#66BB6A"],icon:"doc",ind:"Logistics",d:"Carrier invoices read from any layout, matched to shipments and agreed rates, and posted to accounting. Mismatches go to a person with the reason shown.",res:"Invoice processing time cut by 70% at a 140-person 3PL (sample)."},
+ {id:"crm",k:"build",t:"CRM setup and migration",s:"HubSpot, GoHighLevel or Pipedrive",wk:6,lo:6000,hi:20000,r:"4.90",c:["#F3E5F5","#AB47BC"],icon:"pipe",ind:"Clinics",d:"Your CRM set up properly and moved over from what you use now, with consistent stages and an owner for every deal.",res:"Referrals from 9 clinics moved into one HubSpot account (sample)."},
+ {id:"report",k:"build",t:"Live ops dashboard",s:"CRM, ads and accounting together",wk:4,lo:5000,hi:15000,r:"4.96",fav:1,c:["#FFF8E1","#FFB300"],icon:"chart",ind:"Clinics",d:"Live numbers from your CRM, ads and accounting tools in one place, updated hourly.",res:"One dashboard replaced four weekly spreadsheets (sample)."},
+ {id:"ai",k:"build",t:"Internal AI assistant",s:"Trained on your SOPs",wk:8,lo:12000,hi:35000,r:"4.93",c:["#E0F7FA","#26C6DA"],icon:"spark",ind:"Field services",d:"An assistant trained on your SOPs, documents and FAQs, for onboarding and support, working inside the tools your staff already use.",res:"New technicians find warranty steps without calling the office."},
+ {id:"inbox",k:"build",t:"Inbox automation",s:"Sorted, drafted, followed up",wk:5,lo:6000,hi:15000,r:"4.89",c:["#FCE4EC","#EC407A"],icon:"chat",ind:"Field services",d:"Sorting, drafted replies and follow-ups that go out on time.",res:"Replies stop slipping a day."},
+ {id:"web",k:"build",t:"Brand and website",s:"Sites that book calls",wk:10,lo:12000,hi:40000,r:"4.94",c:["#EDE7F6","#7E57C2"],icon:"web",ind:"Clinics",d:"Identity, social branding and a fast site built to turn visitors into booked calls, with a care plan after launch.",res:"New patient enquiries up 24% in six months (sample)."},
+ {id:"",k:"audit",t:"Automation readiness audit",s:"90-day roadmap, ranked by hours saved",wk:3,lo:2500,hi:6000,r:"4.98",fav:1,c:["#E1F5FE","#29B6F6"],icon:"search",ind:"",d:"We map how work moves today, what your tools already do, and where staff re-key, chase or wait. Fee credited to your build within 60 days.",res:"Audit paid back in 5 weeks at a clinic group (sample)."},
+ {id:"",k:"audit",t:"Tool-spend audit",s:"Usually pays for itself",wk:2,lo:1500,hi:3500,r:"4.97",fav:1,c:["#F1F8E9","#9CCC65"],icon:"search",ind:"",d:"Overlapping SaaS, unused seats and duplicate tools, listed with what to cancel and what it saves.",res:"$38,400 a year of unused software removed (sample)."},
+ {id:"",k:"audit",t:"Funnel and website audit",s:"Where leads drop off",wk:2,lo:1500,hi:3500,r:"4.91",c:["#FFF3E0","#FFA726"],icon:"search",ind:"",d:"How leads arrive, where they drop off, how long they wait for a reply, plus speed, SEO and AI-search visibility.",res:"A ranked list of fixes with expected impact."},
+ {id:"",k:"audit",t:"AI policy starter",s:"Plain-English rules for staff",wk:2,lo:1500,hi:3000,r:"4.88",c:["#ECEFF1","#78909C"],icon:"spark",ind:"",d:"A plain-English guide to which AI tools staff can use and how client data stays protected.",res:"Your team uses AI without guessing what's allowed."},
+ {id:"",k:"run",t:"Starter retainer",s:"Up to 5 automations",wk:0,lo:1800,hi:1800,mo:1,r:"4.92",c:["#E8EAF6","#5C6BC0"],icon:"check",ind:"",d:"Monitoring for up to 5 automations, fixes within one business day, 4 hours of small changes a month and a monthly report on hours saved.",res:"Month to month after three months."},
+ {id:"",k:"run",t:"Growth retainer",s:"Most clients choose this",wk:0,lo:4200,hi:4200,mo:1,r:"4.98",fav:1,c:["#FFEBEE","#FF5252"],icon:"check",ind:"",d:"Up to 15 automations, two new automations or improvements a month, prompt and agent tuning, a website care plan and same-day response in US hours.",res:"Month to month after three months."},
+ {id:"",k:"run",t:"Scale retainer",s:"An automation lead, no hire",wk:0,lo:8500,hi:8500,mo:1,r:"4.96",c:["#E0F2F1","#26A69A"],icon:"check",ind:"",d:"No automation cap, a named automation lead for 20 hours a month, a quarterly roadmap session with leadership and 4-hour response in US hours.",res:"Month to month after three months."}
+];
+const ICONS={
+ chat:`<path d="M12 22h56a8 8 0 0 1 8 8v26a8 8 0 0 1-8 8H36l-14 12v-12h-10a8 8 0 0 1-8-8V30a8 8 0 0 1 8-8z" fill="#fff"/><circle cx="28" cy="43" r="4" fill="C"/><circle cx="42" cy="43" r="4" fill="C"/><circle cx="56" cy="43" r="4" fill="C"/>`,
+ doc:`<rect x="18" y="8" width="44" height="64" rx="6" fill="#fff"/><rect x="26" y="20" width="28" height="5" rx="2.5" fill="C"/><rect x="26" y="32" width="22" height="4" rx="2" fill="C" opacity=".5"/><rect x="26" y="42" width="26" height="4" rx="2" fill="C" opacity=".5"/><rect x="26" y="56" width="16" height="6" rx="3" fill="C"/>`,
+ pipe:`<rect x="8" y="16" width="18" height="48" rx="5" fill="#fff"/><rect x="31" y="16" width="18" height="36" rx="5" fill="#fff"/><rect x="54" y="16" width="18" height="24" rx="5" fill="#fff"/><circle cx="17" cy="28" r="4" fill="C"/><circle cx="40" cy="28" r="4" fill="C"/><circle cx="63" cy="28" r="4" fill="C"/>`,
+ chart:`<rect x="8" y="10" width="64" height="60" rx="8" fill="#fff"/><rect x="18" y="44" width="9" height="16" rx="3" fill="C"/><rect x="34" y="32" width="9" height="28" rx="3" fill="C"/><rect x="50" y="22" width="9" height="38" rx="3" fill="C"/>`,
+ spark:`<path d="M40 6l8 22 22 8-22 8-8 22-8-22-22-8 22-8z" fill="#fff"/><circle cx="40" cy="36" r="6" fill="C"/>`,
+ web:`<rect x="6" y="14" width="68" height="52" rx="8" fill="#fff"/><rect x="6" y="14" width="68" height="12" rx="6" fill="C" opacity=".35"/><rect x="16" y="36" width="26" height="20" rx="4" fill="C"/><rect x="48" y="36" width="16" height="6" rx="3" fill="C" opacity=".5"/>`,
+ search:`<circle cx="34" cy="34" r="22" fill="#fff"/><circle cx="34" cy="34" r="12" fill="C" opacity=".35"/><path d="M50 50l18 18" stroke="#fff" stroke-width="10" stroke-linecap="round"/>`,
+ check:`<circle cx="40" cy="40" r="30" fill="#fff"/><path d="M26 41l10 10 20-22" stroke="C" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`
+};
+const money=n=>"$"+n.toLocaleString("en-US");
+const priceText=x=>x.mo?`<b>${money(x.lo)}</b> per month`:x.lo===x.hi?`<b>${money(x.lo)}</b> total`:`<b>${money(x.lo)}–${money(x.hi)}</b> total`;
+const art=(x,size)=>`<svg class="art" viewBox="0 0 80 80" aria-hidden="true"${size?` style="width:${size};height:${size}"`:""}>${ICONS[x.icon].replaceAll('"C"',`"${x.c[1]}"`)}</svg>`;
+const bg=x=>`background:radial-gradient(120% 90% at 30% 20%,${x.c[0]} 0%,${x.c[1]} 140%)`;
+const saved=new Set();
+function card(x,i){return `<div class="lc" role="button" tabindex="0" data-i="${i}" aria-label="${x.t}, ${x.s}"><div class="ph" style="${bg(x)}">${art(x)}${x.fav?'<span class="fav">Client favorite</span>':""}<button class="heart" type="button" aria-label="Save ${x.t}" aria-pressed="${saved.has(i)}" data-h="${i}"><svg viewBox="0 0 32 32"><path d="M16 28c7-4.7 14-10 14-17.2C30 7 27 4 23.2 4 20.4 4 18 5.7 16 8.3 14 5.7 11.6 4 8.8 4 5 4 2 7 2 10.8 2 18 9 23.3 16 28z"/></svg></button></div><h3>${x.t}</h3><p class="s">${x.s}${x.wk?`, ${x.wk} weeks`:""}</p><p class="pr">${priceText(x)} · ★ ${x.r}</p></div>`}
+let mode="build";
+function render(filter){
+  const rows=document.getElementById("rows");
+  const sets=mode==="build"?[["Popular with field-service companies",x=>x.k==="build"&&x.ind==="Field services"],["Fast to launch, under 6 weeks",x=>x.k==="build"&&x.wk<=6],["Every automation we build",x=>x.k==="build"]]
+    :mode==="audit"?[["Audits that pay for themselves",x=>x.k==="audit"]]:[["Retainers after launch",x=>x.k==="run"]];
+  rows.innerHTML=sets.map(([h,f])=>{const items=L.map((x,i)=>[x,i]).filter(([x])=>f(x)&&(!filter||filter(x)));return `<section class="row"><div class="row-h"><h2><a href="#top">${h}</a></h2><div class="arrows"><button type="button" aria-label="Scroll back" data-d="-1"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M8 2L4 6l4 4" stroke="#222" stroke-width="2" fill="none"/></svg></button><button type="button" aria-label="Scroll forward" data-d="1"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M4 2l4 4-4 4" stroke="#222" stroke-width="2" fill="none"/></svg></button></div></div>${items.length?`<div class="track">${items.map(([x,i])=>card(x,i)).join("")}</div>`:`<p class="empty">No matches. Try a bigger budget or any timeline.</p>`}</section>`}).join("");
+}
+render();
+document.querySelectorAll(".cat").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.k;document.querySelectorAll(".cat").forEach(x=>x.setAttribute("aria-pressed",x===b));render()}));
+document.getElementById("search").addEventListener("submit",e=>{e.preventDefault();const w=document.getElementById("s-what").value,b=+document.getElementById("s-budget").value,t=+document.getElementById("s-time").value,ind=document.getElementById("s-ind").value;
+  mode="build";document.querySelectorAll(".cat").forEach(x=>x.setAttribute("aria-pressed",x.dataset.k==="build"));
+  render(x=>(!w||x.id===w)&&x.lo<=b&&x.wk<=t&&(!ind||x.ind===ind));});
+document.getElementById("rows").addEventListener("click",e=>{
+  const h=e.target.closest(".heart");if(h){e.stopPropagation();const i=+h.dataset.h;saved.has(i)?saved.delete(i):saved.add(i);h.setAttribute("aria-pressed",saved.has(i));return}
+  const a=e.target.closest(".arrows button");if(a){const tr=a.closest(".row").querySelector(".track");tr&&tr.scrollBy({left:+a.dataset.d*tr.clientWidth*.8,behavior:"smooth"});return}
+  const c=e.target.closest(".lc");if(c)open(+c.dataset.i);
+});
+document.getElementById("rows").addEventListener("keydown",e=>{const c=e.target.closest(".lc");if(c&&(e.key==="Enter"||e.key===" ")&&e.target===c){e.preventDefault();open(+c.dataset.i)}});
+const dlg=document.getElementById("dlg");
+function open(i){const x=L[i];
+  const fee=x.mo?0:Math.round(x.lo*.0);
+  document.getElementById("md").innerHTML=`<div class="md-top"><button type="button" id="md-x" aria-label="Close"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="#222" stroke-width="2"/></svg></button><span style="font-size:14px;text-decoration:underline">Save</span></div>
+  <h2 id="md-title">${x.t}</h2>
+  <div class="gallery"><div style="${bg(x)}">${art(x,"40%")}</div><div style="background:${x.c[0]}"></div><div style="background:${x.c[1]};opacity:.55"></div><div style="background:${x.c[1]};opacity:.35"></div><div style="background:${x.c[0]};filter:saturate(1.6)"></div></div>
+  <div class="md-body"><div><h3>${x.s}</h3><p class="lead">${x.wk?`${x.wk} weeks to launch · `:""}Fixed price · ★ ${x.r}</p><div class="sep"></div>
+  <div class="host-row"><span class="av">SL</span><div><b>Delivered by your systems lead</b><p class="lead">Your main contact from first call to handover</p></div></div><div class="sep"></div>
+  <p>${x.d}</p><p style="margin-top:12px"><b>${x.res}</b></p><div class="sep"></div>
+  <h3 style="margin-bottom:16px">What's included</h3><div class="amen"><div>Built in your own accounts</div><div>Runbook and documentation</div><div>Team training session</div><div>30 days of fixes</div><div>Mutual NDA</div><div>You own the code and prompts</div></div></div>
+  <aside class="reserve"><p class="p">${priceText(x)}</p><div class="pick"><div><label for="r-start">Start</label><select id="r-start"><option>Next week</option><option>In 2 weeks</option><option>Next month</option></select></div><div><label for="r-size">Team</label><select id="r-size"><option>10–40 staff</option><option selected>40–120 staff</option><option>120–250 staff</option></select></div><div class="full"><label for="r-tier">Plan</label><select id="r-tier"><option>${x.k==="run"?"Monthly retainer":x.k==="audit"?"Audit only":"Audit, then build"}</option></select></div></div>
+  <a class="rbtn" style="text-align:center" href="#contact" id="r-go">Reserve</a><p class="note">You won't be charged yet</p>
+  ${x.k==="build"?`<div class="ln"><span>Readiness audit</span><span>$2,500–$6,000</span></div><div class="ln"><span>Audit credit</span><span>−100% within 60 days</span></div><div class="tot"><span>Build, fixed in your SOW</span><span>${money(x.lo)}–${money(x.hi)}</span></div>`:""}</aside></div>`;
+  dlg.showModal();
+  document.getElementById("md-x").onclick=()=>dlg.close();
+  document.getElementById("r-go").onclick=()=>{dlg.close();document.getElementById("f-msg").value=`I'd like to reserve: ${x.t}. Start: ${document.getElementById("r-start").value}. Team: ${document.getElementById("r-size").value}.`};
+}
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+
+const form=document.getElementById("form");
+form.addEventListener("submit",e=>{e.preventDefault();const d=new FormData(form);
+  if(!d.get("name")||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.get("email")||"")||!d.get("message")){document.getElementById("f-err").textContent="Enter your name, a valid work email and a message.";return}
+  document.getElementById("f-err").textContent="";document.getElementById("f-out").textContent=`To: hello@roundhouse.studio\nFrom: ${d.get("name")} <${d.get("email")}>\nBudget: ${d.get("budget")}\n\n${d.get("message")}`;document.getElementById("f-ok").hidden=false});
+document.getElementById("f-copy").addEventListener("click",e=>{navigator.clipboard?.writeText(document.getElementById("f-out").textContent).then(()=>e.target.textContent="Copied").catch(()=>{const r=document.createRange();r.selectNodeContents(document.getElementById("f-out"));getSelection().removeAllRanges();getSelection().addRange(r)})});
+</script>
+</body>
+</html>

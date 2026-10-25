@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RoundHouse Site Concepts</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a contact sheet. Ten thumbnails in a grid, each labelled with the site it is modelled on. */
+:root{--bg:#F4F4F2;--card:#FFFFFF;--fg:#141414;--fg2:#5C5C5C;--line:#E2E2DE;--accent:#1F5BFF;--font:"Inter",-apple-system,"Segoe UI",Arial,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111214;--card:#1A1B1E;--fg:#F0F0F0;--fg2:#A3A3A3;--line:#2A2B2F;--accent:#7EA2FF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111214;--card:#1A1B1E;--fg:#F0F0F0;--fg2:#A3A3A3;--line:#2A2B2F;--accent:#7EA2FF;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.5 var(--font)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));padding-block:56px 72px}
+h1{margin:0;font-size:clamp(32px,4.4vw,52px);line-height:1.05;letter-spacing:-.03em;font-weight:700;text-wrap:balance}
+.intro{max-width:64ch;color:var(--fg2);margin:16px 0 40px;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+a.c{display:grid;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;color:inherit;text-decoration:none;transition:border-color .15s}
+a.c:hover{border-color:var(--accent)}
+a.c:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.c img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-bottom:1px solid var(--line);background:var(--line)}
+.c .b{padding:16px 18px 18px;display:grid;gap:6px}
+.c .t{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.c h2{margin:0;font-size:19px;letter-spacing:-.01em}
+.c .n{font-size:13px;color:var(--fg2);font-variant-numeric:tabular-nums}
+.c p{margin:0;color:var(--fg2);font-size:15px}
+.foot{margin-top:40px;color:var(--fg2);font-size:14px;max-width:72ch}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>RoundHouse, ten ways</h1>
+  <p class="intro">Ten front-end websites for RoundHouse, each modelled on the look and feel of a world-leading site: its navigation, hero, components, type and colour. The content is RoundHouse's own: services, published prices, Diagnose → Build → Run, sample case studies and an enquiry form.</p>
+  <div class="grid">
+    <a class="c" href="01-uber/index.html"><img src="thumbs/01-uber.jpg" alt="Uber-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Uber</h2><span class="n">01</span></div><p>Black top bar, bold left hero with a fare-style price estimator, grey suggestion cards, black footer.</p></div></a>
+    <a class="c" href="02-stripe/index.html"><img src="thumbs/02-stripe.jpg" alt="Stripe-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Stripe</h2><span class="n">02</span></div><p>Animated skewed gradient, navy headline, dashboard and phone mockups, dark code band.</p></div></a>
+    <a class="c" href="03-apple/index.html"><img src="thumbs/03-apple.jpg" alt="Apple-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Apple</h2><span class="n">03</span></div><p>Thin global nav, stacked product tiles with blue pills, 2-up grid, "which plan is right for you".</p></div></a>
+    <a class="c" href="04-linear/index.html"><img src="thumbs/04-linear.jpg" alt="Linear-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Linear</h2><span class="n">04</span></div><p>Near-black canvas, gradient headlines, tilted issue-tracker mockup, 1.0 / 2.0 / 3.0 chapters.</p></div></a>
+    <a class="c" href="05-vercel/index.html"><img src="thumbs/05-vercel.jpg" alt="Vercel-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Vercel</h2><span class="n">05</span></div><p>Geist type, prism glow, crosshair grid of customer stats, go-live log, light and dark themes.</p></div></a>
+    <a class="c" href="06-notion/index.html"><img src="thumbs/06-notion.jpg" alt="Notion-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Notion</h2><span class="n">06</span></div><p>Ink line drawings, centred bold headline, tabbed workspace mockup, pale cards, blue CTA.</p></div></a>
+    <a class="c" href="07-airbnb/index.html"><img src="thumbs/07-airbnb.jpg" alt="Airbnb-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Airbnb</h2><span class="n">07</span></div><p>Pill search that filters services, listing-card rows with favourites, listing modal with a reserve card.</p></div></a>
+    <a class="c" href="08-accenture/index.html"><img src="thumbs/08-accenture.jpg" alt="Accenture-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Accenture</h2><span class="n">08</span></div><p>Black and electric purple, huge type, 3D spheres, numbered featured carousel, big link lists.</p></div></a>
+    <a class="c" href="09-ibm/index.html"><img src="thumbs/09-ibm.jpg" alt="IBM-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After IBM</h2><span class="n">09</span></div><p>Carbon-style masthead, light Plex leadspace, square blue buttons, tiles, tabs, accordion, data table.</p></div></a>
+    <a class="c" href="10-mailchimp/index.html"><img src="thumbs/10-mailchimp.jpg" alt="Mailchimp-style RoundHouse home page" loading="lazy"><div class="b"><div class="t"><h2>After Mailchimp</h2><span class="n">10</span></div><p>Yellow hero, bold serif, playful ink illustration, journey-builder flow, plan cards with a toggle.</p></div></a>
+  </div>
+  <p class="foot">Front end only. Each enquiry form validates and prepares a ready-to-send message instead of posting anywhere. Case-study figures are the labelled samples from the Round House content file, and the client names in logo rows are placeholders.</p>
+</main>
+</body>
+</html>

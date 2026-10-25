@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RoundHouse - United States</title>
+<meta name="description" content="RoundHouse helps US businesses put automation and AI to work, from audit to always-on operations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* Look and feel after ibm.com (Carbon): 48px masthead, light-weight leadspace, square blue buttons with trailing icons, grey tiles, line pictograms, tabs, accordion, dark footer. */
+:root{--bg:#fff;--layer:#F4F4F4;--layer-h:#E8E8E8;--text:#161616;--text2:#525252;--border:#E0E0E0;--border2:#8D8D8D;--blue:#0F62FE;--blue-h:#0050E6;--blue-link:#0F62FE;--dark:#161616;--dark2:#262626;--support:#24A148;
+  --sans:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;--mono:"IBM Plex Mono",Menlo,monospace;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.5 var(--sans);letter-spacing:0}
+a{color:var(--blue-link);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+h1,h2,h3,p{margin:0}
+.grid{max-width:1584px;margin:0 auto;padding-left:max(32px, env(safe-area-inset-left,0px));padding-right:max(32px, env(safe-area-inset-right,0px))}
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:48px;min-height:48px;padding:14px 16px 14px 16px;min-width:200px;background:var(--blue);color:#fff;font:400 16px var(--sans);border:0;cursor:pointer;text-decoration:none;border-radius:0}
+.btn:hover{background:var(--blue-h);text-decoration:none}
+.btn.ter{background:transparent;color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.btn.ter:hover{background:var(--blue);color:#fff}
+.btn.ghost{background:transparent;color:var(--blue);min-width:0;gap:12px}
+.btn.ghost:hover{background:var(--layer-h)}
+.ar{width:16px;height:16px;flex:none}
+
+/* masthead */
+.mast{height:48px;border-bottom:1px solid var(--border);background:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:40}
+.mast .grid{display:flex;align-items:center;height:48px;padding-right:0}
+.mast .logo{font-weight:600;font-size:18px;letter-spacing:-.01em;color:var(--text);margin-right:24px;display:flex;align-items:center;gap:8px}
+.mast .logo:hover{text-decoration:none}
+.mast nav{display:flex;height:48px;flex:1}
+.mast nav a{display:flex;align-items:center;padding:0 16px;color:var(--text2);font-size:14px;height:48px}
+.mast nav a:hover{background:var(--layer-h);color:var(--text);text-decoration:none}
+.mast .ic{display:flex;height:48px}
+.mast .ic a{width:48px;height:48px;display:grid;place-items:center}
+.mast .ic a:hover{background:var(--layer-h)}
+
+/* leadspace */
+.lead{border-bottom:1px solid var(--border)}
+.lead .grid{display:grid;grid-template-columns:repeat(16,1fr);gap:32px;padding-block:64px 80px}
+.lead .copy{grid-column:1 / span 8;display:grid;gap:24px;align-content:center}
+.lead h1{font-size:clamp(42px,4.6vw,60px);line-height:1.17;font-weight:300;letter-spacing:0}
+.lead p{font-size:20px;line-height:1.4;color:var(--text2);max-width:560px}
+.lead .ctas{display:flex;gap:1px;flex-wrap:wrap;margin-top:8px}
+.lead .vis{grid-column:10 / span 7;aspect-ratio:4/3;max-width:100%;background:linear-gradient(135deg,#EDF5FF 0%,#D0E2FF 100%);position:relative;overflow:hidden}
+.lead .vis svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* sections */
+.sec{padding-block:64px 80px;border-bottom:1px solid var(--border)}
+.sec-grid{display:grid;grid-template-columns:repeat(16,1fr);gap:32px}
+.sec-h{grid-column:1 / span 4}
+.sec-h h2{font-size:32px;line-height:1.25;font-weight:400}
+.sec-h p{color:var(--text2);margin-top:16px}
+.sec-b{grid-column:5 / -1;min-width:0}
+.eyebrow{font-size:14px;color:var(--text2);margin-bottom:8px}
+
+/* card group */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.cards.c3{grid-template-columns:repeat(3,1fr)}
+.tile{background:var(--layer);padding:16px 16px 16px;min-height:280px;display:flex;flex-direction:column;gap:12px;color:var(--text);transition:background .11s}
+.tile:hover{background:var(--layer-h);text-decoration:none}
+.tile .pg{width:64px;height:64px;margin-bottom:8px}
+.tile h3{font-size:20px;line-height:1.4;font-weight:400}
+.tile p{font-size:14px;color:var(--text2);line-height:1.43}
+.tile .price{font-size:14px;color:var(--text)}
+.tile .go{margin-top:auto;color:var(--blue)}
+.tile.dark{background:var(--dark);color:#F4F4F4}
+.tile.dark p{color:#C6C6C6}
+.tile.dark .go{color:#78A9FF}
+.tile.dark:hover{background:var(--dark2)}
+
+/* tabs */
+.tabs{display:flex;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{background:transparent;border:0;border-bottom:2px solid var(--border);font:400 14px var(--sans);padding:12px 16px;color:var(--text2);cursor:pointer;white-space:nowrap;margin-bottom:-1px}
+.tab[aria-selected="true"]{border-bottom:2px solid var(--blue);color:var(--text);font-weight:600}
+.tab:hover{color:var(--text);border-bottom-color:var(--border2)}
+.tpanel{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:32px}
+.tpanel h3{font-size:28px;font-weight:300;line-height:1.29}
+.tpanel p{color:var(--text2)}
+.tpanel ul{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:0}
+.tpanel li{padding:12px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;font-size:14px}
+.tpanel li span:last-child{color:var(--text);font-family:var(--mono);font-size:13px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.stat{border-top:1px solid var(--text);padding-top:16px;display:grid;gap:8px}
+.stat b{font-size:clamp(42px,4vw,60px);font-weight:300;line-height:1.1}
+.stat p{color:var(--text2);font-size:14px}
+.tag{display:inline-flex;align-items:center;height:24px;padding:0 8px;border-radius:24px;background:#E0E0E0;color:#161616;font-size:12px}
+
+/* quote */
+.quote{background:var(--dark);color:#F4F4F4}
+.quote .grid{display:grid;grid-template-columns:repeat(16,1fr);gap:32px;padding-block:80px}
+.quote blockquote{grid-column:5 / span 10;margin:0;font-size:clamp(28px,3vw,42px);font-weight:300;line-height:1.25}
+.quote blockquote::before{content:"\201C";display:block;font-size:80px;line-height:.6;color:#78A9FF}
+.quote cite{display:block;margin-top:24px;font-style:normal;font-size:14px;color:#C6C6C6}
+
+/* table */
+.dt{width:100%;border-collapse:collapse;font-size:14px}
+.dt th{background:#E0E0E0;text-align:left;font-weight:600;padding:14px 16px}
+.dt td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top;background:var(--layer)}
+.dt tr:hover td{background:var(--layer-h)}
+.dt td:nth-child(2){font-family:var(--mono);font-size:13px;white-space:nowrap}
+.dt-wrap{overflow-x:auto}
+
+/* accordion */
+.acc{border-top:1px solid var(--border)}
+.acc details{border-bottom:1px solid var(--border)}
+.acc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:12px 16px 12px 0;cursor:pointer;font-size:16px;min-height:48px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:hover{background:var(--layer-h)}
+.acc summary svg{transition:transform .11s}
+.acc details[open] summary svg{transform:rotate(180deg)}
+.acc details p{padding:0 25% 24px 0;color:var(--text2);font-size:14px;line-height:1.43}
+
+/* contact form */
+form{display:grid;gap:24px;max-width:640px}
+.fld{display:grid;gap:8px}
+.fld label{font-size:12px;color:var(--text2);letter-spacing:.32px}
+.fld input,.fld select,.fld textarea{background:var(--layer);border:0;border-bottom:1px solid var(--border2);padding:11px 16px;font:400 14px var(--sans);color:var(--text);width:100%;border-radius:0;height:40px}
+.fld textarea{height:auto;min-height:120px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--blue);outline-offset:-2px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.err{color:#DA1E28;font-size:12px;min-height:1em}
+.note{display:flex;gap:12px;align-items:flex-start;background:#DEFBE6;border-left:3px solid var(--support);padding:14px 16px;font-size:14px}
+.note pre{white-space:pre-wrap;margin:8px 0;font:400 13px/1.5 var(--mono);max-height:180px;overflow:auto}
+
+/* footer */
+footer{background:var(--dark);color:#C6C6C6;font-size:14px}
+footer .top{padding-block:48px 32px;border-bottom:1px solid #393939;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer .top b{color:#fff;font-size:20px;font-weight:600}
+footer .loc{border:1px solid #6F6F6F;padding:10px 16px;color:#F4F4F4;display:inline-flex;gap:16px;align-items:center}
+footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-block:32px 48px}
+footer h4{margin:0 0 16px;color:#F4F4F4;font-size:14px;font-weight:600}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+footer ul a{color:#C6C6C6}
+footer ul a:hover{color:#F4F4F4}
+footer .legal{border-top:1px solid #393939;padding-block:16px;display:flex;gap:24px;flex-wrap:wrap}
+footer .legal a{color:#C6C6C6;font-size:12px}
+
+@media (max-width:1056px){
+  .mast nav{display:none}
+  .mast .grid{justify-content:space-between}
+  .lead .grid,.sec-grid,.quote .grid{grid-template-columns:minmax(0,1fr);gap:24px}
+  .lead .copy,.lead .vis{grid-column:1 / -1}
+  .sec-h,.sec-b{grid-column:1 / -1}
+  .cards{grid-template-columns:1fr 1fr}
+  .cards.c3{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .quote blockquote{grid-column:1 / -1}
+}
+@media (max-width:672px){
+  .grid{padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+  .cards,.tpanel,.row2,footer .cols{grid-template-columns:1fr}
+  .btn{min-width:0;width:100%}
+  .acc details p{padding-right:0}
+}
+</style>
+</head>
+<body>
+<header class="mast">
+  <div class="grid">
+    <a class="logo" href="#top"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect width="22" height="22" fill="#0F62FE"/><circle cx="11" cy="11" r="6" fill="none" stroke="#fff" stroke-width="2"/><circle cx="11" cy="11" r="2" fill="#fff"/></svg>RoundHouse</a>
+    <nav aria-label="Main"><a href="#solutions">Automation</a><a href="#solutions">AI agents</a><a href="#services">Consulting</a><a href="#pricing">Pricing</a><a href="#faq">Support</a><a href="#results">Client stories</a></nav>
+    <div class="ic">
+      <a href="#faq" aria-label="Search"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M29 27.6l-7.6-7.6a11 11 0 1 0-1.4 1.4l7.6 7.6zM4 13a9 9 0 1 1 9 9 9 9 0 0 1-9-9z" fill="#161616"/></svg></a>
+      <a href="#contact" aria-label="Contact"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M17.7 30L16 29l4-7h6a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9v2H6a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h20a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4h-4.8z" fill="#161616"/></svg></a>
+      <a href="#contact" aria-label="Account"><svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4a5 5 0 1 1-5 5 5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7 7 7 0 0 0-7-7zm10 28h-2v-5a5 5 0 0 0-5-5h-6a5 5 0 0 0-5 5v5H6v-5a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7z" fill="#161616"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="lead" aria-labelledby="h1">
+  <div class="grid">
+    <div class="copy">
+      <h1 id="h1">Put automation to work for your business</h1>
+      <p>RoundHouse helps US companies of 10 to 250 people find where work stalls, automate it at a fixed price, and keep it running. From the factory floor to the front office.</p>
+      <div class="ctas">
+        <a class="btn" href="#contact">Book a consultation <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></a>
+        <a class="btn ter" href="#solutions">Explore solutions <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+    <div class="vis" aria-hidden="true">
+      <svg viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice">
+        <g fill="none" stroke="#0F62FE" stroke-width="1.5">
+          <rect x="70" y="90" width="150" height="90"/><rect x="70" y="300" width="150" height="90"/>
+          <rect x="300" y="190" width="150" height="100" fill="#0F62FE"/>
+          <rect x="510" y="90" width="110" height="90"/><rect x="510" y="300" width="110" height="90"/>
+          <path d="M220 135H260V240H300M220 345H260V240M450 240H480V135H510M480 240V345H510"/>
+        </g>
+        <g font-family="IBM Plex Sans,Arial" font-size="15" fill="#161616"><text x="88" y="140">Web forms</text><text x="88" y="350">Missed calls</text><text x="526" y="140">Booked</text><text x="526" y="350">CRM</text></g>
+        <text x="375" y="236" text-anchor="middle" font-family="IBM Plex Sans,Arial" font-size="16" fill="#fff">AI qualifier</text>
+        <text x="375" y="258" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="13" fill="#D0E2FF">reply &lt; 90 s</text>
+        <g fill="#0F62FE"><circle cx="260" cy="240" r="4"/><circle cx="480" cy="240" r="4"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="solutions" aria-labelledby="sol-h">
+  <div class="grid sec-grid">
+    <div class="sec-h"><h2 id="sol-h">Featured solutions</h2><p>Each one is built inside the tools you already run, documented, and owned by you.</p></div>
+    <div class="sec-b">
+      <div class="cards">
+        <a class="tile" href="#contact"><svg class="pg" viewBox="0 0 64 64" fill="none" stroke="#161616" stroke-width="1.5" aria-hidden="true"><path d="M8 12h40v28H26l-10 8v-8H8z"/><path d="M48 22h8v26h-6v8l-10-8H28"/><circle cx="20" cy="26" r="1.5" fill="#161616"/><circle cx="28" cy="26" r="1.5" fill="#161616"/><circle cx="36" cy="26" r="1.5" fill="#161616"/></svg><h3>Lead response automation</h3><p>A reply within two minutes to every form, missed call and chat, with qualification and booking.</p><span class="price">$8,000–$20,000</span><svg class="ar go" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></a>
+        <a class="tile" href="#contact"><svg class="pg" viewBox="0 0 64 64" fill="none" stroke="#161616" stroke-width="1.5" aria-hidden="true"><path d="M14 6h26l10 10v42H14z"/><path d="M40 6v10h10M22 26h20M22 34h20M22 42h12"/><path d="M36 50l4 4 8-8"/></svg><h3>Document automation</h3><p>Proposals, quotes, contracts, invoices and reports generated from templates and your data.</p><span class="price">$8,000–$25,000</span><svg class="ar go" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></a>
+        <a class="tile" href="#contact"><svg class="pg" viewBox="0 0 64 64" fill="none" stroke="#161616" stroke-width="1.5" aria-hidden="true"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="8"/><path d="M32 10v14M32 40v14M10 32h14M40 32h14"/></svg><h3>AI agents</h3><p>Knowledge assistants trained on your SOPs, plus CRM and ERP integration end to end.</p><span class="price">$12,000–$35,000</span><svg class="ar go" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></a>
+        <a class="tile dark" href="#contact"><svg class="pg" viewBox="0 0 64 64" fill="none" stroke="#F4F4F4" stroke-width="1.5" aria-hidden="true"><path d="M8 54h48M14 54V34h8v20M28 54V22h8v32M42 54V12h8v42"/></svg><h3>Reporting dashboards</h3><p>Live numbers from your CRM, ads and accounting tools in one place.</p><span class="price" style="color:#F4F4F4">$5,000–$15,000</span><svg class="ar go" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services" aria-labelledby="svc-h">
+  <div class="grid sec-grid">
+    <div class="sec-h"><h2 id="svc-h">RoundHouse Consulting</h2><p>Six practices, one accountable team.</p></div>
+    <div class="sec-b">
+      <div class="tabs" role="tablist" aria-label="Practices" id="tabs"></div>
+      <div class="tpanel" role="tabpanel" id="tpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="results" aria-labelledby="res-h">
+  <div class="grid sec-grid">
+    <div class="sec-h"><h2 id="res-h">Client outcomes</h2><p>A baseline goes in writing before we build. <span class="tag">Sample engagements</span></p></div>
+    <div class="sec-b">
+      <div class="stats">
+        <div class="stat"><b>90 s</b><p>First reply to a lead, from 3 h 40 min. HVAC and plumbing, Texas.</p></div>
+        <div class="stat"><b>4 h</b><p>Quote turnaround, from 3 days. Metal fabrication, Ohio.</p></div>
+        <div class="stat"><b>70%</b><p>Less time per carrier invoice. Logistics provider, Georgia.</p></div>
+        <div class="stat"><b>$38.4K</b><p>Yearly software spend removed. Clinic group, North Carolina.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote">
+  <div class="grid">
+    <blockquote>Two estimators used to re-key ERP prices for every quote. Now quotes go out the same morning, and our win rate went from 22% to 29%.<cite>Chief operating officer, metal fabrication shop, Ohio (sample engagement)</cite></blockquote>
+  </div>
+</div>
+
+<section class="sec" aria-labelledby="ap-h">
+  <div class="grid sec-grid">
+    <div class="sec-h"><h2 id="ap-h">How we engage</h2><p>Stop after any phase and keep what you paid for.</p></div>
+    <div class="sec-b">
+      <div class="cards c3">
+        <div class="tile"><p class="eyebrow">Phase 1</p><h3>Diagnose</h3><p>A paid audit of your tools, data and workflows, with a 90-day roadmap ranked by hours saved.</p><span class="price">$2,500–$6,000, credited to your build within 60 days</span></div>
+        <div class="tile"><p class="eyebrow">Phase 2</p><h3>Build</h3><p>The automation, AI agent, CRM, brand or website the roadmap calls for, at a fixed price.</p><span class="price">$4,000–$40,000, fixed before work starts</span></div>
+        <div class="tile"><p class="eyebrow">Phase 3</p><h3>Run</h3><p>Monitoring, fixes when tools change, new automations each month and a report on hours saved.</p><span class="price">from $1,800 per month</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="pricing" aria-labelledby="pr-h">
+  <div class="grid sec-grid">
+    <div class="sec-h"><h2 id="pr-h">Managed services pricing</h2><p>Month to month after the first three months.</p></div>
+    <div class="sec-b dt-wrap">
+      <table class="dt">
+        <thead><tr><th scope="col">Plan</th><th scope="col">Price</th><th scope="col">Best for</th><th scope="col">Includes</th></tr></thead>
+        <tbody>
+          <tr><td>Starter</td><td>$1,800/mo</td><td>One or two systems that need to keep running</td><td>Monitoring for up to 5 automations, fixes within one business day, 4 hours of changes, monthly report</td></tr>
+          <tr><td>Growth</td><td>$4,200/mo</td><td>Teams adding automation every month</td><td>Up to 15 automations, two new automations a month, agent tuning, website care, same-day response</td></tr>
+          <tr><td>Scale</td><td>$8,500/mo</td><td>An automation lead without the hire</td><td>No cap, named automation lead 20 hours a month, quarterly roadmap, 4-hour response</td></tr>
+          <tr><td>Fractional lead</td><td>from $6,000/mo</td><td>An in-house automation lead</td><td>A named person for a set number of hours a month</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq" aria-labelledby="faq-h">
+  <div class="grid sec-grid">
+    <div class="sec-h"><h2 id="faq-h">Security and trust</h2><p>9am–6pm Eastern, Monday to Friday.</p></div>
+    <div class="sec-b acc">
+      <details><summary>How do you handle our data?<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z" fill="#161616"/></svg></summary><p>We work inside your accounts with the least access the job needs and remove that access at handover. Client data is never used to train AI models, and we require MFA on every account we touch.</p></details>
+      <details><summary>Will you sign our NDA?<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z" fill="#161616"/></svg></summary><p>Yes, or use ours. We sign a mutual NDA before any discovery call that involves your data. Every project runs under a master services agreement and a fixed-price statement of work.</p></details>
+      <details><summary>Who owns what you build?<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z" fill="#161616"/></svg></summary><p>You do. The code, automations, prompts, documentation and accounts are yours. Nothing is locked into a platform we control.</p></details>
+      <details><summary>What happens if an automation breaks?<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z" fill="#161616"/></svg></summary><p>On a retainer we are watching it and fix it, usually before you notice. Every build also comes with 30 days of fixes and a runbook your team can follow.</p></details>
+      <details><summary>Which tools do you work with?<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z" fill="#161616"/></svg></summary><p>HubSpot, GoHighLevel, Pipedrive, Google Workspace, Microsoft 365, QuickBooks, Slack, Twilio, field-service and ERP systems, plus Claude and OpenAI models for the AI parts.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contact" aria-labelledby="ct-h" style="border-bottom:0">
+  <div class="grid sec-grid">
+    <div class="sec-h"><h2 id="ct-h">Let's talk</h2><p>A specialist replies within one business day. Or email hello@roundhouse.studio.</p></div>
+    <div class="sec-b">
+      <form id="form" novalidate>
+        <div class="row2"><div class="fld"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name"></div><div class="fld"><label for="f-email">Business email</label><input id="f-email" name="email" type="email" autocomplete="email"></div></div>
+        <div class="row2"><div class="fld"><label for="f-co">Company</label><input id="f-co" name="company"></div><div class="fld"><label for="f-budget">Budget</label><select id="f-budget" name="budget"><option>Under $10k</option><option>$10k–$25k</option><option>$25k–$50k</option><option>$50k+</option></select></div></div>
+        <div class="fld"><label for="f-msg">How can we help?</label><textarea id="f-msg" name="message"></textarea></div>
+        <p class="err" id="f-err" role="alert"></p>
+        <div><button class="btn" type="submit">Submit <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></button></div>
+        <div class="note" id="f-ok" hidden><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" style="flex:none"><circle cx="10" cy="10" r="9" fill="#24A148"/><path d="M6 10l3 3 5-6" stroke="#fff" stroke-width="2" fill="none"/></svg><div><b>Your request is ready.</b> Copy it and send it to hello@roundhouse.studio.<pre id="f-out"></pre><button class="btn ghost" type="button" id="f-copy">Copy request</button></div></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="grid">
+    <div class="top"><b>RoundHouse</b><span class="loc">United States — English<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z" fill="#F4F4F4"/></svg></span></div>
+    <div class="cols">
+      <div><h4>Solutions</h4><ul><li><a href="#solutions">Lead response</a></li><li><a href="#solutions">Documents</a></li><li><a href="#solutions">AI agents</a></li><li><a href="#solutions">Reporting</a></li></ul></div>
+      <div><h4>Consulting</h4><ul><li><a href="#services">Business analysis</a></li><li><a href="#services">Brand and web</a></li><li><a href="#services">UI and UX</a></li></ul></div>
+      <div><h4>Support</h4><ul><li><a href="#faq">Security</a></li><li><a href="#pricing">Managed services</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>About RoundHouse</h4><ul><li><a href="#results">Client stories</a></li><li><a href="#contact">Careers</a></li><li><a href="../index.html">All 10 concepts</a></li></ul></div>
+    </div>
+    <div class="legal"><a href="#contact">Contact RoundHouse</a><a href="#faq">Privacy</a><a href="#faq">Terms of use</a><a href="#faq">Accessibility</a></div>
+  </div>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const T=[
+ ["Business analysis","Find where the hours go before anything gets built.",[["Automation and AI readiness audit","$2,500–$6,000"],["Tech stack and tool-spend audit","from $1,500"],["Customer journey and funnel audit","from $1,500"],["Data readiness assessment","from $1,500"]]],
+ ["Business automation","Take the copy-paste, chasing and re-keying off your team.",[["Lead capture and instant replies","$8,000–$20,000"],["Document automation","$8,000–$25,000"],["Email and inbox automation","$6,000–$15,000"],["Client onboarding automation","$6,000–$15,000"]]],
+ ["AI agents","Assistants that work inside the tools you already use, connected end to end.",[["Internal AI assistant","$12,000–$35,000"],["AI content system","$6,000–$18,000"],["AI policy and governance starter","from $1,500"],["Staff AI training workshops","$2,500 per session"]]],
+ ["Brand and social","An identity that looks as reliable as the work you do.",[["Brand identity and website","$12,000–$40,000"],["Pitch decks and sales collateral","$3,000–$10,000"],["Social media and content retainer","Quoted"]]],
+ ["Websites","Fast sites, landing pages and care plans that turn visits into calls.",[["Landing pages and microsites","$4,000–$9,000"],["Company sites","$12,000–$40,000"],["SEO and AI-search visibility","Quoted"]]],
+ ["UI and UX","Screens your staff and customers can use without a manual.",[["Dashboards","$5,000–$15,000"],["Customer portals","Quoted"],["Internal tools","Quoted"]]]
+];
+const tabs=$("tabs");
+T.forEach((t,i)=>{const b=document.createElement("button");b.className="tab";b.type="button";b.setAttribute("role","tab");b.textContent=t[0];b.onclick=()=>show(i);tabs.appendChild(b)});
+function show(i){[...tabs.children].forEach((b,j)=>b.setAttribute("aria-selected",j===i));const t=T[i];$("tpanel").innerHTML=`<div><h3>${t[0]}</h3><p style="margin-top:12px">${t[1]}</p><a class="btn ghost" style="margin-top:16px;padding-left:0" href="#contact">Talk to a specialist <svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.3 3.3l-.7.7 3.5 3.5H2v1h10.1l-3.5 3.5.7.7L14 8z" fill="currentColor"/></svg></a></div><ul>${t[2].map(r=>`<li><span>${r[0]}</span><span>${r[1]}</span></li>`).join("")}</ul>`}
+show(0);
+tabs.addEventListener("keydown",e=>{const k=[...tabs.children],i=k.indexOf(document.activeElement);if(i<0)return;if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const n=(i+(e.key==="ArrowRight"?1:-1)+k.length)%k.length;k[n].focus();show(n)}});
+const form=$("form");
+form.addEventListener("submit",e=>{e.preventDefault();const d=new FormData(form);
+  if(!d.get("name")||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.get("email")||"")||!d.get("message")){$("f-err").textContent="Enter your full name, a valid business email and how we can help.";return}
+  $("f-err").textContent="";$("f-out").textContent=`To: hello@roundhouse.studio\nFrom: ${d.get("name")} <${d.get("email")}>\nCompany: ${d.get("company")||"-"}\nBudget: ${d.get("budget")}\n\n${d.get("message")}`;$("f-ok").hidden=false});
+$("f-copy").addEventListener("click",e=>{navigator.clipboard?.writeText($("f-out").textContent).then(()=>e.target.textContent="Copied").catch(()=>{const r=document.createRange();r.selectNodeContents($("f-out"));getSelection().removeAllRanges();getSelection().addRange(r)})});
+</script>
+</body>
+</html>
