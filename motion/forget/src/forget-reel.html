@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forgetting Curve Reel</title>
+<script>
+/* =====================================================================
+   EDIT ME — palette, copy and timing. Times are seconds and follow the
+   voice-over (see motion/forget/vo.py). Save and reload to see changes.
+   ===================================================================== */
+const CONFIG = {
+  color: {
+    bg:     "#F3F0E8",   // warm paper
+    ink:    "#121212",
+    accent: "#FF4A1C",   // the one loud colour: key words, numbers, highlights
+    blue:   "#2D5BFF",   // UI only: the cursor
+    grey:   "#C9C3B6",
+    card:   "#FFFFFF",
+  },
+  copy: {
+    hook: ["YOU'LL", "FORGET"], tomorrow: "TOMORROW",
+    notYou: ["NOT", "YOU"], brain: ["YOUR", "BRAIN"],
+    hours: "IN 24 HOURS",
+    upTo: "UP TO", stat: 67, statLabel: "OF WHAT YOU LEARN",
+    curve: ["FORGETTING", "CURVE"], source: "Ebbinghaus, 1885",
+    fix: ["THE", "FIX?"],
+    review: "REVIEW", reviewSub: "RIGHT BEFORE YOU FORGET",
+    flat: "FLATTENS", flatSub: "THE CURVE", sticks: "IT STICKS",
+    save: "SAVE THIS", dont: "DON'T", forgetIt: ["FORGET", "IT"], follow: "follow for more →",
+  },
+  fps: 30, duration: 19.6, motionBlurSamples: 6, shutter: 0.5,
+};
+/* Voice-over word/clip times (seconds) — every visual keys off these. */
+const T = {
+  video: 1.18, tomorrow: 1.54, notYou: 2.44, strike: 2.86, brain: 3.27, day: 4.29, lose: 5.07, stat: 6.03,
+  learn: 7.09, curve: 8.10, fix: 9.70, review: 10.49, before: 11.25, click: 11.62,
+  d1: 12.31, d3: 12.99, d7: 13.78, flat: 14.71, flattens: 15.25, save: 16.51, tap: 17.0, cta: 17.36,
+};
+const BEATS = [
+  { name: "Hook", start: 0, end: 2.4 }, { name: "Brain", start: 2.4, end: 4.25 }, { name: "67%", start: 4.25, end: 8.0 },
+  { name: "Curve", start: 8.0, end: 9.66 }, { name: "Fix", start: 9.66, end: 12.25 }, { name: "Days", start: 12.25, end: 14.65 },
+  { name: "Flatten", start: 14.65, end: 16.45 }, { name: "Save", start: 16.45, end: 19.6 },
+];
+const CUES = [
+  [0.0, "bass hit"], [0.55, "pop"], [1.18, "marker scribble"], [1.6, "glitch / pixel dissolve"], [2.32, "whip"],
+  [2.86, "scratch"], [3.27, "pop"], [4.18, "zoom-through whoosh"], [4.35, "clock ticks"], [6.03, "impact + counter"],
+  [7.1, "falling whooshes"], [8.0, "swipe"], [8.25, "pencil draw"], [9.66, "bass hit + glitch, music stops"],
+  [10.38, "cut back, music returns"], [11.62, "cursor click"], [12.31, "pop 1"], [12.99, "pop 2"], [13.78, "pop 3"],
+  [15.25, "squash thud"], [16.3, "circle whoosh"], [17.0, "tap + pop burst"], [18.4, "final soft hit"],
+].map(([t, sfx]) => ({ t, sfx }));
+</script>
+<style>
+/*FONTS*/
+:root { --bg:#0d0d0f; --fg:#e9e9ef; --muted:#8a8a98; --line:#24242c; --accent:#FF4A1C; }
+* { box-sizing: border-box; }
+html, body { margin:0; background:var(--bg); color:var(--fg); font: 13px/1.4 "Mono", ui-monospace, monospace; }
+body { min-height:100vh; display:flex; flex-direction:column; align-items:center; gap:12px; padding:16px; }
+canvas#c { display:block; width:min(calc(100vw - 32px), calc((100vh - 150px) * 0.5625)); height:auto; aspect-ratio:9/16; border-radius:10px; box-shadow:0 0 0 1px var(--line); }
+.bar { width:min(calc(100vw - 32px), 640px); display:flex; flex-direction:column; gap:8px; }
+.row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+button { background:#16161b; color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font:inherit; cursor:pointer; }
+#time { font-variant-numeric:tabular-nums; color:var(--muted); min-width:120px; }
+input[type=range] { flex:1; min-width:160px; accent-color:var(--accent); }
+.beats { display:flex; height:22px; border-radius:6px; overflow:hidden; border:1px solid var(--line); position:relative; }
+.beats div { border-right:1px solid var(--line); color:var(--muted); font-size:10px; display:flex; align-items:center; justify-content:center; white-space:nowrap; overflow:hidden; cursor:pointer; }
+.beats div:last-child { border-right:0; }
+.beats i { position:absolute; top:0; bottom:0; width:1px; background:rgba(255,74,28,.6); pointer-events:none; }
+label { color:var(--muted); display:flex; gap:6px; align-items:center; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="bar">
+  <div class="row">
+    <button id="play">Play</button><button id="prev">◀︎</button><button id="next">▶︎</button>
+    <span id="time"></span><label><input type="checkbox" id="mb"> motion blur</label>
+  </div>
+  <input type="range" id="scrub" min="0" value="0" step="1">
+  <div class="beats" id="beats"></div>
+</div>
+<script>
+"use strict";
+const W = 1080, H = 1920, CX = 540, CY = 960;
+const FPS = CONFIG.fps, DUR = CONFIG.duration, FRAMES = Math.round(FPS * DUR);
+const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+const work = document.createElement("canvas"); work.width = W; work.height = H; const wctx = work.getContext("2d");
+
+/* ---------- math ---------- */
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const E = {
+  outExpo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x), inExpo: x => x <= 0 ? 0 : Math.pow(2, 10 * x - 10),
+  outCubic: x => 1 - Math.pow(1 - x, 3), inCubic: x => x * x * x,
+  inOutCubic: x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+  outBack: x => { const c1 = 2.2, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
+};
+/* spring 0 → 1 with overshoot; p is normalised time */
+const spring = (p, k = 6.5, w = 11) => p <= 0 ? 0 : p >= 1 ? 1 : 1 - Math.exp(-k * p) * Math.cos(w * p);
+const pop = (t, t0, d = .5) => spring(prog(t, t0, t0 + d));
+const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+
+/* ---------- colour ---------- */
+const hex = h => { h = h.replace("#", ""); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+const css = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+const C = Object.fromEntries(Object.entries(CONFIG.color).map(([k, v]) => [k, hex(v)]));
+
+/* ---------- drawing helpers ---------- */
+const font = (fam, size) => `${size}px ${fam}`;
+function lay(c, str, fam, size, track = 0) {
+  c.font = font(fam, size); const g = [];
+  for (let i = 0; i < str.length; i++) g.push({ ch: str[i], x: c.measureText(str.slice(0, i)).width + i * track, w: c.measureText(str[i]).width });
+  return { g, width: c.measureText(str).width + (str.length - 1) * track, fam, size, str };
+}
+function fit(c, str, fam, size, maxW, track = 0) { let L = lay(c, str, fam, size, track); if (L.width > maxW) { const s = size * maxW / L.width; L = lay(c, str, fam, s, track * s / size); } return L; }
+function drawLay(c, L, x, y, align = "center", per = null) {
+  const ox = align === "center" ? x - L.width / 2 : align === "right" ? x - L.width : x;
+  c.font = font(L.fam, L.size); c.textBaseline = "alphabetic"; c.textAlign = "left";
+  L.g.forEach((gl, i) => {
+    const p = per ? per(i, gl) || {} : {}; const a = p.a ?? 1; if (a <= .001) return;
+    c.save(); c.globalAlpha *= a;
+    const gx = ox + gl.x + (p.dx || 0), gy = y + (p.dy || 0);
+    const sx = (p.s ?? 1) * (p.sx ?? 1), sy = (p.s ?? 1) * (p.sy ?? 1);
+    if (sx !== 1 || sy !== 1 || p.r) { c.translate(gx + gl.w / 2, gy); if (p.r) c.rotate(p.r); c.scale(sx, sy); c.translate(-(gx + gl.w / 2), -gy); }
+    c.fillStyle = p.color || css(C.ink); c.fillText(gl.ch, gx, gy); c.restore();
+  });
+  return ox;
+}
+/* place a whole text block with a transform (scale/rotate about its baseline centre) */
+function textBlock(c, L, x, y, { s = 1, sx = 1, sy = 1, r = 0, a = 1, color, per } = {}) {
+  if (a <= .001 || s <= .001) return;
+  c.save(); c.globalAlpha *= a; c.translate(x, y); c.rotate(r); c.scale(s * sx, s * sy);
+  drawLay(c, L, 0, 0, "center", per || (() => ({ color: color || css(C.ink) }))); c.restore();
+}
+const rr = (c, x, y, w, h, r) => { c.beginPath(); c.roundRect(x, y, w, h, Math.max(0, Math.min(r, w / 2, h / 2))); };
+/* the reel's graphic language: white card, ink outline, hard offset shadow */
+function card(c, x, y, w, h, r = 28, { fill = C.card, stroke = C.ink, lw = 5, sh = 10, a = 1 } = {}) {
+  if (a <= .001) return;
+  c.save(); c.globalAlpha *= a;
+  if (sh) { c.fillStyle = css(C.ink); rr(c, x + sh, y + sh, w, h, r); c.fill(); }
+  c.fillStyle = css(fill); rr(c, x, y, w, h, r); c.fill();
+  if (lw) { c.lineWidth = lw; c.strokeStyle = css(stroke); rr(c, x, y, w, h, r); c.stroke(); }
+  c.restore();
+}
+function mono(c, str, x, y, size, col, a = 1, align = "center", track = 2) {
+  c.save(); c.globalAlpha *= a; c.font = font("Mono", size); c.letterSpacing = track + "px"; c.textAlign = align; c.fillStyle = col; c.fillText(str, x, y); c.restore();
+}
+/* hand-drawn ellipse / stroke, drawn progressively */
+function scribbleEllipse(c, x, y, rx, ry, p, col, lw = 9, seed = 1) {
+  if (p <= 0) return; c.save(); c.strokeStyle = css(col); c.lineWidth = lw; c.lineCap = "round"; c.beginPath();
+  const n = 80, turns = 1.12;
+  for (let i = 0; i <= n * p; i++) { const u = i / n, a = -2.2 + u * Math.PI * 2 * turns, wob = 1 + .04 * Math.sin(u * 9 + seed) + .03 * u;
+    const px = x + Math.cos(a) * rx * wob, py = y + Math.sin(a) * ry * wob; i ? c.lineTo(px, py) : c.moveTo(px, py); }
+  c.stroke(); c.restore();
+}
+function strokeLine(c, x0, y0, x1, y1, p, col, lw) { if (p <= 0) return; c.save(); c.strokeStyle = css(col); c.lineWidth = lw; c.lineCap = "round";
+  c.beginPath(); c.moveTo(x0, y0); c.lineTo(lerp(x0, x1, p), lerp(y0, y1, p)); c.stroke(); c.restore(); }
+function cursor(c, x, y, s = 1, press = 0) {
+  c.save(); c.translate(x, y); c.scale(s * (1 - .14 * press), s * (1 - .14 * press)); c.rotate(-.12);
+  c.beginPath(); c.moveTo(0, 0); c.lineTo(0, 74); c.lineTo(18, 57); c.lineTo(31, 86); c.lineTo(44, 80); c.lineTo(31, 52); c.lineTo(55, 52); c.closePath();
+  c.fillStyle = css(C.ink); c.save(); c.translate(5, 6); c.fill(); c.restore();
+  c.fillStyle = css(C.blue); c.fill(); c.lineWidth = 5; c.lineJoin = "round"; c.strokeStyle = "#fff"; c.stroke(); c.restore();
+}
+function camAt(c, s, ax, ay, dx = 0, dy = 0, r = 0) { c.translate(ax + dx, ay + dy); c.rotate(r); c.scale(s, s); c.translate(-ax, -ay); }
+function paper(c) {
+  c.fillStyle = css(C.bg); c.fillRect(0, 0, W, H);
+  c.fillStyle = css(C.ink, .07); for (let y = 40; y < H; y += 60) for (let x = 30; x < W; x += 60) { c.beginPath(); c.arc(x, y, 2, 0, 7); c.fill(); }
+}
+
+/* ======================= 1 · HOOK (0 – 2.4) ======================= */
+const RC = { x: 540, y: 1260, w: 330, h: 470 };   // the mini reel card
+function reelCard(c, t, x, y, s, r) {
+  const { w, h } = RC;
+  c.save(); c.translate(x, y); c.rotate(r); c.scale(s, s); c.translate(-w / 2, -h / 2);
+  card(c, 0, 0, w, h, 34, { fill: C.ink, stroke: C.ink, sh: 12 });
+  c.fillStyle = "#fff"; c.beginPath(); c.arc(42, 44, 16, 0, 7); c.fill();
+  c.fillStyle = "rgba(255,255,255,.35)"; rr(c, 70, 34, 110, 9, 5); c.fill(); rr(c, 70, 50, 70, 8, 4); c.fill();
+  c.fillStyle = "#fff"; c.beginPath(); c.moveTo(w / 2 - 26, h / 2 - 36); c.lineTo(w / 2 + 34, h / 2); c.lineTo(w / 2 - 26, h / 2 + 36); c.closePath(); c.fill();
+  mono(c, "this video", w / 2, h / 2 + 96, 24, "rgba(255,255,255,.7)");
+  c.fillStyle = "rgba(255,255,255,.2)"; rr(c, 26, h - 40, w - 52, 8, 4); c.fill();
+  c.fillStyle = css(C.accent); rr(c, 26, h - 40, (w - 52) * (.18 + .3 * prog(t, .55, 2.2)), 8, 4); c.fill();
+  // pixel dissolve: tiles vanish into the paper
+  const cols = 10, rows = 14, tw = (w + 24) / cols, th = (h + 24) / rows;
+  for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
+    const k = i * rows + j, tv = 1.62 + hash(k) * .62 + (j / rows) * .1, p = prog(t, tv, tv + .12);
+    if (p <= 0) continue; const sz = p;
+    c.fillStyle = css(C.bg); c.fillRect(i * tw - 2 + tw * (1 - sz) / 2, j * th - 2 + th * (1 - sz) / 2, tw * sz + 1, th * sz + 1);
+  }
+  c.restore();
+}
+function sHook(c, t) {
+  const punch = 1 + .05 * (1 - E.outCubic(prog(t, 1.54, 1.9))) * (t > 1.54 ? 1 : 0);
+  c.save(); camAt(c, punch, CX, 900);
+  const L1 = lay(c, CONFIG.copy.hook[0], "IDBlack", 128, -2);
+  { const p = pop(t, .16, .45); textBlock(c, L1, CX, 520, { s: p > 0 ? lerp(1.4, 1, p) : 0, r: -.03 }); }
+  const L2 = fit(c, CONFIG.copy.hook[1], "IDBlack", 270, 960, -6);
+  drawLay(c, L2, CX, 790, "center", i => { const p = spring(clamp((t + .1) / .45)); return { s: lerp(1.3, 1, p), color: css(C.ink) }; });
+  // accent underline swipe on FORGET
+  strokeLine(c, CX - L2.width / 2, 830, CX + L2.width / 2, 830, E.outExpo(prog(t, .35, .7)), C.accent, 16);
+  // reel card
+  const cp = pop(t, .55, .55);
+  if (cp > 0) reelCard(c, t, RC.x, RC.y, cp, lerp(-.25, -.05, cp));
+  scribbleEllipse(c, RC.x, RC.y, 245, 300, E.outCubic(prog(t, T.video, T.video + .32)), C.accent, 10, 2);
+  // tomorrow chip
+  const tp = pop(t, T.tomorrow, .5);
+  if (tp > 0) {
+    c.save(); c.translate(790, 1010); c.rotate(.08); c.scale(tp, tp);
+    card(c, -150, -52, 300, 104, 52, { fill: C.accent });
+    const L = lay(c, CONFIG.copy.tomorrow, "IDBlack", 50, 1); drawLay(c, L, 0, 18, "center", () => ({ color: "#fff" })); c.restore();
+  }
+  c.restore();
+}
+
+/* ======================= 2 · NOT YOU → YOUR BRAIN (2.4 – 4.25) ======================= */
+function brainShape(c, x, y, s, fillC) {
+  c.save(); c.translate(x, y); c.scale(s, s);
+  const lobes = [[-58, -34, 52], [-12, -58, 56], [42, -40, 54], [62, 10, 48], [20, 40, 52], [-34, 34, 50], [-70, 8, 44]];
+  c.beginPath(); lobes.forEach(([lx, ly, r]) => { c.moveTo(lx + r, ly); c.arc(lx, ly, r, 0, Math.PI * 2); });
+  c.fillStyle = css(fillC); c.fill();
+  c.lineWidth = 6; c.strokeStyle = css(C.ink); lobes.forEach(([lx, ly, r]) => { c.beginPath(); c.arc(lx, ly, r, 0, Math.PI * 2); c.stroke(); });
+  c.beginPath(); lobes.forEach(([lx, ly, r]) => { c.moveTo(lx + r - 6, ly); c.arc(lx, ly, r - 6, 0, Math.PI * 2); }); c.fillStyle = css(fillC); c.fill();
+  c.strokeStyle = "rgba(255,255,255,.85)"; c.lineWidth = 7; c.lineCap = "round";
+  [[-60, -30, -20, -44], [10, -60, 40, -28], [-30, 30, 10, 20], [36, 20, 64, 0]].forEach(([a, b, d, e]) => { c.beginPath(); c.moveTo(a, b); c.quadraticCurveTo((a + d) / 2, b - 24, d, e); c.stroke(); });
+  c.restore();
+}
+const HEAD = { x: 540, y: 1180 };
+function sBrain(c, t) {
+  const sw = prog(t, T.brain, T.brain + .01) ;
+  const zoom = Math.exp(Math.log(9) * E.inExpo(prog(t, 4.02, 4.3)));
+  const punch = 1 + .1 * E.outCubic(prog(t, T.brain, T.brain + .3));
+  c.save(); camAt(c, punch * zoom, HEAD.x, HEAD.y - 10);
+  // person: head + shoulders
+  const hr = lerp(118, 175, pop(t, T.brain, .5));
+  const ent = pop(t, 2.4, .5);
+  c.save(); c.translate(0, (1 - ent) * 120);
+  c.fillStyle = css(C.ink); c.beginPath(); c.arc(HEAD.x, HEAD.y + 330, 260, Math.PI, 0); c.fill();
+  c.fillStyle = css(sw ? C.card : C.ink); c.lineWidth = 7; c.strokeStyle = css(C.ink); c.beginPath(); c.arc(HEAD.x, HEAD.y, hr, 0, 7); c.fill(); c.stroke();
+  if (sw) brainShape(c, HEAD.x, HEAD.y - 4, 1.45 * pop(t, T.brain + .06, .5), C.accent);
+  c.restore();
+  // text
+  if (t < T.brain + .2) {
+    const out = E.inCubic(prog(t, T.brain - .05, T.brain + .12));
+    const L1 = lay(c, CONFIG.copy.notYou[0], "IDBlack", 200, -4), L2 = lay(c, CONFIG.copy.notYou[1], "IDBlack", 260, -6);
+    c.save(); c.beginPath(); c.rect(0, 0, W, 860); c.clip();
+    textBlock(c, L1, CX, 520 - out * 500, { s: lerp(1.4, 1, pop(t, 2.42, .45)) });
+    textBlock(c, L2, CX, 780 - out * 500, { s: lerp(1.4, 1, pop(t, 2.55, .45)) });
+    const sp = E.outExpo(prog(t, T.strike, T.strike + .18));
+    c.save(); c.translate(0, -out * 500); strokeLine(c, CX - L2.width / 2 - 30, 720, CX + L2.width / 2 + 30, 676, sp, C.accent, 26); c.restore();
+    c.restore();
+  }
+  if (t >= T.brain - .02) {
+    const L1 = lay(c, CONFIG.copy.brain[0], "IDBlack", 150, -3);
+    const p1 = pop(t, T.brain, .5), p2 = pop(t, T.brain + .1, .55);
+    textBlock(c, L1, CX, 470, { s: p1, r: -.02 });
+    const L2 = lay(c, CONFIG.copy.brain[1], "IDBlack", 210, -5);
+    if (p2 > 0) { c.save(); c.translate(CX, 700); c.rotate(-.04); c.scale(p2, p2);
+      card(c, -L2.width / 2 - 34, -186, L2.width + 68, 236, 26, { fill: C.accent });
+      drawLay(c, L2, 0, 0, "center", () => ({ color: "#fff" })); c.restore(); }
+  }
+  c.restore();
+}
+
+/* ======================= 3 · 24 HOURS → 67% (4.25 – 8.0) ======================= */
+const CLOCK = { x: 540, y: 900, r: 300 };
+function clockFace(c, t, x, y, r) {
+  c.save(); c.translate(x, y); const s = r / CLOCK.r; c.scale(s, s);
+  c.fillStyle = css(C.ink); c.beginPath(); c.arc(12, 12, CLOCK.r, 0, 7); c.fill();
+  c.fillStyle = css(C.card); c.beginPath(); c.arc(0, 0, CLOCK.r, 0, 7); c.fill();
+  const sweep = E.inOutCubic(prog(t, 4.36, 5.0)) * Math.PI * 2;
+  if (sweep > 0) { c.fillStyle = css(C.accent); c.beginPath(); c.moveTo(0, 0); c.arc(0, 0, CLOCK.r - 6, -Math.PI / 2, -Math.PI / 2 + sweep); c.closePath(); c.fill(); }
+  c.lineWidth = 9; c.strokeStyle = css(C.ink); c.beginPath(); c.arc(0, 0, CLOCK.r, 0, 7); c.stroke();
+  for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2, r0 = i % 3 ? 250 : 228; c.lineWidth = i % 3 ? 6 : 10; c.lineCap = "round";
+    c.beginPath(); c.moveTo(Math.sin(a) * r0, -Math.cos(a) * r0); c.lineTo(Math.sin(a) * 276, -Math.cos(a) * 276); c.stroke(); }
+  c.save(); c.rotate(sweep); c.lineWidth = 16; c.beginPath(); c.moveTo(0, 30); c.lineTo(0, -230); c.stroke(); c.restore();
+  c.fillStyle = css(C.ink); c.beginPath(); c.arc(0, 0, 22, 0, 7); c.fill();
+  c.restore();
+}
+const GRID = (() => { const g = []; for (let j = 0; j < 3; j++) for (let i = 0; i < 3; i++) g.push({ x: 540 + (i - 1) * 262, y: 1040 + (j - 1) * 262, i: j * 3 + i }); return g; })();
+const KEEP = [1, 5, 6];
+function icon(c, k, s) {
+  c.save(); c.scale(s, s); c.lineWidth = 9; c.lineCap = "round"; c.lineJoin = "round"; c.strokeStyle = css(C.ink); c.fillStyle = css(C.ink);
+  switch (k % 9) {
+    case 0: c.beginPath(); c.arc(0, -12, 34, Math.PI * .8, Math.PI * 2.2); c.lineTo(14, 30); c.lineTo(-14, 30); c.closePath(); c.stroke(); c.beginPath(); c.moveTo(-12, 46); c.lineTo(12, 46); c.stroke(); break; // bulb
+    case 1: c.beginPath(); c.moveTo(-46, -30); c.lineTo(0, -18); c.lineTo(46, -30); c.lineTo(46, 34); c.lineTo(0, 46); c.lineTo(-46, 34); c.closePath(); c.moveTo(0, -18); c.lineTo(0, 46); c.stroke(); break; // book
+    case 2: { c.beginPath(); for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2 - Math.PI / 2, r = i % 2 ? 20 : 46; c.lineTo(Math.cos(a) * r, Math.sin(a) * r); } c.closePath(); c.stroke(); break; } // star
+    case 3: [[-34, 20], [-6, -4], [22, -30]].forEach(([x, h]) => { rr(c, x - 10, h, 22, 46 - h, 5); c.fill(); }); break; // bars
+    case 4: c.beginPath(); c.arc(-14, -10, 24, 0, 7); c.stroke(); c.beginPath(); c.moveTo(4, 8); c.lineTo(40, 44); c.moveTo(26, 30); c.lineTo(38, 18); c.stroke(); break; // key
+    case 5: c.beginPath(); c.moveTo(0, 40); c.bezierCurveTo(-60, 0, -30, -50, 0, -18); c.bezierCurveTo(30, -50, 60, 0, 0, 40); c.stroke(); break; // heart
+    case 6: rr(c, -46, -34, 92, 60, 16); c.stroke(); c.beginPath(); c.moveTo(-16, 26); c.lineTo(-26, 46); c.lineTo(6, 26); c.stroke(); break; // chat
+    case 7: c.beginPath(); c.moveTo(-14, 30); c.lineTo(-14, -34); c.lineTo(36, -44); c.lineTo(36, 22); c.stroke(); c.beginPath(); c.arc(-26, 32, 14, 0, 7); c.fill(); c.beginPath(); c.arc(24, 24, 14, 0, 7); c.fill(); break; // note
+    case 8: c.beginPath(); c.arc(0, -10, 30, 0, 7); c.stroke(); c.beginPath(); c.moveTo(-22, 12); c.lineTo(0, 48); c.lineTo(22, 12); c.stroke(); break; // pin
+  }
+  c.restore();
+}
+function memCard(c, x, y, k, s, r = 0, a = 1) {
+  if (s <= .001 || a <= .001) return; c.save(); c.globalAlpha *= a; c.translate(x, y); c.rotate(r); c.scale(s, s);
+  card(c, -105, -105, 210, 210, 30, { fill: k === 5 ? C.accent : C.card, sh: 9 }); icon(c, k, 1); c.restore();
+}
+function sStat(c, t) {
+  const late = t >= 8.0;
+  // clock part
+  if (late) {}
+  else if (t < 5.3) {
+    const shrink = E.inOutCubic(prog(t, 5.0, 5.25));
+    const cx = lerp(CLOCK.x, 170, shrink), cy = lerp(CLOCK.y, 300, shrink), r = lerp(CLOCK.r, 70, shrink) * lerp(.6, 1, pop(t, 4.25, .45));
+    clockFace(c, t, cx, cy, r);
+    const L = lay(c, CONFIG.copy.hours, "IDBlack", 112, -2);
+    textBlock(c, L, CX, 1420, { s: pop(t, 4.4, .45) * (1 - shrink), r: -.02 });
+  } else clockFace(c, t, 170, 300, 70);
+  if (t > 5.05 && !late) {
+    const L = lay(c, "24H", "IDBlack", 44, 0); textBlock(c, L, 290, 318, { s: pop(t, 5.2, .4), color: css(C.ink) });
+  }
+  const heroOn = prog(t, T.stat - .02, T.stat), heroUp = E.inOutCubic(prog(t, T.learn - .05, T.learn + .3));
+  const dim = heroOn * (1 - heroUp);
+  // memory cards
+  GRID.forEach((g, n) => {
+    const p = pop(t, T.lose + .04 + n * .045, .5); if (p <= 0) return;
+    let x = g.x, y = g.y, r = 0, s = p * lerp(1, .9, dim), a = lerp(1, .18, dim);
+    if (!KEEP.includes(n)) { const tf = T.learn + .08 + KEEP.length * 0 + (n % 4) * .06, dt = Math.max(0, t - tf);
+      y += 3600 * dt * dt - 260 * dt; x += (n % 3 - 1) * 260 * dt; r = (hash(n) - .5) * 6 * dt; }
+    else if (t > 7.85) { const m = E.inOutCubic(prog(t, 7.85, 8.1)); x = lerp(x, CH.x0 + 18, m); y = lerp(y, CH.y0 + 18, m); s *= lerp(1, .12, m); }
+    if (late && !KEEP.includes(n)) return;
+    memCard(c, x, y, g.i, s, r, a);
+  });
+  // hero number
+  if (heroOn > 0 && !late) {
+    const sl = pop(t, T.stat, .55), cnt = Math.round(CONFIG.copy.stat * E.outCubic(prog(t, T.stat, T.stat + .38)));
+    const shake = 14 * Math.exp(-(t - T.stat) * 9);
+    const y = lerp(1000, 520, heroUp), s = lerp(1, .42, heroUp) * lerp(1.6, 1, sl);
+    const Ln = lay(c, String(cnt), "IDBlack", 520, -22), Lp = lay(c, "%", "IDBlack", 330, -6);
+    const tw = Ln.width + Lp.width + 10;
+    c.save(); c.translate(CX + Math.sin(t * 90) * shake, y + Math.cos(t * 70) * shake); c.scale(s, s); c.rotate(-.03 * (1 - heroUp));
+    drawLay(c, Ln, -tw / 2, 0, "left", () => ({ color: css(C.ink) }));
+    drawLay(c, Lp, -tw / 2 + Ln.width + 10, 0, "left", () => ({ color: css(C.accent) }));
+    c.restore();
+    const Lu = lay(c, CONFIG.copy.upTo, "Mono", 40, 6);
+    textBlock(c, Lu, CX, lerp(560, 300, heroUp), { s: pop(t, T.stat + .05, .4) * (1 - heroUp), color: css(C.ink) });
+    const Ll = lay(c, CONFIG.copy.statLabel, "IDBlack", 64, -1);
+    textBlock(c, Ll, CX, 640, { s: pop(t, T.learn + .05, .45), color: css(C.ink) });
+  }
+}
+
+/* ======================= 4–7 · THE CURVE (8.0 – 16.45) ======================= */
+const CH = { x0: 150, x1: 950, y0: 760, y1: 1340 };   // plot area (y0 = 100 %, y1 = 0 %)
+const SEGS = [ { d: 0, f: .2, k: .575 }, { d: 1, f: .46, k: 1.6 }, { d: 3, f: .66, k: 3.6 }, { d: 7, f: .82, k: 9 } ];
+const plain = d => .2 + .8 * Math.exp(-d / .575);
+function reviewed(d, upto = 99) { let s = SEGS[0]; for (const g of SEGS) if (g.d <= d && g.d <= upto) s = g; return s.f + (1 - s.f) * Math.exp(-(d - s.d) / s.k); }
+function visDays(t) {   // horizontal zoom: how many days fit the plot
+  if (t < 12.25) return 3.2;
+  if (t < 12.95) return lerp(3.2, 4.2, E.inOutCubic(prog(t, 12.25, 12.95)));
+  if (t < 13.75) return lerp(4.2, 8.2, E.inOutCubic(prog(t, 12.95, 13.75)));
+  return lerp(8.2, 10.6, E.inOutCubic(prog(t, 13.75, 14.6)));
+}
+function drawnDays(t) {
+  if (t < 8.25) return 0; if (t < 9.3) return 3.2 * E.inOutCubic(prog(t, 8.25, 9.25));
+  if (t < T.click) return 3.2;
+  if (t < 12.36) return 1;
+  if (t < 12.95) return lerp(1, 3, E.inOutCubic(prog(t, 12.36, 12.95)));
+  if (t < 13.75) return lerp(3, 7, E.inOutCubic(prog(t, 13.05, 13.72)));
+  return lerp(7, 10.6, E.inOutCubic(prog(t, 13.85, 14.55)));
+}
+function sCurve(c, t) {
+  const vd = visDays(t), px = d => CH.x0 + (d / vd) * (CH.x1 - CH.x0), py = r => lerp(CH.y1, CH.y0, r);
+  const zoomOut = E.inOutCubic(prog(t, 14.65, 15.1));
+  const cam = 1 - .06 * zoomOut + .04 * (1 - E.outCubic(prog(t, 10.38, 10.7))) * (t > 10.38 ? 1 : 0);
+  c.save(); camAt(c, cam, CX, 1050, 0, 30 * zoomOut);
+  // axes
+  const ax = E.outExpo(prog(t, 8.0, 8.35));
+  strokeLine(c, CH.x0, CH.y1, CH.x0, CH.y0 - 40, ax, C.ink, 7); strokeLine(c, CH.x0, CH.y1, CH.x1 + 30, CH.y1, ax, C.ink, 7);
+  mono(c, "100%", CH.x0 - 18, CH.y0 + 10, 24, css(C.ink), ax, "right", 0); mono(c, "0", CH.x0 - 18, CH.y1 + 8, 24, css(C.ink), ax, "right", 0);
+  mono(c, t < 12.25 ? "TIME →" : "DAYS →", CH.x1 + 30, CH.y1 + 52, 24, css(C.ink), ax, "right", 2);
+  c.save(); c.setLineDash([4, 14]); c.lineCap = "round"; c.strokeStyle = css(C.ink, .25 * ax); c.lineWidth = 4;
+  c.beginPath(); c.moveTo(CH.x0, CH.y0); c.lineTo(CH.x1, CH.y0); c.stroke(); c.restore();
+  if (t >= 12.25) for (let d = 1; d <= 10; d++) { const x = px(d); if (x > CH.x1 + 10) break; mono(c, String(d), x, CH.y1 + 52, 22, css(C.ink), .55, "center", 0); }
+  // ghost of the un-reviewed curve (comparison)
+  const ghost = prog(t, 14.7, 15.1);
+  if (ghost > 0) { c.save(); c.globalAlpha = ghost; c.setLineDash([2, 16]); c.lineCap = "round"; c.lineWidth = 8; c.strokeStyle = css(C.grey); c.beginPath();
+    for (let d = 0; d <= vd; d += .05) { const x = px(d), y = py(plain(d)); d ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke(); c.restore(); }
+  // main curve
+  const dd = drawnDays(t), useRev = t >= 11.62;
+  const upto = t < 12.31 ? 1 : t < 12.99 ? 1 : t < 13.78 ? 3 : 7;
+  c.save(); c.lineWidth = 11; c.lineCap = "round"; c.lineJoin = "round"; c.strokeStyle = css(C.accent); c.beginPath();
+  let last = [px(0), py(1)];
+  for (let d = 0; d <= dd + 1e-6; d += .02) {
+    const r = useRev ? reviewed(d, upto) : plain(d);
+    const x = px(d), y = py(r); if (d === 0) c.moveTo(x, y); else c.lineTo(x, y); last = [x, y];
+  }
+  // the click at day 1 makes the curve jump back up
+  if (t >= T.click && t < 12.36) { const j = E.outBack(prog(t, T.click, T.click + .35)); const x = px(1); c.lineTo(x, lerp(py(plain(1)), py(1), j)); last = [x, lerp(py(plain(1)), py(1), j)]; }
+  c.stroke(); c.restore();
+  if (dd > 0) { c.fillStyle = css(C.accent); c.beginPath(); c.arc(last[0], last[1], 16, 0, 7); c.fill(); c.lineWidth = 5; c.strokeStyle = css(C.ink); c.stroke(); }
+  // review chips
+  [[1, T.d1, "DAY 1"], [3, T.d3, "DAY 3"], [7, T.d7, "DAY 7"]].forEach(([d, tt, lab], i) => {
+    const p = pop(t, tt, .45) * (1 - prog(t, 14.65, 14.9)); if (p <= 0) return;
+    const x = px(d), y = CH.y0 - 70;
+    c.save(); c.translate(x, y); c.scale(p, p); card(c, -62, -32, 124, 64, 32, { fill: C.ink, sh: 0, lw: 0 });
+    const L = lay(c, lab, "IDBlack", 30, 0); drawLay(c, L, 0, 11, "center", () => ({ color: "#fff" }));
+    c.fillStyle = css(C.ink); c.beginPath(); c.moveTo(-10, 30); c.lineTo(10, 30); c.lineTo(0, 44); c.fill(); c.restore();
+  });
+  // 1-day callout during the curve beat
+  const co = pop(t, 9.05, .45) * (1 - prog(t, 9.6, 9.66));
+  if (co > 0) { const x = px(1), y = py(plain(1));
+    c.save(); c.setLineDash([6, 10]); c.strokeStyle = css(C.ink, .6); c.lineWidth = 4; c.beginPath(); c.moveTo(x, y); c.lineTo(x, CH.y1); c.stroke(); c.restore();
+    c.save(); c.translate(x + 150, y - 110); c.scale(co, co); c.rotate(-.04); card(c, -130, -46, 260, 92, 20, { fill: C.card });
+    const L = lay(c, "1 DAY: −67%", "IDBlack", 40, 0); drawLay(c, L, 0, 14, "center", () => ({ color: css(C.ink) })); c.restore(); }
+  c.restore();
+
+  // titles per beat
+  if (t < 9.66) {
+    const L1 = lay(c, CONFIG.copy.curve[0], "IDBlack", 150, -4), L2 = lay(c, CONFIG.copy.curve[1], "IDBlack", 150, -4);
+    textBlock(c, L1, CX, 470, { s: pop(t, T.curve + .1, .5) });
+    textBlock(c, L2, CX, 610, { s: pop(t, T.curve + .2, .5) });
+    strokeLine(c, CX - L1.width / 2, 500, CX + L1.width / 2, 500, E.outExpo(prog(t, 8.7, 9.05)), C.accent, 14);
+    mono(c, CONFIG.copy.source, CX, 1470, 28, css(C.ink), .55 * prog(t, 8.6, 8.9));
+  } else if (t < 14.65) {
+    const L = lay(c, CONFIG.copy.review, "IDBlack", 170, -4);
+    const out = E.inCubic(prog(t, 12.18, 12.33)) * 1.6;
+    textBlock(c, L, CX, 500 - out * 400, { s: pop(t, 10.4, .45) });
+    const Ls = lay(c, CONFIG.copy.reviewSub, "IDBold", 50, 1);
+    textBlock(c, Ls, CX, 590 - out * 400, { s: pop(t, T.before, .45), per: (i, g) => ({ color: css(i >= 19 ? C.accent : C.ink) }) });
+    // cursor + button
+    if (t < 12.3) {
+      const mv = E.inOutCubic(prog(t, 10.45, 11.12)), x1 = px(1), y1 = py(plain(1));
+      const cx = lerp(1150, x1 + 8, mv), cy = lerp(1700, y1 + 8, mv), press = Math.sin(Math.PI * prog(t, T.click - .06, T.click + .1));
+      const bp = pop(t, T.before - .05, .45) * (1 - E.inCubic(prog(t, 12.0, 12.25)));
+      if (bp > 0) { c.save(); c.translate(x1 + 190, y1 + 140); c.scale(bp * (1 - .1 * press), bp * (1 - .1 * press));
+        card(c, -150, -50, 300, 100, 50, { fill: t > T.click ? C.accent : C.ink, sh: press > 0 ? 4 : 9 });
+        const L2 = lay(c, "REVIEW ↺", "IDBlack", 42, 1); drawLay(c, L2, 0, 15, "center", () => ({ color: "#fff" })); c.restore(); }
+      const ring = prog(t, T.click, T.click + .45); if (ring > 0 && ring < 1) { c.save(); c.globalAlpha = 1 - ring; c.lineWidth = 6; c.strokeStyle = css(C.blue); c.beginPath(); c.arc(x1, y1, 20 + ring * 90, 0, 7); c.stroke(); c.restore(); }
+      if (mv > 0) cursor(c, cx, cy, 1.15, press);
+    }
+    // big DAY headline: the number rolls 1 → 3 → 7 on each spoken word
+    const dIn = pop(t, T.d1 - .04, .45) * (1 - E.inCubic(prog(t, 14.5, 14.66)));
+    if (dIn > 0) {
+      const Ld = lay(c, "DAY", "IDBlack", 230, -6), nums = ["1", "3", "7"], ts = [T.d1, T.d3, T.d7];
+      const Ln = lay(c, "7", "IDBlack", 230, 0), tw = Ld.width + 40 + Ln.width;
+      c.save(); c.translate(CX, 560); c.scale(dIn, dIn); c.rotate(-.02);
+      drawLay(c, Ld, -tw / 2, 0, "left", () => ({ color: css(C.ink) }));
+      const nx = -tw / 2 + Ld.width + 40;
+      card(c, nx - 22, -196, Ln.width + 44, 236, 24, { fill: C.accent });
+      c.save(); c.beginPath(); c.rect(nx - 22, -196, Ln.width + 44, 236); c.clip();
+      nums.forEach((n, k) => { const tin = ts[k], tout = k < 2 ? ts[k + 1] : 99;
+        const pi = E.outCubic(prog(t, tin - .02, tin + .2)), po = E.inCubic(prog(t, tout - .1, tout + .02));
+        if (t < tin - .02 || po >= 1) return; const L = lay(c, n, "IDBlack", 230, 0);
+        drawLay(c, L, nx + (Ln.width - L.width) / 2, (1 - pi) * 240 - po * 240, "left", () => ({ color: "#fff" })); });
+      c.restore(); c.restore();
+    }
+  } else {
+    const Lf = lay(c, CONFIG.copy.flat, "IDBlack", 176, -4);
+    const sq = pop(t, T.flattens, .55);
+    textBlock(c, Lf, CX, 520, { s: pop(t, T.flat, .45), sx: lerp(1, 1.16, sq), sy: lerp(1, .5, sq) });
+    const Ls = lay(c, CONFIG.copy.flatSub, "IDBold", 60, 2);
+    textBlock(c, Ls, CX, 610, { s: pop(t, T.flat + .15, .45) });
+    // payoff: chip above the flat end of the curve, short arrow down to it
+    const sp = pop(t, 15.75, .45);
+    if (sp > 0) {
+      const [ex, ey] = curveEnd(t);
+      c.save(); c.translate(ex - 120, ey - 170); c.scale(sp, sp); c.rotate(-.04);
+      card(c, -140, -44, 280, 88, 44, { fill: C.accent });
+      const L = lay(c, CONFIG.copy.sticks, "IDBlack", 44, 1); drawLay(c, L, 0, 15, "center", () => ({ color: "#fff" })); c.restore();
+      const ap = E.outCubic(prog(t, 15.85, 16.05));
+      c.save(); c.strokeStyle = css(C.ink); c.lineWidth = 7; c.lineCap = "round"; c.lineJoin = "round";
+      const x0 = ex - 70, y0 = ey - 118, x1 = lerp(x0, ex - 14, ap), y1 = lerp(y0, ey - 30, ap);
+      c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1, y1); c.stroke();
+      if (ap > .95) { c.beginPath(); c.moveTo(x1 - 22, y1 - 6); c.lineTo(x1, y1); c.lineTo(x1 - 2, y1 - 24); c.stroke(); }
+      c.restore();
+    }
+  }
+}
+function curveEnd(t) { const vd = visDays(t), cam = 1 - .06 * E.inOutCubic(prog(t, 14.65, 15.1)); const x = CH.x0 + (Math.min(drawnDays(t), vd) / vd) * (CH.x1 - CH.x0), y = lerp(CH.y1, CH.y0, reviewed(drawnDays(t)));
+  return [CX + (x - CX) * cam, 1050 + (y - 1050) * cam + 30]; }
+
+/* ======================= 5a · THE FIX? (pattern interrupt) ======================= */
+function sFix(c, t) {
+  c.fillStyle = css(C.accent); c.fillRect(0, 0, W, H);
+  const L1 = lay(c, CONFIG.copy.fix[0], "IDBlack", 190, -4), L2 = fit(c, CONFIG.copy.fix[1], "IDBlack", 420, 940, -14);
+  const p = pop(t, 9.66, .4), wob = Math.sin(t * 40) * 3 * (1 - prog(t, 9.66, 10.0));
+  textBlock(c, L1, CX, 760, { s: lerp(1.5, 1, p), r: -.05, color: css(C.ink) });
+  textBlock(c, L2, CX + wob, 1140, { s: lerp(1.8, 1, pop(t, 9.7, .45)), r: -.05, color: "#fff" });
+}
+
+/* ======================= 8 · SAVE THIS (16.45 – 19.6) ======================= */
+function bookmark(c, x, y, s, fillP, burst) {
+  c.save(); c.translate(x, y); c.scale(s, s);
+  const path = () => { c.beginPath(); c.moveTo(-120, -170); c.lineTo(120, -170); c.lineTo(120, 170); c.lineTo(0, 80); c.lineTo(-120, 170); c.closePath(); };
+  c.save(); c.translate(12, 12); path(); c.fillStyle = css(C.ink); c.fill(); c.restore();
+  path(); c.fillStyle = css(C.card); c.fill();
+  if (fillP > 0) { c.save(); path(); c.clip(); c.fillStyle = css(C.accent); c.fillRect(-130, 180 - 360 * fillP, 260, 360 * fillP + 10); c.restore(); }
+  path(); c.lineJoin = "round"; c.lineWidth = 14; c.strokeStyle = css(C.ink); c.stroke();
+  if (burst > 0 && burst < 1) { c.strokeStyle = css(C.accent); c.lineWidth = 12; c.lineCap = "round";
+    for (let i = 0; i < 10; i++) { const a = i / 10 * Math.PI * 2, r0 = 210 + 120 * E.outCubic(burst), r1 = r0 + 60 * (1 - burst); c.beginPath(); c.moveTo(Math.cos(a) * r0, Math.sin(a) * r0); c.lineTo(Math.cos(a) * r1, Math.sin(a) * r1); c.stroke(); } }
+  c.restore();
+}
+function sSave(c, t) {
+  const shift = E.inOutCubic(prog(t, T.cta - .05, T.cta + .35));
+  const bs = pop(t, 16.48, .5) * lerp(1, .72, shift) * (1 + .14 * (1 - E.outCubic(prog(t, T.tap, T.tap + .35))) * (t > T.tap ? 1 : 0));
+  const by = lerp(1060, 930, shift);
+  bookmark(c, CX, by, bs, E.outCubic(prog(t, T.tap, T.tap + .18)), prog(t, T.tap, T.tap + .5));
+  const Ls = lay(c, CONFIG.copy.save, "IDBlack", 176, -4);
+  textBlock(c, Ls, CX, lerp(640, 560, shift), { s: lerp(1, .82, shift), per: (i) => { const p = pop(t, 16.52 + i * .03, .45); return { s: p, color: css(C.ink) }; } });
+  if (t < T.tap + .1) { const mv = E.inOutCubic(prog(t, 16.6, 16.96)), press = Math.sin(Math.PI * prog(t, T.tap - .06, T.tap + .1));
+    if (mv > 0) cursor(c, lerp(1180, CX + 10, mv), lerp(1760, by + 20, mv), 1.2, press); }
+  if (t >= T.cta - .02) {
+    const Ld = lay(c, CONFIG.copy.dont, "IDBold", 76, 2);
+    textBlock(c, Ld, CX, 1270, { s: pop(t, T.cta, .45) });
+    const Lf = lay(c, CONFIG.copy.forgetIt[0], "IDBlack", 168, -4), Li = lay(c, " " + CONFIG.copy.forgetIt[1], "IDBlack", 168, -4);
+    const tw = Lf.width + Li.width, p = pop(t, T.cta + .22, .5);
+    c.save(); c.translate(CX - 15, 1440); c.scale(p, p); c.rotate(-.02);
+    card(c, -tw / 2 - 20, -150, Lf.width + 40, 186, 22, { fill: C.accent });
+    drawLay(c, Lf, -tw / 2, 0, "left", () => ({ color: "#fff" })); drawLay(c, Li, -tw / 2 + Lf.width + 30, 0, "left", () => ({ color: css(C.ink) })); c.restore();
+  }
+  mono(c, CONFIG.copy.follow, CX, 1560, 28, css(C.ink), .6 * prog(t, 18.5, 18.9));
+}
+
+/* ======================= COMPOSITE ======================= */
+function render(c, t) {
+  c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.globalCompositeOperation = "source-over"; c.filter = "none"; c.shadowBlur = 0;
+  paper(c);
+  if (t < 2.3) sHook(c, t);
+  else if (t < 2.62) {   // whip: hook exits left, brain enters from the right
+    const o = E.inCubic(prog(t, 2.3, 2.42)) * -W, i = (1 - E.outCubic(prog(t, 2.4, 2.62))) * W;
+    c.save(); c.translate(o, 0); sHook(c, t); c.restore();
+    if (t >= 2.4) { c.save(); c.translate(i, 0); sBrain(c, t); c.restore(); }
+  }
+  else if (t < 4.25) sBrain(c, t);
+  else if (t < 4.5) {    // zoom-through the brain → circle opens onto the clock
+    c.fillStyle = css(C.accent); c.fillRect(0, 0, W, H);
+    const R = E.outCubic(prog(t, 4.25, 4.48)) * 1300;
+    c.save(); c.beginPath(); c.arc(CLOCK.x, CLOCK.y, R, 0, 7); c.clip(); paper(c); sStat(c, t); c.restore();
+  }
+  else if (t < 8.0) sStat(c, t);
+  else if (t < 9.66) { sStat(c, t); sCurve(c, t); }
+  else if (t < 10.38) sFix(c, t);
+  else if (t < 16.3) sCurve(c, t);
+  else if (t < 16.5) {   // circle grows from the curve's end dot and opens onto the save beat
+    sCurve(c, t); const [ex, ey] = curveEnd(16.3), R = E.inCubic(prog(t, 16.3, 16.5)) * 2300;
+    c.save(); c.beginPath(); c.arc(ex, ey, R, 0, 7); c.clip(); c.fillStyle = css(C.accent); c.fillRect(0, 0, W, H);
+    c.beginPath(); c.arc(ex, ey, Math.max(0, R - 160), 0, 7); c.clip(); paper(c); sSave(c, t); c.restore();
+  }
+  else sSave(c, t);
+}
+function renderFrame(f, samples = 1) {
+  const t = f / FPS;
+  if (samples <= 1) { render(ctx, t); return; }
+  const CUTS = [9.66, 10.38];
+  for (let k = 0; k < samples; k++) {
+    let tk = (f - (k / samples) * CONFIG.shutter) / FPS;
+    for (const cut of CUTS) if (t >= cut && tk < cut) tk = cut;
+    render(wctx, Math.max(0, tk));
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1 / (k + 1); ctx.drawImage(work, 0, 0);
+  }
+  ctx.globalAlpha = 1;
+}
+
+/* ======================= PLAYER ======================= */
+const ready = (async () => { await Promise.all(["IDBlack", "IDBold", "IDLight", "ISerif", "Mono"].map(f => document.fonts.load(`40px ${f}`))); await document.fonts.ready; })();
+window.REEL = { ready, renderFrame, canvas: cv, FRAMES, FPS, CONFIG };
+const $ = id => document.getElementById(id), scrub = $("scrub"), timeEl = $("time"), playBtn = $("play"), mb = $("mb");
+scrub.max = FRAMES - 1;
+let frame = 0, playing = false, t0 = 0, f0 = 0;
+const AUDIO_SRC = "__AUDIO__", snd = AUDIO_SRC.startsWith("data:") ? new Audio(AUDIO_SRC) : null;
+const show = f => { frame = Math.max(0, Math.min(FRAMES - 1, f)); renderFrame(frame, mb.checked ? 4 : 1); scrub.value = frame;
+  timeEl.textContent = `${(frame / FPS).toFixed(2).padStart(5, "0")} / ${DUR.toFixed(2)}  f${frame}`; };
+const loop = now => { if (!playing) return;
+  const f = snd ? Math.floor(snd.currentTime * FPS) : f0 + Math.floor((now - t0) / 1000 * FPS);
+  if (snd && snd.ended) { snd.currentTime = 0; snd.play(); }
+  show(f % FRAMES); requestAnimationFrame(loop); };
+const toggle = () => { playing = !playing; playBtn.textContent = playing ? "Pause" : "Play";
+  if (playing) { t0 = performance.now(); f0 = frame; if (snd) { snd.currentTime = frame / FPS; snd.play(); } requestAnimationFrame(loop); }
+  else if (snd) snd.pause(); };
+playBtn.onclick = toggle; $("prev").onclick = () => show(frame - 1); $("next").onclick = () => show(frame + 1);
+scrub.oninput = () => { playing = false; playBtn.textContent = "Play"; if (snd) snd.pause(); show(+scrub.value); };
+mb.onchange = () => show(frame);
+addEventListener("keydown", e => { if (e.code === "Space") { e.preventDefault(); toggle(); } if (e.key === "ArrowLeft") show(frame - 1); if (e.key === "ArrowRight") show(frame + 1); });
+const bx = $("beats");
+BEATS.forEach(b => { const d = document.createElement("div"); d.style.width = ((b.end - b.start) / DUR * 100) + "%"; d.textContent = b.name; d.onclick = () => show(Math.round(b.start * FPS)); bx.appendChild(d); });
+CUES.forEach(q => { const i = document.createElement("i"); i.style.left = (q.t / DUR * 100) + "%"; i.title = `${q.t.toFixed(2)}s — ${q.sfx}`; bx.appendChild(i); });
+ready.then(() => { if (!window.__EXPORT__) show(0); });
+</script>
+</body>
+</html>
