@@ -25,12 +25,14 @@ export function loadEnv() {
 export function loadConfig() {
   const own = path.join(ROOT, 'config.json');
   const file = fs.existsSync(own) ? own : path.join(ROOT, 'config.example.json');
-  const raw = JSON.parse(fs.readFileSync(file, 'utf8'));
+  // Hosted copies can take the whole config from a CONFIG_JSON environment variable.
+  const fromEnv = process.env.CONFIG_JSON?.trim();
+  const raw = JSON.parse(fromEnv || fs.readFileSync(file, 'utf8'));
   const config = { ...DEFAULTS, ...raw };
   config.notion = { ...DEFAULTS.notion, ...raw.notion };
   config.alarms = { ...DEFAULTS.alarms, ...raw.alarms };
   config.dayWindow = { ...DEFAULTS.dayWindow, ...raw.dayWindow };
-  config.source = path.basename(file);
+  config.source = fromEnv ? 'CONFIG_JSON' : path.basename(file);
   return config;
 }
 

@@ -32,3 +32,13 @@ test('notes roll unfinished items over to the next day', async () => {
   assert.equal(next.scratch, 'hi');
   await fs.rm(dir, { recursive: true });
 });
+
+test('isPrivateTarget spots plant and home network addresses', async () => {
+  const { isPrivateTarget } = await import('../server/systems.js');
+  assert.equal(isPrivateTarget({ type: 'tcp', host: '192.168.1.10', port: 502 }), true);
+  assert.equal(isPrivateTarget({ type: 'http', url: 'http://localhost:8088/StatusPing' }), true);
+  assert.equal(isPrivateTarget({ type: 'http', url: 'http://172.20.0.5' }), true);
+  assert.equal(isPrivateTarget({ type: 'http', url: 'http://historian.local' }), true);
+  assert.equal(isPrivateTarget({ type: 'http', url: 'https://github.com' }), false);
+  assert.equal(isPrivateTarget({ type: 'http', url: 'http://172.32.0.1' }), false);
+});

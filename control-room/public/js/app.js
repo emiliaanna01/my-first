@@ -47,8 +47,33 @@ const SOURCES = {
 async function api(path, options = {}) {
   const res = await fetch(path, { ...options, headers: { 'Content-Type': 'application/json', ...options.headers } });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error ?? `HTTP ${res.status}`);
+  if (!res.ok) {
+    if (res.status === 401 && data.login) showLogin();
+    throw Object.assign(new Error(data.error ?? `HTTP ${res.status}`), { status: res.status });
+  }
   return data;
+}
+
+function showLogin() {
+  const dialog = $('#login');
+  if (dialog.open) return;
+  dialog.showModal();
+  $('#login-password').focus();
+}
+
+async function submitLogin(event) {
+  event.preventDefault();
+  const error = $('#login-error');
+  error.textContent = '';
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password: $('#login-password').value }),
+  });
+  if (res.ok) return location.reload();
+  const data = await res.json().catch(() => ({}));
+  error.textContent = data.error ?? 'Sign-in failed.';
+  $('#login-password').select();
 }
 
 async function load(name, { force = false } = {}) {
@@ -403,9 +428,18 @@ async function completeTask(button) {
 
 /* ---------- Today's three and notes ---------- */
 
+// Hosted copies have no disk to write to, so notes live in this browser instead,
+// with the same roll-over of unfinished items as the local server.
+function browserNotes() {
+  const today = localDate(new Date());
+  const saved = store.get('notes', { date: today, top3: [], scratch: '' });
+  return saved.date === today ? saved : { ...saved, date: today, top3: (saved.top3 ?? []).filter((t) => !t.done) };
+}
+
 async function loadNotes() {
   try {
     state.notes = await api('/api/notes');
+    if (state.notes.storage === 'browser') state.notes = { ...browserNotes(), storage: 'browser' };
   } catch {
     state.notes = { top3: [], scratch: '' };
   }
@@ -435,6 +469,11 @@ function saveNotes() {
       text: $(`[data-top3="${i}"]`).value,
       done: $(`[data-top3-done="${i}"]`).checked,
     }));
+    if (state.notes?.storage === 'browser') {
+      state.notes = { date: localDate(new Date()), top3, scratch: $('#scratch').value, storage: 'browser' };
+      store.set('notes', state.notes);
+      return;
+    }
     try {
       state.notes = await api('/api/notes', { method: 'PUT', body: JSON.stringify({ top3, scratch: $('#scratch').value }) });
     } catch (error) {
@@ -852,10 +891,12 @@ async function start() {
   setInterval(tick, 1000);
   renderNotifyButton();
 
+  $('#login-form').addEventListener('submit', submitLogin);
   try {
     state.config = await api('/api/config');
   } catch (error) {
-    $('#alarms').innerHTML = `<p class="alarms-clear">${shape('diag')} Can't reach the control room server: ${esc(error.message)}. Is <code>npm start</code> running?</p>`;
+    if (error.status === 401) return;
+    $('#alarms').innerHTML = `<p class="alarms-clear">${shape('diag')} Can't reach the control room server: ${esc(error.message)}</p>`;
     return;
   }
   $('#title').textContent = state.config.title;

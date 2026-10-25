@@ -438,6 +438,24 @@ a.mark:hover .mark-title { text-decoration: underline; }
 .links a { font-weight: 500; white-space: nowrap; }
 .links .host { color: var(--ink-2); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+/* Sign in */
+
+dialog#login {
+  width: min(420px, calc(100% - 32px));
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--ink);
+}
+dialog#login::backdrop { background: var(--bg); }
+.login-form { display: grid; gap: 8px; padding: 18px; }
+.login-form p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.login-form code { font-size: 13px; }
+.login-form input { font-size: 16px; }
+.login-form button { justify-self: start; padding: 6px 16px; }
+.login-error { min-height: 1.2em; color: var(--ink) !important; font-weight: 500; }
+
 /* Search palette */
 
 dialog#palette {

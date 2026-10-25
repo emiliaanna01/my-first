@@ -55,6 +55,17 @@ function tcpConnect(host, port, timeoutMs) {
   });
 }
 
+// A cloud server can't see your plant or home network, so hosted copies skip these.
+export function isPrivateTarget(system) {
+  let host = system.host;
+  try {
+    host ??= new URL(system.url).hostname;
+  } catch {
+    return false;
+  }
+  return /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|169\.254\.|\[?::1\]?$)|\.local$/i.test(host);
+}
+
 export function checkAll(systems) {
   return Promise.all(systems.map((s) => checkSystem(s)));
 }
