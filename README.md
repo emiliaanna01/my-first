@@ -52,3 +52,9 @@ tool and a starter page. Start with `web-design/README.md`.
 ## Pass & Play Chess
 `chess-2p/` is an offline two-player chess app for Android (chess.com-style board, clocks with
 increment, all draw rules). Build the APK with `chess-2p/build-apk.sh`; see `chess-2p/README.md`.
+
+## Control room dashboard
+`control-room/` is a personal start page for the working day: Google Calendar, Notion tasks, X and industry
+feeds (with CISA ICS advisories for the vendors you use), reachability checks for gateways and PLCs, and grouped
+work tabs, laid out like an ISA-101 HMI with an alarm banner. `cd control-room && npm install && npm start`,
+then open http://127.0.0.1:4300. See `control-room/README.md` to connect your accounts.
