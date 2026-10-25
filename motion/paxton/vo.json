@@ -1,0 +1,134 @@
+[
+ {
+  "id": "girl",
+  "text": "In eighteen forty-nine, a little girl stood on a leaf.",
+  "t": 0.6,
+  "dur": 2.984
+ },
+ {
+  "id": "held1",
+  "text": "It held her.",
+  "t": 4.034,
+  "dur": 0.777
+ },
+ {
+  "id": "lily",
+  "text": "The leaf belonged to a giant Amazon water lily.",
+  "t": 5.512,
+  "dur": 2.873
+ },
+ {
+  "id": "father",
+  "text": "And the man who grew it was her father, Joseph Paxton.",
+  "t": 8.735,
+  "dur": 2.954
+ },
+ {
+  "id": "gardener",
+  "text": "A gardener. The first to make it bloom in England.",
+  "t": 11.938,
+  "dur": 2.818
+ },
+ {
+  "id": "over",
+  "text": "Turn the leaf over, and you see why it's so strong.",
+  "t": 15.356,
+  "dur": 2.671
+ },
+ {
+  "id": "ribs",
+  "text": "Ribs. Spreading the weight in every direction.",
+  "t": 18.377,
+  "dur": 2.505
+ },
+ {
+  "id": "london",
+  "text": "A year later, London had a problem.",
+  "t": 21.632,
+  "dur": 2.12
+ },
+ {
+  "id": "expo",
+  "text": "It was hosting the Great Exhibition, and needed a building.",
+  "t": 24.102,
+  "dur": 3.078
+ },
+ {
+  "id": "designs",
+  "text": "Two hundred and forty-five designs had been submitted.",
+  "t": 27.531,
+  "dur": 3.356
+ },
+ {
+  "id": "rejected",
+  "text": "Every one was rejected.",
+  "t": 31.136,
+  "dur": 1.412
+ },
+ {
+  "id": "meeting",
+  "text": "So in a railway meeting, Paxton picked up a pen...",
+  "t": 33.198,
+  "dur": 2.915
+ },
+ {
+  "id": "sketch",
+  "text": "and sketched an idea on blotting paper.",
+  "t": 36.313,
+  "dur": 2.198
+ },
+ {
+  "id": "likeleaf",
+  "text": "A building made like that leaf.",
+  "t": 39.061,
+  "dur": 1.593
+ },
+ {
+  "id": "parts",
+  "text": "Iron ribs. Glass panes. Every part made in a factory.",
+  "t": 41.004,
+  "dur": 3.933
+ },
+ {
+  "id": "warned",
+  "text": "Experts warned it would collapse.",
+  "t": 45.538,
+  "dur": 1.681
+ },
+ {
+  "id": "soldiers",
+  "text": "So soldiers marched across the galleries to test it.",
+  "t": 47.518,
+  "dur": 2.885
+ },
+ {
+  "id": "held2",
+  "text": "It held.",
+  "t": 50.953,
+  "dur": 0.687
+ },
+ {
+  "id": "opened",
+  "text": "On the first of May, eighteen fifty-one, the Crystal Palace opened.",
+  "t": 52.439,
+  "dur": 3.779
+ },
+ {
+  "id": "panes",
+  "text": "Nearly three hundred thousand panes of glass.",
+  "t": 56.568,
+  "dur": 2.458
+ },
+ {
+  "id": "visitors",
+  "text": "Six million visitors.",
+  "t": 59.277,
+  "dur": 1.403
+ },
+ {
+  "id": "since",
+  "text": "Every glass building since owes something to that leaf.",
+  "t": 61.43,
+  "dur": 2.747
+ }
+]
