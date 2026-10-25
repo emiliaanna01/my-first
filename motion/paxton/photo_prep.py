@@ -6,7 +6,7 @@ world (warm, slightly faded, restrained saturation), enlarge to 1200x2134 with s
 and for scenes with people/objects cut the subject out (rembg) and fill the background
 behind it (OpenCV inpaint) so parallax never reveals a duplicate.
 
-usage: python3 motion/paxton/photo_prep.py <out_dir>
+usage: python3 motion/paxton/photo_prep.py <out_dir> [chatgpt]
 """
 import os, sys
 import numpy as np
@@ -56,7 +56,28 @@ def enlarge(img):
     img = img.resize((W, H), Image.LANCZOS)
     return img.filter(ImageFilter.UnsharpMask(radius=2.2, percent=70, threshold=2))
 
-def main(out):
+# all-ChatGPT set: same scenes, ChatGPT files, a little more desaturation (they are glossier)
+SCENES_CHATGPT = {
+    "girl":      (f"{C}/01.webp", (0, 0, 0, 0), .5, "u2net_human_seg"),
+    "bloom":     (f"{C}/02.webp", (0, 0, 0, 0), .55, None),
+    "portrait":  (f"{C}/03.webp", (0, 0, 0, 0), .55, "u2net_human_seg"),
+    "tank":      (f"{C}/04.webp", (0, 0, 0, 0), .5, "u2net_human_seg"),
+    "underside": (f"{C}/05.webp", (0, 0, 0, 0), .55, None),
+    "park":      (f"{C}/06.webp", (0, 0, 0, 0), .5, None),
+    "designs":   (f"{C}/07.webp", (0, 0, 0, 0), .55, None),
+    "boardroom": (f"{C}/08.webp", (0, 0, 0, 0), .55, "u2net_human_seg"),
+    "sketch":    (f"{C}/09.webp", (0, 0, 0, 0), .6, None),
+    "build":     (f"{C}/10.webp", (0, 0, 0, 0), .5, None),
+    "sappers":   (f"{C}/11.webp", (0, 0, 0, 0), .5, None),
+    "opening":   (f"{C}/12.webp", (0, 0, 0, 0), .5, None),
+    "towers":    (f"{C}/13.webp", (0, 0, 0, 0), .6, None),
+    "london":    (f"{C}/14.webp", (0, 0, 0, 0), .7, None),
+}
+
+def main(out, which="gemini"):
+    global SCENES
+    if which == "chatgpt":
+        SCENES = SCENES_CHATGPT
     os.makedirs(out, exist_ok=True)
     sessions = {}
     for key, (src, cf, sat, model) in SCENES.items():
@@ -80,4 +101,4 @@ def main(out):
             print(key, "bg", flush=True)
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(*sys.argv[1:3])
