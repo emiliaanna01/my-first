@@ -1,0 +1,128 @@
+[
+ {
+  "id": "desk",
+  "text": "Your best ideas don't arrive at your desk.",
+  "t": 0.35,
+  "dur": 2.318
+ },
+ {
+  "id": "shower",
+  "text": "They show up in the shower.",
+  "t": 3.218,
+  "dur": 1.261
+ },
+ {
+  "id": "walk",
+  "text": "On a walk.",
+  "t": 4.73,
+  "dur": 0.792
+ },
+ {
+  "id": "queue",
+  "text": "Standing in a queue.",
+  "t": 5.772,
+  "dur": 1.129
+ },
+ {
+  "id": "places",
+  "text": "Places where nothing is asking for your attention.",
+  "t": 7.35,
+  "dur": 2.674
+ },
+ {
+  "id": "coinc",
+  "text": "That's not a coincidence.",
+  "t": 10.474,
+  "dur": 1.421
+ },
+ {
+  "id": "wander",
+  "text": "When your mind has nothing to do, it starts to wander.",
+  "t": 12.445,
+  "dur": 2.865
+ },
+ {
+  "id": "links",
+  "text": "It links old memories to new problems.",
+  "t": 15.71,
+  "dur": 2.095
+ },
+ {
+  "id": "plays",
+  "text": "It rehearses. It plays.",
+  "t": 18.105,
+  "dur": 1.593
+ },
+ {
+  "id": "dmn",
+  "text": "Neuroscientists call it the default mode network.",
+  "t": 20.198,
+  "dur": 2.782
+ },
+ {
+  "id": "bored",
+  "text": "You'd call it... being bored.",
+  "t": 23.379,
+  "dur": 1.493
+ },
+ {
+  "id": "barely",
+  "text": "But we barely let it happen anymore.",
+  "t": 25.523,
+  "dur": 1.681
+ },
+ {
+  "id": "screen",
+  "text": "Every empty second has a screen waiting to fill it.",
+  "t": 27.603,
+  "dur": 2.823
+ },
+ {
+  "id": "bus",
+  "text": "The bus stop.",
+  "t": 30.876,
+  "dur": 0.874
+ },
+ {
+  "id": "lift",
+  "text": "The elevator.",
+  "t": 31.95,
+  "dur": 0.837
+ },
+ {
+  "id": "kettle",
+  "text": "The kettle.",
+  "t": 32.987,
+  "dur": 0.639
+ },
+ {
+  "id": "traded",
+  "text": "We traded boredom for stimulation,",
+  "t": 34.176,
+  "dur": 1.955
+ },
+ {
+  "id": "lost",
+  "text": "and quietly lost the space where ideas grow.",
+  "t": 36.332,
+  "dur": 2.325
+ },
+ {
+  "id": "pocket",
+  "text": "So next time you're waiting, leave the phone in your pocket.",
+  "t": 39.257,
+  "dur": 2.93
+ },
+ {
+  "id": "purpose",
+  "text": "Be bored on purpose.",
+  "t": 42.687,
+  "dur": 1.178
+ },
+ {
+  "id": "start",
+  "text": "That's where the good ideas start.",
+  "t": 44.464,
+  "dur": 1.57
+ }
+]
