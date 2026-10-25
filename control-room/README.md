@@ -61,6 +61,26 @@ day doesn't flood the banner. An acknowledged alarm stays acknowledged until its
 condition clears; if it comes back, it alarms again. Turn on notifications to get
 high and medium alarms as desktop notifications.
 
+## Use it from any browser (Vercel)
+
+The dashboard can also run on Vercel, so it opens in any Chrome tab or on your phone
+without `npm start`. The hosted copy asks for a password (`APP_PASSWORD`) before it
+shows any data; without one set it refuses to serve anything.
+
+Set these in the Vercel project under **Settings > Environment Variables**, then redeploy:
+
+| Variable | What it holds |
+|---|---|
+| `APP_PASSWORD` | The sign-in password (required) |
+| `CALENDAR_ICS_URLS`, `NOTION_TOKEN`, `NOTION_DATABASE_ID`, `X_BEARER_TOKEN` | Same as in `.env` |
+| `CONFIG_JSON` | Optional: the whole contents of your `config.json`, so your own tabs, feeds and systems are used |
+
+Differences from running it locally:
+- Today's three and Notes are saved in your browser, so they don't follow you between devices.
+- Checks of `localhost`, `.local` and private addresses (192.168.x.x, 10.x.x.x, 172.16-31.x.x)
+  are skipped, because Vercel's servers can't reach your plant or home network. Run it
+  locally for PLC and gateway checks.
+
 ## Connect your accounts
 
 ### Google Calendar

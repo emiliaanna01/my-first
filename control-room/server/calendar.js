@@ -42,10 +42,12 @@ export function eventsFromICS(body, { from, to, calendar = 'Calendar' }) {
 }
 
 export async function getAgenda({ calendars, days = 7, now = new Date(), fetchImpl = fetch }) {
+  // Start a day early: a hosted server runs on UTC, and the browser trims to its own local day.
   const from = new Date(now);
   from.setHours(0, 0, 0, 0);
+  from.setDate(from.getDate() - 1);
   const to = new Date(from);
-  to.setDate(to.getDate() + days);
+  to.setDate(to.getDate() + days + 2);
 
   const results = await Promise.allSettled(
     calendars.map(async (cal) => {
