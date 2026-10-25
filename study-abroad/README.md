@@ -9,7 +9,6 @@ Plan: Master's (Finance / Business Analytics / FinTech / Management), Germany fi
 | `data/daily_plan.json` | One 30–60 minute session per day (IELTS prep, then applications) |
 | `data/documents.json`, `data/profile.json` | Papers checklist and your current status |
 | `tracker.html` | Source of the tracker web page (published as a private claude.ai artifact) |
-| `compass.html` | Source of **Germany or Italy**, the country comparison page (private artifact https://claude.ai/artifact/ToiYYKs82G9wXLUcNGBysR) |
 | `bot/telegram_digest.py` | Sends today's session and deadline alerts to Telegram |
 | `bot/menu_bot.py` | The Path Abroad command menu (/today, /week, /deadlines …) |
 | `bot/sync_from_tracker.py` | Copies what you tick on the page back into `data/`, so the bot stays current |
@@ -38,17 +37,30 @@ Test locally without sending:
 python3 study-abroad/bot/telegram_digest.py --dry-run --digest
 ```
 
-## Germany or Italy (country comparison)
+## Study Europe Compass (Germany, Italy, Hungary, France)
 
-`compass.html` compares the two countries for this profile: a recommendation for the self-funded and
-scholarship scenarios, weighted factor scores (the weights are adjustable), a two-year cost chart against the
-15–25 lakh budget, a timeline to a September 2027 start, the latest signals, top opportunities, and an
-"Ask" box that asks Claude about the data on the page. Signals, opportunities and the current recommendation live in the
-page's database, and the daily research run updates them (step 4 of its prompt).
+A four-country comparison for this profile: the recommendation for the self-funded and scholarship scenarios,
+a ranking, factor scores with adjustable weights, two-year cost against the 15–25 lakh budget, cash needed before
+the visa, a timeline to a September 2027 start, the latest signals and top opportunities.
 
-Baseline finding (25 Oct 2026): the German Embassy in Dhaka quotes a wait of more than 27 months for self-funded
-Master's visas, while German-government or EU-funded scholars are processed right away. Self-funded, Italy (with a
-DSU regional grant) is the realistic 2027 route; with an Erasmus Mundus or DAAD award, Germany moves to first.
+| Path | What it is |
+|---|---|
+| `data/compass.json` | The data: scores, recommendation, signals, opportunities. The daily research run edits this file. |
+| `bot/build_compass.py` | Checks `compass.json` and builds `site/data.js` and `compass.html` |
+| `site/` | The website (no login): `index.html`, `data.js`, app manifest, offline worker, icons |
+| `compass.html` | The same page with the data inlined, published to claude.ai (adds an "Ask Claude" box) |
+| `open_compass.bat` | Windows: pulls the latest version and opens the page in your browser |
+
+Ways to open it, none needing a Claude login:
+
+- **Web link:** https://raw.githack.com/emiliaanna01/my-first/claude/friendly-cerf-x5ro5z/study-abroad/site/index.html
+  (served straight from this branch; updates show within a few minutes of each push).
+- **As a desktop app:** open the link in Chrome, then menu ⋮ → *Cast, save and share* → *Install page as app*
+  (or the *Install as an app* button on the page). You get a desktop and taskbar icon that opens in its own window.
+- **Offline / on your PC:** with this repo cloned, double-click `study-abroad/open_compass.bat`.
+- **Inside claude.ai:** https://claude.ai/artifact/ToiYYKs82G9wXLUcNGBysR
+
+To rebuild after editing the data: `python3 study-abroad/bot/build_compass.py`.
 
 ## Daily research run
 
