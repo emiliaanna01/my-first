@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loopwise Control Room</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="An AI copilot for industrial control rooms: it watches the process, diagnoses faults, tests fixes on a digital twin and proposes actions for operator approval.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow+Semi+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <h1>Loopwise</h1>
+    <span class="site">Lift Station 3 · wastewater pumping</span>
+  </div>
+  <span class="clock" id="clock" title="Station time (simulated)">06:00:00</span>
+  <div class="spacer"></div>
+  <span class="label-sm">Sim speed</span>
+  <div class="seg" id="speed" role="group" aria-label="Simulation speed">
+    <button type="button" data-speed="0" aria-pressed="false">Pause</button>
+    <button type="button" data-speed="1" aria-pressed="false">1×</button>
+    <button type="button" data-speed="10" aria-pressed="false">10×</button>
+    <button type="button" data-speed="30" aria-pressed="true">30×</button>
+    <button type="button" data-speed="60" aria-pressed="false">60×</button>
+  </div>
+</header>
+
+<section class="alarms" aria-label="Alarm summary">
+  <div class="alarms-head">
+    <h2>Alarms</h2>
+    <span class="pcount"><span class="glyph p1">1</span><span id="c1" class="mono">0</span></span>
+    <span class="pcount"><span class="glyph p2">2</span><span id="c2" class="mono">0</span></span>
+    <span class="pcount"><span class="glyph p3">3</span><span id="c3" class="mono">0</span></span>
+    <span class="pcount"><span class="glyph p4">4</span><span id="c4" class="mono">0</span></span>
+    <div class="spacer"></div>
+    <button type="button" class="btn small" id="ackPage">Acknowledge visible</button>
+  </div>
+  <div class="alarm-list" id="alarmList"><div class="alarm-empty">No active alarms.</div></div>
+</section>
+
+<div class="main">
+  <div class="process">
+    <section class="panel" aria-label="Process overview">
+      <div class="panel-head"><h2>Overview</h2><span class="note">Grey is normal. Colour means something needs you.</span></div>
+      <div id="mimic"></div>
+    </section>
+
+    <section class="panel" aria-label="Trends">
+      <div class="panel-head"><h2>Trends</h2><span class="note">Last 30 minutes, station time</span></div>
+      <div class="trends">
+        <div class="trend"><div class="trend-head"><b>LT-101 level %</b><span class="legend"><span><i class="sw"></i>PV</span><span><i class="sw sp"></i>SP</span></span><span class="now" id="nLT"></span></div><canvas id="tLT"></canvas></div>
+        <div class="trend"><div class="trend-head"><b>LIC-101 output %</b><span class="now" id="nOP"></span></div><canvas id="tOP"></canvas></div>
+        <div class="trend"><div class="trend-head"><b>PT-102 bar</b><span class="now" id="nPT"></span></div><canvas id="tPT"></canvas></div>
+        <div class="trend"><div class="trend-head"><b>Vibration mm/s</b><span class="legend"><span><i class="sw"></i>P-101</span><span><i class="sw b"></i>P-102</span></span><span class="now" id="nVB"></span></div><canvas id="tVB"></canvas></div>
+      </div>
+    </section>
+
+    <div class="row2">
+      <section class="panel" aria-label="LIC-101 faceplate">
+        <div class="panel-head"><h2>LIC-101 level control</h2></div>
+        <div class="face">
+          <div class="kv">
+            <span class="k">PV</span><span class="mono" id="fPV">–</span>
+            <span class="k">SP</span><span class="mono" id="fSP">–</span>
+            <span class="k">Output</span><span><span class="bar"><i id="fOPbar"></i></span></span>
+            <span class="k">Tuning</span><span class="mono" id="fTune">–</span>
+            <span class="k">Duty pump</span><span class="mono" id="fDuty">–</span>
+          </div>
+          <div class="inline">
+            <div class="seg" id="mode" role="group" aria-label="Controller mode">
+              <button type="button" data-mode="AUTO" aria-pressed="true">AUTO</button>
+              <button type="button" data-mode="MAN" aria-pressed="false">MAN</button>
+            </div>
+            <button type="button" class="btn small" id="swap">Swap duty pump</button>
+          </div>
+          <form class="inline" id="spForm">
+            <label class="label-sm" for="spIn">SP</label><input id="spIn" type="number" step="1" min="20" max="80" value="60">
+            <label class="label-sm" for="opIn">OP</label><input id="opIn" type="number" step="1" min="0" max="100" value="60">
+            <button class="btn small" type="submit">Set</button>
+          </form>
+          <form class="inline" id="tuneForm">
+            <label class="label-sm" for="kpIn">Kp</label><input id="kpIn" type="number" step="0.1" min="0.1" max="20" value="3.4">
+            <label class="label-sm" for="tiIn">Ti s</label><input id="tiIn" type="number" step="10" min="10" max="3000" value="600">
+            <button class="btn small" type="submit">Apply</button>
+          </form>
+          <div class="face-msg" id="faceMsg" role="status"></div>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Demo scenarios">
+        <div class="panel-head"><h2>Demo scenarios</h2><span class="note">Inject a fault, then ask the copilot</span></div>
+        <div class="scen" id="scen"></div>
+        <div class="scen-foot"><button type="button" class="btn small" id="reset">Reset station</button><span id="scenNote">Plant healthy.</span></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="panel copilot" aria-label="Copilot">
+    <div class="panel-head">
+      <h2>Copilot</h2>
+      <span class="chip" id="brain"><span class="dot"></span><span id="brainName">Built-in reasoner</span></span>
+      <div class="spacer"></div>
+      <label class="toggle"><input type="checkbox" id="autoInv" checked> Auto-investigate</label>
+      <button type="button" class="btn small" id="openSettings">Settings</button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" aria-selected="true" data-tab="chat">Chat</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="approvals">Approvals<span class="badge" id="bApprovals"></span></button>
+      <button type="button" role="tab" aria-selected="false" data-tab="workorders">Work orders<span class="badge" id="bWO"></span></button>
+      <button type="button" role="tab" aria-selected="false" data-tab="log">Event log</button>
+    </div>
+    <div class="pane" id="pane-chat" role="tabpanel"></div>
+    <div class="pane" id="pane-approvals" role="tabpanel" hidden></div>
+    <div class="pane" id="pane-workorders" role="tabpanel" hidden></div>
+    <div class="pane" id="pane-log" role="tabpanel" hidden></div>
+    <div id="chatInput">
+      <div class="prompts" id="prompts">
+        <button type="button">What's wrong right now?</button>
+        <button type="button">Check LIC-101 tuning</button>
+        <button type="button">Predict maintenance</button>
+        <button type="button">Write the shift report</button>
+      </div>
+      <form class="ask" id="askForm">
+        <input id="askIn" type="text" placeholder="Ask about the station…" autocomplete="off" aria-label="Ask the copilot">
+        <button class="btn primary" type="submit" id="askBtn">Ask</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<footer class="foot">
+  <span>Loopwise demo · simulated station, no real equipment is connected.</span>
+  <span>The copilot proposes; an operator approves.</span>
+</footer>
+
+<dialog id="settings">
+  <form method="dialog" id="settingsForm">
+    <h2>Copilot settings</h2>
+    <label>Brain
+      <select id="sProvider"></select>
+    </label>
+    <label>API address<input id="sBase" type="url" placeholder="https://…/v1" autocomplete="off"></label>
+    <label>Model<input id="sModel" type="text" autocomplete="off"></label>
+    <label>API key<input id="sKey" type="password" autocomplete="off" placeholder="Stays in this browser only"></label>
+    <p id="sHelp"></p>
+    <p>The key is kept in this browser's storage and sent only to the address above. The built-in reasoner needs no key and works offline.</p>
+    <div class="actions">
+      <button class="btn" value="cancel" type="submit">Cancel</button>
+      <button class="btn primary" value="save" type="submit" id="sSave">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/sim.js"></script>
+<script src="js/detect.js"></script>
+<script src="js/kb.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/agent.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

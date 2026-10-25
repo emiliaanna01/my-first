@@ -49,6 +49,13 @@ with timers and an optional X profile embed. It uses no paid APIs. See `deck/REA
 in `.claude/skills/`, MCP servers in `.mcp.json`, inspiration and component guides, a screenshot
 tool and a starter page. Start with `web-design/README.md`.
 
+## Loopwise: AI control-room copilot
+`loopwise/` is a free, browser-only AI agent for industrial automation. It watches a simulated wastewater
+pumping station, diagnoses faults (cavitation, sensor drift, stuck valve, hunting PID loop, bearing wear,
+storm inflow), tests fixes on a digital twin and proposes actions for operator approval. It runs with a
+built-in reasoner or any free OpenAI-compatible LLM (Groq, OpenRouter, Gemini, Ollama).
+See `loopwise/README.md`, and `loopwise/BUSINESS.md` for how to sell it.
+
 ## Pass & Play Chess
 `chess-2p/` is an offline two-player chess app for Android (chess.com-style board, clocks with
 increment, all draw rules). Build the APK with `chess-2p/build-apk.sh`; see `chess-2p/README.md`.
