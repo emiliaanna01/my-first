@@ -4,7 +4,7 @@
  "format": "9:16",
  "voice": "af_heart",
  "speed": 1.0,
- "music": "bed",
+ "music": "score.wav",
  "seed": 19,
  "images": {
   "street": {
@@ -154,5 +154,7 @@
    "label": "STILL SWEET",
    "burst": true
   }
- ]
+ ],
+ "music_gain": 0.22,
+ "sfx_gain": 0.45
 }
