@@ -218,9 +218,9 @@ def punch_voice(x):
     """Mature narration: a warm, even broadcast voice rather than a hyped one."""
     tmp_in, tmp_out = os.path.join(OUT, "vo_dry.wav"), os.path.join(OUT, "vo_punch.wav")
     sf.write(tmp_in, x.astype(np.float32), SR)
-    # broadcast narration: warm chest, cleared mud, gentle presence, light compression, de-essed, a hint of room
-    chain = ("highpass=f=70,equalizer=f=160:t=q:w=1:g=2.5,equalizer=f=350:t=q:w=1.2:g=-2.5,equalizer=f=3000:t=q:w=1.4:g=2,"
-             "equalizer=f=10000:t=h:w=5000:g=1.5,deesser=i=0.4,acompressor=threshold=-22dB:ratio=3:attack=8:release=140:makeup=4:knee=4,"
+    # broadcast narration (female): warm body, cleared mud, gentle presence, light compression, de-essed, a hint of room
+    chain = ("highpass=f=90,equalizer=f=210:t=q:w=1:g=2,equalizer=f=420:t=q:w=1.2:g=-2,equalizer=f=3800:t=q:w=1.4:g=1.5,"
+             "equalizer=f=11000:t=h:w=5000:g=1.5,deesser=i=0.5,acompressor=threshold=-22dB:ratio=3:attack=8:release=140:makeup=4:knee=4,"
              "aecho=1.0:0.5:23|37:0.07|0.05,alimiter=limit=0.95:level=0")
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", tmp_in, "-af", chain, tmp_out], check=True)
     y, _ = sf.read(tmp_out, dtype="float32")

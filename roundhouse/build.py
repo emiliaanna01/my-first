@@ -31,7 +31,7 @@ STOCK = {"cream": (238, 231, 216), "white": (246, 243, 236), "newsprint": (214, 
 
 
 # silence before each voice line: measured documentary pacing (~145 wpm overall), longest pause before the reveal
-GAPS = [.4, .45, .15, .55, .2, .7, .5, .3, .3, .55, .2, 1.1]
+GAPS = [.4, .5, .15, .6, .2, .75, .5, .3, .3, .6, .2, 1.1]
 VO_AT = []  # filled from the voice durations in build()
 BPM = 100
 BEAT = 60 / BPM
@@ -725,7 +725,7 @@ def build():
     q = f.el(560, 1180, 380, '<div class="mk red" style="font-size:52px">where do I click?</div>', rot=-6, z=30)
     f.enter(q, wt(9, "make"), "snap", sfx=False)
     f.sfx(wt(9, "make"), "draw")
-    f.cut(s, wt(9, "business"), 1.4, 600, 880)
+    f.cut(s, wt(9, "business"), 1.4, 600, 990)
     te = wt(9, "easier")
     f.cut(s, te - .1, 1.0)
     f.leave(messy, te - .1, dx=-300, dy=-1700, d=.25)

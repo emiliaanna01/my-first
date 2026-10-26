@@ -15,9 +15,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", ".claude", "skills", "papercut", "engine"))
 import voice  # noqa: E402  papercut's model lookup
 
-# Michael: a steady, grown-up narrator. Read a touch slower, then lowered ~1 semitone (formants kept) for weight.
-# Pauses between lines are set in build.py (GAPS), giving ~140 wpm overall like documentary narration.
-VOICE, SPEED, PITCH = (("am_michael", 1.0),), .9, .94
+# Heart: Kokoro's best voice, a warm female narrator. Read a touch slower and lowered slightly (formants kept) so it sits
+# mature rather than bright. Pauses between lines are set in build.py (GAPS), giving ~145 wpm overall.
+VOICE, SPEED, PITCH = (("af_heart", 1.0),), .85, .97
 
 # (what is shown in captions, what is spoken: "RoundHouse" is split so the voice says it as two words)
 LINES = [
