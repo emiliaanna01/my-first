@@ -1,0 +1,5 @@
+composition/node_modules/
+composition/out/
+composition/public/spheres/
+work/*
+!work/music.py

@@ -1,0 +1,13 @@
+{
+  "name": "roundhouse-brag",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": { "dev": "remotion studio", "render": "remotion render RoundHouse ../work/brag-raw.mp4" },
+  "dependencies": {
+    "@remotion/cli": "4.0.526",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.526"
+  },
+  "devDependencies": { "@types/react": "19.2.7", "typescript": "5.9.3" }
+}
