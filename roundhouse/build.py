@@ -30,10 +30,12 @@ STOCK = {"cream": (238, 231, 216), "white": (246, 243, 236), "newsprint": (214, 
          "sky": (196, 211, 222), "blush": (233, 205, 192), "ink": (20, 19, 18), "sun": (243, 211, 91)}
 
 
-VO_AT = [0.15, 1.80, 3.35, 6.40, 8.70, 11.25, 14.55, 15.85, 17.15, 19.20, 22.35, 24.75]
-BPM = 110
+# silence before each voice line: measured documentary pacing (~145 wpm overall), longest pause before the reveal
+GAPS = [.4, .45, .15, .55, .2, .7, .5, .3, .3, .55, .2, 1.1]
+VO_AT = []  # filled from the voice durations in build()
+BPM = 100
 BEAT = 60 / BPM
-DROP = 12.2  # RoundHouse reveal: a downbeat, the music turns here
+DROP = 13.85  # RoundHouse reveal, re-set in build() to the moment the name is spoken
 
 
 def Q(t):
@@ -79,9 +81,9 @@ class Film:
         sid = self.id("s")
         self.cur = {"id": sid, "start": start, "end": end, "bg": bg, "z": z, "body": []}
         self.scenes.append(self.cur)
-        if punch:  # a camera punch on every beat: the cut-to-the-music feel
-            for b in beats(start + .05, end):
-                self.js.append(f'tl.set("#{sid}k", {{scale: 1.045}}, {b:.3f}); tl.to("#{sid}k", {{scale: 1, duration: .17, ease: st("power2.out", .17)}}, {b + .001:.3f});')
+        if punch:  # slow push-in, on twos: the camera creeps toward the idea while the narrator explains it
+            d = end - start
+            self.js.append(f'tl.fromTo("#{sid}k", {{scale: 1}}, {{scale: {1.05 + self.r(0, .02):.3f}, duration: {d:.3f}, ease: st("sine.inOut", {d:.3f})}}, {start:.3f});')
         return sid
 
     def el(self, x, y, w, inner, rot=0.0, z=2, boil=1.0):
@@ -106,13 +108,13 @@ class Film:
     def enter(self, i, t, kind="drop", sfx=True, g=1.0):
         R = self.r(-6, 6)
         fr, d, ease, k = {
-            "drop": (f"y: -160, scale: 1.12, rotation: {R:.1f}", .17, "back.out(1.7)", "drop"),
-            "left": (f"x: -1000, rotation: {-abs(R) - 6:.1f}", .17, "power3.out", "slide"),
-            "right": (f"x: 1000, rotation: {abs(R) + 6:.1f}", .17, "power3.out", "slide"),
-            "up": (f"y: 1100, rotation: {R:.1f}", .17, "power3.out", "slide"),
-            "snap": (f"scale: .4, rotation: {R:.1f}", .17, "back.out(2)", "click"),
-            "pop": ("scale: .1", .17, "back.out(2.4)", "ping"),
-            "slam": (f"scale: 1.9, rotation: {R:.1f}", .09, "power4.out", "hit"),
+            "drop": (f"y: -120, scale: 1.08, rotation: {R:.1f}", .25, "back.out(1.3)", "drop"),
+            "left": (f"x: -1000, rotation: {-abs(R) - 4:.1f}", .25, "power3.out", "slide"),
+            "right": (f"x: 1000, rotation: {abs(R) + 4:.1f}", .25, "power3.out", "slide"),
+            "up": (f"y: 1100, rotation: {R:.1f}", .25, "power3.out", "slide"),
+            "snap": (f"scale: .55, rotation: {R:.1f}", .17, "back.out(1.6)", "click"),
+            "pop": ("scale: .2", .17, "back.out(1.8)", "ping"),
+            "slam": (f"scale: 1.45, rotation: {R:.1f}", .17, "power3.out", "hit"),
             "tape": ("scale: .6", .09, "power2.out", "tape"),
             "none": ("scale: 1", .01, "none", None),
         }[kind]
@@ -128,7 +130,7 @@ class Film:
         self.js.append(f'tl.to("#{i}", {{x: {dx}, y: {dy}, rotation: {self.r(-40, 40):.0f}, duration: {d}, ease: st("power2.in", {d})}}, {t:.3f});')
         self.js.append(f'tl.set("#{i}", {{opacity: 0}}, {t + d:.3f});')
 
-    def cut(self, sid, t, s=1.0, px=540, py=883, sfx=True):
+    def cut(self, sid, t, s=1.0, px=540, py=883, sfx=False):
         """Hard-cut reframe: centre point (px, py) of the layout at scale s, instantly."""
         x, y = (540 - px) * s, (883 - py) * s
         # keep the paper filling the frame
@@ -178,8 +180,8 @@ class Film:
                 chips.append(f'<div class="wd" id="{wid}" style="transform:rotate({self.r(-2.5, 2.5):.1f}deg)">{html}</div>')
                 t = times[k]
                 self.js.append(f'tl.set("#{wid}", {{opacity: 1}}, {t:.3f});')
-                self.js.append(f'tl.fromTo("#{wid}", {{scale: 1.7}}, {{scale: 1, duration: .09, ease: st("power4.out", .09)}}, {t:.3f});')
-                self.sfx(t, "hit", .7)
+                self.js.append(f'tl.fromTo("#{wid}", {{scale: 1.3}}, {{scale: 1, duration: .17, ease: st("power3.out", .17)}}, {t:.3f});')
+                self.sfx(t, "hit", .35)
                 if sid and k in shake_on:
                     self.shake(sid, t)
                 ids.append(wid)
@@ -188,7 +190,7 @@ class Film:
             self.js.append(f'tl.set("#{ri}", {{opacity: 1}}, 0);')
         return ids
 
-    def ransom(self, word, y, t0, size=150, step=BEAT / 4, sid=None):
+    def ransom(self, word, y, t0, size=150, step=.085, sid=None):
         """Ransom-note letters, one per 16th note."""
         fonts = ["Anton", "Archivo", "Serif", "Elite", "Anton", "Archivo"]
         tones = [("#161513", "#efe8da"), ("url(assets/paper/white.jpg) center/cover", "#161513"), (VERM, "#f6f1e7"),
@@ -206,8 +208,8 @@ class Film:
             ls.append(f'<span class="rl" id="{lid}" style="background:{bg};color:{fg};font-family:{fnt};{st_}font-size:{fs}px;'
                       f'transform:rotate({self.r(-7, 7):.1f}deg) translateY({self.r(-8, 8):.0f}px)">{ch}</span>')
             t = t0 + k * step
-            self.js.append(f'tl.set("#{lid}", {{opacity: 1}}, {t:.3f}); tl.fromTo("#{lid}", {{scale: 1.6}}, {{scale: 1, duration: .09, ease: st("power3.out", .09)}}, {t:.3f});')
-            self.sfx(t, "key", 1.0)
+            self.js.append(f'tl.set("#{lid}", {{opacity: 1}}, {t:.3f}); tl.fromTo("#{lid}", {{scale: 1.35}}, {{scale: 1, duration: .09, ease: st("power3.out", .09)}}, {t:.3f});')
+            self.sfx(t, "key", .55)
             k += 1
         i = self.row(y, f'<div class="line" style="gap:6px">{"".join(ls)}</div>', z=60, boil=.7)
         self.js.append(f'tl.set("#{i}", {{opacity: 1}}, 0);')
@@ -537,194 +539,202 @@ def rsize(word, cap=150):
 
 
 def build():
+    global DROP
     vo = json.load(open(os.path.join(OUT, "vo", "lines.json")))["lines"]
+    t = 0.0
+    VO_AT.clear()
+    for g, ln in zip(GAPS, vo):
+        t += g
+        VO_AT.append(round(t, 3))
+        t += ln["dur"]
     f = Film(vo)
     wt = f.wt
-    c1, c2, c3, c4, c5 = Q(1.75), Q(3.3), Q(6.3), Q(8.9), Q(10.6)
-    c7, c8, c9, c10, c11, c12, c13 = Q(14.4), Q(15.8), Q(17.1), Q(19.1), Q(22.2), Q(24.55), Q(26.6)
-    RIP = .25
+    V = VO_AT
+    end = lambda i: V[i] + vo[i]["dur"]  # noqa: E731
+    DROP = round(wt(5, "RoundHouse") - .05, 3)
+    RIP = .3
+    c1 = V[1] - .15                 # customers see
+    c2 = V[2] - .05                 # team deals with
+    c3 = V[3] - .15                 # the chain
+    c4 = V[4] - .05                 # work gets messy
+    c5 = end(4) + .2                # black: the gap
+    c7 = V[6] - .1                  # brand
+    c8 = V[7] - .1                  # website
+    c9 = V[8] - .1                  # workflows
+    c10 = V[9] - .05                # easier to understand
+    c11 = V[10] - .15               # easier to do
+    c12 = V[11] - .1                # the question
+    c13 = end(11) + .2              # end card
 
-    # ---- S1 two sides: polished left, messy right; words land as they are said ----
+    # ---- S1 two sides: the polished half and the messy half, words land as they are said ----
     s = f.scene(0, c1 + RIP, "white", 20)
     f.enter(f.el(540, -40, 600, '<img src="assets/paper/half_kraft.png" style="width:600px;display:block">', z=1, boil=0), 0, "none")
     f.enter(f.el(60, 330, 420, site_clean(700).replace('style="width:700px"', 'style="width:700px;zoom:.6"'), rot=-3), 0, "none")
-    f.enter(f.el(600, 290, 420, f'<div style="zoom:.78">{inbox_card()}</div>', rot=3.5), Q(.2), "right")
-    f.enter(f.el(90, 1010, 330, brand_card(), rot=4), Q(.2) + BEAT / 2, "drop")
-    f.enter(f.el(660, 1020, 240, sticky("copy into<br>the sheet??", 38), rot=-7), Q(.75), "drop")
-    f.enter(f.el(590, 880, 400, notif("3 new emails", "Re: Re: Fwd: quote?")), Q(.75) + BEAT / 2, "pop")
-    f.enter(f.el(620, 1185, 400, notif("Reminder", "Follow up… again", COBALT, "⏰")), Q(1.3), "pop")
-    f.slam(["YOUR BUSINESS", "HAS TWO SIDES."], 610, [wt(0, w) for w in "Your business has two sides.".split()], 108, sid=s, shake_on=(4,))
-    f.cut(s, Q(1.3), 1.14, 540, 760)
+    f.enter(f.el(90, 1010, 330, brand_card(), rot=4), .25, "drop")
+    f.enter(f.el(600, 290, 420, f'<div style="zoom:.78">{inbox_card()}</div>', rot=3.5), wt(0, "two"), "right")
+    f.enter(f.el(660, 1020, 240, sticky("copy into<br>the sheet??", 38), rot=-7), wt(0, "sides.") + .15, "drop")
+    f.enter(f.el(590, 880, 400, notif("3 new emails", "Re: Re: Fwd: quote?")), end(0) - .1, "pop")
+    f.slam(["YOUR BUSINESS", "HAS TWO SIDES."], 610, [wt(0, w) for w in "Your business has two sides.".split()], 108)
     f.rip_out(s, c1)
 
-    # ---- S2 what customers see: wide, then cut in on the form and click ----
+    # ---- S2 what customers see: the site, the form, one cut in to the click ----
     s = f.scene(c1, c2, "cream", 19)
-    f.slam(["WHAT CUSTOMERS SEE."], 400, [c1, wt(1, "customers"), wt(1, "see")], 92)
+    f.slam(["WHAT CUSTOMERS SEE."], 400, [V[1], wt(1, "customers"), wt(1, "see…")], 92)
     f.enter(f.el(70, 600, 760, site_clean(760), rot=-1.5), c1, "none")
-    tape_at(f, 360, 575, -4, c1 + BEAT / 4)
-    f.enter(f.el(110, 960, 400, form_card(), rot=-3), c1 + BEAT / 2, "drop")
-    f.enter(f.el(640, 1000, 330, brand_card(), rot=5), c1 + BEAT * .75, "right")
-    f.cut(s, c1 + BEAT * 1.5, 1.55, 310, 1180)
+    tape_at(f, 360, 575, -4, c1 + .2)
+    f.enter(f.el(110, 860, 370, f'<div style="zoom:.9">{form_card()}</div>', rot=-3), wt(1, "customers"), "drop")
+    f.enter(f.el(640, 1000, 330, brand_card(), rot=5), wt(1, "see…"), "right")
+    tci = end(1) - .25
+    f.cut(s, tci, 1.45, 310, 1100)
     cur = f.el(390, 1340, 60, '<svg viewBox="0 0 40 52" width="56"><path d="M4,2 L4,40 L14,30 L22,48 L29,45 L21,28 L35,28 Z" fill="#161513" stroke="#fff" stroke-width="3"/></svg>', z=70, boil=0)
-    f.enter(cur, c1 + BEAT * 1.5, "none")
-    f.js.append(f'tl.fromTo("#{cur}", {{x: 160, y: 140}}, {{x: 0, y: 0, duration: .17, ease: st("power2.out", .17)}}, {c1 + BEAT * 1.5:.3f});')
-    tc = c1 + BEAT * 2
-    f.js.append(f'tl.to("#sendbtn", {{scale: .88, duration: .08, ease: st("none", .08)}}, {tc:.3f}); tl.to("#sendbtn", {{scale: 1.05, background: "#3f7d5c", duration: .08, ease: st("none", .08)}}, {tc + .083:.3f});')
-    f.sfx(tc, "click", 1.4)
-    f.shake(s, tc, 8)
+    f.enter(cur, tci, "none")
+    f.js.append(f'tl.fromTo("#{cur}", {{x: 160, y: 140}}, {{x: 0, y: 0, duration: .25, ease: st("power2.out", .25)}}, {tci:.3f});')
+    tc = tci + .4
+    f.js.append(f'tl.to("#sendbtn", {{scale: .9, duration: .08, ease: st("none", .08)}}, {tc:.3f}); tl.to("#sendbtn", {{scale: 1, background: "#3f7d5c", duration: .08, ease: st("none", .08)}}, {tc + .083:.3f});')
+    f.sfx(tc, "click", 1.2)
 
-    # ---- S3 what your team deals with: chaos on eighths, three hard reframes ----
+    # ---- S3 what your team deals with: the pile builds while he says it ----
     s = f.scene(c2, c3, "newsprint", 18)
-    f.slam(["WHAT YOUR TEAM", "DEALS WITH."], 430, [c2, wt(2, "your"), wt(2, "team"), wt(2, "deal"), wt(2, "with.")], 104, sid=s, shake_on=(3,))
-    E = BEAT / 2
+    f.slam(["WHAT YOUR TEAM", "DEALS WITH."], 430, [V[2], wt(2, "your"), wt(2, "team"), wt(2, "deal"), wt(2, "with.")], 104)
+    step = (c3 - c2 - .4) / 10
     f.enter(f.el(95, 690, 540, inbox_card(), rot=-4), c2, "none")
-    f.enter(f.el(470, 760, 560, sheet_card(), rot=3), c2 + E, "right")
-    f.enter(f.el(80, 1080, 280, crm_card("NEW LEAD", COBALT), rot=6), c2 + 2 * E, "drop")
-    f.enter(f.el(320, 1130, 280, crm_card("FOLLOW UP", VERM), rot=-5), c2 + 3 * E, "drop")
+    f.enter(f.el(470, 760, 560, sheet_card(), rot=3), c2 + step, "right")
+    f.enter(f.el(80, 1080, 280, crm_card("NEW LEAD", COBALT), rot=6), c2 + 2 * step, "drop")
+    f.enter(f.el(320, 1130, 280, crm_card("FOLLOW UP", VERM), rot=-5), c2 + 3 * step, "drop")
     pops = [(560, 640, "New form submission", "just now", "#3f7d5c", "✉"), (90, 255, "Did anyone reply?", "#ops channel", COBALT, "#"),
-            (600, 1215, "3 new emails", "Re: Re: Fwd: quote?", VERM, "●"), (130, 900, "Reminder", "Update the sheet", "#b8862b", "⏰"),
-            (520, 470, "Missed call", "Unknown number", "#3f7d5c", "☎"), (60, 1260, "New comment", "is this still open?", COBALT, "#")]
+            (600, 1215, "3 new emails", "Re: Re: Fwd: quote?", VERM, "●"), (130, 900, "Reminder", "Update the sheet", "#b8862b", "⏰")]
     for k, (x, y, a, b, c, ic) in enumerate(pops):
-        f.enter(f.el(x, y, 400, notif(a, b, c, ic), rot=f.r(-4, 4), z=40), c2 + (4 + k) * E if k < 4 else Q(5.6) + (k - 3) * .14, "pop")
-    for k in range(4):
-        f.enter(f.el(780 + (k % 2) * 30, 1010 + k * 28, 118, keycap("⌘C" if k % 2 == 0 else "⌘V"), rot=f.r(-8, 8), z=45), c2 + 5 * E + k * E / 2, "snap", sfx=False)
-        f.sfx(c2 + 5 * E + k * E / 2, "key", 1.2)
-    f.enter(f.el(700, 250, 240, sticky("who's on<br>this one?", 38), rot=6, z=50), c2 + 7 * E, "drop")
-    f.cut(s, Q(4.5), 1.5, 330, 930)
-    f.cut(s, Q(5.0), 1.55, 820, 1060)
-    f.cut(s, Q(5.6), 1.1, 540, 860)
-    f.shake(s, Q(5.6), 16)
+        f.enter(f.el(x, y, 400, notif(a, b, c, ic), rot=f.r(-4, 4), z=40), c2 + (4 + k * 1.2) * step, "pop", g=.8)
+    for k in range(3):
+        f.enter(f.el(780 + (k % 2) * 30, 1010 + k * 28, 118, keycap("⌘C" if k % 2 == 0 else "⌘V"), rot=f.r(-8, 8), z=45), c2 + 8.5 * step + k * .12, "snap", sfx=False)
+        f.sfx(c2 + 8.5 * step + k * .12, "key", .9)
+    f.enter(f.el(700, 250, 240, sticky("who's on<br>this one?", 38), rot=6, z=50), c2 + 9.5 * step, "drop")
 
-    # ---- S4 the manual chain, one step per beat, camera following; then it blows apart ----
+    # ---- S4 the manual chain: one step at a time, the camera following it down; then it falls apart ----
     s = f.scene(c3, c5, "kraft", 21)
     f.slide_in(s, c3)
     chain = [("CUSTOMER INQUIRY", "paper"), ("EMAIL", "paper"), ("COPY", "paper"), ("SPREADSHEET", "paper"), ("FOLLOW-UP?", "verm")]
     ys = [300, 490, 680, 870, 1060]
+    gap_ = (V[4] - .35 - (c3 + .15)) / 4
     parts = []
     for k, ((txt, tone), y) in enumerate(zip(chain, ys)):
-        t = c3 + k * BEAT
+        t = c3 + .15 + k * gap_
         i = f.row(y, f'<div style="transform:rotate({f.r(-2.5, 2.5):.1f}deg)">{chip(txt, 74, tone)}</div>')
-        f.enter(i, t, "slam" if k in (0, 4) else "drop")
+        f.enter(i, t, "slam" if k == 4 else "drop", g=.7)
         parts.append(i)
         if k:
             pid = f.id("p")
             a = f.el(510, y - 92, 60, arrow_down(pid, 86), z=15, boil=.6)
-            f.enter(a, t - .1, "none")
-            f.draw(pid, t - .1, .09, sfx=None)
+            f.enter(a, t - .17, "none")
+            f.draw(pid, t - .17, .17, sfx=None)
             parts.append(a)
-        if k < 4:
-            f.cut(s, t, 1.3, 540, y + 50, sfx=k > 0)
-    f.cut(s, c3 + 4 * BEAT, 1.0)
-    f.shake(s, c3 + 4 * BEAT, 12)
-    for txt, x, y, rot, t in [("by hand", 760, 690, -6, c3 + 2.5 * BEAT), ("again…", 110, 885, 5, c3 + 3.5 * BEAT)]:
+        if k in (2,):
+            f.cut(s, t, 1.18, 540, 760)
+    f.cut(s, c3 + .15 + 4 * gap_, 1.0)
+    for txt, x, y, rot, t in [("by hand", 760, 690, -6, c3 + .15 + 2.4 * gap_), ("again…", 110, 885, 5, c3 + .15 + 3.4 * gap_)]:
         i = f.el(x, y, 220, f'<div class="mk" style="font-size:40px">{txt}</div>', rot=rot, z=25)
         f.enter(i, t, "snap", sfx=False)
-        f.sfx(t, "draw", .7)
+        f.sfx(t, "draw", .6)
         parts.append(i)
     lp, ci = f.id("p"), f.id("p")
     loop = f.el(700, 520, 300, f'<svg viewBox="0 0 300 640" width="300" height="640" style="overflow:visible"><path id="{lp}" pathLength="1" class="pen red" '
                 f'd="M40,600 C230,600 280,420 250,260 C225,130 150,60 40,40 M70,18 L38,40 L72,66"/></svg>', z=24, boil=.8)
     circ = f.el(300, 1035, 480, f'<svg viewBox="0 0 480 150" width="480" height="150" style="overflow:visible"><path id="{ci}" pathLength="1" class="pen red" '
                 f'd="{wobble(f.rng, 480, 150)}"/></svg>', z=26, boil=.8)
-    f.enter(circ, c3 + 4 * BEAT + E / 2, "none")
-    f.draw(ci, c3 + 4 * BEAT + E / 2, .17)
-    f.enter(loop, c3 + 4 * BEAT + E, "none")
-    f.draw(lp, c3 + 4 * BEAT + E, .25)
+    tl4 = c3 + .15 + 4 * gap_ + .25
+    f.enter(circ, tl4, "none")
+    f.draw(ci, tl4, .25)
+    f.enter(loop, tl4 + .25, "none")
+    f.draw(lp, tl4 + .25, .33)
     parts += [loop, circ]
+    # strip it back
     for k, i in enumerate(parts):
-        f.leave(i, c4 + (k % 4) * .04)
-    f.sfx(c4, "whoosh", 1.2)
-    f.shake(s, c4, 20)
-    f.slam(["WORK GETS", "MESSY."], 720, [c4 + E, c4 + 2 * E, c4 + 3 * E], 150, sid=s, shake_on=(2,))
+        f.leave(i, c4 + (k % 4) * .05, d=.25)
+    f.sfx(c4, "whoosh", 1.0)
+    f.slam(["WORK GETS", "MESSY."], 720, [c4 + .4, c4 + .7, wt(4, "harder")], 150, sid=s, shake_on=(2,))
     for k in range(3):
         f.enter(f.el(int(f.r(60, 760)), int(f.r(250, 1250)), 260, f'<img src="assets/paper/scrap{k % 2}.png" style="width:260px">', rot=f.r(-30, 30), z=5),
-                c4 + (4 + k) * E, "drop", g=.6)
-    f.cut(s, c4 + 4 * BEAT, 1.15, 540, 820)
+                wt(4, "harder") + .4 + k * .35, "drop", g=.5)
 
-    # ---- S5 hard cut to black: the music drops out ----
+    # ---- S5 a clean black frame: the music drops out ----
     s = f.scene(c5, DROP, "ink", 22, punch=False)
     f.slam(["THAT'S THE", "~gap."], 660, [wt(5, "That's"), wt(5, "the"), wt(5, "gap")], 150, tone="cr", gap=190, sid=s, shake_on=(2,))
 
-    # ---- S6 the reveal on the drop: ROUNDHOUSE, two halves slam together ----
+    # ---- S6 the reveal on the name: two halves join, ROUNDHOUSE builds ----
     s = f.scene(DROP, c7 + RIP, "ink", 23)
-    end_wm = f.ransom("ROUNDHOUSE", 420, DROP, size=104, sid=s)
+    f.ransom("ROUNDHOUSE", 420, DROP, size=104)
     left = f.el(95, 720, 445, '<img src="assets/paper/piece_l.png" style="width:445px;display:block">', z=20, boil=.8)
     right = f.el(540, 720, 445, '<img src="assets/paper/piece_r.png" style="width:445px;display:block">', z=21, boil=.8)
-    f.enter(left, DROP, "left", sfx=False)
-    f.enter(right, DROP, "right")
-    f.js.append(f'tl.set("#{left}", {{x: -80}}, {DROP + .17:.3f}); tl.set("#{right}", {{x: 80}}, {DROP + .17:.3f});')
-    tj = DROP + BEAT
-    f.js.append(f'tl.to("#{left}", {{x: 0, duration: .09, ease: st("power3.in", .09)}}, {tj - .09:.3f}); tl.to("#{right}", {{x: 0, duration: .09, ease: st("power3.in", .09)}}, {tj - .09:.3f});')
-    f.sfx(tj, "hit", 1.3)
-    f.shake(s, tj, 22)
-    tape_at(f, 450, 800, 86, tj + E, w=200)
-    tape_at(f, 450, 1050, 92, tj + E * 1.5, w=200)
-    f.cut(s, DROP + 2 * BEAT, 1.35, 540, 990)
-    f.cut(s, DROP + 3 * BEAT, 1.0)
+    f.enter(left, DROP + .1, "left", sfx=False)
+    f.enter(right, DROP + .1, "right")
+    f.js.append(f'tl.set("#{left}", {{x: -80}}, {DROP + .36:.3f}); tl.set("#{right}", {{x: 80}}, {DROP + .36:.3f});')
+    tj = DROP + .75
+    f.js.append(f'tl.to("#{left}", {{x: 0, duration: .17, ease: st("power3.in", .17)}}, {tj - .17:.3f}); tl.to("#{right}", {{x: 0, duration: .17, ease: st("power3.in", .17)}}, {tj - .17:.3f});')
+    f.sfx(tj, "hit", 1.1)
+    f.shake(s, tj, 12)
+    tape_at(f, 450, 800, 86, tj + .25, w=200)
+    tape_at(f, 450, 1050, 92, tj + .42, w=200)
     sub = f.el(0, 1325, W, '<div style="text-align:center" class="small">brand · websites · workflows</div>', z=40, boil=.4)
-    f.enter(sub, DROP + 3 * BEAT, "snap", sfx=False)
+    f.enter(sub, tj + .6, "snap", sfx=False)
     f.js.append(f'tl.set("#{sub}", {{opacity: 0}}, {c7 - .02:.3f});')
     f.rip_out(s, c7)
 
     # ---- S7 BRAND ----
     s = f.scene(c7, c8, "cream", 22)
-    f.ransom("BRAND.", 380, c7, size=rsize("BRAND."))
-    f.enter(f.el(80, 640, 460, logo_sheet(), rot=-3), c7 + BEAT, "drop")
+    f.ransom("BRAND.", 380, wt(6, "brand.") - .1, size=rsize("BRAND."))
+    f.enter(f.el(80, 640, 460, logo_sheet(), rot=-3), c7 + .45, "drop")
     for k, (c, nm) in enumerate([(INK, "ink"), (VERM, "signal"), (COBALT, "cobalt")]):
-        f.enter(f.el(590 + k * 120, 660 + k * 40, 170, swatch(c, nm), rot=f.r(-8, 8)), c7 + BEAT + (k + 1) * E / 2, "snap", sfx=k == 0)
-    f.enter(f.el(560, 950, 420, type_card(), rot=4), c7 + 2 * BEAT + E / 2, "drop")
-    f.enter(f.el(100, 1000, 460, message_card(), rot=-2), c7 + 2 * BEAT, "left")
+        f.enter(f.el(590 + k * 120, 660 + k * 40, 170, swatch(c, nm), rot=f.r(-8, 8)), c7 + .6 + k * .1, "snap", sfx=k == 0)
+    f.enter(f.el(100, 1000, 460, message_card(), rot=-2), c7 + .85, "left")
+    f.enter(f.el(560, 950, 420, type_card(), rot=4), c7 + 1.0, "drop")
 
     # ---- S8 WEBSITE ----
     s = f.scene(c8, c9, "sky", 23)
-    f.ransom("WEBSITE.", 380, c8, size=rsize("WEBSITE."))
-    f.enter(f.el(60, 640, 680, site_clean(680), rot=-2), c8 + E, "drop")
-    f.enter(f.el(690, 800, 300, site_phone(), rot=4, z=5), c8 + BEAT, "right")
+    f.ransom("WEBSITE.", 380, wt(7, "website.") - .1, size=rsize("WEBSITE."))
+    f.enter(f.el(60, 640, 680, site_clean(680), rot=-2), c8 + .3, "drop")
+    f.enter(f.el(690, 800, 300, site_phone(), rot=4, z=5), c8 + .65, "right")
     pa = f.id("p")
     an = f.el(250, 1150, 420, f'<div class="mk" style="font-size:44px">same site, any screen</div>'
                              f'<svg viewBox="0 0 120 70" width="120" height="70" style="position:absolute;left:420px;top:-40px;overflow:visible"><path id="{pa}" pathLength="1" class="pen" d="M6,56 C50,60 90,40 110,8 M84,12 L110,6 L108,34"/></svg>', rot=-4, z=30)
-    f.enter(an, c8 + BEAT + E, "snap", sfx=False)
-    f.draw(pa, c8 + BEAT + E, .17)
+    f.enter(an, c8 + .95, "snap", sfx=False)
+    f.draw(pa, c8 + .95, .25)
 
-    # ---- S9 WORKFLOWS: FORM -> CRM -> TASK -> REPLY on eighths ----
+    # ---- S9 WORKFLOWS: FORM -> CRM -> TASK -> REPLY ----
     s = f.scene(c9, c10, "blush", 24)
-    f.ransom("WORKFLOWS.", 380, c9, size=rsize("WORKFLOWS."))
+    f.ransom("WORKFLOWS.", 380, wt(8, "workflows.") - .1, size=rsize("WORKFLOWS."))
     xs = [90, 330, 545, 770]
-    t0 = c9 + BEAT
+    t0 = c9 + .55
     for k, (txt, x) in enumerate(zip(["FORM", "CRM", "TASK", "REPLY"], xs)):
-        f.enter(f.el(x, 800, 200, chip(txt, 58, "ink" if k < 3 else "verm"), rot=f.r(-3, 3), z=20), t0 + k * E, "slam")
+        f.enter(f.el(x, 800, 200, chip(txt, 58, "ink" if k < 3 else "verm"), rot=f.r(-3, 3), z=20), t0 + k * .2, "snap", g=.8)
         if k:
             pid = f.id("p")
-            f.enter(f.el(x - 62, 812, 60, arrow_right(pid, 56), z=15, boil=.6), t0 + k * E - .08, "none")
-            f.draw(pid, t0 + k * E - .08, .08, sfx=None)
+            f.enter(f.el(x - 62, 812, 60, arrow_right(pid, 56), z=15, boil=.6), t0 + k * .2 - .08, "none")
+            f.draw(pid, t0 + k * .2 - .08, .08, sfx=None)
     tok = f.el(140, 740, 40, '<div class="token"></div>', z=40, boil=0)
-    f.enter(tok, t0 + 4 * E, "pop", sfx=False)
-    f.js.append(f'tl.to("#{tok}", {{x: 680, duration: .34, ease: st("none", .34)}}, {t0 + 4 * E:.3f});')
-    f.sfx(t0 + 4 * E, "slide", .6)
-    f.enter(f.el(890, 900, 64, '<div class="tick">✓</div>', z=45, boil=.4), t0 + 4 * E + .36, "slam")
-    f.shake(s, t0 + 4 * E + .36, 10)
+    f.enter(tok, t0 + .85, "pop", sfx=False)
+    f.js.append(f'tl.to("#{tok}", {{x: 680, duration: .5, ease: st("none", .5)}}, {t0 + .85:.3f});')
+    f.sfx(t0 + .85, "slide", .6)
+    f.enter(f.el(890, 900, 64, '<div class="tick">✓</div>', z=45, boil=.4), t0 + 1.37, "slam", g=.7)
 
-    # ---- S10 EASIER TO UNDERSTAND: messy site torn away to a clear one ----
+    # ---- S10 EASIER TO UNDERSTAND: the cluttered site is torn away, a clear one underneath ----
     s = f.scene(c10, c11 + RIP, "newsprint", 25)
     f.slide_in(s, c10)
     f.enter(f.el(80, 600, 920, site_structured(920), rot=-1, z=10), c10, "none")
     messy = f.el(80, 600, 920, site_messy(920), rot=1.5, z=12)
     f.enter(messy, c10, "none")
     q = f.el(560, 1180, 380, '<div class="mk red" style="font-size:52px">where do I click?</div>', rot=-6, z=30)
-    f.enter(q, c10 + BEAT, "snap", sfx=False)
-    f.sfx(c10 + BEAT, "draw")
-    f.cut(s, c10 + 1.5 * BEAT, 1.6, 600, 880)
-    f.shake(s, c10 + 1.5 * BEAT, 10)
+    f.enter(q, wt(9, "make"), "snap", sfx=False)
+    f.sfx(wt(9, "make"), "draw")
+    f.cut(s, wt(9, "business"), 1.4, 600, 880)
     te = wt(9, "easier")
-    f.cut(s, te - .1, 1.0, sfx=False)
-    f.leave(messy, te - .1, dx=-300, dy=-1700, d=.17)
-    f.leave(q, te - .1, dx=500, dy=-1600, d=.17)
+    f.cut(s, te - .1, 1.0)
+    f.leave(messy, te - .1, dx=-300, dy=-1700, d=.25)
+    f.leave(q, te - .1, dx=500, dy=-1600, d=.25)
     f.sfx(te - .1, "rip")
-    f.slam(["EASIER TO", "UNDERSTAND."], 300, [te, wt(9, "to", 1), wt(9, "understand…")], 116, sid=s, shake_on=(2,))
-    f.cut(s, Q(wt(9, "understand…") + .5), 1.12, 540, 760)
+    f.slam(["EASIER TO", "UNDERSTAND."], 300, [te, wt(9, "to", 1), wt(9, "understand…")], 116)
     f.rip_out(s, c11)
 
-    # ---- S11 EASIER TO DO: the tangle blows apart into three steps ----
+    # ---- S11 EASIER TO DO: the tangle clears into three steps ----
     s = f.scene(c11, c12, "cream", 24)
     tangle = []
     for txt, x, y, r in [("EMAIL", 110, 560, -8), ("COPY", 620, 520, 7), ("SHEET", 160, 980, 5), ("???", 640, 1010, -6), ("PASTE", 400, 770, 3)]:
@@ -736,61 +746,59 @@ def build():
                  f'd="M120,90 C400,20 600,300 560,90 C520,-40 230,400 150,480 C60,560 700,620 650,500 C600,380 300,260 420,250 '
                  f'C540,240 700,540 130,520"/></svg>', z=15, boil=.8)
     f.enter(scrib, c11, "none")
-    f.draw(tg, c11, .25)
+    f.draw(tg, c11, .4)
     te = wt(10, "easier")
     for k, i in enumerate(tangle + [scrib]):
-        f.leave(i, te - .12 + (k % 3) * .03, dy=int(f.r(-1700, -900)))
-    f.sfx(te - .12, "whoosh", 1.2)
-    f.shake(s, te - .12, 16)
-    f.slam(["EASIER TO DO."], 330, [te, wt(10, "to"), wt(10, "do.")], 120, sid=s, shake_on=(2,))
-    ts = wt(10, "do.") + .12
+        f.leave(i, te - .15 + (k % 3) * .04, dy=int(f.r(-1700, -900)), d=.25)
+    f.sfx(te - .15, "whoosh", 1.0)
+    f.slam(["EASIER TO DO."], 330, [te, wt(10, "to"), wt(10, "do.")], 120)
+    ts = wt(10, "do.") + .1
     for k, (txt, y) in enumerate([("INQUIRY", 560), ("CHECK", 790), ("NEXT STEP", 1020)]):
-        f.enter(f.row(y, f'<div style="transform:rotate({f.r(-2, 2):.1f}deg)">{chip(txt, 84, "ink")}</div>'), ts + k * E, "slam")
+        f.enter(f.row(y, f'<div style="transform:rotate({f.r(-2, 2):.1f}deg)">{chip(txt, 84, "ink")}</div>'), ts + k * .22, "snap", g=.8)
         if k:
             pid = f.id("p")
-            f.enter(f.el(510, y - 120, 60, arrow_down(pid, 104), z=15, boil=.6), ts + k * E - .08, "none")
-            f.draw(pid, ts + k * E - .08, .08, sfx=None)
-    f.enter(f.el(760, 1030, 64, '<div class="tick">✓</div>', z=45, boil=.4), ts + 3 * E, "slam")
+            f.enter(f.el(510, y - 120, 60, arrow_down(pid, 104), z=15, boil=.6), ts + k * .22 - .1, "none")
+            f.draw(pid, ts + k * .22 - .1, .1, sfx=None)
+    f.enter(f.el(760, 1030, 64, '<div class="tick">✓</div>', z=45, boil=.4), ts + .72, "slam", g=.7)
 
-    # ---- S12 black: the question, word by word ----
+    # ---- S12 black: the question ----
     s = f.scene(c12, c13, "ink", 26)
-    f.slam(["WHAT WOULD YOU", "MAKE WORK", "~better?"], 600, [wt(11, w) for w in "What would you make work better?".split()],
-           138, tone="cr", gap=175, sid=s, shake_on=(5,))
+    f.slam(["WHAT WOULD YOU", "MAKE WORK", "~better?"], 600, [wt(11, w) for w in "What would you make work better?".split()], 138, tone="cr", gap=175)
 
     # ---- S13 end card ----
     s = f.scene(c13, TOTAL, "cream", 27)
     f.slide_in(s, c13)
-    last = f.ransom("ROUNDHOUSE", 700, c13 + .2, size=100, sid=s)
-    tape_at(f, 150, 670, -8, last + E, w=170)
+    last = f.ransom("ROUNDHOUSE", 700, c13 + .3, size=100)
+    tape_at(f, 150, 670, -8, last + .3, w=170)
     cta = f.row(930, strip("TELL US ABOUT YOUR PROJECT →", 42, "verm", font="Inter", extra="font-weight:800;letter-spacing:.5px;padding:24px 36px 22px"))
-    tcta = Q(last + .3)
-    f.enter(cta, tcta, "slam")
-    f.shake(s, tcta, 12)
-    for b in beats(tcta + BEAT, TOTAL - .4):
-        f.js.append(f'tl.set("#{cta}", {{x: 14}}, {b:.3f}); tl.to("#{cta}", {{x: 0, duration: .17, ease: st("power2.out", .17)}}, {b + .001:.3f});')
+    tcta = last + .55
+    f.enter(cta, tcta, "slam", g=.8)
+    for b in beats(tcta + .6, TOTAL - .4, 2):
+        f.js.append(f'tl.set("#{cta}", {{x: 12}}, {b:.3f}); tl.to("#{cta}", {{x: 0, duration: .25, ease: st("power2.out", .25)}}, {b + .001:.3f});')
 
-    # ---- captions: the narration, 1-3 words at a time, current word lit ----
+    # ---- captions: the narration, 2-4 words at a time, current word lit ----
     caps = []
     for li, (row, t0) in enumerate(zip(vo, VO_AT)):
         words = [dict(w, s=w["s"] + t0, e=w["e"] + t0) for w in row["words"]]
         chunks, cur = [], []
         for w in words:
             cur.append(w)
-            if len(cur) >= 3 or w["w"][-1] in ".,;:?!…" or (len(cur) >= 2 and sum(len(x["w"]) for x in cur) > 12):
+            if len(cur) >= 4 or w["w"][-1] in ".,;:?!…" or (len(cur) >= 3 and sum(len(x["w"]) for x in cur) > 16):
                 chunks.append(cur)
                 cur = []
         if cur:
             chunks.append(cur)
         for j, ch in enumerate(chunks):
-            s0 = ch[0]["s"] - .03
-            nxt = chunks[j + 1][0]["s"] - .03 if j + 1 < len(chunks) else ch[-1]["e"] + .2
+            s0 = ch[0]["s"] - .05
+            nxt = chunks[j + 1][0]["s"] - .05 if j + 1 < len(chunks) else ch[-1]["e"] + .25
             cid = f.id("c")
             spans = "".join(f'<span class="w" id="{cid}w{n}">{x["w"]}</span>' for n, x in enumerate(ch))
             caps.append(f'<div class="clip cap" id="{cid}" data-start="{s0:.3f}" data-duration="{max(.2, nxt - s0):.3f}" data-track-index="5" '
                         f'style="z-index:800"><div class="strip ink" id="{cid}s">{spans}</div></div>')
-            f.js.append(f'tl.fromTo("#{cid}s", {{scale: 1.25}}, {{scale: 1, duration: .09, ease: st("power3.out", .09)}}, {s0:.3f});')
+            f.js.append(f'tl.fromTo("#{cid}s", {{scale: 1.1}}, {{scale: 1, duration: .17, ease: st("power2.out", .17)}}, {s0:.3f});')
             for n, x in enumerate(ch):
                 f.js.append(f'tl.set("#{cid}w{n}", {{color: "{SUN}"}}, {x["s"]:.3f}); tl.set("#{cid}w{n}", {{color: "{CREAM}"}}, {x["e"] + .02:.3f});')
+    f.gap = c5
     return f, caps
 
 
@@ -902,7 +910,7 @@ window.__timelines["main"] = tl;
 {tail}
 </script></body></html>"""
     open(os.path.join(PROJ, "index.html"), "w", encoding="utf-8").write(html)
-    json.dump({"vo_at": VO_AT, "sfx": sorted(f.ev, key=lambda e: e["t"]), "drop": DROP, "gap": Q(10.6), "bpm": BPM, "total": TOTAL},
+    json.dump({"vo_at": VO_AT, "sfx": sorted(f.ev, key=lambda e: e["t"]), "drop": DROP, "gap": f.gap, "bpm": BPM, "total": TOTAL},
               open(os.path.join(OUT, "cues.json"), "w"), indent=0)
     print(f"{len(f.scenes)} scenes, {len(caps)} captions, {len(f.ev)} sfx cues")
 

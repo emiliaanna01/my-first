@@ -5,6 +5,7 @@ Writes out/vo/line{i}.wav and out/vo/lines.json ([{text, dur, words: [{w, s, e}]
 import json
 import os
 import re
+import subprocess
 import sys
 
 import numpy as np
@@ -14,8 +15,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", ".claude", "skills", "papercut", "engine"))
 import voice  # noqa: E402  papercut's model lookup
 
-# 60% Puck + 40% Onyx: deep (~98 Hz, like the reference) but still expressive
-VOICE, SPEED = (("am_puck", .6), ("am_onyx", .4)), 1.16
+# Michael: a steady, grown-up narrator. Read a touch slower, then lowered ~1 semitone (formants kept) for weight.
+# Pauses between lines are set in build.py (GAPS), giving ~140 wpm overall like documentary narration.
+VOICE, SPEED, PITCH = (("am_michael", 1.0),), .9, .94
 
 # (what is shown in captions, what is spoken: "RoundHouse" is split so the voice says it as two words)
 LINES = [
@@ -58,7 +60,11 @@ def main():
         x = np.asarray(x, np.float32)
         nz = np.where(np.abs(x) > 0.004)[0]
         x = x[max(0, nz[0] - int(0.01 * sr)): nz[-1] + int(0.04 * sr)]
-        sf.write(os.path.join(out, f"line{i}.wav"), x, sr, subtype="PCM_16")
+        raw = os.path.join(out, f"line{i}_raw.wav")
+        sf.write(raw, x, sr, subtype="PCM_16")
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", raw, "-af", f"rubberband=pitch={PITCH}:formant=preserved:transients=smooth",
+                        os.path.join(out, f"line{i}.wav")], check=True)
+        x, _ = sf.read(os.path.join(out, f"line{i}.wav"), dtype="float32")
         dur = len(x) / sr
         toks = line.split()
         heard = []

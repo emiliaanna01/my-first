@@ -18,7 +18,7 @@ import sfx as P  # noqa: E402
 from sfx import SR, _bp, _env, _lp  # noqa: E402
 
 OUT = os.path.join(HERE, "out")
-BPM = 110
+BPM = 100
 BEAT = 60 / BPM
 BAR = 4 * BEAT
 
@@ -128,14 +128,12 @@ def music(total, drop, gap_start):
                     place(out, shaker(rng, 1.0 if k % 4 == 2 else .55), tt, .9 if b_part else .6)
                 if not b_part and k in (4, 12):
                     place(out, rim(rng), tt, .9)
-                if not b_part and k in (0, 8, 11):
-                    place(out, kick(rng), tt, .5 if k != 11 else .3)
-                if not b_part and k == 12:
-                    place(out, snap(rng), tt, .35)
-                if b_part and k in (0, 4, 7, 8, 10, 12):
-                    place(out, kick(rng), tt, .7 if k in (0, 4, 8, 12) else .4)
+                if not b_part and k in (0, 8):
+                    place(out, kick(rng), tt, .32)
+                if b_part and k in (0, 8, 10):
+                    place(out, kick(rng), tt, .5 if k != 10 else .3)
                 if b_part and k in (4, 12):
-                    place(out, snap(rng), tt, .75)
+                    place(out, snap(rng), tt, .42)
             if b_part:
                 place(out, pad([hz(n) for n in ch[:3]], BAR + .4), t, 1.0)
         t += BAR
@@ -217,12 +215,13 @@ def foley(events, total):
 
 
 def punch_voice(x):
-    """Hard, forward narration: cut the mud, lift chest and presence, compress hard, a little drive."""
+    """Mature narration: a warm, even broadcast voice rather than a hyped one."""
     tmp_in, tmp_out = os.path.join(OUT, "vo_dry.wav"), os.path.join(OUT, "vo_punch.wav")
     sf.write(tmp_in, x.astype(np.float32), SR)
-    chain = ("highpass=f=75,equalizer=f=140:t=q:w=1:g=3.5,equalizer=f=380:t=q:w=1.4:g=-3,equalizer=f=3200:t=q:w=1.2:g=4.5,"
-             "equalizer=f=9500:t=h:w=5000:g=2.5,acompressor=threshold=-26dB:ratio=7:attack=2:release=70:makeup=9:knee=3,"
-             "asoftclip=type=tanh:threshold=0.9,alimiter=limit=0.92:level=0")
+    # broadcast narration: warm chest, cleared mud, gentle presence, light compression, de-essed, a hint of room
+    chain = ("highpass=f=70,equalizer=f=160:t=q:w=1:g=2.5,equalizer=f=350:t=q:w=1.2:g=-2.5,equalizer=f=3000:t=q:w=1.4:g=2,"
+             "equalizer=f=10000:t=h:w=5000:g=1.5,deesser=i=0.4,acompressor=threshold=-22dB:ratio=3:attack=8:release=140:makeup=4:knee=4,"
+             "aecho=1.0:0.5:23|37:0.07|0.05,alimiter=limit=0.95:level=0")
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", tmp_in, "-af", chain, tmp_out], check=True)
     y, _ = sf.read(tmp_out, dtype="float32")
     y = y[: len(x)]
@@ -244,7 +243,7 @@ def main():
     env = _lp(np.abs(vo), 6)
     env = env / (env.max() or 1)
     duck = 1 - .5 * np.clip(env * 4, 0, 1)
-    mix = vo * 1.0 + mus * duck * .62 + fx * .34
+    mix = vo * 1.0 + mus * duck * .5 + fx * .3
     mix = mix[:n]
     ad = os.path.join(OUT, "project", "assets", "audio")
     os.makedirs(ad, exist_ok=True)
