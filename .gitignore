@@ -10,3 +10,7 @@ edit/*/sets/
 
 # Path Abroad bot keys
 study-abroad/bot/.env
+
+# RoundHouse reel: build output and the >100 MB master render
+roundhouse/out/
+exports/roundhouse_v1.mp4
