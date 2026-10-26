@@ -50,13 +50,17 @@ def synth(beats, out_dir, voice="af_heart", speed=1.0, lang="en-us"):
 
 def words(vo_path, beats, timing, model="small"):
     """Script tokens with start/end times, grouped per beat."""
-    from faster_whisper import WhisperModel
-    m = WhisperModel(model, device="cpu", compute_type="int8")
-    from scipy.signal import resample_poly
-    x, sr = sf.read(vo_path, dtype="float32")
-    x = resample_poly(x, 16000, sr).astype(np.float32)  # hand whisper an array: avoids PyAV version clashes
-    segs, _ = m.transcribe(x, word_timestamps=True, language="en")
-    ww = [w for s in segs for w in (s.words or [])]
+    try:
+        from faster_whisper import WhisperModel
+        m = WhisperModel(model, device="cpu", compute_type="int8")
+        from scipy.signal import resample_poly
+        x, sr = sf.read(vo_path, dtype="float32")
+        x = resample_poly(x, 16000, sr).astype(np.float32)  # hand whisper an array: avoids PyAV version clashes
+        segs, _ = m.transcribe(x, word_timestamps=True, language="en")
+        ww = [w for s in segs for w in (s.words or [])]
+    except Exception as e:  # no whisper model (e.g. offline): space words by characters across each beat's clip
+        print(f"  whisper unavailable ({type(e).__name__}), using even caption timing")
+        ww = []
     out = []
     for b, tm in zip(beats, timing):
         a, z = tm["start"], tm["start"] + tm["dur"]

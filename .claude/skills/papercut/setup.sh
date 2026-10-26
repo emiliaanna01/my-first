@@ -20,7 +20,16 @@ done
 
 data="$root/engine/data"
 mkdir -p "$data"
-get() { [ -f "$data/$1" ] || curl -sL -o "$data/$1" "$2"; }
+# jsDelivr first; if it is unreachable, take the same file out of the npm package (npm pack)
+get() {
+  [ -f "$data/$1" ] && return
+  curl -sfL -o "$data/$1" "$2" && return
+  rm -f "$data/$1"
+  local spec="${2#https://cdn.jsdelivr.net/npm/}" tmp
+  tmp="$(mktemp -d)"
+  (cd "$tmp" && npm pack -q "${spec%%/*}" >/dev/null && tar xzf ./*.tgz) && cp "$tmp/package/${spec#*/}" "$data/$1"
+  rm -rf "$tmp"
+}
 get gsap.min.js https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
 get d3-array.min.js https://cdn.jsdelivr.net/npm/d3-array@3.2.4/dist/d3-array.min.js
 get d3-geo.min.js https://cdn.jsdelivr.net/npm/d3-geo@3.1.1/dist/d3-geo.min.js
