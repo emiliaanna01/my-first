@@ -17,3 +17,11 @@ exports/roundhouse_v1.mp4
 exports/roundhouse_v2.mp4
 exports/roundhouse_v3.mp4
 exports/roundhouse_v4.mp4
+
+# papercut films: build output
+films/*/project/
+films/*/sources/
+films/*/snaps*/
+films/*/*.mp4
+films/*/pieces.jpg
+films/*/sheet.png*
