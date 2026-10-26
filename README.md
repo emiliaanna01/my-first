@@ -30,3 +30,10 @@ python <plugin>/scripts/transcribe.py audio edit/<id> <source>       # prints th
 python tools/asr.py edit/<id>/audio16k-<stem>.wav edit/<id>/transcripts/<stem>.json --source <source>
 python <plugin>/scripts/transcribe.py check edit/<id>/transcripts/<stem>.json
 ```
+
+## Agent skills (`.claude/skills/`)
+Vendored so every Claude Code session in this repo has them:
+- `/brag`, `/brag-slim`: launch videos with music, motion and share copy, from [latent-spaces/brag](https://github.com/latent-spaces/brag) @ `669ab92` (MIT). On Opus 5.5 `/brag` hands off to `/brag-slim`; `/brag --full` keeps the Hyperframes workflow.
+- `/remotion-*` (best-practices, create, markup, captions, render, studio, maps, docs, …): official Remotion skills from [remotion-dev/skills](https://github.com/remotion-dev/skills) @ `30d4553` (v4.0.539).
+
+To update: re-clone the repo and copy `skills/<name>/` over `.claude/skills/<name>/`.
