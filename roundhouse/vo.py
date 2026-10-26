@@ -14,7 +14,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", ".claude", "skills", "papercut", "engine"))
 import voice  # noqa: E402  papercut's model lookup
 
-VOICE, SPEED = "af_heart", 1.04
+# 60% Puck + 40% Onyx: deep (~98 Hz, like the reference) but still expressive
+VOICE, SPEED = (("am_puck", .6), ("am_onyx", .4)), 1.16
 
 # (what is shown in captions, what is spoken: "RoundHouse" is split so the voice says it as two words)
 LINES = [
@@ -41,6 +42,7 @@ def main():
     from kokoro_onnx import Kokoro
     km = voice._models()
     k = Kokoro(os.path.join(km, "kokoro-v1.0.onnx"), os.path.join(km, "voices-v1.0.bin"))
+    style = sum(k.get_voice_style(v) * w for v, w in VOICE)
     out = os.path.join(HERE, "out", "vo")
     os.makedirs(out, exist_ok=True)
     try:
@@ -52,10 +54,10 @@ def main():
     from scipy.signal import resample_poly
     rows = []
     for i, line in enumerate(LINES):
-        x, sr = k.create(spoken(line), voice=VOICE, speed=SPEED, lang="en-us")
+        x, sr = k.create(spoken(line), voice=style, speed=SPEED, lang="en-us")
         x = np.asarray(x, np.float32)
         nz = np.where(np.abs(x) > 0.004)[0]
-        x = x[max(0, nz[0] - int(0.02 * sr)): nz[-1] + int(0.08 * sr)]
+        x = x[max(0, nz[0] - int(0.01 * sr)): nz[-1] + int(0.04 * sr)]
         sf.write(os.path.join(out, f"line{i}.wav"), x, sr, subtype="PCM_16")
         dur = len(x) / sr
         toks = line.split()

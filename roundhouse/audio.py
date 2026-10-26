@@ -18,7 +18,7 @@ import sfx as P  # noqa: E402
 from sfx import SR, _bp, _env, _lp  # noqa: E402
 
 OUT = os.path.join(HERE, "out")
-BPM = 104
+BPM = 110
 BEAT = 60 / BPM
 BAR = 4 * BEAT
 
@@ -91,11 +91,11 @@ def pad(freqs, dur):
     return _lp(x * env, 1800) * .06
 
 
-def music(total, drop):
+def music(total, drop, gap_start):
     rng = np.random.default_rng(4)
     out = np.zeros(int((total + 1) * SR))
     t0 = drop - round(drop / BAR) * BAR  # the reveal lands on a downbeat
-    gap = (12.6, drop)  # the black "gap" frame: the music stops
+    gap = (gap_start, drop)  # the black "gap" frame: the music stops
     # part A: D minor, curious. i - VI - III - VII
     prog_a = [(50, [62, 65, 69, 72]), (46, [58, 62, 65, 69]), (53, [60, 65, 69, 72]), (48, [60, 64, 67, 72])]
     # part B: D major, settled. I - V - vi - IV
@@ -127,11 +127,15 @@ def music(total, drop):
                 if b_part or k % 2 == 0:
                     place(out, shaker(rng, 1.0 if k % 4 == 2 else .55), tt, .9 if b_part else .6)
                 if not b_part and k in (4, 12):
-                    place(out, rim(rng), tt, .8)
-                if b_part and k in (0, 7, 8, 10):
-                    place(out, kick(rng), tt, .55 if k in (0, 8) else .35)
+                    place(out, rim(rng), tt, .9)
+                if not b_part and k in (0, 8, 11):
+                    place(out, kick(rng), tt, .5 if k != 11 else .3)
+                if not b_part and k == 12:
+                    place(out, snap(rng), tt, .35)
+                if b_part and k in (0, 4, 7, 8, 10, 12):
+                    place(out, kick(rng), tt, .7 if k in (0, 4, 8, 12) else .4)
                 if b_part and k in (4, 12):
-                    place(out, snap(rng), tt, .5)
+                    place(out, snap(rng), tt, .75)
             if b_part:
                 place(out, pad([hz(n) for n in ch[:3]], BAR + .4), t, 1.0)
         t += BAR
@@ -146,8 +150,7 @@ def music(total, drop):
     # final chord rings out under the end card
     end = [62, 66, 69, 74]
     for k, m in enumerate(end):
-        place(out, pluck(hz(m), 1.6), 28.45 + k * .04, .18)
-    place(out, pad([hz(m) for m in end[:3]], total - 28.2), 28.2, 1.2)
+        place(out, pluck(hz(m), 1.6), total - 1.6 + k * .04, .18)
     fade = np.ones(len(out))
     fs = int((total - 1.2) * SR)
     fade[fs:] = np.linspace(1, 0, len(out) - fs)
@@ -213,6 +216,19 @@ def foley(events, total):
     return out
 
 
+def punch_voice(x):
+    """Hard, forward narration: cut the mud, lift chest and presence, compress hard, a little drive."""
+    tmp_in, tmp_out = os.path.join(OUT, "vo_dry.wav"), os.path.join(OUT, "vo_punch.wav")
+    sf.write(tmp_in, x.astype(np.float32), SR)
+    chain = ("highpass=f=75,equalizer=f=140:t=q:w=1:g=3.5,equalizer=f=380:t=q:w=1.4:g=-3,equalizer=f=3200:t=q:w=1.2:g=4.5,"
+             "equalizer=f=9500:t=h:w=5000:g=2.5,acompressor=threshold=-26dB:ratio=7:attack=2:release=70:makeup=9:knee=3,"
+             "asoftclip=type=tanh:threshold=0.9,alimiter=limit=0.92:level=0")
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", tmp_in, "-af", chain, tmp_out], check=True)
+    y, _ = sf.read(tmp_out, dtype="float32")
+    y = y[: len(x)]
+    return y / (np.max(np.abs(y)) or 1) * np.max(np.abs(x)) * 1.0
+
+
 def main():
     cues = json.load(open(os.path.join(OUT, "cues.json")))
     total = cues["total"]
@@ -221,13 +237,14 @@ def main():
     for i, t in enumerate(cues["vo_at"]):
         x, sr = sf.read(os.path.join(OUT, "vo", f"line{i}.wav"), dtype="float32")
         place(vo, resample_poly(x, SR, sr), t)
-    mus = music(total, cues["drop"])[: len(vo)]
+    vo = punch_voice(vo)
+    mus = music(total, cues["drop"], cues["gap"])[: len(vo)]
     fx = foley(cues["sfx"], total)[: len(vo)]
     # duck the music under the voice
     env = _lp(np.abs(vo), 6)
     env = env / (env.max() or 1)
     duck = 1 - .5 * np.clip(env * 4, 0, 1)
-    mix = vo * 1.0 + mus * duck * .55 + fx * .42
+    mix = vo * 1.0 + mus * duck * .62 + fx * .34
     mix = mix[:n]
     ad = os.path.join(OUT, "project", "assets", "audio")
     os.makedirs(ad, exist_ok=True)
