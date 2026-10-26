@@ -38,3 +38,10 @@ Fonts: **Inter Tight Variable** (headlines, weight 550, tight tracking) and **DM
 Total: 1620 frames = 54.0s.
 
 No personal data appears on the site or in the video. All UI text is the site's own copy.
+
+## Voiceover (added after the first cut)
+Narration by Kokoro (voice `af_heart`), run locally with sherpa-onnx. There's one line per scene, starting 0.5s after each cut, and the lines add to the picture rather than reading the on-screen text. The script is in `voiceover-script.txt`.
+- `work/voice.py` generates the lines. `work/extra-lexicon.txt` adds pronunciations for words missing from the model's dictionary. Before generating, merge it with the model's `lexicon-us-en.txt` into `work/lex/lexicon-us-en.txt`.
+- `work/mix.sh` sets the voice about 8–9 dB over the music, using sidechain ducking that releases between lines, and normalizes the mix to −14 LUFS.
+- Check: every line was transcribed back with Whisper from the final mix and matched the script.
+- `brag-music-only.mp4` keeps the version without narration.

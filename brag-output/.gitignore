@@ -3,3 +3,6 @@ composition/out/
 composition/public/spheres/
 work/*
 !work/music.py
+!work/voice.py
+!work/mix.sh
+!work/extra-lexicon.txt
