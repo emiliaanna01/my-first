@@ -15,7 +15,7 @@ _spec = importlib.util.spec_from_file_location("paxton_audio", os.path.join(HERE
 _pax = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_pax)
 piano, strings, paper, clank, step = _pax.piano, _pax.strings, _pax.paper, _pax.clank, _pax.step
 
-DUR = 59.0
+DUR = 59.0   # replaced below from the voice-over
 N = int(SR * DUR)
 BPM = 104; B = 60 / BPM; S16 = B / 4
 VO = {m["id"]: m for m in json.load(open(os.path.join(HERE, "vo.json")))}
@@ -23,6 +23,7 @@ W = lambda cid, n=0: VO[cid]["words"][min(n, len(VO[cid]["words"]) - 1)]
 END = lambda cid: VO[cid]["t"] + VO[cid]["dur"]
 SWEEP = W("clear", 3) - .05
 FADE = END("still") + 1.1
+DUR = round(END("still") + 3.2, 2); N = int(SR * DUR)
 # scene cuts (same as the film)
 CUTS = [W("hook2", 6) - .08, W("ny", 0) - .1, W("cantsee", 0) - .12, W("only", 0) - .1, W("watch", 0) - .08, W("watch", 1) - .06,
         W("name", 0) - .1, W("engineer", 0) - .1, W("follows", 0) - .08, W("follows", 1) - .05, W("sketch", 0) - .1, W("lever", 0) - .1,
@@ -274,7 +275,7 @@ def voice_chain(x):
     """Documentary narrator polish: low-cut, a little chest, presence, de-harsh, gentle compression."""
     x = hp(x, 70)
     lowmid = bp(x, 110, 220); pres = bp(x, 2500, 5000); harsh = bp(x, 6500, 9500)
-    x = x + lowmid * .35 + pres * .3 - harsh * .25
+    x = x + lowmid * .12 + pres * .15 - harsh * .15
     env = np.abs(signal.hilbert(x)); env = signal.sosfiltfilt(signal.butter(1, 12, "lowpass", fs=SR, output="sos"), env)
     thr = np.percentile(env[env > 1e-4], 70); gain = np.where(env > thr, (thr / (env + 1e-9)) ** .45, 1.0)
     return x * gain
@@ -291,7 +292,7 @@ def main(vo_dir, out):
     e = signal.sosfiltfilt(signal.butter(1, 4, "lowpass", fs=SR, output="sos"), np.convolve(lvl, np.ones(k) / k, "same"))
     d = np.clip(e / (e.max() + 1e-9) * 3, 0, 1)[:, None]
     music = score(); sfx = design()
-    buses = {"vo": v, "sfx": sfx / (np.abs(sfx).max() + 1e-9) * .85 * (1 - .4 * d), "music": music / (np.abs(music).max() + 1e-9) * .5 * (1 - .62 * d)}
+    buses = {"vo": v, "sfx": sfx / (np.abs(sfx).max() + 1e-9) * .85 * (1 - .4 * d), "music": music / (np.abs(music).max() + 1e-9) * .4 * (1 - .62 * d)}
     mix = sum(buses.values())
     fade = np.ones(N); k = int(.8 * SR); fade[-k:] = np.linspace(1, 0, k) ** 1.5
     mix = np.tanh(mix * fade[:, None] / (np.abs(mix).max() + 1e-9) * 1.25) * .9

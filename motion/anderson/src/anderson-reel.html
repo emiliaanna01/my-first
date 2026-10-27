@@ -12,7 +12,7 @@
    ===================================================================== */
 const CONFIG = {
   color: { gold: "#E8C547", ink: "#1E1B17", paper: "#ECE9E3", cream: "#EFE6D2", white: "#F7F3EA" },
-  fps: 30, duration: 59.0,
+  fps: 30, duration: 0,   // 0 = voice-over length + the end card
 };
 /*VO*/
 /*SPRITES*/
@@ -45,7 +45,7 @@ input[type=range] { flex:1; min-width:160px; accent-color:var(--accent); }
 <script>
 "use strict";
 const W_ = 1080, H_ = 1920, CX = 540, CY = 960;
-const FPS = CONFIG.fps, DUR = CONFIG.duration, FRAMES = Math.round(FPS * DUR);
+const FPS = CONFIG.fps, DUR = CONFIG.duration || +(VO_META.at(-1).t + VO_META.at(-1).dur + 3.2).toFixed(2), FRAMES = Math.round(FPS * DUR);
 const cv = document.getElementById("c"), ctx = cv.getContext("2d");
 const mk = (w = W_, h = H_) => { const k = document.createElement("canvas"); k.width = w; k.height = h; return k; };
 
