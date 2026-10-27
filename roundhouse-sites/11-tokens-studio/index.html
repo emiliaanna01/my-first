@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RoundHouse | Your business, fully automated</title>
+<meta name="description" content="RoundHouse is the automation agency for US businesses. We diagnose where work stalls, build the fix at a fixed price, and keep it running.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Geist:wght@400;500;600;700&family=PT+Serif:wght@700&display=swap">
+<style>
+/* Look and feel after tokens.studio: off-white canvas, huge tight uppercase display type, cyan tactile CTAs,
+   floating 3D "token" widgets, a header that shrinks into a floating bar, stacked colour panels, deep-teal close. */
+:root{
+  --bg:#F7F8F8; --ink:#0C0F0F; --ink2:#5B6161; --grey:#EBEDEE; --line:#D9DDDE; --white:#fff;
+  --cyan:#38E8F5; --cyan-d:#1BC3D0; --teal:#032D30; --teal2:#0A4246;
+  --violet:#9877FF; --violet2:#8756FF; --violet3:#7034EA; --violet4:#4E24A6; --violet-l:#DDD8FF; --violet-xl:#F6F4FF; --navy:#08022F; --navy2:#15295A;
+  --yellow:#FFCA38; --yellow-e:#D9A21B; --yellow-d:#2F2302;
+  --orange:#FF764C; --orange-e:#D9542C; --orange-d:#3A1206; --orange-l:#FFF1EC;
+  --lime:#8BE33B; --lime-e:#5FB21C; --lime-d:#1C3A08; --lime-l:#F2FCE9;
+  --pink:#FF5C93; --pink-e:#D63A72; --pink-d:#4A0A22; --pink-l:#FFF0F5;
+  --display:"Archivo","Arial Black",Impact,sans-serif; --sans:"Geist",-apple-system,"Segoe UI",Arial,sans-serif; --serif:"PT Serif",Georgia,serif;
+  --tactile:0 3px 0 0 rgba(12,15,15,.2);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--violet3);outline-offset:3px;border-radius:6px}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(24px, env(safe-area-inset-left,0px));padding-right:max(24px, env(safe-area-inset-right,0px))}
+.disp{font-family:var(--display);font-weight:850;font-variation-settings:"wdth" 108;text-transform:uppercase;letter-spacing:-.035em;line-height:.92;text-wrap:balance}
+.ln{display:block;overflow:hidden;padding-bottom:.04em}
+.ln > span{display:block}
+
+/* tactile buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:10px;padding:13px 20px;font:600 16px var(--sans);cursor:pointer;background:var(--cyan);color:var(--ink);box-shadow:var(--tactile);transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 5px 0 0 rgba(12,15,15,.22)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 0 rgba(12,15,15,.2)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.ghost{background:var(--grey)}
+.tile{display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:10px;font:600 21px var(--sans);letter-spacing:-.01em;background:var(--cyan);color:var(--ink);box-shadow:var(--tactile);min-width:min(370px,100%);transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:0}
+.tile:hover{transform:translateY(-3px);box-shadow:0 6px 0 0 rgba(12,15,15,.22)}
+.tile .ic{width:48px;height:48px;border-radius:10px;background:var(--ink);display:grid;place-items:center;flex:none}
+.tile.grey{background:var(--grey)}
+
+/* header: full width at top, shrinks into a floating bar on scroll */
+.nav{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:60;display:flex;justify-content:center;pointer-events:none}
+.bar{pointer-events:auto;width:100%;max-width:100%;height:78px;margin-top:0;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 max(44px, env(safe-area-inset-left,0px));background:var(--white);border-radius:0;box-shadow:0 0 0 0 rgba(12,15,15,0);
+  transition:max-width .6s cubic-bezier(.65,0,.2,1),margin-top .6s cubic-bezier(.65,0,.2,1),border-radius .6s,box-shadow .4s,padding .6s cubic-bezier(.65,0,.2,1),background .4s}
+.nav.scrolled .bar{max-width:1050px;margin-top:20px;border-radius:10px;box-shadow:var(--tactile);padding:0 32px}
+.nav.top-clear .bar{background:transparent}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--display);font-weight:850;font-variation-settings:"wdth" 104;text-transform:uppercase;letter-spacing:-.04em;font-size:21px}
+.nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.nav ul a{font:600 14px var(--sans);text-transform:uppercase;letter-spacing:.01em;display:inline-flex;align-items:center;gap:4px;position:relative}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav ul a:hover::after,.nav ul a.on::after{transform:scaleX(1)}
+.nav .r{display:flex;align-items:center;gap:22px}
+.nav .r .li{font-weight:600;font-size:16px}
+.nav .btn{padding:11px 16px;font-size:15px}
+
+/* hero */
+.hero{padding-top:200px;position:relative;text-align:center}
+.hero h1{font-size:clamp(46px,7vw,92px)}
+.hero .sub{max-width:720px;margin:28px auto 0;font-size:clamp(17px,1.4vw,19px);line-height:1.45}
+.hero .ctas{display:flex;justify-content:center;gap:24px;margin-top:44px;flex-wrap:wrap}
+.stage{position:relative;max-width:1200px;margin:96px auto 0;padding-bottom:120px}
+.console{position:relative;z-index:2;background:var(--white);border-radius:22px;border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(12,15,15,.25);padding:18px;display:grid;grid-template-columns:1.45fr .8fr 1fr;gap:14px;text-align:left;max-width:860px;margin:0 auto;font-size:12px}
+.pane{border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:8px;align-content:start}
+.pane .t{font-size:11px;font-weight:600;color:var(--ink2)}
+.bars{display:flex;justify-content:space-around;align-items:flex-end;height:120px;gap:10px;padding-top:6px}
+.bars .b{width:30px;display:flex;flex-direction:column-reverse;gap:2px}
+.bars .b i{display:block;border-radius:2px}
+.bars + .lg{display:flex;justify-content:space-around;font-size:10px;color:var(--ink2)}
+.donut{width:120px;height:120px;border-radius:50%;margin:4px auto;background:conic-gradient(var(--violet3) 0 62%,var(--violet) 62% 84%,var(--violet-l) 84% 100%);display:grid;place-items:center;position:relative}
+.donut::before{content:"";position:absolute;inset:16px;background:#fff;border-radius:50%}
+.donut b{position:relative;font-family:var(--serif);font-size:22px;line-height:1;text-align:center}
+.donut b small{display:block;font:400 10px var(--sans);color:var(--ink2)}
+.list{display:grid}
+.list div{display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--grey)}
+.list div:last-child{border:0}
+.list .ic{width:26px;height:26px;border-radius:50%;background:var(--violet-xl);display:grid;place-items:center;color:var(--violet3);font-weight:700;flex:none}
+.list b{display:block;font-size:12px}
+.list small{color:var(--ink2);font-size:10px}
+.docs{grid-column:1 / -1;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.doc{border-radius:10px;padding:12px;display:grid;gap:6px;min-height:150px;align-content:start;border:1px solid var(--violet-l)}
+.doc .k{font:700 8px var(--sans);letter-spacing:.06em;display:flex;align-items:center;gap:4px}
+.doc h4{margin:0;font:700 20px/1.05 var(--serif)}
+.doc p{font-size:9px;opacity:.8}
+.doc .blk{height:38px;border-radius:4px;margin-top:auto}
+
+/* 3D floating tokens */
+.w{position:absolute;z-index:3;will-change:transform}
+.w .in{will-change:transform}
+.w .face{border-radius:16px;padding:16px 18px;font-family:var(--sans);text-align:left;transform:perspective(900px) rotateX(var(--rx,18deg)) rotateY(var(--ry,-10deg)) rotateZ(var(--rz,-6deg));box-shadow:0 10px 0 0 var(--edge),0 26px 40px -10px rgba(12,15,15,.28);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.w:hover .face{transform:perspective(900px) rotateX(0) rotateY(0) rotateZ(0) translateY(-6px)}
+.w .lb{font-weight:700;font-size:15px;letter-spacing:-.01em}
+.seg{display:flex;gap:4px;margin-top:10px}
+.seg span{padding:6px 10px;border-radius:7px;background:rgba(255,255,255,.45);font-weight:700;font-size:13px;box-shadow:inset 0 -2px 0 rgba(0,0,0,.12)}
+.seg span.on{background:var(--ink);color:#fff}
+.pager{display:flex;align-items:center;gap:14px;font-weight:700;font-size:18px}
+.pager i{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.6);display:grid;place-items:center;font-style:normal;font-size:14px}
+.slider{margin-top:14px;height:6px;border-radius:3px;background:rgba(47,35,2,.35);position:relative}
+.slider::after{content:"";position:absolute;left:52%;top:-8px;width:12px;height:22px;border-radius:4px;background:var(--yellow-d)}
+.ticks{display:flex;justify-content:space-between;font-size:12px;font-weight:600;margin-top:16px}
+.radio{display:flex;gap:16px;margin-top:12px}
+.radio div{display:grid;justify-items:center;gap:6px;font-size:12px;font-weight:700}
+.radio i{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.55);display:grid;place-items:center;font-style:normal}
+.radio div.on i{background:var(--orange-d);color:#fff}
+.radio u{width:14px;height:14px;border-radius:50%;border:2px solid var(--orange-d);text-decoration:none}
+.radio div.on u{background:var(--orange-d);box-shadow:inset 0 0 0 3px var(--orange)}
+.toggle{width:64px;height:34px;border-radius:999px;background:var(--teal);position:relative;margin-top:8px}
+.toggle::after{content:"";position:absolute;right:4px;top:4px;width:26px;height:26px;border-radius:50%;background:var(--cyan);transition:right .3s}
+.w.t-off .toggle::after{right:34px}
+.code{font:500 12px/1.6 ui-monospace,Menlo,monospace;color:#C9C2FF;white-space:pre}
+.code b{color:#FF9BC2;font-weight:500}.code em{color:#7CF3FF;font-style:normal}
+
+/* logos */
+.logos{padding-block:40px 120px;display:grid;grid-template-columns:repeat(5,1fr);gap:36px 24px;align-items:center;justify-items:center}
+.logos span{font-size:24px;color:#555B5B;font-weight:700;letter-spacing:-.02em;opacity:.85}
+.note{font-size:13px;color:var(--ink2)}
+
+/* demo strip */
+.demo{padding-block:40px 120px;text-align:center;overflow:hidden}
+.demo .disp{font-size:clamp(44px,6.4vw,84px)}
+.demo .row{display:block;will-change:transform}
+.bezel{max-width:1200px;margin:56px auto 0;background:#EDEFEF;border-radius:44px;padding:20px;box-shadow:inset 0 0 0 1px var(--line)}
+.screen{background:var(--ink);border-radius:28px;min-height:520px;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center;text-align:left;padding:48px}
+.screen .copy{color:#fff;display:grid;gap:18px;max-width:440px}
+.screen .copy b{font-family:var(--display);font-weight:850;font-variation-settings:"wdth" 108;text-transform:uppercase;font-size:clamp(32px,3.4vw,46px);line-height:.95;letter-spacing:-.03em}
+.screen .copy p{color:#B9C2C2}
+.timer{font:700 64px var(--display);color:var(--cyan);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.phone{justify-self:center;width:290px;height:440px;border-radius:36px;background:#fff;padding:22px 14px;display:flex;flex-direction:column;gap:8px;overflow:hidden;box-shadow:0 0 0 8px #2A2F2F}
+.msg{max-width:82%;padding:9px 12px;border-radius:16px;font-size:13px;line-height:1.35;opacity:0;transform:translateY(10px) scale(.96);transition:opacity .35s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.msg.show{opacity:1;transform:none}
+.msg.in{background:var(--grey);align-self:flex-start}
+.msg.out{background:var(--violet3);color:#fff;align-self:flex-end}
+.msg.sys{align-self:center;background:transparent;color:var(--ink2);font-size:11px}
+.play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120px;height:120px;border-radius:50%;background:var(--cyan);border:0;display:grid;place-items:center;cursor:pointer;box-shadow:var(--tactile);transition:transform .2s,opacity .3s}
+.play:hover{transform:translate(-50%,-50%) scale(1.06)}
+.screen.playing .play{opacity:0;pointer-events:none}
+
+/* process */
+.process{padding-block:80px 140px}
+.center-h{text-align:center;font-size:clamp(38px,4.6vw,56px);margin-bottom:72px}
+.proc{display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:center}
+.proc > *{min-width:0}
+.steps{display:grid;gap:8px}
+.step{border:0;background:transparent;text-align:left;cursor:pointer;border-radius:16px;padding:22px 32px;display:grid;gap:14px;transition:background .4s}
+.step .disp{font-size:clamp(28px,2.7vw,40px);color:#8E9292;transition:color .4s}
+.step .num{font:600 13px var(--sans);color:var(--ink2)}
+.step .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1)}
+.step .body > div{overflow:hidden;display:grid;gap:14px}
+.step p{color:var(--ink2);font-size:16px}
+.step .meta{display:flex;gap:8px;flex-wrap:wrap}
+.step .meta span{font-size:13px;font-weight:600;background:#fff;border-radius:999px;padding:4px 10px}
+.prog{height:4px;border-radius:2px;background:#DAD6F0;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--violet4)}
+.step.on{background:var(--violet-xl)}
+.step.on .disp{color:var(--violet4)}
+.step.on .body{grid-template-rows:1fr}
+.visual{position:relative;aspect-ratio:1/1;max-width:600px;justify-self:end;width:100%}
+.visual .blob{position:absolute;inset:0;background:var(--violet);border-radius:46% 54% 50% 50% / 40% 40% 60% 60%;transition:border-radius 1s,background .6s,transform 1s cubic-bezier(.2,.8,.2,1)}
+.visual .win{position:absolute;left:12%;right:-2%;top:14%;bottom:12%;background:#fff;border-radius:22px;border:2px solid var(--ink);box-shadow:0 8px 0 0 var(--ink);padding:22px;display:grid;gap:12px;align-content:start;overflow:hidden}
+.vview{display:none;gap:10px}
+.vview.on{display:grid;animation:vin .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes vin{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.vview h4{margin:0;font:700 22px var(--sans);letter-spacing:-.02em}
+.row-i{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--bg);font-size:15px}
+.row-i b{font-weight:600}
+.chip{font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px}
+.flow{display:grid;gap:8px;justify-items:start}
+.flow .n{border:2px solid var(--ink);border-radius:12px;padding:10px 14px;font-weight:600;font-size:15px;background:#fff;box-shadow:0 3px 0 var(--ink)}
+.flow .n.c{background:var(--cyan)}
+.flow .ar{width:2px;height:16px;background:var(--ink);margin-left:24px}
+.bigstat{font:850 64px var(--display);font-variation-settings:"wdth" 108;letter-spacing:-.04em;line-height:1}
+
+/* stacked colour panels */
+.stack{padding-bottom:120px}
+.panel{position:sticky;top:120px;border-radius:24px;padding:56px 48px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;min-height:520px;margin-bottom:40px;transform-origin:50% 0;overflow:hidden}
+.panel h2{font-size:clamp(40px,5vw,66px)}
+.panel p{font-size:18px;max-width:560px;margin-top:28px}
+.panel .btn{margin-top:36px;padding:20px 30px;font-size:18px}
+.panel.y{background:var(--yellow);color:var(--yellow-d)}
+.panel.y .btn{background:var(--yellow-d);color:#fff}
+.panel.v{background:var(--violet);color:var(--navy)}
+.panel.v .btn{background:var(--navy);color:#fff}
+.panel.o{background:var(--orange);color:var(--orange-d)}
+.panel.o .btn{background:var(--orange-d);color:#fff}
+.panel .art{justify-self:center;max-width:100%}
+.panel .art svg{display:block;max-width:100%;height:auto}
+.panel ul{margin:24px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:17px;font-weight:500}
+.panel li{display:flex;gap:10px}
+.panel li::before{content:"";flex:none;width:10px;height:6px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:rotate(-45deg);margin-top:8px}
+
+/* portfolio */
+.work{padding-block:40px 120px}
+.work-h{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:72px}
+.work-h h2{font-size:clamp(44px,6vw,84px)}
+.work-h p{font-size:18px;color:var(--ink2);max-width:460px;justify-self:end}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.filters button{border:0;border-radius:999px;padding:9px 16px;background:var(--grey);font-weight:600;font-size:14px;cursor:pointer;transition:background .2s,color .2s}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.col{display:grid;gap:40px}
+.col.b{margin-top:140px}
+.case{display:block;border:2px solid var(--ink);border-radius:18px;overflow:hidden;background:#fff;transition:box-shadow .3s,transform .3s;cursor:pointer;text-align:left;padding:0;width:100%}
+.case:hover{box-shadow:0 8px 0 0 var(--ink);transform:translateY(-6px)}
+.case.hide{display:none}
+.cover{position:relative;aspect-ratio:16/11;overflow:hidden;display:grid;place-items:center;border-bottom:2px solid var(--ink)}
+.cover .mock{width:78%;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.case:hover .cover .mock{transform:scale(1.05) rotate(-1.5deg)}
+.cover .metric{position:absolute;left:24px;bottom:18px;font:850 64px var(--display);font-variation-settings:"wdth" 108;letter-spacing:-.04em;line-height:1}
+.cover .tag{position:absolute;right:16px;top:16px;background:#fff;border:2px solid var(--ink);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700}
+.case .bd{padding:26px 28px 28px;display:grid;gap:12px}
+.case h3{font-size:clamp(24px,2.2vw,32px);font-weight:600;letter-spacing:-.02em;line-height:1.12}
+.case .who{color:var(--ink2);font-size:16px}
+.case .tags{display:flex;gap:6px;flex-wrap:wrap}
+.case .tags span{font-size:12px;font-weight:600;background:var(--grey);border-radius:999px;padding:3px 10px}
+.case .read{font-weight:700;font-size:17px;color:var(--teal)}
+.mock-ui{background:#fff;border-radius:12px;border:2px solid var(--ink);box-shadow:0 6px 0 var(--ink);padding:14px;display:grid;gap:8px;font-size:12px}
+.mock-ui .r{display:flex;justify-content:space-between;gap:8px;padding:7px 9px;border-radius:8px;background:var(--bg)}
+.mock-ui .r b{font-weight:700}
+.bubble{position:fixed;left:0;top:0;z-index:70;width:120px;height:120px;border-radius:50%;background:var(--cyan);display:grid;place-items:center;font-weight:700;font-size:17px;pointer-events:none;transform:translate(-50%,-50%) scale(0);box-shadow:var(--tactile)}
+
+/* reviews */
+.reviews{padding-block:80px 140px}
+.rv{display:grid;grid-template-columns:.85fr 1fr 1fr;gap:20px;align-items:start}
+.rv-h{position:sticky;top:140px;display:grid;gap:40px;padding-right:20px}
+.rv-h h2{font-size:clamp(36px,3.8vw,52px)}
+.rv-col{display:grid;gap:20px}
+.rv-col.b{margin-top:60px}
+.card{border-radius:16px;padding:26px;display:grid;gap:30px}
+.card q{quotes:none;font-size:clamp(20px,1.8vw,26px);line-height:1.15;letter-spacing:-.01em;font-weight:500}
+.card .by{font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px}
+.card .by i{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700}
+.card.stat{gap:4px;padding:22px 26px}
+.card.stat b{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.c-v{background:var(--violet-xl);color:var(--navy2)} .c-v .by i{background:var(--violet-l)}
+.c-p{background:var(--pink-l);color:var(--pink-d)} .c-p .by i{background:#FFD3E2}
+.c-g{background:var(--lime-l);color:var(--lime-d)} .c-g .by i{background:#D9F5BD}
+.c-o{background:var(--orange-l);color:var(--orange-d)} .c-o .by i{background:#FFD8CB}
+.s-o{background:#311005;color:var(--orange)} .s-g{background:#1C3A08;color:var(--lime)} .s-y{background:var(--yellow-d);color:var(--yellow)} .s-v{background:var(--navy);color:var(--violet)}
+
+/* pricing */
+.pricing{padding-block:80px 140px}
+.pr-h{text-align:center;display:grid;gap:22px;justify-items:center;margin-bottom:56px}
+.pr-h h2{font-size:clamp(40px,5.4vw,72px)}
+.pr-h p{color:var(--ink2);font-size:18px;max-width:620px}
+.switch{display:inline-flex;background:var(--grey);border-radius:12px;padding:5px;gap:4px;box-shadow:var(--tactile)}
+.switch button{border:0;background:transparent;border-radius:8px;padding:11px 20px;font-weight:600;font-size:16px;cursor:pointer;transition:background .25s,color .25s}
+.switch button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+.plan{background:#fff;border:2px solid var(--ink);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:18px;position:relative;transition:transform .3s,box-shadow .3s}
+.plan:hover{transform:translateY(-6px);box-shadow:0 8px 0 0 var(--ink)}
+.plan.pick{background:var(--cyan)}
+.plan .badge{position:absolute;top:-16px;left:28px;background:var(--ink);color:#fff;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700}
+.plan h3{font-family:var(--display);font-weight:850;font-variation-settings:"wdth" 108;text-transform:uppercase;letter-spacing:-.03em;font-size:30px;line-height:1}
+.plan .who{color:var(--ink2);font-size:16px;min-height:2.9em}
+.plan.pick .who{color:#0B4146}
+.plan .price{font:850 54px var(--display);font-variation-settings:"wdth" 104;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.plan .price small{font:500 16px var(--sans);letter-spacing:0;color:var(--ink2)}
+.plan.pick .price small{color:#0B4146}
+.plan .terms{font-size:14px;font-weight:600}
+.plan ul{list-style:none;margin:0;padding:18px 0 0;border-top:2px dashed rgba(12,15,15,.18);display:grid;gap:10px;font-size:16px}
+.plan li{display:flex;gap:10px}
+.plan li::before{content:"";flex:none;width:10px;height:6px;border-left:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(-45deg);margin-top:8px}
+.plan .btn{margin-top:auto;justify-content:center}
+.plan.pick .btn{background:var(--ink);color:#fff}
+.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.extra{background:#fff;border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;gap:12px;align-items:center;box-shadow:var(--tactile);border:1px solid var(--line)}
+.extra b{font-size:16px}
+.extra span{font-size:14px;color:var(--ink2)}
+.extra strong{white-space:nowrap;font-size:16px}
+.trust{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:40px;font-size:15px;color:var(--ink2)}
+.trust span{display:flex;align-items:center;gap:8px}
+.trust span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan-d)}
+
+/* close + footer */
+.close{background:var(--teal);color:#fff;padding-block:120px 0;text-align:center}
+.close h2{font-size:clamp(46px,7vw,96px)}
+.close .sub{max-width:660px;margin:26px auto 44px;font-size:18px;color:#CFE3E4}
+.close .tile .ic{background:var(--ink)}
+footer.ft{background:var(--teal);color:#fff;padding-block:100px 40px}
+.fcols{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;max-width:960px;margin:0 auto}
+.fcols h4{margin:0 0 22px;font-size:14px;font-weight:600;color:#8FB4B6;text-transform:uppercase;letter-spacing:.02em}
+.fcols ul{list-style:none;margin:0;padding:0;display:grid;gap:14px;font-weight:600;font-size:15px}
+.fcols a:hover{color:var(--cyan)}
+.legal{max-width:960px;margin:72px auto 0;padding-top:24px;border-top:1px solid var(--teal2);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#8FB4B6;font-size:14px}
+
+/* dialogs */
+dialog{border:2px solid var(--ink);border-radius:20px;padding:0;max-width:640px;width:calc(100% - 32px);box-shadow:0 10px 0 0 var(--ink);background:#fff;color:var(--ink)}
+dialog.wide{max-width:900px}
+dialog::backdrop{background:rgba(3,45,48,.55);backdrop-filter:blur(3px)}
+.dlg{padding:32px;display:grid;gap:18px;max-height:calc(100vh - 80px);overflow:auto}
+.dlg .x{justify-self:end;border:0;background:var(--grey);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:20px;line-height:1}
+.dlg h2{font-size:clamp(30px,3.4vw,44px)}
+form{display:grid;gap:14px}
+label{display:grid;gap:6px;font-weight:600;font-size:14px}
+input,select,textarea{font:400 16px var(--sans);border:2px solid var(--ink);border-radius:10px;padding:12px 14px;background:#fff;color:var(--ink);width:100%}
+input:focus,select:focus,textarea:focus{outline:none;box-shadow:0 0 0 4px var(--cyan)}
+textarea{min-height:110px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.err{color:#C01F4E;font-size:14px;min-height:1em;font-weight:600}
+.ok{background:var(--lime-l);border:2px solid var(--lime-d);border-radius:12px;padding:16px;display:grid;gap:10px;color:var(--lime-d)}
+.ok pre{white-space:pre-wrap;margin:0;font:400 13px/1.5 ui-monospace,Menlo,monospace;max-height:170px;overflow:auto;color:var(--ink)}
+.cs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cs-grid h4{margin:0 0 8px;font-size:15px}
+.cs-grid ul{margin:0;padding-left:18px;display:grid;gap:6px;font-size:15px;color:var(--ink2)}
+.cs-res{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.cs-res div{background:var(--bg);border-radius:12px;padding:14px;display:grid;gap:4px}
+.cs-res b{font:850 32px var(--display);font-variation-settings:"wdth" 104;letter-spacing:-.04em}
+.cs-res span{font-size:13px;color:var(--ink2)}
+
+@media (max-width:1100px){
+  .nav ul{display:none}
+  .w.hide-md{display:none}
+  .console{grid-template-columns:1fr 1fr}.console .pane.l3{display:none}
+  .rv{grid-template-columns:1fr 1fr}.rv-h{grid-column:1 / -1;position:static;padding:0}
+  .plans{grid-template-columns:1fr}
+  .extras{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .bar{padding:0 20px;height:66px}
+  .nav.scrolled .bar{margin-top:10px;max-width:calc(100% - 20px);padding:0 16px}
+  .nav .r .li{display:none}
+  .hero{padding-top:140px}
+  .w{display:none}.w.keep{display:block}
+  .console{grid-template-columns:1fr;max-width:420px}.console .pane.l2{display:none}
+  .docs{grid-template-columns:1fr 1fr}.docs .doc:nth-child(n+3){display:none}
+  .logos{grid-template-columns:repeat(2,1fr)}
+  .screen{grid-template-columns:1fr;padding:28px;gap:28px}
+  .bezel{padding:10px;border-radius:30px}
+  .proc{grid-template-columns:1fr;gap:40px}
+  .visual{justify-self:center}
+  .step{padding:18px 20px}
+  .panel{grid-template-columns:1fr;padding:36px 24px;top:90px;min-height:0}
+  .panel .art{max-width:260px}
+  .work-h{grid-template-columns:1fr}.work-h p{justify-self:start}
+  .cases{grid-template-columns:1fr}.col.b{margin-top:0}
+  .cover{aspect-ratio:auto;place-items:start center;padding:56px 0 84px}.cover .mock{width:86%}.cover .metric{font-size:48px;bottom:16px}
+  .rv{grid-template-columns:1fr}.rv-col.b{margin-top:0}
+  .fcols{grid-template-columns:1fr 1fr}
+  .two,.cs-grid,.cs-res{grid-template-columns:1fr}
+  .tile{min-width:0;width:100%}
+  .dlg{padding:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  .panel{position:relative;top:0}
+}
+</style>
+</head>
+<body>
+
+<header class="nav top-clear" id="nav">
+  <div class="bar">
+    <a class="logo" href="#top" aria-label="RoundHouse home">
+      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2a12 12 0 0 1 12 12h-6a6 6 0 0 0-6-6z" fill="#0C0F0F"/><path d="M14 26A12 12 0 0 1 2 14h6a6 6 0 0 0 6 6z" fill="#0C0F0F"/><circle cx="14" cy="14" r="3" fill="#38E8F5"/></svg>
+      RoundHouse
+    </a>
+    <ul>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#reviews">Clients</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div class="r"><a class="li" href="#pricing">Plans</a><button class="btn" type="button" data-open="contact">Book a call</button></div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <h1 id="h1" class="disp"><span class="ln"><span>Your business,</span></span><span class="ln"><span>fully automated</span></span></h1>
+    <p class="sub" id="hero-sub">RoundHouse is the automation agency for US businesses. We find where work stalls, build the fix at a fixed price, and keep it running, from lead replies and quotes to invoices, CRM and reporting.</p>
+    <div class="ctas" id="hero-ctas">
+      <button class="tile" type="button" data-open="contact"><span class="ic"><svg width="22" height="22" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2a12 12 0 0 1 12 12h-6a6 6 0 0 0-6-6z" fill="#fff"/><path d="M14 26A12 12 0 0 1 2 14h6a6 6 0 0 0 6 6z" fill="#fff"/><circle cx="14" cy="14" r="3" fill="#38E8F5"/></svg></span>Book a 30-minute call</button>
+      <a class="tile grey" href="#work">See the work</a>
+    </div>
+  </div>
+
+  <div class="stage wrap" id="stage">
+    <!-- floating 3D tokens -->
+    <div class="w hide-md" data-depth="1.2" style="left:2%;top:-2%"><div class="in"><div class="face" style="background:var(--lime);--edge:var(--lime-e);color:var(--lime-d);--rz:-9deg"><span class="lb">Reply time</span><div class="seg"><span class="on">90 s</span><span>1 h</span><span>4 h</span></div></div></div></div>
+    <div class="w hide-md" data-depth=".8" style="left:-3%;top:34%"><div class="in"><div class="face" style="background:var(--orange);--edge:var(--orange-e);color:var(--orange-d);--rz:-12deg;border-radius:999px;padding:12px 16px"><div class="pager"><i>‹</i>Web form<i>›</i></div></div></div></div>
+    <div class="w" data-depth="1.5" style="left:4%;top:66%"><div class="in"><div class="face" style="background:var(--yellow);--edge:var(--yellow-e);color:var(--yellow-d);width:250px;--rz:-4deg"><span class="lb">Team size</span><div class="slider"></div><div class="ticks"><span>10</span><span>50</span><span>250</span></div></div></div></div>
+    <div class="w hide-md" data-depth="1" style="left:12%;top:-12%"><div class="in"><div class="face" style="background:var(--violet);--edge:var(--violet3);width:64px;height:64px;padding:0;--rz:8deg;border-radius:14px" aria-hidden="true"></div></div></div>
+    <div class="w keep t-on" id="tog" data-depth="1.1" style="right:22%;top:-14%"><div class="in"><div class="face" style="background:var(--cyan);--edge:var(--cyan-d);color:var(--teal);--rz:10deg;cursor:pointer" title="Toggle auto-reply"><span class="lb">Auto-reply</span><div class="toggle"></div></div></div></div>
+    <div class="w hide-md" data-depth=".7" style="right:-4%;top:-22%"><div class="in"><div class="face" style="background:var(--navy);--edge:#000;--rz:14deg;--rx:10deg;padding:18px 22px"><div class="code">{
+  <b>"on"</b>: <em>"lead.created"</em>,
+  <b>"reply"</b>: <em>"sms + email"</em>,
+  <b>"within"</b>: <em>"90s"</em>,
+  <b>"ask"</b>: [<em>"service"</em>, <em>"zip"</em>],
+  <b>"book"</b>: <em>"open slots"</em>,
+  <b>"log"</b>: <em>"hubspot"</em>
+}</div></div></div></div>
+    <div class="w" data-depth="1.3" style="right:-2%;top:22%"><div class="in"><div class="face" style="background:var(--orange);--edge:var(--orange-e);color:var(--orange-d);--rz:12deg"><span class="lb">Approval</span><div class="radio"><div class="on"><i>A</i><u></u>Auto</div><div><i>R</i><u></u>Review</div><div><i>M</i><u></u>Manual</div></div></div></div></div>
+    <div class="w hide-md" data-depth="1.6" style="right:6%;top:62%"><div class="in"><div class="face" style="background:var(--pink);--edge:var(--pink-e);color:var(--pink-d);width:230px;height:190px;--rz:16deg"><span class="lb">Payback</span><p class="bigstat" style="font-size:44px;margin-top:10px">6 wks</p><p style="font-weight:600;font-size:13px">HVAC lead replies, sample</p></div></div></div>
+    <div class="w hide-md" data-depth=".9" style="left:20%;top:88%"><div class="in"><div class="face" style="background:var(--lime);--edge:var(--lime-e);color:var(--lime-d);--rz:-14deg;border-radius:999px;padding:10px 14px"><div class="pager" style="font-size:16px"><i>‹</i>12 automations live<i>›</i></div></div></div></div>
+    <div class="w hide-md" data-depth="1.4" style="right:30%;top:94%"><div class="in"><div class="face" style="background:var(--yellow);--edge:var(--yellow-e);width:56px;height:56px;padding:0;--rz:-10deg;border-radius:12px" aria-hidden="true"></div></div></div>
+
+    <div class="console" aria-label="Example RoundHouse client console">
+      <div class="pane"><span class="t">Hours saved per week, by process</span>
+        <div class="bars">
+          <div class="b"><i style="height:30px;background:var(--violet4)"></i><i style="height:22px;background:var(--violet3)"></i><i style="height:14px;background:var(--violet)"></i><i style="height:10px;background:var(--violet-l)"></i></div>
+          <div class="b"><i style="height:42px;background:var(--violet4)"></i><i style="height:18px;background:var(--violet3)"></i><i style="height:20px;background:var(--violet)"></i><i style="height:12px;background:var(--violet-l)"></i></div>
+          <div class="b"><i style="height:24px;background:var(--violet4)"></i><i style="height:30px;background:var(--violet3)"></i><i style="height:18px;background:var(--violet)"></i><i style="height:14px;background:var(--violet-l)"></i></div>
+          <div class="b"><i style="height:34px;background:var(--violet4)"></i><i style="height:26px;background:var(--violet3)"></i><i style="height:22px;background:var(--violet)"></i><i style="height:16px;background:var(--violet-l)"></i></div>
+        </div>
+        <div class="lg"><span>Leads</span><span>Quotes</span><span>Invoices</span><span>Reports</span></div>
+      </div>
+      <div class="pane l2"><span class="t">Today</span><div class="donut"><b>147<small>leads handled</small></b></div><div class="list" style="font-size:10px"><div style="padding:4px 0"><span style="width:8px;height:8px;background:var(--violet3);border-radius:2px"></span>Booked<span style="margin-left:auto">91</span></div><div style="padding:4px 0"><span style="width:8px;height:8px;background:var(--violet);border-radius:2px"></span>Qualifying<span style="margin-left:auto">32</span></div><div style="padding:4px 0"><span style="width:8px;height:8px;background:var(--violet-l);border-radius:2px"></span>Not a fit<span style="margin-left:auto">24</span></div></div></div>
+      <div class="pane l3"><span class="t">Automations</span><div class="list">
+        <div><span class="ic">✓</span><span><b>Lead reply</b><small>Live · 12 s ago</small></span></div>
+        <div><span class="ic">✓</span><span><b>Quote engine</b><small>Live · 3 min ago</small></span></div>
+        <div><span class="ic">↻</span><span><b>Invoice match</b><small>2 waiting for review</small></span></div>
+        <div><span class="ic">◷</span><span><b>Weekly ops report</b><small>Monday 7:00</small></span></div>
+      </div></div>
+      <div class="docs">
+        <div class="doc" style="background:var(--violet3);color:#fff;border-color:var(--violet3)"><span class="k">● ROUNDHOUSE</span><h4>Quote Q-2291</h4><p>14 parts, A36 steel, 3 weeks</p><span class="blk" style="background:rgba(255,255,255,.18)"></span></div>
+        <div class="doc" style="background:var(--violet-xl);color:var(--violet4)"><span class="k">● ROUNDHOUSE</span><h4>Invoice match</h4><p>Carrier 4471, rate checked</p><span class="blk" style="background:var(--violet-l)"></span></div>
+        <div class="doc" style="background:#fff;color:var(--violet4)"><span class="k">● ROUNDHOUSE</span><h4>Weekly report</h4><p>Hours saved 26.5</p><span class="blk" style="background:var(--violet-xl)"></span></div>
+        <div class="doc" style="background:var(--violet-l);color:var(--violet4)"><span class="k">● ROUNDHOUSE</span><h4>New client set-up</h4><p>Contract, forms, tasks</p><span class="blk" style="background:#fff"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="logos" aria-label="Sample client types">
+    <span>NORTHLINE</span><span style="font-family:Georgia,serif;font-style:italic">Keller Fab</span><span style="letter-spacing:.12em;font-weight:500">PEACHTREE</span><span>carolina pt</span><span style="font-weight:900">REDLINE</span>
+    <span style="font-family:Georgia,serif">Bluegrass</span><span style="letter-spacing:.2em;font-weight:500">SUMMIT</span><span style="font-weight:900;font-style:italic">OHIO STEEL</span><span>Lakeshore</span><span style="font-family:Georgia,serif;font-weight:700">Pinecrest</span>
+  </div>
+</div>
+
+<section class="demo" aria-labelledby="demo-h">
+  <h2 id="demo-h" class="disp"><span class="row" data-dir="-1">Watch a lead</span><span class="row" data-dir="1">get answered</span><span class="row" data-dir="-1">in 90 seconds</span></h2>
+  <div class="wrap">
+    <div class="bezel">
+      <div class="screen" id="screen">
+        <div class="copy"><span class="timer" id="timer">0:00</span><b>Every enquiry, any hour</b><p>A text and an email within two minutes of every form, missed call and chat. An AI assistant asks the right questions and books an open slot. Before RoundHouse, this sample HVAC company replied in 3 hours 40 minutes.</p></div>
+        <div class="phone" id="phone" aria-live="polite"></div>
+        <button class="play" id="play" type="button" aria-label="Play the demo"><svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M12 7l22 13-22 13z" fill="#0C0F0F"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process" aria-labelledby="proc-h">
+  <div class="wrap">
+    <h2 class="disp center-h" id="proc-h"><span class="ln"><span>Here is how</span></span><span class="ln"><span>RoundHouse works</span></span></h2>
+    <div class="proc">
+      <div class="steps" id="steps" role="tablist" aria-label="Process steps">
+        <button class="step on" type="button" role="tab" aria-selected="true" data-i="0" data-c="#9877FF"><span class="num">Step 1 · 2–3 weeks</span><span class="disp">Diagnose</span><span class="body"><div><p>A paid audit of your tools, data and workflows. You get a 90-day roadmap ranked by hours saved, with a fixed price for every step.</p><div class="meta"><span>$2,500–$6,000</span><span>Credited to your build within 60 days</span></div><span class="prog"><i></i></span></div></span></button>
+        <button class="step" type="button" role="tab" aria-selected="false" data-i="1" data-c="#38E8F5"><span class="num">Step 2 · 4–10 weeks</span><span class="disp">Design &amp; build</span><span class="body"><div><p>The automation, AI agent, CRM, brand or website the roadmap calls for, scoped and priced before work starts, built inside your own accounts.</p><div class="meta"><span>$4,000–$40,000</span><span>Fixed scope and price</span></div><span class="prog"><i></i></span></div></span></button>
+        <button class="step" type="button" role="tab" aria-selected="false" data-i="2" data-c="#FFCA38"><span class="num">Step 3 · Launch week</span><span class="disp">Launch &amp; train</span><span class="body"><div><p>We switch it on with your team, run a training session and hand over a runbook, so your people can own it without us.</p><div class="meta"><span>Runbook</span><span>30 days of fixes included</span></div><span class="prog"><i></i></span></div></span></button>
+        <button class="step" type="button" role="tab" aria-selected="false" data-i="3" data-c="#8BE33B"><span class="num">Step 4 · Every month</span><span class="disp">Run &amp; improve</span><span class="body"><div><p>Monitoring, fixes when a tool changes, new automations each month and one page that shows the hours saved against your baseline.</p><div class="meta"><span>from $1,800/mo</span><span>Month to month after 3 months</span></div><span class="prog"><i></i></span></div></span></button>
+      </div>
+      <div class="visual" aria-hidden="true">
+        <div class="blob" id="blob"></div>
+        <div class="win">
+          <div class="vview on" data-v="0"><h4>90-day roadmap</h4>
+            <div class="row-i"><b>1. Instant lead replies</b><span class="chip" style="background:var(--violet-l)">11 h/wk</span></div>
+            <div class="row-i"><b>2. Quote engine</b><span class="chip" style="background:var(--violet-l)">9 h/wk</span></div>
+            <div class="row-i"><b>3. Cancel 14 unused seats</b><span class="chip" style="background:var(--lime-l)">$3.2k/mo</span></div>
+            <div class="row-i"><b>4. Monday dashboard</b><span class="chip" style="background:var(--violet-l)">4 h/wk</span></div>
+            <p style="font-size:14px;color:var(--ink2)">Baseline recorded: first reply 3 h 40 min</p></div>
+          <div class="vview" data-v="1"><h4>Lead reply flow</h4><div class="flow"><span class="n c">New enquiry</span><span class="ar"></span><span class="n">Text + email in 90 s</span><span class="ar"></span><span class="n">AI asks service, urgency, ZIP</span><span class="ar"></span><span class="n">Book open slot · log to HubSpot</span></div></div>
+          <div class="vview" data-v="2"><h4>Go-live checklist</h4>
+            <div class="row-i"><b>Flows tested on 40 enquiries</b><span class="chip" style="background:var(--lime-l)">Done</span></div>
+            <div class="row-i"><b>Team training session</b><span class="chip" style="background:var(--lime-l)">Done</span></div>
+            <div class="row-i"><b>Runbook handed over</b><span class="chip" style="background:var(--lime-l)">Done</span></div>
+            <div class="row-i"><b>Access reviewed, MFA on</b><span class="chip" style="background:var(--lime-l)">Done</span></div></div>
+          <div class="vview" data-v="3"><h4>October report</h4><p class="bigstat">26.5 h</p><p style="color:var(--ink2);font-size:15px">saved this week, against the baseline</p>
+            <div class="row-i"><b>Automation runs completed</b><span>99.8%</span></div>
+            <div class="row-i"><b>New automations shipped</b><span>2</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stack wrap" aria-label="Why RoundHouse">
+  <div class="panel y">
+    <div><h2 class="disp">Powering the people behind the work</h2><p>Dispatchers, estimators and accounts teams spend their days re-keying, chasing and waiting. We take that off them, so the people who know your business get to do the work only they can do.</p><button class="btn" type="button" data-open="contact">About us</button></div>
+    <div class="art" aria-hidden="true">
+      <svg width="360" height="360" viewBox="0 0 360 360" fill="none" stroke="#2F2302" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M60 300c-30-80 10-210 120-230 110-20 170 60 150 150-20 90-90 110-150 110S80 340 60 300z" fill="#D9A21B" stroke="none"/>
+        <rect x="120" y="70" width="120" height="96" rx="22" fill="#FFCA38"/><rect x="140" y="92" width="80" height="48" rx="10" fill="#2F2302"/>
+        <path d="M158 112l10 8-10 8M202 112l-10 8 10 8" stroke="#FFCA38"/>
+        <path d="M180 166v14"/><rect x="110" y="180" width="140" height="100" rx="24" fill="#FFCA38"/>
+        <circle cx="180" cy="230" r="22" fill="#FFF3C4"/><path d="M180 208a22 22 0 0 1 22 22h-11a11 11 0 0 0-11-11z" fill="#2F2302" stroke="none"/><path d="M180 252a22 22 0 0 1-22-22h11a11 11 0 0 0 11 11z" fill="#2F2302" stroke="none"/>
+        <path d="M110 200c-30 0-46-30-40-60" /><rect x="50" y="110" width="40" height="34" rx="10" fill="#FFCA38" transform="rotate(-20 70 127)"/>
+        <path d="M250 200c30 10 50 40 44 70"/><rect x="276" y="262" width="40" height="34" rx="10" fill="#FFCA38"/>
+        <path d="M150 280v40M210 280v40"/><rect x="118" y="312" width="58" height="24" rx="8" fill="#FFCA38"/><rect x="194" y="312" width="58" height="24" rx="8" fill="#FFCA38"/>
+      </svg>
+    </div>
+  </div>
+  <div class="panel v">
+    <div><h2 class="disp">Open by default, yours by design</h2><p>We build in the tools you already pay for: HubSpot, Microsoft 365, QuickBooks, Slack, Twilio and your ERP. You own the code, automations, prompts and documentation. No lock-in, no new platform to adopt.</p><button class="btn" type="button" data-open="contact">Talk to an engineer</button></div>
+    <div class="art" aria-hidden="true">
+      <div style="background:#141127;border-radius:18px;padding:20px;width:320px;max-width:100%;transform:perspective(900px) rotateX(16deg) rotateZ(6deg);box-shadow:0 12px 0 #08022F,0 30px 50px -10px rgba(8,2,47,.5);color:#fff;font-size:13px;display:grid;gap:10px">
+        <b style="font-size:15px">Connected in your stack</b>
+        <div style="display:flex;justify-content:space-between;background:#221C44;border-radius:8px;padding:9px 12px"><span>HubSpot</span><span style="color:#8BE33B">● Connected</span></div>
+        <div style="display:flex;justify-content:space-between;background:#221C44;border-radius:8px;padding:9px 12px"><span>QuickBooks</span><span style="color:#8BE33B">● Connected</span></div>
+        <div style="display:flex;justify-content:space-between;background:#221C44;border-radius:8px;padding:9px 12px"><span>Twilio SMS</span><span style="color:#8BE33B">● Connected</span></div>
+        <div style="display:flex;justify-content:space-between;background:#221C44;border-radius:8px;padding:9px 12px"><span>Field-service calendar</span><span style="color:#8BE33B">● Connected</span></div>
+        <span style="background:#38E8F5;color:#0C0F0F;border-radius:8px;padding:9px;text-align:center;font-weight:700">Export runbook</span>
+      </div>
+    </div>
+  </div>
+  <div class="panel o">
+    <div><h2 class="disp">Safe with your data</h2><ul><li>Mutual NDA before any discovery call</li><li>Least-privilege access in your own accounts, MFA required</li><li>Client data never used to train AI models</li><li>Our access removed and confirmed in writing at handover</li></ul><button class="btn" type="button" data-open="contact">Ask about security</button></div>
+    <div class="art" aria-hidden="true">
+      <svg width="300" height="300" viewBox="0 0 300 300" fill="none" stroke="#3A1206" stroke-width="5" stroke-linejoin="round">
+        <path d="M150 30l100 40v70c0 70-50 110-100 130-50-20-100-60-100-130V70z" fill="#FFF1EC"/>
+        <rect x="105" y="130" width="90" height="70" rx="14" fill="#FF764C"/><path d="M122 130v-22a28 28 0 0 1 56 0v22"/><circle cx="150" cy="162" r="9" fill="#3A1206"/><path d="M150 170v14" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="work wrap" id="work" aria-labelledby="work-h">
+  <div class="work-h">
+    <div><h2 class="disp" id="work-h"><span class="ln"><span>Selected</span></span><span class="ln"><span>work</span></span></h2>
+      <div class="filters" role="group" aria-label="Filter work"><button type="button" aria-pressed="true" data-f="all">All</button><button type="button" aria-pressed="false" data-f="auto">Automation</button><button type="button" aria-pressed="false" data-f="ai">AI agents</button><button type="button" aria-pressed="false" data-f="web">Brand &amp; web</button></div></div>
+    <p>Every project starts with a baseline in writing, so every result here is a number. These are sample engagements until client results replace them.</p>
+  </div>
+  <div class="cases" id="cases">
+    <div class="col a">
+      <button class="case" type="button" data-case="0" data-f="auto ai"><div class="cover" style="background:var(--cyan)"><span class="tag">Field services</span><div class="mock"><div class="mock-ui"><div class="r"><b>Dana R. · web form</b><span>42 s</span></div><div class="r"><b>Marcus T. · missed call</b><span>58 s</span></div><div class="r"><b>Priya S. · chat</b><span>31 s</span></div></div></div><span class="metric">90 s</span></div><div class="bd"><h3>Lead replies went from 3 h 40 min to 90 seconds</h3><p class="who">Regional HVAC and plumbing, 6 locations, Texas</p><div class="tags"><span>Lead replies</span><span>AI qualifier</span><span>HubSpot</span></div><span class="read">Read the case study</span></div></button>
+      <button class="case" type="button" data-case="2" data-f="auto ai"><div class="cover" style="background:var(--lime)"><span class="tag">Logistics</span><div class="mock"><div class="mock-ui"><div class="r"><b>Carrier 4471</b><span>Matched</span></div><div class="r"><b>Carrier 2210</b><span>Matched</span></div><div class="r" style="background:var(--orange-l)"><b>Carrier 0915</b><span>Rate +$84</span></div></div></div><span class="metric">−70%</span></div><div class="bd"><h3>Carrier invoices read, matched and posted</h3><p class="who">Third-party logistics, 140 staff, Georgia</p><div class="tags"><span>Document AI</span><span>Accounting sync</span></div><span class="read">Read the case study</span></div></button>
+    </div>
+    <div class="col b">
+      <button class="case" type="button" data-case="1" data-f="auto"><div class="cover" style="background:var(--violet)"><span class="tag">Manufacturing</span><div class="mock"><div class="mock-ui"><div class="r"><b>Quote Q-2291</b><span>$18,420</span></div><div class="r"><b>Material</b><span>ERP price</span></div><div class="r"><b>Estimator approval</b><span>✓</span></div></div></div><span class="metric">4 h</span></div><div class="bd"><h3>Quotes that took three days now go out in four hours</h3><p class="who">Metal fabrication shop, 85 staff, Ohio</p><div class="tags"><span>Quote engine</span><span>ERP</span><span>E-signature</span></div><span class="read">Read the case study</span></div></button>
+      <button class="case" type="button" data-case="3" data-f="web auto"><div class="cover" style="background:var(--yellow)"><span class="tag">Healthcare</span><div class="mock"><div class="mock-ui"><div class="r"><b>Unused seats cancelled</b><span>$38.4k/yr</span></div><div class="r"><b>Clinics on one CRM</b><span>9</span></div><div class="r"><b>New site, online booking</b><span>Live</span></div></div></div><span class="metric">$38k</span></div><div class="bd"><h3>An audit that paid for a new CRM, brand and website</h3><p class="who">Physical therapy group, 9 clinics, North Carolina</p><div class="tags"><span>Tool-spend audit</span><span>HubSpot</span><span>Brand &amp; web</span></div><span class="read">Read the case study</span></div></button>
+    </div>
+  </div>
+</section>
+
+<section class="reviews wrap" id="reviews" aria-labelledby="rv-h">
+  <div class="rv">
+    <div class="rv-h"><h2 class="disp" id="rv-h">Trusted by teams who take operations seriously</h2><p>Logos are nice. But numbers are better.<br><span class="note">Quotes and figures from sample engagements, replaced by client reviews before launch.</span></p></div>
+    <div class="rv-col">
+      <div class="card stat s-o"><b>90 s</b><span>Average first reply to a new lead</span></div>
+      <figure class="card c-p" style="margin:0"><q>We finally answer every enquiry, even the ones that come in at 9 at night. Nobody books with a competitor while we're on a job.</q><figcaption class="by"><i>OM</i>Operations manager, HVAC company, Texas</figcaption></figure>
+      <div class="card stat s-y"><b>$38.4k</b><span>Yearly software spend removed after one audit</span></div>
+      <figure class="card c-g" style="margin:0"><q>The audit paid for itself in five weeks, and the savings funded our new CRM.</q><figcaption class="by"><i>CEO</i>Chief executive, clinic group, North Carolina</figcaption></figure>
+    </div>
+    <div class="rv-col b">
+      <figure class="card c-v" style="margin:0"><q>Quotes go out the same morning now. Our two estimators send twice as many, and our win rate went from 22% to 29%.</q><figcaption class="by"><i>COO</i>Chief operating officer, fabrication shop, Ohio</figcaption></figure>
+      <div class="card stat s-g"><b>11 h</b><span>Dispatcher time returned every week</span></div>
+      <figure class="card c-o" style="margin:0"><q>Mismatched carrier invoices land in one queue with the reason shown. We caught 1.8% of spend in billing errors.</q><figcaption class="by"><i>AP</i>Accounts payable lead, 3PL, Georgia</figcaption></figure>
+      <div class="card stat s-v"><b>26 h</b><span>Accounts-payable time back each week</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing wrap" id="pricing" aria-labelledby="pr-h">
+  <div class="pr-h">
+    <h2 class="disp" id="pr-h"><span class="ln"><span>Simple, published</span></span><span class="ln"><span>pricing</span></span></h2>
+    <p>Fixed prices for every project and month-to-month retainers after launch. Your audit turns any range into one figure.</p>
+    <div class="switch" role="group" aria-label="Pricing type"><button type="button" aria-pressed="true" data-m="project">Projects</button><button type="button" aria-pressed="false" data-m="retainer">Monthly retainers</button></div>
+  </div>
+  <div class="plans" id="plans"></div>
+  <div class="extras">
+    <div class="extra"><div><b>Tool-spend audit</b><br><span>Usually pays for itself</span></div><strong>from $1,500</strong></div>
+    <div class="extra"><div><b>Staff AI workshop</b><br><span>Your team, on their own work</span></div><strong>$2,500 / session</strong></div>
+    <div class="extra"><div><b>Fractional automation lead</b><br><span>A named person, set hours</span></div><strong>from $6,000/mo</strong></div>
+  </div>
+  <div class="trust"><span>Mutual NDA</span><span>Fixed-price SOW</span><span>You own everything</span><span>9am–6pm ET support</span></div>
+</section>
+</main>
+
+<section class="close" aria-labelledby="close-h">
+  <div class="wrap">
+    <h2 class="disp" id="close-h"><span class="ln"><span>Build better</span></span><span class="ln"><span>operations—faster</span></span></h2>
+    <p class="sub">Join the field-service, manufacturing, logistics and clinic teams using RoundHouse to answer faster, quote faster and close the month without re-keying.</p>
+    <button class="tile" type="button" data-open="contact" style="margin:0 auto"><span class="ic"><svg width="22" height="22" viewBox="0 0 28 28" aria-hidden="true"><path d="M14 2a12 12 0 0 1 12 12h-6a6 6 0 0 0-6-6z" fill="#fff"/><path d="M14 26A12 12 0 0 1 2 14h6a6 6 0 0 0 6 6z" fill="#fff"/><circle cx="14" cy="14" r="3" fill="#38E8F5"/></svg></span>Book a 30-minute call</button>
+  </div>
+</section>
+<footer class="ft">
+  <div class="wrap">
+    <div class="fcols">
+      <div><h4>Services</h4><ul><li><a href="#process">Diagnose</a></li><li><a href="#process">Build</a></li><li><a href="#process">Run</a></li></ul></div>
+      <div><h4>Work</h4><ul><li><a href="#work">Case studies</a></li><li><a href="#reviews">Clients</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#top">About</a></li><li><a href="#pricing">Security</a></li></ul></div>
+      <div><h4>Pricing</h4><ul><li><a href="#pricing">Projects</a></li><li><a href="#pricing">Retainers</a></li></ul></div>
+      <div><h4>Get in touch</h4><ul><li><a href="#" data-open="contact">Book a call</a></li><li><span>hello@roundhouse.studio</span></li><li><a href="../index.html">All concepts</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 RoundHouse</span><span>9am–6pm Eastern, Monday to Friday</span></div>
+  </div>
+</footer>
+
+<div class="bubble" id="bubble" aria-hidden="true">View case</div>
+
+<dialog id="contact" aria-labelledby="ct-h">
+  <div class="dlg">
+    <button class="x" type="button" data-close aria-label="Close">×</button>
+    <h2 class="disp" id="ct-h">Book a 30-minute call</h2>
+    <p style="color:var(--ink2)">Talk to the person who would run your audit. We reply within one business day, 9am–6pm Eastern. Or write to hello@roundhouse.studio.</p>
+    <form id="form" novalidate>
+      <div class="two"><label for="f-name">Name<input id="f-name" name="name" autocomplete="name"></label><label for="f-email">Work email<input id="f-email" name="email" type="email" autocomplete="email"></label></div>
+      <div class="two"><label for="f-co">Company and team size<input id="f-co" name="company"></label><label for="f-budget">Budget<select id="f-budget" name="budget"><option>Under $10k</option><option>$10k–$25k</option><option>$25k–$50k</option><option>$50k+</option></select></label></div>
+      <label for="f-msg">Where does work stall?<textarea id="f-msg" name="message" placeholder="Missed calls sit in a shared inbox until a dispatcher is free."></textarea></label>
+      <p class="err" id="f-err" role="alert"></p>
+      <div><button class="btn" type="submit">Prepare my enquiry</button></div>
+      <div class="ok" id="f-ok" hidden><b>Your enquiry is ready. Copy it and send it to hello@roundhouse.studio.</b><pre id="f-out"></pre><div><button class="btn dark" type="button" id="f-copy">Copy enquiry</button></div></div>
+    </form>
+  </div>
+</dialog>
+<dialog id="casedlg" class="wide" aria-labelledby="cs-h"><div class="dlg" id="cs-body"></div></dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const hasG=typeof gsap!=="undefined"&&typeof ScrollTrigger!=="undefined";
+
+/* smooth scroll (Lenis), wired to ScrollTrigger like the reference */
+let lenis=null;
+if(!reduce&&typeof Lenis!=="undefined"){
+  lenis=new Lenis({duration:1.15,smoothWheel:true});
+  if(hasG){lenis.on("scroll",ScrollTrigger.update);gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+  else{const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf)}
+}
+$$('a[href^="#"]').forEach(a=>a.addEventListener("click",e=>{const id=a.getAttribute("href");if(id.length<2)return;const t=$(id);if(!t)return;e.preventDefault();lenis?lenis.scrollTo(t,{offset:-100}):t.scrollIntoView({behavior:reduce?"auto":"smooth"})}));
+
+/* header: full-width at the top, shrinks into a floating bar once you scroll */
+const nav=$("#nav");
+const onScroll=()=>{const y=window.scrollY;nav.classList.toggle("scrolled",y>24);nav.classList.toggle("top-clear",y<=24)};
+addEventListener("scroll",onScroll,{passive:true});onScroll();
+// highlight the section in view
+const secs=["process","work","reviews","pricing"].map(id=>$("#"+id));
+if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$(".nav ul a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});secs.forEach(s=>s&&io.observe(s))}
+
+/* dialogs */
+$$("[data-open]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();$("#"+b.dataset.open).showModal()}));
+$$("dialog").forEach(d=>{d.addEventListener("click",e=>{if(e.target===d||e.target.closest("[data-close]"))d.close()})});
+
+/* auto-reply toggle token */
+$("#tog .face").addEventListener("click",()=>{$("#tog").classList.toggle("t-off")});
+
+if(hasG&&!reduce){
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* hero: headline lines rise, then the tokens pop in with a spring */
+  const tl=gsap.timeline({defaults:{ease:"expo.out"}});
+  tl.from(".hero h1 .ln > span",{yPercent:110,duration:1.1,stagger:.1})
+    .from("#hero-sub,#hero-ctas",{y:24,opacity:0,duration:.9,stagger:.08},"-=.7")
+    .from(".console",{y:80,opacity:0,scale:.96,duration:1.2},"-=.6")
+    .from(".w .in",{scale:.2,opacity:0,y:60,rotate:()=>gsap.utils.random(-30,30),duration:1.1,ease:"back.out(1.8)",stagger:{each:.06,from:"random"}},"-=.9");
+
+  /* tokens drift with scroll at different depths, and lean toward the pointer */
+  $$(".w").forEach(w=>{
+    const d=+w.dataset.depth||1;
+    gsap.to(w,{y:-160*d,rotate:(d-1)*12,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+  });
+  const stage=$("#stage"),qx=$$(".w").map(w=>gsap.quickTo(w,"x",{duration:.8,ease:"power3"}));
+  stage.addEventListener("mousemove",e=>{const r=stage.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5;$$(".w").forEach((w,i)=>qx[i](dx*-40*(+w.dataset.depth||1)))});
+  stage.addEventListener("mouseleave",()=>qx.forEach(q=>q(0)));
+  gsap.to(".console",{y:-40,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+
+  /* logos fade up */
+  gsap.from(".logos span",{y:30,opacity:0,duration:.8,ease:"power3.out",stagger:.05,scrollTrigger:{trigger:".logos",start:"top 85%"}});
+
+  /* "watch a lead / get answered / in 90 seconds": lines slide in from alternate sides */
+  $$(".demo .row").forEach(r=>gsap.fromTo(r,{xPercent:30*+r.dataset.dir},{xPercent:0,ease:"none",scrollTrigger:{trigger:".demo",start:"top bottom",end:"top 25%",scrub:true}}));
+  gsap.from(".bezel",{scale:.88,y:80,ease:"none",scrollTrigger:{trigger:".bezel",start:"top bottom",end:"top 30%",scrub:true}});
+
+  /* section headlines rise line by line */
+  $$(".process .ln > span, .work .ln > span, .pricing .ln > span, .close .ln > span").forEach(s=>gsap.from(s,{yPercent:110,duration:1,ease:"expo.out",scrollTrigger:{trigger:s.closest("h2"),start:"top 85%"}}));
+  gsap.from(".steps .step",{x:-40,opacity:0,duration:.9,ease:"power3.out",stagger:.08,scrollTrigger:{trigger:".steps",start:"top 80%"}});
+  gsap.from(".visual",{scale:.8,rotate:-6,opacity:0,duration:1.2,ease:"back.out(1.4)",scrollTrigger:{trigger:".visual",start:"top 80%"}});
+
+  /* stacked colour panels: each one shrinks back as the next slides over it */
+  const panels=$$(".panel");
+  panels.forEach((p,i)=>{if(i===panels.length-1)return;gsap.to(p,{scale:.93,ease:"none",scrollTrigger:{trigger:panels[i+1],start:"top bottom",end:"top 120px",scrub:true}})});
+  panels.forEach(p=>gsap.from(p.querySelector(".art"),{y:80,rotate:8,opacity:0,duration:1.1,ease:"back.out(1.6)",scrollTrigger:{trigger:p,start:"top 75%"}}));
+
+  /* portfolio pops in with a spring, and the columns drift at different speeds */
+  $$(".case").forEach((c,i)=>{
+    gsap.from(c,{y:180,scale:.82,rotate:i%2?7:-7,opacity:0,duration:1.25,ease:"back.out(1.5)",scrollTrigger:{trigger:c,start:"top 92%"}});
+    gsap.from(c.querySelector(".metric"),{scale:.4,opacity:0,duration:1,ease:"back.out(2.2)",delay:.35,scrollTrigger:{trigger:c,start:"top 85%"}});
+    gsap.from(c.querySelector(".mock"),{y:60,rotate:i%2?-5:5,duration:1.2,ease:"expo.out",delay:.2,scrollTrigger:{trigger:c,start:"top 85%"}});
+  });
+  if(matchMedia("(min-width:861px)").matches){
+    gsap.to(".col.a",{y:40,ease:"none",scrollTrigger:{trigger:".cases",start:"top bottom",end:"bottom top",scrub:true}});
+    gsap.to(".col.b",{y:-90,ease:"none",scrollTrigger:{trigger:".cases",start:"top bottom",end:"bottom top",scrub:true}});
+  }
+
+  /* reviews cascade in */
+  ScrollTrigger.batch(".card",{start:"top 90%",onEnter:b=>gsap.from(b,{y:70,rotate:()=>gsap.utils.random(-4,4),opacity:0,duration:.9,ease:"back.out(1.4)",stagger:.1})});
+
+  /* pricing cards pop */
+  gsap.from(".plans",{y:60,opacity:0,duration:1,ease:"expo.out",scrollTrigger:{trigger:".plans",start:"top 85%"}});
+  gsap.from(".close .tile",{scale:.7,opacity:0,duration:1,ease:"back.out(2)",scrollTrigger:{trigger:".close",start:"top 70%"}});
+
+  /* cursor bubble over portfolio covers, like the reference's Explore button */
+  const bub=$("#bubble"),bx=gsap.quickTo(bub,"x",{duration:.45,ease:"power3"}),by=gsap.quickTo(bub,"y",{duration:.45,ease:"power3"});
+  gsap.set(bub,{xPercent:-50,yPercent:-50,scale:0});
+  addEventListener("mousemove",e=>{bx(e.clientX);by(e.clientY)});
+  $$(".cover").forEach(c=>{c.addEventListener("mouseenter",()=>gsap.to(bub,{scale:1,duration:.4,ease:"back.out(2)"}));c.addEventListener("mouseleave",()=>gsap.to(bub,{scale:0,duration:.3}))});
+} else { $("#bubble").remove() }
+
+/* process: timed stepper with progress bars; click to jump */
+const steps=$$(".step"),views=$$(".vview"),blob=$("#blob"),DUR=6500;
+let cur=0,t0=0,running=false,raf=null;
+const shapes=["46% 54% 50% 50% / 40% 40% 60% 60%","60% 40% 55% 45% / 50% 60% 40% 50%","40% 60% 45% 55% / 60% 45% 55% 40%","52% 48% 38% 62% / 45% 55% 45% 55%"];
+function show(i){cur=i;steps.forEach((s,j)=>{s.classList.toggle("on",j===i);s.setAttribute("aria-selected",j===i);s.querySelector(".prog i").style.width="0%"});views.forEach((v,j)=>v.classList.toggle("on",j===i));blob.style.background=steps[i].dataset.c;blob.style.borderRadius=shapes[i];blob.style.transform=`rotate(${i*8-8}deg)`;t0=performance.now()}
+function tick(now){if(!running)return;const p=Math.min(1,(now-t0)/DUR);steps[cur].querySelector(".prog i").style.width=(p*100)+"%";if(p>=1)show((cur+1)%steps.length);raf=requestAnimationFrame(tick)}
+steps.forEach((s,i)=>s.addEventListener("click",()=>show(i)));
+show(0);
+if(!reduce&&"IntersectionObserver" in window){new IntersectionObserver(es=>{running=es[0].isIntersecting;if(running){t0=performance.now()-(parseFloat(steps[cur].querySelector(".prog i").style.width)||0)/100*DUR;raf=requestAnimationFrame(tick)}else cancelAnimationFrame(raf)},{threshold:.35}).observe($(".proc"))}
+else steps.forEach(s=>s.querySelector(".prog i").style.width="100%");
+
+/* demo: a lead gets answered, with a running clock */
+const CHAT=[["in","Hi, our AC stopped cooling tonight. Can someone come out?",0],["sys","RoundHouse replied in 42 seconds",42],["out","Thanks Dana, we can help. Is anyone at home affected by the heat, or can it wait until morning?",42],["in","It can wait, just need it fixed",61],["out","We have Tue 9:00 or 2:00 near 75204. Which works?",66],["in","2:00 please",80],["out","You're booked for Tue 2:00. Your technician will text when on the way.",86],["sys","Booked and logged to HubSpot · 1:26",86]];
+const phone=$("#phone"),timer=$("#timer");let playing=false;
+function play(){if(playing)return;playing=true;$("#screen").classList.add("playing");phone.innerHTML="";const els=CHAT.map(([k,t])=>{const m=document.createElement("div");m.className="msg "+k;m.textContent=t;phone.appendChild(m);return m});
+  const speed=reduce?0:40,start=performance.now();
+  const step=now=>{const sec=reduce?90:Math.min(90,(now-start)/speed);timer.textContent=`${Math.floor(sec/60)}:${String(Math.floor(sec%60)).padStart(2,"0")}`;CHAT.forEach((c,i)=>{if(sec>=c[2])els[i].classList.add("show")});if(sec<90)requestAnimationFrame(step);else{playing=false;setTimeout(()=>$("#screen").classList.remove("playing"),2500)}};requestAnimationFrame(step)}
+$("#play").addEventListener("click",play);
+if("IntersectionObserver" in window){const o=new IntersectionObserver(es=>{if(es[0].isIntersecting){play();o.disconnect()}},{threshold:.5});o.observe($("#screen"))}
+
+/* portfolio filter + case study dialog */
+$$(".filters button").forEach(b=>b.addEventListener("click",()=>{$$(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===b));const f=b.dataset.f;$$(".case").forEach(c=>{const show=f==="all"||c.dataset.f.split(" ").includes(f);c.classList.toggle("hide",!show);if(show&&hasG&&!reduce)gsap.fromTo(c,{scale:.9,opacity:0,y:30},{scale:1,opacity:1,y:0,duration:.7,ease:"back.out(1.6)"})});hasG&&ScrollTrigger.refresh()}));
+const CASES=[
+ {t:"Lead replies went from 3 h 40 min to 90 seconds",w:"Regional HVAC and plumbing, 6 locations, Texas",inv:"$16,000 build, then Growth at $4,200/mo",pay:"About 6 weeks",res:[["90 s","Average first reply, down from 3 h 40 min"],["+38%","Booked service calls in the first quarter"],["11 h","Dispatcher time returned each week"]],sit:["Web forms and missed calls landed in a shared inbox that dispatchers answered between jobs.","Nearly a third of leads booked with a competitor before anyone called back."],built:["Instant text and email on every form, missed call and chat","AI qualifier asks service, urgency and ZIP, and flags emergencies","Booking into open field-service slots","Every conversation logged to HubSpot with its source"]},
+ {t:"Quotes that took three days now go out in four hours",w:"Metal fabrication shop, 85 staff, Ohio",inv:"$4,500 audit, $22,000 build",pay:"About 4 months",res:[["4 h","Quote turnaround, down from 3 days"],["2.1×","Quotes sent per week by the same estimators"],["29%","Win rate, up from 22%"]],sit:["Two estimators priced every job by hand, copying prices out of the ERP.","The audit found 30% of estimator time went to re-keying data that already existed."],built:["One intake form for drawings, quantities and deadlines","Quote engine using current ERP material costs and machine rates","Branded quote PDFs ready for e-signature","Nothing goes out without an estimator's approval"]},
+ {t:"Carrier invoices read, matched and posted",w:"Third-party logistics provider, 140 staff, Georgia",inv:"$24,000 build, then Starter at $1,800/mo",pay:"About 5 months",res:[["−70%","Time to process a carrier invoice"],["26 h","Accounts-payable time returned each week"],["1.8%","Of carrier spend caught as billing errors"]],sit:["About 2,000 carrier invoices a month arrived as PDFs and were keyed in by hand.","Overcharges usually surfaced months later."],built:["Reads invoice lines from any carrier's layout","Checks weight, accessorials and agreed rates against the shipment","Mismatches go to a person with the reason shown","Approved invoices post to accounting automatically"]},
+ {t:"An audit that paid for a new CRM, brand and website",w:"Physical therapy group, 9 clinics, North Carolina",inv:"$3,500 audit, $28,000 build, then Growth",pay:"Audit paid back in 5 weeks",res:[["$38k","Yearly software spend removed"],["+24%","New patient enquiries in six months"],["4 → 1","Weekly spreadsheets replaced by one dashboard"]],sit:["Each clinic had picked its own tools: three scheduling add-ons, two email platforms and dozens of unused seats.","Leadership spent Monday mornings merging spreadsheets."],built:["Tool-spend audit with keep or cancel for every subscription","Referrals and enquiries moved into one HubSpot account","Brand refresh and a fast site with online booking","Dashboard of enquiries and bookings by clinic, updated hourly"]}
+];
+$$(".case").forEach(c=>c.addEventListener("click",()=>{const k=CASES[+c.dataset.case];
+  $("#cs-body").innerHTML=`<button class="x" type="button" data-close aria-label="Close">×</button><span class="note">Sample engagement · ${k.w}</span><h2 class="disp" id="cs-h">${k.t}</h2><div class="cs-res">${k.res.map(r=>`<div><b>${r[0]}</b><span>${r[1]}</span></div>`).join("")}</div><div class="cs-grid"><div><h4>The situation</h4><ul>${k.sit.map(s=>`<li>${s}</li>`).join("")}</ul></div><div><h4>What we built</h4><ul>${k.built.map(s=>`<li>${s}</li>`).join("")}</ul></div></div><p><b>Investment:</b> ${k.inv}. <b>Payback:</b> ${k.pay}.</p><div><button class="btn" type="button" id="cs-cta">Book a call about this</button></div>`;
+  const d=$("#casedlg");d.showModal();$("#cs-cta").onclick=()=>{d.close();$("#f-msg").value=`I read the "${k.t}" case study and want something similar.`;$("#contact").showModal()};
+  if(hasG&&!reduce)gsap.from("#cs-body > *",{y:30,opacity:0,duration:.6,ease:"expo.out",stagger:.05});
+}));
+
+/* pricing */
+const PLANS={
+ project:[
+  {n:"Diagnose",w:"A paid audit and a 90-day roadmap ranked by hours saved.",p:2500,to:6000,u:"",terms:"Fee credited to your build within 60 days",f:["Process map of how work moves today","Tool-spend and data readiness review","Fixed price for every step on the roadmap","Yours to keep, even if you never build with us"],cta:"Start with an audit"},
+  {n:"Build",best:"Most chosen",w:"The automation, AI agent or CRM your roadmap calls for.",p:8000,to:35000,u:"",terms:"Fixed scope and price before work starts",f:["Lead replies, documents, inbox or onboarding","Built inside your own accounts","Runbook and team training","30 days of fixes included"],cta:"Get a fixed quote"},
+  {n:"Brand & web",w:"An identity and a site that turn visits into booked calls.",p:4000,to:40000,u:"",terms:"Landing pages from $4,000, full brand and site to $40,000",f:["Logo and identity system","Fast website with booking","Social media branding","Care plan available after launch"],cta:"Get a fixed quote"}
+ ],
+ retainer:[
+  {n:"Starter",w:"One or two systems that need to keep running.",p:1800,u:"/mo",terms:"Month to month after 3 months",f:["Monitoring for up to 5 automations","Fixes within one business day","4 hours of small changes a month","Monthly report on hours saved"],cta:"Choose Starter"},
+  {n:"Growth",best:"Most popular",w:"Teams adding automation every month.",p:4200,u:"/mo",terms:"Month to month after 3 months",f:["Everything in Starter, up to 15 automations","Two new automations or improvements a month","Prompt and agent tuning","Website care plan","Same-day response in US hours"],cta:"Choose Growth"},
+  {n:"Scale",w:"An automation lead without the hire.",p:8500,u:"/mo",terms:"Month to month after 3 months",f:["Everything in Growth, no automation cap","A named automation lead, 20 hours a month","Quarterly roadmap session with leadership","4-hour response in US hours"],cta:"Choose Scale"}
+ ]};
+const fmt=n=>"$"+Math.round(n).toLocaleString("en-US");
+function renderPlans(m){
+  $("#plans").innerHTML=PLANS[m].map(x=>`<article class="plan${x.best?" pick":""}">${x.best?`<span class="badge">${x.best}</span>`:""}<h3>${x.n}</h3><p class="who">${x.w}</p><p class="price"><span class="num" data-v="${x.p}">${fmt(x.p)}</span><small>${x.to?` to ${fmt(x.to)}`:""}${x.u}</small></p><p class="terms">${x.terms}</p><ul>${x.f.map(f=>`<li>${f}</li>`).join("")}</ul><button class="btn${x.best?"":" ghost"}" type="button" data-plan="${x.n}">${x.cta}</button></article>`).join("");
+  $$("#plans [data-plan]").forEach(b=>b.addEventListener("click",()=>{$("#f-msg").value=`I'm interested in ${b.dataset.plan}.`;$("#contact").showModal()}));
+  if(hasG&&!reduce){gsap.from("#plans .plan",{y:40,opacity:0,rotate:i=>(i-1)*3,duration:.7,ease:"back.out(1.6)",stagger:.07});
+    $$("#plans .num").forEach(n=>{const o={v:0};gsap.to(o,{v:+n.dataset.v,duration:1,ease:"power3.out",onUpdate:()=>n.textContent=fmt(o.v)})})}
+}
+$$(".switch button").forEach(b=>b.addEventListener("click",()=>{$$(".switch button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderPlans(b.dataset.m)}));
+renderPlans("project");
+
+/* enquiry form: front end only, so it prepares the message for the visitor to send */
+const form=$("#form");
+form.addEventListener("submit",e=>{e.preventDefault();const d=new FormData(form);
+  if(!d.get("name")||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.get("email")||"")||!d.get("message")){$("#f-err").textContent="Add your name, a valid work email and where work stalls.";return}
+  $("#f-err").textContent="";$("#f-out").textContent=`To: hello@roundhouse.studio\nFrom: ${d.get("name")} <${d.get("email")}>\nCompany: ${d.get("company")||"-"}\nBudget: ${d.get("budget")}\n\n${d.get("message")}`;$("#f-ok").hidden=false});
+$("#f-copy").addEventListener("click",e=>{navigator.clipboard?.writeText($("#f-out").textContent).then(()=>e.target.textContent="Copied").catch(()=>{const r=document.createRange();r.selectNodeContents($("#f-out"));getSelection().removeAllRanges();getSelection().addRange(r)})});
+</script>
+</body>
+</html>

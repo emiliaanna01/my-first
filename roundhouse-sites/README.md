@@ -1,6 +1,6 @@
 # RoundHouse website concepts
 
-Ten static, front-end-only websites for RoundHouse. Each one takes on the whole look and feel of a
+Eleven static, front-end-only websites for RoundHouse. Each one takes on the whole look and feel of a
 world-leading site (navigation, hero, components, type, colour and footer), filled with RoundHouse's
 own content from `round-house/lib/content.ts`: services, published prices, Diagnose → Build → Run,
 retainers, sample case studies, security terms and an enquiry form.
@@ -20,6 +20,7 @@ CSS and a little vanilla JavaScript per page, with fonts from Google Fonts.
 | `08-accenture` | Accenture | Black and purple, 3D spheres, numbered featured carousel |
 | `09-ibm` | IBM (Carbon) | Masthead, light Plex leadspace, tiles, tabs, accordion, data table |
 | `10-mailchimp` | Mailchimp | Yellow hero, serif headlines, journey-builder flow, plan toggle |
+| `11-tokens-studio` | Tokens Studio | Header that shrinks into a floating bar, 3D tokens that pop and drift (GSAP + Lenis), process stepper, stacked colour panels, portfolio with case dialogs, client reviews, pricing toggle |
 
 ## Notes
 
