@@ -3,7 +3,7 @@
 Built like a documentary reel: a low drone and string ostinato that never stops moving, ticking tension,
 a whoosh on every cut, a hit on every reveal, silence just before each punchline, and dense period foley.
 usage: python3 motion/anderson/audio.py <vo_dir> <out_wav>"""
-import importlib.util, json, os, sys
+import importlib.util, json, os, subprocess, sys
 import numpy as np, soundfile as sf
 from scipy import signal
 
@@ -182,6 +182,35 @@ def score():
     k = int(1.4 * SR); fade = np.ones(N); fade[-k:] = np.linspace(1, 0, k) ** 1.4
     return hp(m * (g * fade)[:, None], 28)
 
+# ---------------- licensed track, cut to the story ----------------
+TRACK = os.path.join(HERE, "music.mp3")   # "Documentary" by dailyvibe (Pixabay): soft intro, long build, breakdown, drop
+T_BEAT, T_GRID0, T_DROP, T_BUILD = 60 / 117.3, .14, 94.13, 62.14   # beat length, first beat, the drop, a bar inside the build
+
+def track():
+    """Three beat-aligned pieces: intro -> build -> breakdown tail, so the drop lands on "Her patent runs out"."""
+    raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", TRACK, "-f", "f32le", "-ac", "2", "-ar", str(SR), "-"], capture_output=True, check=True).stdout
+    x = np.frombuffer(raw, np.float32).reshape(-1, 2).astype(float)
+    P = T_BEAT; vdrop = W("expire", 0)
+    off1 = (T_GRID0 - vdrop) % P                          # intro offset that puts its beats on the drop's grid
+    k1 = round((vdrop - (W("lever", 0) - .1)) / P)          # first splice: near the lever cut
+    k3 = 6                                                # breakdown tail: 6 beats before the drop
+    cut1, cut2 = vdrop - k1 * P, vdrop - k3 * P
+    pieces = [(0, cut1, off1), (cut1, cut2, T_BUILD - cut1), (cut2, DUR, T_DROP - vdrop)]   # (v0, v1, track = v + shift)
+    out = np.zeros((N, 2)); xf = int(.04 * SR)
+    for v0, v1, sh in pieces:
+        a, b = int(v0 * SR), min(N, int(v1 * SR)); s0 = int((v0 + sh) * SR); seg = x[s0: s0 + (b - a)].copy()
+        if a > 0: seg[:xf] *= np.linspace(0, 1, xf)[:, None]
+        if b < N: seg[-xf:] *= np.linspace(1, 0, xf)[:, None]
+        out[a: a + len(seg)] += seg
+    tt = np.arange(N) / SR; g = np.ones(N)
+    for a, b in DROPS: g *= 1 - np.clip(np.minimum((tt - a) / .05, (b - tt) / .03), 0, 1) * .97   # silence on the blank frames + before "clear"
+    a0, a1 = W("lever", 0) - .3, SWEEP - .3                                                           # sit back under the lever/blade lines
+    g *= 10 ** (-3 / 20 * np.clip(np.minimum((tt - a0) / .3, (a1 - tt) / .3), 0, 1))
+    a0, a1 = W("profit", 0) - .2, W("every", 0) - .15                                                # dip for "never profits"
+    g *= 10 ** (-7 / 20 * np.clip(np.minimum((tt - a0) / .4, (a1 - tt) / .4), 0, 1))
+    k = int(2.2 * SR); g[-k:] *= np.linspace(1, 0, k) ** 1.6
+    return out * g[:, None]
+
 # ---------------- sound design ----------------
 def design():
     dry = np.zeros((N, 2)); send = np.zeros((N, 2)); rng = np.random.default_rng(11)
@@ -291,8 +320,12 @@ def main(vo_dir, out):
     lvl = np.abs(v).max(1); k = int(.03 * SR)
     e = signal.sosfiltfilt(signal.butter(1, 4, "lowpass", fs=SR, output="sos"), np.convolve(lvl, np.ones(k) / k, "same"))
     d = np.clip(e / (e.max() + 1e-9) * 3, 0, 1)[:, None]
-    music = score(); sfx = design()
-    buses = {"vo": v, "sfx": sfx / (np.abs(sfx).max() + 1e-9) * .85 * (1 - .4 * d), "music": music / (np.abs(music).max() + 1e-9) * .4 * (1 - .62 * d)}
+    if os.path.exists(TRACK):
+        music = track(); music = music - bp(music, 1000, 4000) * .45 * 1.0   # pocket for the voice
+        mlev = .17
+    else: music = score(); mlev = .4
+    sfx = design()
+    buses = {"vo": v, "sfx": sfx / (np.abs(sfx).max() + 1e-9) * .85 * (1 - .4 * d), "music": music / (np.abs(music).max() + 1e-9) * mlev * (1 - .6 * d)}
     mix = sum(buses.values())
     fade = np.ones(N); k = int(.8 * SR); fade[-k:] = np.linspace(1, 0, k) ** 1.5
     mix = np.tanh(mix * fade[:, None] / (np.abs(mix).max() + 1e-9) * 1.25) * .9
