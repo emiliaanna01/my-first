@@ -221,8 +221,9 @@ S("Hook · woman", w("hook2", 6) - .08, { draw(c, t) {
   cover(c, IMG.A4, { s: kb(t, 3.4, 6, 1.12, 1.2), fx: 640, fy: 860 });
   caps(c, t, [[w("hook2", 6), "a woman", "big"], [w("hook2", 8), "riding a streetcar?", "it"]], 99);
 } });
-S("1902", 5.88, { clip: t => ["v1", t - 5.88 + .2], draw(c, t) {
-  cover(c, VID.v1, { s: kb(t, 5.88, 9.6, 1.0, 1.06) }); sleet(c, t, 170, .45);
+const NY = w("ny", 0) - .1;
+S("1902", NY, { clip: t => ["v1", t - NY + .2], draw(c, t) {
+  cover(c, VID.v1, { s: kb(t, NY, NY + 3.7, 1.0, 1.06) }); sleet(c, t, 170, .45);
   label(c, t, w("ny", 0) - .05, "NEW YORK", CX, 690, { out: w("crawl", 0) - .1 });
   hero(c, t, w("ny", 2), "1902", { y: 980, size: 340, out: w("crawl", 0) - .1 });
   caps(c, t, [[w("crawl", 1), "a streetcar crawls", ""], [w("crawl", 3), "through the sleet.", "it"]], 99);
@@ -296,7 +297,7 @@ S("Canada", w("canada", 0) - .1, { draw(c, t) {
   caps(c, t, [[w("canada", 0), "a company in Canada", ""], [w("canada", 5), "tells her", ""], [w("canada", 7), "it isn't worth making.", "hl"]], 99, 1500);
 } });
 S("Nobody", w("nobody", 0) - .08, { draw(c, t) { blank(c, t, "Nobody", w("nobody", 0)); if (t >= w("nobody", 1)) { c.save(); c.font = "60px CPI"; c.textAlign = "center"; c.fillStyle = css(C.ink, E.out(prog(t, w("nobody", 1), w("nobody", 1) + .15))); c.fillText("buys it.", CX, CAP_Y + 80); c.restore(); } } });
-S("1920", w("expire", 0) - .1, { clip: t => ["v5", t - (w("expire", 0) - .1)], draw(c, t) {
+S("1920", w("expire", 0) - .1, { clip: t => ["v5", Math.min((t - (w("expire", 0) - .1)) * .78, 3.5)], draw(c, t) {   // v5 has a hard jump at 3.63 s: slow it and stop short
   const t0 = w("expire", 0) - .1; cover(c, VID.v5, { s: kb(t, t0, t0 + 4.2, 1.08, 1.0) });
   hero(c, t, w("expire", 5), "1920", { y: 780, size: 320, out: w("roads", 0) - .05 });
   caps(c, t, [[w("expire", 0), "her patent runs out", ""], [w("roads", 0), "just as cars", ""], [w("roads", 3), "are filling the roads.", "it"]], 99);
@@ -312,12 +313,12 @@ S("Never profits", w("profit", 0) - .1, { draw(c, t) {
   c.fillStyle = css(C.white); c.fillRect(-pw / 2 - 26, -ph / 2 - 26, pw + 52, ph + 52); c.shadowColor = "transparent"; c.drawImage(im, -pw / 2, -ph / 2, pw, ph); c.restore();
   caps(c, t, [[w("profit", 0), "She", ""], [w("profit", 1), "never profits", "hl"], [w("profit", 3), "from it.", "it"]], 99);
 } });
-const ST = w("every", 0) - .12, RATE = .62;
+const ST = w("every", 0) - .12, RATE = .62, FADE = end("still") + 1.1;   // FADE: the end card
 S("Still moving", ST, { clip: t => ["v7", Math.min((t - ST) * RATE, 4.55)], draw(c, t) {
-  cover(c, VID.v7, { s: kb(t, ST, 58, 1.0, 1.06) });
-  caps(c, t, [[w("every", 0), "but every time", ""], [w("every", 3), "yours sweeps", ""], [w("every", 5), "the rain away…", "it"], [w("still", 0), "that's her idea,", ""], [w("still", 3), "still moving.", "hl"]], 57.0);
-  const f = prog(t, 57.0, 57.8); if (f > 0) { c.save(); c.globalAlpha = f; c.drawImage(PAPER, 0, 0); c.globalAlpha = f * .5; c.translate(CX, 1420); c.scale(.42, .42); c.translate(-CX, -760); devicePath(c, prog(t, 57.3, 58.6)); c.restore();
-    c.save(); c.globalAlpha = E.out(prog(t, 57.4, 58)); c.font = "56px CPI"; c.textAlign = "center"; c.fillStyle = css(C.ink); c.fillText("Mary Anderson", CX, CAP_Y); c.font = "34px CP"; c.fillStyle = "rgba(30,27,23,.7)"; c.fillText("1866 – 1953", CX, CAP_Y + 60); c.restore(); }
+  cover(c, VID.v7, { s: kb(t, ST, FADE + 1, 1.0, 1.06) });
+  caps(c, t, [[w("every", 0), "but every time", ""], [w("every", 3), "yours sweeps", ""], [w("every", 5), "the rain away…", "it"], [w("still", 0), "that's her idea,", ""], [w("still", 3), "still moving.", "hl"]], FADE);
+  const f = prog(t, FADE, FADE + .8); if (f > 0) { c.save(); c.globalAlpha = f; c.drawImage(PAPER, 0, 0); c.globalAlpha = f * .5; c.translate(CX, 1420); c.scale(.42, .42); c.translate(-CX, -760); devicePath(c, prog(t, FADE + .3, FADE + 1.6)); c.restore();
+    c.save(); c.globalAlpha = E.out(prog(t, FADE + .4, FADE + 1)); c.font = "56px CPI"; c.textAlign = "center"; c.fillStyle = css(C.ink); c.fillText("Mary Anderson", CX, CAP_Y); c.font = "34px CP"; c.fillStyle = "rgba(30,27,23,.7)"; c.fillText("1866 – 1953", CX, CAP_Y + 60); c.restore(); }
 } });
 SCENES.forEach((s, i) => { s.end = i < SCENES.length - 1 ? SCENES[i + 1].start : DUR; });
 

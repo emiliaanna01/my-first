@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Voice-over for 'Mary Anderson and the windshield wiper' (Kokoro TTS, local).
-usage: python3 motion/anderson/vo.py <kokoro_model_dir> <out_dir>"""
+usage: python3 motion/anderson/vo.py <kokoro_model_dir> <out_dir> [voice] [speed]
+voice is a Kokoro voice name or a blend like "am_michael:.6+am_onyx:.4" (deep documentary narrator)."""
 import json, sys
 import numpy as np, soundfile as sf
 from kokoro_onnx import Kokoro
@@ -40,8 +41,10 @@ def trim(x, thr=0.008):
     i = np.where(np.abs(x) > thr)[0]
     return x[max(0, i[0] - 200): i[-1] + 1800] if len(i) else x
 
-def main(model_dir, out_dir, voice="af_heart", speed=1.0):
+def main(model_dir, out_dir, voice="am_michael:.6+am_onyx:.4", speed=1.14):
     k = Kokoro(f"{model_dir}/kokoro-v1.0.onnx", f"{model_dir}/voices-v1.0.bin")
+    speed = float(speed)
+    if ":" in voice: voice = sum(k.get_voice_style(n) * float(w) for n, w in (p.split(":") for p in voice.split("+")))
     t, meta = 0.15, []
     for cid, text, gap in CLIPS:
         s, sr = k.create(text, voice=voice, speed=speed, lang="en-us")
@@ -54,4 +57,4 @@ def main(model_dir, out_dir, voice="af_heart", speed=1.0):
     json.dump(meta, open(f"{out_dir}/vo.json", "w"), indent=1)
 
 if __name__ == "__main__":
-    main(*sys.argv[1:3])
+    main(*sys.argv[1:5])
