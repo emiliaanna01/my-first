@@ -1,0 +1,376 @@
+[
+ {
+  "id": "hook",
+  "text": "What if I told you...",
+  "t": 0.15,
+  "dur": 1.143,
+  "words": [
+   0.15,
+   0.43,
+   0.66,
+   0.73,
+   1.13
+  ]
+ },
+ {
+  "id": "hook2",
+  "text": "the windshield wiper was invented by a woman riding a streetcar?",
+  "t": 1.473,
+  "dur": 3.952,
+  "words": [
+   1.483,
+   1.729,
+   2.393,
+   2.713,
+   2.873,
+   3.543,
+   3.685,
+   3.819,
+   4.313,
+   4.59,
+   4.893
+  ]
+ },
+ {
+  "id": "ny",
+  "text": "New York, nineteen-oh-two.",
+  "t": 5.975,
+  "dur": 1.48,
+  "words": [
+   5.975,
+   6.222,
+   6.495
+  ]
+ },
+ {
+  "id": "crawl",
+  "text": "A streetcar crawls through the sleet.",
+  "t": 7.705,
+  "dur": 1.734,
+  "words": [
+   7.705,
+   7.895,
+   8.145,
+   8.475,
+   8.775,
+   9.095
+  ]
+ },
+ {
+  "id": "cantsee",
+  "text": "The driver can't see the road.",
+  "t": 9.689,
+  "dur": 1.529,
+  "words": [
+   9.699,
+   9.889,
+   10.259,
+   10.489,
+   10.675,
+   11.009
+  ]
+ },
+ {
+  "id": "only",
+  "text": "So he does the only thing he can.",
+  "t": 11.619,
+  "dur": 1.714,
+  "words": [
+   11.639,
+   11.787,
+   11.935,
+   12.259,
+   12.319,
+   12.629,
+   12.889,
+   12.949
+  ]
+ },
+ {
+  "id": "opens",
+  "text": "He opens the window, and leans into the storm.",
+  "t": 13.483,
+  "dur": 2.47,
+  "words": [
+   13.543,
+   13.803,
+   14.013,
+   14.212,
+   14.603,
+   14.743,
+   15.069,
+   15.383,
+   15.553
+  ]
+ },
+ {
+  "id": "watch",
+  "text": "One passenger can't stop watching.",
+  "t": 16.403,
+  "dur": 1.998,
+  "words": [
+   16.403,
+   16.663,
+   17.223,
+   17.473,
+   17.793
+  ]
+ },
+ {
+  "id": "name",
+  "text": "Her name is Mary Anderson.",
+  "t": 18.701,
+  "dur": 1.484,
+  "words": [
+   18.751,
+   19.131,
+   19.191,
+   19.37,
+   19.601
+  ]
+ },
+ {
+  "id": "visiting",
+  "text": "She's visiting from Alabama.",
+  "t": 20.335,
+  "dur": 1.51,
+  "words": [
+   20.355,
+   20.655,
+   21.115,
+   21.455
+  ]
+ },
+ {
+  "id": "engineer",
+  "text": "She isn't an engineer.",
+  "t": 22.144,
+  "dur": 1.188,
+  "words": [
+   22.164,
+   22.344,
+   22.644,
+   22.794
+  ]
+ },
+ {
+  "id": "follows",
+  "text": "But the problem follows her home.",
+  "t": 23.682,
+  "dur": 1.577,
+  "words": [
+   23.692,
+   23.892,
+   24.132,
+   24.392,
+   24.738,
+   24.918
+  ]
+ },
+ {
+  "id": "sketch",
+  "text": "She sketches an idea.",
+  "t": 25.559,
+  "dur": 1.252,
+  "words": [
+   25.579,
+   25.829,
+   26.429,
+   26.489
+  ]
+ },
+ {
+  "id": "lever",
+  "text": "A lever inside the car.",
+  "t": 27.111,
+  "dur": 1.385,
+  "words": [
+   27.111,
+   27.401,
+   27.591,
+   28.011,
+   28.131
+  ]
+ },
+ {
+  "id": "blade",
+  "text": "A rubber blade outside.",
+  "t": 28.616,
+  "dur": 1.419,
+  "words": [
+   28.616,
+   28.743,
+   29.106,
+   29.526
+  ]
+ },
+ {
+  "id": "turn",
+  "text": "One turn of the handle...",
+  "t": 30.335,
+  "dur": 1.184,
+  "words": [
+   30.345,
+   30.531,
+   30.925,
+   30.985,
+   31.045
+  ]
+ },
+ {
+  "id": "clear",
+  "text": "and the glass is clear.",
+  "t": 31.619,
+  "dur": 1.226,
+  "words": [
+   31.619,
+   31.839,
+   32.008,
+   32.369,
+   32.449
+  ]
+ },
+ {
+  "id": "patent",
+  "text": "In nineteen-oh-three, she's granted a patent.",
+  "t": 33.295,
+  "dur": 2.436,
+  "words": [
+   33.295,
+   33.472,
+   34.405,
+   34.745,
+   35.185,
+   35.245
+  ]
+ },
+ {
+  "id": "sell",
+  "text": "Then she tries to sell it.",
+  "t": 35.981,
+  "dur": 1.324,
+  "words": [
+   35.991,
+   36.361,
+   36.421,
+   36.671,
+   36.815,
+   37.181
+  ]
+ },
+ {
+  "id": "canada",
+  "text": "A company in Canada tells her it isn't worth making.",
+  "t": 37.555,
+  "dur": 2.963,
+  "words": [
+   37.555,
+   37.655,
+   38.235,
+   38.295,
+   38.675,
+   39.005,
+   39.215,
+   39.385,
+   39.697,
+   40.015
+  ]
+ },
+ {
+  "id": "nobody",
+  "text": "Nobody buys it.",
+  "t": 40.818,
+  "dur": 1.111,
+  "words": [
+   40.818,
+   41.318,
+   41.768
+  ]
+ },
+ {
+  "id": "expire",
+  "text": "Her patent runs out in nineteen-twenty,",
+  "t": 42.379,
+  "dur": 2.012,
+  "words": [
+   42.419,
+   42.539,
+   42.909,
+   43.207,
+   43.459,
+   43.519
+  ]
+ },
+ {
+  "id": "roads",
+  "text": "just as cars are filling the roads.",
+  "t": 44.491,
+  "dur": 1.858,
+  "words": [
+   44.511,
+   44.741,
+   44.931,
+   45.156,
+   45.451,
+   45.738,
+   46.071
+  ]
+ },
+ {
+  "id": "standard",
+  "text": "Within a few years, wipers are standard.",
+  "t": 46.599,
+  "dur": 2.197,
+  "words": [
+   46.609,
+   46.939,
+   47.094,
+   47.311,
+   47.599,
+   47.909,
+   48.289
+  ]
+ },
+ {
+  "id": "profit",
+  "text": "She never profits from it.",
+  "t": 49.096,
+  "dur": 1.383,
+  "words": [
+   49.116,
+   49.311,
+   49.646,
+   49.976,
+   50.346
+  ]
+ },
+ {
+  "id": "every",
+  "text": "But every time yours sweeps the rain away...",
+  "t": 51.029,
+  "dur": 2.196,
+  "words": [
+   51.029,
+   51.299,
+   51.429,
+   51.773,
+   52.219,
+   52.459,
+   52.609,
+   52.857
+  ]
+ },
+ {
+  "id": "still",
+  "text": "that's her idea, still moving.",
+  "t": 53.375,
+  "dur": 1.659,
+  "words": [
+   53.385,
+   53.885,
+   53.945,
+   54.265,
+   54.549
+  ]
+ }
+]

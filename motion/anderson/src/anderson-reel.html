@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Woman Who Cleared the Glass</title>
+<script>
+/* =====================================================================
+   EDIT ME — colours and timing. Captions key off the voice-over word
+   onsets (VO_META below, from motion/anderson/vo.py + words.py):
+   w("clip", n) = the moment word n of that clip is spoken.
+   ===================================================================== */
+const CONFIG = {
+  color: { gold: "#E8C547", ink: "#1E1B17", paper: "#ECE9E3", cream: "#EFE6D2", white: "#F7F3EA" },
+  fps: 30, duration: 59.0,
+};
+/*VO*/
+/*SPRITES*/
+/*CLIPS*/
+</script>
+<style>
+/*FONTS*/
+:root { --bg:#0e0d0b; --fg:#ece6da; --muted:#9a9080; --line:#2a2622; --accent:#E8C547; }
+* { box-sizing: border-box; }
+html, body { margin:0; background:var(--bg); color:var(--fg); font: 13px/1.4 ui-monospace, monospace; }
+body { min-height:100vh; display:flex; flex-direction:column; align-items:center; gap:12px; padding:16px; }
+canvas#c { display:block; width:min(calc(100vw - 32px), calc((100vh - 150px) * 0.5625)); height:auto; aspect-ratio:9/16; border-radius:10px; box-shadow:0 0 0 1px var(--line); }
+.bar { width:min(calc(100vw - 32px), 640px); display:flex; flex-direction:column; gap:8px; }
+.row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+button { background:#1a1714; color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font:inherit; cursor:pointer; }
+#time { font-variant-numeric:tabular-nums; color:var(--muted); min-width:120px; }
+input[type=range] { flex:1; min-width:160px; accent-color:var(--accent); }
+.beats { display:flex; height:22px; border-radius:6px; overflow:hidden; border:1px solid var(--line); }
+.beats div { border-right:1px solid var(--line); color:var(--muted); font-size:10px; display:flex; align-items:center; justify-content:center; white-space:nowrap; overflow:hidden; cursor:pointer; }
+.beats div:last-child { border-right:0; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="bar">
+  <div class="row"><button id="play">Play</button><button id="prev">◀︎</button><button id="next">▶︎</button><span id="time"></span></div>
+  <input type="range" id="scrub" min="0" value="0" step="1">
+  <div class="beats" id="beats"></div>
+</div>
+<script>
+"use strict";
+const W_ = 1080, H_ = 1920, CX = 540, CY = 960;
+const FPS = CONFIG.fps, DUR = CONFIG.duration, FRAMES = Math.round(FPS * DUR);
+const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+const mk = (w = W_, h = H_) => { const k = document.createElement("canvas"); k.width = w; k.height = h; return k; };
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const E = { inOut: x => -(Math.cos(Math.PI * x) - 1) / 2, out: x => 1 - Math.pow(1 - x, 3), outExpo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x), inQuad: x => x * x };
+const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const hex = h => { h = h.replace("#", ""); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+const css = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+const C = Object.fromEntries(Object.entries(CONFIG.color).map(([k, v]) => [k, hex(v)]));
+
+/* ---------- voice timing ---------- */
+const VO = Object.fromEntries(VO_META.map(v => [v.id, v]));
+const w = (id, n = 0) => VO[id].words[Math.min(n, VO[id].words.length - 1)];
+const end = id => VO[id].t + VO[id].dur;
+
+/* ---------- media ---------- */
+const IMG = {}, VID = {};
+const loadImages = () => Promise.all(Object.entries(SPR).map(([k, src]) => new Promise(r => { const im = new Image(); im.onload = () => { IMG[k] = im; r(); }; im.src = src; })));
+async function loadVideos() {
+  await Promise.all(Object.entries(CLIPS).map(async ([k, src]) => {
+    let url = src;
+    if (src.startsWith("data:")) { const b = await (await fetch(src)).blob(); url = URL.createObjectURL(b); }   // blob URLs keep the canvas exportable
+    const v = document.createElement("video"); v.muted = true; v.preload = "auto"; v.playsInline = true; v.src = url;
+    await new Promise(r => v.addEventListener("loadeddata", r, { once: true })); VID[k] = v;
+  }));
+}
+/* which clip each scene needs at time t, and the source time inside it */
+let NEED = {};
+async function seekFor(t) {
+  NEED = {}; for (const s of SCENES) if (s.clip && t >= s.start - .7 && t < s.end + .7) { const st = s.clip(t); if (st) NEED[st[0]] = st[1]; }
+  await Promise.all(Object.entries(NEED).map(([k, ts]) => { const v = VID[k]; const tt = clamp(ts, 0, v.duration - .04);
+    if (Math.abs(v.currentTime - tt) < .004) return; v.currentTime = tt; return new Promise(r => v.addEventListener("seeked", r, { once: true })); }));
+}
+function cover(c, src, { s = 1, dx = 0, dy = 0, fx = CX, fy = CY, alpha = 1, filter = null } = {}) {
+  if (!src) return; const iw = src.videoWidth || src.width, ih = src.videoHeight || src.height; if (!iw) return;
+  const k = Math.max(W_ / iw, H_ / ih), wv = iw * k, hv = ih * k;
+  c.save(); c.globalAlpha *= alpha; if (filter) c.filter = filter;
+  c.translate(fx + dx, fy + dy); c.scale(s, s); c.translate(-fx, -fy); c.drawImage(src, CX - wv / 2, CY - hv / 2, wv, hv); c.restore();
+}
+const kb = (t, a, b, s0, s1) => lerp(s0, s1, E.inOut(prog(t, a, b)));   // Ken Burns scale
+
+/* ---------- texture ---------- */
+const PAPER = mk(); (() => { const g = PAPER.getContext("2d"); const rg = g.createRadialGradient(CX, 900, 200, CX, 960, 1250);
+  rg.addColorStop(0, "#F1EEE8"); rg.addColorStop(1, "#D6D2CA"); g.fillStyle = rg; g.fillRect(0, 0, W_, H_);
+  for (let i = 0; i < 2200; i++) { const x = hash(i) * W_, y = hash(i + .5) * H_, l = 3 + hash(i + .7) * 12, a = hash(i + .9) * 6;
+    g.strokeStyle = hash(i + .3) > .5 ? "rgba(255,255,255,.25)" : "rgba(80,70,60,.07)"; g.lineWidth = .8; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); } })();
+const CREAM = mk(); (() => { const g = CREAM.getContext("2d"); g.fillStyle = "#EDE3CC"; g.fillRect(0, 0, W_, H_);
+  for (let i = 0; i < 3000; i++) { const x = hash(i * 1.3) * W_, y = hash(i * 2.1) * H_; g.fillStyle = `rgba(120,90,50,${hash(i) * .06})`; g.fillRect(x, y, 2, 2); }
+  for (let i = 0; i < 22; i++) { const x = hash(i * 3.1) * W_, y = hash(i * 7.7) * H_, r = 8 + hash(i * 1.3) * 40, gg = g.createRadialGradient(x, y, 0, x, y, r);
+    gg.addColorStop(0, "rgba(150,110,60,.12)"); gg.addColorStop(1, "rgba(150,110,60,0)"); g.fillStyle = gg; g.fillRect(x - r, y - r, r * 2, r * 2); } })();
+const GRAIN = mk(540, 960); (() => { const g = GRAIN.getContext("2d"), d = g.createImageData(540, 960); for (let i = 0; i < d.data.length; i += 4) { const v = 128 + (hash(i * .61) - .5) * 210; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } g.putImageData(d, 0, 0); })();
+function finish(c, f) {
+  c.save(); c.globalCompositeOperation = "overlay"; c.globalAlpha = .1; const ox = hash(f) * 180 | 0, oy = hash(f + 3) * 300 | 0; c.drawImage(GRAIN, -ox, -oy, W_ + 180, H_ + 300); c.restore();
+  const v = c.createRadialGradient(CX, 960, 600, CX, 960, 1260); v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.42)"); c.fillStyle = v; c.fillRect(0, 0, W_, H_);
+}
+function sleet(c, t, n = 160, a = .5, wind = -.35) {   // falling sleet streaks
+  c.save(); c.strokeStyle = `rgba(245,245,245,${a})`; c.lineCap = "round";
+  for (let i = 0; i < n; i++) { const sp = 900 + hash(i) * 900, len = 18 + hash(i + 2) * 34, x0 = hash(i + 4) * (W_ + 600) - 300;
+    const y = ((hash(i + 6) * H_ + t * sp) % (H_ + 200)) - 100, x = x0 + wind * y; c.lineWidth = 1 + hash(i + 8) * 2.2;
+    c.beginPath(); c.moveTo(x, y); c.lineTo(x + wind * len, y + len); c.stroke(); }
+  c.restore();
+}
+
+/* ---------- typography ---------- */
+const CAP_Y = 985;   // the caption line: dead centre of the frame, like the reference
+function textW(c, s, f) { c.font = f; return c.measureText(s).width; }
+/* one caption chunk. style: "" | "hl" (gold highlighter) | "it" (italic) | "big" | "lbl" (black label) | "frost" (blurred -> sharp) */
+function chunk(c, t, at, s, style = "", y = CAP_Y) {
+  const p = E.out(prog(t, at, at + .14)), big = style === "big";
+  const ink = style.startsWith("ink"), size = big ? 104 : 60, fam = style === "it" || style === "ink-it" || big ? "CPI" : "CP", f = `${size}px ${fam}`, tw = textW(c, s, f);
+  c.save(); c.globalAlpha *= p; c.translate(CX, y + (1 - p) * 8); if (big) { const k = lerp(1.25, 1, E.outExpo(prog(t, at, at + .3))); c.scale(k, k); }
+  c.font = f; c.textAlign = "center"; c.textBaseline = "alphabetic";
+  if (style === "hl" || style === "lbl") {
+    const padX = 16, h = size * 1.08, wp = E.outExpo(prog(t, at, at + .22));
+    c.fillStyle = style === "hl" ? css(C.gold, .96) : "rgba(18,16,14,.92)";
+    c.fillRect(-tw / 2 - padX, -size * .82, (tw + padX * 2) * wp, h);
+    c.fillStyle = style === "hl" ? css(C.ink) : css(C.white); c.fillText(s, 0, 0);
+  } else {
+    if (style === "frost") { const fp = prog(t, at + .1, at + .55); c.filter = `blur(${(1 - fp) * 10}px)`; }
+    if (ink) { c.fillStyle = css(C.ink); c.fillText(s, 0, 0); }
+    else { c.fillStyle = css(C.white); c.shadowColor = "rgba(0,0,0,.55)"; c.shadowBlur = 36; c.fillText(s, 0, 0); c.shadowColor = "rgba(0,0,0,.75)"; c.shadowBlur = 10; c.shadowOffsetY = 2; c.fillText(s, 0, 0); }
+  }
+  c.restore();
+}
+/* a caption track: [[time, text, style], ...] — each chunk holds until the next one (hard switch, like the reference) */
+function caps(c, t, list, until, y) {
+  let cur = -1; for (let i = 0; i < list.length; i++) if (t >= list[i][0]) cur = i;
+  if (cur < 0 || t >= until) return; const [at, s, st] = list[cur]; chunk(c, t, at, s, st, y);
+}
+function hero(c, t, at, s, { y = 900, size = 330, color = C.white, out = 99, gold = false } = {}) {   // huge italic date / phrase
+  if (t < at || t > out + .25) return; const p = E.out(prog(t, at, at + .45)), o = 1 - prog(t, out, out + .25);
+  c.save(); c.globalAlpha *= p * o; c.translate(CX, y); const k = lerp(1.12, 1, E.outExpo(prog(t, at, at + .6))) * (1 + .03 * prog(t, at, out)); c.scale(k, k);
+  c.font = `${size}px ISI`; c.textAlign = "center"; c.textBaseline = "alphabetic"; c.filter = `blur(${(1 - p) * 6}px)`;
+  c.shadowColor = "rgba(0,0,0,.55)"; c.shadowBlur = 30; c.fillStyle = css(gold ? C.gold : color); c.fillText(s, 0, 0); c.restore();
+}
+function label(c, t, at, s, x, y, { gold = true, size = 40, out = 99 } = {}) {   // small place / name tag
+  if (t < at || t > out) return; const p = E.outExpo(prog(t, at, at + .25));
+  c.save(); c.font = `${size}px CPB`; const tw = c.measureText(s).width, padX = 12, h = size * 1.15;
+  c.fillStyle = gold ? css(C.gold) : "rgba(18,16,14,.92)"; c.fillRect(x - tw / 2 - padX, y - size * .9, (tw + padX * 2) * p, h);
+  c.save(); c.beginPath(); c.rect(x - tw / 2 - padX, y - size, (tw + padX * 2) * p, h + 10); c.clip();
+  c.fillStyle = gold ? css(C.ink) : css(C.white); c.textAlign = "center"; c.fillText(s, x, y); c.restore(); c.restore();
+}
+/* hand-drawn gold ellipse, drawn on progressively */
+function circle(c, t, at, x, y, rx, ry, { rot = -.12, d = .45, lw = 7, out = 99 } = {}) {
+  const p = E.out(prog(t, at, at + d)); if (p <= 0 || t > out) return;
+  c.save(); c.translate(x, y); c.rotate(rot); c.strokeStyle = css(C.gold, .95); c.lineWidth = lw; c.lineCap = "round"; c.beginPath();
+  const n = 90, turns = 1.1; for (let i = 0; i <= n * p; i++) { const u = i / n, a = -2.4 + u * Math.PI * 2 * turns, wob = 1 + .045 * Math.sin(u * 7 + x) + .05 * u;
+    const px = Math.cos(a) * rx * wob, py = Math.sin(a) * ry * wob; i ? c.lineTo(px, py) : c.moveTo(px, py); }
+  c.stroke(); c.restore();
+}
+function hand(c, s, x, y, size, rot, p, col = "rgba(40,34,28,.85)") {   // handwritten note, revealed left to right
+  if (p <= 0) return; c.save(); c.translate(x, y); c.rotate(rot); c.font = `${size}px HND`; const tw = c.measureText(s).width;
+  c.beginPath(); c.rect(-10, -size, (tw + 20) * p, size * 1.6); c.clip(); c.fillStyle = col; c.fillText(s, 0, 0); c.restore();
+}
+function blank(c, t, word, at, y = CAP_Y) { c.drawImage(PAPER, 0, 0); if (t >= at) { c.save(); c.font = "60px CP"; c.textAlign = "center"; c.fillStyle = css(C.ink, E.out(prog(t, at, at + .12))); c.fillText(word, CX, y); c.restore(); } }
+
+/* ---------- made-by-hand documents ---------- */
+function devicePath(c, p) {   // patent-style line drawing of the 1903 device, drawn progressively (p 0..1)
+  const P = [
+    ["rect", 250, 560, 580, 470], ["rect", 268, 578, 544, 434],                     // windshield frame, double line
+    ["line", 540, 560, 540, 470], ["circ", 540, 560, 13],                          // spindle through the frame + pivot
+    ["line", 540, 470, 672, 440], ["circ", 684, 437, 17],                          // handle inside the car
+    ["line", 540, 560, 334, 990], ["line", 552, 566, 348, 996],                    // swinging arm
+    ["line", 300, 920, 372, 1060], ["line", 312, 914, 384, 1054],                  // rubber blade
+    ["arc", 540, 560, 452, 2.03, 1.11],                                            // the sweep
+    ["txt", "1", 222, 610], ["txt", "2", 300, 880], ["txt", "3", 700, 420], ["txt", "4", 560, 1036], ["txt", "a", 560, 600]];
+  const n = P.length; c.save(); c.strokeStyle = c.fillStyle = "rgba(40,34,28,.9)"; c.lineWidth = 3.2; c.lineCap = "round"; c.font = "italic 30px LB";
+  P.forEach((e, i) => { const q = clamp(p * n - i); if (q <= 0) return; const [k] = e; c.beginPath();
+    if (k === "line") { c.moveTo(e[1], e[2]); c.lineTo(lerp(e[1], e[3], q), lerp(e[2], e[4], q)); c.stroke(); }
+    else if (k === "rect") { const [, x, y, w, h] = e, L = 2 * (w + h); let d = L * q; const pts = [[x, y], [x + w, y], [x + w, y + h], [x, y + h], [x, y]]; c.moveTo(x, y);
+      for (let j = 1; j < 5 && d > 0; j++) { const [ax, ay] = pts[j - 1], [bx, by] = pts[j], sl = Math.hypot(bx - ax, by - ay), u = Math.min(1, d / sl); c.lineTo(lerp(ax, bx, u), lerp(ay, by, u)); d -= sl; } c.stroke(); }
+    else if (k === "circ") { c.arc(e[1], e[2], e[3], 0, Math.PI * 2 * q); c.stroke(); }
+    else if (k === "arc") { c.save(); c.setLineDash([14, 12]); c.lineWidth = 2.4; c.arc(e[1], e[2], e[3], e[4], lerp(e[4], e[5], q), true); c.stroke(); c.restore(); }
+    else { c.globalAlpha *= q; c.fillText(e[1], e[2], e[3]); c.globalAlpha /= q; } });
+  c.restore();
+}
+function patentPage(c, t, t0) {
+  c.drawImage(CREAM, 0, 0); c.save(); c.fillStyle = "rgba(40,34,28,.9)"; c.textAlign = "center";
+  c.font = "44px LB"; c.fillText("UNITED STATES PATENT OFFICE.", CX, 230);
+  c.font = "34px LB"; c.fillText("MARY ANDERSON, OF BIRMINGHAM, ALABAMA.", CX, 320);
+  c.font = "38px CPB"; c.fillText("WINDOW-CLEANING DEVICE.", CX, 390);
+  c.font = "30px LB"; c.fillText("No. 743,801.          Patented Nov. 10, 1903.", CX, 460);
+  c.strokeStyle = "rgba(40,34,28,.5)"; c.lineWidth = 2; c.beginPath(); c.moveTo(140, 490); c.lineTo(940, 490); c.stroke();
+  c.translate(0, 100); devicePath(c, E.inOut(prog(t, t0, t0 + 2.2))); c.translate(0, -100);
+  c.font = "26px LB"; c.textAlign = "left"; c.fillStyle = "rgba(40,34,28,.55)";
+  ["Witnesses:", "", "Inventor:  Mary Anderson."].forEach((s, i) => c.fillText(s, 160, 1560 + i * 44));
+  c.restore();
+}
+const LETTER = ["Dear Madam,", "", "We have examined the model of", "your window-cleaning device.", "", "We regret we do not consider it", "of such commercial value as to", "warrant our undertaking its sale.", "", "Yours truly,"];
+function letter(c, t, t0) {
+  c.drawImage(CREAM, 0, 0); c.save(); c.fillStyle = "rgba(40,34,28,.9)"; c.textAlign = "center";
+  c.font = "44px LB"; c.fillText("DINNING & ECKENSTEIN", CX, 300); c.font = "28px LB"; c.fillText("MONTREAL, CANADA", CX, 350);
+  c.strokeStyle = "rgba(40,34,28,.45)"; c.lineWidth = 2; c.beginPath(); c.moveTo(150, 385); c.lineTo(930, 385); c.stroke();
+  c.textAlign = "left"; c.font = "40px TW"; const cps = 44; let n = Math.floor((t - t0) * cps);
+  LETTER.forEach((s, i) => { if (n <= 0) return; const k = Math.min(s.length, n); n -= s.length + 2; c.fillText(s.slice(0, k), 140, 560 + i * 72); });
+  c.restore();
+}
+
+/* ======================= SCENES =======================
+   Each scene: start (s), clip(t) -> [videoKey, sourceTime] or null, draw(c, t). Hard cuts unless 'fade'. */
+const SCENES = [];
+const S = (name, start, o) => SCENES.push({ name, start, ...o });
+
+S("Hook", 0, { clip: t => ["v6", t + .1], draw(c, t) {
+  cover(c, VID.v6, { s: kb(t, 0, 3.5, 1.04, 1.1), filter: "brightness(.8)" });
+  hero(c, t, w("hook", 0), "What if", { y: 860, size: 230, out: w("hook2", 0) - .1 });
+  hero(c, t, w("hook", 2) + .05, "I told you…", { y: 1060, size: 150, out: w("hook2", 0) - .1 });
+  caps(c, t, [[w("hook2", 0), "the windshield wiper", "hl"], [w("hook2", 3), "was invented by", ""]], 99);
+} });
+S("Hook · woman", w("hook2", 6) - .08, { draw(c, t) {
+  cover(c, IMG.A4, { s: kb(t, 3.4, 6, 1.12, 1.2), fx: 640, fy: 860 });
+  caps(c, t, [[w("hook2", 6), "a woman", "big"], [w("hook2", 8), "riding a streetcar?", "it"]], 99);
+} });
+S("1902", 5.88, { clip: t => ["v1", t - 5.88 + .2], draw(c, t) {
+  cover(c, VID.v1, { s: kb(t, 5.88, 9.6, 1.0, 1.06) }); sleet(c, t, 170, .45);
+  label(c, t, w("ny", 0) - .05, "NEW YORK", CX, 690, { out: w("crawl", 0) - .1 });
+  hero(c, t, w("ny", 2), "1902", { y: 980, size: 340, out: w("crawl", 0) - .1 });
+  caps(c, t, [[w("crawl", 1), "a streetcar crawls", ""], [w("crawl", 3), "through the sleet.", "it"]], 99);
+} });
+S("Can't see", w("cantsee", 0) - .12, { draw(c, t) {
+  const t0 = w("cantsee", 0) - .12; cover(c, IMG.A2, { s: kb(t, t0, t0 + 2, 1.0, 1.1), fy: 800 }); sleet(c, t, 90, .35);
+  caps(c, t, [[w("cantsee", 1), "The driver", ""], [w("cantsee", 2), "can't see", "frost"], [w("cantsee", 4), "the road.", ""]], 99, 1500);
+} });
+S("Leans out", w("only", 0) - .1, { clip: t => ["v2", t - (w("only", 0) - .1)], draw(c, t) {
+  const t0 = w("only", 0) - .1; cover(c, VID.v2, { s: kb(t, t0, t0 + 4.7, 1.0, 1.05), fy: 760 });
+  circle(c, t, w("opens", 6) - .1, 420, 760, 150, 95, { rot: -.1 });
+  caps(c, t, [[w("only", 3), "the only thing", ""], [w("only", 6), "he can.", "it"], [w("opens", 1), "opens the window,", ""], [w("opens", 6), "leans into", ""], [w("opens", 8), "the storm.", "hl"]], 99);
+} });
+S("One", w("watch", 0) - .08, { draw(c, t) { blank(c, t, "One", w("watch", 0)); } });
+S("Passenger", w("watch", 1) - .06, { clip: t => ["v3", 1.5 + t - (w("watch", 1) - .06)], draw(c, t) {
+  cover(c, VID.v3, {}); caps(c, t, [[w("watch", 1), "passenger", ""], [w("watch", 2), "can't stop watching.", "it"]], 99);
+} });
+S("Mary", w("name", 0) - .1, { draw(c, t) {
+  const t0 = w("name", 0) - .1; cover(c, IMG.A1, { s: 1.12, filter: "blur(7px) brightness(.72)" }); sleet(c, t, 70, .25);
+  const im = IMG["A4-cut"], ch = 1180, cw = im.width * ch / im.height, x = CX - cw / 2, y = 330, p = E.outExpo(prog(t, t0, t0 + .5)), rot = lerp(-.12, -.035, p);
+  c.save(); c.translate(CX, 960); c.rotate(rot); c.scale(lerp(.85, 1, p) * (1 + .03 * prog(t, t0, t0 + 3.4)), lerp(.85, 1, p) * (1 + .03 * prog(t, t0, t0 + 3.4))); c.translate(-CX, -960);
+  c.shadowColor = "rgba(0,0,0,.5)"; c.shadowBlur = 40; c.shadowOffsetY = 18; c.fillStyle = css(C.white); c.fillRect(x - 34, y - 34, cw + 68, ch + 150); c.shadowColor = "transparent";
+  c.fillStyle = "#D9D4CB"; c.fillRect(x, y, cw, ch); c.drawImage(im, x, y, cw, ch);
+  c.font = "34px HND"; c.fillStyle = "rgba(40,34,28,.8)"; c.textAlign = "center"; c.fillText("Mary Anderson, 1902", CX, y + ch + 78); c.restore();
+  label(c, t, w("name", 3), "MARY ANDERSON", CX, 1690, { gold: false, size: 46, out: w("visiting", 2) });
+  label(c, t, w("visiting", 3) - .05, "BIRMINGHAM, ALABAMA", CX, 1690, { size: 46 });
+} });
+S("Not an engineer", w("engineer", 0) - .1, { draw(c, t) {
+  const t0 = w("engineer", 0) - .1; c.drawImage(CREAM, 0, 0); cover(c, IMG.A5, { s: kb(t, t0, t0 + 1.6, 1.0, 1.06), fy: 700, alpha: .96 });
+  caps(c, t, [[w("engineer", 0), "She isn't", ""], [w("engineer", 2), "an engineer.", "big"]], 99);
+} });
+S("But", w("follows", 0) - .08, { draw(c, t) { blank(c, t, "But", w("follows", 0)); } });
+S("The problem", w("follows", 1) - .05, { draw(c, t) {
+  const t0 = w("follows", 1) - .05; cover(c, IMG.A8, { s: kb(t, t0, t0 + 1.8, 1.0, 1.08), filter: "brightness(.85)" }); sleet(c, t, 60, .3);
+  caps(c, t, [[w("follows", 1), "the problem", ""], [w("follows", 3), "follows her home.", "it"]], 99);
+} });
+S("Sketch", w("sketch", 0) - .1, { draw(c, t) {
+  const t0 = w("sketch", 0) - .1; cover(c, IMG.A6, { s: kb(t, t0, t0 + 1.6, 1.0, 1.12), fx: 560, fy: 1150 });
+  caps(c, t, [[w("sketch", 0), "She sketches", ""], [w("sketch", 2), "an idea.", "hl"]], 99, 760);
+} });
+S("Lever & blade", w("lever", 0) - .1, { draw(c, t) {
+  const t0 = w("lever", 0) - .1, pan = E.inOut(prog(t, w("blade", 0) - .3, w("blade", 0) + .5));
+  c.drawImage(CREAM, 0, 0);
+  c.save(); c.translate(0, lerp(-120, 80, pan)); const im = IMG["A9-cut"], ih = 1240, iw = im.width * ih / im.height;
+  c.shadowColor = "rgba(40,30,20,.35)"; c.shadowBlur = 26; c.shadowOffsetY = 12; c.drawImage(im, CX - iw / 2 + 20, 380, iw, ih); c.shadowColor = "transparent";
+  hand(c, "turn from inside", 690, 1580, 52, -.06, E.out(prog(t, w("lever", 1), w("lever", 1) + .7)));
+  hand(c, "rubber blade, outside", 120, 360, 52, -.05, E.out(prog(t, w("blade", 1), w("blade", 1) + .7)));
+  circle(c, t, w("lever", 1), 765, 1360, 120, 230, { rot: .05 });
+  circle(c, t, w("blade", 1), 320, 900, 110, 470, { rot: .02 });
+  c.restore();
+  caps(c, t, [[w("lever", 0), "a lever", "ink"], [w("lever", 2), "inside the car.", "ink-it"], [w("blade", 0), "a rubber blade", "hl"], [w("blade", 3), "outside.", "ink-it"]], 99);
+} });
+const SWEEP = w("clear", 3) - .05;   // the moment the blade crosses the glass
+S("Clear", w("turn", 0) - .1, { clip: t => ["v8", 2.05 + (t - SWEEP)], draw(c, t) {
+  cover(c, VID.v8, { s: kb(t, w("turn", 0) - .1, SWEEP + 1.2, 1.0, 1.05) });
+  caps(c, t, [[w("turn", 0), "one turn", ""], [w("turn", 2), "of the handle…", "it"], [w("clear", 0), "and the glass is", ""]], SWEEP + .15);
+  if (t >= SWEEP + .15) { const p = E.out(prog(t, SWEEP + .15, SWEEP + .65)); c.save(); c.beginPath(); c.rect(0, 0, W_ * p, H_); c.clip(); chunk(c, t, SWEEP + .15, "clear.", "big"); c.restore(); }
+} });
+S("1903 patent", w("patent", 0) - .1, { draw(c, t) {
+  const t0 = w("patent", 0) - .1; c.save(); c.translate(CX, 960); const k = kb(t, t0, t0 + 2.6, 1.0, 1.06); c.scale(k, k); c.translate(-CX, -960); patentPage(c, t, t0); c.restore();
+  hero(c, t, w("patent", 1), "1903", { y: 1480, size: 300, gold: true, out: w("patent", 4) });
+  circle(c, t, w("patent", 5) - .05, 330, 450, 175, 50, { rot: -.03 });
+  caps(c, t, [[w("patent", 4), "she's granted", ""], [w("patent", 6), "a patent.", "hl"]], 99, 1720);
+} });
+S("Sell it", w("sell", 0) - .1, { clip: t => ["v4", 2.2 + t - (w("sell", 0) - .1)], draw(c, t) {
+  cover(c, VID.v4, {}); caps(c, t, [[w("sell", 0), "then she tries", ""], [w("sell", 4), "to sell it.", "it"]], 99);
+} });
+S("Canada", w("canada", 0) - .1, { draw(c, t) {
+  const t0 = w("canada", 0) - .1; c.save(); c.translate(CX, 900); const k = kb(t, t0, t0 + 3.2, 1.0, 1.08); c.scale(k, k); c.translate(-CX, -900); letter(c, t, t0); c.restore();
+  label(c, t, w("canada", 2), "MONTREAL, 1905", CX, 160);
+  caps(c, t, [[w("canada", 0), "a company in Canada", ""], [w("canada", 5), "tells her", ""], [w("canada", 7), "it isn't worth making.", "hl"]], 99, 1500);
+} });
+S("Nobody", w("nobody", 0) - .08, { draw(c, t) { blank(c, t, "Nobody", w("nobody", 0)); if (t >= w("nobody", 1)) { c.save(); c.font = "60px CPI"; c.textAlign = "center"; c.fillStyle = css(C.ink, E.out(prog(t, w("nobody", 1), w("nobody", 1) + .15))); c.fillText("buys it.", CX, CAP_Y + 80); c.restore(); } } });
+S("1920", w("expire", 0) - .1, { clip: t => ["v5", t - (w("expire", 0) - .1)], draw(c, t) {
+  const t0 = w("expire", 0) - .1; cover(c, VID.v5, { s: kb(t, t0, t0 + 4.2, 1.08, 1.0) });
+  hero(c, t, w("expire", 5), "1920", { y: 780, size: 320, out: w("roads", 0) - .05 });
+  caps(c, t, [[w("expire", 0), "her patent runs out", ""], [w("roads", 0), "just as cars", ""], [w("roads", 3), "are filling the roads.", "it"]], 99);
+} });
+S("Standard", w("standard", 0) - .1, { draw(c, t) {
+  const t0 = w("standard", 0) - .1; cover(c, IMG.A13, { s: kb(t, t0, t0 + 2.4, 1.0, 1.1), fx: 420, fy: 950 }); sleet(c, t, 50, .2, -.1);
+  caps(c, t, [[w("standard", 0), "within a few years,", ""], [w("standard", 4), "wipers are", ""], [w("standard", 6), "standard.", "big"]], 99);
+} });
+S("Never profits", w("profit", 0) - .1, { draw(c, t) {
+  const t0 = w("profit", 0) - .1; c.drawImage(PAPER, 0, 0);
+  const im = IMG.A14, pw = 800, ph = pw * im.height / im.width, k = kb(t, t0, t0 + 2, 1.0, 1.05);
+  c.save(); c.translate(CX, 940); c.scale(k, k); c.rotate(-.025); c.shadowColor = "rgba(0,0,0,.35)"; c.shadowBlur = 34; c.shadowOffsetY = 14;
+  c.fillStyle = css(C.white); c.fillRect(-pw / 2 - 26, -ph / 2 - 26, pw + 52, ph + 52); c.shadowColor = "transparent"; c.drawImage(im, -pw / 2, -ph / 2, pw, ph); c.restore();
+  caps(c, t, [[w("profit", 0), "She", ""], [w("profit", 1), "never profits", "hl"], [w("profit", 3), "from it.", "it"]], 99);
+} });
+const ST = w("every", 0) - .12, RATE = .62;
+S("Still moving", ST, { clip: t => ["v7", Math.min((t - ST) * RATE, 4.55)], draw(c, t) {
+  cover(c, VID.v7, { s: kb(t, ST, 58, 1.0, 1.06) });
+  caps(c, t, [[w("every", 0), "but every time", ""], [w("every", 3), "yours sweeps", ""], [w("every", 5), "the rain away…", "it"], [w("still", 0), "that's her idea,", ""], [w("still", 3), "still moving.", "hl"]], 57.0);
+  const f = prog(t, 57.0, 57.8); if (f > 0) { c.save(); c.globalAlpha = f; c.drawImage(PAPER, 0, 0); c.globalAlpha = f * .5; c.translate(CX, 1420); c.scale(.42, .42); c.translate(-CX, -760); devicePath(c, prog(t, 57.3, 58.6)); c.restore();
+    c.save(); c.globalAlpha = E.out(prog(t, 57.4, 58)); c.font = "56px CPI"; c.textAlign = "center"; c.fillStyle = css(C.ink); c.fillText("Mary Anderson", CX, CAP_Y); c.font = "34px CP"; c.fillStyle = "rgba(30,27,23,.7)"; c.fillText("1866 – 1953", CX, CAP_Y + 60); c.restore(); }
+} });
+SCENES.forEach((s, i) => { s.end = i < SCENES.length - 1 ? SCENES[i + 1].start : DUR; });
+
+/* ======================= COMPOSITE ======================= */
+let FRAME = 0;
+function render(c, t) {
+  c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.filter = "none"; c.globalCompositeOperation = "source-over"; c.fillStyle = "#000"; c.fillRect(0, 0, W_, H_);
+  const sc = SCENES.find(s => t >= s.start && t < s.end) || SCENES[SCENES.length - 1];
+  c.save(); sc.draw(c, t); c.restore(); c.setTransform(1, 0, 0, 1, 0, 0); finish(c, FRAME);
+}
+async function renderFrame(f) { FRAME = f; const t = f / FPS; await seekFor(t); render(ctx, t); }
+
+/* ======================= PLAYER ======================= */
+const ready = (async () => { await Promise.all(["CP", "CPI", "CPB", "ISI", "HND", "LB", "TW"].map(f => document.fonts.load(`40px ${f}`))); await document.fonts.ready; await loadImages(); await loadVideos(); })();
+window.REEL = { ready, renderFrame, canvas: cv, FRAMES, FPS, CONFIG };
+const $ = id => document.getElementById(id), scrub = $("scrub"), timeEl = $("time"), playBtn = $("play");
+scrub.max = FRAMES - 1;
+let frame = 0, playing = false, busy = false;
+const AUDIO_SRC = "__AUDIO__", snd = AUDIO_SRC.startsWith("data:") ? new Audio(AUDIO_SRC) : null;
+const show = async f => { if (busy) return; busy = true; frame = Math.max(0, Math.min(FRAMES - 1, f)); await renderFrame(frame); scrub.value = frame; timeEl.textContent = `${(frame / FPS).toFixed(2).padStart(5, "0")} / ${DUR.toFixed(2)}  f${frame}`; busy = false; };
+let t0 = 0, f0 = 0;
+const loop = async now => { if (!playing) return; const f = snd ? Math.floor(snd.currentTime * FPS) : f0 + Math.floor((now - t0) / 1000 * FPS); if (f >= FRAMES) { toggle(); return; } await show(f); requestAnimationFrame(loop); };
+const toggle = () => { playing = !playing; playBtn.textContent = playing ? "Pause" : "Play"; if (playing) { t0 = performance.now(); f0 = frame; if (snd) { snd.currentTime = frame / FPS; snd.play(); } requestAnimationFrame(loop); } else if (snd) snd.pause(); };
+playBtn.onclick = toggle; $("prev").onclick = () => show(frame - 1); $("next").onclick = () => show(frame + 1);
+scrub.oninput = () => { playing = false; playBtn.textContent = "Play"; if (snd) snd.pause(); show(+scrub.value); };
+addEventListener("keydown", e => { if (e.code === "Space") { e.preventDefault(); toggle(); } if (e.key === "ArrowLeft") show(frame - 1); if (e.key === "ArrowRight") show(frame + 1); });
+SCENES.forEach(s => { const d = document.createElement("div"); d.style.width = ((s.end - s.start) / DUR * 100) + "%"; d.textContent = s.name; d.onclick = () => show(Math.round(s.start * FPS)); $("beats").appendChild(d); });
+ready.then(() => { if (!window.__EXPORT__) show(0); });
+</script>
+</body>
+</html>

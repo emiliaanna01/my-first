@@ -8,13 +8,13 @@ const { chromium } = require("playwright");
 
 (async () => {
   const [html, out, ...rest] = process.argv.slice(2);
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ args: ["--allow-file-access-from-files", "--autoplay-policy=no-user-gesture-required"] });
   const page = await browser.newPage({ viewport: { width: 1200, height: 2100 } });
   page.on("pageerror", e => console.error("pageerror:", e.message));
   await page.addInitScript(() => { window.__EXPORT__ = true; });
   await page.goto("file://" + path.resolve(html));
   await page.evaluate(() => window.REEL.ready);
-  const grab = (f, s) => page.evaluate(([f, s]) => { window.REEL.renderFrame(f, s); return window.REEL.canvas.toDataURL("image/png"); }, [f, s]);
+  const grab = (f, s) => page.evaluate(async ([f, s]) => { await window.REEL.renderFrame(f, s); return window.REEL.canvas.toDataURL("image/png"); }, [f, s]);
   const png = d => Buffer.from(d.slice(d.indexOf(",") + 1), "base64");
 
   if (out === "--stills") {
