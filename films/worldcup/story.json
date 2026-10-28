@@ -6,22 +6,7 @@
  "speed": 1.0,
  "music": "score.wav",
  "seed": 26,
- "images": {
-  "goal": {
-   "commons": "File:Ferran Torres Argentina v Spain 19 July 2026-347.jpg",
-   "allow_by": true,
-   "cut": false,
-   "accent": "red",
-   "size": 1100
-  },
-  "duel": {
-   "commons": "File:Ferran Torres Marcos Senesi Argentina v Spain 19 July 2026-243.jpg",
-   "allow_by": true,
-   "cut": false,
-   "accent": "mustard",
-   "size": 1100
-  }
- },
+ "images": {},
  "beats": [
   {
    "say": "July nineteenth, 2026. MetLife Stadium, New Jersey.",
@@ -50,7 +35,7 @@
    "kind": "number",
    "bg": "navy",
    "number": "104",
-   "sub": "MATCHES \u00b7 UP FROM 64"
+   "sub": "MATCHES · UP FROM 64"
   },
   {
    "say": "By late June, it had already broken the crowd record set in 1994.",
@@ -92,19 +77,24 @@
   },
   {
    "say": "Then, in extra time, Ferran Torres scores.",
-   "kind": "photo",
+   "kind": "number",
    "bg": "red",
-   "photo": "goal",
-   "label": "FERRAN TORRES",
-   "stamp": "GOAL",
-   "stamp_on": "scores."
+   "number": "GOAL",
+   "sub": "FERRAN TORRES · EXTRA TIME",
+   "burst": true,
+   "burst_color": "mustard"
   },
   {
    "say": "Argentina push for an equaliser. It never comes.",
-   "kind": "photo",
+   "kind": "timeline",
    "bg": "navy",
-   "photo": "duel",
-   "tag": "ARGENTINA V SPAIN, 2026"
+   "dates": [
+    "90'",
+    "105'",
+    "120'"
+   ],
+   "active": 2,
+   "label": "NO EQUALISER"
   },
   {
    "say": "Spain win, one-nil.",
