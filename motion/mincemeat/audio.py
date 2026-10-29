@@ -166,18 +166,31 @@ def main(vo_dir, out):
     e = signal.sosfiltfilt(signal.butter(1, 4, "lowpass", fs=SR, output="sos"), np.convolve(lvl, np.ones(k) / k, "same"))
     d = np.clip(e / (e.max() + 1e-9) * 3, 0, 1)[:, None]
     mus = music(); mus = mus - bp(mus, 1200, 3800) * .3      # a little room for the voice
-    sfx = design()
-    buses = {"vo": v, "sfx": sfx / (np.abs(sfx).max() + 1e-9) * .7 * (1 - .35 * d), "music": mus / (np.abs(mus).max() + 1e-9) * .42 * (1 - .42 * d)}
+    sfx = design(); mus = mus / (np.abs(mus).max() + 1e-9)
+    # ride the music down only under lines where it would mask the voice (keeps it high in the gaps)
+    sos = signal.butter(4, [300, 4000], "bandpass", fs=SR, output="sos")
+    vb = signal.sosfilt(sos, v.mean(1)); mb = signal.sosfilt(sos, (mus * .6 * (1 - .42 * d)).mean(1))
+    tt = np.arange(N) / SR; ride = np.ones(N)
+    for m in meta:
+        i0, i1 = int(m["t"] * SR), int((m["t"] + m["dur"]) * SR)
+        dm = 20 * np.log10((np.sqrt(np.mean(vb[i0:i1] ** 2)) + 1e-9) / (np.sqrt(np.mean(mb[i0:i1] ** 2)) + 1e-9))
+        cut = min(0, dm - 8.5)
+        if cut < 0: ride *= 10 ** (cut / 20 * np.clip(np.minimum((tt - m["t"] + .25) / .25, (m["t"] + m["dur"] + .2 - tt) / .2), 0, 1))
+    mus = mus * ride[:, None]
+    buses = {"vo": v, "sfx": sfx / (np.abs(sfx).max() + 1e-9) * .7 * (1 - .35 * d), "music": mus * .6 * (1 - .42 * d)}
     mix = sum(buses.values())
     mix = np.tanh(mix / (np.abs(mix).max() + 1e-9) * 1.25) * .9
     sf.write(out, mix.astype(np.float32), SR, subtype="FLOAT")
     sos = signal.butter(4, [300, 4000], "bandpass", fs=SR, output="sos")
     a_ = signal.sosfilt(sos, buses["vo"].mean(1)); r_ = signal.sosfilt(sos, (buses["sfx"] + buses["music"]).mean(1))
+    m_ = signal.sosfilt(sos, buses["music"].mean(1)); s_ = signal.sosfilt(sos, buses["sfx"].mean(1))
     rows = []
     for m in meta:
         i0, i1 = int(m["t"] * SR), int((m["t"] + m["dur"]) * SR)
-        rows.append((20 * np.log10((np.sqrt(np.mean(a_[i0:i1] ** 2)) + 1e-9) / (np.sqrt(np.mean(r_[i0:i1] ** 2)) + 1e-9)), m["t"], m["text"]))
-    for db, t, txt in sorted(rows)[:5]: print(f"{t:6.2f}s {db:5.1f} dB  {txt}")
+        vr = np.sqrt(np.mean(a_[i0:i1] ** 2)) + 1e-9
+        rows.append((20 * np.log10(vr / (np.sqrt(np.mean(r_[i0:i1] ** 2)) + 1e-9)), m["t"], m["text"],
+                     20 * np.log10(vr / (np.sqrt(np.mean(m_[i0:i1] ** 2)) + 1e-9)), 20 * np.log10(vr / (np.sqrt(np.mean(s_[i0:i1] ** 2)) + 1e-9))))
+    for db, t, txt, dm, ds in sorted(rows)[:6]: print(f"{t:6.2f}s {db:5.1f} dB (vs music {dm:5.1f}, vs sfx {ds:5.1f})  {txt[:50]}")
     rv = np.sqrt(np.mean(buses["music"] ** 2)) / (np.sqrt(np.mean(buses["vo"] ** 2)) + 1e-9)
     print(f"music/voice overall {20 * np.log10(rv):.1f} dB"); print("wrote", out)
 
