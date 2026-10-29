@@ -539,10 +539,10 @@ class Film:
             top = beat.get("bars_y", (900 if self.v else 520) - len(rows_) * row_h / 2)
             full = (x1 - x0) - 260
             light = _light(self.cur_bg)
-            key_stock = max([self.look["accent"], "mustard", "ink", "cream", "teal"], key=lambda c: _dist(c, self.cur_bg))
             plain = "ink" if light else "cream"
-            if plain == key_stock:
-                plain = "newsprint" if not light else "navy"
+            # the key bar in the accent stock, unless the accent is too close to this card: then the most distinct stock
+            key_stock = self.look["accent"] if _dist(self.look["accent"], self.cur_bg) > 120 else max(
+                ["mustard", "teal", "cream", "ink"], key=lambda c: _dist(c, self.cur_bg) * (c != plain))
             stag = max(0.15, min(0.35, (dur * 0.55) / len(rows_)))
             for j, (name, v) in enumerate(rows_):
                 y = top + j * row_h
