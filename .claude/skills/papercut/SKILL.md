@@ -34,8 +34,14 @@ Search the topic. Every date, name and number in the script needs two independen
 ### 2. Script (beats)
 
 - 10-14 beats, 30-45 s. One sentence (or half of one) per beat, one visual idea per beat.
-- Open cold, and not the same way every time (see "Make every film different" below): a date and a place, a photo with
-  one striking line, a number, a quote, or a question.
+- **Beat 1 is a spoken hook** that makes the viewer need the answer, said over the opening picture. Write it in the
+  viewer's voice, and vary its form from film to film:
+  - "What if I told you the first selfie was taken in 1914?"
+  - "Do you know what happened in Boston on January 15th, 1919?"
+  - "How did a billionaire hide millions from the taxman for years?"
+  - "This box cost one dollar. It changed how the whole world remembers itself."
+  The hook promises the payoff; the last beat delivers it (callback to the hook, not a summary).
+- After the hook, ground the story fast: a date and a place, a photo with one striking line, a number or a quote.
 - Calm documentary voice, short declaratives. Spell numbers the way they should be spoken ("Seventy-nine years later").
 - End on a short line that lands: "After it, it was." / "We are still debugging."
 
@@ -129,7 +135,8 @@ Two films from this skill should not look or move alike. Before writing story.js
    | `pastel` | sage, blush, butter, terracotta; serif labels | food, places, nature, gentle stories |
    | `tabloid` | black, white, yellow, red | sport, records, money, breaking news |
 
-2. **Opening**: rotate between a date and place, a photo, a number, a quote and a question.
+2. **Opening**: always a hook line first (see Script); rotate its form (what if I told you / do you know what happened /
+   how did / a bold claim) and the picture under it (a photo, a number, a map, a document).
 3. **Shape**: chronological, countdown, then-versus-now, myth-versus-fact, or a single object followed through time.
 4. **Scene mix**: at least five different kinds per film, at least four photo beats, and no kind more than three times.
    Use `gallery` when several photos tell one beat, `bars` for any comparison of amounts, `duo` for two people.
