@@ -31,10 +31,12 @@ def es(sid, **kw):
     """render one earshot bank sound -> mono float array at SR"""
     key = (sid, tuple(sorted(kw.items())))
     if key not in _CACHE:
-        f = tempfile.NamedTemporaryFile(suffix=".wav", delete=False).name
-        args = ["earshot", "sfx", "render", sid, "-o", f, "--sr", str(SR)] + sum([[f"--{k}", str(v)] for k, v in kw.items()], [])
-        subprocess.run(args, check=True, capture_output=True)
-        x, _ = sf.read(f); os.remove(f); _CACHE[key] = x.mean(1) if x.ndim > 1 else x
+        cdir = os.environ.get("SFX_CACHE", tempfile.gettempdir()); os.makedirs(cdir, exist_ok=True)
+        f = os.path.join(cdir, (sid + "".join(f"_{k}{v}" for k, v in sorted(kw.items()))).replace("/", "_") + ".wav")
+        if not os.path.exists(f):
+            args = ["earshot", "sfx", "render", sid, "-o", f, "--sr", str(SR)] + sum([[f"--{k}", str(v)] for k, v in kw.items()], [])
+            subprocess.run(args, check=True, capture_output=True)
+        x, _ = sf.read(f); _CACHE[key] = x.mean(1) if x.ndim > 1 else x
     return _CACHE[key]
 
 # ---------------- music ----------------
@@ -145,7 +147,7 @@ def design():
     hit("fit/bell/small_bell", W("message", 9) + .3, .2, .3, .4)
     # Huelva: wind, a distant bell, the inscription
     put(T_GRV - .4, widen(bed(DUR - T_GRV + .4, 300, 1500, .035, .35, 7)), 0, .3)
-    hit("fit/bell/small_bell", T_GRV + .5, .22, .4, .8, pitch="E5")
+    hit("fit/bell/small_bell", T_GRV + .5, .22, .4, .8)
     hit("reverse_swell/ring", W("beneath", 2), .45, 0, .2)
     hit("impact/deep", W("never", 0) + .02, .45, 0, .45)
     hit("downlifter/sub_sink", END("never") + 1.0, .4)
