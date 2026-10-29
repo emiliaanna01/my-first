@@ -112,7 +112,16 @@ function beam(c, t, { a = .22, x = 300, ang = -.62, wd = 520, drift = 60, dust =
   c.restore();
 }
 function shade(c, a) { c.save(); c.fillStyle = `rgba(11,10,7,${a})`; c.fillRect(0, 0, W_, H_); c.restore(); }
+function filmDamage(c, f) {
+  c.save(); const r = n => hash(f * 7.31 + n);
+  for (let i = 0; i < 5; i++) if (r(i) > .55) { c.fillStyle = r(i + 20) > .5 ? `rgba(20,16,10,${.25 + r(i + 30) * .35})` : `rgba(255,240,205,${.2 + r(i + 30) * .3})`;
+    c.beginPath(); c.ellipse(r(i + 40) * W_, r(i + 50) * H_, 1.5 + r(i + 60) * 4, 1 + r(i + 70) * 3, r(i + 80) * 3, 0, Math.PI * 2); c.fill(); }
+  if (hash(Math.floor(f / 9)) > .72) { const x = hash(Math.floor(f / 9) + 1.7) * W_ + Math.sin(f * .7) * 3; c.strokeStyle = "rgba(255,240,205,.16)"; c.lineWidth = 1.4;
+    c.beginPath(); c.moveTo(x, 0); c.lineTo(x + 6, H_); c.stroke(); }
+  c.restore();
+}
 function finish(c, f) {
+  filmDamage(c, f);
   c.save(); c.globalCompositeOperation = "overlay"; c.globalAlpha = .13; const ox = hash(f) * 180 | 0, oy = hash(f + 3) * 300 | 0; c.drawImage(GRAIN, -ox, -oy, W_ + 180, H_ + 300); c.restore();
   const v = c.createRadialGradient(CX, 960, 520, CX, 960, 1240); v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(5,4,2,.62)"); c.fillStyle = v; c.fillRect(0, 0, W_, H_);
   const fl = .025 * (hash(Math.floor(f / 2)) - .5); if (fl > 0) { c.fillStyle = `rgba(255,230,170,${fl})`; c.fillRect(0, 0, W_, H_); }   // gentle projector flicker
@@ -140,6 +149,8 @@ function phrase(c, t, segs, y, { x = CX, out = 99, ink = false, glow = true } = 
   });
 }
 function hero(c, t, at, s, { y = 900, size = 230, gold = true, out = 99 } = {}) {   // big date
+  const lk = Math.max(0, 1 - Math.abs(t - at - .05) / .45); if (lk > 0) { c.save(); c.globalCompositeOperation = "screen"; const g = c.createRadialGradient(CX, y - size * .3, 0, CX, y - size * .3, 900);
+    g.addColorStop(0, `rgba(255,205,120,${.35 * lk})`); g.addColorStop(1, "rgba(255,205,120,0)"); c.fillStyle = g; c.fillRect(0, 0, W_, H_); c.restore(); }
   if (t < at || t > out + .3) return; const p = E.out(prog(t, at, at + .5)), o = 1 - prog(t, out, out + .3);
   c.save(); c.globalAlpha *= p * o; c.translate(CX, y); const k = lerp(1.08, 1, E.outExpo(prog(t, at, at + .7))) * (1 + .025 * prog(t, at, out)); c.scale(k, k);
   c.font = `${size}px GL`; c.textAlign = "center"; c.filter = `blur(${(1 - p) * 8}px)`; c.shadowColor = "rgba(0,0,0,.7)"; c.shadowBlur = 40;
@@ -217,8 +228,8 @@ S("London", T_LON, { xin: .45, clip: t => ["C2", .3 + (t - T_LON) * .95], draw(c
   const p = drop(t, at("london", 3, -.1), .6); if (p > 0) {
     shade(c, .35 * p); place(c, IMG.P3, lerp(700, 560, p), lerp(1500, 1050, p), 700, lerp(.12, -.04, p), { alpha: p });
   }
-  phrase(c, t, [["London,", at("london", 2), { size: 62, it: true }], ["1943.", at("london", 2, .15), { size: 62, font: "GL" }]], 300, { out: at("london", 7, -.1) });
-  phrase(c, t, [["two officers plan", at("london", 3), { size: 60 }]], 300, { out: 99 });
+  phrase(c, t, [["London,", at("london", 2), { size: 62, it: true }], ["1943.", at("london", 2, .15), { size: 62, font: "GL" }]], 300);
+  phrase(c, t, [["two officers plan", at("london", 3), { size: 60 }]], 1570);
   phrase(c, t, [["the", at("london", 7), { size: 64 }], ["unthinkable.", at("london", 8), { size: 120, it: true }]], 1700);
 } });
 
@@ -321,7 +332,7 @@ S("Fisherman", T_FIS, { xin: .35, clip: t => ["C6", .2 + (t - T_FIS) * .9], draw
 const T_COP = at("copy", 0, -.15);
 S("Copied", T_COP, { draw(c, t) {
   cover(c, IMG.B7, { s: kb(t, T_COP, end("copy") + .3, 1.04, 1.2), fx: 560, fy: 1000 });
-  const fl = Math.max(0, 1 - Math.abs(t - at("copy", 5, .05)) / .18), fl2 = Math.max(0, 1 - Math.abs(t - at("copy", 7, .1)) / .14);
+  const fl = Math.max(0, 1 - Math.abs(t - at("copy", 4, -.05)) / .16), fl2 = Math.max(0, 1 - Math.abs(t - at("copy", 5, -.12)) / .12);
   if (fl + fl2 > 0) { c.fillStyle = `rgba(255,246,225,${Math.min(.92, fl + fl2 * .8)})`; c.fillRect(0, 0, W_, H_); }
   phrase(c, t, [["Spanish officers let", at("copy", 0), { size: 58 }], ["German spies", at("copy", 3), { size: 58, it: true }]], 300);
   phrase(c, t, [["copy", at("copy", 5), { size: 112, it: true, gold: true }], ["the letters.", at("copy", 6), { size: 64 }]], 1700);
@@ -363,8 +374,8 @@ S("Telegram", T_MSG, { clip: t => ["C10", .5 + (t - T_MSG) * .9], draw(c, t) {
 const T_GRV = at("grave", 0, -.2);
 S("Huelva", T_GRV, { xin: .7, draw(c, t) {
   cover(c, IMG.B11, { s: kb(t, T_GRV, at("beneath", 0), 1.0, 1.22), fx: 440, fy: 1500 }); beam(c, t, { a: .1, x: 800, ang: -.3 });
-  phrase(c, t, [["Huelva,", at("grave", 1), { size: 66, it: true }], ["Spain.", at("grave", 1, .2), { size: 66 }]], 260, { out: at("grave", 4, -.1) });
-  phrase(c, t, [["his grave carries", at("grave", 3), { size: 60 }], ["the false name.", at("grave", 7), { size: 92, it: true }]], 260);
+  phrase(c, t, [["Huelva,", at("grave", 1), { size: 66, it: true }], ["Spain.", at("grave", 1, .2), { size: 66 }]], 260);
+  phrase(c, t, [["his grave carries", at("grave", 3), { size: 60 }], ["the false name.", at("grave", 7), { size: 92, it: true }]], 1720);
 } });
 const T_STN = at("grave", 8, .35);
 function engrave(c, s, y, size, a, font = "LB") { if (a <= 0) return; c.save(); c.globalAlpha *= a; c.font = `${size}px ${font}`; c.textAlign = "center"; c.letterSpacing = `${size * .08}px`;
@@ -395,7 +406,7 @@ function render(c, t) {
   const i = Math.max(0, SCENES.findIndex(s => t >= s.start && t < s.end)), sc = SCENES[i] || SCENES[SCENES.length - 1];
   if (sc.xin && i > 0 && t < sc.start + sc.xin) {   // dissolve through shadow
     const p = prog(t, sc.start, sc.start + sc.xin); c.save(); SCENES[i - 1].draw(c, t); c.restore(); shade(c, Math.sin(p * Math.PI) * .55); c.save(); c.globalAlpha = E.inOut(p); sc.draw(c, t); c.restore();
-  } else { c.save(); sc.draw(c, t); c.restore(); }
+  } else { c.save(); c.translate(Math.sin(t * 5.3) * 1.2 + (hash(FRAME) - .5) * .8, Math.sin(t * 3.7 + 1) * 1.5); sc.draw(c, t); c.restore(); }
   c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; finish(c, FRAME);
 }
 async function renderFrame(f) { FRAME = f; const t = f / FPS; await seekFor(t); render(ctx, t); }

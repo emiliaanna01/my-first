@@ -129,7 +129,7 @@ def design():
     # fisherman: the sea at dawn
     put(T_FIS - .3, widen(waves(T_COP - T_FIS + .5, .07)), 0, .2)
     # copied: two camera shutters with flash
-    hit("shutter/film", W("copy", 5) + .05, .8, .1); hit("shutter/film", W("copy", 7) + .1, .65, -.1)
+    hit("shutter/film", W("copy", 4) - .05, .8, .1); hit("shutter/film", W("copy", 5) - .12, .65, -.1)
     hit("whoosh_fast/crisp", T_COP, .35)
     # panzers: engine rumble, the arrow, "Greece"
     hit("whoosh_fast/heavy", T_PAN, .45)
