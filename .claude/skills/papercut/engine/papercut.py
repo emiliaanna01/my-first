@@ -185,8 +185,26 @@ if __name__ == "__main__":
         story, root, proj = load(sys.argv[2])
         os.makedirs(proj, exist_ok=True)
         w = int(sys.argv[sys.argv.index("--wait") + 1]) if "--wait" in sys.argv else 1800
-        images(story, root, proj, wait=w)
-        print("all photos ready")
+        src_dir = os.path.join(root, "sources")
+        missing = []
+        for key, spec in story.get("images", {}).items():  # one photo at a time: a slow one never blocks the rest
+            spec = {"commons": spec} if isinstance(spec, str) else spec
+            if "commons" not in spec or "file" in spec or any(os.path.exists(os.path.join(src_dir, key + e)) for e in (".jpg", ".png", ".jpeg")):
+                continue
+            ext = os.path.splitext(spec["commons"])[1].lower()
+            ext = ".jpg" if ext in (".tif", ".tiff", ".webp", ".svg") else ext
+            try:
+                fetch.get(spec["commons"], os.path.join(src_dir, key + ext), credits=os.path.join(root, "CREDITS.txt"),
+                          allow_by=spec.get("allow_by", False), budget=w)
+                print("  got", key)
+            except (fetch.RateLimited, SystemExit) as e:
+                missing.append(key)
+                print("  not yet:", key, "-", e)
+        if missing:
+            print("still missing:", ", ".join(missing), "(run fetch again later, or save them as photos/<key>.jpg)")
+        else:
+            images(story, root, proj, wait=w)
+            print("all photos ready")
     elif cmd == "snap":
         story, root, proj = load(sys.argv[2])
         out = os.path.join(root, "snaps")
