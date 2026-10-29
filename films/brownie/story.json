@@ -1,35 +1,188 @@
 {
- "title": "The One-Dollar Camera", "slug": "brownie-one-dollar-camera", "look": "pastel", "format": "9:16",
- "voice": "bf_emma", "lang": "en-gb", "speed": 1.0, "music": "bed", "seed": 1900,
+ "title": "The One-Dollar Camera",
+ "slug": "brownie-one-dollar-camera",
+ "look": "pastel",
+ "format": "9:16",
+ "voice": "bf_emma",
+ "lang": "en-gb",
+ "speed": 1.0,
+ "music": "score.wav",
+ "seed": 1900,
  "images": {
-  "selfie": {"commons": "File:Anastasia & Maria Romanova - selfies, 1914 (1 of 3) 01.jpg", "cut": false, "accent": "red", "size": 1000, "contrast": 1.2},
-  "selfie2": {"commons": "File:Anastasia & Maria Romanova - selfies, 1914 (2 of 3).jpg", "cut": false, "accent": "teal", "size": 900, "contrast": 1.25},
-  "box": {"commons": "File:2014-365-233 The Basic Brownie Camera (14809795240).jpg", "cut": true, "accent": "red", "size": 1000, "crop": [0.0, 0.05, 0.62, 0.95]},
-  "eastman": {"commons": "File:Atelier Nadar - George Eastman (1854-1932), Erfinder und Begründer des Photokonzerns Eastman Kodak (Zeno Fotografie).jpg", "cut": true, "accent": "mustard", "crop": [0.0, 0.0, 1.0, 0.55]},
-  "brownies": {"commons": "File:Brownie Camera (1905) (ADVERT 428).jpeg", "cut": false, "dots": false, "accent": "red", "size": 1000},
-  "kodakgirl": {"commons": "File:No. 28 - The Kodak Girl cph.3b17968.jpg", "cut": false, "accent": "pink", "size": 800},
-  "ad1904": {"commons": "File:Kodak camera ad (1904).jpg", "cut": false, "dots": false, "accent": "teal", "size": 800}
+  "selfie": {
+   "commons": "File:Anastasia & Maria Romanova - selfies, 1914 (1 of 3) 01.jpg",
+   "cut": false,
+   "accent": "red",
+   "size": 1000,
+   "contrast": 1.15,
+   "dots": false
+  },
+  "selfie2": {
+   "commons": "File:Anastasia & Maria Romanova - selfies, 1914 (2 of 3).jpg",
+   "cut": false,
+   "accent": "teal",
+   "size": 900,
+   "contrast": 1.2,
+   "dots": false
+  },
+  "box": {
+   "commons": "File:2014-365-233 The Basic Brownie Camera (14809795240).jpg",
+   "cut": true,
+   "accent": "red",
+   "size": 1000,
+   "crop": [
+    0.0,
+    0.05,
+    0.62,
+    0.95
+   ],
+   "dots": false,
+   "contrast": 1.1
+  },
+  "eastman": {
+   "commons": "File:Atelier Nadar - George Eastman (1854-1932), Erfinder und Begründer des Photokonzerns Eastman Kodak (Zeno Fotografie).jpg",
+   "cut": true,
+   "accent": "mustard",
+   "crop": [
+    0.0,
+    0.0,
+    1.0,
+    0.55
+   ]
+  },
+  "brownies": {
+   "commons": "File:Brownie Camera (1905) (ADVERT 428).jpeg",
+   "cut": false,
+   "dots": false,
+   "accent": "red",
+   "size": 1000
+  },
+  "kodakgirl": {
+   "commons": "File:No. 28 - The Kodak Girl cph.3b17968.jpg",
+   "cut": false,
+   "accent": "pink",
+   "size": 800
+  },
+  "ad1904": {
+   "commons": "File:Kodak camera ad (1904).jpg",
+   "cut": false,
+   "dots": false,
+   "accent": "teal",
+   "size": 800
+  }
  },
  "beats": [
-  {"say": "Around 1914, a teenage Russian princess points a camera at a mirror.", "kind": "photo", "photo": "selfie",
-   "label": "A SELFIE?", "tag": "ANASTASIA ROMANOVA, c. 1914"},
-  {"say": "Her camera is a Kodak Brownie. A box that cost one dollar.", "kind": "hero", "hero": "box", "label": "THE BROWNIE",
-   "stamp": "$1", "stamp_on": "dollar."},
-  {"say": "Its maker, George Eastman, had a promise.", "kind": "hero", "hero": "eastman", "label": "GEORGE EASTMAN", "tag": "KODAK"},
-  {"say": "You press the button, we do the rest.", "kind": "quote", "quote": "You press the button, we do the rest.",
-   "by": "Kodak slogan, 1888", "hero": "eastman"},
-  {"say": "But his first Kodak, in 1888, cost twenty-five dollars. The Brownie, in 1900, cost one.", "kind": "bars",
-   "bars": [["KODAK, 1888", 25], ["BROWNIE, 1900", 1]], "values": ["$25", "$1"], "active": 1, "label": "THE PRICE"},
-  {"say": "A roll of film was fifteen cents, for six pictures.", "kind": "document", "head": "PRICE LIST, 1900",
-   "lines": ["CAMERA: $1.00", "FILM: 15 CENTS", "PICTURES PER ROLL: 6"], "mark": 1},
-  {"say": "Its name came from the Brownies, cartoon characters from popular children's books.", "kind": "photo", "photo": "brownies",
-   "label": "THE BROWNIES", "tag": "KODAK ADVERT, 1905"},
-  {"say": "About a quarter of a million of the first model were made.", "kind": "number", "number": "250,000", "sub": "THE FIRST MODEL"},
-  {"say": "Suddenly, anyone could take a snapshot.", "kind": "gallery", "photos": ["kodakgirl", "ad1904", "selfie2"],
-   "captions": ["THE KODAK GIRL", "AN AD, 1904", "THE ROMANOVS"], "label": "SNAPSHOTS"},
-  {"say": "The Brownie name lasted on Kodak cameras for about eighty years.", "kind": "timeline", "dates": ["1900", "1940", "1980"],
-   "active": 2, "label": "80 YEARS"},
-  {"say": "So the selfie is older than you think. It started with a one-dollar box.", "kind": "photo", "photo": "selfie",
-   "label": "THE FIRST SELFIES", "label_size": 84, "stamp": "$1", "stamp_on": "one-dollar", "burst": true, "burst_color": "pink"}
- ]
+  {
+   "say": "Around 1914, a teenage Russian princess points a camera at a mirror.",
+   "kind": "photo",
+   "photo": "selfie",
+   "label": "A SELFIE?",
+   "tag": "ANASTASIA ROMANOVA, c. 1914"
+  },
+  {
+   "say": "Her camera is a Kodak Brownie. A box that cost one dollar.",
+   "kind": "hero",
+   "hero": "box",
+   "label": "THE BROWNIE",
+   "stamp": "$1",
+   "stamp_on": "dollar."
+  },
+  {
+   "say": "Its maker, George Eastman, had a promise.",
+   "kind": "hero",
+   "hero": "eastman",
+   "label": "GEORGE EASTMAN",
+   "tag": "KODAK"
+  },
+  {
+   "say": "You press the button, we do the rest.",
+   "kind": "quote",
+   "quote": "You press the button, we do the rest.",
+   "by": "Kodak slogan, 1888",
+   "hero": "eastman"
+  },
+  {
+   "say": "But his first Kodak, in 1888, cost twenty-five dollars. The Brownie, in 1900, cost one.",
+   "kind": "bars",
+   "bars": [
+    [
+     "KODAK, 1888",
+     25
+    ],
+    [
+     "BROWNIE, 1900",
+     1
+    ]
+   ],
+   "values": [
+    "$25",
+    "$1"
+   ],
+   "active": 1,
+   "label": "THE PRICE"
+  },
+  {
+   "say": "A roll of film was fifteen cents, for six pictures.",
+   "kind": "document",
+   "head": "PRICE LIST, 1900",
+   "lines": [
+    "CAMERA: $1.00",
+    "FILM: 15 CENTS",
+    "PICTURES PER ROLL: 6"
+   ],
+   "mark": 1
+  },
+  {
+   "say": "Its name came from the Brownies, cartoon characters from popular children's books.",
+   "kind": "photo",
+   "photo": "brownies",
+   "label": "THE BROWNIES",
+   "tag": "KODAK ADVERT, 1905"
+  },
+  {
+   "say": "About a quarter of a million of the first model were made.",
+   "kind": "number",
+   "number": "250,000",
+   "sub": "THE FIRST MODEL"
+  },
+  {
+   "say": "Suddenly, anyone could take a snapshot.",
+   "kind": "gallery",
+   "photos": [
+    "kodakgirl",
+    "ad1904",
+    "selfie2"
+   ],
+   "captions": [
+    "THE KODAK GIRL",
+    "AN AD, 1904",
+    "THE ROMANOVS"
+   ],
+   "label": "SNAPSHOTS"
+  },
+  {
+   "say": "The Brownie name lasted on Kodak cameras for about eighty years.",
+   "kind": "timeline",
+   "dates": [
+    "1900",
+    "1940",
+    "1980"
+   ],
+   "active": 2,
+   "label": "80 YEARS"
+  },
+  {
+   "say": "So the selfie is older than you think. It started with a one-dollar box.",
+   "kind": "photo",
+   "photo": "selfie",
+   "label": "THE FIRST SELFIES",
+   "label_size": 84,
+   "stamp": "$1",
+   "stamp_on": "one-dollar",
+   "burst": true,
+   "burst_color": "pink"
+  }
+ ],
+ "music_gain": 0.3,
+ "sfx_gain": 0.38
 }
