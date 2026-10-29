@@ -13,6 +13,7 @@ import shutil
 import numpy as np
 from PIL import Image
 
+import looks
 from paper import CARDS, card, scrap, tape
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -24,6 +25,16 @@ CREAM = "#efe8da"
 
 def rgb(c):
     return "rgb(%d,%d,%d)" % CARDS.get(c, c)
+
+
+def _dist(a, c):
+    """How different two stocks look (RGB distance)."""
+    return sum((x - y) ** 2 for x, y in zip(CARDS.get(a, a), CARDS.get(c, c))) ** 0.5
+
+
+def _light(c):
+    r, g, bl = CARDS.get(c, c)
+    return 0.299 * r + 0.587 * g + 0.114 * bl > 140
 
 
 class B:
@@ -70,6 +81,7 @@ CSS = r"""
 @font-face { font-family: "Elite"; src: url("assets/fonts/SpecialElite-Regular.ttf"); }
 @font-face { font-family: "Archivo"; src: url("assets/fonts/ArchivoBlack-Regular.ttf"); }
 @font-face { font-family: "Marker"; src: url("assets/fonts/PermanentMarker-Regular.ttf"); }
+@font-face { font-family: "Serif"; font-style: italic; src: url("assets/fonts/instrument-serif-latin-400-italic.woff2"); }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: %(W)dpx; height: %(H)dpx; overflow: hidden; background: #1a1714; }
 #root { position: relative; width: %(W)dpx; height: %(H)dpx; overflow: hidden; }
@@ -82,7 +94,7 @@ html, body { width: %(W)dpx; height: %(H)dpx; overflow: hidden; background: #1a1
   transform: translate(calc((var(--bx) - .5) * 3px * var(--amp)), calc((var(--by) - .5) * 3px * var(--amp))) rotate(calc((var(--br) - .5) * .7deg * var(--amp))); }
 .boil img, .boil svg { display: block; width: 100%%; height: auto; }
 .strip { position: relative; padding: 14px 34px 10px; background: url("assets/paper/cream.jpg") center/cover; color: #1a1714;
-  font-family: "Anton"; text-transform: uppercase; letter-spacing: 1px; line-height: 1; white-space: nowrap;
+  font-family: "%(LABEL)s"; %(LABEL_STYLE)s text-transform: uppercase; letter-spacing: 1px; line-height: 1; white-space: nowrap;
   filter: drop-shadow(5px 8px 6px rgba(20,14,8,.45)); }
 .strip.ink { background: #1f1c19; color: #efe8da; }
 .strip.red { background: url("assets/paper/red.jpg") center/cover; color: #efe8da; }
@@ -103,7 +115,7 @@ html, body { width: %(W)dpx; height: %(H)dpx; overflow: hidden; background: #1a1
 #vig { position: absolute; inset: 0; pointer-events: none; z-index: 901;
   background: radial-gradient(ellipse at 50%% 45%%, rgba(0,0,0,0) 55%%, rgba(20,12,4,.38) 100%%); }
 .cap { position: absolute; left: 0; right: 0; top: %(CAPY)dpx; display: flex; justify-content: center; z-index: 800; }
-.cap .strip { font-family: "Archivo"; font-size: 62px; padding: 16px 30px 14px; letter-spacing: 0; }
+.cap .strip { font-family: "%(CAP)s"; font-style: normal; font-size: 62px; padding: 16px 30px 14px; letter-spacing: 0; }
 .cap .w { display: inline-block; margin: 0 9px; }
 """
 
@@ -143,6 +155,8 @@ class Film:
         self.W, self.H = (1080, 1920) if fmt == "9:16" else (1920, 1080)
         self.v = fmt == "9:16"
         self.b = B(self.W, self.H, story.get("seed", 11))
+        self.look_name = looks.pick(story)
+        self.look = looks.LOOKS[self.look_name]
         self.cap_y = 1520 if self.v else 900
         # content box (kept clear of captions and platform UI)
         self.box = (60, 230, self.W - 60, 1460) if self.v else (120, 90, self.W - 120, 840)
@@ -231,9 +245,10 @@ class Film:
                  f'text-align:center">{text}</div></div>')
         return self.el(inner, x, y, 0, z)
 
-    def stamp(self, text, x, y, size, z):
-        # red ink vanishes on red card: stamp in black there
-        ink = "color:#efe8da;border-color:#efe8da;mix-blend-mode:normal;" if self.cur_bg in ("red", "pink") else ""
+    def stamp(self, text, x, y, size, z, on_paper=False):
+        # accent ink vanishes on a card of the same colour: stamp in cream there (unless it lands on paper)
+        same = _dist(self.cur_bg, self.look["accent"]) < 90
+        ink = "color:#efe8da;border-color:#efe8da;mix-blend-mode:normal;" if same and not on_paper else ""
         half = (len(text) * size * 0.52 + 70) / 2  # keep long stamps inside the frame
         x = min(max(x, 60 + half), self.W - 60 - half)
         inner = (f'<div style="position:absolute;left:0;top:0;transform:translateX(-50%)">'
@@ -380,8 +395,8 @@ class Film:
             fit = (x1 - x0 - 40) / (max(len(r) for r in rows) * 0.78)
             size = min(beat.get("size", 250), fit)
             cy0 = (beat.get("number_y") or (700 if self.v else 380)) - (len(rows) - 1) * size * 0.6
-            fonts = ["Anton", "Archivo", "Elite", "Anton"]
-            bgs = [("cream", INK), ("ink", CREAM), ("red", CREAM), ("mustard", INK), ("cream", RED)]
+            fonts = [self.look["label"], "Archivo", "Elite", "Anton"]
+            bgs = [(c, INK if _light(c) else CREAM) for c in self.look["tiles"]] + [("cream", RED)]
             k = 0
             for r_i, row in enumerate(rows):
                 cw = size * 0.78
@@ -392,7 +407,7 @@ class Film:
                     bgn, fg = bgs[(k * 3 + r_i) % len(bgs)]
                     f = fonts[k % len(fonts)]
                     rot = b.r(-7, 7)
-                    bg_css = f'url(assets/paper/{bgn}.jpg) center/cover' if bgn != "ink" else "#1f1c19"
+                    bg_css = f'url(assets/paper/{bgn}.jpg) center/cover' if bgn != "ink" else rgb("ink")
                     inner = (f'<div class="chip" style="position:relative;width:{cw - 6:.0f}px;height:{size * 1.08:.0f}px;'
                              f'background:{bg_css};color:{fg};font-family:{f};font-size:{size * (0.86 if f != "Elite" else 0.8):.0f}px;'
                              f'clip-path:{torn_clip(b.rng, tear=4)}">{ch}</div>')
@@ -447,7 +462,7 @@ class Film:
                 ti, _ = self.tape_on(cx + 230, dy - 60, 8, 15)
                 fresh.append((ti, dict(how="drop", rot=8), t + 0.45))
             if beat.get("stamp"):
-                st_ = self.stamp(beat["stamp"], cx + 120, dy + 60 + len(lines) * 62 + (100 if head else 0) + 40, 96, 60)
+                st_ = self.stamp(beat["stamp"], cx + 120, dy + 60 + len(lines) * 62 + (100 if head else 0) + 40, 96, 60, on_paper=True)
                 fresh.append((st_, dict(how="stamp", rot=-12), min(tt + 0.1, t + dur - 0.3)))
             if beat.get("label"):
                 li_ = self.strip(beat["label"], cx, dy - 150, 100, 45)
@@ -477,6 +492,81 @@ class Film:
             if beat.get("label"):
                 lb = self.strip(beat["label"], cx, (y0 + 30) if not beat.get("hero") else ly + 220, 96, 45)
                 fresh.append((lb, dict(how="side", rot=b.r(-2, 2)), t + 0.6 + len(dates) * 0.18))
+
+        elif kind == "gallery":
+            # 2-4 photos dealt as bordered prints, fanned across the frame, one per idea
+            keys = beat["photos"][:4]
+            caps_ = beat.get("captions", [])
+            n = len(keys)
+            spots = {1: [(0, 0)], 2: [(-170, -190), (170, 170)], 3: [(-190, -240), (200, -50), (-60, 270)],
+                     4: [(-200, -260), (200, -210), (-190, 220), (210, 270)]}[n]
+            bw, bh = (620, 640) if n <= 2 else (540, 560) if n == 3 else (460, 480)
+            if not self.v:
+                spots = [(sx * 1.9, sy * 0.45) for sx, sy in spots]
+                bh = min(bh, 520)
+            gy = beat.get("hero_y", 880 if self.v else 480)
+            per = max(0.25, min(0.7, (dur * 0.65) / n))
+            tops, bottoms = [], []
+            for j, key in enumerate(keys):
+                src, w, h = self.piece(key, bw, bh)
+                cap = caps_[j] if j < len(caps_) else ""
+                pad_b = 70 if cap else 26
+                inner = (f'<div style="background:url(assets/paper/cream.jpg) center/cover;padding:18px 18px {pad_b}px;position:relative;'
+                         f'box-shadow:6px 12px 18px rgba(20,14,8,.45)"><img src="{src}" style="width:{w:.0f}px;height:{h:.0f}px">'
+                         + (f'<div style="position:absolute;left:0;right:0;bottom:16px;text-align:center;font-family:Elite;font-size:32px;'
+                            f'color:#1a1714;white-space:nowrap">{cap}</div>' if cap else "") + "</div>")
+                ox, oy = spots[j]
+                pw, ph = w + 36, h + 18 + pad_b
+                px = min(max(cx + ox - pw / 2, x0 - 20), x1 + 20 - pw)
+                py = min(max(gy + oy - ph / 2, y0), y1 - ph)
+                rot = (-1) ** j * b.r(4, 9)
+                i = self.el(inner, px, py, pw, 10 + j)
+                fresh.append((i, dict(how="slide", dur=0.45, rot=rot), t + 0.05 + j * per))
+                ti, _ = self.tape_on(px + pw / 2, py + 4, b.r(-8, 8), 30 + j)
+                fresh.append((ti, dict(how="drop", rot=b.r(-8, 8)), t + 0.35 + j * per))
+                b.ev(t + 0.35 + j * per, "tape", g=0.5)
+                tops.append(py)
+                bottoms.append(py + ph)
+            self._labels(beat, t, dur, fresh, top=min(tops), bottom=max(bottoms), cx=cx)
+
+        elif kind == "bars":
+            # a torn-paper bar chart: one row per value, the key row in the accent stock
+            rows_ = beat["bars"][:5]
+            act = beat.get("active", max(range(len(rows_)), key=lambda j: rows_[j][1]))
+            vmax = max(v for _, v in rows_) or 1
+            unit = beat.get("unit", "")
+            row_h = 210 if self.v else 150
+            top = beat.get("bars_y", (900 if self.v else 520) - len(rows_) * row_h / 2)
+            full = (x1 - x0) - 260
+            light = _light(self.cur_bg)
+            key_stock = max([self.look["accent"], "mustard", "ink", "cream", "teal"], key=lambda c: _dist(c, self.cur_bg))
+            plain = "ink" if light else "cream"
+            if plain == key_stock:
+                plain = "newsprint" if not light else "navy"
+            stag = max(0.15, min(0.35, (dur * 0.55) / len(rows_)))
+            for j, (name, v) in enumerate(rows_):
+                y = top + j * row_h
+                ta = t + 0.2 + j * stag
+                si = self.strip(str(name), x0 + 40, y, 52, 20 + j, kind="type", anchor="l")
+                fresh.append((si, dict(how="drop", rot=b.r(-3, 3)), ta - 0.1))
+                stock = key_stock if j == act else plain
+                bl = max(60, full * v / vmax)
+                bi = self.el(f'<div style="height:96px;background:url(assets/paper/{stock}.jpg) center/cover;'
+                             f'clip-path:{torn_clip(b.rng, tear=1.5)};filter:drop-shadow(5px 8px 6px rgba(20,14,8,.45))"></div>',
+                             x0 + 40, y + 74, bl, 15 + j)
+                b.js.append(f'tl.fromTo("#{bi}", {{scaleX: 0, transformOrigin: "0% 50%"}}, {{scaleX: 1, duration: .5, ease: st("power2.out", .5)}}, {ta:.3f});')
+                fresh.append((bi, dict(how="set"), ta))
+                b.ev(ta, "slide", g=0.8)
+                val = beat.get("values", [None] * len(rows_))[j] or (f"{v:g}{unit}")
+                vi = self.strip(val, x0 + 40 + bl + 24, y + 80, 64, 25 + j, kind="ink", anchor="l")
+                fresh.append((vi, dict(how="drop", rot=b.r(-4, 4)), ta + 0.3))
+            if beat.get("label"):
+                lb = self.strip(beat["label"], cx, max(y0, top - 190), 100, 45)
+                fresh.append((lb, dict(how="side", rot=b.r(-2, 2)), t + 0.05))
+            if beat.get("stamp"):
+                st_ = self.stamp(beat["stamp"], cx + 150, top + len(rows_) * row_h + 40, 88, 60)
+                wt_ = self.word_time(beat.get("stamp_on"))
+                fresh.append((st_, dict(how="stamp", rot=-9), wt_ or t + min(dur * 0.7, 2.0)))
 
         elif kind == "quote":
             q = beat["quote"]
@@ -581,7 +671,7 @@ class Film:
         self.maps, self.pins, self.tags = [], [], []
         total = self.total
         scenes_html = []
-        trans_cycle = ["right", "up", "left", "down", "cut", "right", "drop"]
+        trans_cycle = self.look["trans"]
         for k, (beat, tm) in enumerate(zip(beats, self.timing)):
             self.k = k
             t0 = tm["start"]
@@ -589,7 +679,8 @@ class Film:
             trans = beat.get("transition", trans_cycle[k % len(trans_cycle)] if k else "none")
             s_start = (max(0.0, t0 - (0.06 if trans == "cut" else 0.3))) if k else 0.0
             s_end = min(total, nxt + 0.05) if k + 1 < len(beats) else total
-            bg = beat.get("bg", ["mustard", "red", "teal", "newsprint", "kraft", "navy"][k % 6])
+            order = looks.BG_ORDER[self.look_name]
+            bg = beat.get("bg", order[k % len(order)])
             bgf = f"assets/paper/bg_{bg}_{k % 3}.jpg"
             self.need_bg.add((bg, k % 3))
             self.cur_bg = bg
@@ -636,12 +727,18 @@ class Film:
                        f'data-track-kind="captions" style="z-index:{800 + j}"><div class="strip ink" id="{cid}s" style="clip-path:{clip};display:inline-block">{spans}</div></div>')
             b.js.append(f'tl.fromTo("#{cid}s", {{scale: 1.18, rotation: {b.r(-3, 3):.1f}}}, {{scale: 1, rotation: {b.r(-1.5, 1.5):.1f}, duration: .17, ease: st("power2.out", .17)}}, {s:.3f});')
             for n, x in enumerate(ch):
-                b.js.append(f'tl.set("#{cid}w{n}", {{color: "{rgb("mustard")}"}}, {x["s"]:.3f});')
+                b.js.append(f'tl.set("#{cid}w{n}", {{color: "{rgb(self.look["highlight"])}"}}, {x["s"]:.3f});')
                 b.js.append(f'tl.set("#{cid}w{n}", {{color: "{CREAM}"}}, {x["e"] + 0.02:.3f});')
         return "".join(out)
 
 
 def write_project(story, timing, words, total, proj, images):
+    global RED
+    look_name = looks.pick(story)
+    look = looks.LOOKS[look_name]
+    CARDS.update(look["cards"])  # every card, strip and tile is printed from the look's stock
+    RED = rgb(look["accent"])
+    print(f"  look: {look_name}")
     f = Film(story, timing, words, proj, images)
     f.total = total
     f.need_bg = set()
@@ -650,11 +747,16 @@ def write_project(story, timing, words, total, proj, images):
     # backgrounds + shared paper
     pd = os.path.join(proj, "assets", "paper")
     os.makedirs(pd, exist_ok=True)
+    stamp_file = os.path.join(pd, "look.txt")
+    if (open(stamp_file).read() if os.path.exists(stamp_file) else "") != look_name:  # new look: reprint the paper
+        for fn in os.listdir(pd):
+            os.remove(os.path.join(pd, fn))
+        open(stamp_file, "w").write(look_name)
     for bg, v in f.need_bg:
         p = os.path.join(pd, f"bg_{bg}_{v}.jpg")
         if not os.path.exists(p):
             card(bg, W, H, seed=hash(bg) % 1000 + v).save(p, quality=90)
-    for c in ("cream", "red", "mustard", "teal", "navy", "newsprint", "kraft"):
+    for c in CARDS:  # every stock, so ransom tiles and strips can use any of them
         p = os.path.join(pd, f"{c}.jpg")
         if not os.path.exists(p):
             card(c, 900, 600, seed=5).save(p, quality=90)
@@ -732,7 +834,8 @@ for (const p of TAGS) {{ const m = MAPS.find(x => x.id === p.map); const [px, py
   if (right) {{ const inner = e.querySelector(".boil > div"); inner.style.transform = "translateX(-100%)"; }} }}
 """
     scripts = "".join(f'<script src="assets/js/{fn}"></script>' for fn in libs)
-    css = CSS % {"W": W, "H": H, "RED": RED, "CAPY": f.cap_y}
+    css = CSS % {"W": W, "H": H, "RED": RED, "CAPY": f.cap_y, "LABEL": look["label"], "CAP": look["caption"],
+                 "LABEL_STYLE": "font-style: italic; letter-spacing: 0;" if look["label"] == "Serif" else ""}
     head_js = JS_HEAD % {"W": W, "H": H}
     tail_js = f"""
 tl.fromTo("#grain", {{"--gx": 0}}, {{"--gx": 1, duration: {total:.3f}, ease: jit(5, {total:.3f})}}, 0);

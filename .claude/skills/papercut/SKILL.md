@@ -34,17 +34,37 @@ Search the topic. Every date, name and number in the script needs two independen
 ### 2. Script (beats)
 
 - 10-14 beats, 30-45 s. One sentence (or half of one) per beat, one visual idea per beat.
-- Cold open on a date and a place: "September ninth, 1947. Harvard University."
+- Open cold, and not the same way every time (see "Make every film different" below): a date and a place, a photo with
+  one striking line, a number, a quote, or a question.
 - Calm documentary voice, short declaratives. Spell numbers the way they should be spoken ("Seventy-nine years later").
 - End on a short line that lands: "After it, it was." / "We are still debugging."
 
 ### 3. Pictures
 
+Photos are what make a film feel real. Aim for at least 4 photo beats (`hero`, `photo`, `duo`, `gallery`, or a
+`hero` on a `number`/`timeline`/`document`); a film made only of type and maps is a fallback, not a plan.
+
 ```
 <python> <skill>/engine/papercut.py search "Grace Hopper" sheet.png
+<python> <skill>/engine/papercut.py search "Ferran Torres" sheet.png --allow-by   # also CC BY / BY-SA (credit required)
 ```
 
-Open `sheet.png` and pick by looking, not by title. Rules learned the hard way:
+Search several angles per story (the people, the place, the object, the event, the newspaper of the day), open each
+`sheet.png` and pick by looking, not by title. Recent events rarely have public-domain photos: use `--allow-by` and
+keep `"allow_by": true` on those images; their credits must go in the description.
+
+Then gather the photos before building, so a slow network never blocks the edit:
+
+```
+<python> <skill>/engine/papercut.py fetch story.json --wait 1800    # run it in the background
+```
+
+Wikimedia rate-limits busy networks. `fetch` waits as long as it is told to (it reads Wikimedia's Retry-After),
+looks up the whole film's photos in one request, and keeps every download in `~/.papercut/cache`, so nothing is
+fetched twice. If photos still cannot be downloaded, ask the person to save them into the film's `photos/` folder
+named after the image key (`photos/goal.jpg`); those are used as-is. Only then fall back to type-only beats.
+
+Rules learned the hard way:
 
 - People: `"cut": true` (background removed). The face must be well lit and at least ~400 px tall in the source. Dark or busy photos cut badly: crop tight around the person (`"crop": [l, t, r, b]` as fractions) or use `"cut": false`.
 - Machines, rooms, scenes, space photos: `"cut": false` (a printed photo with tape).
@@ -68,7 +88,10 @@ Open `sheet.png` and pick by looking, not by title. Rules learned the hard way:
 }
 ```
 
-Image keys: `commons` (exact `File:` title) or `file` (local path), `cut`, `dots`, `crop`, `accent` (red, mustard, teal, null), `size`, `contrast`.
+Image keys: `commons` (exact `File:` title) or `file` (local path), `allow_by`, `cut`, `dots`, `crop`, `accent` (red, mustard, teal, null), `size`, `contrast`.
+A file in `photos/<key>.jpg` (or .png) replaces the download for that key.
+
+Top-level `look` sets the whole film's art direction (see below). Without it, the slug picks one.
 
 Beat kinds (every beat also takes `bg`, `scraps`, `burst`, `transition`):
 
@@ -82,10 +105,35 @@ Beat kinds (every beat also takes `bg`, `scraps`, `burst`, `transition`):
 | `timeline` | `dates`, `active`, `hero`, `label` | before / after, a span of years |
 | `quote` | `quote`, `by`, `hero` | a real, sourced quote |
 | `map` | `map: {country | highlight[], pin: [lon, lat], place, sea}`, `label`, `stamp` | where it happened |
+| `gallery` | `photos: [2-4 keys]`, `captions`, `label`, `tag`, `stamp` | several photos at once, dealt as taped prints |
+| `bars` | `bars: [[name, value], ...]` (2-5), `unit`, `values`, `active`, `label`, `stamp` | comparing amounts (torn-paper bar chart) |
 
-`bg`: mustard, red, teal, navy, newsprint, kraft, cream, pink, olive, ink. Alternate warm and cool; never the same twice in a row.
+`bg`: mustard, red, teal, navy, newsprint, kraft, cream, pink, olive, ink. These are names of the look's stock, not fixed
+colours: under `noir` "mustard" is a pale grey card, under `riso` it is fluoro yellow. Leave `bg` out to use the look's own
+order, or set it per beat; never the same twice in a row.
 `stamp_on`: a word from `say`; the stamp lands when that word is spoken.
 Labels: 1-3 words, uppercase. `label_size` shrinks long ones; `|` breaks a line.
+
+### Make every film different
+
+Two films from this skill should not look or move alike. Before writing story.json, decide and vary:
+
+1. **Look** (`"look"`), chosen for the subject, and not the one the previous film used:
+
+   | look | stock | suits |
+   |---|---|---|
+   | `classic` | mustard, red, teal, navy, kraft | mid-century history |
+   | `noir` | black, greys, cream, one red | crime, scandal, disaster |
+   | `riso` | fluoro pink, blue, yellow on off-white | culture, music, youth, sport |
+   | `blueprint` | navies and blues, safety orange | science, tech, space, engineering |
+   | `pastel` | sage, blush, butter, terracotta; serif labels | food, places, nature, gentle stories |
+   | `tabloid` | black, white, yellow, red | sport, records, money, breaking news |
+
+2. **Opening**: rotate between a date and place, a photo, a number, a quote and a question.
+3. **Shape**: chronological, countdown, then-versus-now, myth-versus-fact, or a single object followed through time.
+4. **Scene mix**: at least five different kinds per film, at least four photo beats, and no kind more than three times.
+   Use `gallery` when several photos tell one beat, `bars` for any comparison of amounts, `duo` for two people.
+5. **Ending**: a twist, a callback to the opening, a number, or a quote; not always a timeline to TODAY.
 
 ### 5. Build, look, fix, render
 
@@ -105,6 +153,7 @@ Credits for every photo are written to `CREDITS.txt`. Put them in the video desc
 - Halftone cut-outs with a scissor-cut paper border, a misregistered colour offset and a real cast shadow.
 - Stop-motion on twos: every move is quantised to 12 poses a second, every piece "boils" a pixel or two, the camera pushes in slowly in steps.
 - Paper wipes between scenes (slide, drop, cut), torn label strips, rubber stamps, marker circles, red string, typewriter documents with redaction bars.
+- Six looks (`classic`, `noir`, `riso`, `blueprint`, `pastel`, `tabloid`) that reprint every card, strip, tile and stamp in their own stock, fonts and transition rhythm.
 - Foley for every entrance (paper slide, tap, stamp thud, tape, typewriter) and a quiet tension bed, mixed under the voice to -14 LUFS.
 - Captions from the script's own words, timed by whisper, current word highlighted.
 

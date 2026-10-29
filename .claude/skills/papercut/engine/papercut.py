@@ -39,24 +39,32 @@ def load(path):
     return story, root, proj
 
 
-def images(story, root, proj):
+def images(story, root, proj, wait=900):
     src_dir = os.path.join(root, "sources")
     out_dir = os.path.join(proj, "assets", "img")
     os.makedirs(src_dir, exist_ok=True)
     os.makedirs(out_dir, exist_ok=True)
     credits = os.path.join(root, "CREDITS.txt")
     done = {}
-    for key, spec in story.get("images", {}).items():
-        if isinstance(spec, str):
-            spec = {"commons": spec}
-        if "file" in spec:
+    drop = os.path.join(root, "photos")  # a photo saved here as <key>.jpg/.png is used as-is, no download
+    dropped = {os.path.splitext(fn)[0]: os.path.join(drop, fn) for fn in (os.listdir(drop) if os.path.isdir(drop) else [])
+               if fn.lower().endswith((".jpg", ".jpeg", ".png", ".webp"))}
+    specs = {k: ({"commons": v} if isinstance(v, str) else v) for k, v in story.get("images", {}).items()}
+    wanted = [s["commons"] for k, s in specs.items() if "commons" in s and "file" not in s and k not in dropped
+              and not any(os.path.exists(os.path.join(src_dir, k + e)) for e in (".jpg", ".png", ".jpeg"))]
+    if wanted:
+        fetch.info(wanted, budget=wait)  # one batched lookup for the whole film
+    for key, spec in specs.items():
+        if key in dropped:
+            raw = dropped[key]
+        elif "file" in spec:
             raw = os.path.join(root, spec["file"])
         else:
             ext = os.path.splitext(spec["commons"])[1].lower()
             ext = ".jpg" if ext in (".tif", ".tiff", ".webp", ".svg") else ext
             raw = os.path.join(src_dir, key + ext)
             if not os.path.exists(raw):
-                fetch.get(spec["commons"], raw, credits=credits, allow_by=spec.get("allow_by", False))
+                fetch.get(spec["commons"], raw, credits=credits, allow_by=spec.get("allow_by", False), budget=wait)
         params = {k: spec.get(k) for k in ("cut", "accent", "size", "contrast", "crop", "dots")}
         tag = _h([params, os.path.getsize(raw)])
         out = os.path.join(out_dir, f"{key}-{tag}.png")
@@ -172,6 +180,13 @@ if __name__ == "__main__":
         if len(sys.argv) > 3 and not sys.argv[3].startswith("--"):
             fetch.contact_sheet(c, sys.argv[3])
             print("sheet:", sys.argv[3])
+    elif cmd == "fetch":
+        # gather every photo for a film before building, waiting out Wikimedia's rate limit as long as it takes
+        story, root, proj = load(sys.argv[2])
+        os.makedirs(proj, exist_ok=True)
+        w = int(sys.argv[sys.argv.index("--wait") + 1]) if "--wait" in sys.argv else 1800
+        images(story, root, proj, wait=w)
+        print("all photos ready")
     elif cmd == "snap":
         story, root, proj = load(sys.argv[2])
         out = os.path.join(root, "snaps")
