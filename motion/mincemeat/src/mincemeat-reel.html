@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Man Who Never Was</title>
+<script>
+/* =====================================================================
+   EDIT ME — colours and timing. Captions key off the voice-over word
+   onsets (VO_META below, from motion/mincemeat/vo.py + words.py):
+   w("clip", n) = the moment word n of that clip is spoken.
+   ===================================================================== */
+const CONFIG = {
+  color: { gold: "#D9B45A", cream: "#EFE3C4", ink: "#1E1A14", green: "#7E9A4E", black: "#0B0A07" },
+  fps: 30, duration: 0,   // 0 = voice-over length + end card
+};
+/*VO*/
+/*SPRITES*/
+/*CLIPS*/
+</script>
+<style>
+/*FONTS*/
+:root { --bg:#0e0d0b; --fg:#ece6da; --muted:#9a9080; --line:#2a2622; --accent:#E8C547; }
+* { box-sizing: border-box; }
+html, body { margin:0; background:var(--bg); color:var(--fg); font: 13px/1.4 ui-monospace, monospace; }
+body { min-height:100vh; display:flex; flex-direction:column; align-items:center; gap:12px; padding:16px; }
+canvas#c { display:block; width:min(calc(100vw - 32px), calc((100vh - 150px) * 0.5625)); height:auto; aspect-ratio:9/16; border-radius:10px; box-shadow:0 0 0 1px var(--line); }
+.bar { width:min(calc(100vw - 32px), 640px); display:flex; flex-direction:column; gap:8px; }
+.row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+button { background:#1a1714; color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font:inherit; cursor:pointer; }
+#time { font-variant-numeric:tabular-nums; color:var(--muted); min-width:120px; }
+input[type=range] { flex:1; min-width:160px; accent-color:var(--accent); }
+.beats { display:flex; height:22px; border-radius:6px; overflow:hidden; border:1px solid var(--line); }
+.beats div { border-right:1px solid var(--line); color:var(--muted); font-size:10px; display:flex; align-items:center; justify-content:center; white-space:nowrap; overflow:hidden; cursor:pointer; }
+.beats div:last-child { border-right:0; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="bar">
+  <div class="row"><button id="play">Play</button><button id="prev">◀︎</button><button id="next">▶︎</button><span id="time"></span></div>
+  <input type="range" id="scrub" min="0" value="0" step="1">
+  <div class="beats" id="beats"></div>
+</div>
+<script>
+"use strict";
+const W_ = 1080, H_ = 1920, CX = 540, CY = 960;
+const FPS = CONFIG.fps, DUR = CONFIG.duration || +(VO_META.at(-1).t + VO_META.at(-1).dur + 3.4).toFixed(2), FRAMES = Math.round(FPS * DUR);
+const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+const mk = (w = W_, h = H_) => { const k = document.createElement("canvas"); k.width = w; k.height = h; return k; };
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const E = { inOut: x => -(Math.cos(Math.PI * x) - 1) / 2, out: x => 1 - Math.pow(1 - x, 3), outExpo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x), inQuad: x => x * x };
+const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+const hex = h => { h = h.replace("#", ""); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+const css = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+const C = Object.fromEntries(Object.entries(CONFIG.color).map(([k, v]) => [k, hex(v)]));
+
+/* ---------- voice timing ---------- */
+const VO = Object.fromEntries(VO_META.map(v => [v.id, v]));
+const w = (id, n = 0) => VO[id].words[Math.min(n, VO[id].words.length - 1)];
+const end = id => VO[id].t + VO[id].dur;
+
+/* ---------- media ---------- */
+const IMG = {}, VID = {};
+const loadImages = () => Promise.all(Object.entries(SPR).map(([k, src]) => new Promise(r => { const im = new Image(); im.onload = () => { IMG[k] = im; r(); }; im.src = src; })));
+async function loadVideos() {
+  await Promise.all(Object.entries(CLIPS).map(async ([k, src]) => {
+    let url = src;
+    if (src.startsWith("data:")) { const b = await (await fetch(src)).blob(); url = URL.createObjectURL(b); }   // blob URLs keep the canvas exportable
+    const v = document.createElement("video"); v.muted = true; v.preload = "auto"; v.playsInline = true; v.src = url;
+    await new Promise(r => v.addEventListener("loadeddata", r, { once: true })); VID[k] = v;
+  }));
+}
+/* which clip each scene needs at time t, and the source time inside it */
+let NEED = {};
+async function seekFor(t) {
+  NEED = {}; for (const s of SCENES) if (s.clip && t >= s.start - .7 && t < s.end + .7) { const st = s.clip(t); if (st) NEED[st[0]] = st[1]; }
+  await Promise.all(Object.entries(NEED).map(([k, ts]) => { const v = VID[k]; const tt = clamp(ts, 0, v.duration - .05);
+    if (Math.abs(v.currentTime - tt) < .004) return; v.currentTime = tt; return new Promise(r => v.addEventListener("seeked", r, { once: true })); }));
+}
+/* draw an image or video so it covers the frame; s = scale about (fx, fy) */
+function cover(c, src, { s = 1, dx = 0, dy = 0, fx = CX, fy = CY, alpha = 1, filter = null } = {}) {
+  if (!src) return; const iw = src.videoWidth || src.width, ih = src.videoHeight || src.height; if (!iw) return;
+  const k = Math.max(W_ / iw, H_ / ih), wv = iw * k, hv = ih * k;
+  c.save(); c.globalAlpha *= alpha; if (filter) c.filter = filter;
+  c.translate(fx + dx, fy + dy); c.scale(s, s); c.translate(-fx, -fy); c.drawImage(src, CX - wv / 2, CY - hv / 2, wv, hv); c.restore();
+}
+const kb = (t, a, b, s0, s1) => lerp(s0, s1, E.inOut(prog(t, a, b)));   // Ken Burns scale
+/* a cut-out or print placed at (x, y) centre, width wd, rotation r, with a soft drop shadow */
+function place(c, im, x, y, wd, r = 0, { alpha = 1, shadow = .45, filter = null } = {}) {
+  if (!im || alpha <= 0) return; const hd = im.height * wd / im.width;
+  c.save(); c.globalAlpha *= alpha; c.translate(x, y); c.rotate(r);
+  if (shadow) { c.shadowColor = `rgba(0,0,0,${shadow})`; c.shadowBlur = 30; c.shadowOffsetX = 10; c.shadowOffsetY = 18; }
+  if (filter) c.filter = filter; c.drawImage(im, -wd / 2, -hd / 2, wd, hd); c.restore();
+}
+/* a document dropped onto the desk: slides from off-axis, settles with a little rotation, no bounce */
+function drop(t, at, d = .5) { return E.outExpo(prog(t, at, at + d)); }
+
+/* ---------- light, texture, finish ---------- */
+const GRAIN = mk(540, 960); (() => { const g = GRAIN.getContext("2d"), d = g.createImageData(540, 960); for (let i = 0; i < d.data.length; i += 4) { const v = 128 + (hash(i * .61) - .5) * 210; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; } g.putImageData(d, 0, 0); })();
+/* the reference's signature: a wide diagonal window beam with dust floating in it */
+function beam(c, t, { a = .22, x = 300, ang = -.62, wd = 520, drift = 60, dust = 26 } = {}) {
+  c.save(); c.globalCompositeOperation = "screen"; c.translate(x + Math.sin(t * .25) * drift, CY); c.rotate(ang);
+  const g = c.createLinearGradient(-wd / 2, 0, wd / 2, 0);
+  g.addColorStop(0, "rgba(217,180,90,0)"); g.addColorStop(.25, `rgba(217,180,90,${a * .6})`); g.addColorStop(.5, `rgba(240,214,150,${a})`); g.addColorStop(.75, `rgba(217,180,90,${a * .6})`); g.addColorStop(1, "rgba(217,180,90,0)");
+  c.fillStyle = g; c.fillRect(-wd / 2, -1800, wd, 3600);
+  for (let i = 0; i < dust; i++) { const px = (hash(i) - .5) * wd * .8, py = ((hash(i + 9) * 3000 - t * (14 + hash(i + 3) * 26)) % 3000 + 3000) % 3000 - 1500, r = 1 + hash(i + 5) * 2.6;
+    c.fillStyle = `rgba(255,235,190,${(.25 + hash(i + 7) * .45) * a * 3})`; c.beginPath(); c.arc(px + Math.sin(t + i) * 8, py, r, 0, Math.PI * 2); c.fill(); }
+  c.restore();
+}
+function shade(c, a) { c.save(); c.fillStyle = `rgba(11,10,7,${a})`; c.fillRect(0, 0, W_, H_); c.restore(); }
+function finish(c, f) {
+  c.save(); c.globalCompositeOperation = "overlay"; c.globalAlpha = .13; const ox = hash(f) * 180 | 0, oy = hash(f + 3) * 300 | 0; c.drawImage(GRAIN, -ox, -oy, W_ + 180, H_ + 300); c.restore();
+  const v = c.createRadialGradient(CX, 960, 520, CX, 960, 1240); v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(5,4,2,.62)"); c.fillStyle = v; c.fillRect(0, 0, W_, H_);
+  const fl = .025 * (hash(Math.floor(f / 2)) - .5); if (fl > 0) { c.fillStyle = `rgba(255,230,170,${fl})`; c.fillRect(0, 0, W_, H_); }   // gentle projector flicker
+}
+
+/* ---------- typography ---------- */
+/* a phrase built word by word on the voice, mixed sizes, condensed serif:
+   segs = [[text, at, {size, it, gold, font}], ...] laid out on one line centred at (x, y) */
+function phrase(c, t, segs, y, { x = CX, out = 99, ink = false, glow = true } = {}) {
+  if (t < segs[0][1] - .05 || t > out + .3) return; const o = 1 - prog(t, out, out + .3);
+  const fonts = segs.map(([s, , op = {}]) => `${op.size || 70}px ${op.font || (op.it ? "ISI" : "ISR")}`);
+  const ws = segs.map(([s], i) => { c.font = fonts[i]; return c.measureText(s).width; }), sp = 18, tot = ws.reduce((a, b) => a + b, 0) + sp * (segs.length - 1);
+  let cx = x - tot / 2;
+  if (!ink) { const p0 = E.out(prog(t, segs[0][1], segs[0][1] + .3)), h = Math.max(...segs.map(([, , op = {}]) => op.size || 70));
+    c.save(); c.globalAlpha *= p0 * o; c.translate(x, y - h * .3); c.scale((tot + 260) / 2, h * 1.2); const g = c.createRadialGradient(0, 0, 0, 0, 0, 1);
+    g.addColorStop(0, "rgba(8,7,4,.5)"); g.addColorStop(1, "rgba(8,7,4,0)"); c.fillStyle = g; c.fillRect(-1, -1, 2, 2); c.restore(); }
+  segs.forEach(([s, at, op = {}], i) => {
+    const p = E.out(prog(t, at, at + .22)); if (p > 0) {
+      c.save(); c.globalAlpha *= p * o; c.font = fonts[i]; c.textBaseline = "alphabetic"; c.filter = `blur(${(1 - p) * 5}px)`;
+      const col = op.gold ? C.gold : ink ? C.ink : C.cream;
+      if (glow && !ink) { c.shadowColor = "rgba(0,0,0,.75)"; c.shadowBlur = 28; }
+      c.fillStyle = css(col); c.fillText(s, cx, y + (1 - p) * 10); c.restore();
+    }
+    cx += ws[i] + sp;
+  });
+}
+function hero(c, t, at, s, { y = 900, size = 230, gold = true, out = 99 } = {}) {   // big date
+  if (t < at || t > out + .3) return; const p = E.out(prog(t, at, at + .5)), o = 1 - prog(t, out, out + .3);
+  c.save(); c.globalAlpha *= p * o; c.translate(CX, y); const k = lerp(1.08, 1, E.outExpo(prog(t, at, at + .7))) * (1 + .025 * prog(t, at, out)); c.scale(k, k);
+  c.font = `${size}px GL`; c.textAlign = "center"; c.filter = `blur(${(1 - p) * 8}px)`; c.shadowColor = "rgba(0,0,0,.7)"; c.shadowBlur = 40;
+  c.fillStyle = css(gold ? C.gold : C.cream); c.fillText(s, 0, 0); c.restore();
+}
+function label(c, t, at, s, x, y, { size = 34, out = 99, dark = true } = {}) {   // small black tag with cream caps
+  if (t < at || t > out + .2) return; const p = E.outExpo(prog(t, at, at + .3)), o = 1 - prog(t, out, out + .2);
+  c.save(); c.globalAlpha *= o; c.font = `${size}px LB`; const tw = c.measureText(s).width + size * .1 * s.length, pad = 18, h = size * 1.5;
+  c.fillStyle = dark ? "rgba(11,10,7,.9)" : css(C.gold, .95); c.fillRect(x - tw / 2 - pad, y - h * .72, (tw + pad * 2) * p, h);
+  c.beginPath(); c.rect(x - tw / 2 - pad, y - h, (tw + pad * 2) * p, h * 1.4); c.clip();
+  c.fillStyle = dark ? css(C.cream) : css(C.ink); c.textAlign = "center"; c.letterSpacing = `${size * .1}px`; c.fillText(s, x, y); c.restore();
+}
+/* typed text: lines appear key by key from t0 at cps characters / second */
+function typed(c, t, t0, lines, x, y, { size = 30, lh = 1.5, cps = 40, col = "rgba(30,26,20,.88)", font = "TW", align = "left", hl = null } = {}) {
+  let n = Math.floor((t - t0) * cps); if (n <= 0) return;
+  c.save(); c.font = `${size}px ${font}`; c.fillStyle = col; c.textAlign = align;
+  lines.forEach((s, i) => { if (n <= 0) return; const k = Math.min(s.length, n); n -= s.length + 3; const yy = y + i * size * lh;
+    if (hl && s.includes(hl.word) && k >= s.indexOf(hl.word) + hl.word.length && t > hl.at) {   // green marker on the lie
+      const x0 = x + c.measureText(s.slice(0, s.indexOf(hl.word))).width, ww = c.measureText(hl.word).width, p = E.out(prog(t, hl.at, hl.at + .4));
+      c.save(); c.fillStyle = css(C.green, .55); c.fillRect(x0 - 6, yy - size * .85, (ww + 12) * p, size * 1.15); c.restore(); }
+    c.fillText(s.slice(0, k), x, yy); });
+  c.restore();
+}
+function hand(c, s, x, y, size, rot, p, col = "rgba(40,30,22,.85)") {   // handwriting revealed left to right
+  if (p <= 0) return; c.save(); c.translate(x, y); c.rotate(rot); c.font = `${size}px HND`; const tw = c.measureText(s).width;
+  c.beginPath(); c.rect(-10, -size * 1.2, (tw + 20) * p, size * 1.8); c.clip(); c.fillStyle = col; c.fillText(s, 0, 0); c.restore();
+}
+/* hand-drawn arrow (green: the lie points at Greece) */
+function arrow(c, p, pts, col, lw = 7) {
+  if (p <= 0) return; c.save(); c.strokeStyle = col; c.fillStyle = col; c.lineWidth = lw; c.lineCap = "round"; c.setLineDash([22, 14]);
+  const n = 60, P = i => { const u = i / n, [a, b, d] = pts; return [lerp(lerp(a[0], b[0], u), lerp(b[0], d[0], u), u), lerp(lerp(a[1], b[1], u), lerp(b[1], d[1], u), u)]; };
+  c.beginPath(); for (let i = 0; i <= n * p; i++) { const [x, y] = P(i); i ? c.lineTo(x, y) : c.moveTo(x, y); } c.stroke();
+  if (p > .97) { const [x1, y1] = P(n), [x0, y0] = P(n - 3), a = Math.atan2(y1 - y0, x1 - x0); c.setLineDash([]); c.beginPath();
+    c.moveTo(x1, y1); c.lineTo(x1 - 34 * Math.cos(a - .45), y1 - 34 * Math.sin(a - .45)); c.lineTo(x1 - 34 * Math.cos(a + .45), y1 - 34 * Math.sin(a + .45)); c.closePath(); c.fill(); }
+  c.restore();
+}
+/* a sheet of the aged paper with typed or handwritten contents */
+function sheet(c, x, y, wd, r, draw, { alpha = 1 } = {}) {
+  const im = IMG.D1paper, hd = im.height * wd / im.width; place(c, im, x, y, wd, r, { alpha });
+  c.save(); c.globalAlpha *= alpha; c.translate(x, y); c.rotate(r); c.translate(-wd / 2, -hd / 2); draw(c, wd, hd); c.restore();
+}
+
+/* ======================= SCENES =======================
+   Each scene: start, clip(t) -> [videoKey, sourceTime] or null, draw(c, t), xin = dissolve-in seconds. */
+const SCENES = [];
+const S = (name, start, o) => SCENES.push({ name, start, ...o });
+const at = (id, n, d = 0) => w(id, n) + d;
+
+/* 1 · hook — the wet briefcase, then the man himself lifts his eyes */
+const T_FACE = at("hook", 6, -.12);
+S("Briefcase", 0, { clip: t => ["C9", .2 + t * .78], draw(c, t) {
+  cover(c, VID.C9, { s: kb(t, 0, T_FACE, 1.04, 1.12), fx: 520, fy: 1000 }); beam(c, t, { a: .16, x: 380 });
+  hero(c, t, at("hook", 4, -.05), "1943", { y: 1500, size: 250 });
+  phrase(c, t, [["In the spring of", at("hook", 0), { size: 58, it: true }]], 640);
+} });
+S("Living portrait", T_FACE, { clip: t => ["C1", 1.6 + (t - T_FACE) * 1.35], draw(c, t) {
+  cover(c, VID.C1, { s: kb(t, T_FACE, end("believed") + .4, 1.06, 1.14), fy: 820 }); beam(c, t, { a: .12, x: 760, ang: -.5 });
+  phrase(c, t, [["a", at("hook", 6), { size: 64 }], ["dead man", at("hook", 7), { size: 112, it: true }]], 1420, { out: at("believed", 0, -.15) });
+  phrase(c, t, [["lied to", at("hook", 9), { size: 64 }], ["Hitler.", at("hook", 11), { size: 64, it: true, gold: true }]], 1530, { out: at("believed", 0, -.15) });
+  phrase(c, t, [["And Hitler", at("believed", 0), { size: 64 }], ["believed", at("believed", 2), { size: 112, it: true }], ["him.", at("believed", 3), { size: 64 }]], 1500);
+} });
+
+/* 2 · Sicily — a hand circles the island */
+const T_SIC = at("sicily", 0, -.25);
+S("Sicily", T_SIC, { clip: t => ["C3", 2.6 + (t - T_SIC) * 1.75], draw(c, t) {
+  cover(c, VID.C3, { s: kb(t, T_SIC, T_SIC + 3, 1.2, 1.28), fx: 600, fy: 1050 });
+  phrase(c, t, [["The Allies need", at("sicily", 0), { size: 62 }], ["Sicily.", at("sicily", 3), { size: 104, it: true, gold: true }]], 330);
+  phrase(c, t, [["The Germans", at("sicily", 4), { size: 62 }], ["know it.", at("sicily", 6), { size: 62, it: true }]], 1700);
+} });
+
+/* 3 · London — newsreel, then the planners' print drops in */
+const T_LON = at("london", 0, -.25);
+S("London", T_LON, { xin: .45, clip: t => ["C2", .3 + (t - T_LON) * .95], draw(c, t) {
+  cover(c, VID.C2, { s: kb(t, T_LON, T_LON + 4, 1.04, 1.1), fy: 900 });
+  const p = drop(t, at("london", 3, -.1), .6); if (p > 0) {
+    shade(c, .35 * p); place(c, IMG.P3, lerp(700, 560, p), lerp(1500, 1050, p), 700, lerp(.12, -.04, p), { alpha: p });
+  }
+  phrase(c, t, [["London,", at("london", 2), { size: 62, it: true }], ["1943.", at("london", 2, .15), { size: 62, font: "GL" }]], 300, { out: at("london", 7, -.1) });
+  phrase(c, t, [["two officers plan", at("london", 3), { size: 60 }]], 300, { out: 99 });
+  phrase(c, t, [["the", at("london", 7), { size: 64 }], ["unthinkable.", at("london", 8), { size: 120, it: true }]], 1700);
+} });
+
+/* 4 · They find a body — silence, one card slides into a narrow beam */
+const T_BODY = at("body", 0, -.2);
+S("A body", T_BODY, { draw(c, t) {
+  c.fillStyle = "#0B0A07"; c.fillRect(0, 0, W_, H_);
+  const p = drop(t, T_BODY + .1, .7);
+  sheet(c, lerp(-300, 540, p), 980, 560, lerp(-.25, -.05, p), (g, wd, hd) => {
+    typed(g, t, T_BODY + .5, ["ST. PANCRAS MORTUARY", "", "JANUARY 1943", "", "No. 1  ·  Male  ·  unclaimed"], 70, 210, { size: 26, cps: 60 });
+  });
+  beam(c, t, { a: .2, x: 560, wd: 360, dust: 18 });
+  phrase(c, t, [["They find a", at("body", 0), { size: 62 }], ["body.", at("body", 3), { size: 112, it: true }]], 1640);
+} });
+
+/* 5 · the real man — a pencil underlines his name */
+const T_DRI = at("drifter", 0, -.15);
+S("Glyndwr Michael", T_DRI, { clip: t => ["C4", 2.2 + (t - T_DRI) * 1.9], draw(c, t) {
+  cover(c, VID.C4, { s: kb(t, T_DRI, T_DRI + 2.5, 1.0, 1.06), fx: 540, fy: 980 });
+  c.save(); c.translate(540, 980); c.scale(kb(t, T_DRI, T_DRI + 2.5, 1.0, 1.06), kb(t, T_DRI, T_DRI + 2.5, 1.0, 1.06)); c.translate(-540, -980);
+  c.globalCompositeOperation = "multiply"; typed(c, t, T_DRI + .05, ["MICHAEL, Glyndwr.", "Welsh. Aged 34. No next of kin."], 300, 905, { size: 34, cps: 34, col: "rgba(40,30,20,.9)" }); c.restore();
+  phrase(c, t, [["A Welsh", at("drifter", 0), { size: 60 }], ["drifter.", at("drifter", 2), { size: 60, it: true }]], 330);
+  phrase(c, t, [["Glyndwr Michael", at("drifter", 3), { size: 108, it: true, gold: true }]], 1660);
+} });
+
+/* 6 · a new life — the typewriter */
+const T_NEW = at("newlife", 0, -.12);
+S("Typewriter", T_NEW, { clip: t => ["C7", 1 + (t - T_NEW)], draw(c, t) {
+  cover(c, VID.C7, { s: kb(t, T_NEW, T_NEW + 2, 1.06, 1.14), fx: 760, fy: 520 }); beam(c, t, { a: .12, x: 200 });
+  c.save(); c.translate(790, 470); c.rotate(-.06); c.transform(1, 0, -.18, 1, 0, 0); c.globalCompositeOperation = "multiply";
+  typed(c, t, T_NEW + .15, ["MARTIN, William", "Major, R.M."], -170, 0, { size: 38, cps: 12, col: "rgba(25,20,14,.9)" }); c.restore();
+  phrase(c, t, [["a", at("newlife", 3), { size: 64 }], ["new life.", at("newlife", 4), { size: 112, it: true }]], 1640);
+} });
+
+/* 7 · Major William Martin — huge faded face behind, sharp cut-out in front */
+const T_MAR = at("martin", 0, -.12);
+S("Major Martin", T_MAR, { draw(c, t) {
+  c.fillStyle = "#0B0A07"; c.fillRect(0, 0, W_, H_);
+  cover(c, IMG.P1, { s: kb(t, T_MAR, T_MAR + 3, 1.35, 1.42), fy: 700, alpha: .42, filter: "blur(2px)" });
+  shade(c, .25); beam(c, t, { a: .2, x: 330 });
+  const p = drop(t, T_MAR + .05, .8); place(c, IMG.P2cut, lerp(820, 700, p), 1220 + (1 - p) * 60, 760, 0, { alpha: p, shadow: .6 });
+  phrase(c, t, [["Major", at("martin", 0), { size: 64 }], ["William Martin", at("martin", 1), { size: 104, it: true, gold: true }]], 330, { x: 520 });
+  label(c, t, at("martin", 3), "ROYAL MARINES", 300, 1760);
+} });
+
+/* 8 · pocket litter — Pam, love letters, tickets, the ring */
+const T_PAM = at("pam", 0, -.15);
+S("Pocket litter", T_PAM, { draw(c, t) {
+  const k = kb(t, T_PAM, end("pam") + .3, 1.14, 1.0); c.save(); c.translate(CX, CY); c.scale(k, k); c.translate(-CX, -CY);
+  cover(c, IMG.B3, {});
+  let p = drop(t, at("pam", 3, -.1)); place(c, IMG.P4photo, lerp(150, 330, p), lerp(300, 600, p), 470, lerp(-.3, -.08, p), { alpha: p });
+  p = drop(t, at("pam", 4, -.1)); sheet(c, lerp(1000, 760, p), lerp(700, 860, p), 470, lerp(.25, .07, p), (g, wd, hd) => {
+    ["My darling,", "the days are so long", "without you —", "", "all my love,", "         Pam"].forEach((s, i) => hand(g, s, 60, 150 + i * 62, 40, -.02, prog(t, at("pam", 4), at("pam", 4) + 1.6 + i * .2)));
+  }, { alpha: p });
+  p = drop(t, at("pam", 6, -.1)); place(c, IMG.D3tickets, lerp(-100, 330, p), lerp(1500, 1260, p), 500, lerp(-.4, -.06, p), { alpha: p });
+  if (p > 0) { c.save(); c.globalAlpha *= p; c.translate(lerp(-100, 330, p), lerp(1500, 1260, p)); c.rotate(lerp(-.4, -.06, p)); c.font = "26px LB"; c.fillStyle = "rgba(40,30,20,.75)"; c.textAlign = "center";
+    c.fillText("PRINCE OF WALES THEATRE", 0, -122); c.fillText("STALLS  ·  ROW F", 0, -82); c.fillText("PRINCE OF WALES THEATRE", 0, 108); c.fillText("STALLS  ·  ROW F", 0, 148); c.restore(); }
+  p = drop(t, at("pam", 9, -.1)); sheet(c, lerp(1200, 780, p), lerp(1600, 1420, p), 420, lerp(.3, .1, p), (g, wd, hd) => {
+    typed(g, t, at("pam", 9), ["JEWELLERS — NEW BOND ST.", "", "To: Major W. Martin", "", "One diamond ring"], 40, 200, { size: 20, cps: 70 });
+  }, { alpha: p });
+  c.restore();
+  beam(c, t, { a: .12, x: 250 });
+  phrase(c, t, [["A fiancée called", at("pam", 0), { size: 58 }], ["Pam.", at("pam", 3), { size: 108, it: true, gold: true }]], 160);
+  phrase(c, t, [["Love letters.", at("pam", 4), { size: 54, it: true }], ["Tickets.", at("pam", 6), { size: 54, it: true }], ["A ring.", at("pam", 8), { size: 54, it: true }]], 1830);
+} });
+
+/* 9 · the briefcase and the lie — "Greece" marked in green */
+const T_GRE = at("greece", 0, -.15);
+S("Secret letter", T_GRE, { draw(c, t) {
+  const k = kb(t, at("greece", 5), end("greece") + .3, 1.0, 1.55), fx = 470, fy = 1210; c.save(); c.translate(fx, fy); c.scale(k, k); c.translate(-fx, -fy);
+  cover(c, IMG.B3, { alpha: .7 }); shade(c, .3);
+  place(c, IMG.K3case, 540, 1240, 860, 0, { shadow: .6 });
+  const p = drop(t, at("greece", 4, -.2), .7);
+  sheet(c, 540, lerp(1350, 1060, p), 640, lerp(0, -.03, p), (g, wd, hd) => {
+    typed(g, t, at("greece", 4), ["MOST SECRET AND PERSONAL", "", "My dear Alex,", "", "...the coming operation", "will be launched against", "Greece."], 70, 230, { size: 27, cps: 90, hl: { word: "Greece.", at: at("greece", 8, -.1) } });
+  }, { alpha: Math.min(1, p * 3) });
+  c.restore();
+  beam(c, t, { a: .16, x: 420, wd: 420 });
+  phrase(c, t, [["a briefcase of", at("greece", 1), { size: 60 }], ["secret letters,", at("greece", 4), { size: 60, it: true }]], 260);
+  phrase(c, t, [["pointing at", at("greece", 6), { size: 62 }], ["Greece.", at("greece", 8), { size: 112, it: true, gold: true }]], 1720);
+} });
+
+/* 10 · 30 April — underwater, the submarine passes overhead */
+const T_APR = at("april", 0, -.2);
+S("Submarine", T_APR, { xin: .5, clip: t => ["C8", (t - T_APR) * .9], draw(c, t) {
+  cover(c, VID.C8, { s: kb(t, T_APR, end("april"), 1.04, 1.1), fy: 500 });
+  const u = prog(t, T_APR, end("april") + .4); place(c, IMG.K1sub, lerp(-100, 700, u), lerp(980, 860, u), 1500, -.02, { alpha: .85, shadow: 0, filter: "brightness(.35) blur(1.5px)" });
+  hero(c, t, at("april", 2), "30 April 1943", { y: 1380, size: 120, out: at("april", 9, -.1) });
+  phrase(c, t, [["off the coast of", at("april", 9), { size: 62 }], ["Spain.", at("april", 13), { size: 112, it: true, gold: true }]], 1450);
+} });
+
+/* 11 · a fisherman at dawn */
+const T_FIS = at("fisher", 0, -.15);
+S("Fisherman", T_FIS, { xin: .35, clip: t => ["C6", .2 + (t - T_FIS) * .9], draw(c, t) {
+  cover(c, VID.C6, { s: kb(t, T_FIS, T_FIS + 2, 1.05, 1.1), fy: 1100 });
+  phrase(c, t, [["A fisherman", at("fisher", 0), { size: 70, it: true }], ["finds him.", at("fisher", 2), { size: 70 }]], 1720);
+} });
+
+/* 12 · the letters are copied — a flash */
+const T_COP = at("copy", 0, -.15);
+S("Copied", T_COP, { draw(c, t) {
+  cover(c, IMG.B7, { s: kb(t, T_COP, end("copy") + .3, 1.04, 1.2), fx: 560, fy: 1000 });
+  const fl = Math.max(0, 1 - Math.abs(t - at("copy", 5, .05)) / .18), fl2 = Math.max(0, 1 - Math.abs(t - at("copy", 7, .1)) / .14);
+  if (fl + fl2 > 0) { c.fillStyle = `rgba(255,246,225,${Math.min(.92, fl + fl2 * .8)})`; c.fillRect(0, 0, W_, H_); }
+  phrase(c, t, [["Spanish officers let", at("copy", 0), { size: 58 }], ["German spies", at("copy", 3), { size: 58, it: true }]], 300);
+  phrase(c, t, [["copy", at("copy", 5), { size: 112, it: true, gold: true }], ["the letters.", at("copy", 6), { size: 64 }]], 1700);
+} });
+
+/* 13 · panzers to Greece — green arrow on the map */
+const T_PAN = at("panzer", 0, -.15);
+S("Panzers", T_PAN, { draw(c, t) {
+  const k = kb(t, T_PAN, end("panzer") + .3, 1.0, 1.18); c.save(); c.translate(860, 1180); c.scale(k, k); c.translate(-860, -1180);
+  cover(c, IMG.B4, {});
+  const p = E.inOut(prog(t, at("panzer", 1), at("panzer", 6, .3)));
+  arrow(c, p, [[640, 520], [980, 700], [900, 1170]], css(C.green, .95));
+  const tp = E.inOut(prog(t, at("panzer", 1), at("panzer", 6, .5)));
+  place(c, IMG.K2tank, lerp(560, 880, tp), lerp(470, 1080, tp) - 70, 230, .12, { filter: "brightness(.55)" });
+  c.restore();
+  phrase(c, t, [["Hitler moves", at("panzer", 0), { size: 58 }], ["a panzer division", at("panzer", 2), { size: 80, it: true }]], 250);
+  phrase(c, t, [["to", at("panzer", 5), { size: 64 }], ["Greece.", at("panzer", 6), { size: 112, it: true, gold: true }]], 1740);
+} });
+
+/* 14 · July — the landing */
+const T_JUL = at("july", 0, -.15);
+S("Sicily landing", T_JUL, { clip: t => ["C5", .2 + (t - T_JUL)], draw(c, t) {
+  cover(c, VID.C5, { s: kb(t, T_JUL, end("july") + .4, 1.0, 1.08) });
+  hero(c, t, at("july", 1), "July 1943", { y: 520, size: 150 });
+  phrase(c, t, [["the Allies land on", at("july", 2), { size: 62 }], ["Sicily.", at("july", 6), { size: 120, it: true, gold: true }]], 1700);
+} });
+
+/* 15 · the message to Churchill — the telegram types itself */
+const T_MSG = at("message", 0, -.15);
+S("Telegram", T_MSG, { clip: t => ["C10", .5 + (t - T_MSG) * .9], draw(c, t) {
+  const k = kb(t, T_MSG, end("message") + .5, 1.0, 1.12); cover(c, VID.C10, { s: k, fx: 400, fy: 1090 });
+  c.save(); c.translate(400, 1090); c.scale(k, k); c.translate(-400, -1090); c.translate(385, 1085); c.rotate(-.1); c.transform(1, 0, -.22, .9, 0, 0); c.globalCompositeOperation = "multiply";
+  typed(c, t, at("message", 1), ["MOST SECRET", "TO: PRIME MINISTER", "", "MINCEMEAT SWALLOWED", "ROD, LINE AND SINKER"], -200, -150, { size: 30, cps: 26, col: "rgba(30,24,16,.92)" }); c.restore();
+  phrase(c, t, [["A message reaches", at("message", 0), { size: 58 }], ["Churchill.", at("message", 3), { size: 96, it: true, gold: true }]], 300, { out: at("message", 6, -.1) });
+  phrase(c, t, [["rod, line", at("message", 6), { size: 104, it: true }], ["and sinker.", at("message", 8), { size: 104, it: true, gold: true }]], 300);
+} });
+
+/* 16 · Huelva — the grave, then the inscription */
+const T_GRV = at("grave", 0, -.2);
+S("Huelva", T_GRV, { xin: .7, draw(c, t) {
+  cover(c, IMG.B11, { s: kb(t, T_GRV, at("beneath", 0), 1.0, 1.22), fx: 440, fy: 1500 }); beam(c, t, { a: .1, x: 800, ang: -.3 });
+  phrase(c, t, [["Huelva,", at("grave", 1), { size: 66, it: true }], ["Spain.", at("grave", 1, .2), { size: 66 }]], 260, { out: at("grave", 4, -.1) });
+  phrase(c, t, [["his grave carries", at("grave", 3), { size: 60 }], ["the false name.", at("grave", 7), { size: 92, it: true }]], 260);
+} });
+const T_STN = at("grave", 8, .35);
+function engrave(c, s, y, size, a, font = "LB") { if (a <= 0) return; c.save(); c.globalAlpha *= a; c.font = `${size}px ${font}`; c.textAlign = "center"; c.letterSpacing = `${size * .08}px`;
+  c.fillStyle = "rgba(255,248,230,.55)"; c.fillText(s, CX + 2, y + 2); c.fillStyle = "rgba(60,48,32,.82)"; c.fillText(s, CX, y); c.restore(); }
+S("Headstone", T_STN, { xin: .6, draw(c, t) {
+  const pan = E.inOut(prog(t, at("beneath", 0, -.3), at("beneath", 4)));
+  c.save(); c.translate(0, lerp(220, -160, pan)); const k = kb(t, T_STN, DUR, 1.12, 1.2); c.translate(CX, CY); c.scale(k, k); c.translate(-CX, -CY);
+  cover(c, IMG.B12, {});
+  engrave(c, "WILLIAM MARTIN", 700, 50, 1); engrave(c, "MAJOR · ROYAL MARINES", 760, 28, 1); engrave(c, "DIED APRIL 1943", 810, 26, .9);
+  const r = E.out(prog(t, at("beneath", 2), at("beneath", 4, .3)));
+  engrave(c, "GLYNDWR MICHAEL", 1180, 46, r); engrave(c, "SERVED AS", 1240, 26, r); engrave(c, "MAJOR WILLIAM MARTIN, RM", 1290, 30, r);
+  c.restore();
+  beam(c, t, { a: .14, x: 120, ang: -.95, wd: 700 });
+  phrase(c, t, [["Beneath it,", at("beneath", 0), { size: 62 }], ["the real one.", at("beneath", 2), { size: 96, it: true, gold: true }]], 1700, { out: at("never", 0, -.1) });
+  phrase(c, t, [["Glyndwr Michael.", at("never", 0), { size: 100, it: true, gold: true }]], 1640);
+  phrase(c, t, [["The man", at("never", 2), { size: 64 }], ["who never was.", at("never", 4), { size: 64, it: true }]], 1770);
+  const f = prog(t, end("never") + .9, end("never") + 1.8); if (f > 0) { shade(c, f * .96);
+    c.save(); c.globalAlpha = E.out(prog(t, end("never") + 1.3, end("never") + 2.1)); c.textAlign = "center"; c.fillStyle = css(C.gold); c.font = "92px ISI"; c.fillText("The Man Who Never Was", CX, CY);
+    c.font = "30px LB"; c.letterSpacing = "6px"; c.fillStyle = css(C.cream, .75); c.fillText("OPERATION MINCEMEAT · 1943", CX, CY + 80);
+    c.font = "20px ISR"; c.letterSpacing = "1px"; c.fillStyle = css(C.cream, .4); c.fillText("Photographs and documents are dramatised reconstructions.", CX, H_ - 120); c.restore(); }
+} });
+SCENES.forEach((s, i) => { s.end = i < SCENES.length - 1 ? SCENES[i + 1].start : DUR; });
+
+/* ======================= COMPOSITE ======================= */
+let FRAME = 0;
+function render(c, t) {
+  c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.filter = "none"; c.globalCompositeOperation = "source-over"; c.fillStyle = "#000"; c.fillRect(0, 0, W_, H_);
+  const i = Math.max(0, SCENES.findIndex(s => t >= s.start && t < s.end)), sc = SCENES[i] || SCENES[SCENES.length - 1];
+  if (sc.xin && i > 0 && t < sc.start + sc.xin) {   // dissolve through shadow
+    const p = prog(t, sc.start, sc.start + sc.xin); c.save(); SCENES[i - 1].draw(c, t); c.restore(); shade(c, Math.sin(p * Math.PI) * .55); c.save(); c.globalAlpha = E.inOut(p); sc.draw(c, t); c.restore();
+  } else { c.save(); sc.draw(c, t); c.restore(); }
+  c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; finish(c, FRAME);
+}
+async function renderFrame(f) { FRAME = f; const t = f / FPS; await seekFor(t); render(ctx, t); }
+
+/* ======================= PLAYER ======================= */
+const ready = (async () => { await Promise.all(["ISR", "ISI", "GL", "HND", "LB", "TW"].map(f => document.fonts.load(`40px ${f}`))); await document.fonts.ready; await loadImages(); await loadVideos(); })();
+window.REEL = { ready, renderFrame, canvas: cv, FRAMES, FPS, CONFIG };
+const $ = id => document.getElementById(id), scrub = $("scrub"), timeEl = $("time"), playBtn = $("play");
+scrub.max = FRAMES - 1;
+let frame = 0, playing = false, busy = false;
+const AUDIO_SRC = "__AUDIO__", snd = AUDIO_SRC.startsWith("data:") ? new Audio(AUDIO_SRC) : null;
+const show = async f => { if (busy) return; busy = true; frame = Math.max(0, Math.min(FRAMES - 1, f)); await renderFrame(frame); scrub.value = frame; timeEl.textContent = `${(frame / FPS).toFixed(2).padStart(5, "0")} / ${DUR.toFixed(2)}  f${frame}`; busy = false; };
+let t0 = 0, f0 = 0;
+const loop = async now => { if (!playing) return; const f = snd ? Math.floor(snd.currentTime * FPS) : f0 + Math.floor((now - t0) / 1000 * FPS); if (f >= FRAMES) { toggle(); return; } await show(f); requestAnimationFrame(loop); };
+const toggle = () => { playing = !playing; playBtn.textContent = playing ? "Pause" : "Play"; if (playing) { t0 = performance.now(); f0 = frame; if (snd) { snd.currentTime = frame / FPS; snd.play(); } requestAnimationFrame(loop); } else if (snd) snd.pause(); };
+playBtn.onclick = toggle; $("prev").onclick = () => show(frame - 1); $("next").onclick = () => show(frame + 1);
+scrub.oninput = () => { playing = false; playBtn.textContent = "Play"; if (snd) snd.pause(); show(+scrub.value); };
+addEventListener("keydown", e => { if (e.code === "Space") { e.preventDefault(); toggle(); } if (e.key === "ArrowLeft") show(frame - 1); if (e.key === "ArrowRight") show(frame + 1); });
+SCENES.forEach(s => { const d = document.createElement("div"); d.style.width = ((s.end - s.start) / DUR * 100) + "%"; d.textContent = s.name; d.onclick = () => show(Math.round(s.start * FPS)); $("beats").appendChild(d); });
+ready.then(() => { if (!window.__EXPORT__) show(0); });
+</script>
+</body>
+</html>

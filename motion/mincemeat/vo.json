@@ -1,0 +1,300 @@
+[
+ {
+  "id": "hook",
+  "text": "In the spring of nineteen forty-three, a dead man lied to Hitler.",
+  "t": 0.15,
+  "dur": 3.625,
+  "words": [
+   0.16,
+   0.5,
+   0.56,
+   1.05,
+   1.12,
+   1.63,
+   2.17,
+   2.38,
+   2.57,
+   2.82,
+   3.18,
+   3.33
+  ]
+ },
+ {
+  "id": "believed",
+  "text": "And Hitler believed him.",
+  "t": 4.075,
+  "dur": 1.378,
+  "words": [
+   4.085,
+   4.315,
+   4.635,
+   5.075
+  ]
+ },
+ {
+  "id": "sicily",
+  "text": "The Allies need Sicily. The Germans know it.",
+  "t": 6.003,
+  "dur": 2.67,
+  "words": [
+   6.013,
+   6.255,
+   6.773,
+   6.959,
+   7.483,
+   7.623,
+   8.113,
+   8.503
+  ]
+ },
+ {
+  "id": "london",
+  "text": "So in London, two intelligence officers plan the unthinkable.",
+  "t": 9.023,
+  "dur": 3.498,
+  "words": [
+   9.053,
+   9.232,
+   9.411,
+   9.801,
+   10.093,
+   10.793,
+   11.232,
+   11.493,
+   11.833
+  ]
+ },
+ {
+  "id": "body",
+  "text": "They find a body.",
+  "t": 12.971,
+  "dur": 1.128,
+  "words": [
+   12.991,
+   13.211,
+   13.531,
+   13.692
+  ]
+ },
+ {
+  "id": "drifter",
+  "text": "A Welsh drifter, Glin-dur Michael.",
+  "t": 14.649,
+  "dur": 2.073,
+  "words": [
+   14.659,
+   14.796,
+   15.129,
+   15.679,
+   16.122
+  ]
+ },
+ {
+  "id": "newlife",
+  "text": "They give him a new life.",
+  "t": 17.122,
+  "dur": 1.494,
+  "words": [
+   17.162,
+   17.512,
+   17.572,
+   17.902,
+   18.019,
+   18.342
+  ]
+ },
+ {
+  "id": "martin",
+  "text": "Major William Martin, Royal Marines.",
+  "t": 18.916,
+  "dur": 2.439,
+  "words": [
+   18.926,
+   19.325,
+   20.026,
+   20.346,
+   20.711
+  ]
+ },
+ {
+  "id": "pam",
+  "text": "A fianc\u00e9e called Pam. Love letters. Theatre tickets. A bill for the ring.",
+  "t": 21.756,
+  "dur": 4.248,
+  "words": [
+   21.766,
+   21.886,
+   22.436,
+   22.746,
+   22.965,
+   23.226,
+   23.726,
+   24.266,
+   24.756,
+   24.816,
+   25.066,
+   25.386,
+   25.446
+  ]
+ },
+ {
+  "id": "greece",
+  "text": "And a briefcase of secret letters, pointing at Greece.",
+  "t": 26.403,
+  "dur": 2.845,
+  "words": [
+   26.413,
+   26.633,
+   26.693,
+   27.233,
+   27.503,
+   27.863,
+   28.223,
+   28.713,
+   28.773
+  ]
+ },
+ {
+  "id": "april",
+  "text": "On the thirtieth of April, a submarine releases him off the coast of Spain.",
+  "t": 29.748,
+  "dur": 4.12,
+  "words": [
+   29.758,
+   30.018,
+   30.228,
+   30.748,
+   30.808,
+   31.188,
+   31.248,
+   31.803,
+   32.448,
+   32.508,
+   32.728,
+   32.958,
+   33.298,
+   33.438
+  ]
+ },
+ {
+  "id": "fisher",
+  "text": "A fisherman finds him.",
+  "t": 34.269,
+  "dur": 1.428,
+  "words": [
+   34.279,
+   34.429,
+   34.949,
+   35.329
+  ]
+ },
+ {
+  "id": "copy",
+  "text": "Spanish officers let German spies copy the letters.",
+  "t": 36.096,
+  "dur": 2.972,
+  "words": [
+   36.126,
+   36.706,
+   37.076,
+   37.306,
+   37.796,
+   38.176,
+   38.316,
+   38.656
+  ]
+ },
+ {
+  "id": "panzer",
+  "text": "Hitler moves a panzer division to Greece.",
+  "t": 39.419,
+  "dur": 2.295,
+  "words": [
+   39.459,
+   39.989,
+   40.149,
+   40.209,
+   40.589,
+   41.049,
+   41.179
+  ]
+ },
+ {
+  "id": "july",
+  "text": "In July, the Allies land on Sicily.",
+  "t": 42.164,
+  "dur": 2.354,
+  "words": [
+   42.174,
+   42.379,
+   42.706,
+   43.024,
+   43.444,
+   43.745,
+   43.951
+  ]
+ },
+ {
+  "id": "message",
+  "text": "A message reaches Churchill: Mincemeat swallowed. Rod, line and sinker.",
+  "t": 45.018,
+  "dur": 4.173,
+  "words": [
+   45.028,
+   45.163,
+   45.698,
+   46.208,
+   46.818,
+   47.274,
+   47.808,
+   48.158,
+   48.408,
+   48.655
+  ]
+ },
+ {
+  "id": "grave",
+  "text": "In Huelva, his grave still carries the false name.",
+  "t": 49.79,
+  "dur": 2.877,
+  "words": [
+   49.79,
+   49.97,
+   50.29,
+   50.58,
+   50.82,
+   51.26,
+   51.85,
+   51.95,
+   52.23
+  ]
+ },
+ {
+  "id": "beneath",
+  "text": "Beneath it, the real one.",
+  "t": 53.018,
+  "dur": 1.486,
+  "words": [
+   53.018,
+   53.548,
+   53.638,
+   53.869,
+   54.153
+  ]
+ },
+ {
+  "id": "never",
+  "text": "Glin-dur Michael. The man who never was.",
+  "t": 55.054,
+  "dur": 2.262,
+  "words": [
+   55.074,
+   55.511,
+   56.074,
+   56.134,
+   56.434,
+   56.694,
+   57.074
+  ]
+ }
+]
