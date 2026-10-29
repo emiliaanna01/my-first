@@ -214,21 +214,44 @@ def get(title, out, credits="CREDITS.txt", allow_by=False, budget=900):
     return out
 
 
-def contact_sheet(cands, path, cols=4, tw=300):
+def _preview_url(title, width=SHEET_W):
+    """A standard-size thumbnail on upload.wikimedia.org (only standard widths are served)."""
+    name = _norm(title)[5:].replace(" ", "_")
+    h = hashlib.md5(name.encode("utf-8")).hexdigest()
+    from urllib.parse import quote
+    q = quote(name)
+    if name.lower().endswith((".tif", ".tiff")):
+        return f"https://upload.wikimedia.org/wikipedia/commons/thumb/{h[0]}/{h[:2]}/{q}/lossy-page1-{width}px-{q}.jpg"
+    return f"https://upload.wikimedia.org/wikipedia/commons/thumb/{h[0]}/{h[:2]}/{q}/{width}px-{q}"
+
+
+def contact_sheet(cands, path, cols=4, tw=300, budget=300):
+    """Previews go through the same patient, cached downloader as photos (Wikimedia rate-limits those too)."""
+    if not cands:
+        print("  no usable images for this search: try other words, or --allow-by")
+        return
     font = ImageFont.load_default()
     rows = (len(cands) + cols - 1) // cols
     sheet = Image.new("RGB", (cols * tw, rows * (tw + 40)), (30, 30, 30))
-    from io import BytesIO
+    pdir = os.path.join(CACHE, "preview")
+    os.makedirs(pdir, exist_ok=True)
     for i, c in enumerate(cands):
         im = None
-        for u in _candidates({"thumb": re.sub(r"/\d+px-", f"/{SHEET_W}px-", c["thumb"] or "")}, c["title"])[:1]:
-            try:
-                r = requests.get(u, headers=UA, timeout=30)
-                if r.status_code == 200:
-                    im = Image.open(BytesIO(r.content)).convert("RGB")
-            except Exception:
-                pass
+        prev = os.path.join(pdir, hashlib.md5(_norm(c["title"]).encode()).hexdigest() + ".jpg")
+        if not os.path.exists(prev):
+            for u in (_preview_url(c["title"]), (c.get("thumb") or "").split("?")[0]):
+                try:
+                    ok, budget = _download(u, prev + ".part", budget)
+                except RateLimited:
+                    ok = False
+                if ok:
+                    os.replace(prev + ".part", prev)
+                    break
             time.sleep(0.3)
+        try:
+            im = Image.open(prev).convert("RGB")
+        except Exception:
+            im = None
         x, y = (i % cols) * tw, (i // cols) * (tw + 40)
         d = ImageDraw.Draw(sheet)
         if im is not None:
