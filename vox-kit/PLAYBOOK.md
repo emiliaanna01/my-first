@@ -202,4 +202,7 @@ colours. Leave `bg` out to use the look's own order.
 - `fetch.py`: honours Retry-After, batched lookups, shared cache, upload.wikimedia.org fallback, standard-width
   previews, `papercut.py fetch` command, `photos/` drop folder.
 - Stamps on documents land on the paper; active timeline date stays visible on an accent card.
+- `voice.py`: when the skill is installed in a deep folder, espeak-ng (used by the voice) cannot read its data from
+  the long path and every line fails with a `/home/runner/...phontab` error. The engine now copies that data once
+  to `~/.papercut/espeak-ng-data` and uses it from there (a symlink does not work).
 - `SKILL.md`: hook rule, photo workflow, make-every-film-different checklist.

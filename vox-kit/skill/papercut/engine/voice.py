@@ -21,10 +21,29 @@ def _models():
 GAP = 0.18  # silence between beats (s)
 
 
+def _espeak():
+    """espeak-ng silently falls back to a build-machine path when its data path is long (a deep install folder), and
+    then every line fails. Point it at a short copy of the bundled data instead."""
+    try:
+        import espeakng_loader
+        from kokoro_onnx.config import EspeakConfig
+    except ImportError:
+        return None
+    data = espeakng_loader.get_data_path()
+    short = os.path.join(os.path.expanduser("~"), ".papercut", "espeak-ng-data")
+    if len(data) > 100:  # a copy, not a symlink: espeak follows the link back to the long path and fails again
+        if not os.path.exists(os.path.join(short, "phontab")):
+            import shutil
+            shutil.rmtree(short, ignore_errors=True)
+            shutil.copytree(data, short)
+        data = short
+    return EspeakConfig(lib_path=espeakng_loader.get_library_path(), data_path=data)
+
+
 def synth(beats, out_dir, voice="af_heart", speed=1.0, lang="en-us"):
     from kokoro_onnx import Kokoro
     km = _models()
-    k = Kokoro(os.path.join(km, "kokoro-v1.0.onnx"), os.path.join(km, "voices-v1.0.bin"))
+    k = Kokoro(os.path.join(km, "kokoro-v1.0.onnx"), os.path.join(km, "voices-v1.0.bin"), espeak_config=_espeak())
     os.makedirs(out_dir, exist_ok=True)
     clips, sr = [], 24000
     for i, b in enumerate(beats):
