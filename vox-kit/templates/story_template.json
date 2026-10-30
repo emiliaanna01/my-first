@@ -1,0 +1,29 @@
+{
+ "title": "Film Title", "slug": "film-slug", "look": "riso", "format": "9:16",
+ "voice": "af_heart", "speed": 1.0,
+ "music": "score.wav", "music_gain": 0.28, "sfx_gain": 0.4, "seed": 7,
+ "images": {
+  "person": {"commons": "File:Exact title on Wikimedia Commons.jpg", "cut": true, "accent": "red", "contrast": 1.15, "crop": [0.0, 0.0, 1.0, 0.6]},
+  "scene": {"commons": "File:A scene photo.jpg", "cut": false, "dots": false, "accent": "red", "size": 1100},
+  "paper": {"commons": "File:A newspaper or document.jpg", "cut": false, "dots": false, "size": 1100},
+  "recent": {"commons": "File:A CC BY-SA photo.jpg", "allow_by": true, "cut": false, "size": 1000},
+  "mine": {"file": "photos/my-own-photo.jpg", "cut": false, "dots": false}
+ },
+ "beats": [
+  {"say": "What if I told you ... ? (the hook, in the viewer's voice)", "kind": "hero", "hero": "person", "label": "WHO"},
+  {"say": "Place, the decade. One line that grounds the story.", "kind": "map",
+   "map": {"country": "United States of America", "pin": [-87.63, 41.88], "place": "CITY", "sea": "navy"}, "label": "1920s"},
+  {"say": "Several photos that tell one idea.", "kind": "gallery", "photos": ["scene", "paper", "person"],
+   "captions": ["CAPTION ONE", "CAPTION TWO", "CAPTION THREE"], "label": "LABEL"},
+  {"say": "A record, a ruling or a list, typed out.", "kind": "document", "head": "DOCUMENT TITLE, YEAR",
+   "lines": ["LINE ONE", "LINE TWO", "LINE THREE"], "mark": 1, "redact": [], "stamp": "STAMP", "stamp_on": "word."},
+  {"say": "A scene photo with its place and year.", "kind": "photo", "photo": "scene", "label": "PLACE", "tag": "PLACE, YEAR"},
+  {"say": "A number that lands.", "kind": "number", "number": "250,000", "sub": "WHAT IT COUNTS"},
+  {"say": "Two amounts compared.", "kind": "bars", "bars": [["THEN", 25], ["NOW", 1]], "values": ["$25", "$1"], "active": 1, "label": "THE PRICE"},
+  {"say": "A real, sourced quote.", "kind": "quote", "quote": "The exact documented words.", "by": "Who, year", "hero": "person"},
+  {"say": "Two people and the link between them.", "kind": "duo", "left": "person", "right": "person", "label": "THE LINK"},
+  {"say": "A span of years.", "kind": "timeline", "dates": ["1900", "1950", "2000"], "active": 2, "label": "LABEL"},
+  {"say": "The payoff of the hook.", "kind": "photo", "photo": "paper", "label": "PAYOFF", "stamp": "STAMP", "stamp_on": "word.",
+   "burst": true, "burst_color": "red"}
+ ]
+}

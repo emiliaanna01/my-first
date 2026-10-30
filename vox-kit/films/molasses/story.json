@@ -1,0 +1,160 @@
+{
+ "title": "The Great Molasses Flood",
+ "slug": "great-molasses-flood",
+ "format": "9:16",
+ "voice": "af_heart",
+ "speed": 1.0,
+ "music": "score.wav",
+ "seed": 19,
+ "images": {
+  "street": {
+   "commons": "File:Boston molasses detail map.png",
+   "cut": false,
+   "dots": false,
+   "accent": "red",
+   "size": 900
+  },
+  "wreck": {
+   "commons": "File:Boston 1919 molasses disaster - el train structure.jpg",
+   "cut": false,
+   "accent": "mustard",
+   "size": 1000,
+   "dots": false,
+   "contrast": 1.15
+  },
+  "post": {
+   "commons": "File:Boston post-January 16, 1919,.jpg",
+   "cut": false,
+   "dots": false,
+   "accent": "red",
+   "size": 1100
+  }
+ },
+ "beats": [
+  {
+   "say": "January fifteenth, 1919. Boston's North End.",
+   "kind": "map",
+   "bg": "mustard",
+   "map": {
+    "country": "United States of America",
+    "pin": [
+     -71.05,
+     42.37
+    ],
+    "place": "BOSTON",
+    "sea": "navy"
+   },
+   "label": "15.01.1919"
+  },
+  {
+   "say": "Just after noon, a giant tank on Commercial Street bursts open.",
+   "kind": "photo",
+   "bg": "red",
+   "photo": "street",
+   "label": "COMMERCIAL ST."
+  },
+  {
+   "say": "Inside: two point three million gallons of molasses.",
+   "kind": "number",
+   "bg": "navy",
+   "number": "2.3 MILLION",
+   "sub": "GALLONS OF MOLASSES"
+  },
+  {
+   "say": "A brown wave races through the streets at about thirty-five miles an hour.",
+   "kind": "number",
+   "bg": "teal",
+   "number": "35 MPH",
+   "sub": "A WAVE OF MOLASSES",
+   "scraps": 3
+  },
+  {
+   "say": "It crushes buildings and twists the steel of the elevated railway.",
+   "kind": "photo",
+   "bg": "kraft",
+   "photo": "wreck",
+   "label": "THE ELEVATED RAILWAY",
+   "label_size": 76,
+   "tag": "COMMERCIAL ST., 1919"
+  },
+  {
+   "say": "Twenty-one people are killed. About a hundred and fifty are hurt.",
+   "kind": "number",
+   "bg": "red",
+   "number": "21",
+   "sub": "KILLED · 150 HURT"
+  },
+  {
+   "say": "The next morning, it is front-page news.",
+   "kind": "photo",
+   "bg": "newsprint",
+   "photo": "post",
+   "tag": "BOSTON POST, 16.01.1919"
+  },
+  {
+   "say": "More than three hundred workers spend weeks scrubbing the streets.",
+   "kind": "document",
+   "bg": "mustard",
+   "head": "CLEANUP CREW",
+   "lines": [
+    "WORKERS: 300+",
+    "TOOLS: SALTWATER HOSES",
+    "TIME: WEEKS"
+   ],
+   "mark": 0,
+   "label": "THE CLEANUP"
+  },
+  {
+   "say": "The harbor stays brown until summer.",
+   "kind": "timeline",
+   "bg": "teal",
+   "dates": [
+    "JAN",
+    "SPRING",
+    "SUMMER"
+   ],
+   "active": 2,
+   "label": "STILL BROWN"
+  },
+  {
+   "say": "The company blames sabotage. In 1925, the court blames its tank.",
+   "kind": "document",
+   "bg": "kraft",
+   "head": "THE RULING, 1925",
+   "lines": [
+    "OWNER: U.S. IND. ALCOHOL",
+    "CLAIM: SABOTAGE",
+    "FINDING: UNSAFE TANK"
+   ],
+   "redact": [
+    1
+   ],
+   "mark": 2,
+   "stamp": "LIABLE",
+   "stamp_on": "tank",
+   "label": "1925"
+  },
+  {
+   "say": "It pays out more than six hundred thousand dollars.",
+   "kind": "number",
+   "bg": "navy",
+   "number": "$600K+",
+   "sub": "PAID TO VICTIMS"
+  },
+  {
+   "say": "For decades, people swore the North End still smelled sweet on hot days.",
+   "kind": "timeline",
+   "bg": "red",
+   "dates": [
+    "1919",
+    "1925",
+    "TODAY"
+   ],
+   "active": 2,
+   "label": "STILL SWEET",
+   "burst": true
+  }
+ ],
+ "music_gain": 0.22,
+ "sfx_gain": 0.45
+}

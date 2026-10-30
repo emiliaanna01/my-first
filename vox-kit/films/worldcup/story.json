@@ -1,0 +1,154 @@
+{
+ "title": "The Biggest World Cup Ever",
+ "slug": "world-cup-2026-final",
+ "format": "9:16",
+ "voice": "af_heart",
+ "speed": 1.0,
+ "music": "score.wav",
+ "seed": 26,
+ "images": {},
+ "beats": [
+  {
+   "say": "July nineteenth, 2026. MetLife Stadium, New Jersey.",
+   "kind": "map",
+   "bg": "mustard",
+   "map": {
+    "country": "United States of America",
+    "pin": [
+     -74.07,
+     40.81
+    ],
+    "place": "METLIFE STADIUM",
+    "sea": "navy"
+   },
+   "label": "19.07.2026"
+  },
+  {
+   "say": "The final of the first World Cup with forty-eight teams.",
+   "kind": "number",
+   "bg": "red",
+   "number": "48 TEAMS",
+   "sub": "A NEW FORMAT"
+  },
+  {
+   "say": "A hundred and four matches, up from sixty-four.",
+   "kind": "number",
+   "bg": "navy",
+   "number": "104",
+   "sub": "MATCHES · UP FROM 64"
+  },
+  {
+   "say": "By late June, it had already broken the crowd record set in 1994.",
+   "kind": "timeline",
+   "bg": "teal",
+   "dates": [
+    "1994",
+    "2026"
+   ],
+   "active": 1,
+   "label": "RECORD CROWDS"
+  },
+  {
+   "say": "One match left. Spain against Argentina.",
+   "kind": "map",
+   "bg": "newsprint",
+   "map": {
+    "highlight": [
+     "Spain",
+     "Argentina"
+    ],
+    "pin": [
+     -74.07,
+     40.81
+    ],
+    "place": "THE FINAL",
+    "sea": "teal"
+   },
+   "label": "ESP v ARG"
+  },
+  {
+   "say": "Ninety minutes. No goals.",
+   "kind": "number",
+   "bg": "kraft",
+   "number": "0 - 0",
+   "sub": "AFTER 90 MINUTES",
+   "stamp": "EXTRA TIME",
+   "stamp_on": "goals."
+  },
+  {
+   "say": "Then, in extra time, Ferran Torres scores.",
+   "kind": "number",
+   "bg": "red",
+   "number": "GOAL",
+   "sub": "FERRAN TORRES · EXTRA TIME",
+   "burst": true,
+   "burst_color": "mustard"
+  },
+  {
+   "say": "Argentina push for an equaliser. It never comes.",
+   "kind": "timeline",
+   "bg": "navy",
+   "dates": [
+    "90'",
+    "105'",
+    "120'"
+   ],
+   "active": 2,
+   "label": "NO EQUALISER"
+  },
+  {
+   "say": "Spain win, one-nil.",
+   "kind": "number",
+   "bg": "mustard",
+   "number": "1 - 0",
+   "sub": "SPAIN",
+   "burst": true
+  },
+  {
+   "say": "Their second World Cup, sixteen years after the first.",
+   "kind": "timeline",
+   "bg": "teal",
+   "dates": [
+    "2010",
+    "2026"
+   ],
+   "active": 1,
+   "label": "SECOND STAR"
+  },
+  {
+   "say": "The biggest World Cup ever, decided by a single goal.",
+   "kind": "document",
+   "bg": "kraft",
+   "head": "MATCH REPORT",
+   "lines": [
+    "SPAIN 1 - 0 ARGENTINA",
+    "GOAL: F. TORRES (ET)",
+    "VENUE: METLIFE, N.J."
+   ],
+   "mark": 1,
+   "stamp": "CHAMPIONS",
+   "stamp_on": "goal."
+  },
+  {
+   "say": "And the next one, in 2030, will be played partly in Spain.",
+   "kind": "map",
+   "bg": "red",
+   "map": {
+    "highlight": [
+     "Spain",
+     "Portugal",
+     "Morocco"
+    ],
+    "pin": [
+     -3.7,
+     40.42
+    ],
+    "place": "SPAIN",
+    "sea": "navy"
+   },
+   "label": "2030"
+  }
+ ],
+ "music_gain": 0.22,
+ "sfx_gain": 0.4
+}

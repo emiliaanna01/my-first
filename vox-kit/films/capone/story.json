@@ -1,0 +1,191 @@
+{
+ "title": "Caught by the Taxman",
+ "slug": "capone-caught-by-the-taxman",
+ "look": "noir",
+ "format": "9:16",
+ "voice": "af_heart",
+ "speed": 1.0,
+ "music": "score.wav",
+ "seed": 1931,
+ "images": {
+  "capone": {
+   "commons": "File:Al Capone in 1930 (cropped)(2).jpg",
+   "cut": true,
+   "accent": "red",
+   "contrast": 1.15
+  },
+  "mugshot": {
+   "commons": "File:AlCaponemugshotCPD.jpg",
+   "cut": false,
+   "dots": false,
+   "accent": "red",
+   "size": 1100
+  },
+  "miami": {
+   "commons": "File:Al Capone in Florida.jpg",
+   "cut": false,
+   "dots": false,
+   "accent": "red",
+   "size": 900
+  },
+  "later": {
+   "commons": "File:Al Capone-around 1935 (cropped).jpg",
+   "cut": false,
+   "dots": false,
+   "accent": "red",
+   "size": 800
+  },
+  "wilson": {
+   "commons": "File:Chief of U.S. Secret Service. Washington, D.C., June 11. One of the busiest men in the capital these days is Frank J. Wilson, Chief of the United States Secret Service. Chief Wilson posed LCCN2016877732.jpg",
+   "cut": false,
+   "dots": false,
+   "accent": "red",
+   "size": 1000,
+   "crop": [
+    0.1,
+    0.05,
+    0.9,
+    0.85
+   ]
+  },
+  "alcatraz": {
+   "commons": "File:USS Oklahoma (BB-37) passing Alcatraz in the 1930s.jpg",
+   "cut": false,
+   "accent": "red",
+   "size": 1100,
+   "crop": [
+    0.0,
+    0.1,
+    0.75,
+    0.95
+   ],
+   "dots": false,
+   "contrast": 1.15
+  }
+ },
+ "beats": [
+  {
+   "say": "What if I told you America's most notorious gangster was finally jailed... over his taxes?",
+   "kind": "hero",
+   "hero": "capone",
+   "label": "AL CAPONE"
+  },
+  {
+   "say": "Chicago, the 1920s. Prohibition made Al Capone rich.",
+   "kind": "map",
+   "map": {
+    "country": "United States of America",
+    "pin": [
+     -87.63,
+     41.88
+    ],
+    "place": "CHICAGO",
+    "sea": "navy"
+   },
+   "label": "1920s"
+  },
+  {
+   "say": "Bootlegging, gambling, violence. Yet prosecutors could not make the big crimes stick.",
+   "kind": "gallery",
+   "photos": [
+    "mugshot",
+    "miami",
+    "later"
+   ],
+   "captions": [
+    "CHICAGO POLICE",
+    "MIAMI POLICE",
+    "c. 1935"
+   ],
+   "label": "UNTOUCHABLE?"
+  },
+  {
+   "say": "Then in 1927, the Supreme Court ruled: even illegal income is taxable.",
+   "kind": "document",
+   "head": "U.S. v. SULLIVAN, 1927",
+   "lines": [
+    "ILLEGAL INCOME:",
+    "STILL TAXABLE",
+    "DECISION: UNANIMOUS"
+   ],
+   "mark": 1,
+   "stamp": "RULED",
+   "stamp_on": "taxable."
+  },
+  {
+   "say": "So a tax agent, Frank Wilson, went after his money.",
+   "kind": "photo",
+   "photo": "wilson",
+   "label": "FRANK J. WILSON",
+   "tag": "TAX INVESTIGATOR"
+  },
+  {
+   "say": "In 1930, he found ledgers, with payments marked A, and Al.",
+   "kind": "document",
+   "head": "THE LEDGER",
+   "lines": [
+    "PAYMENT TO: 'A'",
+    "PAYMENT TO: 'AL'",
+    "TRACED TO: CAPONE"
+   ],
+   "mark": 2,
+   "stamp": "EVIDENCE"
+  },
+  {
+   "say": "October 1931. Guilty of tax evasion.",
+   "kind": "number",
+   "number": "GUILTY",
+   "sub": "TAX EVASION · OCT 1931"
+  },
+  {
+   "say": "Sentenced to eleven years. He served about seven and a half.",
+   "kind": "bars",
+   "bars": [
+    [
+     "SENTENCE",
+     11
+    ],
+    [
+     "SERVED",
+     7.5
+    ]
+   ],
+   "values": [
+    "11 YRS",
+    "7.5 YRS"
+   ],
+   "active": 0,
+   "label": "THE TIME"
+  },
+  {
+   "say": "From 1934, much of it on Alcatraz.",
+   "kind": "photo",
+   "photo": "alcatraz",
+   "label": "ALCATRAZ",
+   "tag": "SAN FRANCISCO BAY, 1930s"
+  },
+  {
+   "say": "He walked out in 1939, seriously ill.",
+   "kind": "timeline",
+   "dates": [
+    "1931",
+    "1934",
+    "1939"
+   ],
+   "active": 2,
+   "label": "RELEASED"
+  },
+  {
+   "say": "Not for murder. Not for bootlegging. For taxes.",
+   "kind": "photo",
+   "photo": "mugshot",
+   "label": "FOR TAXES.",
+   "stamp": "TAX EVASION",
+   "stamp_on": "taxes.",
+   "burst": true,
+   "burst_color": "red"
+  }
+ ],
+ "music_gain": 0.3,
+ "sfx_gain": 0.4
+}
