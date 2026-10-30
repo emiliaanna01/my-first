@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control Reel</title>
+<script>
+/* =====================================================================
+   EDIT ME — brand, copy and palette. Everything in the film reads from
+   this block. Change a value, save, reload the page.
+   ===================================================================== */
+const CONFIG = {
+  brand: {
+    name:   "HALCYN",            // wordmark on the end frame (placeholder)
+    cta:    "Book a demo",       // button text on the end frame
+    handle: "@halcyn.systems",   // website or Instagram handle
+    hero:   null,                // your main brand colour, e.g. "#6633EE" — palette rebuilds around it
+  },
+  copy: {
+    hook:      ["One fault", "stops everything."],   // beat 1 — line 1 big, line 2 light
+    kicker:    "WITHOUT VISIBILITY",                 // beat 2 — small label
+    problems:  ["Alarms", "Delays", "Guesswork"],    // beat 2 — word replacement
+    solution:  ["See every", "signal."],             // beat 3
+    live:      "Live.",                              // beat 3 — serif accent word
+    stat:      "40%",                                // beat 4 — PLACEHOLDER figure, replace with a real one
+    statLabel: "less downtime",                      // beat 4
+    benefit:   ["Control", "it", "from anywhere."],  // beat 5 — "it" is the serif accent
+    ghost:     "ANYWHERE",                           // beat 5 — outlined word drifting behind the phone
+  },
+  // Neon progression used when brand.hero is null: [seconds, colour]
+  palette: [[0, "#22E6FF"], [4.5, "#3D82FF"], [9, "#7C5CFF"], [13.5, "#A64CFF"], [17, "#E040F0"], [20, "#FF4FB8"]],
+  fps: 30, duration: 20,
+  motionBlurSamples: 6,   // used by the MP4 export; the live player toggles it below
+  shutter: 0.5,           // fraction of a frame the virtual shutter stays open
+};
+
+/* Timeline — beat boundaries (seconds). Shown on the scrubber. */
+const BEATS = [
+  { name: "Hook",     start: 0.0,  end: 2.5  },
+  { name: "Problem",  start: 2.5,  end: 6.0  },
+  { name: "Solution", start: 6.0,  end: 10.0 },
+  { name: "Impact",   start: 10.0, end: 13.5 },
+  { name: "Benefit",  start: 13.5, end: 17.0 },
+  { name: "End frame",start: 17.0, end: 20.0 },
+];
+
+/* Sound-design cue points (seconds) — line your hits, clicks and whooshes up to these. */
+const CUES = [
+  { t: 0.00, sfx: "bass hit + LED tick" },
+  { t: 0.52, sfx: "type click (last letter flash)" },
+  { t: 0.95, sfx: "power-down / sub drop" },
+  { t: 2.22, sfx: "shockwave whoosh" },
+  { t: 2.50, sfx: "impact — 'Alarms'" },
+  { t: 3.60, sfx: "impact — 'Delays'" },
+  { t: 4.70, sfx: "impact — 'Guesswork'" },
+  { t: 5.86, sfx: "collapse into light line" },
+  { t: 6.00, sfx: "split whoosh" },
+  { t: 7.30, sfx: "light sweep shimmer" },
+  { t: 8.15, sfx: "riser start — 'Live.'" },
+  { t: 9.60, sfx: "ring closes — click" },
+  { t: 10.00, sfx: "MAIN IMPACT — 40%" },
+  { t: 13.00, sfx: "zoom-through whoosh" },
+  { t: 13.50, sfx: "landing hit — phone" },
+  { t: 14.60, sfx: "toggle click" },
+  { t: 16.50, sfx: "push-in whoosh" },
+  { t: 17.00, sfx: "logo ring draw" },
+  { t: 18.45, sfx: "CTA pop" },
+  { t: 19.00, sfx: "final pulse" },
+];
+</script>
+<style>
+/*FONTS*/
+:root { --bg:#050506; --fg:#e9e9ef; --muted:#8a8a98; --line:#22222a; --accent:#7c5cff; }
+* { box-sizing: border-box; }
+html, body { margin:0; background:var(--bg); color:var(--fg); font: 13px/1.4 "Mono", ui-monospace, monospace; }
+body { min-height:100vh; display:flex; flex-direction:column; align-items:center; gap:12px; padding:16px; }
+canvas#c { display:block; width:min(calc(100vw - 32px), calc((100vh - 150px) * 0.5625)); height:auto; aspect-ratio:9/16; background:#000; border-radius:10px; box-shadow:0 0 0 1px var(--line); }
+.bar { width:min(calc(100vw - 32px), 640px); display:flex; flex-direction:column; gap:8px; }
+.row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+button { background:#111116; color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font:inherit; cursor:pointer; }
+button:hover { border-color:#3a3a46; }
+#time { font-variant-numeric:tabular-nums; color:var(--muted); min-width:120px; }
+input[type=range] { flex:1; min-width:160px; accent-color:var(--accent); }
+.beats { display:flex; height:22px; border-radius:6px; overflow:hidden; border:1px solid var(--line); position:relative; }
+.beats div { border-right:1px solid var(--line); color:var(--muted); font-size:10px; display:flex; align-items:center; justify-content:center; white-space:nowrap; overflow:hidden; cursor:pointer; }
+.beats div:last-child { border-right:0; }
+.beats i { position:absolute; top:0; bottom:0; width:1px; background:rgba(124,92,255,.55); pointer-events:none; }
+label { color:var(--muted); display:flex; gap:6px; align-items:center; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<div class="bar">
+  <div class="row">
+    <button id="play">Play</button>
+    <button id="prev" title="Previous frame (←)">◀︎</button>
+    <button id="next" title="Next frame (→)">▶︎</button>
+    <span id="time">00.00 / 20.00</span>
+    <label><input type="checkbox" id="mb"> motion blur</label>
+  </div>
+  <input type="range" id="scrub" min="0" max="599" value="0" step="1">
+  <div class="beats" id="beats"></div>
+</div>
+<script>
+"use strict";
+/* ---------- core ---------- */
+const W = 1080, H = 1920, CX = 540, CY = 960;
+const FPS = CONFIG.fps, DUR = CONFIG.duration, FRAMES = Math.round(FPS * DUR);
+const cv = document.getElementById("c"), ctx = cv.getContext("2d");
+const mk = () => { const k = document.createElement("canvas"); k.width = W; k.height = H; return k; };
+const work = mk(), wctx = work.getContext("2d");
+const layerA = mk(), lA = layerA.getContext("2d");
+const frost = mk(), fr = frost.getContext("2d");
+
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const prog = (t, a, b) => clamp((t - a) / (b - a));
+const E = {
+  outExpo: x => x >= 1 ? 1 : 1 - Math.pow(2, -10 * x),
+  inExpo: x => x <= 0 ? 0 : Math.pow(2, 10 * x - 10),
+  inOutExpo: x => x <= 0 ? 0 : x >= 1 ? 1 : x < .5 ? Math.pow(2, 20 * x - 10) / 2 : (2 - Math.pow(2, -20 * x + 10)) / 2,
+  outCubic: x => 1 - Math.pow(1 - x, 3),
+  inCubic: x => x * x * x,
+  inOutCubic: x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2,
+  inOutSine: x => -(Math.cos(Math.PI * x) - 1) / 2,
+  outBack: x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); },
+};
+const hash = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+
+/* ---------- colour ---------- */
+const hex = h => { h = h.replace("#", ""); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+const mix = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
+const css = (c, a = 1) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+const WHITE = [255, 255, 255];
+function rgb2hsl([r, g, b]) { r /= 255; g /= 255; b /= 255; const mx = Math.max(r, g, b), mn = Math.min(r, g, b); let h = 0, s = 0; const l = (mx + mn) / 2;
+  if (mx !== mn) { const d = mx - mn; s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn);
+    h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; }
+  return [h, s, l]; }
+function hsl2rgb(h, s, l) { h = ((h % 360) + 360) % 360; const k = n => (n + h / 30) % 12, a = s * Math.min(l, 1 - l);
+  const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1)); return [f(0) * 255, f(8) * 255, f(4) * 255]; }
+const STOPS = (() => {
+  if (!CONFIG.brand.hero) return CONFIG.palette.map(([t, c]) => [t, hex(c)]);
+  const [h, s, l] = rgb2hsl(hex(CONFIG.brand.hero)), S = Math.max(s, .75), L = clamp(l, .55, .66);
+  return [[0, hsl2rgb(h - 75, S, L)], [5, hsl2rgb(h - 35, S, L)], [10, hex(CONFIG.brand.hero)], [15, hsl2rgb(h + 22, S, L)], [20, hsl2rgb(h + 45, S, L)]];
+})();
+function accentAt(t) {
+  if (t <= STOPS[0][0]) return STOPS[0][1];
+  for (let i = 1; i < STOPS.length; i++) if (t <= STOPS[i][0]) {
+    const [t0, c0] = STOPS[i - 1], [t1, c1] = STOPS[i]; return mix(c0, c1, E.inOutSine((t - t0) / (t1 - t0))); }
+  return STOPS[STOPS.length - 1][1];
+}
+
+/* ---------- drawing helpers ---------- */
+const font = (fam, size) => `${size}px ${fam}`;
+function lay(c, str, fam, size, track = 0) {
+  c.font = font(fam, size); const g = [];
+  for (let i = 0; i < str.length; i++) g.push({ ch: str[i], x: c.measureText(str.slice(0, i)).width + i * track, w: c.measureText(str[i]).width });
+  return { g, width: c.measureText(str).width + (str.length - 1) * track, fam, size, str };
+}
+function drawLay(c, L, x, y, align = "center", per = null) {
+  const ox = align === "center" ? x - L.width / 2 : align === "right" ? x - L.width : x;
+  c.font = font(L.fam, L.size); c.textBaseline = "alphabetic"; c.textAlign = "left";
+  L.g.forEach((gl, i) => {
+    const p = per ? per(i, gl) || {} : {}; const a = p.a ?? 1; if (a <= 0.001) return;
+    c.save(); c.globalAlpha *= a;
+    const gx = ox + gl.x + (p.dx || 0), gy = y + (p.dy || 0);
+    if ((p.s ?? 1) !== 1 || (p.sy ?? 1) !== 1 || (p.sx ?? 1) !== 1) { c.translate(gx + gl.w / 2, gy); c.scale((p.s ?? 1) * (p.sx ?? 1), (p.s ?? 1) * (p.sy ?? 1)); c.translate(-(gx + gl.w / 2), -gy); }
+    c.fillStyle = p.color || "#fff";
+    if (p.glow) { c.shadowColor = p.glowColor || "#fff"; c.shadowBlur = p.glow; c.fillText(gl.ch, gx, gy); c.shadowBlur = 0; }
+    c.fillText(gl.ch, gx, gy); c.restore();
+  });
+  return ox;
+}
+const rr = (c, x, y, w, h, r) => { c.beginPath(); c.roundRect(x, y, w, h, Math.max(0, Math.min(r, w / 2, h / 2))); };
+function blob(c, x, y, r, col, a) { if (a <= 0) return; const g = c.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0, css(col, a)); g.addColorStop(.45, css(col, a * .35)); g.addColorStop(1, css(col, 0));
+  c.save(); c.globalCompositeOperation = "lighter"; c.fillStyle = g; c.fillRect(x - r, y - r, r * 2, r * 2); c.restore(); }
+function ring(c, x, y, r, lw, col, a, glow = 30) { if (a <= 0 || r <= 0) return; c.save(); c.globalAlpha *= a; c.strokeStyle = css(mix(col, WHITE, .35));
+  c.lineWidth = lw; c.shadowColor = css(col, 1); c.shadowBlur = glow; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.stroke(); c.restore(); }
+function shock(c, x, y, r, w, col, a) { if (a <= 0) return; const r0 = Math.max(0, r - w), g = c.createRadialGradient(x, y, r0, x, y, r + w * .35);
+  g.addColorStop(0, css(col, 0)); g.addColorStop(.62, css(col, a * .55)); g.addColorStop(.74, css(mix(col, WHITE, .7), a)); g.addColorStop(1, css(col, 0));
+  c.save(); c.globalCompositeOperation = "lighter"; c.fillStyle = g; c.beginPath(); c.arc(x, y, r + w, 0, Math.PI * 2); c.fill(); c.restore(); }
+function camAt(c, s, ax, ay, dx = 0, dy = 0) { c.translate(ax + dx, ay + dy); c.scale(s, s); c.translate(-ax, -ay); }
+
+/* Dark glass panel: matte body, lit edge, top highlight, optional frosted backdrop and light sweep. */
+function glass(c, x, y, w, h, r, o = {}) {
+  const ac = o.accent || [124, 92, 255], a = o.alpha ?? 1, edge = o.edge ?? 1;
+  if (a <= 0.002 || w <= 1 || h <= 1) return;
+  c.save(); c.globalAlpha *= a;
+  c.save(); c.shadowColor = css(ac, .5 * edge); c.shadowBlur = o.glow ?? 60; c.fillStyle = "rgb(7,8,13)"; rr(c, x, y, w, h, r); c.fill(); c.restore();
+  if (o.backdrop) { c.save(); rr(c, x, y, w, h, r); c.clip(); c.setTransform(1, 0, 0, 1, 0, 0); c.filter = `blur(${o.blur ?? 18}px) brightness(.62)`; c.drawImage(o.backdrop, 0, 0); c.filter = "none"; c.restore(); }
+  const g = c.createLinearGradient(x, y, x + w * .35, y + h);
+  g.addColorStop(0, "rgba(255,255,255,0.085)"); g.addColorStop(.5, "rgba(255,255,255,0.018)"); g.addColorStop(1, "rgba(255,255,255,0.05)");
+  rr(c, x, y, w, h, r); c.fillStyle = g; c.fill();
+  const g2 = c.createRadialGradient(x + w * .5, y + h * 1.15, 0, x + w * .5, y + h * 1.15, Math.max(w, h) * 1.05);
+  g2.addColorStop(0, css(ac, .2 * edge)); g2.addColorStop(1, css(ac, 0)); c.fillStyle = g2; c.fill();
+  if (o.content) { c.save(); rr(c, x, y, w, h, r); c.clip(); o.content(c); c.restore(); }
+  const ge = c.createLinearGradient(x, y, x + w, y + h);
+  ge.addColorStop(0, css(mix(ac, WHITE, .55), .95 * edge)); ge.addColorStop(.32, "rgba(255,255,255,0.12)");
+  ge.addColorStop(.68, "rgba(255,255,255,0.05)"); ge.addColorStop(1, css(ac, .8 * edge));
+  c.lineWidth = o.lw ?? 2; c.strokeStyle = ge; rr(c, x + 1, y + 1, w - 2, h - 2, r - 1); c.stroke();
+  const gh = c.createLinearGradient(x, 0, x + w, 0); gh.addColorStop(0, "rgba(255,255,255,0)"); gh.addColorStop(.5, "rgba(255,255,255,0.38)"); gh.addColorStop(1, "rgba(255,255,255,0)");
+  c.strokeStyle = gh; c.lineWidth = 1.5; c.beginPath(); c.moveTo(x + r, y + 2); c.lineTo(x + w - r, y + 2); c.stroke();
+  if (o.sweepX != null) {
+    const sx = o.sweepX, gs = c.createLinearGradient(sx - 170, y - 60, sx + 170, y + 60);
+    gs.addColorStop(0, "rgba(255,255,255,0)"); gs.addColorStop(.5, "rgba(255,255,255,0.20)"); gs.addColorStop(1, "rgba(255,255,255,0)");
+    c.save(); rr(c, x, y, w, h, r); c.clip(); c.globalCompositeOperation = "lighter"; c.fillStyle = gs; c.fillRect(x, y, w, h); c.restore();
+  }
+  c.restore();
+}
+/* Light sweep across whatever is already painted on a layer (text only). */
+function sweepLayer(lc, sx, col) {
+  lc.save(); lc.globalCompositeOperation = "source-atop";
+  const g = lc.createLinearGradient(sx - 220, 0, sx + 220, 300);
+  g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(.5, css(mix(col, WHITE, .5), 1)); g.addColorStop(1, "rgba(255,255,255,0)");
+  lc.fillStyle = g; lc.fillRect(0, 0, W, H); lc.restore();
+}
+function mono(c, str, x, y, size, col, a = 1, align = "left", track = 0) {
+  c.save(); c.globalAlpha *= a; c.font = font("Mono", size); c.letterSpacing = track + "px"; c.textAlign = align; c.fillStyle = col; c.fillText(str, x, y); c.restore();
+}
+
+/* ======================= BEAT 1 — HOOK (0 – 2.5) ======================= */
+const LED = [652, 612];
+const hookCam = t => lerp(1.14, 1, E.outExpo(prog(t, 0, .8))) * (1 + .04 * E.inCubic(prog(t, 1.95, 2.25)));
+function sHook(c, t) {
+  const ac = accentAt(t), s = hookCam(t);
+  let led;
+  if (t < .52) led = .8 + .2 * Math.sin(t * 16);
+  else if (t < .95) led = hash(Math.floor(t * 30)) > .45 ? 1 : .05;
+  else if (t < 2.02) led = .05;
+  else led = .05 + 1.6 * E.inCubic(prog(t, 2.02, 2.22));
+  const alive = t < .95 ? 1 : t < 2.02 ? lerp(1, .22, E.outCubic(prog(t, .95, 1.3))) : lerp(.22, 1.2, prog(t, 2.02, 2.22));
+  c.save(); camAt(c, s, CX, 800);
+  blob(c, CX, 770, 560, ac, .10 * alive);
+  glass(c, 390, 560, 300, 420, 40, { accent: ac, edge: alive, glow: 70 * alive, content: k => {
+    mono(k, "PLC · 04", 420, 618, 20, "#fff", .55);
+    for (let r = 0; r < 4; r++) for (let q = 0; q < 2; q++) {
+      const x = 420 + q * 128, y = 676 + r * 62; k.fillStyle = "rgba(255,255,255,0.045)"; rr(k, x, y, 112, 38, 10); k.fill();
+      k.strokeStyle = "rgba(255,255,255,0.08)"; k.lineWidth = 1; k.stroke();
+      const on = t < .95 || (t > 2.1 && hash(r * 2 + q) > .3);
+      k.fillStyle = on ? css(ac, .9) : "rgba(255,255,255,0.12)"; k.beginPath(); k.arc(x + 20, y + 19, 5, 0, 7); k.fill();
+      k.fillStyle = "rgba(255,255,255,0.14)"; rr(k, x + 36, y + 16, 56 - hash(r * 7 + q) * 22, 6, 3); k.fill();
+    }
+    mono(k, t < .95 || t > 2.1 ? "RUN" : "STOP", 420, 950, 20, t < .95 || t > 2.1 ? css(ac) : "#fff", .7);
+  } });
+  blob(c, LED[0], LED[1], 120 * (.4 + led), ac, .55 * Math.min(led, 1.4));
+  c.fillStyle = css(mix(ac, WHITE, .6 * Math.min(led, 1)), clamp(.25 + led)); c.beginPath(); c.arc(LED[0], LED[1], 9, 0, 7); c.fill();
+
+  const L1 = lay(c, CONFIG.copy.hook[0], "IDBlack", 196, -6);
+  drawLay(c, L1, CX, 1270, "center", i => {
+    const ta = .1 + i * .046; if (t < ta) return { a: 0 };
+    const cool = prog(t, ta + .05, ta + .42);
+    return { a: clamp((t - ta) / .04), dy: (1 - E.outExpo(prog(t, ta, ta + .3))) * 42, color: css(mix(ac, WHITE, cool)), glow: 46 * (1 - cool), glowColor: css(ac) };
+  });
+  const L2 = lay(c, CONFIG.copy.hook[1], "IDLight", 80, lerp(1, 12, E.outCubic(prog(t, .95, 2.3))));
+  c.save(); c.beginPath(); c.rect(0, 1300, W, 106); c.clip();
+  const d2 = (1 - E.outExpo(prog(t, .95, 1.5))) * 96;
+  drawLay(c, L2, CX, 1380 + d2, "center", () => ({ color: "rgba(255,255,255,0.9)" }));
+  c.restore();
+  c.restore();
+}
+
+/* ======================= BEAT 2 — PROBLEM (2.5 – 6.0) ======================= */
+const PTIMES = [2.5, 3.6, 4.7];
+function problemWord(c, t, x, base) {
+  const words = CONFIG.copy.problems, ac = accentAt(t);
+  words.forEach((wd, k) => {
+    const tin = PTIMES[k], tout = k < words.length - 1 ? PTIMES[k + 1] : 99;
+    if (t < tin - .11 || t > tout + .4) return;
+    let size = 212, L = lay(c, wd, "IDBlack", size, -6);
+    if (L.width > 900) { size *= 900 / L.width; L = lay(c, wd, "IDBlack", size, -6 * size / 212); }
+    const punch = 1 + .06 * (1 - E.outCubic(prog(t, tin, tin + .4)));
+    c.save(); c.translate(x, base); c.scale(punch, punch); c.translate(-x, -base);
+    c.beginPath(); c.rect(0, base - size * .9, W, size * 1.16); c.clip();
+    drawLay(c, L, x, base, "center", i => {
+      const a = tin - .1 + i * .028; if (t < a) return { a: 0 };
+      const pin = E.outExpo(prog(t, a, a + .5)), b = tout - .2 + i * .012, pout = E.inCubic(prog(t, b, b + .16));
+      const cool = prog(t, a + .04, a + .38);
+      return { dy: (1 - pin) * size * .95 - pout * size * 1.3, color: css(mix(ac, WHITE, cool)), glow: 34 * (1 - cool), glowColor: css(ac) };
+    });
+    c.restore();
+  });
+}
+function sProblem(c, t) {
+  const ac = accentAt(t);
+  const drift = lerp(40, -40, E.inOutSine(prog(t, 2.3, 5.9)));
+  const sq = 1 - E.inExpo(prog(t, 5.48, 5.86));
+  const push = lerp(1.07, 1, E.outExpo(prog(t, 2.2, 3.1)));
+  const gridA = .55 * (1 - prog(t, 5.6, 6.3));
+  // far layer — dot grid
+  c.save(); camAt(c, push, CX, CY, drift * .35);
+  c.fillStyle = css(mix(ac, WHITE, .3), .16 * gridA);
+  for (let y = 120; y < H; y += 64) for (let x = -60; x < W + 60; x += 64) { c.beginPath(); c.arc(x, y, 1.6, 0, 7); c.fill(); }
+  c.restore();
+  blob(c, CX, 1000, 640, ac, .07 * sq);
+  if (sq > .002) {
+    c.save(); c.translate(CX, CY); c.scale(push * sq, push); c.translate(-CX, -CY);
+    c.globalAlpha = clamp(sq * 1.6);
+    const kt = prog(t, 2.55, 3.2);
+    mono(c, CONFIG.copy.kicker, CX + drift * .8, 790, 30, css(ac), E.outCubic(kt) * .9, "center", lerp(22, 8, E.outExpo(kt)));
+    const wx = CX + drift, base = 1046;
+    problemWord(c, t, wx, base);
+    // frosted backdrop = the word itself
+    fr.setTransform(1, 0, 0, 1, 0, 0); fr.clearRect(0, 0, W, H); fr.setTransform(c.getTransform()); problemWord(fr, t, wx, base); fr.setTransform(1, 0, 0, 1, 0, 0);
+    const pe = E.outExpo(prog(t, 2.3, 3.0)), px = 560 + drift * 1.4, py = 1012 + Math.sin(t * 1.7) * 8 + (1 - pe) * 80;
+    glass(c, px, py, 440, 290, 30, { accent: ac, alpha: pe, backdrop: frost, blur: 14, content: k => {
+      mono(k, "LINE 04 — STATUS", px + 28, py + 46, 18, "#fff", .55, "left", 2);
+      const blink = (Math.floor(t * 6) % 2) ? 1 : .25; k.fillStyle = css(ac, blink); k.beginPath(); k.arc(px + 410, py + 40, 6, 0, 7); k.fill();
+      k.beginPath(); const n = 26;
+      for (let i = 0; i <= n; i++) { const xx = px + 28 + i * (384 / n), j = (hash(i + Math.floor(t * 8) * 3) - .5) * (30 + 70 * prog(t, 2.5, 5.2));
+        const yy = py + 150 + Math.sin(i * .7 + t * 3) * 14 + j; i ? k.lineTo(xx, yy) : k.moveTo(xx, yy); }
+      k.strokeStyle = css(mix(ac, WHITE, .2), .95); k.lineWidth = 2.5; k.shadowColor = css(ac); k.shadowBlur = 14; k.stroke(); k.shadowBlur = 0;
+      ["TEMP", "FLOW", "PRESS"].forEach((lb, i) => { const yy = py + 222 + i * 26; mono(k, lb, px + 28, yy + 6, 14, "#fff", .45, "left", 1);
+        k.fillStyle = "rgba(255,255,255,0.08)"; rr(k, px + 110, yy - 4, 300, 8, 4); k.fill();
+        k.fillStyle = css(ac, .85); rr(k, px + 110, yy - 4, 300 * (.3 + .6 * hash(i * 9 + Math.floor(t * 5))), 8, 4); k.fill(); });
+    } });
+    c.restore();
+  }
+  // collapse → light line
+  const la = prog(t, 5.7, 5.86) * (1 - prog(t, 6.0, 6.3));
+  if (la > 0) {
+    const hh = lerp(260, 1100, E.outExpo(prog(t, 5.72, 6.0)));
+    const g = c.createLinearGradient(CX - 50, 0, CX + 50, 0); g.addColorStop(0, css(ac, 0)); g.addColorStop(.5, css(ac, .9 * la)); g.addColorStop(1, css(ac, 0));
+    c.save(); c.globalCompositeOperation = "lighter"; c.fillStyle = g; c.fillRect(CX - 50, CY - hh / 2, 100, hh);
+    c.fillStyle = `rgba(255,255,255,${la})`; c.fillRect(CX - 1.5, CY - hh / 2, 3, hh); c.restore();
+  }
+}
+
+/* ======================= BEAT 3 — SOLUTION (6.0 – 10.0) ======================= */
+const TILES = [
+  { x: -270, y: -560, z: 1.7, w: 310, h: 196, tin: 5.98, kind: "spark" },
+  { x: 300, y: -430, z: 2.3, w: 260, h: 260, tin: 6.10, kind: "gauge" },
+  { x: -300, y: 470, z: 2.1, w: 280, h: 180, tin: 6.18, kind: "bars" },
+  { x: 290, y: 560, z: 1.5, w: 320, h: 200, tin: 6.04, kind: "toggle" },
+  { x: -390, y: -60, z: 3.4, w: 210, h: 120, tin: 6.30, kind: "pid" },
+  { x: 400, y: 190, z: 3.6, w: 200, h: 120, tin: 6.36, kind: "temp" },
+];
+const solCamZ = t => lerp(0, .55, E.inOutCubic(prog(t, 6.0, 9.7))) + .9 * E.inCubic(prog(t, 9.2, 10.0));
+const proj = (x, y, z, cz) => { const s = 2.2 / (z - cz); return [CX + x * s, CY + y * s, s]; };
+function tileContent(k, kind, w, h, t, ac) {
+  const L = (s, x, y, a = .5) => mono(k, s, x, y, 17, "#fff", a, "left", 2);
+  if (kind === "spark") { L("THROUGHPUT", 24, 40); k.font = font("IDBold", 42); k.fillStyle = "#fff"; k.fillText("1,284/h", 24, 92);
+    k.beginPath(); const n = 12, d = clamp((t - 6.3) / .9);
+    for (let i = 0; i <= n * d; i++) { const x = 24 + i * (262 / n), y = 160 - (Math.sin(i * .9) * 14 + i * 3.2); i ? k.lineTo(x, y) : k.moveTo(x, y); }
+    k.strokeStyle = css(mix(ac, WHITE, .2)); k.lineWidth = 3; k.shadowColor = css(ac); k.shadowBlur = 12; k.stroke(); k.shadowBlur = 0; }
+  if (kind === "gauge") { const cx = w / 2, cy = h / 2 + 8, R = 86, a0 = Math.PI * .75, sp = Math.PI * 1.5, p = .87 * E.outCubic(prog(t, 6.4, 7.4));
+    k.lineCap = "round"; k.lineWidth = 13; k.strokeStyle = "rgba(255,255,255,0.08)"; k.beginPath(); k.arc(cx, cy, R, a0, a0 + sp); k.stroke();
+    k.strokeStyle = css(mix(ac, WHITE, .15)); k.shadowColor = css(ac); k.shadowBlur = 18; k.beginPath(); k.arc(cx, cy, R, a0, a0 + sp * p); k.stroke(); k.shadowBlur = 0;
+    k.font = font("IDBold", 54); k.textAlign = "center"; k.fillStyle = "#fff"; k.fillText((98.7 * p / .87).toFixed(1), cx, cy + 16); k.textAlign = "left";
+    mono(k, "OEE %", cx, cy + 50, 16, "#fff", .5, "center", 2); }
+  if (kind === "bars") { L("SIGNAL", 24, 40);
+    for (let i = 0; i < 8; i++) { const bh = 30 + 70 * (.5 + .5 * Math.sin(t * 5 + i * .8)); k.fillStyle = css(mix(ac, WHITE, i / 14), .9); rr(k, 24 + i * 30, 160 - bh, 18, bh, 5); k.fill(); } }
+  if (kind === "toggle") { L("MODE", 26, 44); k.font = font("IDBold", 56); k.fillStyle = "#fff"; k.fillText("AUTO", 26, 118);
+    const on = E.outBack(prog(t, 6.9, 7.2)); k.fillStyle = css(ac, .35 + .5 * on); rr(k, 196, 76, 98, 52, 26); k.fill();
+    k.fillStyle = "#fff"; k.shadowColor = css(ac); k.shadowBlur = 16 * on; k.beginPath(); k.arc(222 + 46 * on, 102, 20, 0, 7); k.fill(); k.shadowBlur = 0; L("PLC-04 · 12ms", 26, 170, .35); }
+  if (kind === "pid") { L("PID", 22, 36); k.beginPath(); for (let i = 0; i <= 40; i++) { const x = 22 + i * 4.2, y = 82 - Math.exp(-i / 10) * Math.cos(i * .6) * 26; i ? k.lineTo(x, y) : k.moveTo(x, y); }
+    k.strokeStyle = css(ac, .9); k.lineWidth = 2; k.stroke(); }
+  if (kind === "temp") { L("TEMP", 22, 36); k.font = font("IDBold", 40); k.fillStyle = "#fff"; k.fillText("24.0°", 22, 88); }
+}
+function sSolution(c, t) {
+  const ac = accentAt(t), cz = solCamZ(t), fade = 1 - E.inCubic(prog(t, 9.25, 9.85));
+  const sweep = lerp(-500, 1700, E.inOutCubic(prog(t, 7.3, 8.15)));
+  blob(c, CX, CY, 760, ac, .08 * fade);
+  const items = TILES.map(tl => ({ ...tl, type: "tile" })).concat([{ type: "text", z: 2.6 }]);
+  items.forEach(it => { if (it.type === "tile") { const e = E.outExpo(prog(t, it.tin, it.tin + .75)); it.ze = it.z + (1 - e) * 1.3; it.e = e; } else it.ze = it.z; });
+  items.sort((a, b) => b.ze - a.ze);
+  for (const it of items) {
+    if (it.ze - cz < .2) continue;
+    if (it.type === "tile") {
+      const [sx, sy, s] = proj(it.x, it.y, it.ze, cz), w = it.w * s, h = it.h * s, x = sx - w / 2, y = sy - h / 2;
+      const depth = clamp(1.5 - (it.ze - cz) * .26, .35, 1);
+      glass(c, x, y, w, h, 26 * s, { accent: ac, alpha: it.e * fade * depth, glow: 46 * s, sweepX: sweep - (sy - CY) * .35,
+        content: k => { k.translate(x, y); k.scale(s, s); tileContent(k, it.kind, it.w, it.h, t, ac); } });
+    } else {
+      const s = 2.2 / (it.ze - cz);
+      c.save(); camAt(c, s, CX, CY); c.globalAlpha = fade;
+      const L1 = lay(c, CONFIG.copy.solution[0], "IDBold", 118, -3), L2 = lay(c, CONFIG.copy.solution[1], "IDBlack", 196, -7);
+      const sp = CONFIG.copy.solution[0].indexOf(" ");
+      const wordIn = (t0) => { const p = E.outExpo(prog(t, t0, t0 + .6)); return { a: clamp(p * 1.4), sy: lerp(.15, 1, p), dy: (1 - p) * 70 }; };
+      drawLay(c, L1, CX, CY - 150, "center", i => wordIn(6.12 + (sp > 0 && i > sp ? .13 : 0)));
+      drawLay(c, L2, CX, CY + 50, "center", i => { const r = wordIn(6.36); if (i === L2.g.length - 1) { r.color = css(ac); r.glow = 30; r.glowColor = css(ac); } return r; });
+      const lt = prog(t, 8.15, 9.0), L3 = lay(c, CONFIG.copy.live, "ISerif", 300, lerp(-46, 2, E.outExpo(lt)));
+      if (t > 8.12) {
+        c.save(); c.globalAlpha *= clamp((t - 8.12) / .2);
+        const ox = drawLay(c, L3, CX + 20, CY + 330, "center", () => ({ color: css(mix(ac, WHITE, .35)), glow: 40, glowColor: css(ac) }));
+        const dx = ox - 46, dy = CY + 240, ping = ((t - 8.2) % .8) / .8;
+        c.fillStyle = css(mix(ac, WHITE, .4)); c.shadowColor = css(ac); c.shadowBlur = 24; c.beginPath(); c.arc(dx, dy, 15, 0, 7); c.fill(); c.shadowBlur = 0;
+        ring(c, dx, dy, 15 + ping * 40, 2, ac, 1 - ping, 12);
+        c.restore();
+      }
+      c.restore();
+    }
+  }
+  // trace → ring
+  if (t > 9.05) {
+    const g = TILES[1], [bx, by] = proj(g.x, g.y, g.z, cz), R = 150, u = E.inOutCubic(prog(t, 9.05, 9.6));
+    const P = []; const N = 90;
+    for (let i = 0; i <= N; i++) { const q = i / N;
+      if (q < .3) { const v = q / .3, mx = lerp(bx, CX + R, .5) + 180, my = lerp(by, CY, .5) - 40;
+        P.push([(1 - v) * (1 - v) * bx + 2 * (1 - v) * v * mx + v * v * (CX + R), (1 - v) * (1 - v) * by + 2 * (1 - v) * v * my + v * v * CY]); }
+      else { const v = (q - .3) / .7, a = v * Math.PI * 2; P.push([CX + Math.cos(a) * R, CY + Math.sin(a) * R]); } }
+    const head = Math.floor(u * N);
+    c.save(); c.globalCompositeOperation = "lighter"; c.lineCap = "round";
+    for (let i = 1; i <= head; i++) { const fadeT = u < 1 ? clamp(1 - (head - i) / 55) : 1; if (fadeT <= 0) continue;
+      c.strokeStyle = css(mix(ac, WHITE, .4), fadeT); c.lineWidth = 5; c.shadowColor = css(ac); c.shadowBlur = 22;
+      c.beginPath(); c.moveTo(P[i - 1][0], P[i - 1][1]); c.lineTo(P[i][0], P[i][1]); c.stroke(); }
+    c.restore();
+    if (u < 1 && head > 0) blob(c, P[head][0], P[head][1], 70, ac, .9);
+    if (t >= 9.6) { const k = E.inCubic(prog(t, 9.6, 9.99)), r = lerp(R, 112, k);
+      c.save(); c.globalAlpha = 1; ring(c, CX, CY, r, 6 + 4 * k, ac, 1, 30 + 40 * k); c.restore(); blob(c, CX, CY, 260, ac, .25 + .6 * k); }
+  }
+}
+
+/* ======================= BEAT 4 — IMPACT (10.0 – 13.5) ======================= */
+let COUNTER = { cx: .5, cy: .36, rx: .12, ry: .2 };   // hole of the "0", measured at load (fractions of font size)
+function measureCounter() {
+  const k = document.createElement("canvas"), S = 400; k.width = S; k.height = S; const q = k.getContext("2d");
+  q.font = font("IDBlack", S * .8); q.fillStyle = "#000"; q.fillRect(0, 0, S, S); q.fillStyle = "#fff"; const bx = 40, by = S * .8;
+  q.fillText("0", bx, by); const w = q.measureText("0").width, d = q.getImageData(0, 0, S, S).data, px = (x, y) => d[(y * S + x) * 4] > 128;
+  let top = 0, bot = 0; const midX = Math.round(bx + w / 2);
+  for (let y = 0; y < S; y++) if (px(midX, y)) { top = y; break; } for (let y = S - 1; y >= 0; y--) if (px(midX, y)) { bot = y; break; }
+  const midY = Math.round((top + bot) / 2); let l = 0, r = 0, inTop = 0, inBot = 0;
+  for (let x = midX; x > 0; x--) if (px(x, midY)) { l = x; break; } for (let x = midX; x < S; x++) if (px(x, midY)) { r = x; break; }
+  for (let y = midY; y > 0; y--) if (px(midX, y)) { inTop = y; break; } for (let y = midY; y < S; y++) if (px(midX, y)) { inBot = y; break; }
+  const fs = S * .8; COUNTER = { cx: ((l + r) / 2 - bx) / fs, cy: (by - (inTop + inBot) / 2) / fs, rx: (r - l) / 2 / fs, ry: (inBot - inTop) / 2 / fs };
+}
+function statGeom(c) {
+  let size = 470, L = lay(c, CONFIG.copy.stat, "IDBlack", size, -20);
+  if (L.width > 940) { size *= 940 / L.width; L = lay(c, CONFIG.copy.stat, "IDBlack", size, -20 * size / 470); }
+  const base = 1060, ox = CX - L.width / 2, zi = CONFIG.copy.stat.indexOf("0"), gl = L.g[Math.max(0, zi)];
+  return { L, size, base, ox, hx: ox + gl.x + COUNTER.cx * size, hy: base - COUNTER.cy * size, hrx: COUNTER.rx * size, hry: COUNTER.ry * size };
+}
+function statCam(t, G) {
+  const settle = 1 + .24 * (1 - E.outExpo(prog(t, 10, 10.24))), push = 1 + .045 * E.inOutSine(prog(t, 10.2, 13)), zt = E.inExpo(prog(t, 13.0, 13.5));
+  const s = settle * push * Math.exp(Math.log(38) * zt), sh = 18 * Math.exp(-(t - 10) * 8);
+  const ax = lerp(G.hx, CX, E.inOutCubic(prog(t, 12.9, 13.4))), ay = lerp(G.hy, CY, E.inOutCubic(prog(t, 12.9, 13.4)));
+  return { s, ax, ay, dx: Math.sin(t * 93) * sh + (ax - G.hx), dy: Math.cos(t * 71) * sh + (ay - G.hy), zt };
+}
+function sStat(c, t) {
+  const ac = accentAt(t), G = statGeom(c), K = statCam(t, G), it = t - 10;
+  c.save(); c.translate(K.ax, K.ay); c.translate(K.dx - (K.ax - G.hx), K.dy - (K.ay - G.hy)); c.scale(K.s, K.s); c.translate(-G.hx, -G.hy);
+  blob(c, CX, 900, 820, ac, .14);
+  for (let i = 0; i < 3; i++) { const d = i * .13, p = E.outCubic(prog(it, d, d + 1.0)); if (p > 0 && p < 1) ring(c, CX, 900, lerp(140, 1150, p), lerp(7, 1, p), ac, (1 - p) * .9, 26); }
+  { const p = E.outCubic(prog(it, 0, .6)); shock(c, CX, 900, lerp(60, 1400, p), 150, ac, 1 - p); }
+  // number layer (for the sweep)
+  lA.setTransform(1, 0, 0, 1, 0, 0); lA.clearRect(0, 0, W, H);
+  const pi = CONFIG.copy.stat.indexOf("%");
+  const gNum = lA.createLinearGradient(0, G.base - G.size * .75, 0, G.base); gNum.addColorStop(0, "#ffffff"); gNum.addColorStop(1, css(mix(ac, WHITE, .78)));
+  drawLay(lA, G.L, CX, G.base, "center", i => i === pi ? { color: css(mix(ac, WHITE, .2)) } : { color: gNum });
+  const sw = prog(t, 11.15, 11.85); if (sw > 0 && sw < 1) sweepLayer(lA, lerp(-300, 1400, E.inOutCubic(sw)), ac);
+  c.save(); c.shadowColor = css(ac, .75); c.shadowBlur = lerp(140, 44, E.outCubic(prog(it, 0, .8))); c.drawImage(layerA, 0, 0); c.restore();
+  // label
+  const lp = prog(t, 10.35, 10.95), L2 = lay(c, CONFIG.copy.statLabel, "IDLight", 80, lerp(0, 16, E.outCubic(prog(t, 10.35, 12.8))));
+  c.save(); c.beginPath(); c.rect(CX - L2.width / 2 - 30, 0, (L2.width + 60) * E.outExpo(lp), H); c.clip();
+  drawLay(c, L2, CX, G.base + 150, "center", () => ({ color: "rgba(255,255,255,0.9)" })); c.restore();
+  const ul = E.outExpo(prog(t, 10.6, 11.3)) * 120; c.fillStyle = css(ac); c.shadowColor = css(ac); c.shadowBlur = 16; c.fillRect(CX - ul, G.base + 196, ul * 2, 3); c.shadowBlur = 0;
+  c.restore();
+  // impact flash on the cut
+  const fl = 1 - E.outCubic(prog(it, 0, .26)); if (fl > 0) { c.save(); c.globalCompositeOperation = "lighter"; c.fillStyle = css(mix(ac, WHITE, .55), .2 * fl); c.fillRect(0, 0, W, H); c.restore(); blob(c, CX, 900, 900, WHITE, .35 * fl); }
+  return { G, K };
+}
+function statAperture(c, t, G, K) {
+  // the hole of the "0" in screen space under the stat camera
+  const x = K.ax + K.dx - (K.ax - G.hx), y = K.ay + K.dy - (K.ay - G.hy);
+  const sx = x + 0, sy = y + 0, rx = G.hrx * K.s * .98, ry = G.hry * K.s * .98;
+  c.save(); c.beginPath(); c.ellipse(sx, sy, rx, ry, 0, 0, Math.PI * 2); c.clip(); c.fillStyle = "#000"; c.fillRect(0, 0, W, H); sBenefit(c, t); c.restore();
+}
+
+/* ======================= BEAT 5 — BENEFIT (13.5 – 17.0) ======================= */
+function phoneUI(k, x, y, w, h, t, ac) {
+  mono(k, "LINE 04", x + 44, y + 112, 20, "#fff", .55, "left", 2);
+  const run = (Math.floor(t * 2.5) % 2) ? 1 : .55; k.fillStyle = css(ac, run); k.beginPath(); k.arc(x + w - 150, y + 105, 6, 0, 7); k.fill();
+  mono(k, "RUNNING", x + w - 136, y + 112, 20, css(mix(ac, WHITE, .4)), .95, "left", 2);
+  const cx = x + w / 2, cy = y + 330, R = 122, p = .82 * E.outCubic(prog(t, 13.9, 15.0));
+  k.lineCap = "round"; k.lineWidth = 16; k.strokeStyle = "rgba(255,255,255,0.07)"; k.beginPath(); k.arc(cx, cy, R, 0, 7); k.stroke();
+  k.strokeStyle = css(mix(ac, WHITE, .2)); k.shadowColor = css(ac); k.shadowBlur = 22; k.beginPath(); k.arc(cx, cy, R, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * p); k.stroke(); k.shadowBlur = 0;
+  k.font = font("IDBold", 66); k.textAlign = "center"; k.fillStyle = "#fff"; k.fillText(`${Math.round(12 * p / .82)}/12`, cx, cy + 20); k.textAlign = "left";
+  mono(k, "STATIONS ONLINE", cx, cy + 58, 16, "#fff", .5, "center", 2);
+  const ty = y + 520; k.fillStyle = "rgba(255,255,255,0.05)"; rr(k, x + 34, ty, w - 68, 96, 26); k.fill(); k.strokeStyle = "rgba(255,255,255,0.09)"; k.lineWidth = 1; k.stroke();
+  k.font = font("IDBold", 30); k.fillStyle = "#fff"; k.fillText("Auto mode", x + 64, ty + 58);
+  const on = E.outBack(prog(t, 14.6, 14.9)), tx = x + w - 160;
+  k.fillStyle = css(ac, .3 + .55 * on); rr(k, tx, ty + 24, 96, 48, 24); k.fill();
+  k.fillStyle = "#fff"; k.shadowColor = css(ac); k.shadowBlur = 18 * on; k.beginPath(); k.arc(tx + 24 + 48 * on, ty + 48, 19, 0, 7); k.fill(); k.shadowBlur = 0;
+  for (let i = 0; i < 3; i++) { const bx = x + 34 + i * ((w - 68 - 24) / 3 + 12), bw = (w - 68 - 24) / 3, by = y + 640;
+    k.fillStyle = "rgba(255,255,255,0.045)"; rr(k, bx, by, bw, 74, 18); k.fill();
+    for (let j = 0; j < 5; j++) { const bh = 12 + 30 * (.5 + .5 * Math.sin(t * 4 + i * 2 + j)); k.fillStyle = css(ac, .8); rr(k, bx + 18 + j * 18, by + 60 - bh, 10, bh, 3); k.fill(); } }
+}
+function sBenefit(c, t) {
+  const ac = accentAt(t), cs = lerp(1.32, 1, E.outExpo(prog(t, 13.05, 13.95)));
+  const px = prog(t, 16.5, 17.0), pz = Math.exp(Math.log(7.5) * E.inExpo(px));
+  const pcx = CX, pcy = lerp(1000, CY, E.inOutCubic(px)), PW = 430, PH = 780;
+  const e = E.outExpo(prog(t, 13.12, 14.1)), rot = (1 - e) * -.3 - .04 * (1 - px) + .01 * Math.sin(t * 1.3) * (1 - px);
+  const fadeOut = 1 - E.inCubic(prog(t, 16.45, 16.8));
+  c.save(); camAt(c, cs, CX, CY);
+  blob(c, CX, 1000, 700, ac, .12);
+  // ghost word behind the phone
+  const gw = lay(c, CONFIG.copy.ghost, "IDBlack", 330, -6), gx = lerp(820, -620, prog(t, 13.1, 17.0));
+  const ghost = k => { k.save(); k.font = font("IDBlack", 330); k.lineWidth = 2.5; k.strokeStyle = css(mix(ac, WHITE, .3), .16); k.textAlign = "left"; k.strokeText(CONFIG.copy.ghost, gx, 1110); k.restore(); };
+  c.save(); c.globalAlpha = fadeOut; ghost(c); c.restore();
+  fr.setTransform(1, 0, 0, 1, 0, 0); fr.clearRect(0, 0, W, H); fr.setTransform(c.getTransform()); fr.globalAlpha = 1;
+  fr.save(); fr.font = font("IDBlack", 330); fr.fillStyle = css(mix(ac, WHITE, .4), .9); fr.fillText(CONFIG.copy.ghost, gx, 1110); fr.restore(); fr.setTransform(1, 0, 0, 1, 0, 0);
+  // top line
+  const [w1, w2, w3] = CONFIG.copy.benefit;
+  const La = lay(c, w1, "IDBlack", 150, -5), Lb = lay(c, " " + w2, "ISerif", 172, 0), tw = La.width + Lb.width, x0 = CX - tw / 2;
+  c.save(); c.globalAlpha = fadeOut; camAt(c, 1 + .6 * E.inCubic(px), CX, 480); c.beginPath(); c.rect(0, 300, W, 210); c.clip();
+  drawLay(c, La, x0, 470, "left", i => { const a = 13.7 + i * .03, p = E.outExpo(prog(t, a, a + .5)); return { a: t < a ? 0 : 1, dy: (1 - p) * 170 }; });
+  drawLay(c, Lb, x0 + La.width, 470, "left", i => { const a = 13.95 + i * .03, p = E.outExpo(prog(t, a, a + .5)); return { a: t < a ? 0 : 1, dy: (1 - p) * 170, color: css(mix(ac, WHITE, .3)), glow: 34, glowColor: css(ac) }; });
+  c.restore();
+  // bottom line
+  const Lc = lay(c, w3, "IDLight", 84, lerp(0, 14, E.outCubic(prog(t, 14.35, 16.4))));
+  c.save(); c.globalAlpha = fadeOut; camAt(c, 1 + .6 * E.inCubic(px), CX, 1540); c.beginPath(); c.rect(0, 1470, W, 110); c.clip();
+  drawLay(c, Lc, CX, 1548 + (1 - E.outExpo(prog(t, 14.35, 14.9))) * 100, "center", () => ({ color: "rgba(255,255,255,0.9)" })); c.restore();
+  c.restore();
+  // phone (own transform: entry, float, push-through)
+  c.save();
+  const m = new DOMMatrix().translate(CX, CY).scale(cs, cs).translate(-CX, -CY).translate(pcx, pcy + (1 - e) * 760).rotate(rot * 57.2958).scale((.88 + .12 * e) * pz, (.88 + .12 * e) * pz);
+  c.setTransform(m);
+  const x = -PW / 2, y = -PH / 2, sweep = lerp(-PW - 300, PW + 300, E.inOutCubic(prog(t, 15.35, 16.05)));
+  glass(c, x, y, PW, PH, 74, { accent: ac, alpha: clamp(e * 1.4), glow: 80, lw: 2.5, sweepX: sweep, content: k => {
+    k.save(); k.setTransform(1, 0, 0, 1, 0, 0); k.filter = "blur(16px) brightness(.6)"; k.globalAlpha = fadeOut; k.drawImage(frost, 0, 0); k.filter = "none"; k.restore();
+    const ix = x + 14, iy = y + 14, iw = PW - 28, ih = PH - 28;
+    k.fillStyle = "rgba(0,0,0,0.55)"; rr(k, ix, iy, iw, ih, 60); k.fill();
+    k.save(); k.globalAlpha = fadeOut; k.fillStyle = "#000"; rr(k, -55, y + 32, 110, 30, 15); k.fill(); phoneUI(k, x, y, PW, PH, t, ac); k.restore();
+    if (px > 0) { k.save(); rr(k, ix, iy, iw, ih, 60); k.clip(); k.setTransform(1, 0, 0, 1, 0, 0); k.globalAlpha = E.outCubic(prog(t, 16.55, 16.85));
+      k.fillStyle = "#000"; k.fillRect(0, 0, W, H); sEnd(k, t); k.restore(); }
+  } });
+  c.restore();
+}
+
+/* ======================= BEAT 6 — END FRAME (17.0 – 20.0) ======================= */
+function sEnd(c, t) {
+  const ac = accentAt(t), s = lerp(1.06, 1, E.outCubic(prog(t, 16.8, 20))), LX = CX, LY = 790, R = 112;
+  const pulse = 1 + .7 * (1 - E.outCubic(prog(t, 19, 19.5))) * (t > 19 ? 1 : 0);
+  c.save(); camAt(c, s, CX, CY);
+  blob(c, LX, LY + 120, 780, ac, .16);
+  // logo: open control-loop ring + core
+  const dp = E.outCubic(prog(t, 16.95, 17.7)), a0 = -Math.PI / 2 + .5, span = (Math.PI * 2 - 1.0) * dp;
+  if (dp > 0) {
+    const g = c.createConicGradient(a0, LX, LY); g.addColorStop(0, css(mix(ac, [40, 220, 255], .45))); g.addColorStop(.6, css(ac)); g.addColorStop(1, css(mix(ac, WHITE, .6)));
+    c.save(); c.lineCap = "round"; c.lineWidth = 17; c.strokeStyle = g; c.shadowColor = css(ac); c.shadowBlur = 30 * pulse; c.beginPath(); c.arc(LX, LY, R, a0, a0 + span); c.stroke(); c.restore();
+    const ex = LX + Math.cos(a0 + span) * R, ey = LY + Math.sin(a0 + span) * R;
+    c.fillStyle = "#fff"; c.shadowColor = css(ac); c.shadowBlur = 24; c.beginPath(); c.arc(ex, ey, 12, 0, 7); c.fill(); c.shadowBlur = 0;
+    ring(c, LX, LY, 66, 2, ac, .35 * dp, 8);
+  }
+  const cp = E.outBack(prog(t, 17.5, 17.9));
+  if (cp > 0) { const gr = c.createRadialGradient(LX - 8, LY - 8, 2, LX, LY, 30); gr.addColorStop(0, "#fff"); gr.addColorStop(1, css(ac));
+    c.fillStyle = gr; c.shadowColor = css(ac); c.shadowBlur = 36 * pulse; c.beginPath(); c.arc(LX, LY, 27 * cp, 0, 7); c.fill(); c.shadowBlur = 0; }
+  for (let i = 0; i < 2; i++) { const p = E.outCubic(prog(t, 19 + i * .14, 19.9 + i * .14)); if (p > 0 && p < 1) ring(c, LX, LY, lerp(R, 480, p), lerp(4, 1, p), ac, (1 - p) * .7, 20); }
+  // wordmark (layer for sweep)
+  const wp = prog(t, 17.35, 18.3), Lw = lay(c, CONFIG.brand.name, "IDBold", 124, lerp(84, 26, E.outExpo(wp)));
+  lA.setTransform(1, 0, 0, 1, 0, 0); lA.clearRect(0, 0, W, H);
+  drawLay(lA, Lw, CX, 1090, "center", () => ({ a: clamp(prog(t, 17.35, 17.75)), color: "#fff" }));
+  const sw = prog(t, 18.3, 18.95); if (sw > 0 && sw < 1) sweepLayer(lA, lerp(-200, 1300, E.inOutCubic(sw)), ac);
+  c.drawImage(layerA, 0, 0);
+  // CTA pill
+  const ce = E.outBack(prog(t, 18.42, 18.85));
+  if (ce > 0) {
+    const pw = 540, ph = 124, px = CX - pw / 2, py = 1196;
+    c.save(); c.translate(CX, py + ph / 2); c.scale(lerp(.86, 1, ce), lerp(.86, 1, ce)); c.translate(-CX, -(py + ph / 2));
+    glass(c, px, py, pw, ph, 62, { accent: ac, alpha: clamp(ce), glow: 50, sweepX: lerp(px - 300, px + pw + 300, E.inOutCubic(prog(t, 19.2, 19.8))), content: k => {
+      const Lc = lay(k, CONFIG.brand.cta, "IDBold", 46, 0), nudge = 10 * Math.sin(Math.PI * prog(t, 19.3, 19.6)), tot = Lc.width + 58;
+      drawLay(k, Lc, CX - tot / 2, py + 78, "left", () => ({ color: "#fff" }));
+      const ax = CX - tot / 2 + Lc.width + 22 + nudge, ay = py + 62;
+      k.strokeStyle = css(mix(ac, WHITE, .4)); k.lineWidth = 4; k.lineCap = "round"; k.lineJoin = "round";
+      k.beginPath(); k.moveTo(ax, ay); k.lineTo(ax + 32, ay); k.moveTo(ax + 20, ay - 12); k.lineTo(ax + 32, ay); k.lineTo(ax + 20, ay + 12); k.stroke();
+    } });
+    c.restore();
+  }
+  // handle — typed
+  const Lh = lay(c, CONFIG.brand.handle, "Mono", 38, 1);
+  drawLay(c, Lh, CX, 1430, "center", i => { const a = 18.7 + i * .03; if (t < a) return { a: 0 }; const cool = prog(t, a + .03, a + .3);
+    return { a: .78, color: css(mix(ac, WHITE, cool)), glow: 20 * (1 - cool), glowColor: css(ac) }; });
+  c.restore();
+}
+
+/* ======================= COMPOSITE ======================= */
+function render(c, t) {
+  c.setTransform(1, 0, 0, 1, 0, 0); c.globalAlpha = 1; c.globalCompositeOperation = "source-over"; c.filter = "none"; c.shadowBlur = 0;
+  c.fillStyle = "#000"; c.fillRect(0, 0, W, H);
+  if (t < 2.2) sHook(c, t);
+  else if (t < 2.62) {   // shockwave from the LED wipes beat 1 away
+    const s = hookCam(t), ox = CX + (LED[0] - CX) * s, oy = 800 + (LED[1] - 800) * s, R = (1 - Math.pow(1 - prog(t, 2.2, 2.62), 2)) * 1800;
+    c.save(); c.beginPath(); c.rect(0, 0, W, H); c.arc(ox, oy, R, 0, Math.PI * 2, true); c.clip("evenodd"); sHook(c, t); c.restore();
+    c.save(); c.beginPath(); c.arc(ox, oy, R, 0, Math.PI * 2); c.clip(); c.fillStyle = "#000"; c.fillRect(0, 0, W, H); sProblem(c, t); c.restore();
+    shock(c, ox, oy, R, 170, accentAt(t), 1 - prog(t, 2.45, 2.62));
+  }
+  else if (t < 6.0) sProblem(c, t);
+  else if (t < 6.42) {   // the light line splits open onto beat 3
+    const d = E.outExpo(prog(t, 6.0, 6.42)) * 620, ac = accentAt(t);
+    c.save(); c.beginPath(); c.rect(CX - d, 0, d * 2, H); c.clip(); sSolution(c, t); c.restore();
+    const la = 1 - prog(t, 6.05, 6.42);
+    c.save(); c.globalCompositeOperation = "lighter";
+    for (const x of [CX - d, CX + d]) { const g = c.createLinearGradient(x - 40, 0, x + 40, 0); g.addColorStop(0, css(ac, 0)); g.addColorStop(.5, css(ac, .8 * la)); g.addColorStop(1, css(ac, 0));
+      c.fillStyle = g; c.fillRect(x - 40, 0, 80, H); c.fillStyle = `rgba(255,255,255,${la})`; c.fillRect(x - 1.5, 0, 3, H); }
+    c.restore();
+  }
+  else if (t < 10.0) sSolution(c, t);
+  else if (t < 13.5) { const { G, K } = sStat(c, t); if (t >= 13.0) statAperture(c, t, G, K); }
+  else if (t < 17.0) sBenefit(c, t);
+  else sEnd(c, t);
+}
+
+/* Frame render with optional shutter accumulation (motion blur). Never blends across the hard cut at 10.0 s. */
+function renderFrame(f, samples = 1) {
+  const t = f / FPS;
+  if (samples <= 1) { render(ctx, t); return; }
+  for (let k = 0; k < samples; k++) {
+    let tk = (f - (k / samples) * CONFIG.shutter) / FPS; if (t >= 10 && tk < 10) tk = 10;
+    render(wctx, Math.max(0, tk));
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1 / (k + 1); ctx.drawImage(work, 0, 0);
+  }
+  ctx.globalAlpha = 1;
+}
+
+/* ======================= PLAYER ======================= */
+const ready = (async () => {
+  await Promise.all(["IDBlack", "IDBold", "IDLight", "ISerif", "Mono"].map(f => document.fonts.load(`40px ${f}`)));
+  await document.fonts.ready; measureCounter();
+})();
+window.REEL = { ready, renderFrame, canvas: cv, FRAMES, FPS, CONFIG };
+
+const $ = id => document.getElementById(id), scrub = $("scrub"), timeEl = $("time"), playBtn = $("play"), mb = $("mb");
+scrub.max = FRAMES - 1;
+let frame = 0, playing = false, t0 = 0, f0 = 0;
+const AUDIO_SRC = "__AUDIO__", snd = AUDIO_SRC.startsWith("data:") ? new Audio(AUDIO_SRC) : null;
+const show = f => { frame = Math.max(0, Math.min(FRAMES - 1, f)); renderFrame(frame, mb.checked ? 4 : 1); scrub.value = frame;
+  timeEl.textContent = `${(frame / FPS).toFixed(2).padStart(5, "0")} / ${DUR.toFixed(2)}  f${frame}`; };
+const loop = now => { if (!playing) return;
+  const f = snd ? Math.floor(snd.currentTime * FPS) : f0 + Math.floor((now - t0) / 1000 * FPS);
+  if (snd && snd.ended) { snd.currentTime = 0; snd.play(); }
+  show(f % FRAMES); requestAnimationFrame(loop); };
+const toggle = () => { playing = !playing; playBtn.textContent = playing ? "Pause" : "Play";
+  if (playing) { t0 = performance.now(); f0 = frame; if (snd) { snd.currentTime = frame / FPS; snd.play(); } requestAnimationFrame(loop); }
+  else if (snd) snd.pause(); };
+playBtn.onclick = toggle; $("prev").onclick = () => show(frame - 1); $("next").onclick = () => show(frame + 1);
+scrub.oninput = () => { playing = false; playBtn.textContent = "Play"; if (snd) snd.pause(); show(+scrub.value); };
+mb.onchange = () => show(frame);
+addEventListener("keydown", e => { if (e.code === "Space") { e.preventDefault(); toggle(); } if (e.key === "ArrowLeft") show(frame - 1); if (e.key === "ArrowRight") show(frame + 1); });
+const bx = $("beats");
+BEATS.forEach(b => { const d = document.createElement("div"); d.style.width = ((b.end - b.start) / DUR * 100) + "%"; d.textContent = b.name; d.onclick = () => show(Math.round(b.start * FPS)); bx.appendChild(d); });
+CUES.forEach(q => { const i = document.createElement("i"); i.style.left = (q.t / DUR * 100) + "%"; i.title = `${q.t.toFixed(2)}s — ${q.sfx}`; bx.appendChild(i); });
+ready.then(() => { if (!window.__EXPORT__) show(0); });
+</script>
+</body>
+</html>

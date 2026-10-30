@@ -8,6 +8,14 @@ description: Make an original 55–70 s vertical (9:16, 1080×1920) archival-his
 Proven on: "The Man Who Never Was" (Operation Mincemeat, 60.7 s) and "The Woman Who Cleared the Glass" (Mary Anderson).
 Everything renders on CPU in a canvas page driven by headless Chromium; no paid APIs.
 
+## The user's standing preferences (follow these every time)
+- Plan first and **wait for explicit approval** ("approved", "start now") before producing anything.
+- **Ask for exactly what you need**, as a numbered list with copy-paste Gemini/ChatGPT prompts; check every upload (keep / redo and why).
+- **Centred text hooks**: big mixed-size phrases, gold italic key words, never two lines overlapping.
+- **Voice: the saved female narrator** (`voices/`) or the user's ElevenLabs MP3 — not Samara, not a male TTS. Match the reference's pace.
+- **Music clearly present** (louder than a "safe" mix; ride it down only under lines) and rich sound design on cuts and reveals — "sound makes it alive".
+- Deliver **MP4 + editable HTML**, commit and push. "Just answer" = short answer, no work.
+
 ## 0 · Ground rules (learned the hard way)
 - **Two phases. Plan first, build only after the user says "approved"/"start".** Phase 1 = analysis, story, verified facts, script, storyboard, asset prompts. No rendering before approval.
 - The user generates images/clips in **Gemini / ChatGPT**; you give exact prompts, check every upload, and say clearly what to redo and why.
