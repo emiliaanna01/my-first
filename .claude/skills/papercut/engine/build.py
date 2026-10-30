@@ -439,7 +439,8 @@ class Film:
                 rows.append(f'<div class="ln ln{li}"><span class="tx" style="clip-path:inset(0 100% 0 0)">{ln}</span>{hl}{bar}</div>')
             head = beat.get("head")
             hh = f'<div style="font-family:Anton;font-size:64px;letter-spacing:4px;margin-bottom:28px">{head}</div>' if head else ""
-            inner = (f'<div class="doc" style="clip-path:{torn_clip(b.rng, tear=1.2, ends=False)};--fs:{fs}px">'
+            room = 130 if beat.get("stamp") else 0  # a stamped document gets paper below its last line for the stamp
+            inner = (f'<div class="doc" style="clip-path:{torn_clip(b.rng, tear=1.2, ends=False)};--fs:{fs}px;padding-bottom:{70 + room}px">'
                      f'{hh}{"".join(rows)}</div>')
             di = self.el(inner, cx - dw / 2, dy, dw, 10)
             fresh.append((di, dict(how="slide", dur=0.5, rot=b.r(-2.5, 2.5)), t + 0.02))
@@ -462,7 +463,8 @@ class Film:
                 ti, _ = self.tape_on(cx + 230, dy - 60, 8, 15)
                 fresh.append((ti, dict(how="drop", rot=8), t + 0.45))
             if beat.get("stamp"):
-                st_ = self.stamp(beat["stamp"], cx + 120, dy + 60 + len(lines) * 62 + (100 if head else 0) + 40, 96, 60, on_paper=True)
+                # below the last typed line (a line is fs * 1.55 tall), overlapping the paper's bottom edge
+                st_ = self.stamp(beat["stamp"], cx + 120, dy + 70 + len(lines) * fs * 1.55 + (92 if head else 0) + 25, 96, 60, on_paper=True)
                 fresh.append((st_, dict(how="stamp", rot=-12), min(tt + 0.1, t + dur - 0.3)))
             if beat.get("label"):
                 li_ = self.strip(beat["label"], cx, dy - 150, 100, 45)
@@ -480,7 +482,8 @@ class Film:
             gap = (lx1 - lx0) / max(1, len(dates) - 1) if len(dates) > 1 else 0
             for j, d in enumerate(dates):
                 x = lx0 + gap * j if len(dates) > 1 else cx
-                kind_ = "red" if j == act else ("ink" if j % 2 else "")
+                # the active date in the accent stock, unless the card is that colour: then in ink
+                kind_ = ("ink" if _dist(self.cur_bg, self.look["accent"]) < 90 else "red") if j == act else ("ink" if j % 2 else "")
                 above = j % 2 == 0
                 si = self.strip(d, x, ly - 130 if above else ly + 50, 64, 20 + j, kind=kind_)
                 fresh.append((si, dict(how="drop", rot=b.r(-5, 5)), t + 0.35 + j * 0.18))
