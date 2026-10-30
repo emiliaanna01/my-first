@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Original score + sound design + mix for the phone-addiction reel (10 clips x 6 s).
-Score: minimal modern beat, 100 BPM, A minor — soft plucks and a warm bass that build clip by clip, a full groove for the
-slot-machine middle, a strip-down on S09, a hard stop before the last line and a closing hit on the question mark.
+"""Original score + sound design + mix for the phone-addiction reel (10 clips x 4.615 s = 2 bars each at 104 BPM).
+Score v2: modern lo-fi hip-hop in A minor built from earshot's physically modelled kalimba / marimba and an 808, crisp snaps
+and ticks; every cut lands on a downbeat. Builds S01 → S08, strips back on S09 with a riser, hard stop into S10 with a deep
+chord and impact.
 Effects: earshot bank (code-made), each placed so its peak lands on the motion measured in the clip.
 usage: python3 motion/curiosity/audio.py <vo_dir> <out_wav>"""
 import json, os, subprocess, sys
@@ -12,8 +13,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "audio"))
 from dsp import SR, adsr, bp, convolve, glide, hp, ir, lp, mtof, noise, osc, pan, perc, place, t_, widen  # noqa: E402
 
-DUR = 60.0; N = int(SR * DUR); CLIP = 6.0
-BPM = 100; B = 60 / BPM; S16 = B / 4
+BPM = 104; B = 60 / BPM; S16 = B / 4; BAR = 4 * B; CLIP = 2 * BAR; SPEED = 6.0 / CLIP
+DUR = round(10 * CLIP + 1.8, 3); N = int(SR * DUR)
 PROG = [[57, 60, 64, 67], [53, 57, 60, 64], [48, 52, 55, 59], [55, 59, 62, 65]]      # Am7 · Fmaj7 · Cmaj7 · G7
 VOICE_END = None
 
@@ -56,40 +57,43 @@ def vinyl(d, g=.008):
     for _ in range(int(d * 9)): a = int(rng.uniform(0, d - .01) * SR); x[a:a + 40] += rng.uniform(-1, 1) * 3
     return x * g
 
+NOTE = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+nm = lambda m: f"{NOTE[m % 12]}{m // 12 - 1}"
+PROG2 = [[57, 60, 64, 67], [53, 57, 60, 64], [48, 52, 55, 59], [55, 59, 62, 65]]   # Am7 · Fmaj7 · Cmaj7 · G7, one per bar
+
 def score():
-    m = np.zeros((N, 2)); tt = np.arange(N) / SR
-    STOP = 54.0 - .02                                  # everything stops before the last clip
-    bars = int(STOP / (4 * B)) + 1
-    for b in range(bars):
-        a = b * 4 * B; ch = PROG[b % 4]
-        if a >= STOP: break
-        sec = a / CLIP                                 # which clip we're in (0..9)
-        d = min(4 * B, STOP - a)
-        place(m, a, widen(keys([x - 12 for x in ch], d + .4, .045 if sec < 2 else .055), .015, .8))
-        if sec >= 2 and not 8 <= sec < 9:              # bass: root on 1 and the "and" of 3
-            place(m, a, pan(bass(mtof(ch[0] - 24), min(1.6 * B, d), .2)))
-            if a + 2.5 * B < STOP: place(m, a + 2.5 * B, pan(bass(mtof(ch[0] - 24), min(1.4 * B, STOP - a - 2.5 * B), .16)))
-    # plucked motif on 8ths, sparse at first
-    MOT = [0, 2, 1, 3, 2, 0, 3, 1]
-    for k in range(int(STOP / (B / 2))):
-        t = k * B / 2; sec = t / CLIP; ch = PROG[int(t / (4 * B)) % 4]
-        if sec < 2 and k % 4: continue
-        if 8 <= sec < 9 and k % 2: continue
-        place(m, t, pan(pluck(mtof(ch[MOT[k % 8]] + 12), 1.1, .07 if sec < 4 else .085), .35 * np.sin(k * .9)))
-    # drums from S03, full from S05, out on S09
-    for k in range(int(STOP / S16)):
-        t = k * S16; sec = t / CLIP; step = k % 16
-        if sec < 2 or 8 <= sec < 9: continue
-        full = 4 <= sec < 8
-        if step in (0, 10) or (full and step == 7): place(m, t, pan(kick(.42 if full else .3)))
-        if step in (4, 12): place(m, t, pan(rim(.11 if full else .08), .1))
-        if full or step % 2 == 0: place(m, t, pan(hat(.035 if step % 2 == 0 else .02, open_=(full and step == 14)), -.3 if step % 4 else .3))
-    place(m, 0, widen(vinyl(STOP)))
-    # the ending: a single deep chord + hit under "It's addictive because it's uncertain."
-    place(m, 54.0, widen(keys([45, 52, 57, 60], 6.0, .07), .02, .9))
-    place(m, 54.0, pan(bass(mtof(33), 3.0, .22)))
-    m = m + convolve(m, ir(1.4, 2.0, 6000)) * .25
-    g = np.ones(N); k = int(1.5 * SR); g[-k:] = np.linspace(1, 0, k) ** 1.5
+    m = np.zeros((N, 2)); STOP = 9 * CLIP
+    def put(t, x, g=1., p=0.):
+        place(m, t, pan(x * g, p))
+    for bar in range(18):                                  # clips 1–9 = bars 0–17
+        a = bar * BAR; c = bar // 2; ch = PROG2[bar % 4]
+        arp = [ch[0], ch[2], ch[1], ch[3], ch[2], ch[1], ch[3], ch[2]]
+        for k in range(8):                                 # kalimba ostinato (quarters first, then 8ths)
+            if c < 2 and k % 2: continue
+            put(a + k * B / 2, es("pluck/kalimba_soft", pitch=nm(arp[k] + 12)), .16 if c < 4 else .14, .3 * np.sin(k + bar))
+        if 4 <= c < 8:                                     # marimba answer on the offbeats
+            for k, d in ((3, 2), (7, 3)):
+                put(a + k * B / 2, es("mallet/marimba", pitch=nm(ch[d] + 12)), .13, -.35)
+        put(a, widen(keys([x - 12 for x in ch], BAR + .3, .035 if c < 2 else .045), .015, .8)[:, 0], 1.0)
+        if c >= 2 and c != 8:                              # 808 on the downbeat + a pickup
+            put(a, es("sub_drop/808", pitch=nm(ch[0] - 24), dur=1.2), .45)
+            put(a + 2.5 * B, es("sub_drop/808", pitch=nm(ch[0] - 24), dur=.7), .3)
+        if c < 2 or c == 8: continue
+        full = 4 <= c < 8
+        for k in range(16):                                # drums
+            t = a + k * S16
+            if k in (0, 10) or (full and k == 7): put(t, es("cut_hit/kick"), .55 if full else .45)
+            if k in (4, 12): put(t, mixx(es("knock/snap"), hp(noise(.12), 1500) * perc(.12, .001, .03) * .6), .4, .1)
+            if full or k % 2 == 0: put(t, es("hover_tick/air"), .22 if k % 4 == 0 else .13, -.3 if k % 2 else .3)
+    # S09: drums out, riser into the last clip
+    put(STOP - 1.7, es("pro_riser/air_gate", dur=1.7), .35)
+    # S10: hard stop, one deep chord, a last kalimba note on the final word
+    for n in (57, 64, 69, 72, 76): put(STOP + .02, es("pluck/kalimba_ring", pitch=nm(n)), .12, (n - 67) / 20)
+    put(STOP, keys([45, 52, 57, 60], 4.0, .06))
+    put(STOP, es("sub_drop/808", pitch="A1", dur=2.0), .5)
+    place(m, 0, widen(vinyl(DUR)))
+    m = m + convolve(m, ir(1.2, 1.8, 6500)) * .22
+    g = np.ones(N); k = int(1.4 * SR); g[-k:] = np.linspace(1, 0, k) ** 1.5
     return hp(m * g[:, None], 30)
 
 # ---------------- sound design (clip-relative times from measured motion peaks) ----------------
@@ -110,12 +114,12 @@ def design():
     dry = np.zeros((N, 2)); send = np.zeros((N, 2))
     for c, cues in CUES.items():
         for tc, sid, g, kw in cues:
-            x = es(sid, **kw); pk = np.argmax(np.abs(x)) / SR; t = (c - 1) * CLIP + tc
+            x = es(sid, **kw); pk = np.argmax(np.abs(x)) / SR; t = (c - 1) * CLIP + tc / SPEED
             s = pan(x * g, .2 * np.sin(c + tc)); place(dry, t - pk, s); place(send, t - pk, s * .2)
     # coins spilling out of the slot machine (S05 ≈ 2.6–4.6 s)
     rng = np.random.default_rng(8)
     for i in range(22):
-        t = 24 + 2.6 + i * .09 + rng.uniform(0, .05); x = es("tap/glass") * rng.uniform(.15, .3)
+        t = 4 * CLIP + (2.6 + i * .09 + rng.uniform(0, .05)) / SPEED; x = es("tap/glass") * rng.uniform(.07, .14)
         place(dry, t, pan(x, rng.uniform(-.5, .5)))
     return hp(dry + convolve(send, ir(1.2, 1.8, 6000)) * .6, 30)
 
