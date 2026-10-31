@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Cut each 6 s scene clip to the length of its voice line and join them.
 For clip i (duration d = next line start - this line start), take the source window that shows its animation:
-it ends just after the motion settles and is sped up (max 2x) when the animation is longer than d.
+it ends just after the motion settles and is sped up (max 1.25x) when the animation is longer than d.
 usage: python3 motion/lustig/assemble.py <vo_dir> <out.mp4>"""
 import json, os, subprocess, sys
 import cv2, numpy as np
@@ -32,10 +32,10 @@ def main(vo_dir, out):
     for i in range(1, n + 1):
         src = os.path.join(HERE, SRC.get(i, f"video/S{i:02d}.mp4")); d = durs[i - 1]
         first, settle, last = motion(os.path.join(HERE, f"video/S{i:02d}.mp4"))
-        we = WEND.get(i) or min(6.0, max(settle + .55, min(last + .25, settle + 1.6)))
+        we = WEND.get(i) or min(6.0, max(settle + 1.0, min(last + .6, settle + 1.8)))   # end on a held, readable frame
         ws = max(MINSTART.get(i, 0), first - .1)
         sp = (we - ws) / d
-        if sp > 2.0: ws = we - 2.0 * d; sp = 2.0
+        if sp > 1.25: ws = we - 1.25 * d; sp = 1.25          # never faster than 1.25x: the viewer must catch each element
         if sp < 1.0:                                              # clip longer than its animation: hold real time, start a bit earlier
             ws = max(MINSTART.get(i, 0), we - d); sp = max(1.0, (we - ws) / d)
             if we - ws < d: we = min(6.0, ws + d); sp = 1.0
