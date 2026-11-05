@@ -1,0 +1,135 @@
+[
+ {
+  "id": "S01",
+  "text": "Your salary just hit your account. You're rich!",
+  "t": 0.3,
+  "dur": 2.446,
+  "words": [
+   0.31,
+   0.564,
+   1.08,
+   1.14,
+   1.49,
+   1.55,
+   2.03,
+   2.51
+  ]
+ },
+ {
+  "id": "S02",
+  "text": "Well... for about five minutes.",
+  "t": 3.196,
+  "dur": 1.606,
+  "words": [
+   3.206,
+   3.576,
+   3.636,
+   4.006,
+   4.269
+  ]
+ },
+ {
+  "id": "S03",
+  "text": "First comes rent.",
+  "t": 6.303,
+  "dur": 1.198,
+  "words": [
+   6.373,
+   6.653,
+   7.082
+  ]
+ },
+ {
+  "id": "S04",
+  "text": "Then groceries, bills, subscriptions, and that daily coffee you swear doesn't count.",
+  "t": 8.25,
+  "dur": 4.253,
+  "words": [
+   8.26,
+   8.519,
+   9.07,
+   9.327,
+   9.93,
+   10.29,
+   10.47,
+   10.79,
+   11.13,
+   11.34,
+   11.7,
+   12.2
+  ]
+ },
+ {
+  "id": "S05",
+  "text": "Suddenly, your bank balance looks like a horror movie.",
+  "t": 12.953,
+  "dur": 2.672,
+  "words": [
+   12.973,
+   13.513,
+   13.753,
+   13.963,
+   14.252,
+   14.573,
+   14.793,
+   14.923,
+   15.218
+  ]
+ },
+ {
+  "id": "S06",
+  "text": "Here's the real problem: your money has jobs before you even get paid.",
+  "t": 16.125,
+  "dur": 3.991,
+  "words": [
+   16.165,
+   16.415,
+   16.895,
+   17.175,
+   17.515,
+   17.765,
+   18.096,
+   18.285,
+   18.602,
+   18.945,
+   19.185,
+   19.665,
+   19.725
+  ]
+ },
+ {
+  "id": "S07",
+  "text": "So next payday, pay yourself first.",
+  "t": 20.615,
+  "dur": 2.026,
+  "words": [
+   20.645,
+   20.915,
+   21.055,
+   21.525,
+   21.707,
+   22.155
+  ]
+ },
+ {
+  "id": "S08",
+  "text": "Save a little, budget the rest, and stop wondering where it all went.",
+  "t": 23.041,
+  "dur": 3.42,
+  "words": [
+   23.071,
+   23.316,
+   23.424,
+   23.701,
+   24.001,
+   24.311,
+   24.511,
+   24.721,
+   24.961,
+   25.453,
+   25.743,
+   25.897,
+   26.096
+  ]
+ }
+]
