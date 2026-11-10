@@ -1,0 +1,280 @@
+[
+ {
+  "id": "S01",
+  "text": "He hijacked a plane. Collected two hundred thousand dollars. Then jumped into the darkness.",
+  "t": 0.3,
+  "dur": 6.247,
+  "words": [
+   0.32,
+   0.54,
+   1.13,
+   1.35,
+   1.89,
+   2.42,
+   2.67,
+   3.31,
+   3.8,
+   4.38,
+   4.71,
+   5.23,
+   5.44,
+   5.821
+  ]
+ },
+ {
+  "id": "S02",
+  "text": "The FBI searched for decades... but never found him.",
+  "t": 7.247,
+  "dur": 3.562,
+  "words": [
+   7.247,
+   7.617,
+   7.823,
+   8.467,
+   8.757,
+   9.297,
+   9.617,
+   10.067,
+   10.401
+  ]
+ },
+ {
+  "id": "S03",
+  "text": "November twenty-fourth, nineteen seventy-one. A man calling himself Dan Cooper boards a flight from Portland to Seattle.",
+  "t": 11.609,
+  "dur": 7.925,
+  "words": [
+   11.609,
+   12.209,
+   13.079,
+   13.656,
+   14.409,
+   14.579,
+   14.789,
+   15.219,
+   16.059,
+   16.119,
+   16.669,
+   17.119,
+   17.219,
+   17.719,
+   18.029,
+   18.839,
+   18.899
+  ]
+ },
+ {
+  "id": "S04",
+  "text": "He orders a drink, then quietly hands a flight attendant a note.",
+  "t": 20.034,
+  "dur": 3.841,
+  "words": [
+   20.054,
+   20.214,
+   20.744,
+   20.804,
+   21.184,
+   21.384,
+   21.934,
+   22.227,
+   22.514,
+   22.764,
+   23.334,
+   23.394
+  ]
+ },
+ {
+  "id": "S05",
+  "text": "He claims there's a bomb in his briefcase.",
+  "t": 24.375,
+  "dur": 2.444,
+  "words": [
+   24.385,
+   24.495,
+   24.945,
+   25.345,
+   25.491,
+   25.815,
+   25.875,
+   26.145
+  ]
+ },
+ {
+  "id": "S06",
+  "text": "His demands? Two hundred thousand dollars... and four parachutes.",
+  "t": 27.419,
+  "dur": 4.251,
+  "words": [
+   27.439,
+   27.639,
+   28.419,
+   28.549,
+   29.068,
+   29.769,
+   30.289,
+   30.439,
+   30.709
+  ]
+ },
+ {
+  "id": "S07",
+  "text": "The plane lands. All thirty-six passengers are released. Cooper gets his money.",
+  "t": 32.271,
+  "dur": 5.934,
+  "words": [
+   32.281,
+   32.491,
+   33.057,
+   33.551,
+   33.761,
+   34.561,
+   35.399,
+   35.701,
+   36.361,
+   36.941,
+   37.241,
+   37.551
+  ]
+ },
+ {
+  "id": "S08",
+  "text": "But he's not finished. The plane takes off again.",
+  "t": 38.705,
+  "dur": 3.13,
+  "words": [
+   38.705,
+   38.962,
+   39.305,
+   39.533,
+   40.105,
+   40.315,
+   40.805,
+   41.045,
+   41.345
+  ]
+ },
+ {
+  "id": "S09",
+  "text": "Shortly after eight that night, Cooper parachutes from the rear of the aircraft into the darkness.",
+  "t": 42.335,
+  "dur": 5.102,
+  "words": [
+   42.365,
+   42.915,
+   43.065,
+   43.495,
+   43.775,
+   44.015,
+   44.305,
+   44.915,
+   45.055,
+   45.315,
+   45.573,
+   45.736,
+   46.005,
+   46.355,
+   46.815,
+   46.875
+  ]
+ },
+ {
+  "id": "S10",
+  "text": "He disappears.",
+  "t": 48.337,
+  "dur": 1.118,
+  "words": [
+   48.367,
+   48.757
+  ]
+ },
+ {
+  "id": "S11",
+  "text": "Nine years later, a boy discovers five thousand eight hundred dollars of the ransom money near the Columbia River.",
+  "t": 50.755,
+  "dur": 6.724,
+  "words": [
+   50.765,
+   51.06,
+   51.385,
+   51.895,
+   51.955,
+   52.125,
+   52.775,
+   52.996,
+   53.505,
+   53.935,
+   54.365,
+   54.835,
+   54.905,
+   55.205,
+   55.515,
+   56.025,
+   56.275,
+   56.555,
+   57.009
+  ]
+ },
+ {
+  "id": "S12",
+  "text": "But no confirmed trace of Cooper himself.",
+  "t": 57.979,
+  "dur": 2.659,
+  "words": [
+   57.979,
+   58.319,
+   58.539,
+   58.899,
+   59.429,
+   59.659,
+   60.031
+  ]
+ },
+ {
+  "id": "S13",
+  "text": "In twenty sixteen, the FBI redirects its investigation resources elsewhere.",
+  "t": 61.338,
+  "dur": 5.542,
+  "words": [
+   61.338,
+   61.468,
+   62.098,
+   62.688,
+   63.108,
+   63.284,
+   64.007,
+   64.438,
+   65.418,
+   66.108
+  ]
+ },
+ {
+  "id": "S14",
+  "text": "Did Cooper survive? Or did the wilderness claim him?",
+  "t": 67.579,
+  "dur": 3.456,
+  "words": [
+   67.589,
+   67.849,
+   68.308,
+   68.819,
+   69.069,
+   69.279,
+   69.562,
+   70.359,
+   70.647
+  ]
+ },
+ {
+  "id": "S15",
+  "text": "To this day... nobody knows.",
+  "t": 71.935,
+  "dur": 1.866,
+  "words": [
+   71.955,
+   72.325,
+   72.518,
+   72.795,
+   73.272
+  ]
+ }
+]
