@@ -1,0 +1,93 @@
+[
+ {
+  "scene": 1,
+  "who": "NARRATOR",
+  "text": "This is what happens when you have one dollar... but billionaire confidence.",
+  "t": 0.3,
+  "dur": 4.239
+ },
+ {
+  "scene": 2,
+  "who": "RED",
+  "text": "Bro, money doesn't impress me anymore.",
+  "t": 4.989,
+  "dur": 1.88
+ },
+ {
+  "scene": 2,
+  "who": "WHITE",
+  "text": "You borrowed five bucks yesterday.",
+  "t": 7.168,
+  "dur": 2.037
+ },
+ {
+  "scene": 3,
+  "who": "RED",
+  "text": "That's called leveraging assets.",
+  "t": 9.556,
+  "dur": 1.445
+ },
+ {
+  "scene": 4,
+  "who": "NARRATOR",
+  "text": "So he walks into a fancy restaurant.",
+  "t": 11.451,
+  "dur": 2.137
+ },
+ {
+  "scene": 5,
+  "who": "RED",
+  "text": "Your finest sparkling water, please.",
+  "t": 13.938,
+  "dur": 1.742
+ },
+ {
+  "scene": 5,
+  "who": "WAITER",
+  "text": "That'll be twelve dollars.",
+  "t": 15.98,
+  "dur": 1.82
+ },
+ {
+  "scene": 6,
+  "who": "RED",
+  "text": "Twelve?! Does it come with the ocean?!",
+  "t": 18.1,
+  "dur": 1.473
+ },
+ {
+  "scene": 7,
+  "who": "NARRATOR",
+  "text": "His card gets declined.",
+  "t": 20.023,
+  "dur": 1.698
+ },
+ {
+  "scene": 7,
+  "who": "WHITE",
+  "text": "Where's your Lamborghini now?",
+  "t": 22.022,
+  "dur": 1.745
+ },
+ {
+  "scene": 8,
+  "who": "RED",
+  "text": "Funny you mention that...",
+  "t": 24.117,
+  "dur": 1.173
+ },
+ {
+  "scene": 8,
+  "who": "RED",
+  "text": "Can you lend me fifty bucks for parking?",
+  "t": 25.59,
+  "dur": 1.88
+ },
+ {
+  "scene": 8,
+  "who": "WHITE",
+  "text": "You don't even have a car!!",
+  "t": 27.77,
+  "dur": 1.453
+ }
+]
