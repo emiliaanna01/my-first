@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MarginBird: business systems for small businesses (preview)</title>
+<meta name="description" content="MarginBird builds the brand, website, ads and automations a small business keeps running after handover.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <nav class="nav__pill" aria-label="Main">
+    <a class="nav__word" href="/">MarginBird</a>
+    <ul class="nav__links">
+      <li><a href="#problem">The problem</a></li>
+      <li><a href="#process">How it’s built</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a class="btn btn--primary btn--sm" href="#audit">Book my free audit</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- HERO: the switchboard -->
+<section class="hero" aria-labelledby="hero-h">
+  <div class="container hero__grid">
+    <div class="hero__text">
+      <h1 id="hero-h">Agencies sell tasks. We build business systems.</h1>
+      <p class="lead">Pick the problem. Watch the system that ends it.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#audit">Book my free audit</a>
+        <a class="btn btn--ghost" href="#process">See how it’s built</a>
+      </div>
+    </div>
+
+    <div class="board" data-switch>
+      <div class="board__tabs" role="tablist" aria-label="Pick a problem">
+        <button role="tab" id="t-content" aria-controls="p-content" aria-selected="true">Costly content</button>
+        <button role="tab" id="t-menu" aria-controls="p-menu" aria-selected="false" tabindex="-1">A daily menu</button>
+        <button role="tab" id="t-calls" aria-controls="p-calls" aria-selected="false" tabindex="-1">Missed calls</button>
+      </div>
+
+      <section class="flow" role="tabpanel" id="p-content" aria-labelledby="t-content">
+        <p class="flow__who">Jake the Stock Guy, trader and educator</p>
+        <ol class="flow__steps">
+          <li style="--i:0"><span class="flow__in">In</span><span>He records a trade</span></li>
+          <li style="--i:1"><time>08:02</time><span>Chart and recording saved</span></li>
+          <li style="--i:2"><time>08:04</time><span>Voiceover trimmed and levelled</span></li>
+          <li style="--i:3"><time>08:05</time><span>Post made in his brand kit</span></li>
+          <li style="--i:4"><time>08:06</time><span>Out to every channel and Slack</span></li>
+        </ol>
+        <p class="flow__out" style="--i:5"><span class="flow__was">$2,000</span><span class="flow__now">$300</span><span class="flow__unit">a month, after setup</span></p>
+      </section>
+
+      <section class="flow" role="tabpanel" id="p-menu" aria-labelledby="t-menu">
+        <p class="flow__who">Le Bobadel Market, restaurant</p>
+        <ol class="flow__steps">
+          <li style="--i:0"><span class="flow__in">In</span><span>A photo of the handwritten board</span></li>
+          <li style="--i:1"><span class="flow__in">Then</span><span>Read and turned into a menu</span></li>
+          <li style="--i:2"><span class="flow__in">Then</span><span>Made website-ready</span></li>
+          <li style="--i:3"><span class="flow__in">Live</span><span>Published on a fixed schedule</span></li>
+        </ol>
+        <p class="flow__out" style="--i:4"><span class="flow__was">A monthly hire</span><span class="flow__now">$200 to $250</span><span class="flow__unit">a month, running three years</span></p>
+      </section>
+
+      <section class="flow" role="tabpanel" id="p-calls" aria-labelledby="t-calls">
+        <p class="flow__who">In every Launch plan</p>
+        <ol class="flow__steps">
+          <li style="--i:0"><span class="flow__in">In</span><span>A customer calls and nobody answers</span></li>
+          <li style="--i:1"><span class="flow__in">Then</span><span>A text goes back to them</span></li>
+          <li style="--i:2"><span class="flow__in">Then</span><span>They book from the link</span></li>
+          <li style="--i:3"><span class="flow__in">Live</span><span>A customer on your calendar</span></li>
+        </ol>
+        <p class="flow__out" style="--i:4"><span class="flow__now">Booked</span><span class="flow__unit">nothing dropped on the way</span></p>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM: tasks you rent, systems you own -->
+<section class="problem" id="problem" aria-labelledby="prob-h">
+  <div class="container">
+    <h2 id="prob-h">You’re paying people to do work a system could do.</h2>
+    <div class="versus">
+      <div class="versus__side versus__side--rent">
+        <h3>What agencies sell</h3>
+        <ul>
+          <li>Twelve posts</li>
+          <li>One landing page</li>
+          <li>A monthly report</li>
+        </ul>
+        <p class="versus__end">You keep paying. It stops when they stop.</p>
+      </div>
+      <div class="versus__side versus__side--own">
+        <h3>What we build</h3>
+        <ul>
+          <li>A content pipeline that posts itself</li>
+          <li>A menu that updates from a photo</li>
+          <li>Calls that turn into bookings</li>
+        </ul>
+        <p class="versus__end">It keeps running after we hand it over. In your name.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS: five steps, each with what it produces -->
+<section class="process" id="process" aria-labelledby="proc-h">
+  <div class="container">
+    <div class="head">
+      <h2 id="proc-h">How a system gets built.</h2>
+      <p class="lead">Five steps. Each one hands you something you can see.</p>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <div class="step__text">
+          <h3><span class="step__n">1</span>Audit</h3>
+          <p>Where your time and money go today. You get a short video and one fix you can use, hired or not.</p>
+        </div>
+        <figure class="panel">
+          <figcaption class="panel__head"><span>Example audit</span><span>Sample rows</span></figcaption>
+          <table class="audit-t">
+            <thead><tr><th scope="col">Where it goes</th><th scope="col">Today</th><th scope="col">System?</th></tr></thead>
+            <tbody>
+              <tr><td>Social posts</td><td>Paid by the post</td><td class="yes">Yes</td></tr>
+              <tr><td>Menu updates</td><td>Retyped by hand</td><td class="yes">Yes</td></tr>
+              <tr><td>Missed calls</td><td>No follow-up</td><td class="yes">Yes</td></tr>
+              <tr><td>Ad accounts</td><td>In the agency’s name</td><td class="yes">Move to yours</td></tr>
+            </tbody>
+          </table>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step__text">
+          <h3><span class="step__n">2</span>Plan</h3>
+          <p>The system worth building first, priced in writing.</p>
+        </div>
+        <figure class="panel panel--doc">
+          <figcaption class="panel__head"><span>Written scope</span><span>Launch</span></figcaption>
+          <ul class="scope">
+            <li>Five-page website in 14 days</li>
+            <li>Booking and hosting set up</li>
+            <li>Missed-call text-back</li>
+            <li>Review requests and Google profile</li>
+          </ul>
+          <p class="scope__price"><b>$997</b> once, then $149 a month care</p>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step__text">
+          <h3><span class="step__n">3</span>Build</h3>
+          <p>Brand, site, ads and content, made by specialist teams.</p>
+        </div>
+        <figure class="panel panel--build">
+          <div class="build__site" tabindex="0" role="region" aria-label="RevMar homepage, scrollable">
+            <img src="assets/revmar.webp" width="373" height="2048" loading="lazy" alt="The RevMar homepage we built, from the hero to its three-engine method">
+          </div>
+          <img class="build__art" src="assets/sideline-rush-ep06.webp" width="1080" height="899" loading="lazy" alt="Episode 6 artwork for The Sideline Rush podcast">
+          <figcaption class="build__cap">RevMar’s site and The Sideline Rush artwork</figcaption>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step__text">
+          <h3><span class="step__n">4</span>Automate</h3>
+          <p>The repeat work moves off your desk.</p>
+        </div>
+        <figure class="panel">
+          <figcaption class="panel__head"><span>Jake’s content system</span><span>Every trading day</span></figcaption>
+          <ol class="log">
+            <li><time>08:02</time>Chart captured, screen recording saved</li>
+            <li><time>08:04</time>Voiceover recorded and cleaned</li>
+            <li><time>08:05</time>Branded post generated</li>
+            <li><time>08:06</time>Published to every channel</li>
+          </ol>
+          <p class="log__foot">Nobody touches it.</p>
+        </figure>
+      </li>
+
+      <li class="step">
+        <div class="step__text">
+          <h3><span class="step__n">5</span>Grow</h3>
+          <p>Monthly tuning, reported in hours and dollars.</p>
+        </div>
+        <figure class="panel panel--report">
+          <figcaption class="panel__head"><span>Jake’s content, every month</span><span>After a one-time setup</span></figcaption>
+          <div class="report">
+            <p><span>Before</span><b class="report__was">$2,000</b></p>
+            <p><span>After</span><b class="report__now">$300</b></p>
+          </div>
+          <p class="report__note">He went back to trading.</p>
+        </figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="next" id="work" aria-labelledby="next-h">
+  <div class="container">
+    <h2 id="next-h">Then: the work, pricing and your audit.</h2>
+    <p class="lead">This preview stops here. The rest of the page follows in the same look once you confirm.</p>
+    <p><a class="btn btn--primary" id="pricing" href="#audit">Book my free audit</a><span id="audit"></span></p>
+  </div>
+</section>
+
+</main>
+
+<script>
+document.querySelectorAll('[data-switch]').forEach((root) => {
+  const tabs = [...root.querySelectorAll('[role=tab]')];
+  const pick = (t, focus) => {
+    tabs.forEach((x) => {
+      const on = x === t;
+      x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
+      const p = document.getElementById(x.getAttribute('aria-controls'));
+      p.hidden = !on;
+      if (on) { p.classList.remove('is-run'); void p.offsetWidth; p.classList.add('is-run'); }
+    });
+    if (focus) t.focus();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => pick(t));
+    t.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+      if (d) { e.preventDefault(); pick(tabs[(i + d + tabs.length) % tabs.length], true); }
+    });
+  });
+  pick(tabs[0]);
+});
+</script>
+</body>
+</html>
