@@ -47,7 +47,7 @@
     "motion-extras": {
       "source": {
         "source": "directory",
-        "path": "./motion/marketplace"
+        "path": "/home/user/my-first/motion/marketplace"
       }
     }
   }
