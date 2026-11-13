@@ -1,0 +1,30 @@
+[
+ {
+  "shape": "Bento Grid",
+  "theme": "studio",
+  "axes": "light/roman-serif/warm",
+  "hero": "Poster",
+  "nav": "masthead",
+  "footer": "letter close",
+  "imagery": "the product",
+  "photos": [],
+  "entry": "index.html",
+  "fingerprint": "bento/poster/masthead/letter/studio/hire",
+  "sections": [
+   "hero",
+   "case rows",
+   "bento",
+   "index",
+   "plans",
+   "split list+quote",
+   "form close"
+  ],
+  "signature": "Jake bill measured $2,000 to $300",
+  "waived": [
+   "83"
+  ],
+  "prompt": "design my site, no ai feel, show offerings and value: marginbird",
+  "date": "2026-11-13",
+  "mode": "build"
+ }
+]
