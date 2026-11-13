@@ -1,5 +1,35 @@
 [
  {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "page",
+  "shape": "Stat-Led",
+  "theme": "kiln",
+  "axes": "dark/high-contrast-serif/warm",
+  "hero": "Stage",
+  "nav": "floating pill",
+  "footer": "mast",
+  "imagery": "the product",
+  "photos": [],
+  "entry": "index.html",
+  "fingerprint": "statled/stage/pill/mast/kiln/hire",
+  "sections": [
+   "hero run screen",
+   "bill band",
+   "ledger rows",
+   "work frames",
+   "pricing table",
+   "split list+quote",
+   "audit band"
+  ],
+  "signature": "Jake system running, bill $2,000 struck to $300",
+  "waived": [
+   "83"
+  ],
+  "prompt": "redesign marginbird, more premium",
+  "date": "2026-11-13"
+ },
+ {
   "shape": "Bento Grid",
   "theme": "studio",
   "axes": "light/roman-serif/warm",
