@@ -184,6 +184,14 @@ th { font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: 0.06
 .item.is-new { background: var(--new-bg); border-radius: 8px; padding-inline: 10px; margin-inline: -10px; box-shadow: inset 3px 0 0 var(--new-line); }
 .newtag { font: 600 10.5px var(--mono); padding: 2px 6px; border-radius: 4px; background: var(--new-line); color: #1c2431; letter-spacing: 0.06em; }
 .verdict-lead.is-new { background: var(--new-bg); border-radius: 8px; padding: 8px 12px; margin: -8px -12px; box-shadow: inset 3px 0 0 var(--new-line); }
+.prog { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.prog .tile .bar { height: 6px; border-radius: 3px; background: var(--surface); overflow: hidden; }
+.prog .tile .bar i { display: block; height: 100%; background: var(--heat); }
+.st { font: 600 10.5px var(--mono); padding: 2px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+.st.applied, .st.accepted { background: var(--good-soft); color: var(--good); }
+.st.preparing { background: var(--warn-soft); color: var(--warn); }
+.st.rejected, .st.dropped { background: var(--bad-soft); color: var(--bad); }
+.st.to-check, .st.later { background: var(--sunk); color: var(--muted); }
 .toast { position: fixed; z-index: 20; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: min(380px, calc(100vw - 32px)); background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-left: 4px solid var(--new-line); border-radius: 12px; box-shadow: 0 10px 30px rgba(20, 30, 50, 0.18); padding: 14px 16px; display: grid; gap: 8px; animation: toastIn 0.35s ease; }
 .toast h3 { font-size: 15px; }
 .toast ul { margin: 0; padding-left: 18px; font-size: 13.5px; display: grid; gap: 2px; }
@@ -216,7 +224,7 @@ footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; max-wi
       <span class="chip">Married, wife joins later</span>
       <span class="chip">Intake <b>Sep–Oct 2027</b></span>
     </div>
-    <div class="status"><span id="freshness"></span><button class="btn sm ghost" type="button" id="unreadBtn" hidden></button><button class="btn sm ghost" type="button" id="alertsBtn" hidden>Turn on desktop alerts</button><button class="btn sm ghost" type="button" id="installBtn" hidden>Install as an app</button></div>
+    <div class="status"><span id="freshness"></span><button class="btn sm ghost" type="button" id="unreadBtn" hidden></button><button class="btn sm ghost" type="button" id="alertsBtn" hidden>Turn on desktop alerts</button><button class="btn sm ghost" type="button" id="installBtn" hidden>Install as an app</button><a class="btn sm ghost" id="trackerLink" href="https://claude.ai/artifact/YD31RbVmBQgdeK1tZFsJv7" target="_blank" rel="noopener" style="text-decoration:none">Open Path Abroad tracker ↗</a></div>
   </header>
 
   <section class="panel" aria-labelledby="vTitle">
@@ -237,6 +245,15 @@ footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; max-wi
         <div class="ranking" id="ranking" role="list" aria-label="Country ranking"></div>
         <p class="rank-note" id="rankNote"></p>
       </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="gTitle" id="progPanel" hidden>
+    <div class="panel-head"><h2 id="gTitle">Your progress</h2><span class="small muted" id="progAsOf"></span></div>
+    <div class="prog" id="progTiles"></div>
+    <div class="two" style="gap:16px">
+      <div style="display:grid;gap:8px;align-content:start"><h3>Today's session</h3><p class="small" id="progToday"></p></div>
+      <div style="display:grid;gap:8px;align-content:start"><h3>Next deadlines</h3><div class="list" id="progDeadlines"></div></div>
     </div>
   </section>
 
@@ -501,7 +518,7 @@ footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; max-wi
         const due = p.deadline ? `${fmtDate(p.deadline)} · ${dd < 0 ? "passed" : dd + " days"}` : "No fixed date yet";
         const nw = isNewPick(p);
         return `<div class="item${nw ? " is-new" : ""}"><span class="stripe ${fit}"></span><div>
-          <div class="i-top">${nw ? '<span class="newtag">NEW</span>' : ""}<span class="i-title">${esc(p.name)}</span><span class="tag">${dot(p.country)}${C[p.country] || ""}</span><span class="tag">${fit} fit</span></div>
+          <div class="i-top">${nw ? '<span class="newtag">NEW</span>' : ""}<span class="i-title">${esc(p.name)}</span><span class="tag">${dot(p.country)}${C[p.country] || ""}</span><span class="tag">${fit} fit</span>${trackerStatus(p.id)}</div>
           <div class="i-meta">${esc(due)}${verified(p.verified)}</div>
           <p class="i-body"><b style="color:var(--ink);font-weight:500">${esc(p.funding)}</b>${p.why ? " · " + esc(p.why) : ""}</p>${linkHtml(p.link)}</div></div>`;
       }).join("") + (rows.length > 8 ? `<button class="more" type="button" id="pickMore">${state.pickAll ? "Show fewer" : `Show all ${rows.length}`}</button>` : "");
@@ -538,7 +555,7 @@ footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; max-wi
       "SCORES (0-10; DE, IT, HU, FR; weight):\n" + D.factors.map((f) => `- ${f.name}: ${IDS.map((c) => f[scenario][c]).join(", ")}; weight ${weights[f.id]}. ${f.note[scenario]}`).join("\n"),
       "TOTALS /100: " + IDS.map((c) => `${C[c]} ${t[c]}`).join(", "),
       "SIGNALS:\n" + D.signals.map((s) => `- [${s.date}] [${s.country}] ${s.title}: ${s.detail}${s.verified === false ? " (unverified)" : ""}`).join("\n"),
-      "SHORTLIST:\n" + D.picks.map((p) => `- [${p.country}] ${p.name} | ${p.funding} | deadline ${p.deadline || "n/a"} | fit ${p.fit}`).join("\n"),
+      (D.tracker ? `PROGRESS: IELTS ${D.tracker.ielts.score || "not taken, test " + (D.tracker.ielts.date || "not booked")}; sessions last 7 days ${D.tracker.sessions.last7}/7; documents ready ${D.tracker.docs.ready}/${D.tracker.docs.total}; applications submitted ${D.tracker.apps.submitted}/${D.tracker.apps.target}.\n` : "") + "SHORTLIST:\n" + D.picks.map((p) => `- [${p.country}] ${p.name} | ${p.funding} | deadline ${p.deadline || "n/a"} | fit ${p.fit}`).join("\n"),
     ].join("\n\n");
   }
   async function ask(q) {
@@ -644,7 +661,38 @@ footer { font-size: 12.5px; color: var(--muted); display: grid; gap: 6px; max-wi
     document.addEventListener("visibilitychange", () => { if (!document.hidden) checkForUpdate(); });
   }
 
-  function renderAll() { renderFreshness(); renderVerdict(); renderHeat(); renderCosts(); renderTimeline(); render.sig(); render.pick(); renderCards(); renderNotice(); }
+  /* tracker progress, synced from the Path Abroad tracker every morning */
+  function renderProgress() {
+    const T = D.tracker;
+    if (!T) return;
+    $("progPanel").hidden = false;
+    const url = safeUrl(T.url);
+    if (url) $("trackerLink").href = url;
+    $("progAsOf").innerHTML = `From your tracker, synced ${esc(fmtDate(T.asOf))}${url ? ` · <a href="${esc(url)}" target="_blank" rel="noopener">tick things off there ↗</a>` : ""}`;
+    const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+    const days = T.ielts.date ? Math.ceil((Date.parse(T.ielts.date) - Date.now()) / 86400000) : null;
+    const tiles = [
+      ["IELTS", T.ielts.score ? `${T.ielts.score}` : days !== null ? `${Math.max(days, 0)} days` : "Not booked", T.ielts.score ? `target ${T.ielts.target}` : T.ielts.date ? `test ${fmtDate(T.ielts.date)} · target ${T.ielts.target}` : "set the date in the tracker", null],
+      ["Study sessions", `${T.sessions.last7}/7`, `last 7 days · streak ${T.sessions.streak} · ${T.sessions.doneTotal}/${T.sessions.pastTotal} since start`, pct(T.sessions.last7, 7)],
+      ["Documents ready", `${T.docs.ready}/${T.docs.total}`, T.docs.missing.length ? `next: ${T.docs.missing[0]}` : "all collected", pct(T.docs.ready, T.docs.total)],
+      ["Applications", `${T.apps.submitted}/${T.apps.target}`, `submitted · ${T.apps.preparing} in preparation`, pct(T.apps.submitted, T.apps.target)],
+      ["Roadmap", `${T.steps.done}/${T.steps.total}`, "steps done", pct(T.steps.done, T.steps.total)],
+    ];
+    $("progTiles").innerHTML = tiles.map(([k, big, sub, p]) => `<div class="tile"><span class="eyebrow">${esc(k)}</span><span class="big">${esc(big)}</span><span class="small muted">${esc(sub)}</span>${p === null ? "" : `<span class="bar"><i style="width:${p}%"></i></span>`}</div>`).join("");
+    $("progToday").innerHTML = T.today ? `<b>${esc(T.today.focus)} · ${esc(T.today.minutes)} min</b>${T.today.done ? " ✓ done" : ""}<br>${esc(T.today.task)}` : "No session planned for today.";
+    $("progDeadlines").innerHTML = T.deadlines.length ? T.deadlines.map((d) => {
+      const dd = Math.ceil((Date.parse(d.date) - Date.now()) / 86400000);
+      const link = safeUrl(d.link);
+      return `<div class="item"><span class="stripe ${dd <= 7 ? "down" : dd <= 30 ? "watch" : "low"}"></span><div><div class="i-top"><span class="i-title">${link ? `<a href="${esc(link)}" target="_blank" rel="noopener">${esc(d.name)}</a>` : esc(d.name)}</span></div><div class="i-meta">${esc(fmtDate(d.date))} · ${dd <= 0 ? "today" : dd === 1 ? "1 day" : dd + " days"}${d.status === "step" ? " · roadmap step" : ""}</div></div></div>`;
+    }).join("") : '<p class="small muted">Nothing due soon.</p>';
+  }
+  const trackerStatus = (id) => {
+    const s = D.tracker && D.tracker.pickStatus ? D.tracker.pickStatus[id] : null;
+    const label = { "to-check": "To check", preparing: "Preparing", applied: "Applied", accepted: "Accepted", rejected: "Rejected", later: "Later", dropped: "Dropped" }[s];
+    return label ? `<span class="st ${s}">${label}</span>` : "";
+  };
+
+  function renderAll() { renderFreshness(); renderProgress(); renderVerdict(); renderHeat(); renderCosts(); renderTimeline(); render.sig(); render.pick(); renderCards(); renderNotice(); }
   renderAll();
 })();
 </script>
