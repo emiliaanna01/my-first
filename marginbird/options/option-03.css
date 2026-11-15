@@ -1,0 +1,14 @@
+/* Hallmark · shape: hero option 3 · genre: atmospheric · theme: custom · redesign: full · job: hire · idea: "what agencies rent you against what you own" · vibe: "premium dark, quiet confidence"
+ * paper: oklch(7.5% 0.006 292) · accent: oklch(72% 0.15 293) · display: Satoshi (by request) · body: Satoshi (by request) · hero: centred claim over two panels, the rented tasks dim, the owned system lit · nav: floating bar · footer: none (hero option) · imagery: none, the offer as type · signature: the two panels side by side
+ * axes: dark/grotesk/violet · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V5 · weakest: E, a first-screen option only; the page below follows the preview */
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./common.css");
+.h{padding-block:var(--space-2xl)}.c{display:grid;justify-items:center;text-align:center}.lead{margin-top:var(--space-lg);max-width:40ch}.actions{display:flex;gap:var(--space-sm);margin-top:var(--space-xl)}
+.vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);max-width:64rem;margin:var(--space-2xl) auto 0}
+.p{padding:var(--space-xl);border-radius:var(--radius-card);box-shadow:inset 0 0 0 1px var(--color-rule)}.p ul{margin:var(--space-md) 0 0;padding:0;list-style:none}
+.p li{padding-block:var(--space-sm);border-bottom:1px solid var(--color-rule);font:400 var(--text-xl)/1.25 var(--font-display);letter-spacing:-.02em}
+.t,.e{font-size:var(--text-sm);color:var(--color-muted)}.e{margin-top:var(--space-md)}
+.p--off li{color:var(--color-muted);text-decoration:line-through;text-decoration-thickness:1px}
+.p--on{background:radial-gradient(100% 80% at 50% 0%,var(--color-glow-faint),transparent 70%),var(--color-paper-2);box-shadow:inset 0 1px 0 var(--color-rule-strong),inset 0 0 0 1px var(--color-accent)}.p--on li{color:var(--color-ink)}.p--on .e{color:var(--color-accent)}

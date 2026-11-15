@@ -1,0 +1,13 @@
+/* Hallmark · shape: hero option 10 · genre: atmospheric · theme: custom · redesign: full · job: hire · idea: "the systems report back like a phone that works for you" · vibe: "premium dark, quiet confidence"
+ * paper: oklch(7.5% 0.006 292) · accent: oklch(72% 0.15 293) · display: Satoshi (by request) · body: Satoshi (by request) · hero: centred claim over a stack of real system notifications · nav: floating bar · footer: none (hero option) · imagery: the product built · signature: the stack of system notifications
+ * axes: dark/grotesk/violet · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V5 · weakest: E, a first-screen option only; the page below follows the preview */
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./common.css");
+.h{position:relative;padding-top:var(--space-2xl);isolation:isolate;overflow:clip;height:calc(100dvh - 80px)}.c{display:grid;justify-items:center;text-align:center}.lead{margin-top:var(--space-lg);max-width:40ch}.actions{display:flex;gap:var(--space-sm);margin-top:var(--space-xl)}
+.stack{display:grid;gap:var(--space-sm);width:100%;max-width:34rem;margin:var(--space-2xl) 0 0;padding:0;list-style:none;text-align:left}
+.stack li{padding:var(--space-md) var(--space-lg);border-radius:16px;background:color-mix(in oklab,var(--color-paper-3) 80%,transparent);box-shadow:var(--shadow-card),inset 0 1px 0 var(--color-rule-strong),inset 0 0 0 1px var(--color-rule);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.stack .s2{transform:scale(.96);opacity:.85}.stack .s3{transform:scale(.92);opacity:.7}
+.a{display:flex;justify-content:space-between;font-size:var(--text-sm);color:var(--color-muted)}.a time{color:var(--color-accent)}.b{margin-top:var(--space-2xs);color:var(--color-ink)}
+.glow{position:absolute;z-index:-1;left:50%;bottom:-20%;width:60%;aspect-ratio:1.6;translate:-50% 0;background:radial-gradient(closest-side,var(--color-glow),transparent)}

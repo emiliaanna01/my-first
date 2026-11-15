@@ -1,0 +1,14 @@
+/* Hallmark · shape: hero option 6 · genre: atmospheric · theme: custom · redesign: full · job: hire · idea: "four real results, one glance" · vibe: "premium dark, quiet confidence"
+ * paper: oklch(7.5% 0.006 292) · accent: oklch(72% 0.15 293) · display: Satoshi (by request) · body: Satoshi (by request) · hero: claim on the left, a bento of four real results on the right · nav: floating bar · footer: none (hero option) · imagery: none, results as built tiles · signature: the results bento
+ * axes: dark/grotesk/violet · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V5 · weakest: E, a first-screen option only; the page below follows the preview */
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./common.css");
+.h{min-height:calc(100dvh - 80px);display:grid;align-items:center}.g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-2xl);align-items:center}
+h1{font-size:clamp(2.5rem,3.6vw + .6rem,4.25rem)}.lead{margin-top:var(--space-lg);max-width:34ch}.actions{display:flex;gap:var(--space-sm);margin-top:var(--space-xl)}
+.bento{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-md)}.t{display:grid;align-content:end;gap:var(--space-xs);min-height:200px;padding:var(--space-lg);border-radius:var(--radius-card);background:var(--color-paper-2);box-shadow:inset 0 0 0 1px var(--color-rule)}
+.t--lead{grid-column:span 3;min-height:240px;background:radial-gradient(90% 90% at 80% 0%,var(--color-glow),transparent 70%),var(--color-paper-2);box-shadow:inset 0 1px 0 var(--color-rule-strong),inset 0 0 0 1px var(--color-rule)}
+.k{font-size:var(--text-sm);color:var(--color-muted)}.n{font:400 var(--text-display-s)/1 var(--font-display);letter-spacing:-.04em;color:var(--color-ink)}.t--lead .n{font-size:clamp(3.5rem,5vw,5.5rem)}
+s{font-size:.45em;color:var(--color-muted);text-decoration-thickness:1px}
+.t:not(.t--lead) .n{font-size:var(--text-2xl)}

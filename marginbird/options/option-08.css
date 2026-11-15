@@ -1,0 +1,11 @@
+/* Hallmark · shape: hero option 8 · genre: atmospheric · theme: custom · redesign: full · job: hire · idea: "the same quiet confidence, in daylight" · vibe: "premium dark, quiet confidence"
+ * paper: oklch(7.5% 0.006 292) · accent: oklch(72% 0.15 293) · display: Satoshi (by request) · body: Satoshi (by request) · hero: centred claim over Jake's system window on a light ground · nav: floating bar · footer: none (hero option) · imagery: the product built · signature: Jake's system window on paper
+ * axes: dark/grotesk/violet · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V5 · weakest: E, a first-screen option only; the page below follows the preview */
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./common.css");
+:root{--color-paper:oklch(97.5% 0.004 292);--color-paper-2:oklch(99.5% 0.002 292);--color-paper-3:oklch(95% 0.006 292);--color-ink:oklch(15% 0.01 292);--color-ink-2:oklch(15% 0.01 292 / .7);--color-muted:oklch(15% 0.01 292 / .55);--color-rule:oklch(15% 0.01 292 / .09);--color-rule-strong:oklch(15% 0.01 292 / .16);--color-button:oklch(15% 0.01 292);--color-button-ink:oklch(98% 0.003 292);--color-accent:oklch(52% 0.19 293);--shadow-card:0 30px 70px -30px oklch(15% 0.03 292 / .3)}
+.nav__bar{background:color-mix(in oklab,var(--color-paper-2) 85%,transparent)}
+.h{padding-top:var(--space-2xl)}.c{display:grid;justify-items:center;text-align:center}.lead{margin-top:var(--space-lg);max-width:40ch}.actions{display:flex;gap:var(--space-sm);margin-top:var(--space-xl)}
+.w{width:100%;max-width:64rem;margin-top:var(--space-2xl);text-align:left}

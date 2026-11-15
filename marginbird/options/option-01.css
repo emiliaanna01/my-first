@@ -1,0 +1,11 @@
+/* Hallmark · shape: hero option 1 · genre: atmospheric · theme: custom · redesign: full · job: hire · idea: "the claim beside the system that proves it" · vibe: "premium dark, quiet confidence"
+ * paper: oklch(7.5% 0.006 292) · accent: oklch(72% 0.15 293) · display: Satoshi (by request) · body: Satoshi (by request) · hero: split, claim left, Jake's system window right · nav: floating bar · footer: none (hero option) · imagery: the product built · signature: Jake's system window
+ * axes: dark/grotesk/violet · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V5 · weakest: E, a first-screen option only; the page below follows the preview */
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./common.css");
+.h{min-height:calc(100dvh - 80px);display:grid;align-items:center}.g{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-2xl);align-items:center}
+h1{font-size:clamp(2.5rem,3.6vw + .6rem,4.25rem)}.lead{margin-top:var(--space-lg);max-width:34ch}.actions{display:flex;gap:var(--space-sm);margin-top:var(--space-xl)}
+.w{position:relative;isolation:isolate}.glow{position:absolute;z-index:-1;inset:-20% -10%;background:radial-gradient(closest-side,var(--color-glow),transparent)}
+.app__body{grid-template-columns:minmax(0,1fr)}.bill{border-left:0;border-top:var(--rule-hair) solid var(--color-rule)}

@@ -1,0 +1,14 @@
+/* Hallmark · shape: hero option 5 · genre: atmospheric · theme: custom · redesign: full · job: hire · idea: "the sites we built are the opening argument" · vibe: "premium dark, quiet confidence"
+ * paper: oklch(7.5% 0.006 292) · accent: oklch(72% 0.15 293) · display: Satoshi (by request) · body: Satoshi (by request) · hero: centred claim over three client homepages fanned like prints · nav: floating bar · footer: none (hero option) · imagery: client sites captured live · signature: three real sites fanned under the claim
+ * axes: dark/grotesk/violet · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R5 V5 · weakest: E, a first-screen option only; the page below follows the preview */
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./common.css");
+.h{position:relative;padding-top:var(--space-2xl);overflow:clip;isolation:isolate;height:calc(100dvh - 80px)}.c{display:grid;justify-items:center;text-align:center}
+.lead{margin-top:var(--space-lg);max-width:40ch}.actions{display:flex;gap:var(--space-sm);margin-top:var(--space-xl)}
+.fan{position:relative;display:flex;justify-content:center;margin-top:var(--space-2xl);height:520px}
+.fan img{position:absolute;top:0;width:min(26rem,30%);height:640px;object-fit:cover;object-position:top;border-radius:var(--radius-card);box-shadow:var(--shadow-card),0 0 0 1px var(--color-rule)}
+.fan .m{z-index:2;width:min(30rem,34%)}.fan .l{transform:translateX(-62%) rotate(-6deg) translateY(30px)}.fan .r{transform:translateX(62%) rotate(6deg) translateY(30px)}
+.glow{position:absolute;z-index:-1;left:50%;bottom:-10%;width:70%;aspect-ratio:2;translate:-50% 0;background:radial-gradient(closest-side,var(--color-glow),transparent)}
+@media (prefers-reduced-motion: reduce){.fan img{transition:none}}
