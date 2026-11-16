@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-15",
+ "updated": "2026-11-16",
  "countries": [
   {
    "id": "de",
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (20 days away). Today: SOP draft 1 (60 min); book a January IELTS backup date.",
-    "Get the NSU English-medium letter now: Debrecen (Hungary), Bologna QF and EPOG accept it; Corvinus tests English itself.",
-    "Stipendium Hungaricum 2027/28 call still not out; plan Corvinus MSc Finance + Debrecen MSc International Economy and Business, deadline expected 15 Jan.",
-    "Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan. Italy: Padua's second call runs 1 Dec – 1 Mar."
+    "IELTS is on 5 Dec (19 days away). Today: Cambridge 18 Test 4 Listening (30 min); SOP draft 1 is still open.",
+    "Get the NSU English-medium letter now: BME and Debrecen (Hungary), Bologna QF and EPOG accept it; Corvinus tests English itself.",
+    "Stipendium Hungaricum 2027/28 call still not out (expected ~15 Jan): shortlist Corvinus MSc Finance, BME MSc Finance, Debrecen IEB.",
+    "Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan. Italy: Pavia window 1 closes 18 Nov; Padua's second call runs 1 Dec – 1 Mar."
    ]
   },
   "sch": {
@@ -241,9 +241,9 @@
     }
    ],
    "next": [
-    "Eiffel: TSM Toulouse closes 16 Nov; email a Paris-Saclay Master's coordinator before 26 Nov. Universities file by 6 Jan 2027.",
+    "Eiffel: TSM Toulouse closes today (16 Nov); email a Paris-Saclay Master's coordinator before 26 Nov. Universities file by 6 Jan 2027.",
     "Études en France: programme choices lock 18 Nov; Master's deadline 15 Jan 2027.",
-    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan.",
+    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan (MOI exemption).",
     "Keep the Italy and Hungary applications running until an award letter arrives."
    ]
   },
@@ -658,6 +658,18 @@
    "factor": "visa",
    "link": "https://www.thedailystar.net/news/bangladesh/education/news/german-embassy-introduce-digital-student-visa-process-january-4324251",
    "verified": false
+  },
+  {
+   "id": "hu-bme-finance-moi",
+   "date": "2026-11-16",
+   "added": "2026-11-16",
+   "country": "hu",
+   "title": "BME Budapest MSc Finance: Stipendium Hungaricum option that accepts an MOI letter",
+   "detail": "BME's English-taught MSc Finance takes a BBA Finance, accepts a Medium of Instruction certificate as B2 proof and admits by online test and interview. Self-funded it costs €2,200 a semester; the 2027/28 SH call is still not published.",
+   "impact": "up",
+   "factor": "programmes",
+   "link": "https://apply.stipendiumhungaricum.hu/courses/course/1628",
+   "verified": true
   }
  ],
  "picks": [
@@ -984,6 +996,19 @@
    "fit": "high",
    "why": "Accepts your NSU English-medium certificate instead of IELTS and takes BBA graduates; a solid second SH choice next to Corvinus.",
    "link": "https://apply.stipendiumhungaricum.hu/courses/course/957",
+   "verified": true
+  },
+  {
+   "id": "hu-bme-finance",
+   "name": "BME Budapest: MSc Finance",
+   "country": "hu",
+   "kind": "program",
+   "funding": "Stipendium Hungaricum (full) or €2,200/semester self-funded",
+   "deadline": null,
+   "added": "2026-11-16",
+   "fit": "high",
+   "why": "Takes your BBA Finance and NSU English-medium letter instead of IELTS; a third SH finance choice next to Corvinus and Debrecen.",
+   "link": "https://apply.stipendiumhungaricum.hu/courses/course/1628",
    "verified": true
   }
  ]
