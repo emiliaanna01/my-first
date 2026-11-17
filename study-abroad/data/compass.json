@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16",
+ "updated": "2026-11-17",
  "countries": [
   {
    "id": "de",
@@ -57,7 +57,7 @@
     "fr": 9
    },
    "note": {
-    "self": "Germany: no tuition but €11,904 blocked. Italy: income-based fees, cheap rent, €10,180/yr proof of funds. Hungary: €3–5k fees, cheapest living. France: about €3,950/yr fees.",
+    "self": "Germany: no tuition but €11,904 blocked. Italy: income-based fees, cheap rent, €10,180/yr proof of funds. Hungary: €3–5k fees, cheapest living. France: about €3,950/yr fees and €877.50/month (€10,530/yr) proof of funds.",
     "sch": "Erasmus €1,400/month, DAAD ~€992, Eiffel ~€1,181. Hungary's stipend (HUF 43,700 ≈ €110) covers little beyond the dorm."
    }
   },
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (19 days away). Today: Cambridge 18 Test 4 Listening (30 min); SOP draft 1 is still open.",
-    "Get the NSU English-medium letter now: BME and Debrecen (Hungary), Bologna QF and EPOG accept it; Corvinus tests English itself.",
-    "Stipendium Hungaricum 2027/28 call still not out (expected ~15 Jan): shortlist Corvinus MSc Finance, BME MSc Finance, Debrecen IEB.",
-    "Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan. Italy: Pavia window 1 closes 18 Nov; Padua's second call runs 1 Dec – 1 Mar."
+    "IELTS is on 5 Dec (18 days). Today: Cambridge 18 Test 1 Reading 1–2 (45 min); last week's 7 sessions and SOP draft 1 are still open.",
+    "Pavia MSc Finance: window 1 closes tomorrow (18 Nov); no need to rush, the final window runs to 24 May 2027.",
+    "Get the NSU English-medium letter now: BME and Debrecen (Hungary), Bologna QF and EPOG accept it.",
+    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan. SH 2027/28 call still not out (expected ~15 Jan)."
    ]
   },
   "sch": {
@@ -241,8 +241,8 @@
     }
    ],
    "next": [
-    "Eiffel: TSM Toulouse closes today (16 Nov); email a Paris-Saclay Master's coordinator before 26 Nov. Universities file by 6 Jan 2027.",
-    "Études en France: programme choices lock 18 Nov; Master's deadline 15 Jan 2027.",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (9 days); results by 7 Dec.",
+    "Études en France: programme choices lock 18 Nov (tomorrow); Master's deadline 15 Jan 2027.",
     "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan (MOI exemption).",
     "Keep the Italy and Hungary applications running until an award letter arrives."
    ]
@@ -423,12 +423,12 @@
    "id": "fr-funds-raised",
    "date": "2026-08-01",
    "country": "fr",
-   "title": "France raised the student-visa funds requirement from 1 Aug 2026",
-   "detail": "The old figure was €615/month. Check the new amount on the Campus France Bangladesh checklist before you plan.",
-   "impact": "watch",
+   "title": "France: student-visa funds now €877.50 a month (was €615)",
+   "detail": "The French government's service-public page now sets the minimum at €877.50/month, about €10,530 (14.7 lakh BDT) a year, slightly above Italy's €10,180. France's cost score stays at 6; the cost note now shows the figure.",
+   "impact": "down",
    "factor": "cost",
-   "link": "https://bangladesh.campusfrance.org/",
-   "verified": false,
+   "link": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2231",
+   "verified": true,
    "added": "2026-10-25"
   },
   {
@@ -669,6 +669,18 @@
    "impact": "up",
    "factor": "programmes",
    "link": "https://apply.stipendiumhungaricum.hu/courses/course/1628",
+   "verified": true
+  },
+  {
+   "id": "fr-saclay-eiffel-results-7dec",
+   "date": "2026-11-17",
+   "added": "2026-11-17",
+   "country": "fr",
+   "title": "Paris-Saclay Eiffel: contact a coordinator by 26 Nov, results by 7 Dec",
+   "detail": "Re-checked on the official page: you email the coordinator of one Master's by 26 Nov 2026 and hear by 7 Dec. Preselected or not, the normal Master's application opens in February 2027.",
+   "impact": "watch",
+   "factor": "funding",
+   "link": "https://www.universite-paris-saclay.fr/en/admission/bourses-et-aides-financieres/france-excellence-eiffel-scholarship",
    "verified": true
   }
  ],
@@ -1009,6 +1021,19 @@
    "fit": "high",
    "why": "Takes your BBA Finance and NSU English-medium letter instead of IELTS; a third SH finance choice next to Corvinus and Debrecen.",
    "link": "https://apply.stipendiumhungaricum.hu/courses/course/1628",
+   "verified": true
+  },
+  {
+   "id": "fr-visa-funds",
+   "name": "France student visa: proof of funds €877.50/month",
+   "country": "fr",
+   "kind": "visa",
+   "funding": "Not a scholarship: the minimum you must show",
+   "deadline": null,
+   "added": "2026-11-17",
+   "fit": "medium",
+   "why": "About 14.7 lakh BDT a year sits inside your 15–25 lakh budget but leaves little for France's ~€3,950 fees unless Eiffel pays.",
+   "link": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2231",
    "verified": true
   }
  ]

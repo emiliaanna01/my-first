@@ -480,6 +480,22 @@
   "verified": true
  },
  {
+  "id": "fr-visa-funds",
+  "country": "France",
+  "deadline": null,
+  "deadlineNote": "Applies to visa files lodged now; the amount is tied to 47% of the French gross minimum wage, so it can rise again when the SMIC rises.",
+  "eligibility": "Long-stay student visa (VLS-TS) after the Études en France procedure with Campus France Bangladesh. Not required if you passed the entrance exam of a school that has a state agreement.",
+  "field": "Any",
+  "fit": "medium",
+  "funding": "Not a scholarship. Minimum resources to show: €877.50 per month (about €10,530 or BDT 14.7 lakh a year at 140), up from €615. Eiffel and French-government scholars meet it through the award.",
+  "kind": "visa",
+  "link": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2231",
+  "name": "France student visa: proof of funds €877.50/month",
+  "notes": "Read 2026-11-17 on service-public.gouv.fr (French government, page verified 1 Aug 2026; legal basis CESEDA art. R422-7). Third-party reports cite Décret n° 2026-526 of 22 June 2026. Campus France Bangladesh's own checklist does not yet show the figure: https://www.bangladesh.campusfrance.org/ . Slightly above Italy's €10,179.85/yr and below Germany's €11,904.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "hu-bme-finance",
   "country": "Hungary",
   "deadline": null,
