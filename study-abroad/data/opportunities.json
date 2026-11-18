@@ -160,6 +160,22 @@
   "verified": false
  },
  {
+  "id": "hu-corvinus-finance",
+  "country": "Hungary",
+  "deadline": "2027-01-20",
+  "deadlineNote": "2027/28 (classes start 30 Aug 2027): early-bird pre-deadline 20 Jan 2027, 23:59 CET, with an application discount; final deadline 12 Aug 2027. Stipendium Hungaricum route follows the SH call (expected ~15 Jan 2027).",
+  "eligibility": "English only, 4 semesters. Admission requirements and English-proof rules (MOI letter?) are on a separate page I could not read; the 2026 Corvinus Scholarship needed 75/100 admission points for Finance, max 20 places.",
+  "field": "Finance",
+  "fit": "medium",
+  "funding": "Stipendium Hungaricum covers tuition + stipend + housing; self-funded non-EEA tuition is €8,000/year, with a Corvinus Scholarship (tuition) for top-scoring admits",
+  "kind": "program",
+  "link": "https://uni-corvinus.hu/post/landing-page/msc-finance/?lang=en",
+  "name": "Corvinus University of Budapest: MSc Finance",
+  "notes": "Official page read 2026-10-26: English-only, non-EEA tuition €4,000/semester. Scholarship page confirms SH applications for Sept 2027 are expected to open in autumn 2026. Update 2026-11-15 from the official SH portal (https://apply.stipendiumhungaricum.hu/courses/course/1725): no English certificate is listed; English is assessed in Corvinus's own online entrance exam (SkillCert written test on language, quantitative analysis and logical reasoning, plus a 15-minute Teams interview), unless you hold an exempting qualification. Still email admissions to confirm the NSU English-medium letter is enough. Update 2026-11-18 from Corvinus's official DreamApply course page (https://corvinus-university.dreamapply.com/courses/course/20): 2027/28 intake is open; pre-deadline 20 Jan 2027 (discount), final 12 Aug 2027; €4,000/semester plus a one-time €100 application fee; 'no specific English language requirements', English is tested in the entrance exam. The separate Corvinus Scholarship (tuition waiver) page still shows only the 2026 round.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "it-bocconi-msc-finance",
   "country": "Italy",
   "deadline": "2027-01-26",
@@ -187,7 +203,7 @@
   "kind": "scholarship",
   "link": "https://www.epog.eu/admission-and-scholarships/admission/",
   "name": "Erasmus Mundus EPOG (Economic Policies for the Global Bifurcation)",
-  "notes": "Can apply WITHOUT IELTS: use an NSU English-medium (MOI) letter. Re-read the official admission page 2026-10-30: deadline 27 Jan 2027, 13:00 Paris time confirmed; English exemption applies if your degree was taught entirely in English; Bachelor GPA should be at least 70% of the scale and you need at least 24 ECTS in economics and 6 ECTS in statistics/econometrics, so check your NSU transcript against those. Apply now; strongest immediate option.",
+  "notes": "Can apply WITHOUT IELTS: use an NSU English-medium (MOI) letter. Re-read the official admission page 2026-10-30: deadline 27 Jan 2027, 13:00 Paris time confirmed; English exemption applies if your degree was taught entirely in English; Bachelor GPA should be at least 70% of the scale and you need at least 24 ECTS in economics and 6 ECTS in statistics/econometrics, so check your NSU transcript against those. Apply now; strongest immediate option. Re-checked 2026-11-18 on the official page: still 27 Jan 2027, 13:00 Paris (some aggregators wrongly say 29 Jan); GRE optional; English proof can come by 10 June.",
   "status": "to-check",
   "verified": true
  },
@@ -508,22 +524,6 @@
   "link": "https://apply.stipendiumhungaricum.hu/courses/course/1628",
   "name": "Budapest University of Technology and Economics (BME): MSc Finance",
   "notes": "Read on the official SH portal and BME GTK pages (https://www.gtk.bme.hu/en/for-applicants/master-programmes/master-in-finance) on 2026-11-16. MOI-friendly: the NSU English-medium letter counts as English proof. A third Hungarian SH finance choice next to Corvinus MSc Finance and Debrecen IEB; SH allows several programme choices. Self-funded it is also among the cheapest English finance MSc on the list.",
-  "status": "to-check",
-  "verified": true
- },
- {
-  "id": "hu-corvinus-finance",
-  "country": "Hungary",
-  "deadline": null,
-  "deadlineNote": "2027 intake starts September 2027. Corvinus has not published 2027 dates on the pages I read; Stipendium Hungaricum is expected to open autumn 2026, close about 15 Jan 2027.",
-  "eligibility": "English only, 4 semesters. Admission requirements and English-proof rules (MOI letter?) are on a separate page I could not read; the 2026 Corvinus Scholarship needed 75/100 admission points for Finance, max 20 places.",
-  "field": "Finance",
-  "fit": "medium",
-  "funding": "Stipendium Hungaricum covers tuition + stipend + housing; self-funded non-EEA tuition is €8,000/year, with a Corvinus Scholarship (tuition) for top-scoring admits",
-  "kind": "program",
-  "link": "https://uni-corvinus.hu/post/landing-page/msc-finance/?lang=en",
-  "name": "Corvinus University of Budapest: MSc Finance",
-  "notes": "Official page read 2026-10-26: English-only, non-EEA tuition €4,000/semester. Scholarship page confirms SH applications for Sept 2027 are expected to open in autumn 2026. Update 2026-11-15 from the official SH portal (https://apply.stipendiumhungaricum.hu/courses/course/1725): no English certificate is listed; English is assessed in Corvinus's own online entrance exam (SkillCert written test on language, quantitative analysis and logical reasoning, plus a 15-minute Teams interview), unless you hold an exempting qualification. Still email admissions to confirm the NSU English-medium letter is enough.",
   "status": "to-check",
   "verified": true
  },

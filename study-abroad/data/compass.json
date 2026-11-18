@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17",
+ "updated": "2026-11-18",
  "countries": [
   {
    "id": "de",
@@ -212,9 +212,9 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (18 days). Today: Cambridge 18 Test 1 Reading 1–2 (45 min); last week's 7 sessions and SOP draft 1 are still open.",
-    "Pavia MSc Finance: window 1 closes tomorrow (18 Nov); no need to rush, the final window runs to 24 May 2027.",
-    "Get the NSU English-medium letter now: BME and Debrecen (Hungary), Bologna QF and EPOG accept it.",
+    "IELTS is on 5 Dec (17 days). Today: Writing Task 2 essay (45 min). No sessions are ticked done since 20 Oct, so restart with today's one essay.",
+    "Get the NSU English-medium letter now: EPOG (27 Jan), BME and Debrecen (Hungary) and Bologna QF accept it; Corvinus tests English itself.",
+    "Corvinus MSc Finance: early-bird deadline 20 Jan 2027 (fee discount), final 12 Aug.",
     "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan. SH 2027/28 call still not out (expected ~15 Jan)."
    ]
   },
@@ -241,9 +241,9 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (9 days); results by 7 Dec.",
-    "Études en France: programme choices lock 18 Nov (tomorrow); Master's deadline 15 Jan 2027.",
-    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan (MOI exemption).",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (8 days); results by 7 Dec.",
+    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan (MOI exemption, re-checked today).",
+    "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
     "Keep the Italy and Hungary applications running until an award letter arrives."
    ]
   },
@@ -682,6 +682,18 @@
    "factor": "funding",
    "link": "https://www.universite-paris-saclay.fr/en/admission/bourses-et-aides-financieres/france-excellence-eiffel-scholarship",
    "verified": true
+  },
+  {
+   "id": "hu-corvinus-2027-open",
+   "date": "2026-11-18",
+   "added": "2026-11-18",
+   "country": "hu",
+   "title": "Corvinus MSc Finance 2027/28 is open: early-bird deadline 20 Jan 2027",
+   "detail": "Corvinus's official application page lists a discounted pre-deadline of 20 Jan 2027 and a final deadline of 12 Aug 2027, at €4,000 a semester. It sets no English certificate; English is tested in its own online entrance exam.",
+   "impact": "up",
+   "factor": "admission",
+   "link": "https://corvinus-university.dreamapply.com/courses/course/20",
+   "verified": true
   }
  ],
  "picks": [
@@ -821,11 +833,11 @@
    "country": "hu",
    "kind": "program",
    "funding": "Stipendium Hungaricum eligible",
-   "deadline": null,
+   "deadline": "2027-01-20",
    "fit": "medium",
    "why": "Hungary's top business school; pick it as one of your two SH choices.",
    "link": "https://www.uni-corvinus.hu/",
-   "verified": false,
+   "verified": true,
    "added": "2026-10-25"
   },
   {
