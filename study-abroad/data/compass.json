@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "countries": [
   {
    "id": "de",
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (17 days). Today: Writing Task 2 essay (45 min). No sessions are ticked done since 20 Oct, so restart with today's one essay.",
-    "Get the NSU English-medium letter now: EPOG (27 Jan), BME and Debrecen (Hungary) and Bologna QF accept it; Corvinus tests English itself.",
-    "Corvinus MSc Finance: early-bird deadline 20 Jan 2027 (fee discount), final 12 Aug.",
-    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan. SH 2027/28 call still not out (expected ~15 Jan)."
+    "IELTS is on 5 Dec (16 days). Today: Speaking Part 2, 3 cue cards (30 min). Nothing ticked done since 20 Oct, so one session today restarts your streak.",
+    "Get the NSU English-medium letter now: EPOG (27 Jan), Debrecen and BME (Hungary) and Bologna QF accept it; Corvinus tests English itself.",
+    "Corvinus MSc Finance early-bird deadline 20 Jan 2027; SH 2027/28 call still not out (expected ~15 Jan). Szeged IEB is a third SH choice.",
+    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan."
    ]
   },
   "sch": {
@@ -241,8 +241,8 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (8 days); results by 7 Dec.",
-    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan (MOI exemption, re-checked today).",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (7 days); results by 7 Dec.",
+    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan (accepts an English-taught degree, re-checked today).",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
     "Keep the Italy and Hungary applications running until an award letter arrives."
    ]
@@ -694,6 +694,42 @@
    "factor": "admission",
    "link": "https://corvinus-university.dreamapply.com/courses/course/20",
    "verified": true
+  },
+  {
+   "id": "hu-szeged-ieb-sh",
+   "date": "2026-11-19",
+   "added": "2026-11-19",
+   "country": "hu",
+   "title": "Szeged MA International Economy and Business is a third SH finance-leaning option",
+   "detail": "The official SH portal lists this 4-semester English MA with finance and accounting courses for economics/business graduates; it asks for IELTS 6.0 and doesn't mention an MOI letter. Not open yet; 2027/28 SH call still unpublished.",
+   "impact": "up",
+   "factor": "programmes",
+   "link": "https://apply.stipendiumhungaricum.hu/courses/course/1560",
+   "verified": true
+  },
+  {
+   "id": "eu-deai-11jan",
+   "date": "2026-11-19",
+   "added": "2026-11-19",
+   "country": "eu",
+   "title": "Erasmus Mundus DEAI (data/AI): grant deadline 11 Jan 2027",
+   "detail": "Official page: grant applications close 11 Jan 2027 at 12:00 GMT, IELTS 5.5 accepted. Its selection score rewards computer-science credits, so a BBA Finance is a long shot.",
+   "impact": "watch",
+   "factor": "funding",
+   "link": "https://deai.ulb.be/home/students/admission/",
+   "verified": true
+  },
+  {
+   "id": "de-portal-reregister-conflict",
+   "date": "2026-11-15",
+   "added": "2026-11-19",
+   "country": "de",
+   "title": "German visa: embassy page and 15 Nov news disagree on re-registering",
+   "detail": "The embassy page (still dated 4 Jun 2026) says people on the old list need not re-register; Prothom Alo's 15 Nov report says everyone must reapply in the portal from 1 Jan 2027. It only matters once you hold an admission letter; re-check in January.",
+   "impact": "watch",
+   "factor": "visa",
+   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
+   "verified": true
   }
  ],
  "picks": [
@@ -1046,6 +1082,32 @@
    "fit": "medium",
    "why": "About 14.7 lakh BDT a year sits inside your 15–25 lakh budget but leaves little for France's ~€3,950 fees unless Eiffel pays.",
    "link": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2231",
+   "verified": true
+  },
+  {
+   "id": "hu-szeged-ieb",
+   "name": "University of Szeged: MA International Economy and Business",
+   "country": "hu",
+   "kind": "program",
+   "funding": "Stipendium Hungaricum: fees + stipend + dorm",
+   "deadline": null,
+   "added": "2026-11-19",
+   "fit": "medium",
+   "why": "Backup SH choice with finance and accounting courses that takes a BBA; needs your IELTS (6.0).",
+   "link": "https://apply.stipendiumhungaricum.hu/courses/course/1560",
+   "verified": true
+  },
+  {
+   "id": "emjm-deai",
+   "name": "Erasmus Mundus DEAI (Data Engineering and AI)",
+   "country": "eu",
+   "kind": "scholarship",
+   "funding": "Full Erasmus Mundus scholarship",
+   "deadline": "2027-01-11",
+   "added": "2026-11-19",
+   "fit": "low",
+   "why": "A real data route, but scoring favours computer-science credits, so only use a slot on it if you want pure data/AI.",
+   "link": "https://deai.ulb.be/home/students/admission/",
    "verified": true
   }
  ]

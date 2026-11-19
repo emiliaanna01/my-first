@@ -112,6 +112,22 @@
   "verified": true
  },
  {
+  "id": "emjm-deai",
+  "country": "EU (Belgium / Spain / Austria / Italy / France)",
+  "deadline": "2027-01-11",
+  "deadlineNote": "Grant period opened 20 Oct 2026; strict deadline 11 Jan 2027, 12:00 GMT; reference letters by 18 Jan 2027. Self-funded round for non-EU: 1 Mar - 15 May 2027.",
+  "eligibility": "Any 180-ECTS bachelor's from a ranked/WHED-listed university; final-year students may apply. English B2 by test (IELTS Academic 5.5, TOEFL iBT 72); MOI not mentioned. Selection score rewards the share of computer-science credits in your bachelor's.",
+  "field": "Data engineering, AI",
+  "fit": "low",
+  "funding": "Full Erasmus Mundus scholarship (tuition + monthly allowance) for grant-period applicants",
+  "kind": "scholarship",
+  "link": "https://deai.ulb.be/home/students/admission/",
+  "name": "Erasmus Mundus DEAI (Data Engineering and Artificial Intelligence)",
+  "notes": "Read on the official admission page 2026-11-19 (2027-2029 cohort). Real Erasmus Mundus option in data, but a BBA Finance with few CS credits will score low; only worth one of your 3 EM slots if you want a pure data/AI route. Needs your 5 Dec IELTS result before 11 Jan.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "emjm-glocal",
   "country": "EU (UK / Spain / Netherlands …)",
   "deadline": "2027-01-14",
@@ -411,7 +427,7 @@
   "kind": "visa",
   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
   "name": "German Embassy Dhaka: student visa waiting list",
-  "notes": "NEW 15 Nov 2026 (embassy press release, reported by The Daily Star, TBS, Prothom Alo): from 1 Jan 2027 Bachelor's and Master's students apply digitally through the Consular Services Portal; VFS pre-checks the file and the visit is mainly biometrics, fee and document check. The old appointment waiting list is discontinued at the end of 2026, so everyone, including people already on it, must create a new account and apply again. Embassy page (4 Jun 2026) still says 27+ months for Master's applicants WITHOUT a German or EU scholarship; German-gov/EU-funded scholars (DAAD, Erasmus Mundus) are processed right after registration. News: https://www.thedailystar.net/news/bangladesh/education/news/german-embassy-introduce-digital-student-visa-process-january-4324251",
+  "notes": "NEW 15 Nov 2026 (embassy press release, reported by The Daily Star, TBS, Prothom Alo): from 1 Jan 2027 Bachelor's and Master's students apply digitally through the Consular Services Portal; VFS pre-checks the file and the visit is mainly biometrics, fee and document check. The old appointment waiting list is discontinued at the end of 2026, so everyone, including people already on it, must create a new account and apply again. Embassy page (4 Jun 2026) still says 27+ months for Master's applicants WITHOUT a German or EU scholarship; German-gov/EU-funded scholars (DAAD, Erasmus Mundus) are processed right after registration. News: https://www.thedailystar.net/news/bangladesh/education/news/german-embassy-introduce-digital-student-visa-process-january-4324251 . Re-read 2026-11-19: the official page is still the 4 Jun 2026 version and still says people on the old list need not re-register, which conflicts with the 15 Nov press reports (Prothom Alo 15 Nov says they must reapply). Doesn't affect you until you hold an admission letter; trust the newer press release but re-check the embassy page in January.",
   "status": "to-check",
   "verified": true
  },
@@ -556,6 +572,22 @@
   "link": "https://apply.stipendiumhungaricum.hu/courses/course/957",
   "name": "University of Debrecen: MSc International Economy and Business",
   "notes": "Read on the official Stipendium Hungaricum portal 2026-11-15. MOI-friendly: an NSU English-medium certificate is listed as valid English proof, so you can apply even before your IELTS result. 4 semesters, 120 ECTS, taught in English. Good second SH choice next to Corvinus MSc Finance.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
+  "id": "hu-szeged-ieb",
+  "country": "Hungary",
+  "deadline": null,
+  "deadlineNote": "Listed on the Stipendium Hungaricum portal as 'not available for applying at the moment'. The 2027/28 SH call is not published yet; expect about mid-January 2027.",
+  "eligibility": "Bachelor's with at least 60 ECTS in economics, business or social sciences (BBA Finance fits). English B2: IELTS 6.0 or TOEFL 95 or equivalent; the page does not say an English-medium letter is accepted. 2 references, motivation letter, online oral interview.",
+  "field": "International economics, finance, accounting, management",
+  "fit": "medium",
+  "funding": "Stipendium Hungaricum eligible (tuition + monthly stipend + dorm + insurance); self-funded fee not stated on the SH page",
+  "kind": "program",
+  "link": "https://apply.stipendiumhungaricum.hu/courses/course/1560",
+  "name": "University of Szeged: MA International Economy and Business",
+  "notes": "Read on the official Stipendium Hungaricum portal 2026-11-19. 4 semesters, 120 ECTS, in English; courses include international economics, finance and accounting. A backup SH choice behind Corvinus MSc Finance and Debrecen IEB; needs your IELTS result, unlike Debrecen.",
   "status": "to-check",
   "verified": true
  },
