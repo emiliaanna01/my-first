@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-20",
  "countries": [
   {
    "id": "de",
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (16 days). Today: Speaking Part 2, 3 cue cards (30 min). Nothing ticked done since 20 Oct, so one session today restarts your streak.",
-    "Get the NSU English-medium letter now: EPOG (27 Jan), Debrecen and BME (Hungary) and Bologna QF accept it; Corvinus tests English itself.",
-    "Corvinus MSc Finance early-bird deadline 20 Jan 2027; SH 2027/28 call still not out (expected ~15 Jan). Szeged IEB is a third SH choice.",
-    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan."
+    "IELTS is on 5 Dec (15 days). Today: Writing Task 1, one chart in 20 min (30 min). Nothing ticked done since 20 Oct, so one session today restarts your streak.",
+    "Get the NSU English-medium letter now: EPOG/GLOBAL COOP (27 Jan), Debrecen and BME (Hungary) and Bologna QF accept an English-taught degree; Corvinus tests English itself.",
+    "Corvinus MSc Finance early-bird deadline 20 Jan 2027; SH 2027/28 call still not out (official page still shows 2026/27).",
+    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or new GLOBAL COOP 27 Jan."
    ]
   },
   "sch": {
@@ -241,8 +241,8 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (7 days); results by 7 Dec.",
-    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG 27 Jan (accepts an English-taught degree, re-checked today).",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (6 days); results by 7 Dec.",
+    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan (same portal). EMLE (31 Dec) only if law-economics appeals.",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
     "Keep the Italy and Hungary applications running until an award letter arrives."
    ]
@@ -730,6 +730,30 @@
    "factor": "visa",
    "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
    "verified": true
+  },
+  {
+   "id": "eu-global-coop-27jan",
+   "date": "2026-11-20",
+   "added": "2026-11-20",
+   "country": "eu",
+   "title": "New Erasmus Mundus GLOBAL COOP opens on EPOG's portal, deadline 27 Jan 2027",
+   "detail": "The official EPOG application platform lists GLOBAL COOP (economic policies for new global cooperation) for 2027-2029 beside EPOG-JM, closing 27 Jan 2027 at 13:00 Paris. Listings say one track covers the international monetary and financial system.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://application.epog.eu/",
+   "verified": true
+  },
+  {
+   "id": "eu-emle-31dec",
+   "date": "2026-11-20",
+   "added": "2026-11-20",
+   "country": "eu",
+   "title": "Erasmus Mundus EMLE: non-European deadline 31 Dec 2026, IELTS 7.0",
+   "detail": "The official EMLE page for 2027/28 sets 31 Dec 2026 for non-Europeans, needs 240 ECTS and IELTS 7.0 (6.0 per band), and says an English-medium degree does not exempt you. Law and economics, so a weak fit for a finance degree.",
+   "impact": "watch",
+   "factor": "funding",
+   "link": "https://emle.org/application-2/",
+   "verified": true
   }
  ],
  "picks": [
@@ -1108,6 +1132,32 @@
    "fit": "low",
    "why": "A real data route, but scoring favours computer-science credits, so only use a slot on it if you want pure data/AI.",
    "link": "https://deai.ulb.be/home/students/admission/",
+   "verified": true
+  },
+  {
+   "id": "emjm-global-coop",
+   "name": "Erasmus Mundus GLOBAL COOP (economic policies, international finance track)",
+   "country": "eu",
+   "kind": "scholarship",
+   "funding": "Full EM scholarship, about €1,400/month + fees",
+   "deadline": "2027-01-27",
+   "added": "2026-11-20",
+   "fit": "medium",
+   "why": "An economics EM with an international monetary and finance track, on the same portal and date as EPOG, so it costs little extra effort.",
+   "link": "https://application.epog.eu/",
+   "verified": true
+  },
+  {
+   "id": "emjm-emle",
+   "name": "Erasmus Mundus EMLE (law and economics)",
+   "country": "eu",
+   "kind": "scholarship",
+   "funding": "EM scholarship up to €1,400/month (about 15 a year)",
+   "deadline": "2026-12-31",
+   "added": "2026-11-20",
+   "fit": "low",
+   "why": "Earliest EM deadline still open to you, but it is law and economics and needs IELTS 7.0 with no MOI exemption.",
+   "link": "https://emle.org/application-2/",
    "verified": true
   }
  ]

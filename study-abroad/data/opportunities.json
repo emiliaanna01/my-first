@@ -80,6 +80,22 @@
   "verified": true
  },
  {
+  "id": "emjm-emle",
+  "country": "EU (Germany / Italy / Netherlands and partners)",
+  "deadline": "2026-12-31",
+  "deadlineNote": "2027/28 non-European deadline 31 Dec 2026, 23:59 CET (the page also says CEST in one place). Applications opened 1 Sep 2026.",
+  "eligibility": "At least 240 ECTS (a 4-year bachelor's); law or economics graduates preferred, others need a strong motivation letter. IELTS Academic 7.0 with 6.0 in each band; an English-medium degree does NOT exempt you. Proof only needed if admitted. Final-year students graduating before July 2027 may apply.",
+  "field": "Law and economics",
+  "fit": "low",
+  "funding": "Erasmus Mundus scholarship up to €1,400/month (about 15 per year) for the top-ranked admitted students",
+  "kind": "scholarship",
+  "link": "https://emle.org/application-2/",
+  "name": "Erasmus Mundus EMLE (European Master in Law and Economics)",
+  "notes": "Read on the official EMLE application page 2026-11-20 (2027/28 cycle). The earliest Erasmus Mundus deadline he could still meet, but it is law-and-economics, not finance, and needs IELTS 7.0; only worth a slot if the law-economics angle genuinely interests him.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "fr-eiffel",
   "country": "France",
   "deadline": "2027-01-06",
@@ -220,6 +236,22 @@
   "link": "https://www.epog.eu/admission-and-scholarships/admission/",
   "name": "Erasmus Mundus EPOG (Economic Policies for the Global Bifurcation)",
   "notes": "Can apply WITHOUT IELTS: use an NSU English-medium (MOI) letter. Re-read the official admission page 2026-10-30: deadline 27 Jan 2027, 13:00 Paris time confirmed; English exemption applies if your degree was taught entirely in English; Bachelor GPA should be at least 70% of the scale and you need at least 24 ECTS in economics and 6 ECTS in statistics/econometrics, so check your NSU transcript against those. Apply now; strongest immediate option. Re-checked 2026-11-18 on the official page: still 27 Jan 2027, 13:00 Paris (some aggregators wrongly say 29 Jan); GRE optional; English proof can come by 10 June.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
+  "id": "emjm-global-coop",
+  "country": "EU (France / Italy and partners)",
+  "deadline": "2027-01-27",
+  "deadlineNote": "Official application platform (shared with EPOG) shows the 'EPOG-JM & GLOBAL COOP' 2027-2029 campaign closing 27 Jan 2027 at 13:00 Paris time.",
+  "eligibility": "Bachelor's (180 ECTS) and English proof. EPOG's admission page on the same platform accepts a degree taught entirely in English instead of a test; check GLOBAL COOP's own rules when applying.",
+  "field": "Economics, international monetary and financial system",
+  "fit": "medium",
+  "funding": "Full Erasmus Mundus scholarship: tuition, insurance, about €1,400/month for 2 years (amount from programme listings; confirm on the scholarship page)",
+  "kind": "scholarship",
+  "link": "https://application.epog.eu/",
+  "name": "Erasmus Mundus GLOBAL COOP (Economic Policies for New Global Cooperation and Alliances)",
+  "notes": "Read on the official application platform 2026-11-20: GLOBAL COOP is a new 2-year Erasmus Mundus Joint Master listed beside EPOG-JM, closing 27 Jan 2027 13:00 Paris. One track (per listings, unverified) covers the international monetary and financial system, the closest EM economics option to a finance degree. Same portal and deadline as EPOG, so check whether you may apply to both or must choose one.",
   "status": "to-check",
   "verified": true
  },
