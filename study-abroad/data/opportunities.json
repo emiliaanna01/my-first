@@ -640,6 +640,22 @@
   "verified": true
  },
  {
+  "id": "it-torvergata-fb",
+  "country": "Italy",
+  "deadline": null,
+  "deadlineNote": "2027/28 call not published yet. In past cycles, non-EU applicants needing a visa had an earlier window (2023/24: 1 Feb – 25 May), then Universitaly pre-enrolment.",
+  "eligibility": "Bachelor's with maths, economics and statistics (business qualifies); minimum GPA 80% (3.21/4 is about 80%, borderline); open admission after an online interview. No English certificate required: English is checked at the interview. No GRE/GMAT.",
+  "field": "Finance",
+  "fit": "high",
+  "funding": "Public university; fees about €200–400/month (income-based), €30 application fee; LazioDisco regional grant if income qualifies",
+  "kind": "program",
+  "link": "https://economia.uniroma2.it/master-science/financeandbanking/f-a-q/",
+  "name": "Tor Vergata University of Rome: MSc Finance and Banking",
+  "notes": "Found 2026-11-21. Official FAQ (may describe an older cycle) says English is assessed at the interview, so IELTS is optional, which works like an MOI route. Watch https://economia.uniroma2.it/master-science/financeandbanking/ for the 2027/28 call (likely Jan–Feb 2027). Can combine with a LazioDisco DSU grant.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "it-unibo-qf",
   "country": "Italy",
   "deadline": null,

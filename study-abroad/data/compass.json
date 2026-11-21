@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20",
+ "updated": "2026-11-21",
  "countries": [
   {
    "id": "de",
@@ -36,7 +36,7 @@
     "fr": 7
    },
    "note": {
-    "self": "Germany: 27+ month queue for self-funded Master's. Italy: VFS via Universitaly, summer rush. Hungary: embassy route, fairly quick. France: Campus France, 3 interviews, about 3 months.",
+    "self": "Germany: 27+ month queue for self-funded Master's. Italy: VFS via Universitaly, summer rush. Hungary: D visa at the embassy's Dhaka Office (no trip to Delhi), fairly quick. France: Campus France, 3 interviews, about 3 months.",
     "sch": "German-gov / EU-funded scholars skip Germany's queue. Stipendium Hungaricum and Eiffel holders get priority handling."
    }
   },
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (15 days). Today: Writing Task 1, one chart in 20 min (30 min). Nothing ticked done since 20 Oct, so one session today restarts your streak.",
-    "Get the NSU English-medium letter now: EPOG/GLOBAL COOP (27 Jan), Debrecen and BME (Hungary) and Bologna QF accept an English-taught degree; Corvinus tests English itself.",
-    "Corvinus MSc Finance early-bird deadline 20 Jan 2027; SH 2027/28 call still not out (official page still shows 2026/27).",
-    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or new GLOBAL COOP 27 Jan."
+    "IELTS is on 5 Dec (14 days). Today: mock test, Reading passage 3 + full Listening (60 min). Nothing ticked done since 20 Oct, so one session today restarts your streak.",
+    "Get the NSU English-medium letter now: EPOG/GLOBAL COOP (27 Jan), Debrecen and BME (Hungary) and Bologna QF accept it; Tor Vergata and Turin check English at the interview.",
+    "Stipendium Hungaricum 2027/28 call still not out (expected deadline 15 Jan); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
+    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan."
    ]
   },
   "sch": {
@@ -241,7 +241,7 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (6 days); results by 7 Dec.",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (5 days); results by 7 Dec.",
     "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan (same portal). EMLE (31 Dec) only if law-economics appeals.",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
     "Keep the Italy and Hungary applications running until an award letter arrives."
@@ -754,6 +754,30 @@
    "factor": "funding",
    "link": "https://emle.org/application-2/",
    "verified": true
+  },
+  {
+   "id": "hu-dhaka-office-dvisa",
+   "date": "2026-11-21",
+   "added": "2026-11-21",
+   "country": "hu",
+   "title": "Hungary: student D visas are handled by the embassy's Dhaka Office",
+   "detail": "The Hungarian Embassy in New Delhi says its Dhaka Office receives D-visa cases, booked by email, so you would not need to travel to India. The visa note in the Compass now says this; the score stays at 7.",
+   "impact": "up",
+   "factor": "visa",
+   "link": "https://delhi.mfa.gov.hu/en/1_2-general-consular-information",
+   "verified": true
+  },
+  {
+   "id": "it-torvergata-interview-english",
+   "date": "2026-11-21",
+   "added": "2026-11-21",
+   "country": "it",
+   "title": "Tor Vergata MSc Finance and Banking: English checked at interview, no GRE",
+   "detail": "The Rome programme's official FAQ says no English certificate is needed, and English is checked at the online interview. It sets an 80% minimum GPA and charges income-based fees of about €200–400 a month. The 2027/28 call is not out yet.",
+   "impact": "up",
+   "factor": "admission",
+   "link": "https://economia.uniroma2.it/master-science/financeandbanking/f-a-q/",
+   "verified": true
   }
  ],
  "picks": [
@@ -1158,6 +1182,19 @@
    "fit": "low",
    "why": "Earliest EM deadline still open to you, but it is law and economics and needs IELTS 7.0 with no MOI exemption.",
    "link": "https://emle.org/application-2/",
+   "verified": true
+  },
+  {
+   "id": "it-torvergata-fb",
+   "name": "Tor Vergata (Rome): MSc Finance and Banking",
+   "country": "it",
+   "kind": "program",
+   "funding": "Public; fees about €200–400/month by income; LazioDisco grant possible",
+   "deadline": null,
+   "added": "2026-11-21",
+   "fit": "high",
+   "why": "A finance MSc that needs no IELTS or GRE: English is checked at the interview, and your BBA Finance meets the maths/economics/statistics prerequisites.",
+   "link": "https://economia.uniroma2.it/master-science/financeandbanking/f-a-q/",
    "verified": true
   }
  ]
