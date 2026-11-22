@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "countries": [
   {
    "id": "de",
@@ -212,9 +212,9 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (14 days). Today: mock test, Reading passage 3 + full Listening (60 min). Nothing ticked done since 20 Oct, so one session today restarts your streak.",
-    "Get the NSU English-medium letter now: EPOG/GLOBAL COOP (27 Jan), Debrecen and BME (Hungary) and Bologna QF accept it; Tor Vergata and Turin check English at the interview.",
-    "Stipendium Hungaricum 2027/28 call still not out (expected deadline 15 Jan); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
+    "IELTS is on 5 Dec (13 days). Today: email 2 NSU professors for recommendation letters (60 min); tomorrow back to Listening. No session ticked done since 20 Oct, so today restarts your streak.",
+    "Get the NSU English-medium letter now: EPOG/GLOBAL COOP (27 Jan), Debrecen and BME (Hungary), Bologna QF and Kiel QF accept an English-taught degree.",
+    "Stipendium Hungaricum 2027/28 call still not out (last year opened 17 Nov, closed 15 Jan); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
     "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan."
    ]
   },
@@ -241,10 +241,10 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (5 days); results by 7 Dec.",
-    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan (same portal). EMLE (31 Dec) only if law-economics appeals.",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (4 days); results by 7 Dec.",
+    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan. EMLE (31 Dec) only if law-economics appeals.",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
-    "Keep the Italy and Hungary applications running until an award letter arrives."
+    "Keep Italy and Hungary running until an award letter arrives; with an award, Kiel QF (31 May) is a tuition-free German option."
    ]
   },
   "changedOn": "2026-10-25",
@@ -778,6 +778,30 @@
    "factor": "admission",
    "link": "https://economia.uniroma2.it/master-science/financeandbanking/f-a-q/",
    "verified": true
+  },
+  {
+   "id": "hu-sh-2027-call-late",
+   "date": "2026-11-22",
+   "added": "2026-11-22",
+   "country": "hu",
+   "title": "Stipendium Hungaricum 2027/28 call still not out on 22 Nov",
+   "detail": "Last year's call was posted on 17 Nov 2025 with a 15 Jan 2026, 14:00 CET deadline; the official apply page still shows only the 2026/27 call. Expect a mid-January deadline and a short window, so have documents ready.",
+   "impact": "watch",
+   "factor": "funding",
+   "link": "https://stipendiumhungaricum.hu/apply/",
+   "verified": true
+  },
+  {
+   "id": "de-kiel-qf-moi",
+   "date": "2026-11-22",
+   "added": "2026-11-22",
+   "country": "de",
+   "title": "Kiel MSc Quantitative Finance: no tuition, English-taught degree counts",
+   "detail": "Kiel University's page accepts an English-medium Bachelor's (or IELTS 6.5) and asks for grade 2.5 or better plus 20 ECTS of maths/statistics; apply via Uni-Assist 1 Apr – 31 May 2027. Still blocked by the Dhaka visa queue unless you hold a German/EU award.",
+   "impact": "up",
+   "factor": "programmes",
+   "link": "https://www.uni-kiel.de/en/wiso/studying/master/quantitative-finance",
+   "verified": true
   }
  ],
  "picks": [
@@ -1195,6 +1219,19 @@
    "fit": "high",
    "why": "A finance MSc that needs no IELTS or GRE: English is checked at the interview, and your BBA Finance meets the maths/economics/statistics prerequisites.",
    "link": "https://economia.uniroma2.it/master-science/financeandbanking/f-a-q/",
+   "verified": true
+  },
+  {
+   "id": "kiel-qf",
+   "name": "Kiel University: MSc Quantitative Finance",
+   "country": "de",
+   "kind": "program",
+   "funding": "No tuition; semester contribution only",
+   "deadline": "2027-05-31",
+   "added": "2026-11-22",
+   "fit": "medium",
+   "why": "Tuition-free English finance MSc that accepts your NSU English-medium degree and clears its 2.5 grade cut-off; usable if an Erasmus/DAAD award lifts the visa queue.",
+   "link": "https://www.uni-kiel.de/en/wiso/studying/master/quantitative-finance",
    "verified": true
   }
  ]

@@ -368,6 +368,22 @@
   "verified": false
  },
  {
+  "id": "kiel-qf",
+  "country": "Germany",
+  "deadline": "2027-05-31",
+  "deadlineNote": "Foreign Bachelor's: apply via Uni-Assist 1 Apr – 31 May 2027 for the winter semester (Oct 2027).",
+  "eligibility": "Bachelor with grade 2.5 or better (your ~1.79 qualifies), 180 ECTS, of which 35 ECTS in economics (micro/macro) and quantitative basics (analysis, algebra, statistics, econometrics), at least 20 of them quantitative. English C1 reading: IELTS 6.5 / TOEFL iBT 79, OR a Bachelor's taught in English. No GRE/GMAT mentioned. Eligibility assessed by the programme adviser.",
+  "field": "Finance (quantitative)",
+  "fit": "medium",
+  "funding": "No tuition at Schleswig-Holstein public universities (semester contribution only; fee not stated on the programme page). Self-funded visa still faces the 27+ month Dhaka queue.",
+  "kind": "program",
+  "link": "https://www.uni-kiel.de/en/wiso/studying/master/quantitative-finance",
+  "name": "Kiel University (CAU): MSc Quantitative Finance",
+  "notes": "Added 2026-11-22. Accepts an English-taught Bachelor's as English proof (MOI-friendly). Check your NSU transcript for 20 ECTS of maths/stats/econometrics. Realistic only with a German/EU-funded scholarship or if the Dhaka visa queue shortens; keep as a Germany backup.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "magdeburg-imf",
   "country": "Germany (Saxony-Anhalt, tuition-free)",
   "deadline": "2027-05-31",
