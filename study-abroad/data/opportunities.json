@@ -64,6 +64,22 @@
   "verified": true
  },
  {
+  "id": "fr-ube-eiffel",
+  "country": "France",
+  "deadline": "2026-12-04",
+  "deadlineNote": "Internal deadline 4 Dec 2026: all documents to the International Office. First email a Master's programme coordinator for approval; UBE files with Campus France before the 6 Jan 2027 national deadline. Admission is a separate application.",
+  "eligibility": "Campus France Eiffel criteria (Master's candidates 29 or younger, first Eiffel application, one institution only). Coordinator approval needed before the International Office sends the application link. English-test requirement for the Eiffel file not stated.",
+  "field": "Economics and management (English-taught IAE Dijon Master's: International Master in Business Studies, International Management and Sustainability)",
+  "fit": "medium",
+  "funding": "Eiffel Excellence Scholarship if nominated and selected by Campus France: monthly allowance, travel, insurance, no tuition.",
+  "kind": "scholarship",
+  "link": "https://www.ube.fr/?p=62731",
+  "name": "Eiffel via Université Bourgogne Europe (Dijon): internal call (Master's)",
+  "notes": "Read the official UBE page on 23 Nov 2026. Contact: bourse-eiffel-master@ube.fr. Backup if Paris-Saclay (26 Nov) doesn't work out, but Eiffel allows only one nominating institution. The English-taught options are management degrees with finance modules, not pure finance. Long shot at CGPA 3.21. English-taught list: https://www.ube.fr/wp-content/uploads/2025/11/PRI_English-taught-Masters-degrees-at-Universite-Bourgogne-Europe.pdf",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "emjm-catalogue",
   "country": "EU",
   "deadline": "2026-12-15",
@@ -652,6 +668,22 @@
   "link": "https://www.esteri.it/en/servizi-opportunita/opportunita/borse-di-studio/per-cittadini-stranieri/progetti-speciali/invest-your-talent-in-italy/",
   "name": "Invest Your Talent in Italy",
   "notes": "Checked 2026-10-26 via Politecnico di Torino and Salento pages; re-read the ministry page 2026-10-27: the 2026/27 call closed 11 May 2026 (6 pm Italian time), a nine-month scholarship, and no later call is listed yet. The page does not list eligible countries, so confirm Bangladesh in the next call. Application portal: investyourtalentapplication.esteri.it. You must first be accepted or pre-select a participating programme.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
+  "id": "it-siena-finance",
+  "country": "Italy",
+  "deadline": null,
+  "deadlineNote": "2027/28 call not published. The 2026/27 scholarship deadline was 26 May 2026; you must first apply to the programme on apply.unisi.it, then submit the scholarship form (€10 fee, 1-minute video) from the same account.",
+  "eligibility": "Non-Italian Bachelor's that qualifies for a Laurea Magistrale; not resident in Italy. English B2 by an accepted certificate at the time of applying (MOI letter not listed as accepted; exemption only for countries where English is official).",
+  "field": "Finance (English-taught Quantitative Finance curriculum)",
+  "fit": "medium",
+  "funding": "Siena International Excellence Scholarship: €6,000/year gross for up to 2 years, but only 1 award for the whole Economics and Law area (Economics, Finance, International Accounting and Management); it does not cover fees. Otherwise Tuscany DSU (income-based).",
+  "kind": "program",
+  "link": "https://admission.unisi.it/?p=2283",
+  "name": "University of Siena: MSc Finance + Siena International Excellence Scholarship",
+  "notes": "Scholarship page read on 23 Nov 2026 (shows the 2026/27 call). Programme page: https://apply.unisi.it/courses/course/40-m-finance. One award across three programmes makes the scholarship a long shot; the real value is a 2-year English finance MSc in a cheap city with DSU eligibility. Plan to use the 5 Dec IELTS.",
   "status": "to-check",
   "verified": true
  },

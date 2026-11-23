@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22",
+ "updated": "2026-11-23",
  "countries": [
   {
    "id": "de",
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (13 days). Today: email 2 NSU professors for recommendation letters (60 min); tomorrow back to Listening. No session ticked done since 20 Oct, so today restarts your streak.",
+    "IELTS is on 5 Dec (12 days). Today: Cambridge 18 Test 1 Listening (30 min). No session ticked done since 20 Oct, so today restarts your streak.",
     "Get the NSU English-medium letter now: EPOG/GLOBAL COOP (27 Jan), Debrecen and BME (Hungary), Bologna QF and Kiel QF accept an English-taught degree.",
-    "Stipendium Hungaricum 2027/28 call still not out (last year opened 17 Nov, closed 15 Jan); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
-    "Erasmus Mundus: shortlist 3 by 15 Dec; GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan."
+    "Padua's Call Two for non-EU applicants opens 1 Dec (to 1 Mar); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
+    "Stipendium Hungaricum 2027/28 call still not out (last year 17 Nov – 15 Jan); Erasmus Mundus shortlist of 3 by 15 Dec."
    ]
   },
   "sch": {
@@ -241,8 +241,8 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (4 days); results by 7 Dec.",
-    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan. EMLE (31 Dec) only if law-economics appeals.",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (3 days). Backup: Université Bourgogne Europe by 4 Dec. Only one university can nominate you.",
+    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan.",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
     "Keep Italy and Hungary running until an award letter arrives; with an award, Kiel QF (31 May) is a tuition-free German option."
    ]
@@ -802,6 +802,30 @@
    "factor": "programmes",
    "link": "https://www.uni-kiel.de/en/wiso/studying/master/quantitative-finance",
    "verified": true
+  },
+  {
+   "id": "fr-ube-eiffel-4dec",
+   "date": "2026-11-23",
+   "added": "2026-11-23",
+   "country": "fr",
+   "title": "Eiffel backup: Université Bourgogne Europe takes files until 4 Dec",
+   "detail": "UBE (Dijon) asks you to get a Master's coordinator's approval, then send all documents to its International Office by 4 Dec 2026. Its English-taught options are management Master's with finance modules.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://www.ube.fr/?p=62731",
+   "verified": true
+  },
+  {
+   "id": "it-siena-excellence-6000",
+   "date": "2026-11-23",
+   "added": "2026-11-23",
+   "country": "it",
+   "title": "Siena: English MSc Finance, one €6,000/yr excellence award for its area",
+   "detail": "Siena's International Excellence Scholarship pays €6,000 a year for 2 years, but only one award covers Economics, Finance and International Accounting together. The 2027/28 call isn't out; last deadline was 26 May.",
+   "impact": "watch",
+   "factor": "programmes",
+   "link": "https://admission.unisi.it/?p=2283",
+   "verified": true
   }
  ],
  "picks": [
@@ -1053,19 +1077,6 @@
    "verified": true
   },
   {
-   "id": "it-padova-excellence",
-   "name": "Padua International Excellence Scholarship",
-   "country": "it",
-   "kind": "scholarship",
-   "funding": "€8,000/yr + fee exemption (up to 76 awards)",
-   "deadline": "2026-11-15",
-   "added": "2026-11-11",
-   "fit": "medium",
-   "why": "Automatic when you apply to an English-taught Padua degree, but mostly awarded in the first call closing 15 Nov.",
-   "link": "https://www.unipd.it/en/padua-international-excellence-scholarship-programme",
-   "verified": true
-  },
-  {
    "id": "fr-tsm-eiffel",
    "name": "Eiffel via Toulouse School of Management (internal call)",
    "country": "fr",
@@ -1232,6 +1243,32 @@
    "fit": "medium",
    "why": "Tuition-free English finance MSc that accepts your NSU English-medium degree and clears its 2.5 grade cut-off; usable if an Erasmus/DAAD award lifts the visa queue.",
    "link": "https://www.uni-kiel.de/en/wiso/studying/master/quantitative-finance",
+   "verified": true
+  },
+  {
+   "id": "fr-ube-eiffel",
+   "name": "Eiffel via Université Bourgogne Europe (Dijon)",
+   "country": "fr",
+   "kind": "scholarship",
+   "funding": "Eiffel: monthly allowance, travel, insurance, no tuition",
+   "deadline": "2026-12-04",
+   "added": "2026-11-23",
+   "fit": "medium",
+   "why": "A second Eiffel route if Paris-Saclay doesn't answer, through English-taught management Master's with finance modules.",
+   "link": "https://www.ube.fr/?p=62731",
+   "verified": true
+  },
+  {
+   "id": "it-siena-finance",
+   "name": "University of Siena: MSc Finance + Excellence Scholarship",
+   "country": "it",
+   "kind": "program",
+   "funding": "€6,000/yr scholarship (1 award for the area) or Tuscany DSU",
+   "deadline": null,
+   "added": "2026-11-23",
+   "fit": "medium",
+   "why": "An English-taught finance MSc in a cheap city that fits your BBA Finance; your IELTS result is the English proof.",
+   "link": "https://admission.unisi.it/?p=2283",
    "verified": true
   }
  ]
