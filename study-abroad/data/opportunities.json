@@ -176,6 +176,22 @@
   "verified": true
  },
  {
+  "id": "emjm-m3ep",
+  "country": "EU (Denmark year 1; year 2 Heidelberg, Charles Univ. Prague, Milan or Warsaw)",
+  "deadline": "2027-01-15",
+  "deadlineNote": "Non-EU portal opened 15 Nov; application and all documents (incl. English test) due 15 Jan, 23:59 CET. The page does not print the year, but it says applications are open now, so this is the 2027 intake.",
+  "eligibility": "Bachelor in economics, or any bachelor with at least 60 ECTS in economics and/or political science (individual assessment possible). IELTS Academic 6.5 with 6.0 in each part, valid at the deadline. An English-medium degree or MOI letter is NOT accepted. No GRE mentioned. No previous EMJM scholarship.",
+  "field": "Environmental economics and policy",
+  "fit": "low",
+  "funding": "Erasmus Mundus scholarship up to €33,600 (€1,400/month for 24 months) plus tuition waiver; self-funded non-EU tuition €33,600 for 2 years",
+  "kind": "scholarship",
+  "link": "https://m3ep.eu/admission-scholarships/",
+  "name": "Erasmus Mundus M3EP (European Environmental Economics and Policy)",
+  "notes": "Read the official M3EP admission page 2026-11-24. Selection: 75% academic record, 15% work experience, 10% motivation. Low fit: your BBA Finance probably has well under 60 ECTS of economics, and you need your IELTS result by 15 Jan. Only worth one of your 3 EM slots if NSU's economics courses add up. Year 2 in Milan or Heidelberg keeps it inside your countries.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "fr-etudes-en-france",
   "country": "France",
   "deadline": "2027-01-15",
@@ -483,7 +499,7 @@
   "id": "de-visa-portal",
   "country": "Germany",
   "deadline": null,
-  "deadlineNote": "From 1 Jan 2027: apply online in the Consular Services Portal (new account needed). The old waiting list closes end of 2026.",
+  "deadlineNote": "Embassy page updated 22 Nov 2026: the Consular Services Portal process is in force now ('effective immediately'). The old waiting list is closed (last appointments December 2026); a new waiting list runs in the portal.",
   "eligibility": "Master's visas go through VFS. Holders of German-government or EU-funded scholarships count as 'qualified students'.",
   "field": "-",
   "fit": "high",
@@ -491,7 +507,7 @@
   "kind": "visa",
   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
   "name": "German Embassy Dhaka: student visa waiting list",
-  "notes": "NEW 15 Nov 2026 (embassy press release, reported by The Daily Star, TBS, Prothom Alo): from 1 Jan 2027 Bachelor's and Master's students apply digitally through the Consular Services Portal; VFS pre-checks the file and the visit is mainly biometrics, fee and document check. The old appointment waiting list is discontinued at the end of 2026, so everyone, including people already on it, must create a new account and apply again. Embassy page (4 Jun 2026) still says 27+ months for Master's applicants WITHOUT a German or EU scholarship; German-gov/EU-funded scholars (DAAD, Erasmus Mundus) are processed right after registration. News: https://www.thedailystar.net/news/bangladesh/education/news/german-embassy-introduce-digital-student-visa-process-january-4324251 . Re-read 2026-11-19: the official page is still the 4 Jun 2026 version and still says people on the old list need not re-register, which conflicts with the 15 Nov press reports (Prothom Alo 15 Nov says they must reapply). Doesn't affect you until you hold an admission letter; trust the newer press release but re-check the embassy page in January.",
+  "notes": "Re-read the official embassy page 2026-11-24 (dated 22.11.2026). It now says: register in the Consular Services Portal and upload all documents; after a preliminary review you book a VFS appointment for documents and biometrics; some applicants get a follow-up interview. The old waiting list is closed and no more appointments come from it; people on it who have no appointment yet must register in the portal and upload documents (this settles the conflict noted on 19 Nov in favour of re-registering). On waiting time the page now says 'It is difficult to make a prediction' and no longer prints the 27-month figure; processing after the appointment takes about 4 weeks. PhD students and German/EU-funded scholars are still processed right after portal registration. Blocked account €11,904 (€992/month). Visa is issued no earlier than 3 months before arrival. Earlier news: https://www.thedailystar.net/news/bangladesh/education/news/german-embassy-introduce-digital-student-visa-process-january-4324251",
   "status": "to-check",
   "verified": true
  },

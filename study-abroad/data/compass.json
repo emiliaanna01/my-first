@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "countries": [
   {
    "id": "de",
@@ -36,7 +36,7 @@
     "fr": 7
    },
    "note": {
-    "self": "Germany: 27+ month queue for self-funded Master's. Italy: VFS via Universitaly, summer rush. Hungary: D visa at the embassy's Dhaka Office (no trip to Delhi), fairly quick. France: Campus France, 3 interviews, about 3 months.",
+    "self": "Germany: old list closed 22 Nov; new portal list with no predicted wait (was 27+ months). Italy: VFS via Universitaly, summer rush. Hungary: D visa at the embassy's Dhaka Office (no trip to Delhi), fairly quick. France: Campus France, 3 interviews, about 3 months.",
     "sch": "German-gov / EU-funded scholars skip Germany's queue. Stipendium Hungaricum and Eiffel holders get priority handling."
    }
   },
@@ -190,7 +190,7 @@
  ],
  "analysis": {
   "self": {
-   "headline": "Self-funded, Italy is your best 2027 route. Apply to Stipendium Hungaricum and Erasmus Mundus in parallel; Germany's Dhaka visa queue (27+ months) blocks a self-funded start.",
+   "headline": "Self-funded, Italy is your best 2027 route. Apply to Stipendium Hungaricum and Erasmus Mundus in parallel; Germany's Dhaka visa queue (no predicted wait, last stated as 27+ months) blocks a self-funded start.",
    "routes": [
     {
      "country": "it",
@@ -208,14 +208,14 @@
      "country": "de",
      "title": "Germany, self-funded",
      "status": "blocked",
-     "detail": "Admission in mid-2027 means a visa appointment around late 2029. Keep Germany for an award or a job move after an EU degree."
+     "detail": "The embassy restarted its waiting list in the Consular Services Portal on 22 Nov and won't predict the wait (it was 27+ months). A self-funded Sept 2027 start is unlikely; keep Germany for an award or a job move after an EU degree."
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (12 days). Today: Cambridge 18 Test 1 Listening (30 min). No session ticked done since 20 Oct, so today restarts your streak.",
-    "Get the NSU English-medium letter now: EPOG/GLOBAL COOP (27 Jan), Debrecen and BME (Hungary), Bologna QF and Kiel QF accept an English-taught degree.",
+    "IELTS is on 5 Dec (11 days). Today: Cambridge 18 Test 2 Reading, 60 min timed. Nothing ticked done since 20 Oct, so today restarts your streak.",
+    "Email 2 NSU professors for recommendation letters (missed on 22 Nov) and ask NSU for the English-medium letter: Bologna QF, Kiel QF, Debrecen and BME accept it.",
     "Padua's Call Two for non-EU applicants opens 1 Dec (to 1 Mar); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
-    "Stipendium Hungaricum 2027/28 call still not out (last year 17 Nov – 15 Jan); Erasmus Mundus shortlist of 3 by 15 Dec."
+    "Stipendium Hungaricum 2027/28 call still not out on 24 Nov; Erasmus Mundus shortlist of 3 by 15 Dec."
    ]
   },
   "sch": {
@@ -241,14 +241,14 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (3 days). Backup: Université Bourgogne Europe by 4 Dec. Only one university can nominate you.",
-    "Pick up to 3 Erasmus Mundus: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan.",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (2 days). Backup: Université Bourgogne Europe by 4 Dec. Only one university can nominate you.",
+    "Pick up to 3 Erasmus Mundus by 15 Dec: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan (M3EP 15 Jan only if you have 60 ECTS of economics).",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
-    "Keep Italy and Hungary running until an award letter arrives; with an award, Kiel QF (31 May) is a tuition-free German option."
+    "Keep Italy and Hungary running until an award letter arrives; with an award, German visas are processed right after portal registration."
    ]
   },
-  "changedOn": "2026-10-25",
-  "changeNote": "Hungary and France added. Italy leads if self-funded; Germany leads with a scholarship."
+  "changedOn": "2026-11-24",
+  "changeNote": "Germany's self-funded route now reflects the embassy's 22 Nov update (new portal waiting list, no predicted wait); still blocked, ranking unchanged."
  },
  "signals": [
   {
@@ -256,7 +256,7 @@
    "date": "2026-06-04",
    "country": "de",
    "title": "Dhaka: self-funded Master's visas wait more than 27 months",
-   "detail": "The German Embassy says the wait for students without a German or EU scholarship is more than 27 months and is not expected to fall. Registration opens only after admission.",
+   "detail": "The June 2026 embassy page put the wait for students without a German or EU scholarship at more than 27 months. The 22 Nov 2026 update drops that figure and says the wait is 'difficult to predict', so assume it is still long.",
    "impact": "down",
    "factor": "visa",
    "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
@@ -652,12 +652,12 @@
    "date": "2026-11-15",
    "added": "2026-11-15",
    "country": "de",
-   "title": "Dhaka: student visas go digital on 1 Jan 2027; old waiting list ends",
-   "detail": "From 1 Jan 2027 Bachelor's and Master's students apply online in the Consular Services Portal; VFS pre-checks files and visits are mainly for biometrics and fees. The old appointment waiting list closes at the end of 2026, so everyone, including people already on it, must open a new account and apply again. The embassy has not said the 27+ month wait gets shorter.",
+   "title": "Dhaka: student visas now go through the Consular Services Portal",
+   "detail": "Press reports said 1 Jan 2027, but the embassy page (22 Nov 2026) says the portal process applies effective immediately: register, upload documents, pre-check, then a VFS appointment for biometrics. The old waiting list is closed.",
    "impact": "watch",
    "factor": "visa",
-   "link": "https://www.thedailystar.net/news/bangladesh/education/news/german-embassy-introduce-digital-student-visa-process-january-4324251",
-   "verified": false
+   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
+   "verified": true
   },
   {
    "id": "hu-bme-finance-moi",
@@ -724,8 +724,8 @@
    "date": "2026-11-15",
    "added": "2026-11-19",
    "country": "de",
-   "title": "German visa: embassy page and 15 Nov news disagree on re-registering",
-   "detail": "The embassy page (still dated 4 Jun 2026) says people on the old list need not re-register; Prothom Alo's 15 Nov report says everyone must reapply in the portal from 1 Jan 2027. It only matters once you hold an admission letter; re-check in January.",
+   "title": "German visa: people on the old list must register again in the portal",
+   "detail": "The embassy page updated 22 Nov 2026 settles it: the old waiting list is closed, and anyone on it without an appointment must register in the Consular Services Portal and upload documents. It only matters once you hold an admission letter.",
    "impact": "watch",
    "factor": "visa",
    "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
@@ -825,6 +825,30 @@
    "impact": "watch",
    "factor": "programmes",
    "link": "https://admission.unisi.it/?p=2283",
+   "verified": true
+  },
+  {
+   "id": "de-csp-new-list-22nov",
+   "date": "2026-11-22",
+   "added": "2026-11-24",
+   "country": "de",
+   "title": "German embassy: old visa list closed, new waiting list opens in the portal",
+   "detail": "The 22 Nov page says the last old-list appointments were in December 2026 and a new list starts in the Consular Services Portal; processing after the appointment is about 4 weeks. It won't predict waiting times, so Germany's self-funded visa score stays at 2.",
+   "impact": "watch",
+   "factor": "visa",
+   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
+   "verified": true
+  },
+  {
+   "id": "eu-m3ep-15jan",
+   "date": "2026-11-15",
+   "added": "2026-11-24",
+   "country": "eu",
+   "title": "Erasmus Mundus M3EP: non-EU deadline 15 Jan, IELTS 6.5, no MOI letter",
+   "detail": "Environmental economics, year 1 Copenhagen and year 2 in Milan, Heidelberg, Prague or Warsaw; scholarship up to €33,600 plus fee waiver. It needs 60 ECTS of economics or political science, which a BBA Finance may not meet.",
+   "impact": "watch",
+   "factor": "funding",
+   "link": "https://m3ep.eu/admission-scholarships/",
    "verified": true
   }
  ],
@@ -1077,19 +1101,6 @@
    "verified": true
   },
   {
-   "id": "fr-tsm-eiffel",
-   "name": "Eiffel via Toulouse School of Management (internal call)",
-   "country": "fr",
-   "kind": "scholarship",
-   "funding": "€1,200/month + travel and health cover",
-   "deadline": "2026-11-16",
-   "fit": "low",
-   "why": "Closes in 4 days and wants an English certificate before your IELTS, so only worth it if TSM accepts your NSU English-medium letter.",
-   "link": "https://tsm-education.fr/en/international/eiffel-scholarship",
-   "verified": true,
-   "added": "2026-11-12"
-  },
-  {
    "id": "it-visa-funds",
    "name": "Italy study visa: proof of funds €10,179.85/year",
    "country": "it",
@@ -1269,6 +1280,19 @@
    "fit": "medium",
    "why": "An English-taught finance MSc in a cheap city that fits your BBA Finance; your IELTS result is the English proof.",
    "link": "https://admission.unisi.it/?p=2283",
+   "verified": true
+  },
+  {
+   "id": "emjm-m3ep",
+   "name": "Erasmus Mundus M3EP (environmental economics)",
+   "country": "eu",
+   "kind": "scholarship",
+   "funding": "EM scholarship up to €33,600 (€1,400/month) plus tuition waiver",
+   "deadline": "2027-01-15",
+   "added": "2026-11-24",
+   "fit": "low",
+   "why": "Economics-heavy and needs 60 ECTS of economics plus IELTS 6.5 by 15 Jan, so only worth an EM slot if your NSU economics credits add up.",
+   "link": "https://m3ep.eu/admission-scholarships/",
    "verified": true
   }
  ]
