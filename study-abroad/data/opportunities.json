@@ -80,6 +80,22 @@
   "verified": true
  },
  {
+  "id": "fr-um-eiffel",
+  "country": "France",
+  "deadline": "2026-12-11",
+  "deadlineNote": "Faculty members file nominations with the International Relations office by 11 Dec 2026; Campus France national deadline 6 Jan 2027. Students cannot apply directly.",
+  "eligibility": "Non-French, 29 or younger for Master's. You must first persuade the director of a Université de Montpellier Master's to endorse you.",
+  "field": "Any Master's at Université de Montpellier (e.g. Montpellier Management finance tracks)",
+  "fit": "medium",
+  "funding": "Eiffel: about €1,181–1,200/month, return flight, insurance; tuition waived",
+  "kind": "scholarship",
+  "link": "https://www.umontpellier.fr/en/international/etudier-a-letranger/financements-de-projets",
+  "name": "Eiffel via Université de Montpellier: internal call (Master's)",
+  "notes": "Read the official page on 25 Nov 2026: endorsement by a UM faculty member required; contact your chosen programme's director. The page heading still says 2026-2027 but the 11 Dec 2026 date is the current Eiffel round. Only one French university can nominate you, so pick between Paris-Saclay (26 Nov), Bourgogne Europe (4 Dec) and Montpellier (11 Dec).",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "emjm-catalogue",
   "country": "EU",
   "deadline": "2026-12-15",
@@ -352,6 +368,22 @@
   "verified": true
  },
  {
+  "id": "de-hohenheim-eds",
+  "country": "Germany",
+  "deadline": "2027-05-15",
+  "deadlineNote": "Winter semester start only; apply online via HohCampus by 15 May.",
+  "eligibility": "Bachelor's in business/economics (3+ years) with German grade 2.5 or better (yours ≈ 1.79). English: IELTS 6.5 OR completion of an English-taught Bachelor's.",
+  "field": "Economics / Data Science",
+  "fit": "medium",
+  "funding": "Self-funded; Baden-Württemberg charges non-EU students about €1,500/semester plus semester fee",
+  "kind": "program",
+  "link": "https://dein-studium.uni-hohenheim.de/en/applying-and-enrollment/applying/applying-for-the-masters-in-economics-with-data-science",
+  "name": "University of Hohenheim: MSc Economics with Data Science",
+  "notes": "MOI-friendly: an English-taught bachelor's counts as English proof. Data/analytics angle fits your target. Self-funded German visa queue from Dhaka is still unpredictable, so treat as a backup or an option if you win an award. Non-EU fee figure is from Baden-Württemberg rules, not this page; confirm.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "goethe-mmf",
   "country": "Germany (Hesse, tuition-free)",
   "deadline": "2027-05-15",
@@ -588,6 +620,22 @@
   "link": "https://emfindata.eu/application",
   "name": "FINDATA: Financial Data Analytics and Sustainable Finance (joint MSc)",
   "notes": "Read emfindata.eu application and fees-and-funding pages 2026-10-31. Year 2 in Rome (LUMSA) or Vilnius. Low fit only because it is not funded; the fee is €6,000 a year. Funding page: https://emfindata.eu/fees-and-funding",
+  "status": "to-check",
+  "verified": true
+ },
+ {
+  "id": "fr-ujm-eds",
+  "country": "France",
+  "deadline": null,
+  "deadlineNote": "2027/28 dates not on the page. A third-party list says UJM's Eiffel internal deadline is 11 Dec 2026; not confirmed on an official page.",
+  "eligibility": "Bachelor's with a solid background in economics or quantitative methods; fully taught in English; no English test stated on the programme page.",
+  "field": "Economics / Data science / Machine learning",
+  "fit": "medium",
+  "funding": "Public university fees (non-EU about €3,950/yr unless exempted); SE² lists excellence and incoming international scholarships",
+  "kind": "program",
+  "link": "https://se2.univ-st-etienne.fr/en/studying-at-se2/the-master-s-programmes/master-of-political-engineering.html",
+  "name": "Université Jean Monnet Saint-Étienne (SE²): Master Economics, Data and Decision Science",
+  "notes": "Two-year public Master fully in English, mixing economics with machine learning: a data option in France. Check its Admission page for dates and ask SE² whether an English-medium letter is accepted and whether it nominates for Eiffel.",
   "status": "to-check",
   "verified": true
  },

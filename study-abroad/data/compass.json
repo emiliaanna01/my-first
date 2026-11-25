@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-25",
  "countries": [
   {
    "id": "de",
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (11 days). Today: Cambridge 18 Test 2 Reading, 60 min timed. Nothing ticked done since 20 Oct, so today restarts your streak.",
-    "Email 2 NSU professors for recommendation letters (missed on 22 Nov) and ask NSU for the English-medium letter: Bologna QF, Kiel QF, Debrecen and BME accept it.",
+    "IELTS is on 5 Dec (10 days). Today: one Writing Task 2 essay in 40 minutes. Nothing ticked done since 20 Oct, so one session today restarts your streak.",
+    "Email 2 NSU professors for recommendation letters and ask NSU for the English-medium letter: Bologna QF, Kiel QF, Hohenheim, Debrecen and BME accept it.",
     "Padua's Call Two for non-EU applicants opens 1 Dec (to 1 Mar); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
-    "Stipendium Hungaricum 2027/28 call still not out on 24 Nov; Erasmus Mundus shortlist of 3 by 15 Dec."
+    "Stipendium Hungaricum 2027/28 call still not out on 25 Nov; pick your Erasmus Mundus 3 by 15 Dec."
    ]
   },
   "sch": {
@@ -241,8 +241,8 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by 26 Nov (2 days). Backup: Université Bourgogne Europe by 4 Dec. Only one university can nominate you.",
-    "Pick up to 3 Erasmus Mundus by 15 Dec: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan (M3EP 15 Jan only if you have 60 ECTS of economics).",
+    "Eiffel via Paris-Saclay: email one Master's coordinator by tomorrow, 26 Nov. Backups: Bourgogne Europe by 4 Dec, Montpellier (professor's endorsement) by 11 Dec. Only one university can nominate you.",
+    "Pick up to 3 Erasmus Mundus by 15 Dec: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan.",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
     "Keep Italy and Hungary running until an award letter arrives; with an award, German visas are processed right after portal registration."
    ]
@@ -850,6 +850,30 @@
    "factor": "funding",
    "link": "https://m3ep.eu/admission-scholarships/",
    "verified": true
+  },
+  {
+   "id": "fr-um-eiffel-11dec",
+   "date": "2026-11-25",
+   "added": "2026-11-25",
+   "country": "fr",
+   "title": "Eiffel: Université de Montpellier takes faculty nominations until 11 Dec",
+   "detail": "Students can't apply directly: a Montpellier programme director must endorse you and file by 11 Dec 2026. It is a later backup than Paris-Saclay (26 Nov) and Bourgogne Europe (4 Dec).",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://www.umontpellier.fr/en/international/etudier-a-letranger/financements-de-projets",
+   "verified": true
+  },
+  {
+   "id": "de-hohenheim-eds-moi",
+   "date": "2026-11-25",
+   "added": "2026-11-25",
+   "country": "de",
+   "title": "Hohenheim MSc Economics with Data Science accepts an English-taught bachelor's",
+   "detail": "The official application page lists completion of an English-language bachelor's as English proof, asks for a 2.5 grade or better, and closes 15 May. Germany's self-funded visa queue still blocks a 2027 start.",
+   "impact": "up",
+   "factor": "admission",
+   "link": "https://dein-studium.uni-hohenheim.de/en/applying-and-enrollment/applying/applying-for-the-masters-in-economics-with-data-science",
+   "verified": true
   }
  ],
  "picks": [
@@ -1293,6 +1317,45 @@
    "fit": "low",
    "why": "Economics-heavy and needs 60 ECTS of economics plus IELTS 6.5 by 15 Jan, so only worth an EM slot if your NSU economics credits add up.",
    "link": "https://m3ep.eu/admission-scholarships/",
+   "verified": true
+  },
+  {
+   "id": "fr-um-eiffel",
+   "name": "Eiffel via Université de Montpellier (internal call)",
+   "country": "fr",
+   "kind": "scholarship",
+   "funding": "Eiffel ~€1,200/month + fees waived",
+   "deadline": "2026-12-11",
+   "added": "2026-11-25",
+   "fit": "medium",
+   "why": "Latest Eiffel door still open if Paris-Saclay and Bourgogne Europe don't work, but you need a programme director to back you.",
+   "link": "https://www.umontpellier.fr/en/international/etudier-a-letranger/financements-de-projets",
+   "verified": true
+  },
+  {
+   "id": "de-hohenheim-eds",
+   "name": "Hohenheim: MSc Economics with Data Science",
+   "country": "de",
+   "kind": "program",
+   "funding": "Self-funded, ~€1,500/semester non-EU fee (BW)",
+   "deadline": "2027-05-15",
+   "added": "2026-11-25",
+   "fit": "medium",
+   "why": "Takes your NSU English-medium degree instead of IELTS and your 1.79 grade clears its 2.5 cut-off; useful if you win an award.",
+   "link": "https://dein-studium.uni-hohenheim.de/en/applying-and-enrollment/applying/applying-for-the-masters-in-economics-with-data-science",
+   "verified": true
+  },
+  {
+   "id": "fr-ujm-eds",
+   "name": "Saint-Étienne SE²: Master Economics, Data and Decision Science",
+   "country": "fr",
+   "kind": "program",
+   "funding": "Public fees; SE² excellence scholarships",
+   "deadline": null,
+   "added": "2026-11-25",
+   "fit": "medium",
+   "why": "A fully English public Master's in France that adds data and machine learning to economics, matching your analytics goal.",
+   "link": "https://se2.univ-st-etienne.fr/en/studying-at-se2/the-master-s-programmes/master-of-political-engineering.html",
    "verified": true
   }
  ]
