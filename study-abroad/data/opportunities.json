@@ -720,6 +720,22 @@
   "verified": true
  },
  {
+  "id": "it-brescia-lmint",
+  "country": "Italy",
+  "deadline": null,
+  "deadlineNote": "2027/28 call not published yet. The 2026/27 call was published 30 Jan 2026 and closed 15 Mar 2026 at 12:00 Italian time (non-EU pre-assessment round); expect similar dates.",
+  "eligibility": "Non-EU citizen and resident, 3-year+ non-EU bachelor's, final grade at least 80/100 or GPA 3.2/4, age 30 or under, English B2 OR an undergraduate degree taught in English (MOI accepted). €20 fee. 8 group-A awards; max 1 for International Business, 2 for Analytics & Data Science.",
+  "field": "Management / Business Analytics",
+  "fit": "high",
+  "funding": "€5,060/year + tuition exemption (except ~€156 regional tax), free double room in university residence, subsidised meals, €500 health cover; renewable for year 2",
+  "kind": "scholarship",
+  "link": "https://www.unibs.it/en/university/work-us/calls-and-notices/scholarships-applicants-non-eu-countries-star-lmint-ay-20262027",
+  "name": "University of Brescia: LMINT scholarship for English-taught Master's (Management – International Business; Analytics and Data Science for Economics and Management)",
+  "notes": "Read the official 2026/27 call PDF on 26 Nov 2026. Your CGPA 3.21 just clears the 3.2 cut-off, and NSU's English-medium letter can replace IELTS. Only one programme and one scholarship per application; you also map your NSU courses to required subject areas. Very few awards per programme, so it's a bonus, not a plan A.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "it-iyt",
   "country": "Italy",
   "deadline": null,

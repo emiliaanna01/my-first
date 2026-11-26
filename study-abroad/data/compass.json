@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "countries": [
   {
    "id": "de",
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (10 days). Today: one Writing Task 2 essay in 40 minutes. Nothing ticked done since 20 Oct, so one session today restarts your streak.",
-    "Email 2 NSU professors for recommendation letters and ask NSU for the English-medium letter: Bologna QF, Kiel QF, Hohenheim, Debrecen and BME accept it.",
+    "IELTS is on 5 Dec (9 days). Today: Speaking Part 2, 3 cue cards recorded. Nothing ticked done since 20 Oct; one session today restarts your streak.",
+    "Ask NSU for the English-medium letter now: Bologna QF, Kiel QF, Hohenheim, Debrecen, BME and the new Brescia LMINT scholarship accept it.",
     "Padua's Call Two for non-EU applicants opens 1 Dec (to 1 Mar); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
-    "Stipendium Hungaricum 2027/28 call still not out on 25 Nov; pick your Erasmus Mundus 3 by 15 Dec."
+    "Stipendium Hungaricum 2027/28 call still not out on 26 Nov; pick your Erasmus Mundus 3 by 15 Dec."
    ]
   },
   "sch": {
@@ -241,7 +241,7 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay: email one Master's coordinator by tomorrow, 26 Nov. Backups: Bourgogne Europe by 4 Dec, Montpellier (professor's endorsement) by 11 Dec. Only one university can nominate you.",
+    "Eiffel via Paris-Saclay closes today, 26 Nov: email one Master's coordinator now if you want it. Backups: Bourgogne Europe by 4 Dec, Montpellier by 11 Dec. Only one university can nominate you.",
     "Pick up to 3 Erasmus Mundus by 15 Dec: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan.",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
     "Keep Italy and Hungary running until an award letter arrives; with an award, German visas are processed right after portal registration."
@@ -874,6 +874,18 @@
    "factor": "admission",
    "link": "https://dein-studium.uni-hohenheim.de/en/applying-and-enrollment/applying/applying-for-the-masters-in-economics-with-data-science",
    "verified": true
+  },
+  {
+   "id": "it-brescia-lmint-gpa32",
+   "date": "2026-01-30",
+   "added": "2026-11-26",
+   "country": "it",
+   "title": "Brescia LMINT scholarship: €5,060 + free tuition and dorm, GPA 3.2 cut-off",
+   "detail": "The official 2026/27 call funds non-EU students in English-taught Management and Analytics & Data Science, needs GPA 3.2/4 and accepts an English-taught degree instead of IELTS; it closed 15 Mar 2026. The 2027/28 call isn't out yet.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://www.unibs.it/en/university/work-us/calls-and-notices/scholarships-applicants-non-eu-countries-star-lmint-ay-20262027",
+   "verified": true
   }
  ],
  "picks": [
@@ -1356,6 +1368,19 @@
    "fit": "medium",
    "why": "A fully English public Master's in France that adds data and machine learning to economics, matching your analytics goal.",
    "link": "https://se2.univ-st-etienne.fr/en/studying-at-se2/the-master-s-programmes/master-of-political-engineering.html",
+   "verified": true
+  },
+  {
+   "id": "it-brescia-lmint",
+   "name": "Brescia LMINT scholarship (Management – International Business / Analytics & Data Science)",
+   "country": "it",
+   "kind": "scholarship",
+   "funding": "€5,060/yr + tuition exemption + free dorm room + €500 health cover",
+   "deadline": null,
+   "added": "2026-11-26",
+   "fit": "high",
+   "why": "Your 3.21 CGPA clears its 3.2 cut-off and NSU's English-medium letter replaces IELTS; only 1–2 awards per programme, so treat it as a bonus.",
+   "link": "https://www.unibs.it/en/university/work-us/calls-and-notices/scholarships-applicants-non-eu-countries-star-lmint-ay-20262027",
    "verified": true
   }
  ]
