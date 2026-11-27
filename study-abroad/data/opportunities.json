@@ -624,6 +624,22 @@
   "verified": true
  },
  {
+  "id": "fr-saclay-ims",
+  "country": "France",
+  "deadline": null,
+  "deadlineNote": "2027 dates not published yet. The 2026 campaign: coordinator preselection by 25 Mar 2026, scholarship form by 31 Mar 2026, results mid-May. You must first apply to the Master's (opens Feb 2027) and be preselected by the coordinator.",
+  "eligibility": "Foreign national, under 30 in the year of application, first enrolment in France, admitted to a Paris-Saclay Master's. Can't be combined with Eiffel or Erasmus Mundus, or other funding over €600/month.",
+  "field": "Any Paris-Saclay Master's (economics, finance, data science eligible; not apprenticeship tracks)",
+  "fit": "medium",
+  "funding": "€10,000/year paid Sep–Jun + up to €900/year travel/visa; M1 award renews for M2",
+  "kind": "scholarship",
+  "link": "https://www.universite-paris-saclay.fr/en/admission/bourses-et-aides-financieres/international-masters-scholarships-program",
+  "name": "Université Paris-Saclay International Master's Scholarships (IDEX)",
+  "notes": "Read the official page on 27 Nov 2026. This is the Paris-Saclay route that does not depend on the 26 Nov Eiffel nomination: apply to a Master's in February and ask the coordinator to preselect you. Check which economics/finance Master's are taught in English before applying.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "fr-ujm-eds",
   "country": "France",
   "deadline": null,
@@ -768,6 +784,22 @@
   "verified": true
  },
  {
+  "id": "it-talents4unito",
+  "country": "Italy",
+  "deadline": null,
+  "deadlineNote": "2027/28 call not announced yet on the official page (27 Nov 2026). The 2026/27 call closed 29 Jan 2026 via Apply@UniTO, per the official call PDF; expect a similar late-January date.",
+  "eligibility": "International students entering year 1 of an English-taught Master's with no restricted number of places. Candidates are drawn from the programme's admission list (each programme ranks up to 10, top 2 win).",
+  "field": "Any English-taught Master's (incl. Quantitative Finance and Insurance)",
+  "fit": "high",
+  "funding": "€20,000 gross over two years (two-year award); 40 awards in 2026/27",
+  "kind": "scholarship",
+  "link": "https://en.unito.it/studying-unito/scholarships-international-students",
+  "name": "Talents 4 UniTo scholarship (University of Turin, English-taught Master's)",
+  "notes": "Read the official UniTo scholarships page on 27 Nov 2026: 2026/27 had 40 two-year awards of €20,000 gross; ranking published June 2026. Pairs with the Turin MSc Quantitative Finance and Insurance already in your list, which checks English at the interview. Apply to the programme early on Apply@UniTO so you're in the scholarship pool.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "it-torvergata-fb",
   "country": "Italy",
   "deadline": null,
@@ -796,6 +828,22 @@
   "link": "https://corsi.unibo.it/2cycle/Qfinance/how-to-enrol",
   "name": "University of Bologna: MSc Quantitative Finance",
   "notes": "Read on the programme's How to enrol page 2026-11-12 (still showing 2026/27 rules). MOI-friendly: degree taught fully in English is accepted for the B2 requirement. Call section: https://corsi.unibo.it/2cycle/Qfinance/admission . Quantitative programme, so check the maths/statistics credit requirements in the new call against your BBA transcript.",
+  "status": "to-check",
+  "verified": true
+ },
+ {
+  "id": "it-unifi-frm",
+  "country": "Italy",
+  "deadline": null,
+  "deadlineNote": "2027/28 rounds for non-EU applicants residing abroad not published yet. An aggregator reports the 2026/27 rounds closed 6 Feb and 17 Apr 2026 (not on the official page).",
+  "eligibility": "Strong background in maths, statistics and social sciences, IT/data software familiarity; 'First Class or High Second Class' degree or equivalent; possible online test. English level and MOI acceptance not stated on the official page.",
+  "field": "Finance",
+  "fit": "medium",
+  "funding": "Public university fees (income-based); DSU Toscana grant possible; no programme scholarship listed",
+  "kind": "program",
+  "link": "https://www.unifi.it/en/study-us/degree-programs/second-cycle-degree/finance-and-risk-management",
+  "name": "University of Florence: Master's in Finance and Risk Management (FIRM)",
+  "notes": "Official pages read 27 Nov 2026: 2-year, 120 ECTS, English-taught, class LM-16. Ask the school (scuola@economia.unifi.it) whether an NSU English-medium letter counts as B2 and what CGPA counts as 'High Second Class'.",
   "status": "to-check",
   "verified": true
  },

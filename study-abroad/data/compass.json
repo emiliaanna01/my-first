@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26",
+ "updated": "2026-11-27",
  "countries": [
   {
    "id": "de",
@@ -212,10 +212,10 @@
     }
    ],
    "next": [
-    "IELTS is on 5 Dec (9 days). Today: Speaking Part 2, 3 cue cards recorded. Nothing ticked done since 20 Oct; one session today restarts your streak.",
-    "Ask NSU for the English-medium letter now: Bologna QF, Kiel QF, Hohenheim, Debrecen, BME and the new Brescia LMINT scholarship accept it.",
+    "IELTS is on 5 Dec (8 days). Today: one Writing Task 1 chart in 20 minutes. Nothing ticked done since 20 Oct; one session today restarts your streak.",
+    "Ask NSU for the English-medium letter now: Bologna QF, Kiel QF, Hohenheim, Debrecen, BME and Brescia LMINT accept it.",
     "Padua's Call Two for non-EU applicants opens 1 Dec (to 1 Mar); Corvinus MSc Finance early-bird deadline 20 Jan 2027.",
-    "Stipendium Hungaricum 2027/28 call still not out on 26 Nov; pick your Erasmus Mundus 3 by 15 Dec."
+    "Watch for Turin's Talents 4 UniTo 2027/28 call (last one closed 29 Jan) and the Stipendium Hungaricum call, still not out on 27 Nov."
    ]
   },
   "sch": {
@@ -241,10 +241,10 @@
     }
    ],
    "next": [
-    "Eiffel via Paris-Saclay closes today, 26 Nov: email one Master's coordinator now if you want it. Backups: Bourgogne Europe by 4 Dec, Montpellier by 11 Dec. Only one university can nominate you.",
+    "Eiffel: Paris-Saclay's step closed 26 Nov. Backups: Bourgogne Europe by 4 Dec, Montpellier by 11 Dec. Only one university can nominate you.",
     "Pick up to 3 Erasmus Mundus by 15 Dec: GrEnFIn 7 Jan, GLOCAL 14 Jan, EPOG or GLOBAL COOP 27 Jan.",
     "Études en France: Master's deadline 15 Jan 2027; Eiffel files from universities by 6 Jan.",
-    "Keep Italy and Hungary running until an award letter arrives; with an award, German visas are processed right after portal registration."
+    "If Eiffel doesn't work out, Paris-Saclay's own €10,000/yr Master's scholarship runs Feb–Mar 2027 via the programme coordinator."
    ]
   },
   "changedOn": "2026-11-24",
@@ -886,6 +886,54 @@
    "factor": "funding",
    "link": "https://www.unibs.it/en/university/work-us/calls-and-notices/scholarships-applicants-non-eu-countries-star-lmint-ay-20262027",
    "verified": true
+  },
+  {
+   "id": "it-talents4unito-20k",
+   "date": "2026-11-27",
+   "added": "2026-11-27",
+   "country": "it",
+   "title": "Turin: Talents 4 UniTo pays €20,000 over two years for English-taught Master's",
+   "detail": "The official page lists 40 two-year awards for 2026/27 (call closed 29 Jan 2026); 2027/28 isn't announced yet. Turin's Quantitative Finance MSc qualifies, so apply there early on Apply@UniTO.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://en.unito.it/studying-unito/scholarships-international-students",
+   "verified": true
+  },
+  {
+   "id": "fr-saclay-ims-10k",
+   "date": "2026-11-27",
+   "added": "2026-11-27",
+   "country": "fr",
+   "title": "Paris-Saclay Master's scholarship: €10,000/yr, separate from Eiffel",
+   "detail": "Coordinators preselect admitted Master's students; the 2026 form closed 31 Mar. Under-30 foreign nationals only, and it can't be combined with Eiffel or Erasmus Mundus.",
+   "impact": "up",
+   "factor": "funding",
+   "link": "https://www.universite-paris-saclay.fr/en/admission/bourses-et-aides-financieres/international-masters-scholarships-program",
+   "verified": true
+  },
+  {
+   "id": "de-visa-3-month-window",
+   "date": "2026-11-22",
+   "added": "2026-11-27",
+   "country": "de",
+   "title": "German visa is issued only within 3 months of your arrival date",
+   "detail": "The embassy page says not to apply if arrival is more than 3 months away; processing after the VFS appointment is about 4 weeks. You still need an admission letter before registering, so no change to the scores.",
+   "impact": "watch",
+   "factor": "visa",
+   "link": "https://dhaka.diplo.de/bd-en/service/2685884-2685884",
+   "verified": true
+  },
+  {
+   "id": "it-unifi-frm",
+   "date": "2026-11-27",
+   "added": "2026-11-27",
+   "country": "it",
+   "title": "Florence: English-taught Master's in Finance and Risk Management",
+   "detail": "Two-year LM-16 finance degree that wants maths, statistics and data skills; 2027/28 non-EU rounds aren't published yet. The page doesn't say whether an English-medium letter counts.",
+   "impact": "up",
+   "factor": "programmes",
+   "link": "https://www.unifi.it/en/study-us/degree-programs/second-cycle-degree/finance-and-risk-management",
+   "verified": true
   }
  ],
  "picks": [
@@ -1381,6 +1429,45 @@
    "fit": "high",
    "why": "Your 3.21 CGPA clears its 3.2 cut-off and NSU's English-medium letter replaces IELTS; only 1–2 awards per programme, so treat it as a bonus.",
    "link": "https://www.unibs.it/en/university/work-us/calls-and-notices/scholarships-applicants-non-eu-countries-star-lmint-ay-20262027",
+   "verified": true
+  },
+  {
+   "id": "it-talents4unito",
+   "name": "Talents 4 UniTo scholarship (Turin, English-taught Master's)",
+   "country": "it",
+   "kind": "scholarship",
+   "funding": "€20,000 gross over two years",
+   "deadline": null,
+   "added": "2026-11-27",
+   "fit": "high",
+   "why": "Pairs with Turin's Quantitative Finance MSc, which checks English at the interview, and needs no separate form beyond a strong programme application.",
+   "link": "https://en.unito.it/studying-unito/scholarships-international-students",
+   "verified": true
+  },
+  {
+   "id": "fr-saclay-ims",
+   "name": "Paris-Saclay International Master's Scholarship (IDEX)",
+   "country": "fr",
+   "kind": "scholarship",
+   "funding": "€10,000/yr + up to €900 travel",
+   "deadline": null,
+   "added": "2026-11-27",
+   "fit": "medium",
+   "why": "A second Paris-Saclay route after the Eiffel step closed: apply to a Master's in February and ask the coordinator to preselect you.",
+   "link": "https://www.universite-paris-saclay.fr/en/admission/bourses-et-aides-financieres/international-masters-scholarships-program",
+   "verified": true
+  },
+  {
+   "id": "it-unifi-frm",
+   "name": "University of Florence: MSc Finance and Risk Management",
+   "country": "it",
+   "kind": "program",
+   "funding": "Income-based fees; DSU Toscana possible",
+   "deadline": null,
+   "added": "2026-11-27",
+   "fit": "medium",
+   "why": "English-taught finance MSc at a public university with low income-based fees; check whether your NSU English-medium letter counts.",
+   "link": "https://www.unifi.it/en/study-us/degree-programs/second-cycle-degree/finance-and-risk-management",
    "verified": true
   }
  ]
