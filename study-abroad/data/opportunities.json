@@ -352,6 +352,22 @@
   "verified": true
  },
  {
+  "id": "de-ulm-finance",
+  "country": "Germany",
+  "deadline": "2027-03-15",
+  "deadlineNote": "Winter 2027/28 intake: online applications expected 1 Feb – 15 Mar 2027 (page marks both dates as estimates).",
+  "eligibility": "Bachelor's with above-average results; IELTS 5.5 or TOEFL iBT 72, OR no test if your Bachelor's was taught in English (MOI letter route). No GMAT/GRE mentioned.",
+  "field": "Finance",
+  "fit": "medium",
+  "funding": "Public university; non-EU fee €1,500/semester (€6,000 for 2 years) + €182/semester contribution",
+  "kind": "program",
+  "link": "https://uni-ulm.de/en/mawi/master-in-finance/prospective-students/application",
+  "name": "Ulm University, MSc Master in Finance (English)",
+  "notes": "MOI-friendly: NSU's English-medium degree can replace IELTS. You can email your transcript as one PDF for a free pre-check. Germany's Dhaka visa queue still blocks a self-funded 2027 start, so this is mainly a backup if you win a German/EU award. Fees: https://www.uni-ulm.de/en/mawi/master-in-finance/prospective-students/fees-and-financing/",
+  "status": "to-check",
+  "verified": true
+ },
+ {
   "id": "it-luiss-msc-finance",
   "country": "Italy",
   "deadline": "2027-03-31",
@@ -766,6 +782,22 @@
   "notes": "Checked 2026-10-26 via Politecnico di Torino and Salento pages; re-read the ministry page 2026-10-27: the 2026/27 call closed 11 May 2026 (6 pm Italian time), a nine-month scholarship, and no later call is listed yet. The page does not list eligible countries, so confirm Bangladesh in the next call. Application portal: investyourtalentapplication.esteri.it. You must first be accepted or pre-select a participating programme.",
   "status": "to-check",
   "verified": true
+ },
+ {
+  "id": "it-sapienza-fin-ins",
+  "country": "Italy",
+  "deadline": null,
+  "deadlineNote": "2027/28 pre-selection (MoveIn platform) not announced yet. Last cycle opened 22 Dec 2025 and closed 15 May 2026 for non-EU visa applicants; expect similar dates.",
+  "eligibility": "Relevant Bachelor's plus Sapienza's knowledge assessment; English B2 (aggregator lists IELTS 5.5). Up to 2 pre-selection applications per year, €30 each.",
+  "field": "Finance / risk and data",
+  "fit": "medium",
+  "funding": "Public; income-based fees, reported max about €2,821/yr for non-residents; Lazio DSU (DiSCo) grant possible",
+  "kind": "program",
+  "link": "https://www.uniroma1.it/en/admissions",
+  "name": "Sapienza University of Rome, MSc Finance and Insurance (English)",
+  "notes": "Official admissions page read for process and 2026/27 dates; the programme's fees, IELTS score and English 'Financial Risk and Data Analysis' track come from third-party listings, so confirm on Sapienza's programme page. Whether an MOI letter is accepted is not stated.",
+  "status": "to-check",
+  "verified": false
  },
  {
   "id": "it-siena-finance",
